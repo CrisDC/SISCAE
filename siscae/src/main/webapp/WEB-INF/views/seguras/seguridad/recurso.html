@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4"
+	layout:decorator="layout">
+<head>
+<title th:text="Perfiles"></title>
+</head>
+<th:block layout:fragment="style">
+	<link th:href="@{/resources/css/dataTables.bootstrap.min.css}"
+		rel="stylesheet" />
+	<link th:href="@{/resources/css/responsive.bootstrap.min.css}"
+		rel="stylesheet" />
+	<link th:href="@{/resources/css/popupwindow.css}" rel="stylesheet" />
+	<link th:href="@{/resources/css/jquery-confirm.min.css}"
+		rel="stylesheet" />
+	<link th:href="@{/resources/css/select2.min.css}" rel="stylesheet" />
+	<link th:href="@{/resources/css/select2-bootstrap.min.css}"
+		rel="stylesheet" />
+</th:block>
+<body>
+	<th:block layout:fragment="content">
+		<div class="page-content-wrap">
+			<div class="row">
+				<div class="col-md-12 col-sm-12 col-xs-12">
+					<div class="panel panel-default">
+						<div class="panel-heading">
+							<h3 class="panel-title">Administración de Recursos</h3>
+						</div>
+						<div class="panel-body">
+							<div class="row col-xs-12 col-sm-12 col-md-5 col-lg-5"
+								th:fragment="modalMantenimiento">
+								<fieldset class="well">
+									<legend class="well-legend"> Nuevo Recurso</legend>
+									<form id="formRecurso" class="form-horizontal" role="form">
+										<div class="form-group">
+											<label class="col-sm-3 control-label"> Recurso</label>
+											<div class="col-sm-7">
+												<input type="text" class="form-control" name="idRecurso"></input>
+											</div>
+										</div>
+										<div class="form-group">
+											<label for="inputEmail3" class="col-sm-3 control-label">
+												Descripcion</label>
+											<div class="col-sm-7">
+												<input type="text" class="form-control" name="descripcion"></input>
+											</div>
+										</div>
+										<div class="form-group">
+											<label for="inputEmail3" class="col-sm-3 control-label">
+												Categoria</label>
+											<div class="col-sm-7">
+												<select id="selectTipoPerfil" class="form-control"
+													name="idCategoria">
+													<option th:each="categoriaRecurso : ${lsCategoriaRecurso}"
+														th:value="${categoriaRecurso.idCategoria}"
+														th:text="${categoriaRecurso.categoria}"></option>
+												</select>
+											</div>
+										</div>
+										<div class="form-group">
+											<div class="col-lg-12 text-center">
+												<button id="registrarRecurso" type="button"
+													class="btn btn-success">
+													<i class="fa fa-floppy-o"></i> Añadir
+												</button>
+											</div>
+										</div>
+									</form>
+								</fieldset>
+							</div>
+							<div id="modalRecurso"
+								class="row col-xs-12 col-sm-12 col-md-5 col-lg-5"
+								style="width: 100%;">
+								<fieldset class="well">
+									<legend class="well-legend"> Actualizar Recurso</legend>
+									<form id="formRecursoModal" class="form-horizontal" role="form">
+										<div class="form-group">
+											<label for="inputEmail3" class="col-sm-3 control-label">
+												Recurso</label>
+											<div class="col-sm-7">
+												<input type="text" class="form-control" name="idRecurso" th:readonly="true"></input>
+											</div>
+										</div>
+										<div class="form-group">
+											<label for="inputEmail3" class="col-sm-3 control-label">
+												Descripcion</label>
+											<div class="col-sm-7">
+												<input type="text" class="form-control" name="descripcion"></input>
+											</div>
+										</div>
+										<div class="form-group">
+											<div class="col-lg-12 text-center">
+												<button id="actualizarRecursoModal" type="button"
+													class="btn btn-primary hidden">
+													<i class="fa fa-pencil-square"></i> Actualizar
+												</button>
+											</div>
+										</div>
+									</form>
+								</fieldset>
+							</div>
+							<div class="col-xs-12 col-sm-12 col-md-7 col-lg-7">
+								<table id="tablaRecursos"
+									class="table table-bordered table-striped table-hover">
+								</table>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</th:block>
+	<th:block layout:fragment="script">
+		<script th:src="@{/resources/js/datatables/jquery.dataTables.min.js}"></script>
+		<script
+			th:src="@{/resources/js/datatables/dataTables.bootstrap.min.js}"></script>
+		<script
+			th:src="@{/resources/js/datatables/dataTables.responsive.min.js}"></script>
+		<script th:src="@{/resources/js/datatables/dataTables.show.rows.js}"></script>
+		<script th:src="@{/resources/js/bootstrap/bootstrap-notify.min.js}"></script>
+		<script th:src="@{/resources/js/jquery/popupwindow.min.js}"></script>
+		<script th:src="@{/resources/js/jquery/jquery.serializejson.min.js}"></script>
+		<script th:src="@{/resources/js/jquery/jquery.validate.min.js}"></script>
+		<script th:src="@{/resources/js/jquery/additional-methods.min.js}"></script>
+		<script th:src="@{/resources/js/jquery/jquery-confirm.min.js}"></script>
+		<script th:src="@{/resources/js/jquery/jquery.animate.min.js}"></script>
+		<script th:src="@{/resources/js/jquery/select2.full.min.js}"></script>
+		<script th:src="@{/resources/js/util/formularioUtil.js}"></script>
+		<script th:src="@{/resources/js/pagina/recurso/recurso.js}"></script>
+		<script th:src="@{/resources/js/pagina/recurso/recursoFormulario.js}"></script>
+	</th:block>
+</body>
+</html>

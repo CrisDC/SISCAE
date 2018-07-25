@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org">
+<head>
+</head>
+<body>
+	<div id="modalDetalleTablaConsulta" class="row">
+		<div class="col-xs-12">
+			<fieldset class="well">
+				<div class="col-xs-12">
+					<fieldset class="well">
+						<form id="formDetalleControlLote" role="form" method="POST">
+							<ul class="panel-controls">
+								<li><button id="btnRecarga" class="btn btn-primary hidden" type="button"><span
+											th:text="|Recargar...|"></span>
+									</button></li>
+							</ul>
+							
+							<div class="form-group">
+								<div class="group">
+									<label class="col-sm-4 col-md-4 control-label"
+										for="rangoFechasTransaccion">Fecha de envio del
+										pedido:</label> <label class="col-sm-2 col-md-2 control-label"
+										for="rangoFechasTransaccion">05/07/2017</label>
+								</div>
+							</div>
+							<div class="form-group">
+								<div class="group">
+									<label class="col-sm-4 col-md-4 control-label"
+										for="rangoFechasTransaccion">Estado:</label> <label
+										class="col-sm-2 col-md-2 control-label"
+										for="rangoFechasTransaccion">En Emision</label>
+								</div>
+							</div>
+						</form>
+					</fieldset>
+					<div id="divTablaDetalleConsulta"
+						class="panel panel-default hidden">
+						<div class="panel-body ">
+							<table id="tablaDetalleConsulta" width="100%"
+								class="table table-bordered table-condensed nowrap display table-hover">
+							</table>
+						</div>
+					</div>
+				</div>
+			</fieldset>
+		</div>
+	</div>
+</body>
+</html>
