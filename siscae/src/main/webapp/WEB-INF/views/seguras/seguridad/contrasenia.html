@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4"
+	layout:decorator="layout">
+<head>
+<title th:text="Perfiles"></title>
+</head>
+<th:block layout:fragment="style">
+	<link th:href="@{/resources/css/dataTables.bootstrap.min.css}"
+		rel="stylesheet" />
+	<link th:href="@{/resources/css/responsive.bootstrap.min.css}"
+		rel="stylesheet" />
+	<link th:href="@{/resources/css/popupwindow.css}" rel="stylesheet" />
+	<link th:href="@{/resources/css/jquery-confirm.min.css}"
+		rel="stylesheet" />
+	<link th:href="@{/resources/css/select2.min.css}" rel="stylesheet" />
+	<link th:href="@{/resources/css/select2-bootstrap.min.css}"
+		rel="stylesheet" />
+</th:block>
+<body>
+	<th:block layout:fragment="content">
+		<div class="page-content-wrap">
+			<div class="row">
+				<div class="col-md-12 col-sm-12 col-xs-12">
+					<div class="panel panel-default">
+						<div class="panel-heading">
+							<h3 class="panel-title">Cambio de Contraseña</h3>
+						</div>
+						<div class="panel-body">
+							<div class="row" id="modalContrasenia"
+								th:fragment="modalMantenimiento">
+								<fieldset class="well">
+									<legend class="well-legend"> Nueva Contraseña</legend>
+									<form id="formContrasenia" class="form-horizontal" role="form">
+										<div class="form-group">
+											<label class="col-sm-4 control-label"> Contraseña
+												Actual</label>
+											<div class="col-sm-4">
+												<input type="password" class="form-control"
+													name="password"></input>
+											</div>
+										</div>
+										<div class="form-group">
+											<label for="inputEmail3" class="col-sm-4 control-label">
+												Nueva Contraseña</label>
+											<div class="col-sm-4">
+												<input type="password" class="form-control" id="nuevoPassword"
+													name="nuevoPassword"></input>
+											</div>
+										</div>
+										<div class="form-group">
+											<label for="inputEmail3" class="col-sm-4 control-label">
+												Confirmar Contraseña</label>
+											<div class="col-sm-4">
+												<input type="password" class="form-control" id="nuevo_password_2"
+													name="nuevoPassword2"></input>
+											</div>
+										</div>
+										<div class="form-group" id="idUsuario">
+											<div class="col-sm-4">
+												<input type="text" class="form-control" th:value="${usuario}"
+													name="idUsuario"></input>
+											</div>
+										</div>
+										<div class="form-group">
+											<div class="col-lg-12 text-center">
+												<button id="actualizarContrasenia" type="button"
+													class="btn btn-success">
+													<i class="fa fa-refresh"></i> Actualizar
+												</button>
+											</div>
+										</div>
+									</form>
+								</fieldset>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</th:block>
+	<th:block layout:fragment="script">
+		<script th:src="@{/resources/js/datatables/jquery.dataTables.min.js}"></script>
+		<script
+			th:src="@{/resources/js/datatables/dataTables.bootstrap.min.js}"></script>
+		<script
+			th:src="@{/resources/js/datatables/dataTables.responsive.min.js}"></script>
+		<script th:src="@{/resources/js/datatables/dataTables.show.rows.js}"></script>
+		<script th:src="@{/resources/js/bootstrap/bootstrap-notify.min.js}"></script>
+		<script th:src="@{/resources/js/jquery/popupwindow.min.js}"></script>
+		<script th:src="@{/resources/js/jquery/jquery.serializejson.min.js}"></script>
+		<script th:src="@{/resources/js/jquery/jquery.validate.min.js}"></script>
+		<script th:src="@{/resources/js/jquery/additional-methods.min.js}"></script>
+		<script th:src="@{/resources/js/jquery/jquery-confirm.min.js}"></script>
+		<script th:src="@{/resources/js/jquery/jquery.animate.min.js}"></script>
+		<script th:src="@{/resources/js/jquery/select2.full.min.js}"></script>
+		<script th:src="@{/resources/js/util/formularioUtil.js}"></script>
+		<script th:src="@{/resources/js/pagina/contrasenia/contrasenia.js}"></script>
+		<script th:src="@{/resources/js/pagina/contrasenia/contraseniaFormulario.js}"></script>
+	</th:block>
+</body>
+</html>

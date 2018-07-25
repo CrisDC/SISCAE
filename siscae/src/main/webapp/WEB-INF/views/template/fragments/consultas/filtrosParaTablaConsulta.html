@@ -1,0 +1,741 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head>
+</head>
+<body>
+	<th:block th:fragment="criterioBusqueda" th:with="consulta=${consulta}">
+		<div id="tipoBusqueda" class="col-xs-12 col-md-5 col-lg-4">
+			<fieldset class="well">
+				<legend class="well-legend">Tipo de Búsqueda</legend>
+				<form id="formTipoBusqueda" class="form-horizontal">
+					<div class="form-group">
+						<div class="col-sm-12">
+							<label class="radio-inline">
+								<input type="radio" checked="checked" name="tipoBusqueda" value="tipoDocumento">
+								Por Tipo de Documento
+							</label>
+							<label class="radio-inline">
+								<input type="radio"  name="tipoBusqueda" value="criterios">
+								Por Criterios
+							</label>
+						</div>
+					</div>
+				</form>
+			</fieldset>
+		</div>
+		<div class="col-xs-12">
+			<fieldset class="well">
+				<legend class="well-legend">Filtro</legend>
+				<div id="tipoDocumento" >
+					<form id="formParamIniciales" class="form-horizontal">
+						<div class="form-group">
+							<div class="group">
+								<label class="col-sm-1 control-label">Tipo de Documento</label>
+								<div class="col-sm-3">									
+									<select id="selectTipoDocumento" name="tipoDocumento" class="form-control select2">
+										<option value="-1" disabled="disabled" selected="selected">Seleccione un Tipo de Documento</option>
+										<option value="1">DNI</option> 
+										<option value="2">Carnet de Extranjería</option>
+										<option th:each= "documentos : ${tipoDocumentos}" th:value="${documentos.idItem}"
+											th:text="|${documentos.idItem} - ${documentos.descripcionItem}|"></option>
+									</select>
+								</div>
+							</div>
+							<div class="group">
+								<label class="col-sm-1 control-label">Número de Documento</label>
+								<div class="col-sm-2">
+									<input id="txtNumDocumentoCliente" name="numeroDocumento" type="text"
+										placeholder="10002987" class="form-control input-md">
+								</div>
+							</div>
+							<div class="group">
+								<div class="col-sm-3">
+									<button id="btnBuscarPorDocumentoCliente" class="btn btn-primary" type="button">
+										<i class="fa fa-search"></i> Buscar
+									</button>
+								</div>
+							</div>
+						</div>
+					</form> 
+				</div>
+				<div id="criterios" class="hidden">
+					<form id="formBusquedaCriterios" class="form-horizontal">
+						<th:block
+							th:replace="~{template/fragments/consultas/filtrosParaTablaConsulta:: ${consulta}}?:~{}">
+						</th:block>
+						<div class="form-group">
+							<div class="col-lg-12 text-center">
+								<button id="buscarCriterios" type="button" class="btn btn-primary">
+									<i class="fa fa-search"></i> Buscar
+								</button>
+							</div>
+						</div>
+						
+						
+					</form>
+				</div>
+			</fieldset>
+		</div>
+	</th:block>
+
+	<th:block th:fragment="consultaDocumentos">
+		
+		<div class="form-group">
+			<div class="group">
+				<label class="col-sm-1 col-md-1 control-label">Nombres</label>
+				<div class="col-sm-3 col-md-3">
+					<input class="form-control filtro" name="nombres" />
+				</div>
+			</div>
+			<div class="group">
+				<label class="col-sm-1 col-md-1 control-label">Apellidos</label>
+				<div class="col-sm-3 col-md-3">
+					<input class="form-control filtro" name="apellidos" />
+				</div>
+			</div>
+			
+		</div>
+		
+		<div class="form-group">
+			<div class="group">
+				<label class="col-sm-1 col-md-1 control-label">Tipo de Trámite</label>
+				<div class="col-sm-3 col-md-3">
+					<select id="cmbTiposTramite" class="form-control select2 filtro" name="codigoTipoTramite">
+						<option value="0001">OBTENCIÓN DE GRADO DE BACHILLER</option>
+						<option value="0002">OBTENCIÓN DE TÍTULO PROFESIONAL</option>
+						<option th:each="tipoTramite : ${tiposTramite}" th:value="${tipoTramite.codigo}"
+							th:text="|${tipoTramite.codigo} - ${tipoTramite.descripcion}|"></option>
+					</select>
+				</div>
+			</div>
+			
+			<div class="group">
+				<label class="col-sm-1 col-md-1 control-label">Tipo de Documento</label>
+				<div class="col-sm-3 col-md-3">
+					<select id="cmbTiposDocumento" class="form-control select2 filtro" name="codigoTipoDocumento">
+						<option value="-1">TODOS</option>
+						<option value="031">RESOLUCIÓN RECTORAL</option>
+						<option value="028">RESOLUCIÓN DECANAL</option>
+						<option th:each="origenArchivo : ${origenesArchivo}" th:value="${origenArchivo.idItem}"
+							th:text="|${origenArchivo.idItem} - ${origenArchivo.descripcionItem}|"></option>
+					</select>
+				</div>
+			</div>
+			
+			<div class="group">
+				<label class="col-sm-1 control-label">Fecha</label>
+				<div class="col-sm-3 input-group">
+					<span class="input-group-addon"><i class="fa fa-calendar"></i></span>
+					<input id="rangoFechaBusqueda" type="text" class="form-control filtro" readonly="readonly" />
+				</div>
+			</div>
+		</div>
+	</th:block>
+
+
+	<th:block th:fragment="txnsObservadas">
+		<div class="form-group">
+			<div class="group">
+				<label class="col-sm-1 col-md-1 control-label">Número de Tarjeta</label>
+				<div class="col-sm-3 col-md-3">
+					<input class="form-control filtro" name="numeroTarjeta" />
+				</div>
+			</div>
+			<div class="group">
+				<label class="col-sm-1 col-md-1 control-label">Número de Trace</label>
+				<div class="col-sm-3 col-md-3">
+					<input class="form-control filtro" name="numeroTrace" />
+				</div>
+			</div>
+			<div class="group">
+				<label class="col-sm-1 control-label">Fechas</label>
+				<div class="col-sm-3 input-group">
+					<span class="input-group-addon"><i class="fa fa-calendar"></i></span>
+					<input id="rangoFechaBusqueda" type="text" class="form-control filtro" readonly="readonly" />
+				</div>
+			</div>
+		</div>
+		<div class="form-group">
+			<div class="group">
+				<label class="col-sm-1 col-md-1 control-label">Origen de Archivo</label>
+				<div class="col-sm-3 col-md-3">
+					<select id="origenesArchivo" class="form-control select2 filtro" name="idOrigenArchivo">
+						<option value="-1">TODOS</option>
+						<option th:each="origenArchivo : ${origenesArchivo}" th:value="${origenArchivo.idItem}"
+							th:text="|${origenArchivo.idItem} - ${origenArchivo.descripcionItem}|"></option>
+					</select>
+				</div>
+			</div>
+			<div class="group">
+				<label class="control-label col-sm-1">Extornar</label>
+				<div class="col-sm-3">
+					<label class="radio-inline">
+						<input type="radio" name="extornar" value="1" class="filtro">
+						Si
+					</label>
+					<label class="radio-inline">
+						<input type="radio" name="extornar" value="0" class="filtro">
+						No
+					</label>
+					<label class="radio-inline">
+						<input type="radio" checked="checked" name="extornar" value="-1" class="filtro">
+						Ninguno
+					</label>
+				</div>
+			</div>
+			<div class="group">
+				<label class="control-label col-sm-1">Devolver</label>
+				<div class="col-sm-3">
+					<label class="radio-inline">
+						<input type="radio" name="devolver" value="1" class="filtro">
+						Si
+					</label>
+					<label class="radio-inline">
+						<input type="radio" name="devolver" value="0" class="filtro">
+						No
+					</label>
+					<label class="radio-inline">
+						<input type="radio" checked="checked" name="devolver" value="-1" class="filtro">
+						Ninguno
+					</label>
+				</div>
+			</div>
+		</div>
+	</th:block>
+	
+	<th:block th:fragment="txnsCompensacion">
+		<div class="form-group">
+			<div class="group">
+				<label class="col-sm-1 col-md-1 control-label" for="membresiaFiltroTablaConsulta">Membresía</label>
+				 <div class="col-sm-3 col-md-3">
+					<select id="membresiaFiltroTablaConsulta" name="codigoMembresia" class="form-control select2 filtro">
+						<option selected="selected" th:value="-1">Seleccione Membresia</option>
+						<option th:each="membresia : ${membresias}" th:value="${membresia.codigoMembresia}"
+								th:text="|${membresia.codigoMembresia} - ${membresia.descripcion}|"></option>
+					</select>
+				 </div>
+			</div>
+			<div class="group">
+				<label class="col-sm-1 col-md-1 control-label" for="canalFiltroTablaConsulta">Canal</label>
+					<div class="col-sm-3 col-md-3">
+						<select id="canalFiltroTablaConsulta" name="idCanal" class="form-control select2 filtro">
+							<option selected="selected" value="-1">Seleccione Canal</option>
+							<option th:each="canal : ${canales}" th:value="${canal.idCanal}"
+								th:text="|${canal.idCanal} - ${canal.descripcion}|"></option>
+						</select>
+					</div>
+			</div>
+			<div class="group">
+				<label class="col-sm-1 col-md-1 control-label" for="textinput">Número Tarjeta</label>
+					<div class="col-sm-3 col-md-3">
+						<input id="numeroTarjetaFiltroTablaConsulta" name="numeroTarjeta" type="text" value="" placeholder="4220520005884799"
+							class="form-control input-md filtro">
+					</div>
+			</div>
+		</div>
+		
+		<div class="form-group">
+			<div class="group">
+				<label class="col-sm-1 col-md-1 control-label" for="servicioFiltroTablaConsulta">Servicio</label>
+					<div class="col-sm-3 col-md-3">
+						<select id="servicioFiltroTablaConsulta" name="codigoClaseServicio"
+							class="form-control select2 filtro">
+							<option selected="selected" value="-1">Seleccione Clase de Servicio</option>
+						</select>
+					</div>
+			</div>
+			<div class="group">
+				<label class="col-sm-1 col-md-1 control-label" for="institucionEmisoraFiltroTablaConsulta">Institución
+						Emisora</label>
+					<div class="col-sm-3 col-md-3">
+						<select id="institucionEmisoraFiltroTablaConsulta" name="codigoInstitucionEmisor"
+							class="form-control select2 filtro">
+							<option selected="selected" value="-1">Seleccione Institución Emisora</option>
+							<option th:each="institucion : ${instituciones}" th:value="${institucion.codigoInstitucion}"
+								th:text="|${institucion.codigoInstitucion} - ${institucion.descripcion}|"></option>
+						</select>
+					</div>
+			</div>
+			<div class="group">
+				<label class="col-sm-1 col-md-1 control-label" for="textinput">Trace</label>
+					<div class="col-sm-3 col-md-3">
+						<input id="textinput" name="trace" type="text" placeholder="" value=""
+							class="form-control input-md filtro">
+					</div>
+			</div>
+		</div>
+		
+		<div class="form-group">
+			<div class="group">
+				<label class="col-sm-1 col-md-1 control-label" for="origenFiltroTablaConsulta">Origen</label>
+					<div class="col-sm-3 col-md-3">
+						<select id="origenFiltroTablaConsulta" name="codigoOrigen" class="form-control select2 filtro">
+							<option selected="selected" value="-1">Seleccione Origen</option>
+							<option th:each="origen : ${origenes}" th:value="${origen.codigoOrigen}"
+								th:text="|${origen.codigoOrigen} - ${origen.descripcion}|"></option>
+						</select>
+					</div>
+			</div>
+			<div class="group">
+				<label class="col-sm-1 col-md-1 control-label" for="institucionReceptoraFiltroTablaConsulta">Institución
+						Receptora</label>
+					<div class="col-sm-3 col-md-3">
+						<select id="institucionReceptoraFiltroTablaConsulta" name="codigoInstitucionReceptor"
+							class="form-control select2 filtro">
+							<option selected="selected" value="-1">Seleccione Institucion Receptora</option>
+							<option th:each="institucion : ${instituciones}" th:value="${institucion.codigoInstitucion}"
+								th:text="|${institucion.codigoInstitucion} - ${institucion.descripcion}|"></option>
+						</select>
+					</div>
+			</div>
+			<div class="group">
+				<label class="col-sm-1 col-md-1 control-label" for="textinput">Autorización</label>
+					<div class="col-sm-3 col-md-3">
+						<input id="textinput" name="autorizacion" type="text" placeholder="" value=""
+							class="form-control input-md filtro">
+					</div>
+			</div>
+		</div>
+		
+		<div class="form-group">
+			<div class="group">
+				<label class="col-sm-1 col-md-1 control-label" for="claseTransaccionFiltroTablaConsulta">Clase
+						Transaccion</label>
+					<div class="col-sm-3 col-md-3">
+						<select id="claseTransaccionFiltroTablaConsulta" name="codigoClaseTxn"
+							class="form-control select2 filtro">
+							<option selected="selected" value="-1">Seleccione Clase Transacción</option>
+							<option th:each="claseTransaccion : ${clasesTransacciones}"
+								th:value="${claseTransaccion.codigoClaseTransaccion}"
+								th:text="|${claseTransaccion.codigoClaseTransaccion} - ${claseTransaccion.descripcion}|"></option>
+						</select>
+					</div>
+			</div>
+			<div class="group">
+				<label class="col-sm-1 col-md-1 control-label" for="binFiltroTablaConsulta">BIN</label>
+					<div class="col-sm-3 col-md-3">
+						<select id="binFiltroTablaConsulta" name="codigoBIN" class="form-control select2 filtro">
+							<option selected="selected" value="-1">Seleccione BIN</option>
+							<option th:each="bin : ${bines}" th:value="${bin.codigoBIN}"
+								th:text="|${bin.codigoBIN} - ${bin.descripcion}|"></option>
+						</select>
+					</div>
+			</div>
+			<div class="group">
+				<label class="col-sm-1 col-md-1 control-label" for="respuestaSwitchFiltroTablaConsulta">Respuesta</label>
+					<div class="col-sm-3 col-md-3">
+						<select id="respuestaSwitchFiltroTablaConsulta" name="codigoRespuestaSwitch"
+							class="form-control select2 filtro">
+							<option value="-1" selected="selected">Seleccione Respuesta</option>
+							<option th:each="respuestaSwitch : ${respuestasSwitch}"
+								th:value="${respuestaSwitch.codigoRespuestaSwitch}"
+								th:text="|${respuestaSwitch.codigoRespuestaSwitch} - ${respuestaSwitch.descripcion}|"></option>
+						</select>
+					</div>
+			</div>
+		</div>
+		
+		<div class="form-group">
+			<div class="group">
+				<label class="col-sm-1 col-md-1 control-label" for="codigoTransaccionFiltroTablaConsulta">Código
+						Transacción</label>
+					<div class="col-sm-3 col-md-3">
+						<select id="codigoTransaccionFiltroTablaConsulta" name="codigoTxn"
+							class="form-control select2 filtro">
+							<option selected="selected" value="-1">Seleccione Codigo Transacción</option>
+						</select>
+					</div>
+			</div>
+			<div class="group">
+				<label class="col-sm-1 col-md-1 control-label" for="subBinFiltroTablaConsulta">Sub BIN</label>
+					<div class="col-sm-3 col-md-3">
+						<select id="subBinFiltroTablaConsulta" name="codigoSubBIN" class="form-control select2 filtro">
+							<option selected="selected" value="-1">Seleccione Sub BIN</option>
+						</select>
+					</div>
+			</div>
+			<div class="group">
+				<label class="control-label col-sm-1 col-md-1" for="fechaProcFiltroTablaConsulta">Fecha
+						Proceso</label>
+					<div class="col-sm-3 col-md-3 input-group">
+						<span class="input-group-addon"><i class="fa fa-calendar"></i></span>
+						<input id="fechaProcFiltroTablaConsulta" type="text" class="form-control filtro" readonly="readonly"
+							name="fechaProceso" />
+					</div>
+			</div>
+		</div>
+		
+		<div class="form-group">
+			<div class="group">
+				<label class="col-sm-1 col-md-1 control-label" for="monedaFiltroTablaConsulta">Moneda</label>
+					<div class="col-sm-3 col-md-3">
+						<select id="monedaFiltroTablaConsulta" name="codigoMoneda" class="form-control select2 filtro">
+							<option value="-1" selected="selected">Seleccione Moneda</option>
+							<option th:each="moneda : ${monedas}" th:value="${moneda.codigoMoneda}"
+								th:text="|${moneda.codigoMoneda} - ${moneda.descripcion}|"></option>
+						</select>
+					</div>
+			</div>
+			<div class="group">
+				<label class="control-label col-sm-1 col-md-1" for="fechaTxnFiltroTablaConsulta">Fecha Transac</label>
+					<div class="col-sm-3 col-md-3 input-group">
+						<span class="input-group-addon"><i class="fa fa-calendar"></i></span>
+						<input id="fechaTxnFiltroTablaConsulta" type="text" class="form-control filtro" readonly="readonly"
+							name="fechaTxn" />
+					</div>
+			</div>
+		</div>
+	</th:block>
+	
+	<th:block th:fragment="txnsSwDmpLog">
+		<div class="form-group">
+			<div class="group">
+				<label class="col-sm-1 col-md-1 control-label" for="textinput">Número Tarjeta</label>
+					<div class="col-sm-3 col-md-3">
+						<input id="textinput" name="numeroTarjeta" type="text" placeholder=""
+							class="form-control input-md filtro">
+					</div>
+			</div>
+			<div class="group">
+				<label class="col-sm-1 col-md-1 control-label" for="canalFiltroParaTablaConsulta">Canal</label>
+					<div class="col-sm-3 col-md-3">
+						<select id="canalFiltroParaTablaConsulta" class="select2 filtro" name="idCanal">
+							<option disable="disable" selected="selected" th:value="-1">Seleccione un Canal</option>
+							<option th:each="canal : ${canales}" th:value="${canal.idCanal}"
+								th:text="|${canal.idCanal} - ${canal.descripcion}|"></option>
+						</select>
+					</div>
+			</div>
+			<div class="group">
+				<label class="control-label col-sm-1 col-md-1" for="rangoFechasTransaccion">Fecha
+						Transacción</label>
+					<div class="col-sm-3 col-md-3 input-group">
+						<span class="input-group-addon"><i class="fa fa-calendar"></i></span>
+						<input id="rangoFechasTransaccion" type="text" class="form-control filtro" readonly="readonly"
+							name="fechaTransaccion" />
+					</div>
+			</div>
+		</div>
+		<div class="form-group">
+			<div class="group">
+				<label class="col-sm-1 col-md-1 control-label" for="textinput">Trace</label>
+					<div class="col-sm-3 col-md-3">
+						<input id="textinput" name="trace" type="text" placeholder="" class="form-control input-md filtro">
+					</div>
+			</div>
+			<div class="group">
+				<label class="col-sm-2 col-md-1 control-label" for="codigoProcesoFiltroParaTablaConsulta">Código
+						Proceso</label>
+					<div class="col-sm-3 col-md-3">
+						<select id="codigoProcesoFiltroParaTablaConsulta" class="select2 filtro" name="codigoProcesoSwitch">
+							<option disable="disable" selected="selected" th:value="-1">Seleccione un Codigo
+								Proceso</option>
+							<option th:each="codigoProceso : ${codigoProcesos}"
+								th:value="${codigoProceso.codigoProcesoSwitch}"
+								th:text="|${codigoProceso.codigoProcesoSwitch} - ${codigoProceso.descripcion}|"></option>
+						</select>
+					</div>
+			</div>
+		</div>
+	</th:block>
+	
+	<th:block th:fragment="txnsAutorizacion">
+		<div class="form-group">
+			<div class="group">
+				<label class="col-sm-1 col-md-1 control-label" for="textinput">Número Tarjeta</label>
+					<div class="col-sm-3 col-md-3">
+						<input id="textinput" name="numeroTarjeta" type="text" placeholder=""
+							class="form-control input-md filtro">
+					</div>
+			</div>
+			<div class="group">
+				<label class="col-sm-1 col-md-1 control-label" for="canalFiltroParaTablaConsulta">Canal</label>
+					<div class="col-sm-3 col-md-3">
+						<select id="canalFiltroParaTablaConsulta" class="select2 filtro" name="idCanal">
+							<option disable="disable" selected="selected" th:value="-1">Seleccione un Canal</option>
+							<option th:each="canal : ${canales}" th:value="${canal.idCanal}"
+								th:text="|${canal.idCanal} - ${canal.descripcion}|"></option>
+						</select>
+					</div>
+			</div>
+			<div class="group">
+				<label class="control-label col-sm-1 col-md-1" for="rangoFechasTransaccion">Fecha
+						Transacción</label>
+					<div class="col-sm-3 col-md-3 input-group">
+						<span class="input-group-addon"><i class="fa fa-calendar"></i></span>
+						<input id="rangoFechasTransaccion" type="text" class="form-control filtro" readonly="readonly"
+							name="fechaTransaccion" />
+					</div>
+			</div>
+		</div>
+		<div class="form-group">
+			<div class="group">
+				<label class="col-sm-1 col-md-1 control-label" for="textinput">Trace</label>
+					<div class="col-sm-3 col-md-3">
+						<input id="textinput" name="trace" type="text" placeholder="" class="form-control input-md filtro">
+					</div>
+			</div>
+			<div class="group">
+				<label class="col-sm-2 col-md-1 control-label" for="codigoProcesoFiltroParaTablaConsulta">Código
+						Proceso</label>
+					<div class="col-sm-3 col-md-3">
+						<select id="codigoProcesoFiltroParaTablaConsulta" class="select2 filtro" name="codigoProcesoSwitch">
+							<option disable="disable" selected="selected" th:value="-1">Seleccione un Codigo
+								Proceso</option>
+							<option th:each="codigoProceso : ${codigoProcesos}"
+								th:value="${codigoProceso.codigoProcesoSwitch}"
+								th:text="|${codigoProceso.codigoProcesoSwitch} - ${codigoProceso.descripcion}|"></option>
+						</select>
+					</div>
+			</div>
+		</div>
+	</th:block>
+	
+	<th:block th:fragment="txnsConsolidada">
+		<div class="form-group">
+			<div class="group">
+				<label class="col-sm-1 col-md-1 control-label" for="textinput">Número Tarjeta</label>
+					<div class="col-sm-3 col-md-3">
+						<input id="textinput" name="numeroTarjeta" type="text" placeholder=""
+							class="form-control input-md filtro" value="">
+					</div>
+			</div>
+			<div class="group">
+				<label class="col-sm-1 col-md-1 control-label" for="canalFiltroParaTablaConsulta">Canal</label>
+					<div class="col-sm-3 col-md-3">
+						<select id="canalFiltroParaTablaConsulta" class="form-control  select2 filtro" name="idCanal">
+							<option disable="disable" selected="selected" th:value="-1">TODOS</option>
+							<option th:each="canal : ${canales}" th:value="${canal.idCanal}"
+								th:text="|${canal.idCanal} - ${canal.descripcion}|"></option>
+						</select>
+					</div>
+			</div>
+			<div class="group">
+				<label class="control-label col-sm-1 col-md-1" for="rangoFechasTransaccion">Fecha
+						Transacción</label>
+					<div class="col-sm-3 col-md-3 input-group">
+						<span class="input-group-addon"><i class="fa fa-calendar"></i></span>
+						<input id="rangoFechasTransaccion" type="text" class="form-control filtro" readonly="readonly"
+							name="fechaTransaccion" />
+					</div>
+			</div>
+		</div>
+		
+		<div class="form-group">
+			<div class="group">
+				<label class="col-sm-1 col-md-1 control-label" for="textinput">Número Cuenta</label>
+					<div class="col-sm-3 col-md-3">
+						<input id="textinput" name="numeroCuenta" type="text" placeholder=""
+							class="form-control input-md filtro" value="">
+					</div>
+			</div>
+			<div class="group">
+				<label class="col-sm-1 col-md-1 control-label">Origen de Archivo</label>
+						<div class="col-sm-3 col-md-3">
+							<select id="origenesArchivo" class="form-control select2 filtro" name="idOrigenArchivo">
+								<option value="-1">TODOS</option>
+								<option th:each="origenArchivo : ${origenesArchivo}" th:value="${origenArchivo.idItem}"
+									th:text="|${origenArchivo.idItem} - ${origenArchivo.descripcionItem}|"></option>
+							</select>
+						</div>
+			</div>
+		</div>
+	</th:block>
+	
+	<th:block th:fragment="txnsLiberadas">
+		<div class="form-group">
+			<div class="group">
+				<label class="col-sm-1 col-md-1 control-label" for="textinput">Número Tarjeta</label>
+					<div class="col-sm-3 col-md-3">
+						<input id="textinput" name="numeroTarjeta" type="text" placeholder=""
+							class="form-control input-md filtro">
+					</div>
+			</div>
+			<div class="group">
+				<label class="col-sm-1 col-md-1 control-label" for="canalFiltroParaTablaConsulta">Canal</label>
+					<div class="col-sm-3 col-md-3">
+						<select id="canalFiltroParaTablaConsulta" class="select2 filtro" name="idCanal">
+							<option disable="disable" selected="selected" th:value="-1">Seleccione un Canal</option>
+							<option th:each="canal : ${canales}" th:value="${canal.idCanal}"
+								th:text="|${canal.idCanal} - ${canal.descripcion}|"></option>
+						</select>
+					</div>
+			</div>
+			<div class="group">
+				<label class="control-label col-sm-1 col-md-1" for="rangoFechasTransaccion">Fecha
+						Transacción</label>
+					<div class="col-sm-3 col-md-3 input-group">
+						<span class="input-group-addon"><i class="fa fa-calendar"></i></span>
+						<input id="rangoFechasTransaccion" type="text" class="form-control filtro" readonly="readonly"
+							name="fechaTransaccion" />
+					</div>
+			</div>
+		</div>
+		<div class="form-group">
+			<div class="group">
+				<label class="col-sm-1 col-md-1 control-label" for="textinput">Trace</label>
+					<div class="col-sm-3 col-md-3">
+						<input id="textinput" name="trace" type="text" placeholder="" class="form-control input-md filtro">
+					</div>
+			</div>
+			<div class="group">
+				<label class="col-sm-2 col-md-1 control-label" for="codigoProcesoFiltroParaTablaConsulta">Código
+						Proceso</label>
+					<div class="col-sm-3 col-md-3">
+						<select id="codigoProcesoFiltroParaTablaConsulta" class="select2 filtro" name="codigoProcesoSwitch">
+							<option disable="disable" selected="selected" th:value="-1">Seleccione un Codigo
+								Proceso</option>
+							<option th:each="codigoProceso : ${codigoProcesos}"
+								th:value="${codigoProceso.codigoProcesoSwitch}"
+								th:text="|${codigoProceso.codigoProcesoSwitch} - ${codigoProceso.descripcion}|"></option>
+						</select>
+					</div>
+			</div>
+		</div>
+	</th:block>
+	
+	<th:block th:fragment="txnsPendientes">
+		<div class="form-group">
+			<div class="group">
+				<label class="col-sm-1 col-md-1 control-label" for="textinput">Número Tarjeta</label>
+					<div class="col-sm-3 col-md-3">
+						<input id="textinput" name="numeroTarjeta" type="text" placeholder=""
+							class="form-control input-md filtro">
+					</div>
+			</div>
+			<div class="group">
+				<label class="col-sm-1 col-md-1 control-label" for="canalFiltroParaTablaConsulta">Canal</label>
+					<div class="col-sm-3 col-md-3">
+						<select id="canalFiltroParaTablaConsulta" class="select2 filtro" name="idCanal">
+							<option disable="disable" selected="selected" th:value="-1">Seleccione un Canal</option>
+							<option th:each="canal : ${canales}" th:value="${canal.idCanal}"
+								th:text="|${canal.idCanal} - ${canal.descripcion}|"></option>
+						</select>
+					</div>
+			</div>
+			<div class="group">
+				<label class="control-label col-sm-1 col-md-1" for="rangoFechasTransaccion">Fecha
+						Transacción</label>
+					<div class="col-sm-3 col-md-3 input-group">
+						<span class="input-group-addon"><i class="fa fa-calendar"></i></span>
+						<input id="rangoFechasTransaccion" type="text" class="form-control filtro" readonly="readonly"
+							name="fechaTransaccion" />
+					</div>
+			</div>
+		</div>
+		<div class="form-group">
+			<div class="group">
+				<label class="col-sm-1 col-md-1 control-label" for="textinput">Trace</label>
+					<div class="col-sm-3 col-md-3">
+						<input id="textinput" name="trace" type="text" placeholder="" class="form-control input-md filtro">
+					</div>
+			</div>
+			<div class="group">
+				<label class="col-sm-2 col-md-1 control-label" for="codigoProcesoFiltroParaTablaConsulta">Código
+						Proceso</label>
+					<div class="col-sm-3 col-md-3">
+						<select id="codigoProcesoFiltroParaTablaConsulta" class="select2 filtro" name="codigoProcesoSwitch">
+							<option disable="disable" selected="selected" th:value="-1">Seleccione un Codigo
+								Proceso</option>
+							<option th:each="codigoProceso : ${codigoProcesos}"
+								th:value="${codigoProceso.codigoProcesoSwitch}"
+								th:text="|${codigoProceso.codigoProcesoSwitch} - ${codigoProceso.descripcion}|"></option>
+						</select>
+					</div>
+			</div>
+		</div>
+	</th:block>
+	
+	<th:block th:fragment="txnsAjustes">
+		<div class="form-group">
+			<div class="group">
+				<label class="col-sm-1 col-md-1 control-label">Número de Tarjeta</label>
+				<div class="col-sm-3 col-md-3">
+					<input class="form-control filtro" name="numeroTarjeta" />
+				</div>
+			</div>
+			<div class="group">
+				<label class="col-sm-1 col-md-1 control-label">Número de Trace</label>
+				<div class="col-sm-3 col-md-3">
+					<input class="form-control filtro" name="numeroTrace" />
+				</div>
+			</div>
+			<div class="group">
+				<label class="col-sm-1 control-label">Fechas</label>
+				<div class="col-sm-3 input-group">
+					<span class="input-group-addon"><i class="fa fa-calendar"></i></span>
+					<input id="rangoFechaBusqueda" type="text" class="form-control filtro" readonly="readonly" />
+				</div>
+			</div>
+		</div>
+		
+	</th:block>
+		
+	<th:block th:fragment="saldos">
+		<div class="form-group">
+			
+			<div class="group">
+				<label class="col-sm-1 col-md-1 control-label" for="textinput">Número Tarjeta</label>
+					<div class="col-sm-3 col-md-3">
+						<input id="numeroTarjetaFiltroTablaConsulta" name="numeroTarjeta" type="text" value="" placeholder="4220520005884799"
+							class="form-control input-md filtro">
+					</div>
+			</div>
+			
+			<div class="group">
+				<label class="control-label col-sm-1 col-md-1" for="fechaProcFiltroTablaConsulta">Fecha
+						Proceso</label>
+					<div class="col-sm-3 col-md-3 input-group">
+						<span class="input-group-addon"><i class="fa fa-calendar"></i></span>
+						<input id="fechaProcFiltroTablaConsulta" type="text" class="form-control filtro" readonly="readonly"
+							name="fechaProceso" />
+					</div>
+			</div>
+			</div>
+			
+			
+			<div class="form-group">
+			<div class="group">
+				<label class="col-sm-1 col-md-1 control-label" for="binFiltroTablaConsulta">BIN</label>
+					<div class="col-sm-3 col-md-3">
+						<select id="binFiltroTablaConsulta" name="codigoBIN" class="form-control select2 filtro">
+							<option selected="selected" value="-1">Seleccione BIN</option>
+							<option th:each="bin : ${bines}" th:value="${bin.codigoBIN}"
+								th:text="|${bin.codigoBIN} - ${bin.descripcion}|"></option>
+						</select>
+					</div>
+			</div>
+			<div class="group">
+				<label class="col-sm-1 col-md-1 control-label" for="subBinFiltroTablaConsulta">Sub BIN</label>
+					<div class="col-sm-3 col-md-3">
+						<select id="subBinFiltroTablaConsulta" name="codigoSubBIN" class="form-control select2 filtro">
+							<option selected="selected" value="-1">Seleccione Sub BIN</option>
+						</select>
+					</div>
+			</div>
+			
+			<div class="form-group">
+				<div class="group">
+					<label class="col-sm-1 col-md-1 control-label" for="monedaFiltroTablaConsulta">Moneda</label>
+						<div class="col-sm-3 col-md-3">
+							<select id="monedaFiltroTablaConsulta" name="codigoMoneda" class="form-control select2 filtro">
+								<option value="-1" selected="selected">Seleccione Moneda</option>
+								<option th:each="moneda : ${monedas}" th:value="${moneda.codigoMoneda}"
+									th:text="|${moneda.codigoMoneda} - ${moneda.descripcion}|"></option>
+							</select>
+						</div>
+				</div>
+				
+				
+				
+			</div>
+			
+			
+			
+			
+		</div>
+	
+	</th:block>
+	
+</body>
+</html>

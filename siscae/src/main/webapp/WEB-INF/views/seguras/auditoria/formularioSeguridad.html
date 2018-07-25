@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4"
+	layout:decorator="layout">
+<head>
+<title th:text="|Seguridad de #{__${seguridad}__}|"></title>
+</head>
+<th:block layout:fragment="style">
+	<link th:href="@{/resources/css/dataTables.bootstrap.min.css}"
+		rel="stylesheet" />
+	<link th:href="@{/resources/css/responsive.bootstrap.min.css}"
+		rel="stylesheet" />
+	<link th:href="@{/resources/css/popupwindow.css}" rel="stylesheet" />
+	<link th:href="@{/resources/css/jquery-confirm.min.css}"
+		rel="stylesheet" />
+	<link th:href="@{/resources/css/select2.min.css}" rel="stylesheet" />
+	<link th:href="@{/resources/css/select2-bootstrap.min.css}"
+		rel="stylesheet" />
+</th:block>
+<body>
+	<th:block layout:fragment="content">
+		<div class="page-content-wrap">
+			<div class="row">
+				<div class="col-md-12 col-sm-12 col-xs-12">
+					<div class="panel panel-default">
+						<div class="panel-heading">
+							<h3 class="panel-title" th:text="|Seguridad #{__${seguridad}__}|"></h3>
+						</div>
+						<div class="panel-body">
+							<th:block
+								th:replace="~{template/fragments/seguridad/formularioRegistroSeguridad :: formularioRegistroSeguridad(tipo=${seguridad})}?:~{}">
+							</th:block>
+							<div class="col-xs-12 col-sm-12 col-md-7 col-lg-7">
+								<th:block
+									th:replace="~{seguras/seguridad/formularioSeguridad :: ${seguridad}}?:~{}">
+								</th:block>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+				<th:block
+					th:replace="~{seguras/seguridad/formularioSeguridad :: ${seguridad}}?:~{}">
+				</th:block>
+	</th:block>
+
+	<div th:fragment="perfil">
+		<div class="table-responsive">
+			<table id="tablaPerfiles" class="table table-bordered table-striped">
+			</table>
+		</div>
+	</div>
+
+	<div th:fragment="recurso">
+		<table id="tablaRecursos"
+			class="table table-bordered table-striped table-hover">
+		</table>
+	</div>
+
+	<div th:fragment="usuario">
+		<div class="table-responsive">
+			<table id="tablaUsuarios" class="table table-bordered table-striped">
+			</table>
+		</div>
+	</div>
+
+	<!-- modal -->
+	<div id="modalPerfil" class="row col-xs-12 col-sm-12 col-md-5 col-lg-5"
+		style="width: 100%;">
+		<fieldset class="well">
+			<legend class="well-legend"> Modificar Perfil</legend>
+			<form id="formPerfilModal" class="form-horizontal" role="form">
+				<div class="form-group">
+					<label for="inputEmail3" class="col-sm-3 control-label">
+						Perfil</label>
+					<div class="col-sm-7">
+						<input type="text" class="form-control" name="idPerfil"
+							th:readonly="true"></input>
+					</div>
+				</div>
+				<div class="form-group">
+					<label for="inputEmail3" class="col-sm-3 control-label">
+						Descripcion</label>
+					<div class="col-sm-7">
+						<input type="text" class="form-control" name="descripcion"></input>
+					</div>
+				</div>
+				<div class="form-group">
+					<div class="col-lg-12 text-center">
+						<button id="actualizarPerfilModal" type="button"
+							class="btn btn-primary hidden">
+							<i class="fa fa-pencil-square"></i> Actualizar
+						</button>
+					</div>
+				</div>
+			</form>
+		</fieldset>
+	</div>
+
+	<div id="modalRecurso"
+		class="row col-xs-12 col-sm-12 col-md-5 col-lg-5" style="width: 100%;">
+		<fieldset class="well">
+			<legend class="well-legend"> Actualizar Recurso</legend>
+			<form id="formRecursoModal" class="form-horizontal" role="form">
+				<div class="form-group">
+					<label for="inputEmail3" class="col-sm-3 control-label">
+						Recurso</label>
+					<div class="col-sm-7">
+						<input type="text" class="form-control" name="idRecurso"
+							th:readonly="true"></input>
+					</div>
+				</div>
+				<div class="form-group">
+					<label for="inputEmail3" class="col-sm-3 control-label">
+						Descripcion</label>
+					<div class="col-sm-7">
+						<input type="text" class="form-control" name="descripcion"></input>
+					</div>
+				</div>
+				<div class="form-group">
+					<div class="col-lg-12 text-center">
+						<button id="actualizarRecursoModal" type="button"
+							class="btn btn-primary hidden">
+							<i class="fa fa-pencil-square"></i> Actualizar
+						</button>
+					</div>
+				</div>
+			</form>
+		</fieldset>
+	</div>
+
+	<div id="modalUsuario"
+		class="row col-xs-12 col-sm-12 col-md-5 col-lg-5" style="width: 100%;">
+		<fieldset class="well">
+			<legend class="well-legend"> Modificar Usuario</legend>
+			<form id="formUsuarioModal" class="form-horizontal" role="form">
+
+				<div class="form-group">
+					<label for="inputEmail3" class="col-sm-3 control-label">
+						Usuario</label>
+					<div class="col-sm-7">
+						<input type="text" class="form-control" name="idUsuario"
+							th:readonly="true"></input>
+					</div>
+				</div>
+				<div class="form-group">
+					<label for="inputEmail3" class="col-sm-3 control-label">
+						Contraseña</label>
+					<div class="col-sm-7">
+						<input id="txtPassword" type="password" class="form-control"
+							name="password" value="12345678" th:readonly="true"></input>
+					</div>
+					<div>
+						<button type="button" class="btn btn-default" id="boton">
+							<i class="fa fa-refresh"></i>
+						</button>
+					</div>
+				</div>
+				<div class="form-group" id="repetirContrasenia">
+					<label for="inputEmail3" class="col-sm-3 control-label">
+						Repetir Contraseña</label>
+					<div class="col-sm-7">
+						<input type="password" class="form-control" name="password2"
+							value="12345678" th:readonly="false"></input>
+					</div>
+				</div>
+				<div class="form-group">
+					<label for="inputEmail3" class="col-sm-3 control-label">
+						Bloquear</label>
+					<div class="col-sm-7">
+						<select id="activar" class="form-control" name="activo">
+							<option value="1">SI</option>
+							<option value="0">NO</option>
+						</select>
+					</div>
+				</div>
+				<div class="form-group">
+					<label for="inputEmail3" class="col-sm-3 control-label">
+						Perfil</label>
+					<div class="col-sm-7">
+						<select id="selectTipoPerfil" class="form-control" name="idPerfil">
+							<option th:each="tipoPerfil : ${TiposPerfiles}"
+								th:value="${tipoPerfil.idPerfil}"
+								th:text="${tipoPerfil.idPerfil}"></option>
+						</select>
+					</div>
+				</div>
+				<div class="form-group">
+					<div class="col-lg-12 text-center">
+
+						<button id="actualizarUsuarioModal" type="button"
+							class="btn btn-primary hidden">
+							<i class="fa fa-pencil-square"></i> Actualizar
+						</button>
+					</div>
+				</div>
+			</form>
+		</fieldset>
+	</div>
+	
+	<th:block layout:fragment="script">
+		<script th:src="@{/resources/js/datatables/jquery.dataTables.min.js}"></script>
+		<script
+			th:src="@{/resources/js/datatables/dataTables.bootstrap.min.js}"></script>
+		<script
+			th:src="@{/resources/js/datatables/dataTables.responsive.min.js}"></script>
+		<script th:src="@{/resources/js/datatables/dataTables.show.rows.js}"></script>
+		<script th:src="@{/resources/js/bootstrap/bootstrap-notify.min.js}"></script>
+		<script th:src="@{/resources/js/jquery/popupwindow.min.js}"></script>
+		<script th:src="@{/resources/js/jquery/jquery.serializejson.min.js}"></script>
+		<script th:src="@{/resources/js/jquery/jquery.validate.min.js}"></script>
+		<script th:src="@{/resources/js/jquery/additional-methods.min.js}"></script>
+		<script th:src="@{/resources/js/jquery/jquery-confirm.min.js}"></script>
+		<script th:src="@{/resources/js/jquery/jquery.animate.min.js}"></script>
+		<script th:src="@{/resources/js/jquery/select2.full.min.js}"></script>
+		<script th:src="@{/resources/js/util/formularioUtil.js}"></script>
+		<script
+			th:src="@{/resources/js/pagina/seguridad/{seguridad}/{seguridad}.js(seguridad = ${seguridad})}"></script>
+		<script
+			th:src="@{/resources/js/pagina/seguridad/{seguridad}/{seguridad}Formulario.js(seguridad = ${seguridad})}"></script>
+	</th:block>
+</body>
+</html>

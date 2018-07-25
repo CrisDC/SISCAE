@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4" layout:decorator="layout">
+<head>
+<title th:text="|Consulta Administratuva de #{__${consulta}__}|"></title>
+</head>
+<th:block layout:fragment="style">
+	<link th:href="@{/resources/css/dataTables.bootstrap.min.css}" rel="stylesheet" />
+	<link th:href="@{/resources/css/responsive.bootstrap.min.css}" rel="stylesheet" />
+	
+	<link th:href="@{/resources/css/buttons.dataTables.min.css}" rel="stylesheet" />
+</th:block>
+<body>
+	<th:block layout:fragment="content">
+		<div class="page-content-wrap">
+			<div class="row">
+				<div class="col-md-12 col-sm-12 col-xs-12">
+					<div class="panel panel-default">
+						<div class="panel-heading">
+							<h3 class="panel-title" th:text="|Consulta Administrativa de #{__${consulta}__}|"></h3>
+						<th:block th:if="${consulta} == 'tarjetaPP' ?: true">
+								
+										<button id="exportarXlsx" type="button" class="btn btn-success pull-right">
+									<i class="fa fa-search"></i> Exportar Excel
+									</button>
+								
+							</th:block>
+						</div>
+						
+						<div class="panel-body">
+							<table id="tablaConsultaAdministrativa" width="100%" class="table table-bordered table-condensed nowrap display table-hover">
+							</table>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</th:block>
+	<th:block layout:fragment="script">
+		<script th:src="@{/resources/js/datatables/jquery.dataTables.min.js}"></script>
+		<script th:src="@{/resources/js/datatables/dataTables.bootstrap.min.js}"></script>
+		<script th:src="@{/resources/js/datatables/dataTables.responsive.min.js}"></script>>
+		<script th:src="@{/resources/js/bootstrap/bootstrap-notify.min.js}"></script>
+		<script th:src="@{/resources/js/bootstrap/bootstrap-datepicker.min.js}"></script>
+		
+		<script th:src="@{/resources/js/datatables/export/dataTables.buttons.min.js}"></script>
+		<script th:src="@{/resources/js/datatables/export/buttons.flash.min.js}"></script>
+		<script th:src="@{/resources/js/datatables/export/jszip.min.js}"></script>
+		<script th:src="@{/resources/js/datatables/export/pdfmake.min.js}"></script>
+		<script th:src="@{/resources/js/datatables/export/vfs_fonts.js}"></script>
+		<script th:src="@{/resources/js/datatables/export/buttons.html5.min.js}"></script>
+		<script th:src="@{/resources/js/datatables/export/buttons.print.min.js}"></script>
+		<script th:src="@{/resources/js/datatables/export/dataTables.tableTools.nightly.js}"></script>
+		
+		
+		<script th:src="@{/resources/js/pagina/consulta/administrativa/{consulta}.js(consulta = ${consulta})}"></script>
+	</th:block>
+</body>
+</html>

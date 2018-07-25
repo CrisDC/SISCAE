@@ -1,0 +1,981 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head>
+</head>
+<body>
+	<div id="modalMantenimiento" class="row" th:fragment="modalMantenimiento" th:with="tipo=${tipo}">
+		<fieldset class="well">
+			<legend class="well-legend">Formulario de Mantenimiento</legend>
+			<form id="formMantenimiento" class="form-horizontal" role="form">
+				<th:block th:replace="~{template/fragments/mantenimiento/modalMantenimiento :: ${tipo}}?:~{}">
+				</th:block>
+				<div id="botonesForm" class="form-group">
+					<div class="col-lg-12 text-center">
+						<button id="registrarMantenimiento" type="button" class="btn btn-success">
+							<i class="fa fa-floppy-o"></i> Registrar
+						</button>
+						<button id="actualizarMantenimiento" type="button" class="btn btn-primary hidden">
+							<i class="fa fa-pencil-square"></i> Actualizar
+						</button>
+					</div>
+				</div>
+			</form>
+		</fieldset>
+		<th:block
+			th:replace="~{template/fragments/mantenimiento/formularioAdicionalMantenimiento :: ${tipo}}?:~{}">
+		</th:block>
+	</div>
+
+	<th:block th:fragment="bin">
+		<div class="form-group">
+			<label class="col-lg-2 control-label">BIN</label>
+			<div class="col-lg-10">
+				<input class="form-control numbersOnly elemento-desactivable" name="codigoBIN"
+					autofocus="autofocus" />
+			</div>
+		</div>
+		<div class="form-group">
+			<label class="col-lg-2 control-label">Descripción</label>
+			<div class="col-lg-10">
+				<input class="form-control upperCase" name="descripcion">
+			</div>
+		</div>
+		<div class="form-group">
+			<label class="col-lg-2 control-label">Institución</label>
+			<div class="col-lg-10">
+				<select class="form-control" disabled="disabled">
+					<option value="" disabled="disabled" selected="selected" th:each="institucion : ${institucion}"
+						th:text="|${institucion.codigoInstitucion} - ${institucion.descripcionCorta}|"></option>
+				</select>
+			</div>
+		</div>
+		<div class="form-group">
+			<label class="col-lg-2 control-label">Membresía</label>
+			<div class="col-lg-10">
+				<select id="membresias" class="form-control select2" name="codigoMembresia">
+					<option value="" disabled="disabled" selected="selected">Seleccione una Membresía</option>
+					<option th:each="membresia,iter: ${membresias}" th:value="${membresia.codigoMembresia}"
+						th:text="|${membresia.codigoMembresia} - ${membresia.descripcion}|"></option>
+				</select>
+			</div>
+		</div>
+		<div class="form-group">
+			<label class="col-lg-2 control-label">Clase de Servicio</label>
+			<div class="col-lg-10">
+				<select id="clasesServicio" class="form-control select2" name="codigoClaseServicio">
+					<option value="" disabled="disabled" selected="selected">Seleccione una Clase de
+						Servicio</option>
+				</select>
+			</div>
+		</div>
+	</th:block>
+
+	<th:block th:fragment="canal">
+		<div class="form-group">
+			<label class="col-lg-2 control-label">Identificador</label>
+			<div class="col-lg-10">
+				<input class="form-control numbersOnly elemento-desactivable" name="idCanal"
+					autofocus="autofocus" />
+			</div>
+		</div>
+		<div class="form-group">
+			<label class="col-lg-2 control-label">Descripción</label>
+			<div class="col-lg-10">
+				<input class="form-control upperCase" name="descripcion">
+			</div>
+		</div>
+	</th:block>
+
+	<th:block th:fragment="canalEmisor">
+		<div class="form-group">
+			<label class="col-lg-2 control-label">Código</label>
+			<div class="col-lg-10">
+				<input class="form-control upperCase elemento-desactivable" name="codigoCanalEmisor"
+					autofocus="autofocus" />
+			</div>
+		</div>
+		<div class="form-group">
+			<label class="col-lg-2 control-label">Descripción</label>
+			<div class="col-lg-10">
+				<input class="form-control upperCase" name="descripcion">
+			</div>
+		</div>
+	</th:block>
+	<th:block th:fragment="claseServicio">
+		<div class="form-group">
+			<label class="col-lg-2 control-label">Código</label>
+			<div class="col-lg-10">
+				<input class="form-control upperCase elemento-desactivable" name="codigoClaseServicio"
+					autofocus="autofocus" />
+			</div>
+		</div>
+		<div class="form-group">
+			<label class="col-lg-2 control-label">Descripción</label>
+			<div class="col-lg-10">
+				<input class="form-control upperCase" name="descripcion">
+			</div>
+		</div>
+		<div class="form-group">
+			<label class="col-lg-2 control-label">Membresía</label>
+			<div class="col-lg-10">
+				<select id="membresias" class="form-control select2 elemento-desactivable"
+					name="codigoMembresia">
+					<option value="" selected="selected" disabled="disabled">Seleccione una Membresía</option>
+					<option th:each="membresia: ${membresias}" th:value="|${membresia.codigoMembresia}|"
+						th:text="|${membresia.codigoMembresia} - ${membresia.descripcion}|"></option>
+				</select>
+			</div>
+		</div>
+	</th:block>
+
+	<th:block th:fragment="claseTransaccion">
+		<div class="form-group">
+			<label class="col-lg-2 control-label">Código</label>
+			<div class="col-lg-10">
+				<input class="form-control numbersOnly elemento-desactivable" name="codigoClaseTransaccion"
+					autofocus="autofocus" />
+			</div>
+		</div>
+		<div class="form-group">
+			<label class="col-lg-2 control-label">Descripción</label>
+			<div class="col-lg-10">
+				<input class="form-control upperCase" name="descripcion">
+			</div>
+		</div>
+	</th:block>
+
+	<th:block th:fragment="cliente">
+		<div class="form-group">
+			<label class="col-lg-2 control-label">Código</label>
+			<div class="col-lg-10">
+				<input class="form-control numbersOnly elemento-desactivable" name="idCliente"
+					autofocus="autofocus" />
+			</div>
+		</div>
+		<div class="form-group">
+			<label class="col-lg-2 control-label">Descripción</label>
+			<div class="col-lg-10">
+				<input class="form-control upperCase" name="descripcion">
+			</div>
+		</div>
+		<div class="form-group">
+			<label class="col-lg-2 control-label">Empresa</label>
+			<div class="col-lg-10">
+				<select id="empresas" class="form-control select2 elemento-desactivable" name="idEmpresa">
+					<option value="" selected="selected" disabled="disabled">Seleccione una Empresa</option>
+					<option th:each="empresa: ${empresas}" th:value="${empresa.idEmpresa}"
+						th:text="|${empresa.idEmpresa} - ${empresa.descripcion}|"></option>
+				</select>
+			</div>
+		</div>
+	</th:block>
+
+	<th:block th:fragment="codigoProcBevertec">
+		<div class="form-group">
+			<label class="col-lg-2 control-label">Canal Emisor</label>
+			<div class="col-lg-10">
+				<select id="canalesEmisores" class="form-control select2 elemento-desactivable"
+					name="codigoCanalEmisor">
+					<option value="" selected="selected" disabled="disabled">Seleccione un Canal Emisor</option>
+					<option th:each="canalEmisor : ${canalesEmisores}" th:value="${canalEmisor.codigoCanalEmisor}"
+						th:text="|${canalEmisor.codigoCanalEmisor} - ${canalEmisor.descripcion}|"></option>
+				</select>
+			</div>
+		</div>
+		<div class="form-group">
+			<label class="col-lg-2 control-label">Tipo Transacción</label>
+			<div class="col-lg-10">
+				<input class="form-control numbersOnly elemento-desactivable" name="tipoTransaccion">
+			</div>
+		</div>
+		<div class="form-group">
+			<label class="col-lg-2 control-label">Descripción</label>
+			<div class="col-lg-10">
+				<input class="form-control upperCase" name="descripcion">
+			</div>
+		</div>
+	</th:block>
+
+	<th:block th:fragment="codigoProcesoSwitch">
+		<div class="form-group">
+			<label class="col-lg-2 control-label">Código Switch</label>
+			<div class="col-lg-10">
+				<input class="form-control numbersOnly elemento-desactivable" name="codigoProcesoSwitch"
+					autofocus="autofocus" />
+			</div>
+		</div>
+		<div class="form-group">
+			<label class="col-lg-2 control-label">Descripción</label>
+			<div class="col-lg-10">
+				<input class="form-control upperCase" name="descripcion" />
+			</div>
+		</div>
+		<div class="form-group">
+			<label class="col-lg-2 control-label">Clase de Transacción</label>
+			<div class="col-lg-10">
+				<select id="claseTransacciones" class="form-control select2" name="codigoClaseTransaccion">
+					<option value="" selected="selected" disabled="disabled">Seleccione una Clase de
+						Transacción</option>
+					<option th:each="claseTransaccion: ${claseTransacciones}"
+						th:value="${claseTransaccion.codigoClaseTransaccion}"
+						th:text="|${claseTransaccion.codigoClaseTransaccion} - ${claseTransaccion.descripcion}|"></option>
+				</select>
+			</div>
+		</div>
+		<div class="form-group">
+			<label class="col-lg-2 control-label">Código de Transacción</label>
+			<div class="col-lg-10">
+				<select id="codigoTransacciones" class="form-control select2" name="codigoTransaccion">
+					<option value="" disabled="disabled" selected="selected">Seleccione un Código de
+						Transacción</option>
+				</select>
+			</div>
+		</div>
+		<div class="form-group">
+			<label class="col-lg-2 control-label">Transacción Monetaria</label>
+			<div class="col-lg-10">
+				<div class="checkbox">
+					<label>
+						<input type="checkbox" value="1" data-unchecked-value="0" name="transaccionMonetaria" />
+					</label>
+				</div>
+			</div>
+		</div>
+		<div class="form-group">
+			<label class="col-lg-2 control-label">Aplica interés</label>
+			<div class="col-lg-10">
+				<div class="checkbox">
+					<label>
+						<input type="checkbox" value="1" data-unchecked-value="0" name="aplicaInteres" />
+					</label>
+				</div>
+			</div>
+		</div>
+	</th:block>
+
+	<th:block th:fragment="codigoRptaSwitch">
+		<div class="form-group">
+			<label class="col-lg-2 control-label">Código</label>
+			<div class="col-lg-10">
+				<input class="form-control numbersOnly elemento-desactivable" name="codigoRespuestaSwitch"
+					autofocus="autofocus" />
+			</div>
+		</div>
+		<div class="form-group">
+			<label class="col-lg-2 control-label">Descripción</label>
+			<div class="col-lg-10">
+				<input class="form-control upperCase" name="descripcion">
+			</div>
+		</div>
+		<div class="form-group">
+			<label class="col-lg-2 control-label">Tipo de Respuesta</label>
+			<div class="col-lg-10">
+				<select id="tipoRespuestas" class="form-control select2" name="tipoRespuesta">
+					<option value="" selected="selected" disabled="disabled">Seleccione un Tipo de
+						Respuesta</option>
+					<option th:each="tipoRespuesta : ${tipoRespuestas}" th:value="${tipoRespuesta.idItem}"
+						th:text="|${tipoRespuesta.idItem} - ${tipoRespuesta.descripcionItem}|"></option>
+				</select>
+			</div>
+		</div>
+		<div class="form-group">
+			<label class="col-lg-2 control-label">Comisión</label>
+			<div class="col-lg-10">
+				<div class="checkbox">
+					<label>
+						<input type="checkbox" value="1" data-unchecked-value="0" name="comisionTipoC" />
+					</label>
+				</div>
+			</div>
+		</div>
+	</th:block>
+
+	<th:block th:fragment="codigoRptaVisa">
+		<div class="form-group">
+			<label class="col-lg-2 control-label">Código</label>
+			<div class="col-lg-10">
+				<input class="form-control numbersOnly elemento-desactivable" name="codigoRespuestaVisa"
+					autofocus="autofocus" />
+			</div>
+		</div>
+		<div class="form-group">
+			<label class="col-lg-2 control-label">Descripción</label>
+			<div class="col-lg-10">
+				<input class="form-control upperCase" name="descripcion">
+			</div>
+		</div>
+		<div class="form-group">
+			<label class="col-lg-2 control-label">Atribuible</label>
+			<div class="col-lg-10">
+				<div class="checkbox">
+					<label>
+						<input type="checkbox" value="1" data-unchecked-value="0" name="atribuible" />
+					</label>
+				</div>
+			</div>
+		</div>
+	</th:block>
+
+	<th:block th:fragment="codigoTransaccion">
+		<div class="form-group">
+			<label class="col-lg-2 control-label">Código</label>
+			<div class="col-lg-10">
+				<input class="form-control upperCase elemento-desactivable" name="codigoTransaccion"
+					autofocus="autofocus" />
+			</div>
+		</div>
+		<div class="form-group">
+			<label class="col-lg-2 control-label">Clase de Transacción</label>
+			<div class="col-lg-10">
+				<select id="claseTransacciones" class="form-control select2 elemento-desactivable"
+					name="codigoClaseTransaccion">
+					<option value="" selected="selected" disabled="disabled">Seleccione una Clase de
+						Transacción</option>
+					<option th:each="claseTransaccion: ${claseTransacciones}"
+						th:value="${claseTransaccion.codigoClaseTransaccion}"
+						th:text="|${claseTransaccion.codigoClaseTransaccion} - ${claseTransaccion.descripcion}|"></option>
+				</select>
+			</div>
+		</div>
+		<div class="form-group">
+			<label class="col-lg-2 control-label">Descripción</label>
+			<div class="col-lg-10">
+				<input class="form-control upperCase" name="descripcion">
+			</div>
+		</div>
+		<div class="form-group">
+			<label class="col-lg-2 control-label">Transacción Miscelánea</label>
+			<div class="col-lg-2">
+				<div class="checkbox">
+					<label>
+						<input type="checkbox" name="transaccionMiscelanea" value="1" data-unchecked-value="0" />
+					</label>
+				</div>
+			</div>
+			<label class="col-lg-2 control-label">Compensa Fondos</label>
+			<div class="col-lg-2">
+				<div class="checkbox">
+					<label>
+						<input type="checkbox" name="compensaFondos" value="1" data-unchecked-value="0" />
+					</label>
+				</div>
+			</div>
+			<label class="col-lg-2 control-label">Compensa Comisiones</label>
+			<div class="col-lg-2">
+				<div class="checkbox">
+					<label>
+						<input type="checkbox" name="compensaComisiones" value="1" data-unchecked-value="0" />
+					</label>
+				</div>
+			</div>
+		</div>
+	</th:block>
+
+	<th:block th:fragment="codigoTxnBevertec">
+		<div class="form-group">
+			<label class="col-lg-2 control-label">Canal Emisor</label>
+			<div class="col-lg-10">
+				<select id="canalesEmisores" class="form-control select2 elemento-desactivable"
+					name="codigoCanalEmisor">
+					<option value="" selected="selected" disabled="disabled">Seleccione un Canal Emisor</option>
+					<option th:each="canalEmisor : ${canalesEmisores}" th:value="${canalEmisor.codigoCanalEmisor}"
+						th:text="|${canalEmisor.codigoCanalEmisor} - ${canalEmisor.descripcion}|"></option>
+				</select>
+			</div>
+		</div>
+		<div class="form-group">
+			<label class="col-lg-2 control-label">Tipo Transacción</label>
+			<div class="col-lg-10">
+				<select id="tiposTransacciones" class="form-control select2 elemento-desactivable"
+					name="tipoTransaccion">
+					<option value="" selected="selected" disabled="disabled">Seleccione un Tipo de
+						Transaccion</option>
+				</select>
+			</div>
+		</div>
+		<div class="form-group">
+			<label class="col-lg-2 control-label">Código de Transacción</label>
+			<div class="col-lg-10">
+				<input class="form-control numbersOnly elemento-desactivable" name="codTransaccion">
+			</div>
+		</div>
+		<div class="form-group">
+			<label class="col-lg-2 control-label">Descripción</label>
+			<div class="col-lg-10">
+				<input class="form-control upperCase" name="descripcion">
+			</div>
+		</div>
+	</th:block>
+
+	<th:block th:fragment="cuentaContableEmisor">
+		<div class="form-group">
+			<div class="col-xs-12 col-sm-6 col-md-6 col-lg-6">
+				<fieldset class="well">
+					<legend class="well-legend">Cuentas Fondos</legend>
+					<div class="form-group">
+						<label class="col-lg-2 control-label">Institución</label>
+						<div class="col-lg-10">
+							<select class="form-control" disabled="disabled">
+								<option value="" disabled="disabled" selected="selected"
+									th:each="institucion : ${institucion}"
+									th:text="|${institucion.codigoInstitucion} - ${institucion.descripcionCorta}|"></option>
+							</select>
+						</div>
+					</div>
+					<div class="form-group">
+						<label class="col-lg-2 control-label">Empresa</label>
+						<div class="col-lg-10">
+							<select id="empresas" class="form-control select2 elemento-desactivable" name="idEmpresa">
+								<option value="" selected="selected" disabled="disabled">Seleccione una Empresa</option>
+								<option th:each="empresa: ${empresas}" th:value="${empresa.idEmpresa}"
+									th:text="|${empresa.idEmpresa} - ${empresa.descripcion}|"></option>
+							</select>
+						</div>
+					</div>
+					<div class="form-group">
+						<label class="col-lg-2 control-label">Cliente</label>
+						<div class="col-lg-10">
+							<select id="clientes" class="form-control select2 elemento-desactivable" name="idCliente">
+								<option value="" selected="selected" disabled="disabled">Seleccione un Cliente</option>
+							</select>
+						</div>
+					</div>
+					<div class="form-group">
+						<label class="col-lg-2 control-label">Moneda</label>
+						<div class="col-lg-10">
+							<select id="monedas" class="form-control select2 elemento-desactivable" name="codigoMoneda">
+								<option value="" disabled="disabled" selected="selected">Seleccione una Moneda</option>
+								<option th:each="moneda: ${monedas}" th:value="${moneda.codigoMoneda}"
+									th:text="|${moneda.codigoMoneda} - ${moneda.descripcion}|"></option>
+							</select>
+						</div>
+					</div>
+				</fieldset>
+			</div>
+			<div class="col-xs-12 col-sm-6 col-md-6 col-lg-6">
+				<fieldset class="well">
+					<legend class="well-legend">Producto</legend>
+					<div class="form-group">
+						<label class="col-lg-2 control-label">Membresía</label>
+						<div class="col-lg-10">
+							<select id="membresias" class="form-control select2 elemento-desactivable"
+								name="codigoMembresia">
+								<option value="" selected="selected" disabled="disabled">Seleccione una Membresía</option>
+								<option th:each="membresia: ${membresias}" th:value="|${membresia.codigoMembresia}|"
+									th:text="|${membresia.codigoMembresia} - ${membresia.descripcion}|"></option>
+							</select>
+						</div>
+					</div>
+					<div class="form-group">
+						<label class="col-lg-2 control-label">Clase de Servicio</label>
+						<div class="col-lg-10">
+							<select id="clasesServicio" class="form-control select2 elemento-desactivable"
+								name="codigoClaseServicio">
+								<option value="" disabled="disabled" selected="selected">Seleccione una Clase de
+									Servicio</option>
+							</select>
+						</div>
+					</div>
+					<div class="form-group">
+						<label class="col-lg-2 control-label">BIN</label>
+						<div class="col-lg-10">
+							<select id="bines" name="codigoBIN" class="form-control select2 elemento-desactivable">
+								<option value="" disabled="disabled" selected="selected">Seleccione un BIN</option>
+								<option th:each="bin : ${bines}" th:value="${bin.codigoBIN}"
+									th:text="|${bin.codigoBIN} - ${bin.descripcion}|"></option>
+							</select>
+						</div>
+					</div>
+					<div class="form-group">
+						<label class="col-lg-2 control-label">SubBIN</label>
+						<div class="col-lg-10">
+							<select id="subBines" name="codigoSubBIN" class="form-control select2 elemento-desactivable">
+								<option value="" disabled="disabled" selected="selected">Seleccione un SubBIN</option>
+							</select>
+						</div>
+					</div>
+				</fieldset>
+			</div>
+		</div>
+		<div class="form-group">
+			<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+				<fieldset class="well">
+					<legend class="well-legend">Transacción</legend>
+					<div class="form-group">
+						<div class="group">
+							<label class="col-lg-1 control-label">Origen de Transacción</label>
+							<div class="col-lg-3">
+								<select id="origenes" class="form-control select2 elemento-desactivable" name="codigoOrigen">
+									<option value="" disabled="disabled" selected="selected">Seleccione un Origen</option>
+									<option th:each="origen : ${origenes}" th:value="${origen.codigoOrigen}"
+										th:text="|${origen.codigoOrigen} - ${origen.descripcion}|"></option>
+								</select>
+							</div>
+						</div>
+						<div class="group">
+							<label class="col-lg-1 control-label">Clase de Transacción</label>
+							<div class="col-lg-3">
+								<select id="claseTransacciones" class="form-control select2 elemento-desactivable"
+									name="codigoClaseTransaccion">
+									<option value="" selected="selected" disabled="disabled">Seleccione una Clase de
+										Transacción</option>
+									<option th:each="claseTransaccion: ${claseTransacciones}"
+										th:value="${claseTransaccion.codigoClaseTransaccion}"
+										th:text="|${claseTransaccion.codigoClaseTransaccion} - ${claseTransaccion.descripcion}|"></option>
+								</select>
+							</div>
+						</div>
+						<div class="group">
+							<label class="col-lg-1 control-label">Código de Transacción</label>
+							<div class="col-lg-3">
+								<select id="codigoTransacciones" class="form-control select2 elemento-desactivable"
+									name="codigoTransaccion">
+									<option value="" disabled="disabled" selected="selected">Seleccione un Código de
+										Transacción</option>
+								</select>
+							</div>
+						</div>
+					</div>
+					<div class="form-group">
+						<div class="group">
+							<label class="col-lg-1 control-label">Rol de Transacción</label>
+							<div class="col-lg-3">
+								<select id="rolesTransaccion" class="form-control select2 elemento-desactivable"
+									name="idRolTransaccion">
+									<option value="" disabled="disabled" selected="selected">Seleccione un Rol de Transacción</option>
+									<option th:each="rolTransaccion: ${rolesTransaccion}"
+										th:if="${rolTransaccion.idItem == '1' or rolTransaccion.idItem == '3'}"
+										th:value="${rolTransaccion.idItem}"
+										th:text="|${rolTransaccion.idItem} - ${rolTransaccion.descripcionItem}|"></option>
+								</select>
+							</div>
+						</div>
+					</div>
+				</fieldset>
+			</div>
+		</div>
+	</th:block>
+
+	<th:block th:fragment="cuentaContableReceptor">
+		<div class="form-group">
+			<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+				<fieldset class="well">
+					<legend class="well-legend">Escenario</legend>
+					<div class="form-group">
+						<div class="group">
+							<label class="col-lg-1 control-label">Institución</label>
+							<div class="col-lg-3">
+								<select class="form-control" disabled="disabled">
+									<option value="" disabled="disabled" selected="selected"
+										th:each="institucion : ${institucion}"
+										th:text="|${institucion.codigoInstitucion} - ${institucion.descripcionCorta}|"></option>
+								</select>
+							</div>
+						</div>
+						<div class="group">
+							<label class="col-lg-1 control-label">ATM</label>
+							<div class="col-lg-3">
+								<select id="atms" class="form-control select2 elemento-desactivable" name="idATM">
+									<option value="" disabled="disabled" selected="selected">Seleccione un ATM</option>
+									<option th:each="atm: ${atms}" th:value="${atm.idATM}"
+										th:text="|${atm.idATM} - ${atm.descripcionATM}|"></option>
+								</select>
+							</div>
+						</div>
+						<div class="group">
+							<label class="col-lg-1 control-label">Moneda</label>
+							<div class="col-lg-3">
+								<select id="monedas" class="form-control select2 elemento-desactivable" name="codigoMoneda">
+									<option value="" disabled="disabled" selected="selected">Seleccione una Moneda</option>
+									<option th:each="moneda: ${monedas}" th:value="${moneda.codigoMoneda}"
+										th:text="|${moneda.codigoMoneda} - ${moneda.descripcion}|"></option>
+								</select>
+							</div>
+						</div>
+					</div>
+					<div class="form-group">
+						<div class="group">
+							<label class="col-lg-1 control-label">Membresía</label>
+							<div class="col-lg-3">
+								<select id="membresias" class="form-control select2 elemento-desactivable"
+									name="codigoMembresia">
+									<option value="" selected="selected" disabled="disabled">Seleccione una Membresía</option>
+									<option th:each="membresia: ${membresias}" th:value="|${membresia.codigoMembresia}|"
+										th:text="|${membresia.codigoMembresia} - ${membresia.descripcion}|"></option>
+								</select>
+							</div>
+						</div>
+						<div class="group">
+							<label class="col-lg-1 control-label">Clase de Servicio</label>
+							<div class="col-lg-3">
+								<select id="clasesServicio" class="form-control select2 elemento-desactivable"
+									name="codigoClaseServicio">
+									<option value="" disabled="disabled" selected="selected">Seleccione una Clase de
+										Servicio</option>
+								</select>
+							</div>
+						</div>
+					</div>
+				</fieldset>
+			</div>
+		</div>
+		<div class="form-group">
+			<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+				<fieldset class="well">
+					<legend class="well-legend">Transacción</legend>
+					<div class="form-group">
+						<div class="group">
+							<label class="col-lg-1 control-label">Origen de Transacción</label>
+							<div class="col-lg-3">
+								<select id="origenes" class="form-control select2 elemento-desactivable" name="codigoOrigen">
+									<option value="" disabled="disabled" selected="selected">Seleccione un Origen</option>
+									<option th:each="origen : ${origenes}" th:value="${origen.codigoOrigen}"
+										th:text="|${origen.codigoOrigen} - ${origen.descripcion}|"></option>
+								</select>
+							</div>
+						</div>
+						<div class="group">
+							<label class="col-lg-1 control-label">Clase de Transacción</label>
+							<div class="col-lg-3">
+								<select id="claseTransacciones" class="form-control select2 elemento-desactivable"
+									name="codigoClaseTransaccion">
+									<option value="" selected="selected" disabled="disabled">Seleccione una Clase de
+										Transacción</option>
+									<option th:each="claseTransaccion: ${claseTransacciones}"
+										th:value="${claseTransaccion.codigoClaseTransaccion}"
+										th:text="|${claseTransaccion.codigoClaseTransaccion} - ${claseTransaccion.descripcion}|"></option>
+								</select>
+							</div>
+						</div>
+						<div class="group">
+							<label class="col-lg-1 control-label">Código de Transacción</label>
+							<div class="col-lg-3">
+								<select id="codigoTransacciones" class="form-control select2 elemento-desactivable"
+									name="codigoTransaccion">
+									<option value="" disabled="disabled" selected="selected">Seleccione un Código de
+										Transacción</option>
+								</select>
+							</div>
+						</div>
+					</div>
+				</fieldset>
+			</div>
+		</div>
+	</th:block>
+
+	<th:block th:fragment="empresa">
+		<div class="form-group">
+			<label class="col-lg-2 control-label">Código</label>
+			<div class="col-lg-10">
+				<input class="form-control upperCase elemento-desactivable" name="idEmpresa"
+					autofocus="autofocus" />
+			</div>
+		</div>
+		<div class="form-group">
+			<label class="col-lg-2 control-label">Descripción</label>
+			<div class="col-lg-10">
+				<input class="form-control upperCase" name="descripcion">
+			</div>
+		</div>
+		<div class="form-group">
+			<label class="col-lg-2 control-label">RUC</label>
+			<div class="col-lg-10">
+				<input class="form-control numbersOnly" name="ruc">
+			</div>
+		</div>
+		<div class="form-group">
+			<label class="col-lg-2 control-label">Dirección</label>
+			<div class="col-lg-10">
+				<input class="form-control" name="direccion">
+			</div>
+		</div>
+	</th:block>
+
+	<th:block th:fragment="indCorreoTelefono">
+		<div class="form-group">
+			<label class="col-lg-2 control-label">Código</label>
+			<div class="col-lg-10">
+				<input class="form-control numbersOnly elemento-desactivable" name="codigoIndCorreoTelefono"
+					autofocus="autofocus" />
+			</div>
+		</div>
+		<div class="form-group">
+			<label class="col-lg-2 control-label">Descripción</label>
+			<div class="col-lg-10">
+				<input class="form-control upperCase" name="descripcion">
+			</div>
+		</div>
+	</th:block>
+
+	<th:block th:fragment="institucion">
+		<div class="form-group">
+			<label class="col-lg-2 control-label">Código</label>
+			<div class="col-lg-10">
+				<input class="form-control numbersOnly elemento-desactivable" name="codigoInstitucion"
+					autofocus="autofocus" />
+			</div>
+		</div>
+		<div class="form-group">
+			<label class="col-lg-2 control-label">Descripción</label>
+			<div class="col-lg-10">
+				<input class="form-control upperCase" name="descripcion">
+			</div>
+		</div>
+		<div class="form-group">
+			<label class="col-lg-2 control-label">Descripción Corta</label>
+			<div class="col-lg-10">
+				<input class="form-control upperCase" name="descripcionCorta">
+			</div>
+		</div>
+		<div class="form-group">
+			<label class="col-lg-2 control-label">Cuenta Compensación</label>
+			<div class="col-lg-10">
+				<div class="checkbox">
+					<label>
+						<input type="checkbox" name="cuentaCompensacion" value="1" data-unchecked-value="0" />
+					</label>
+				</div>
+			</div>
+		</div>
+	</th:block>
+	<th:block th:fragment="membresia">
+		<div class="form-group">
+			<label class="col-lg-2 control-label">Código</label>
+			<div class="col-lg-10">
+				<input class="form-control upperCase elemento-desactivable" name="codigoMembresia"
+					autofocus="autofocus" />
+			</div>
+		</div>
+		<div class="form-group">
+			<label class="col-lg-2 control-label">Descripción</label>
+			<div class="col-lg-10">
+				<input class="form-control upperCase" name="descripcion">
+			</div>
+		</div>
+	</th:block>
+
+	<th:block th:fragment="metodoIdThb">
+		<div class="form-group">
+			<label class="col-lg-2 control-label">Código</label>
+			<div class="col-lg-10">
+				<input class="form-control numbersOnly elemento-desactivable" name="idMetodo"
+					autofocus="autofocus" />
+			</div>
+		</div>
+		<div class="form-group">
+			<label class="col-lg-2 control-label">Descripción</label>
+			<div class="col-lg-10">
+				<input class="form-control upperCase" name="descripcion">
+			</div>
+		</div>
+	</th:block>
+
+	<th:block th:fragment="modoEntradaPos">
+		<div class="form-group">
+			<label class="col-lg-2 control-label">Código</label>
+			<div class="col-lg-10">
+				<input class="form-control numbersOnly elemento-desactivable" name="codigoModoEntradaPOS"
+					autofocus="autofocus" />
+			</div>
+		</div>
+		<div class="form-group">
+			<label class="col-lg-2 control-label">Descripción</label>
+			<div class="col-lg-10">
+				<input class="form-control upperCase" name="descripcion">
+			</div>
+		</div>
+	</th:block>
+
+	<th:block th:fragment="motivoReclamo">
+		<div class="form-group">
+			<label class="col-lg-2 control-label">Identificador</label>
+			<div class="col-lg-10">
+				<input class="form-control numbersOnly elemento-desactivable" name="idMotivo"
+					autofocus="autofocus" />
+			</div>
+		</div>
+		<div class="form-group">
+			<label class="col-lg-2 control-label">Descripción</label>
+			<div class="col-lg-10">
+				<input class="form-control upperCase" name="descripcion">
+			</div>
+		</div>
+	</th:block>
+
+	<th:block th:fragment="multiTabCab">
+		<div class="form-group">
+			<label class="col-lg-2 control-label">Identificador</label>
+			<div class="col-lg-10">
+				<input class="form-control numbersOnly elemento-desactivable" name="idTabla"
+					autofocus="autofocus" />
+			</div>
+		</div>
+		<div class="form-group">
+			<label class="col-lg-2 control-label">Descripción</label>
+			<div class="col-lg-10">
+				<input class="form-control upperCase" name="descripcion">
+			</div>
+		</div>
+	</th:block>
+
+	<th:block th:fragment="origen">
+		<div class="form-group">
+			<label class="col-lg-2 control-label">Código</label>
+			<div class="col-lg-10">
+				<input class="form-control numbersOnly elemento-desactivable" name="codigoOrigen"
+					autofocus="autofocus" />
+			</div>
+		</div>
+		<div class="form-group">
+			<label class="col-lg-2 control-label">Descripción</label>
+			<div class="col-lg-10">
+				<input class="form-control upperCase" name="descripcion">
+			</div>
+		</div>
+	</th:block>
+	<th:block th:fragment="rptaConcilUba">
+		<div class="form-group">
+			<label class="col-lg-2 control-label">Identificador</label>
+			<div class="col-lg-10">
+				<input class="form-control numbersOnly elemento-desactivable" name="idRespuestaConcilUba"
+					autofocus="autofocus" />
+			</div>
+		</div>
+		<div class="form-group">
+			<label class="col-lg-2 control-label">Descripción</label>
+			<div class="col-lg-10">
+				<input class="form-control upperCase" name="descripcion">
+			</div>
+		</div>
+	</th:block>
+
+	<th:block th:fragment="parametroGeneral">
+		<div class="form-group">
+			<label class="col-lg-2 control-label">Fecha de Proceso</label>
+			<div class="col-lg-10 input-group">
+				<span class="input-group-addon"><i class="fa fa-calendar"></i></span>
+				<input id="rangoFechaBusqueda" type="text" class="form-control" readonly="readonly"/>
+			</div>
+		</div>
+		<div class="form-group">
+			<label class="col-lg-2 control-label">Plantillas</label>
+			<div class="col-lg-10">
+				<input class="form-control" name="plantillas">
+			</div>
+		</div>
+		<div class="form-group">
+			<label class="col-lg-2 control-label">Configuración</label>
+			<div class="col-lg-10">
+				<input class="form-control" name="config">
+			</div>
+		</div>
+		<div class="form-group">
+			<label class="col-lg-2 control-label">BIN Ruteo Switch</label>
+			<div class="col-lg-10">
+				<input class="form-control" name="binRuteoSwitch">
+			</div>
+		</div>
+		<div class="form-group">
+			<label class="col-lg-2 control-label">Código de Institución</label>
+			<div class="col-lg-10">
+				<select id="instituciones" class="form-control select2" name="codigoInstitucion">
+					<option value="" selected="selected" disabled="disabled">Seleccione una Institución</option>
+					<option th:each="institucion : ${instituciones}" th:value="${institucion.codigoInstitucion}"
+						th:text="|${institucion.codigoInstitucion} - ${institucion.descripcionCorta}|"></option>
+				</select>
+			</div>
+		</div>
+		<div class="form-group">
+			<label class="col-lg-2 control-label">Id Empresa</label>
+			<div class="col-lg-10">
+				<select id="empresas" class="form-control select2" name="idEmpresa">
+					<option value="" selected="selected" disabled="disabled">Seleccione una Empresa</option>
+					<option th:each="empresa: ${empresas}" th:value="${empresa.idEmpresa}"
+						th:text="|${empresa.idEmpresa} - ${empresa.descripcion}|"></option>
+				</select>
+			</div>
+		</div>
+		<div class="form-group">
+			<label class="col-lg-2 control-label">Repositorio Prepago</label>
+			<div class="col-lg-10">
+				<input class="form-control" name="repositorioPrepago">
+			</div>
+		</div>
+		<div class="form-group">
+			<label class="col-lg-2 control-label">Repositorio Compensación</label>
+			<div class="col-lg-10">
+				<input class="form-control" name="repositorioCompensacion">
+			</div>
+		</div>
+		<div class="form-group">
+			<label class="col-lg-2 control-label">Surcharge Soles</label>
+			<div class="col-lg-10">
+				<input class="form-control" name="surchargeSoles">
+			</div>
+		</div>
+		<div class="form-group">
+			<label class="col-lg-2 control-label">Surcharge Dólares</label>
+			<div class="col-lg-10">
+				<input class="form-control" name="surchargeDolares">
+			</div>
+		</div>
+		<div class="form-group">
+			<label class="col-lg-2 control-label">Ruta SimpBus</label>
+			<div class="col-lg-10">
+				<input class="form-control" name="rutaContextoSimpBus">
+			</div>
+		</div>
+	</th:block>
+
+	<th:block th:fragment="subBin">
+		<div class="form-group">
+			<label class="col-lg-2 control-label">SubBIN</label>
+			<div class="col-lg-10">
+				<input class="form-control numbersOnly elemento-desactivable" name="codigoSubBIN"
+					autofocus="autofocus" />
+			</div>
+		</div>
+		<div class="form-group">
+			<label class="col-lg-2 control-label">Descripción</label>
+			<div class="col-lg-10">
+				<input class="form-control upperCase" name="descripcion">
+			</div>
+		</div>
+		<div class="form-group">
+			<label class="col-lg-2 control-label">Institución</label>
+			<div class="col-lg-10">
+				<select class="form-control" disabled="disabled">
+					<option value="" disabled="disabled" selected="selected" th:each="institucion : ${institucion}"
+						th:text="|${institucion.codigoInstitucion} - ${institucion.descripcionCorta}|"></option>
+				</select>
+			</div>
+		</div>
+		<div class="form-group">
+			<label class="col-lg-2 control-label">BIN</label>
+			<div class="col-lg-10">
+				<select id="bines" class="form-control select2 elemento-desactivable" name="codigoBIN">
+					<option value="" selected="selected" disabled="disabled">Seleccione un BIN</option>
+					<option th:each="bin: ${bines}" th:value="${bin.codigoBIN}"
+						th:text="|${bin.codigoBIN} - ${bin.descripcion}|"></option>
+				</select>
+			</div>
+		</div>
+	</th:block>
+
+	<th:block th:fragment="tipoTerminalPos">
+		<div class="form-group">
+			<label class="col-lg-2 control-label">Código</label>
+			<div class="col-lg-10">
+				<input class="form-control numbersOnly elemento-desactivable" name="codigoTipoTerminalPOS"
+					autofocus="autofocus" />
+			</div>
+		</div>
+		<div class="form-group">
+			<label class="col-lg-2 control-label">Descripción</label>
+			<div class="col-lg-10">
+				<input class="form-control upperCase" name="descripcion">
+			</div>
+		</div>
+	</th:block>
+</body>
+</html>

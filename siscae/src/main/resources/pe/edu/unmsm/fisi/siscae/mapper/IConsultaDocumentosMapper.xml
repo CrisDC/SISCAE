@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="pe.edu.unmsm.fisi.siscae.mapper.IConsultaDocumentosMapper">
+	
+	<sql id = "fragmentoSelectBuscarDocumentos">
+		SELECT nu_sec_exp 	AS numeroExpediente,
+			   dep_elabora  AS dependenciaElabora,
+			   nu_doc_des 	AS numeroDocumentoDescripcion,
+			   nu_emi		AS numeroEmision
+		  FROM IDOSGD.VW_SEGUIMIENTO_EXP_DOC vwse
+	</sql>
+	
+	<select id="buscarPorNumeroDocumento" resultType="Documento">		
+		<include refid="fragmentoSelectBuscarDocumentos" />		
+          <where>
+	   		  vwse.cdoc_tipdoc = '031'   
+	          AND vwse.nu_sec_exp 
+	                IN (SELECT vwseg.nu_sec_exp 
+	                      FROM IDOSGD.VW_SEGUIMIENTO_EXP vwseg  
+	                     WHERE 
+	                       vwseg.co_proceso_exp = '0001'   
+	                       AND  vwseg.nu_dni_emi LIKE #{numeroDocumento}
+	                       AND vwseg.es_doc_emi IN ('0', '1', '2', '3'))	
+           </where> 
+	</select>
+	
+	<select id="buscarPorCriterio" resultType="Documento">  
+		<include refid="fragmentoSelectBuscarDocumentos" />		
+          <where>
+          	  <if test="codigoTipoDocumento != null and codigoTipoDocumento != '-1'">
+	   			    vwse.cdoc_tipdoc =  #{codigoTipoDocumento} 
+	  		  </if>
+            AND vwse.nu_sec_exp  
+                IN (SELECT vwseg.nu_sec_exp 
+                      FROM IDOSGD.VW_SEGUIMIENTO_EXP vwseg
+                     <where> 
+                  	    <if test="codigoTipoTramite != null and codigoTipoTramite != '-1'">
+	   					    vwseg.co_proceso_exp = #{codigoTipoTramite}   		
+	  					</if>
+                        <if test="nombres != null and nombres != ''">
+				   			 vwse.nombres = #{nombres}
+				  		</if>
+			            <if test="apellidos != null and apellidos != ''">
+				   			 vwse.apellidos = #{apellidos}
+				  		</if>
+				  		AND vwseg.es_doc_emi IN ('0', '1', '2', '3'))	
+		  			</where>
+		  </where> 
+	</select>
+	
+	<select id="buscarPorNumeroEmision" resultType="Documento">		
+		SELECT vwse.nu_sec_exp 	AS numeroExpediente,
+			   vwse.dep_elabora  AS dependenciaElabora,
+			   vwse.nu_doc_des 	AS numeroDocumentoDescripcion,
+			   vwse.nu_emi		AS numeroEmision,
+			   vwse.bl_doc      AS archivoBLOB
+		  FROM IDOSGD.VW_SEGUIMIENTO_EXP_DOC vwse
+		  where vwse.nu_emi = #{numeroEmision}  
+	</select>
+</mapper>
