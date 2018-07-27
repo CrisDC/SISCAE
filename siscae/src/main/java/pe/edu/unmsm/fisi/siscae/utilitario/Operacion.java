@@ -5,8 +5,8 @@ import lombok.Getter;
 @Getter
 public enum Operacion
 {
-    INSERT,
-    SELECT, 
+	SELECT,
+    INSERT, 
     UPDATE, 
     DELETE;
     
