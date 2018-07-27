@@ -5,8 +5,8 @@ import lombok.Getter;
 @Getter
 public enum Operacion
 {
-    INSERT,
-    SELECT, 
+	SELECT,
+    INSERT, 
     UPDATE, 
     DELETE;
     
@@ -17,7 +17,7 @@ public enum Operacion
         LOGIN, 
         USUARIO,
         CODIGO_RPTA,
-        PRIMARY_KEY;
+        PRIMARY_KEY
     }
     
     private OperacionParam parametro;
