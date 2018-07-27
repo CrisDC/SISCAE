@@ -16,7 +16,8 @@ public enum Operacion
         FECHA,
         LOGIN, 
         USUARIO,
-        CODIGO_RPTA
+        CODIGO_RPTA,
+        PRIMARY_KEY;
     }
     
     private OperacionParam parametro;

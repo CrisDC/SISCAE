@@ -3,6 +3,9 @@ package pe.edu.unmsm.fisi.siscae.aspecto.enumeracion;
 public enum Tipo
 {
     /*Mantenimiento*/
+	TipRec("TipoRecurso"),
+	Inf("Infraccion"),
+	Ex("Externo"),
     Emp("Empresa"),
     Inst("Institución"),
     Clte("Cliente"),

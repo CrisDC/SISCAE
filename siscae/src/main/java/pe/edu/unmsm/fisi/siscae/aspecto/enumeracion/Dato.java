@@ -7,6 +7,9 @@ public enum Dato
     /*Mantenimientos*/
     Bin("BIN = #bin.codigoBIN, Descripción = #bin.descripcion"),
     Empresa("Empresa = #empresa.idEmpresa, Descripción = #empresa.descripcion"),
+    TipoRecurso("TipoRecurso= #tipoRecurso.idTipoRecurso, Nombre = #tipoRecurso.nombre, Descripcion = #tipoRecurso.descripcion ,Uso = #tipoRecurso.uso ,FechaRegistro = #tipoRecurso.fechaRegistro ,UsuarioRegistro = #tipoRecurso.usuarioRegistro ,FechaModificacion = #tipoRecurso.fechaModificacion ,UsuarioModificacion = #tipoRecurso.usuarioModificacion "),
+    Infraccion("Infraccion = #infraccion.idInfraccion, Descripcion= #infraccion.descripcion, Fecha= #infraccion.fecha, Estado  = #infraccion.estado ,IdPersona= #infraccion.idPersona,  IdTipoInfraccion= #infraccion.tipoInfraccion,FechaRegistro= #infraccion.fechaRegistro,  UsuarioRegistro= #infraccion.usuarioRegistro,  FechaModificacion= #infraccion.fechaModificacion,  UsuarioModificacion= #infraccion.usuarioModificacion"),
+    Externo("Externo = #externo.idExterno ,EstadoExterno = #externo.estadoExterno,FechaRegistro = #externo.fechaRegistro,UsuarioRegistro = #externo.usuarioRegistro,FechaModificacion = #externo.fechaModificacion,UsuarioModificacion = #externo.usuarioModificacion"),
     Institucion("Institución = #institucion.codigoInstitucion, Descripción = #institucion.descripcion"),
     Cliente("Cliente = #cliente.idCliente, Empresa = #cliente.idEmpresa, Descripción = #cliente.descripcion"),
     SubBin("SubBIN = #subBin.codigoSubBIN, BIN = #subBin.codigoBIN, Descripción = #subBin.descripcion"),
