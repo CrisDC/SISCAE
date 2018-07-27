@@ -3,6 +3,9 @@ package pe.edu.unmsm.fisi.siscae.aspecto.enumeracion;
 public enum Tipo
 {
     /*Mantenimiento*/
+	Horario("Horario"),
+	AreaAdministrativo("AreaAdministrativo"),
+	AreaEstudio("AreaEstudio"),
     Emp("Empresa"),
     Inst("Institución"),
     Clte("Cliente"),

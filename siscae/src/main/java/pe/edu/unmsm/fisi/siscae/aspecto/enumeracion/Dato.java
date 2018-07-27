@@ -5,7 +5,10 @@ import java.util.Date;
 public enum Dato
 {
     /*Mantenimientos*/
-    Bin("BIN = #bin.codigoBIN, Descripción = #bin.descripcion"),
+	Horario("Horario=#horario.idHorario, Hora_Inicio=#horario.horaInicio, Hora_Fin=#horario.horaFin, Estado=#horario.estado, Tiempo_Max=#horario.tiempoMax, Id_Turno=#horario.idTurno, Id_Dia=#horario.idDia, Id_Tipo_Horario=#horario.idTipoHorario, Id_Area_Estudio=#horario.idAreaEstudio, Fecha_Registro=#horario.fechaRegistro,Usuario_Registro=#horario.usuarioRegistro,Fecha_Modificacion=#horario.fechaModificacion,Usuario_Modificacion=#horario.usuarioModificacion"),
+	AreaEstudio("Area_Estudio=#areaEstudio.idAreaEstudio, Nombre=#areaEstudio.nombre,Pabellon=#areaEstudio.pabellon, Nivel=#areaEstudio.nivel, Fecha_Registro=#areaEstudio.fechaRegistro, Usuario_Registro=#areaEstudio.usuarioRegistro,Fecha_Modificacion=#areaEstudio.fechaModificacion, Usuario_Modificacion=#areaEstudio.usuarioModificacion"),
+    AreaAdministrativo("Area_Estudio=#areaAdministrativo.idAreaEstudio, Area_Administrativo=#areaAdministrativo.idAdministrativo, Fecha_Inicio=#areaAdministrativo.fechaInicio, Fecha_Fin=#areaAdministrativo.fechaFin, Cargo=#areaAdministrativo.cargo, Fecha_Registro=#areaAdministrativo.fechaRegistro,Usuario_Registro=#areaAdministrativo.usuarioRegistro,Fecha_Modificacion=#areaAdministrativo.fechaModificacion, Usuario_Modificacion=#areaAdministrativo.usuarioModificacion"),
+	Bin("BIN = #bin.codigoBIN, Descripción = #bin.descripcion"),
     Empresa("Empresa = #empresa.idEmpresa, Descripción = #empresa.descripcion"),
     Institucion("Institución = #institucion.codigoInstitucion, Descripción = #institucion.descripcion"),
     Cliente("Cliente = #cliente.idCliente, Empresa = #cliente.idEmpresa, Descripción = #cliente.descripcion"),
