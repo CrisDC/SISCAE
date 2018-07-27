@@ -110,12 +110,12 @@
 			<artifactId>aspectjweaver</artifactId>
 		</dependency>
 
-		<!-- ORACLE -->
+		<!-- MYSQL -->
 		<dependency>
-            <groupId>com.oracle</groupId>
-            <artifactId>ojdbc7</artifactId>
-            <version>12.1.0</version>
-        </dependency>
+			<groupId>mysql</groupId>
+		    <artifactId>mysql-connector-java</artifactId>
+		    <version>6.0.6</version>
+		</dependency>
 
 		<!-- VALIDATION -->
 		<dependency>
