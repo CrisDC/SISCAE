@@ -1,5 +1,12 @@
 package pe.edu.unmsm.fisi.siscae.controller.mantenimiento.rest;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestMapping;
+
+import pe.edu.unmsm.fisi.siscae.aspecto.anotacion.Audit;
+import pe.edu.unmsm.fisi.siscae.aspecto.enumeracion.Dato;
+import pe.edu.unmsm.fisi.siscae.aspecto.enumeracion.Tipo;
 import java.util.List;
 
 import javax.validation.groups.Default;
@@ -21,7 +28,9 @@ import pe.edu.unmsm.fisi.siscae.aspecto.enumeracion.Accion;
 import pe.edu.unmsm.fisi.siscae.aspecto.enumeracion.Comentario;
 import pe.edu.unmsm.fisi.siscae.aspecto.enumeracion.Dato;
 import pe.edu.unmsm.fisi.siscae.aspecto.enumeracion.Tipo;
+import pe.edu.unmsm.fisi.siscae.model.mantenimiento.Alumno;
 import pe.edu.unmsm.fisi.siscae.model.mantenimiento.Empresa;
+import pe.edu.unmsm.fisi.siscae.service.IAlumnoService;
 import pe.edu.unmsm.fisi.siscae.service.IEmpresaService;
 import pe.edu.unmsm.fisi.siscae.service.excepcion.BadRequestException;
 import pe.edu.unmsm.fisi.siscae.utilitario.ConstantesGenerales;
@@ -29,58 +38,59 @@ import pe.edu.unmsm.fisi.siscae.utilitario.ValidatorUtil;
 import pe.edu.unmsm.fisi.siscae.validacion.grupo.accion.IActualizacion;
 import pe.edu.unmsm.fisi.siscae.validacion.grupo.accion.IRegistro;
 
-@Audit(tipo = Tipo.Emp, datos = Dato.Empresa)
-@RequestMapping("/empresa")
-public @RestController class EmpresaController
-{
-    private @Autowired IEmpresaService empresaService;
+
+@Audit(tipo = Tipo.Alum, datos = Dato.Alumno)
+@RequestMapping("/alumno")
+
+public @RestController class AlumnoController {
+	private @Autowired IAlumnoService alumnoService;
 
     @Audit(accion = Accion.Consulta, comentario = Comentario.ConsultaTodos)
     @GetMapping(params = "accion=buscarTodos")
-    public List<Empresa> buscarTodos()
+    public List<Alumno> buscarTodos()
     {
-        return empresaService.buscarTodos();
+        return alumnoService.buscarTodos();
     }
 
     @Audit(accion = Accion.REGISTRO, comentario = Comentario.Registro)
     @PostMapping
-    public ResponseEntity<?> registrarEmpresa(
-            @Validated({ Default.class, IRegistro.class }) @RequestBody Empresa empresa,
+    public ResponseEntity<?> registrarAlumno(
+            @Validated({ Default.class, IRegistro.class }) @RequestBody Alumno alumno,
             Errors error)
     {
         if (error.hasErrors())
         {
             throw new BadRequestException(ValidatorUtil.obtenerMensajeValidacionError(error));
         }
-        empresaService.registrarEmpresa(empresa);
+        alumnoService.registrarAlumno(alumno);
         return ResponseEntity.ok(ConstantesGenerales.REGISTRO_EXITOSO);
     }
 
     @Audit(accion = Accion.Actualizacion, comentario = Comentario.Actualizacion)
     @PutMapping
-    public ResponseEntity<?> actualizarEmpresa(
-            @Validated({ Default.class, IActualizacion.class }) @RequestBody Empresa empresa,
+    public ResponseEntity<?> actualizarAlumno(
+            @Validated({ Default.class, IActualizacion.class }) @RequestBody Alumno alumno,
             Errors error)
     {
         if (error.hasErrors())
         {
             throw new BadRequestException(ValidatorUtil.obtenerMensajeValidacionError(error));
         }
-        empresaService.actualizarEmpresa(empresa);
+        alumnoService.actualizarAlumno(alumno);
         return ResponseEntity.ok(ConstantesGenerales.ACTUALIZACION_EXITOSA);
     }
 
     @Audit(accion = Accion.Eliminacion, comentario = Comentario.Eliminacion)
     @DeleteMapping
-    public ResponseEntity<?> eliminarEmpresa(
-            @Validated(IActualizacion.class) @RequestBody Empresa empresa, Errors error)
+    public ResponseEntity<?> eliminarAlumno(
+            @Validated(IActualizacion.class) @RequestBody Alumno alumno, Errors error)
     {
         if (error.hasErrors())
         {
-        	
             throw new BadRequestException(ValidatorUtil.obtenerMensajeValidacionError(error));
         }
-        empresaService.eliminarEmpresa(empresa);
+        alumnoService.eliminarAlumno(alumno);
         return ResponseEntity.ok(ConstantesGenerales.ELIMINACION_EXITOSA);
     }
+
 }

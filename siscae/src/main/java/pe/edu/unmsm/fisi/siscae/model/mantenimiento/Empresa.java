@@ -40,4 +40,8 @@ public class Empresa
     @NotNull(message = "{NotNull.Empresa.direccion}")
     @NotBlank(message = "{NotBlank.Empresa.direccion}")
     private String direccion;
+    
 }
+
+
+

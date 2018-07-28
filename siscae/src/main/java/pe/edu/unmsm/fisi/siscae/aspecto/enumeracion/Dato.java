@@ -5,8 +5,17 @@ import java.util.Date;
 public enum Dato
 {
     /*Mantenimientos*/
-    Bin("BIN = #bin.codigoBIN, Descripción = #bin.descripcion"),
+	Alumno("Alumno = #alumno.idAlumno, Codigo = #alumno.codigo,Estado_Alumno=#alumno.estadoAlumno"),
+	Facultad("Facultad  = #facultad.idFacultad, Nombre = #facultad.nombre,Fecha_Registro=#facultad.fechaRegistro,Usuario_Registro=#facultad.usuarioRegistro"),
+	Escuela("Escuela = #escuela.idEscuela, Nombre = #escuela.nombre"),
+	Horario("Horario=#horario.idHorario, Hora_Inicio=#horario.horaInicio, Hora_Fin=#horario.horaFin, Estado=#horario.estado, Tiempo_Max=#horario.tiempoMax, Id_Turno=#horario.idTurno, Id_Dia=#horario.idDia, Id_Tipo_Horario=#horario.idTipoHorario, Id_Area_Estudio=#horario.idAreaEstudio, Fecha_Registro=#horario.fechaRegistro,Usuario_Registro=#horario.usuarioRegistro,Fecha_Modificacion=#horario.fechaModificacion,Usuario_Modificacion=#horario.usuarioModificacion"),
+	AreaEstudio("Area_Estudio=#areaEstudio.idAreaEstudio, Nombre=#areaEstudio.nombre,Pabellon=#areaEstudio.pabellon, Nivel=#areaEstudio.nivel, Fecha_Registro=#areaEstudio.fechaRegistro, Usuario_Registro=#areaEstudio.usuarioRegistro,Fecha_Modificacion=#areaEstudio.fechaModificacion, Usuario_Modificacion=#areaEstudio.usuarioModificacion"),
+    AreaAdministrativo("Area_Estudio=#areaAdministrativo.idAreaEstudio, Area_Administrativo=#areaAdministrativo.idAdministrativo, Fecha_Inicio=#areaAdministrativo.fechaInicio, Fecha_Fin=#areaAdministrativo.fechaFin, Cargo=#areaAdministrativo.cargo, Fecha_Registro=#areaAdministrativo.fechaRegistro,Usuario_Registro=#areaAdministrativo.usuarioRegistro,Fecha_Modificacion=#areaAdministrativo.fechaModificacion, Usuario_Modificacion=#areaAdministrativo.usuarioModificacion"),
+	Bin("BIN = #bin.codigoBIN, Descripción = #bin.descripcion"),
     Empresa("Empresa = #empresa.idEmpresa, Descripción = #empresa.descripcion"),
+    TipoRecurso("TipoRecurso= #tipoRecurso.idTipoRecurso, Nombre = #tipoRecurso.nombre, Descripcion = #tipoRecurso.descripcion ,Uso = #tipoRecurso.uso ,FechaRegistro = #tipoRecurso.fechaRegistro ,UsuarioRegistro = #tipoRecurso.usuarioRegistro ,FechaModificacion = #tipoRecurso.fechaModificacion ,UsuarioModificacion = #tipoRecurso.usuarioModificacion "),
+    Infraccion("Infraccion = #infraccion.idInfraccion, Descripcion= #infraccion.descripcion, Fecha= #infraccion.fecha, Estado  = #infraccion.estado ,IdPersona= #infraccion.idPersona,  IdTipoInfraccion= #infraccion.tipoInfraccion,FechaRegistro= #infraccion.fechaRegistro,  UsuarioRegistro= #infraccion.usuarioRegistro,  FechaModificacion= #infraccion.fechaModificacion,  UsuarioModificacion= #infraccion.usuarioModificacion"),
+    Externo("Externo = #externo.idExterno ,EstadoExterno = #externo.estadoExterno,FechaRegistro = #externo.fechaRegistro,UsuarioRegistro = #externo.usuarioRegistro,FechaModificacion = #externo.fechaModificacion,UsuarioModificacion = #externo.usuarioModificacion"),
     Institucion("Institución = #institucion.codigoInstitucion, Descripción = #institucion.descripcion"),
     Cliente("Cliente = #cliente.idCliente, Empresa = #cliente.idEmpresa, Descripción = #cliente.descripcion"),
     SubBin("SubBIN = #subBin.codigoSubBIN, BIN = #subBin.codigoBIN, Descripción = #subBin.descripcion"),
@@ -33,7 +42,28 @@ public enum Dato
     MultiTabDet("Id_Detalle = #multiTabDet.idItem,Id_Tabla = #multiTabDet.idTabla, Descripción = #multiTabDet.descripcionItem"),
     ParametroGeneral("Fecha_Proceso = #parametroGeneral.fechaProceso, Plantillas = #parametroGeneral.plantillas, Config = #parametroGeneral.config, Bin_de_Ruteo = #parametroGeneral.binRuteoSwitch, Institución = #parametroGeneral.codigoInstitucion, Repo_Prepago = #parametroGeneral.repositorioPrepago, Repo_Compensación = #parametroGeneral.repositorioCompensacion, Surcharge_Soles = #parametroGeneral.surchargeSoles, Surcharge_Dolares = #parametroGeneral.surchargeDolares,Empresa = #parametroGeneral.idEmpresa, Ruta_SimpBus = #parametroGeneral.rutaContextoSimpBus, Enmascarar_Tarjeta = #parametroGeneral.enmascararTarjeta, IGV = #parametroGeneral.porcentajeIgv"),
     CuentaContableEmisor("Empresa = #cuentaContableEmisor.idEmpresa, Cliente = #cuentaContableEmisor.idCliente, Moneda = #cuentaContableEmisor.codigoMoneda, Membresía = #cuentaContableEmisor.codigoMembresia, Clase_Servicio = #cuentaContableEmisor.codigoClaseServicio, BIN = #cuentaContableEmisor.codigoBIN, SubBIN = #cuentaContableEmisor.codigoSubBIN, Origen = #cuentaContableEmisor.codigoOrigen, Rol = #cuentaContableEmisor.idRolTransaccion, Clase_Transacción = #cuentaContableEmisor.codigoClaseTransaccion, Código_Transacción = #cuentaContableEmisor.codigoTransaccion"),
-    CuentaContableReceptor("ATM = #cuentaContableReceptor.idATM, Moneda = #cuentaContableReceptor.codigoMoneda, Membresía = #cuentaContableReceptor.codigoMembresia, Clase_Servicio = #cuentaContableReceptor.codigoClaseServicio, Origen = #cuentaContableReceptor.codigoOrigen, Clase_Transacción = #cuentaContableReceptor.codigoClaseTransaccion, Código_Transacción = #cuentaContableReceptor.codigoTransaccion"), 
+    CuentaContableReceptor("ATM = #cuentaContableReceptor.idATM, Moneda = #cuentaContableReceptor.codigoMoneda, Membresía = #cuentaContableReceptor.codigoMembresia, Clase_Servicio = #cuentaContableReceptor.codigoClaseServicio, Origen = #cuentaContableReceptor.codigoOrigen, Clase_Transacción = #cuentaContableReceptor.codigoClaseTransaccion, Código_Transacción = #cuentaContableReceptor.codigoTransaccion"),
+    AREA_ADMINISTRATIVA(""),
+    AREA_ESTUDIO(""),
+    HORARIO(""),
+    UBICACION(""),
+    RECURSO(""),
+    TIPO_RECURSO(""),
+    ADMINISTRATIVO(""),
+    PERSONA(""),
+    DOCENTE(""),
+    EXTERNO(""),
+    ALUMNO(""),
+    FACULTAD(""),
+    ESCUELA(""),
+    MATERIAL(""),
+    MULTI_TAB_CAB(""),
+    MULTI_TAB_DET(""),
+    
+    /*Movimientos*/
+    INFRACCION(""),
+    PRESTAMO(""),
+    PRESTAMO_DETALLE(""),
     
     /*Tarifarios*/
     TipoTarifa("Tipo_de_Tarifa = #tipoTarifa.tipoTarifa, Descripción = #tipoTarifa.descripcion"),

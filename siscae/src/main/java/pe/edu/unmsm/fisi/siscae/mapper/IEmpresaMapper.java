@@ -12,7 +12,7 @@ import pe.edu.unmsm.fisi.siscae.model.parametro.Parametro;
 
 public interface IEmpresaMapper extends IMantenibleMapper<Empresa>
 {
-    @Select(value = { "{call MANT_EMPRESAS ( "
+    @Select(value = { "{call MANT_EMPRESAS ( " 
             + "#{operacion, jdbcType = VARCHAR, mode = IN},"
             + "#{objeto.idEmpresa, jdbcType = VARCHAR, mode = IN},"
             + "#{objeto.descripcion, jdbcType = VARCHAR, mode = IN},"

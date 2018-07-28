@@ -3,6 +3,18 @@ package pe.edu.unmsm.fisi.siscae.aspecto.enumeracion;
 public enum Tipo
 {
     /*Mantenimiento*/
+	Alum("Alumno"),
+	Fac("Facultad"),
+	Esc("Escuela"),
+	
+	Horario("Horario"),
+	AreaAdministrativo("AreaAdministrativo"),
+	AreaEstudio("AreaEstudio"),
+
+	TipRec("TipoRecurso"),
+	Inf("Infraccion"),
+	Ex("Externo"),
+	
     Emp("Empresa"),
     Inst("Institución"),
     Clte("Cliente"),
@@ -32,6 +44,25 @@ public enum Tipo
     ParamGral("Parámetros Generales"),
     ContabEmi("Cuenta Contable Emisor"),
     ContabRec("Cuenta Contable Receptor"),
+    AREA_ADMINISTRATIVA("Área administrativa"),
+    AREA_ESTUDIO("Área estudio"),
+    HORARIO("Horario"),
+    UBICACION("Ubicación"),
+    RECURSO("Recurso"),
+    TIPO_RECURSO("Tipo recurso"),
+    ADMINISTRATIVO("Administrativo"),
+    PERSONA("Persona"),
+    DOCENTE("Docente"),
+    EXTERNO("Externo"),
+    ALUMNO("Alumno"),
+    FACULTAD("Facultad"),
+    ESCUELA("Escuela"),
+    MATERIAL("Material"),
+    MULTI_TAB_CAB("Tabla de tablas"),
+    MULTI_TAB_DET("Detalle de tabla de tablas"),
+    INFRACCION("Infraccion"),
+    PRESTAMO("Prestamo"),
+    PRESTAMO_DETALLE("Detalle de prestamo"),
     
     /*Tarifario*/
     TipoTar("Tipo de Tarifa"),
