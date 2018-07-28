@@ -110,8 +110,6 @@
 			<artifactId>aspectjweaver</artifactId>
 
 		</dependency>
-
-		</dependency>
 		<!-- MYSQL -->
 		
 		<dependency>

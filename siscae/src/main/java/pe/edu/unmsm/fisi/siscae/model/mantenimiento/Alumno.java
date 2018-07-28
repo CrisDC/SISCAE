@@ -13,7 +13,7 @@ import lombok.NoArgsConstructor;
       public class Alumno {
 		
 		private Integer idAlumno;
-		private String codigo;
+		private String codigoAlumno;
 		private String estadoAlumno;
 		private int idTipoAcademico;
 		private int idEscuela;
