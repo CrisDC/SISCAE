@@ -12,9 +12,10 @@ public interface IEmpresaService extends IMantenibleService<Empresa> {
 
 	public boolean existeEmpresa(String idEmpresa);
 
-    public void registrarEmpresa(Empresa empresa);
+	public void registrarEmpresa(Empresa empresa);
 
-    public void actualizarEmpresa(Empresa empresa);
+	public void actualizarEmpresa(Empresa empresa);
+
 
     public void eliminarEmpresa(Empresa empresa);
 }

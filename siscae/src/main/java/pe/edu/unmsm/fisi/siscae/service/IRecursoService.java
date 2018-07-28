@@ -2,9 +2,18 @@ package pe.edu.unmsm.fisi.siscae.service;
 
 import java.util.List;
 
-import pe.edu.unmsm.fisi.siscae.model.Recurso;
+import pe.edu.unmsm.fisi.siscae.model.mantenimiento.Recurso;
 
-public interface IRecursoService
-{
-    public List<Recurso> obtenerRecursosPermitidosPorIdUsuario(String idUsuario);
+public interface IRecursoService extends IMantenibleService<Recurso> {
+	public List<Recurso> buscarTodos();
+
+	public List<Recurso> buscarPorIdRecurso(Integer idRecurso);
+
+	public boolean existeRecurso(Integer idRecurso);
+
+	public void registrarRecurso(Recurso recurso);
+
+	public void actualizarRecurso(Recurso recurso);
+
+	public void eliminarRecurso(Recurso recurso);
 }
