@@ -14,13 +14,9 @@ import pe.edu.unmsm.fisi.siscae.model.parametro.Parametro;
 public interface IExternoMapper extends IMantenibleMapper<Externo> {
 	@Select(value = { "{call SP_MANT_EMPRESAS ( "
             + "#{operacion, jdbcType = VARCHAR, mode = IN},"
-            + "#{operacion_Param, jdbcType = VARCHAR, mode = IN},"
+            + "#{operacionParam, jdbcType = VARCHAR, mode = IN},"
             + "#{objeto.idExterno, jdbcType = INTEGER, mode = IN},"
             + "#{objeto.estadoExterno, jdbcType = VARCHAR, mode = IN},"
-            + "#{objeto.fechaRegistro, jdbcType = DATATIME, mode = IN},"
-            + "#{objeto.usuarioRegistro,jdbcType = VARCHAR, mode = IN},"
-            + "#{objeto.fechaModificacion,jdbcType = DATATIME, mode = IN},"
-            + "#{objeto.usuarioModificacion,jdbcType = VARCHAR, mode = IN},"
             + "#{userAudit, jdbcType = VARCHAR, mode = IN})}" })
 	@Options (statementType = StatementType.CALLABLE)
 	 public List<Externo> mantener (Parametro parametro);

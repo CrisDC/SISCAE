@@ -19,7 +19,7 @@ public class AreaAdministrativoService extends MantenibleService<AreaAdministrat
 	
 	private IAreaAdministrativoMapper areaAdministrativoMapper;
 	
-	public AreaAdministrativoService(@Qualifier("IAreaAdministrativo")IMantenibleMapper<AreaAdministrativo> mapper){
+	public AreaAdministrativoService(@Qualifier("IAreaAdministrativoMapper")IMantenibleMapper<AreaAdministrativo> mapper){
 		super(mapper);
 		
 		this.areaAdministrativoMapper= (IAreaAdministrativoMapper) mapper;

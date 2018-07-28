@@ -6,8 +6,8 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
+import pe.edu.unmsm.fisi.siscae.mapper.IPrestamoMapper;
 import pe.edu.unmsm.fisi.siscae.mapper.base.IMantenibleMapper;
-import pe.edu.unmsm.fisi.siscae.mapper.practica.IPrestamoMapper;
 import pe.edu.unmsm.fisi.siscae.model.practica.Administrativo;
 import pe.edu.unmsm.fisi.siscae.model.practica.Prestamo;
 import pe.edu.unmsm.fisi.siscae.service.impl.MantenibleService;

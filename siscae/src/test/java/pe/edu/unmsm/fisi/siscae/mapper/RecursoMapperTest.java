@@ -14,6 +14,7 @@ import pe.edu.unmsm.fisi.siscae.model.mantenimiento.Institucion;
 import pe.edu.unmsm.fisi.siscae.model.mantenimiento.Recurso;
 import pe.edu.unmsm.fisi.siscae.model.parametro.Parametro;
 import pe.edu.unmsm.fisi.siscae.utilitario.Operacion;
+import pe.edu.unmsm.fisi.siscae.utilitario.Operacion.OperacionParam;
 
 @ContextConfiguration(classes = { ServiceConfiguration.class, PersistenceConfiguration.class })
 @RunWith(SpringJUnit4ClassRunner.class)
@@ -21,18 +22,43 @@ public class RecursoMapperTest {
 
 	private @Autowired IRecursoMapper recursoMapper;
 
-    @Test
-    public void mantenerTipoGetTest()
-    {
-        Parametro operacion = new Parametro();
-        operacion.setOperacion(Operacion.SELECT.name());
-     
-        operacion.setObjeto(new Recurso());
-        List<Recurso> recursos = recursoMapper.mantener(operacion);
-        recursos.stream().forEach(recurso -> {
-            System.out.println(recurso.toString());
-        });
-    }
+	@Test
+	public void mantenerTipoGetTest() {
+		Parametro operacion = new Parametro();
+		Recurso recursoTest = new Recurso(2, "C-0002", "PROBANDO INSERT", 1, true, 1, 1, 1, null, null,
+				null, null, null);
 
-	
+		operacion.setOperacion(Operacion.SELECT.name());
+
+		operacion.setObjeto(new Recurso());
+
+		List<Recurso> recursos = recursoMapper.mantener(operacion);
+		recursos.stream().forEach(recurso -> {
+			System.out.println(recurso.toString());
+		});
+
+		operacion = new Parametro<>(Operacion.INSERT, OperacionParam.PRIMARY_KEY, recursoTest, "Usuario de prueba");
+
+		recursos = recursoMapper.mantener(operacion);
+		recursos.stream().forEach(recurso -> {
+			System.out.println(recurso.toString());
+		});
+
+		recursoTest.setDescripcion("PROBANDO UPDATE");
+		operacion.setOperacion(Operacion.UPDATE.name());
+		operacion.setObjeto(recursoTest);
+
+		recursos = recursoMapper.mantener(operacion);
+		recursos.stream().forEach(recurso -> {
+			System.out.println(recurso.toString());
+		});
+
+		operacion.setOperacion(Operacion.DELETE.name());
+
+		recursos = recursoMapper.mantener(operacion);
+		recursos.stream().forEach(recurso -> {
+			System.out.println(recurso.toString());
+		});
+
+	}
 }

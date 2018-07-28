@@ -8,9 +8,9 @@ public interface IMultiTabDetService extends IMantenibleService<MultiTabDet>
 {
     public List<MultiTabDet> buscarTodos();
 
-    public List<MultiTabDet> buscarPorIdTablaIdItem(int idTabla, String idItem);
+    public List<MultiTabDet> buscarPorIdTablaIdItem(int idTabla, int idItem);
 
-    public boolean existeMultiTabDet(int idTabla, String idItem);
+    public boolean existeMultiTabDet(int idTabla, int idItem);
 
     public void registrarMultiTabDet(MultiTabDet multiTabDet);
 

@@ -1,5 +1,7 @@
 package pe.edu.unmsm.fisi.siscae.model.mantenimiento;
 
+import java.util.Date;
+
 import javax.validation.constraints.NotNull;
 
 import org.hibernate.validator.constraints.Length;
@@ -22,9 +24,16 @@ public class MultiTabCab
     @IdTabla(existe = true, groups = IActualizacion.class)
     @IdTabla(existe = false, message = "{Existe.MultiTabCab.idTabla}", groups = IRegistro.class)
     private int idTabla;
+    
+    private String nombre;
 
     @NotNull(message = "{NotNull.MultiTabCab.descripcion}")
     @NotBlank(message = "{NotBlank.MultiTabCab.descripcion}")
     @Length(min = 3, max = 80, message = "{Length.MultiTabCab.descripcion}")
     private String descripcion;
+    
+    private Date fechaRegistro;
+    private String usuarioRegistro;
+    private Date fechaModificacion;
+    private String usuarioModificacion;
 }

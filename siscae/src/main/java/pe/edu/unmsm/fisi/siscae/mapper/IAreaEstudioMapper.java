@@ -14,14 +14,10 @@ public interface IAreaEstudioMapper extends IMantenibleMapper<AreaEstudio> {
 	@Select(value = { "{call MANT_AREA_ESTUDIO ( "
             + "#{operacion, jdbcType = VARCHAR, mode = IN},"
             + "#{operacionParam, jdbcType = VARCHAR, mode = IN},"	
-            + "#{objeto.idAreaEstudio, jdbcType = INT, mode = IN},"
-            + "#{objeto.nombre, jdbcType = TIME, mode = IN},"
-            + "#{objeto.pabellon, jdbcType = TIME, mode = IN},"
-            + "#{objeto.nivel,jdbcType = BOOLEAN, mode = IN},"
-            + "#{objeto.fechaRegistro, jdbcType = DECIMAL, mode = IN}," 
-			+ "#{objeto.usuarioRegistro, jdbcType = INT, mode = IN},"
-		    + "#{objeto.fechaModificacion,jdbcType = INT, mode = IN},"
-            + "#{objeto.usuarioModificacion, jdbcType = INT, mode = IN}," 
+            + "#{objeto.idAreaEstudio, jdbcType = INTEGER, mode = IN},"
+            + "#{objeto.nombre, jdbcType = VARCHAR, mode = IN},"
+            + "#{objeto.pabellon, jdbcType = VARCHAR, mode = IN},"
+            + "#{objeto.nivel,jdbcType = VARCHAR, mode = IN}," 
 			+ "#{userAudit, jdbcType = VARCHAR, mode = IN})}" })
     @Options(statementType = StatementType.CALLABLE)
 	public List<AreaEstudio> mantener(Parametro parametro);

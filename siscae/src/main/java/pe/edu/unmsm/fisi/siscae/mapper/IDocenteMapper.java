@@ -17,7 +17,7 @@ public interface IDocenteMapper extends IMantenibleMapper<Docente> {
 			+ "#{operacionParam, jdbcType = VARCHAR, mode = IN},"
 			+ "#{objeto.idDocente, jdbcType = INTEGER, mode = IN},"
 			+ "#{objeto.estadoDocente, jdbcType = VARCHAR, mode = IN},"
-			+ "#{objeto.usuario, jdbcType = VARCHAR, mode = IN})}"})
+			+ "#{userAudit, jdbcType = VARCHAR, mode = IN})}"})
 	@Options(statementType = StatementType.CALLABLE)
 	public List<Docente> mantener(Parametro parametro);
 	

@@ -4,8 +4,6 @@ package pe.edu.unmsm.fisi.siscae.model.practica;
 import java.sql.Time;
 import java.util.Date;
 
-import com.sun.star.util.DateTime;
-
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -36,11 +34,11 @@ public class Prestamo {
 	
 	private int idPersona;
 	
-	private DateTime fechaRegistro;
+	private Date fechaRegistro;
 	
 	private String usuarioRegistro;
 	
-	private DateTime fechaModificacion;
+	private Date fechaModificacion;
 	
 	private String usuarioModificacion;
 

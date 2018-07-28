@@ -16,14 +16,10 @@ public interface IInfraccionMapper extends IMantenibleMapper<Infraccion> {
             + "#{operacionParam, jdbcType = VARCHAR, mode = IN},"
             + "#{objeto.idInfraccion, jdbcType = INTEGER, mode = IN},"
             + "#{objeto.descripcion, jdbcType = VARCHAR, mode = IN},"
-            + "#{objeto.fecha, jdbcType = DATETIME, mode = IN},"
+            + "#{objeto.fecha, jdbcType = DATE, mode = IN},"
             + "#{objeto.estado,jdbcType = BOOLEAN, mode = IN},"
             + "#{objeto.idPersona,jdbcType = INTEGER, mode = IN},"
             + "#{objeto.idTipoInfraccion,jdbcType = INTEGER, mode = IN},"
-            + "#{objeto.fechaRegistro,jdbcType = DATETIME, mode = IN},"
-            + "#{objeto.usuarioRegistro,jdbcType = VARCHAR, mode = IN},"
-            + "#{objeto.fechaModificacion,jdbcType = DATETIME, mode = IN},"
-            + "#{objeto.usuarioModificacion,jdbcType = VARCHAR, mode = IN},"
             + "#{userAudit, jdbcType = VARCHAR, mode = IN})}" })
 	@Options (statementType = StatementType.CALLABLE)
 	 public List<Infraccion> mantener (Parametro parametro);

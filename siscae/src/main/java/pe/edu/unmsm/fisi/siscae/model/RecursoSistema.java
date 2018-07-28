@@ -5,7 +5,7 @@ import java.util.Date;
 import lombok.Data;
 
 @Data
-public class Recurso
+public class RecursoSistema
 {
     private String idRecurso;
     private String descripcion;

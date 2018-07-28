@@ -14,15 +14,11 @@ public interface IAreaAdministrativoMapper  extends IMantenibleMapper<AreaAdmini
 	@Select(value = { "{call MANT_AREA_ADMINISTRATIVO ( "
             + "#{operacion, jdbcType = VARCHAR, mode = IN},"
             + "#{operacionParam, jdbcType = VARCHAR, mode = IN},"	
-            + "#{objeto.idAreaEstudio, jdbcType = INT, mode = IN},"
-            + "#{objeto.idAdministrativo, jdbcType = TIME, mode = IN},"
-            + "#{objeto.fechaInicio, jdbcType = TIME, mode = IN},"
-            + "#{objeto.fechaFin,jdbcType = BOOLEAN, mode = IN},"
-            + "#{objeto.cargo, jdbcType = DECIMAL, mode = IN}," 
-			+ "#{objeto.fechaRegistro, jdbcType = INT, mode = IN},"
-		    + "#{objeto.usuarioRegistro,jdbcType = INT, mode = IN},"
-		    + "#{objeto.fechaModificacion,jdbcType = INT, mode = IN},"
-            + "#{objeto.usuarioModificacion, jdbcType = INT, mode = IN}," 
+            + "#{objeto.idAreaEstudio, jdbcType = INTEGER, mode = IN},"
+            + "#{objeto.idAdministrativo, jdbcType = INTEGER, mode = IN},"
+            + "#{objeto.fechaInicio, jdbcType = DATE, mode = IN},"
+            + "#{objeto.fechaFin,jdbcType = DATE, mode = IN},"
+            + "#{objeto.cargo, jdbcType = VARCHAR, mode = IN},"
 			+ "#{userAudit, jdbcType = VARCHAR, mode = IN})}" })
     @Options(statementType = StatementType.CALLABLE)
     public List<AreaAdministrativo> mantener(Parametro parametro);

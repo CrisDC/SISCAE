@@ -32,20 +32,20 @@ public class MultitabDetValidator implements ConstraintValidator<MultitabDet, Ob
     @Override
     public boolean isValid(Object oIdItem, ConstraintValidatorContext context)
     {
-        String idItem = String.valueOf(oIdItem);
+        Integer idItem = (Integer) oIdItem;
         if (idItem == null || idItem.equals("null"))
         {
             ValidatorUtil.addCustomMessageWithTemplate("{NotNull.MultitabDet." + campoIdItem + "}",
                     context);
             return false;
         }
-        if (idItem.trim().isEmpty())
+        if (!(idItem != null))
         {
             ValidatorUtil.addCustomMessageWithTemplate("{NotBlank.MultitabDet." + campoIdItem + "}",
                     context);
             return false;
         }
-        if (idItem.length() < min || idItem.length() > max)
+        if (idItem < min || idItem > max)
         {
             ValidatorUtil.addCustomMessageWithTemplate("{Length.MultitabDet." + campoIdItem + "}",
                     context);

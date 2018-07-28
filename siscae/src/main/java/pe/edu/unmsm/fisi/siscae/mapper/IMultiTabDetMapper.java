@@ -14,10 +14,11 @@ public interface IMultiTabDetMapper extends IMantenibleMapper<MultiTabDet>
 {
     @Select(value = { "{call MANT_MULTI_TAB_DET ( " 
             + "#{operacion, jdbcType = VARCHAR, mode = IN},"
-            + "#{objeto.idTabla, jdbcType = INTEGER, mode = IN},"
-            + "#{objeto.idItem, jdbcType = VARCHAR, mode = IN},"
-            + "#{objeto.descripcionItem, jdbcType = VARCHAR, mode = IN},"
-            + "#{objeto.abreviatura, jdbcType = VARCHAR, mode = IN},"
+            + "#{operacionParam, jdbcType = VARCHAR, mode = IN},"
+            + "#{objeto.iditem, jdbcType = INTEGER, mode = IN},"
+            + "#{objeto.idTabla, jdbcType = VARCHAR, mode = IN},"
+            + "#{objeto.descripcion, jdbcType = VARCHAR, mode = IN},"
+            + "#{objeto.descripcionCorta, jdbcType = VARCHAR, mode = IN},"
             + "#{userAudit, jdbcType = VARCHAR, mode = IN})}" })
     @Options(statementType = StatementType.CALLABLE)
     public List<MultiTabDet> mantener(Parametro parametro);

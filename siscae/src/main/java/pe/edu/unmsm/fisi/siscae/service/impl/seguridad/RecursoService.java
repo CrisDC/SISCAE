@@ -8,7 +8,7 @@ import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
 import pe.edu.unmsm.fisi.siscae.mapper.IRecursoMapper;
-import pe.edu.unmsm.fisi.siscae.model.Recurso;
+import pe.edu.unmsm.fisi.siscae.model.RecursoSistema;
 import pe.edu.unmsm.fisi.siscae.service.IRecursoService;
 import pe.edu.unmsm.fisi.siscae.utilitario.Operacion;
 import pe.edu.unmsm.fisi.siscae.utilitario.Operacion.OperacionParam;

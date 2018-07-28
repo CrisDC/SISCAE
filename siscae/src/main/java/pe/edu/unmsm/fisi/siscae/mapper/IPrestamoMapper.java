@@ -1,4 +1,4 @@
-package pe.edu.unmsm.fisi.siscae.mapper.practica;
+package pe.edu.unmsm.fisi.siscae.mapper;
 
 
 import java.util.List;
