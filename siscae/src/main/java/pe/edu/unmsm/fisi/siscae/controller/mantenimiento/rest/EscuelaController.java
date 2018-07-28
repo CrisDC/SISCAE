@@ -22,65 +22,66 @@ import pe.edu.unmsm.fisi.siscae.aspecto.enumeracion.Comentario;
 import pe.edu.unmsm.fisi.siscae.aspecto.enumeracion.Dato;
 import pe.edu.unmsm.fisi.siscae.aspecto.enumeracion.Tipo;
 import pe.edu.unmsm.fisi.siscae.model.mantenimiento.Empresa;
+import pe.edu.unmsm.fisi.siscae.model.mantenimiento.Escuela;
 import pe.edu.unmsm.fisi.siscae.service.IEmpresaService;
+import pe.edu.unmsm.fisi.siscae.service.IEscuelaService;
 import pe.edu.unmsm.fisi.siscae.service.excepcion.BadRequestException;
 import pe.edu.unmsm.fisi.siscae.utilitario.ConstantesGenerales;
 import pe.edu.unmsm.fisi.siscae.utilitario.ValidatorUtil;
 import pe.edu.unmsm.fisi.siscae.validacion.grupo.accion.IActualizacion;
 import pe.edu.unmsm.fisi.siscae.validacion.grupo.accion.IRegistro;
 
-@Audit(tipo = Tipo.Emp, datos = Dato.Empresa)
-@RequestMapping("/empresa")
-public @RestController class EmpresaController
-{
-    private @Autowired IEmpresaService empresaService;
+@Audit(tipo = Tipo.Esc, datos = Dato.Escuela)
+@RequestMapping("/escuela ")
+public @RestController class EscuelaController {
+	private @Autowired IEscuelaService escuelaService;
 
     @Audit(accion = Accion.Consulta, comentario = Comentario.ConsultaTodos)
     @GetMapping(params = "accion=buscarTodos")
-    public List<Empresa> buscarTodos()
+    public List<Escuela> buscarTodos()
     {
-        return empresaService.buscarTodos();
+        return escuelaService.buscarTodos();
     }
 
     @Audit(accion = Accion.REGISTRO, comentario = Comentario.Registro)
     @PostMapping
-    public ResponseEntity<?> registrarEmpresa(
-            @Validated({ Default.class, IRegistro.class }) @RequestBody Empresa empresa,
+    public ResponseEntity<?> registrarEscuela(
+            @Validated({ Default.class, IRegistro.class }) @RequestBody Escuela escuela,
             Errors error)
     {
         if (error.hasErrors())
         {
             throw new BadRequestException(ValidatorUtil.obtenerMensajeValidacionError(error));
         }
-        empresaService.registrarEmpresa(empresa);
+        escuelaService.registrarEscuela(escuela);
         return ResponseEntity.ok(ConstantesGenerales.REGISTRO_EXITOSO);
     }
 
     @Audit(accion = Accion.Actualizacion, comentario = Comentario.Actualizacion)
     @PutMapping
-    public ResponseEntity<?> actualizarEmpresa(
-            @Validated({ Default.class, IActualizacion.class }) @RequestBody Empresa empresa,
+    public ResponseEntity<?> actualizarEscuela(
+            @Validated({ Default.class, IActualizacion.class }) @RequestBody Escuela escuela,
             Errors error)
     {
         if (error.hasErrors())
         {
             throw new BadRequestException(ValidatorUtil.obtenerMensajeValidacionError(error));
         }
-        empresaService.actualizarEmpresa(empresa);
+        escuelaService.actualizarEscuela(escuela);
         return ResponseEntity.ok(ConstantesGenerales.ACTUALIZACION_EXITOSA);
     }
 
     @Audit(accion = Accion.Eliminacion, comentario = Comentario.Eliminacion)
     @DeleteMapping
-    public ResponseEntity<?> eliminarEmpresa(
-            @Validated(IActualizacion.class) @RequestBody Empresa empresa, Errors error)
+    public ResponseEntity<?> eliminarEscuela(
+            @Validated(IActualizacion.class) @RequestBody Escuela  escuela , Errors error)
     {
         if (error.hasErrors())
         {
-        	
             throw new BadRequestException(ValidatorUtil.obtenerMensajeValidacionError(error));
         }
-        empresaService.eliminarEmpresa(empresa);
+        escuelaService.eliminarEscuela(escuela );
         return ResponseEntity.ok(ConstantesGenerales.ELIMINACION_EXITOSA);
     }
+
 }

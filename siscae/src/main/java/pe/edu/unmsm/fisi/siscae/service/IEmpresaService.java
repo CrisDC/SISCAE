@@ -16,6 +16,6 @@ public interface IEmpresaService extends IMantenibleService<Empresa> {
 
 	public void actualizarEmpresa(Empresa empresa);
 
-	public void eliminarEmpresa(Empresa empresa);
 
+    public void eliminarEmpresa(Empresa empresa);
 }
