@@ -2741,3 +2741,8 @@ td{
   background: #fff;
   border-color: #38a4ff;
 }
+
+.numero{
+  text-align: center;
+  border-style: none; 
+}
