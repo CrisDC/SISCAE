@@ -11,7 +11,7 @@ import pe.edu.unmsm.fisi.siscae.model.mantenimiento.AreaAdministrativo;
 import pe.edu.unmsm.fisi.siscae.model.parametro.Parametro;
 
 public interface IAreaAdministrativoMapper  extends IMantenibleMapper<AreaAdministrativo>{
-	@Select(value = { "{call MANT_AREA_ADMINISTRATIVO ( "
+	@Select(value = { "{call SP_MANT_AREA_ADMINISTRATIVO ( "
             + "#{operacion, jdbcType = VARCHAR, mode = IN},"
             + "#{operacionParam, jdbcType = VARCHAR, mode = IN},"	
             + "#{objeto.idAreaEstudio, jdbcType = INTEGER, mode = IN},"

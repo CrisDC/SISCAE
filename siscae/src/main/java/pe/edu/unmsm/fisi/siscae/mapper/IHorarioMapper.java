@@ -12,7 +12,7 @@ import pe.edu.unmsm.fisi.siscae.model.parametro.Parametro;
 
 
 public interface IHorarioMapper extends IMantenibleMapper<Horario> {
-	@Select(value = { "{call MANT_HORARIO ( "
+	@Select(value = { "{call SP_MANT_HORARIO ( "
             + "#{operacion, jdbcType = VARCHAR, mode = IN},"
             + "#{operacionParam, jdbcType = VARCHAR, mode = IN},"		
             + "#{objeto.idHorario, jdbcType = INTEGER, mode = IN},"

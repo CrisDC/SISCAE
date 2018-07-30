@@ -11,7 +11,7 @@ import pe.edu.unmsm.fisi.siscae.model.mantenimiento.AreaEstudio;
 import pe.edu.unmsm.fisi.siscae.model.parametro.Parametro;
 
 public interface IAreaEstudioMapper extends IMantenibleMapper<AreaEstudio> {
-	@Select(value = { "{call MANT_AREA_ESTUDIO ( "
+	@Select(value = { "{call SP_MANT_AREA_ESTUDIO ( "
             + "#{operacion, jdbcType = VARCHAR, mode = IN},"
             + "#{operacionParam, jdbcType = VARCHAR, mode = IN},"	
             + "#{objeto.idAreaEstudio, jdbcType = INTEGER, mode = IN},"

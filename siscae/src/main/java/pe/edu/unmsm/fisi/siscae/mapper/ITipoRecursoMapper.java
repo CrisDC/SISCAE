@@ -10,7 +10,7 @@ import pe.edu.unmsm.fisi.siscae.model.mantenimiento.TipoRecurso;
 import pe.edu.unmsm.fisi.siscae.model.parametro.Parametro;
 public interface ITipoRecursoMapper extends IMantenibleMapper <TipoRecurso> {
 	
-	@Select(value = { "{call SP_MANT_EMPRESAS ( "
+	@Select(value = { "{call SP_MANT_TIPO_RECURSO ( "
             + "#{operacion, jdbcType = VARCHAR, mode = IN},"
             + "#{operacionParam, jdbcType = VARCHAR, mode = IN},"
             + "#{objeto.idTipoRecurso, jdbcType = INTEGER, mode = IN},"
