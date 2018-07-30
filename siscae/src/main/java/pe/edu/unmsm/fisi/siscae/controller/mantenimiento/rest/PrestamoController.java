@@ -11,9 +11,9 @@ import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
-import pe.edu.unmsm.fisi.siscae.model.practica.Prestamo;
+import pe.edu.unmsm.fisi.siscae.model.mantenimiento.Prestamo;
 import pe.edu.unmsm.fisi.siscae.service.excepcion.BadRequestException;
-import pe.edu.unmsm.fisi.siscae.service.practica.IPrestamoService;
+import pe.edu.unmsm.fisi.siscae.service.IPrestamoService;
 import pe.edu.unmsm.fisi.siscae.utilitario.ConstantesGenerales;
 import pe.edu.unmsm.fisi.siscae.utilitario.ValidatorUtil;
 import pe.edu.unmsm.fisi.siscae.validacion.grupo.accion.IRegistro;

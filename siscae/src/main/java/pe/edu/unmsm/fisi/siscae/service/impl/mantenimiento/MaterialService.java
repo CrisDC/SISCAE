@@ -7,29 +7,24 @@ import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
 import pe.edu.unmsm.fisi.siscae.mapper.base.IMantenibleMapper;
-import pe.edu.unmsm.fisi.siscae.mapper.practica.IMaterialMapper;
-import pe.edu.unmsm.fisi.siscae.model.practica.Material;
+import pe.edu.unmsm.fisi.siscae.mapper.IMaterialMapper;
+import pe.edu.unmsm.fisi.siscae.model.mantenimiento.Material;
 import pe.edu.unmsm.fisi.siscae.service.impl.MantenibleService;
-import pe.edu.unmsm.fisi.siscae.service.practica.IMaterialService;
+import pe.edu.unmsm.fisi.siscae.service.IMaterialService;
 import pe.edu.unmsm.fisi.siscae.utilitario.Operacion;
 import pe.edu.unmsm.fisi.siscae.utilitario.Operacion.OperacionParam;
 
+public class MaterialService extends MantenibleService<Material> implements IMaterialService {
 
-public class MaterialService extends MantenibleService<Material>
-implements IMaterialService{
-	
 	private IMaterialMapper materialMapper;
-	
-	
-	public MaterialService (@Qualifier("IMaterialMapper") IMantenibleMapper<Material> mapper ){
-		
+
+	public MaterialService(@Qualifier("IMaterialMapper") IMantenibleMapper<Material> mapper) {
+
 		super(mapper);
-		this.materialMapper = (IMaterialMapper) mapper ;
-		
+		this.materialMapper = (IMaterialMapper) mapper;
+
 	}
-	
-	
-	
+
 	@Override
 	@Transactional(propagation = Propagation.REQUIRES_NEW)
 	public List<Material> buscarTodos() {
@@ -41,7 +36,7 @@ implements IMaterialService{
 	public List<Material> buscarPorIdMaterial(Integer idMaterial) {
 
 		Material material = Material.builder().idMaterial(idMaterial).build();
-		return this.buscar(material, Operacion.SELECT,OperacionParam.PRIMARY_KEY);
+		return this.buscar(material, Operacion.SELECT, OperacionParam.PRIMARY_KEY);
 	}
 
 	@Override
@@ -52,7 +47,7 @@ implements IMaterialService{
 
 	@Override
 	public void registrarMaterial(Material material) {
-		
+
 		this.registrar(material);
 	}
 
@@ -60,7 +55,7 @@ implements IMaterialService{
 	public void actualizarMaterial(Material material) {
 
 		this.actualizar(material);
-		
+
 	}
 
 	@Override
