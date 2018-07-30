@@ -10,7 +10,6 @@ import org.springframework.validation.Errors;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
-
 import pe.edu.unmsm.fisi.siscae.model.mantenimiento.Prestamo;
 import pe.edu.unmsm.fisi.siscae.service.IPrestamoService;
 import pe.edu.unmsm.fisi.siscae.service.excepcion.BadRequestException;

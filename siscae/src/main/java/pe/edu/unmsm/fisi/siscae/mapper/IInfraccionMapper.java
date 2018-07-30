@@ -11,7 +11,7 @@ import pe.edu.unmsm.fisi.siscae.model.parametro.Parametro;
 
 public interface IInfraccionMapper extends IMantenibleMapper<Infraccion> {
 	
-	@Select(value = { "{call SP_MANT_EMPRESAS ( "
+	@Select(value = { "{call SP_MANT_INFRACCION ( "
             + "#{operacion, jdbcType = VARCHAR, mode = IN},"
             + "#{operacionParam, jdbcType = VARCHAR, mode = IN},"
             + "#{objeto.idInfraccion, jdbcType = INTEGER, mode = IN},"

@@ -14,21 +14,17 @@ import pe.edu.unmsm.fisi.siscae.service.impl.MantenibleService;
 import pe.edu.unmsm.fisi.siscae.utilitario.Operacion;
 import pe.edu.unmsm.fisi.siscae.utilitario.Operacion.OperacionParam;
 
-
-public class PrestamoService extends MantenibleService<Prestamo> 
-implements IPrestamoService{
+public class PrestamoService extends MantenibleService<Prestamo> implements IPrestamoService {
 
 	private IPrestamoMapper prestamoMapper;
-	
-	
-	public PrestamoService (@Qualifier("IPrestamoMapper") IMantenibleMapper<Prestamo> mapper ){
-		
+
+	public PrestamoService(@Qualifier("IPrestamoMapper") IMantenibleMapper<Prestamo> mapper) {
+
 		super(mapper);
-		this.prestamoMapper = (IPrestamoMapper) mapper ;
-		
+		this.prestamoMapper = (IPrestamoMapper) mapper;
+
 	}
-	
-	
+
 	@Override
 	@Transactional(propagation = Propagation.REQUIRES_NEW)
 	public List<Prestamo> buscarTodos() {
@@ -39,9 +35,8 @@ implements IPrestamoService{
 	@Transactional(propagation = Propagation.REQUIRED)
 	public List<Prestamo> buscarPorIdPrestamo(Integer idPrestamo) {
 
-		
 		Prestamo prestamo = Prestamo.builder().idAdministrativo(idPrestamo).build();
-		return this.buscar(prestamo, Operacion.SELECT,OperacionParam.PRIMARY_KEY);
+		return this.buscar(prestamo, Operacion.SELECT, OperacionParam.PRIMARY_KEY);
 	}
 
 	@Override

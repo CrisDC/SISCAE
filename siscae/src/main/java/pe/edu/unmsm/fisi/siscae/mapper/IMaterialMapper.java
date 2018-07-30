@@ -10,6 +10,7 @@ import org.apache.ibatis.mapping.StatementType;
 import pe.edu.unmsm.fisi.siscae.mapper.base.IMantenibleMapper;
 import pe.edu.unmsm.fisi.siscae.model.mantenimiento.Material;
 import pe.edu.unmsm.fisi.siscae.model.parametro.Parametro;
+import pe.edu.unmsm.fisi.siscae.model.mantenimiento.Material;
 
 
 public interface IMaterialMapper extends IMantenibleMapper<Material> {

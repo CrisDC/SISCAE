@@ -10,37 +10,38 @@ import pe.edu.unmsm.fisi.siscae.mapper.IAdministrativoMapper;
 import pe.edu.unmsm.fisi.siscae.mapper.base.IMantenibleMapper;
 import pe.edu.unmsm.fisi.siscae.model.mantenimiento.Administrativo;
 import pe.edu.unmsm.fisi.siscae.service.IAdministrativoService;
+import pe.edu.unmsm.fisi.siscae.mapper.IAdministrativoMapper;
+import pe.edu.unmsm.fisi.siscae.model.mantenimiento.Administrativo;
 import pe.edu.unmsm.fisi.siscae.service.impl.MantenibleService;
+import pe.edu.unmsm.fisi.siscae.service.IAdministrativoService;
 import pe.edu.unmsm.fisi.siscae.utilitario.Operacion;
 import pe.edu.unmsm.fisi.siscae.utilitario.Operacion.OperacionParam;
 
-public class AdministrativoService extends MantenibleService<Administrativo> 
-implements IAdministrativoService{
+public class AdministrativoService extends MantenibleService<Administrativo> implements IAdministrativoService {
 
 	private IAdministrativoMapper administrativoMapper;
-	
-	public AdministrativoService(@Qualifier("IAdministrativoMapper") 
-									IMantenibleMapper<Administrativo> mapper ){
-		
+
+	public AdministrativoService(@Qualifier("IAdministrativoMapper") IMantenibleMapper<Administrativo> mapper) {
+
 		super(mapper);
-		this.administrativoMapper = (IAdministrativoMapper) mapper ;
-		
+		this.administrativoMapper = (IAdministrativoMapper) mapper;
+
 	}
-	
+
 	@Override
 	@Transactional(propagation = Propagation.REQUIRES_NEW)
 	public List<Administrativo> buscarTodos() {
-		
+
 		return this.buscar(new Administrativo(), Operacion.SELECT);
 	}
 
 	@Override
 	@Transactional(propagation = Propagation.REQUIRED)
 	public List<Administrativo> buscarPorIdAdministrativo(Integer idAdministrativo) {
-		
+
 		Administrativo administrativo = Administrativo.builder().idAdministrativo(idAdministrativo).build();
-		
-		return this.buscar(administrativo, Operacion.SELECT,OperacionParam.PRIMARY_KEY);
+
+		return this.buscar(administrativo, Operacion.SELECT, OperacionParam.PRIMARY_KEY);
 	}
 
 	@Override
@@ -66,7 +67,7 @@ implements IAdministrativoService{
 	public void eliminarAdministrativo(Administrativo administrativo) {
 
 		this.eliminar(administrativo);
-		
+
 	}
 
 }
