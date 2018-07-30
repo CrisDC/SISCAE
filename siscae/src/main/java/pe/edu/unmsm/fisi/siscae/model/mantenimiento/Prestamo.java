@@ -1,7 +1,7 @@
 package pe.edu.unmsm.fisi.siscae.model.mantenimiento;
 
 
-import java.sql.Time;
+import java.time.LocalTime;
 import java.util.Date;
 
 import com.sun.star.util.DateTime;
@@ -24,9 +24,9 @@ public class Prestamo {
 	
 	private Date fecha;
 	
-	private Time horaEntrada;
+	private LocalTime horaEntrada;
 	
-	private Time horaSalida;
+	private LocalTime horaSalida;
 	
 	private String estadoPrestamo;
 	
@@ -36,7 +36,7 @@ public class Prestamo {
 	
 	private Integer idPersona;
 	
-	private DateTime fechaRegistro;
+	private Date fechaRegistro;
 	
 	private String usuarioRegistro;
 	

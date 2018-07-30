@@ -1,7 +1,7 @@
 package pe.edu.unmsm.fisi.siscae.model.mantenimiento;
 
 
-import com.sun.star.util.DateTime;
+import java.util.Date;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -23,11 +23,11 @@ public class Material {
 	
 	private Integer idTipoMaterial;
 	
-	private DateTime fechaRegistro;
+	private Date fechaRegistro;
 	
 	private String usuarioRegistro;
 	
-	private DateTime fechaModificacion;
+	private Date fechaModificacion;
 	
 	private String usuarioModificacion;
 	

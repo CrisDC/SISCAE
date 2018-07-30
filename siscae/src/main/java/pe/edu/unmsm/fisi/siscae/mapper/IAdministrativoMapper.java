@@ -6,9 +6,8 @@ import java.util.List;
 import org.apache.ibatis.annotations.Options;
 import org.apache.ibatis.annotations.Select;
 import org.apache.ibatis.mapping.StatementType;
-
 import pe.edu.unmsm.fisi.siscae.mapper.base.IMantenibleMapper;
-import pe.edu.unmsm.fisi.siscae.model.practica.Administrativo;
+import pe.edu.unmsm.fisi.siscae.model.mantenimiento.Administrativo;
 import pe.edu.unmsm.fisi.siscae.model.parametro.Parametro;
 
 

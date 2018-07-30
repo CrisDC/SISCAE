@@ -2,7 +2,7 @@ package pe.edu.unmsm.fisi.siscae.service;
 
 import java.util.List;
 
-import pe.edu.unmsm.fisi.siscae.model.practica.Prestamo;
+import pe.edu.unmsm.fisi.siscae.model.mantenimiento.Prestamo;
 import pe.edu.unmsm.fisi.siscae.service.IMantenibleService;
 
 
