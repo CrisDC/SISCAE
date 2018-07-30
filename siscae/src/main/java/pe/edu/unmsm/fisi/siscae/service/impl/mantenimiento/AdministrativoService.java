@@ -6,11 +6,11 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
+import pe.edu.unmsm.fisi.siscae.mapper.IAdministrativoMapper;
 import pe.edu.unmsm.fisi.siscae.mapper.base.IMantenibleMapper;
-import pe.edu.unmsm.fisi.siscae.mapper.practica.IAdministrativoMapper;
-import pe.edu.unmsm.fisi.siscae.model.practica.Administrativo;
+import pe.edu.unmsm.fisi.siscae.model.mantenimiento.Administrativo;
+import pe.edu.unmsm.fisi.siscae.service.IAdministrativoService;
 import pe.edu.unmsm.fisi.siscae.service.impl.MantenibleService;
-import pe.edu.unmsm.fisi.siscae.service.practica.IAdministrativoService;
 import pe.edu.unmsm.fisi.siscae.utilitario.Operacion;
 import pe.edu.unmsm.fisi.siscae.utilitario.Operacion.OperacionParam;
 

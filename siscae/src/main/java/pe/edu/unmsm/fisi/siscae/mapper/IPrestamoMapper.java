@@ -9,7 +9,7 @@ import org.apache.ibatis.annotations.Select;
 import org.apache.ibatis.mapping.StatementType;
 
 import pe.edu.unmsm.fisi.siscae.mapper.base.IMantenibleMapper;
-import pe.edu.unmsm.fisi.siscae.model.practica.Prestamo;
+import pe.edu.unmsm.fisi.siscae.model.mantenimiento.Prestamo;
 import pe.edu.unmsm.fisi.siscae.model.parametro.Parametro;
 
 
