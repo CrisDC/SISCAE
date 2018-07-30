@@ -10,10 +10,7 @@ import pe.edu.unmsm.fisi.siscae.mapper.IAdministrativoMapper;
 import pe.edu.unmsm.fisi.siscae.mapper.base.IMantenibleMapper;
 import pe.edu.unmsm.fisi.siscae.model.mantenimiento.Administrativo;
 import pe.edu.unmsm.fisi.siscae.service.IAdministrativoService;
-import pe.edu.unmsm.fisi.siscae.mapper.IAdministrativoMapper;
-import pe.edu.unmsm.fisi.siscae.model.mantenimiento.Administrativo;
 import pe.edu.unmsm.fisi.siscae.service.impl.MantenibleService;
-import pe.edu.unmsm.fisi.siscae.service.IAdministrativoService;
 import pe.edu.unmsm.fisi.siscae.utilitario.Operacion;
 import pe.edu.unmsm.fisi.siscae.utilitario.Operacion.OperacionParam;
 
