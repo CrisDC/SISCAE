@@ -15,9 +15,12 @@ public interface IUsuarioMapper extends IMantenibleMapper<Usuario>
    	@Select( value = {"{call SP_MANT_USUARIO("
 			+ "#{operacion, jdbcType = VARCHAR, mode = IN},"
 			+ "#{operacionParam, jdbcType = VARCHAR, mode = IN},"
-			+ "#{objeto.username, jdbcType = INTEGER, mode = IN},"
+			+ "#{objeto.idUsuario, jdbcType = INTEGER, mode = IN},"
+			+ "#{objeto.username, jdbcType = VARCHAR, mode = IN},"
 			+ "#{objeto.pass, jdbcType = VARCHAR, mode = IN},"
-			+ "#{userAudit, jdbcType = VARCHAR, mode = IN})}"} )
+			+ "#{objeto.estado, jdbcType = VARCHAR, mode = IN},"
+			+ "#{objeto.idRol, jdbcType = INTEGER, mode = IN},"
+			+ "#{objeto.idPersona, jdbcType = INTEGER, mode = IN})}"} )
 	@Options(statementType = StatementType.CALLABLE)
     public List<Usuario> mantener(Parametro parametro);
    	
