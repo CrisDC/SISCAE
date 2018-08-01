@@ -21,7 +21,7 @@ import pe.edu.unmsm.fisi.siscae.service.ISecRecursoService;
 import pe.edu.unmsm.fisi.siscae.utilitario.ConstantesGenerales;
 
 @Audit(tipo = Tipo.Recurso, datos = Dato.Recurso)
-public @RestController class RecursoController {
+public @RestController class SecRecursoController {
 	private @Autowired ISecRecursoService secRecursoService;
 
 	@Audit(accion = Accion.Consulta, comentario = Comentario.ConsultaTodos)

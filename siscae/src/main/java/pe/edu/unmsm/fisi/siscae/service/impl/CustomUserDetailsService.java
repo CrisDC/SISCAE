@@ -14,16 +14,16 @@ import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
 import pe.edu.unmsm.fisi.siscae.configuracion.security.CustomUser;
-import pe.edu.unmsm.fisi.siscae.mapper.IRecursoMapper;
+import pe.edu.unmsm.fisi.siscae.mapper.ISecRecursoMapper;
 import pe.edu.unmsm.fisi.siscae.model.RecursoSistema;
 import pe.edu.unmsm.fisi.siscae.model.seguridad.SecUsuario;
-import pe.edu.unmsm.fisi.siscae.service.IUsuarioService;
+import pe.edu.unmsm.fisi.siscae.service.ISecUsuarioService;
 
 @Service
 public class CustomUserDetailsService implements UserDetailsService
 {
-    private @Autowired IUsuarioService usuarioService;
-    private @Autowired IRecursoMapper recursoMapper;
+    private @Autowired ISecUsuarioService usuarioService;
+    private @Autowired ISecRecursoMapper recursoMapper;
 
     @Override
     @Transactional(propagation = Propagation.REQUIRES_NEW)

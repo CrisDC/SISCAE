@@ -23,7 +23,5 @@ public interface IUsuarioMapper extends IMantenibleMapper<Usuario>
 			+ "#{objeto.idPersona, jdbcType = INTEGER, mode = IN})}"} )
 	@Options(statementType = StatementType.CALLABLE)
     public List<Usuario> mantener(Parametro parametro);
-   	
-   	public Usuario buscarUsuarioPorId(String idUsuario);
  
 }

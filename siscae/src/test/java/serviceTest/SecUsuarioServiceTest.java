@@ -10,7 +10,7 @@ import pe.edu.unmsm.fisi.siscae.configuracion.ServiceConfiguration;
 
 @ContextConfiguration(classes = { ServiceConfiguration.class, PersistenceConfiguration.class })
 @RunWith(SpringJUnit4ClassRunner.class)
-public class UsuarioServiceTest
+public class SecUsuarioServiceTest
 {
 
     @Test
