@@ -14,6 +14,7 @@ import pe.edu.unmsm.fisi.siscae.configuracion.ServiceConfiguration;
 import pe.edu.unmsm.fisi.siscae.model.mantenimiento.Horario;
 import pe.edu.unmsm.fisi.siscae.model.parametro.Parametro;
 import pe.edu.unmsm.fisi.siscae.utilitario.Operacion;
+import pe.edu.unmsm.fisi.siscae.utilitario.Operacion.OperacionParam;
 
 @ContextConfiguration(classes = { ServiceConfiguration.class, PersistenceConfiguration.class })
 @RunWith(SpringJUnit4ClassRunner.class)
@@ -23,36 +24,46 @@ public class HorarioMapperTest {
 
 	@Test
 	public void mantenerTipoGetTest() {
+		Parametro<Horario> operacion = new Parametro<>();
 
-		Horario horario = new Horario();
-		horario.setIdHorario(1);
-		horario.setHoraInicio(LocalTime.now());
-		horario.setHoraFin(LocalTime.now());
-		horario.setEstado(true);
-		horario.setTiempoMax(2.00);
-		horario.setIdTurno(1);
-		horario.setIdDia(1);
-		horario.setIdTipoHorario(1);
-		horario.setIdAreaEstudio(1);
-
-		Parametro<Horario> operacion = new Parametro<>(Operacion.SELECT, horario, "TEST USER");
-
+		Horario horarioTest = new Horario();
+		horarioTest.setIdHorario(1);
+		horarioTest.setHoraInicio(LocalTime.now());
+		horarioTest.setHoraFin(LocalTime.now());
+		horarioTest.setEstado(true);
+		horarioTest.setTiempoMax(2.00);
+		horarioTest.setIdTurno(1);
+		horarioTest.setIdDia(1);
+		horarioTest.setIdTipoHorario(1);
+		horarioTest.setIdAreaEstudio(1);
+		
+		operacion.setOperacion(Operacion.SELECT.name());
+		operacion.setObjeto(new Horario());
+		
 		List<Horario> horarios = horarioMapper.mantener(operacion);
-		horarios.forEach(System.out::println);
+		horarios.stream().forEach(horario ->{
+			System.out.println(horario.toString());
+		});
 		
-		operacion.setOperacion(Operacion.INSERT.name());
-		horarios = horarioMapper.mantener(operacion);
-		horarios.forEach(System.out::println);
-		
-		horario.setHoraFin(LocalTime.now());
+		operacion=new Parametro<>(Operacion.INSERT, OperacionParam.PRIMARY_KEY,horarioTest, "Usuario de prueba");
+		horarios.stream().forEach(horario ->{
+			System.out.println(horario.toString());
+		});
+				
+		horarioTest.setHoraFin(LocalTime.now());
 		operacion.setOperacion(Operacion.UPDATE.name());
-		horarios = horarioMapper.mantener(operacion);
-		horarios.forEach(System.out::println);
+		operacion.setObjeto(horarioTest);
 		
+		horarios = horarioMapper.mantener(operacion);
+		horarios.stream().forEach(horario ->{
+			System.out.println(horario.toString());
+		});
 		operacion.setOperacion(Operacion.DELETE.name());
 		horarios = horarioMapper.mantener(operacion);
-		horarios.forEach(System.out::println);
-
+		
+		horarios.stream().forEach(horario ->{
+			System.out.println(horario.toString());
+		});
 	}
 
 }
