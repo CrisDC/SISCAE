@@ -4,7 +4,12 @@ package pe.edu.unmsm.fisi.siscae.model.mantenimiento;
 import java.time.LocalTime;
 import java.util.Date;
 
-import com.sun.star.util.DateTime;
+import javax.validation.constraints.NotNull;
+
+import org.hibernate.validator.constraints.Length;
+import org.hibernate.validator.constraints.NotBlank;
+
+import com.fasterxml.jackson.annotation.JsonFormat;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -22,12 +27,17 @@ public class Prestamo {
 	
 	private Integer idPrestamo;
 	
+	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd", timezone = "EST")
+    @NotNull(message = "{NotNull.Prestamo.fecha}")
 	private Date fecha;
 	
 	private LocalTime horaEntrada;
 	
 	private LocalTime horaSalida;
 	
+	@NotNull(message = "{NotNull.Prestamo.estadoPrestamo}")
+    @NotBlank(message = "{NotBlank.Prestamo.estadoPrestamo}")
+    @Length(min = 3, max = 20, message = "{Length.CodigoProcesoSwitch.estadoPrestamo}")
 	private String estadoPrestamo;
 	
 	private Integer idRecurso;
@@ -36,12 +46,22 @@ public class Prestamo {
 	
 	private Integer idPersona;
 	
+	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd", timezone = "EST")
+    @NotNull(message = "{NotNull.Prestamo.fechaRegistro}")
 	private Date fechaRegistro;
 	
+	@NotNull(message = "{NotNull.Prestamo.usuarioRegistro}")
+    @NotBlank(message = "{NotBlank.Prestamo.usuarioRegistro}")
+    @Length(min = 3, max = 45, message = "{Length.CodigoProcesoSwitch.usuarioRegistro}")
 	private String usuarioRegistro;
 	
-	private DateTime fechaModificacion;
+	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd", timezone = "EST")
+    @NotNull(message = "{NotNull.Prestamo.fechaModificacion}")
+	private Date fechaModificacion;
 	
+	@NotNull(message = "{NotNull.Prestamo.usuarioModificacion}")
+    @NotBlank(message = "{NotBlank.Prestamo.usuarioModificacion}")
+    @Length(min = 3, max = 45, message = "{Length.CodigoProcesoSwitch.usuarioModificacion}")
 	private String usuarioModificacion;
 
 }

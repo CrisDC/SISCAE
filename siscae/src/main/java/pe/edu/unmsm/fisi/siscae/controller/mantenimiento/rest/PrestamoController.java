@@ -50,7 +50,7 @@ public @RestController class PrestamoController {
 			 throw new BadRequestException(ValidatorUtil.obtenerMensajeValidacionError(error));
 		}
 		prestamoService.actualizarPrestamo(prestamo);
-		return ResponseEntity.ok(ConstantesGenerales.REGISTRO_EXITOSO);
+		return ResponseEntity.ok(ConstantesGenerales.ACTUALIZACION_EXITOSA);
 				
 	}
 	
@@ -62,7 +62,7 @@ public @RestController class PrestamoController {
 			 throw new BadRequestException(ValidatorUtil.obtenerMensajeValidacionError(error));
 		}
 		prestamoService.eliminarPrestamo(prestamo);
-		return ResponseEntity.ok(ConstantesGenerales.REGISTRO_EXITOSO);
+		return ResponseEntity.ok(ConstantesGenerales.ELIMINACION_EXITOSA);
 				
 	}
 	

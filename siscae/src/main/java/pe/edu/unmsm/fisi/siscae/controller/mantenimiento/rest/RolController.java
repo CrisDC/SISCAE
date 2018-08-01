@@ -11,58 +11,58 @@ import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
-import pe.edu.unmsm.fisi.siscae.model.mantenimiento.Material;
-import pe.edu.unmsm.fisi.siscae.service.IMaterialService;
+import pe.edu.unmsm.fisi.siscae.model.mantenimiento.Rol;
+import pe.edu.unmsm.fisi.siscae.service.IRolService;
 import pe.edu.unmsm.fisi.siscae.service.excepcion.BadRequestException;
 import pe.edu.unmsm.fisi.siscae.utilitario.ConstantesGenerales;
 import pe.edu.unmsm.fisi.siscae.utilitario.ValidatorUtil;
 import pe.edu.unmsm.fisi.siscae.validacion.grupo.accion.IRegistro;
 
-
-public @RestController class MaterialController {
-
+public @RestController class RolController {
 	
-	private @Autowired IMaterialService materialService;
+	private @Autowired IRolService rolService;
 	
-	public List<Material> buscarTodos(){
-		return materialService.buscarTodos();
+	
+	
+	public List<Rol> buscarTodos(){
+		return rolService.buscarTodos();
 	}
 	
-	public ResponseEntity<?> registrarMaterial(
-			@Validated({ Default.class, IRegistro.class }) @RequestBody Material material,
-			Errors error){
-		
+	
+	public ResponseEntity<?> registrarRol(
+			@Validated({ Default.class, IRegistro.class }) @RequestBody Rol rol, Errors error){
 		if(error.hasErrors()){
 			 throw new BadRequestException(ValidatorUtil.obtenerMensajeValidacionError(error));
 		}
-		materialService.registrarMaterial(material);
+		rolService.registrarRol(rol);
 		return ResponseEntity.ok(ConstantesGenerales.REGISTRO_EXITOSO);
 		
 	}
-	
-	public ResponseEntity<?> actualizarMaterial(
-			@Validated({ Default.class, IRegistro.class }) @RequestBody Material material,
-			Errors error){
+	public ResponseEntity<?> actualizarRol(
+			@Validated({ Default.class, IRegistro.class }) @RequestBody Rol rol, Errors error){
 		
 		if(error.hasErrors()){
 			 throw new BadRequestException(ValidatorUtil.obtenerMensajeValidacionError(error));
 		}
-		materialService.actualizarMaterial(material);
+		rolService.actualizarRol(rol);
 		return ResponseEntity.ok(ConstantesGenerales.ACTUALIZACION_EXITOSA);
-		
 	}
 	
-	public ResponseEntity<?> eliminarMaterial(
-			@Validated({ Default.class, IRegistro.class }) @RequestBody Material material,
-			Errors error){
+	public ResponseEntity<?> eliminarRol(
+			@Validated({ Default.class, IRegistro.class }) @RequestBody Rol rol, Errors error){
 		
 		if(error.hasErrors()){
 			 throw new BadRequestException(ValidatorUtil.obtenerMensajeValidacionError(error));
 		}
-		materialService.eliminarMaterial(material);
+		rolService.eliminarRol(rol);
 		return ResponseEntity.ok(ConstantesGenerales.ELIMINACION_EXITOSA);
 		
 	}
 	
 	
+	
+	
+	
 }
+
+
