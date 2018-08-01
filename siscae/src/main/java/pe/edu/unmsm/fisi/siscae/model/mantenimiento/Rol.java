@@ -20,6 +20,8 @@ import com.fasterxml.jackson.annotation.JsonFormat;
 @AllArgsConstructor
 
 public class Rol {
+	
+	
 	private Integer idRol;
 	
 	@NotNull(message = "{NotNull.Rol.nombre}")
