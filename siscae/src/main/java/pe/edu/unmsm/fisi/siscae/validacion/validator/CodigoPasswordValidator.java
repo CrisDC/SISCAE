@@ -12,6 +12,7 @@ import org.apache.commons.beanutils.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
+import pe.edu.unmsm.fisi.siscae.model.mantenimiento.Usuario;
 import pe.edu.unmsm.fisi.siscae.model.seguridad.PoliticaSeguridad;
 import pe.edu.unmsm.fisi.siscae.model.seguridad.SecUsuario;
 import pe.edu.unmsm.fisi.siscae.service.IPoliticaSeguridadService;
@@ -80,8 +81,8 @@ public class CodigoPasswordValidator implements ConstraintValidator<CodigoPasswo
             }
             BCryptPasswordEncoder passwordEnconder = new BCryptPasswordEncoder();
 
-			List<SecUsuario> usuario = secUsuarioService.obtenerPasswordPorCodigoUsuario(idUsuario);
-			boolean passwordMatches = passwordEnconder.matches(password, usuario.get(0).getPassword());
+			List<Usuario> usuario = secUsuarioService.obtenerPasswordPorCodigoUsuario(idUsuario);
+			boolean passwordMatches = passwordEnconder.matches(password, usuario.get(0).getPass());
 			if (!passwordMatches) {
 				ValidatorUtil.addCustomMessageWithTemplateWithProperty("{Noequals.Contrasenia.password}",
 						this.campoPassword, context);

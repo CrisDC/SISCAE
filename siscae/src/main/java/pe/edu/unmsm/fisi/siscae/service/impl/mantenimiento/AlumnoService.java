@@ -9,42 +9,44 @@ import org.springframework.transaction.annotation.Transactional;
 import pe.edu.unmsm.fisi.siscae.mapper.IAlumnoMapper;
 import pe.edu.unmsm.fisi.siscae.mapper.base.IMantenibleMapper;
 import pe.edu.unmsm.fisi.siscae.model.mantenimiento.Alumno;
+import pe.edu.unmsm.fisi.siscae.model.mantenimiento.Persona;
 import pe.edu.unmsm.fisi.siscae.service.IAlumnoService;
 import pe.edu.unmsm.fisi.siscae.service.impl.MantenibleService;
 import pe.edu.unmsm.fisi.siscae.utilitario.Operacion;
 
-@Service 
+@Service
 public class AlumnoService extends MantenibleService<Alumno> implements IAlumnoService {
-	 private IAlumnoMapper alumnoMapper;
-	 public AlumnoService(@Qualifier("IAlumnoMapper") IMantenibleMapper<Alumno> mapper)
-	    {
-	        super(mapper);
-	        this.alumnoMapper = (IAlumnoMapper) mapper;
-	    }
+	private IAlumnoMapper alumnoMapper;
+
+	public AlumnoService(@Qualifier("IAlumnoMapper") IMantenibleMapper<Alumno> mapper) {
+		super(mapper);
+		this.alumnoMapper = (IAlumnoMapper) mapper;
+	}
+
 	@Override
 	@Transactional(propagation = Propagation.REQUIRES_NEW)
 	public List<Alumno> buscarTodos() {
-		 return super.buscar(new Alumno(), Operacion.SELECT);
+		return super.buscar(new Alumno(), Operacion.SELECT);
 	}
 
 	@Override
 	@Transactional(propagation = Propagation.REQUIRED)
 	public List<Alumno> buscarPorIdAlumno(Integer idAlumno) {
-		Alumno alumno = Alumno.builder().idAlumno(idAlumno).build();
-	    return super.buscar(alumno,Operacion.SELECT,Operacion.OperacionParam.PRIMARY_KEY);
+		Alumno alumno = Alumno.builder().persona(Persona.builder().idPersona(idAlumno).build()).build();
+		return super.buscar(alumno, Operacion.SELECT, Operacion.OperacionParam.PRIMARY_KEY);
 	}
 
 	@Override
 	@Transactional(propagation = Propagation.REQUIRED)
 	public boolean existeAlumno(Integer idAlumno) {
-		 return !this.buscarPorIdAlumno(idAlumno).isEmpty();
+		return !this.buscarPorIdAlumno(idAlumno).isEmpty();
 	}
 
 	@Override
 	@Transactional(propagation = Propagation.REQUIRES_NEW)
 	public void registrarAlumno(Alumno alumno) {
 		this.registrar(alumno);
-		
+
 	}
 
 	@Override
@@ -56,12 +58,8 @@ public class AlumnoService extends MantenibleService<Alumno> implements IAlumnoS
 	@Override
 	@Transactional(propagation = Propagation.REQUIRES_NEW)
 	public void eliminarAlumno(Alumno alumno) {
-		 this.eliminar(alumno);
-		
+		this.eliminar(alumno);
+
 	}
-
-	    
-
-	    
 
 }

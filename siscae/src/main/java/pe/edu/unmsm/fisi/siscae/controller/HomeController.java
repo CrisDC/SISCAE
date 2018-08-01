@@ -19,7 +19,6 @@ public @Controller class HomeController
 {
     private @Autowired IParametroGeneralService parametroGeneralService;
     private @Autowired ISecUsuarioService iSecUsuarioService;
-	private @Autowired IUsuarioService iUsuarioService;
 
     @GetMapping(value = "/irPaginaInicio")
     public String irPageInicio(Principal principal, HttpSession session)

@@ -14,7 +14,7 @@ public interface IAlumnoMapper extends  IMantenibleMapper<Alumno>{
 		@Select(value = { "{call MANT_Alumno ( " 
 	            + "#{operacion, jdbcType = VARCHAR, mode = IN},"
 	            + "#{operacionParam, jdbcType = VARCHAR, mode = IN},"
-	            + "#{objeto. idAlumno, jdbcType = INTEGER, mode = IN},"
+	            + "#{objeto.persona.idPersona, jdbcType = INTEGER, mode = IN},"
 	            + "#{objeto.codigoAlumno, jdbcType = VARCHAR, mode = IN},"
 	            + "#{objeto estadoAlumno, jdbcType = VARCHAR, mode = IN},"
 	            + "#{objeto.idTipoAcademico,jdbcType = INTEGER, mode = IN},"

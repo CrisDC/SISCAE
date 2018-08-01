@@ -1,10 +1,20 @@
 package pe.edu.unmsm.fisi.siscae.service;
 
-import pe.edu.unmsm.fisi.siscae.model.Usuario;
-import pe.edu.unmsm.fisi.siscae.model.seguridad.SecUsuario;
+import java.util.List;
 
-public interface IUsuarioService extends IMantenibleService<SecUsuario>
-{
-    public SecUsuario buscarPorIdUsuarioParaInicioSesion(String idUsuario);
-    public Usuario buscarUsuarioPorId(String idUsuario);
+import pe.edu.unmsm.fisi.siscae.model.mantenimiento.Usuario;
+
+public interface IUsuarioService extends IMantenibleService<Usuario> {
+	public List<Usuario> buscarTodos();
+
+	public List<Usuario> buscarPorIdUsuario(Integer idUsuario);
+
+	public boolean existeUsuario(Integer idUsuario);
+
+	public void registrarUsuario(Usuario usuario);
+
+	public void actualizarUsuario(Usuario usuario);
+
+	public void eliminarUsuario(Usuario usuario);
+
 }

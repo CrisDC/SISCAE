@@ -25,9 +25,9 @@ public class PersonaMapperTest {
 	public void mantenerTipoGetTest() {
 
 		Persona personaTest = new Persona();
-		personaTest.setIdPersona(1);
-		personaTest.setNumDocumento("73094339");
-		personaTest.setNombre("CRISTHIAN WALDIR");
+		personaTest.setIdPersona(5);
+		personaTest.setNumDocumento("73094338");
+		personaTest.setNombre("PERSONA DE PRUEBA");
 		personaTest.setAppPaterno("DE LA CRUZ");
 		personaTest.setAppMaterno("SÁNCHEZ");
 		personaTest.setSexo("MASCULINO");
@@ -52,7 +52,7 @@ public class PersonaMapperTest {
 		operacion.setOperacion(Operacion.DELETE.name());
 		personas = personaMapper.mantener(operacion);
 		personas.forEach(System.out::println);
-
+		
 	}
 
 }

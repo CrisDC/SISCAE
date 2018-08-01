@@ -15,7 +15,7 @@ public interface IExternoMapper extends IMantenibleMapper<Externo> {
 	@Select(value = { "{call SP_MANT_EMPRESAS ( "
             + "#{operacion, jdbcType = VARCHAR, mode = IN},"
             + "#{operacionParam, jdbcType = VARCHAR, mode = IN},"
-            + "#{objeto.idExterno, jdbcType = INTEGER, mode = IN},"
+            + "#{objeto.persona.idPersona, jdbcType = INTEGER, mode = IN},"
             + "#{objeto.estadoExterno, jdbcType = VARCHAR, mode = IN},"
             + "#{userAudit, jdbcType = VARCHAR, mode = IN})}" })
 	@Options (statementType = StatementType.CALLABLE)

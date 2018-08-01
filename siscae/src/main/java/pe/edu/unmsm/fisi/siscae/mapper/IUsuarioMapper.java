@@ -3,19 +3,25 @@ package pe.edu.unmsm.fisi.siscae.mapper;
 import java.util.List;
 
 import org.apache.ibatis.annotations.Options;
-import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Select;
 import org.apache.ibatis.mapping.StatementType;
 
 import pe.edu.unmsm.fisi.siscae.mapper.base.IMantenibleMapper;
-import pe.edu.unmsm.fisi.siscae.model.Usuario;
+import pe.edu.unmsm.fisi.siscae.model.mantenimiento.Usuario;
 import pe.edu.unmsm.fisi.siscae.model.parametro.Parametro;
-import pe.edu.unmsm.fisi.siscae.model.seguridad.SecUsuario;
 
-public interface IUsuarioMapper extends IMantenibleMapper<SecUsuario>
+public interface IUsuarioMapper extends IMantenibleMapper<Usuario>
 {   
-   
-    public List<SecUsuario> mantener(Parametro parametro);
-    
-    public Usuario buscarUsuarioPorId(@Param("idUsuario") String idUsuario);
+   	@Select( value = {"{call SP_MANT_USUARIO("
+			+ "#{operacion, jdbcType = VARCHAR, mode = IN},"
+			+ "#{operacionParam, jdbcType = VARCHAR, mode = IN},"
+			+ "#{objeto.idUsuario, jdbcType = INTEGER, mode = IN},"
+			+ "#{objeto.username, jdbcType = VARCHAR, mode = IN},"
+			+ "#{objeto.pass, jdbcType = VARCHAR, mode = IN},"
+			+ "#{objeto.estado, jdbcType = VARCHAR, mode = IN},"
+			+ "#{objeto.idRol, jdbcType = INTEGER, mode = IN},"
+			+ "#{objeto.idPersona, jdbcType = INTEGER, mode = IN})}"} )
+	@Options(statementType = StatementType.CALLABLE)
+    public List<Usuario> mantener(Parametro parametro);
+ 
 }

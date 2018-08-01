@@ -48,7 +48,7 @@ public @RestController class MaterialController {
 			 throw new BadRequestException(ValidatorUtil.obtenerMensajeValidacionError(error));
 		}
 		materialService.actualizarMaterial(material);
-		return ResponseEntity.ok(ConstantesGenerales.REGISTRO_EXITOSO);
+		return ResponseEntity.ok(ConstantesGenerales.ACTUALIZACION_EXITOSA);
 		
 	}
 	
@@ -60,7 +60,7 @@ public @RestController class MaterialController {
 			 throw new BadRequestException(ValidatorUtil.obtenerMensajeValidacionError(error));
 		}
 		materialService.eliminarMaterial(material);
-		return ResponseEntity.ok(ConstantesGenerales.REGISTRO_EXITOSO);
+		return ResponseEntity.ok(ConstantesGenerales.ELIMINACION_EXITOSA);
 		
 	}
 	
