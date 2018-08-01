@@ -19,7 +19,7 @@ public interface IMaterialMapper extends IMantenibleMapper<Material> {
 			+ "#{operacion, jdbcType = VARCHAR, mode = IN},"
 			+ "#{operacionParam, jdbcType = VARCHAR, mode = IN},"
 			+ "#{objeto.idMaterial, jdbcType = INTEGER, mode = IN},"
-			+ "#{objecto.nombreMaterial, jdbcType = VARCHAR, mode = IN},"
+			+ "#{objeto.nombreMaterial, jdbcType = VARCHAR, mode = IN},"
 			+ "#{objeto.idTipoMaterial, jdbcType = INTEGER, mode = IN},"
 			+ "#{userAudit, jdbcType = VARCHAR, mode = IN})}"} )
 	@Options(statementType = StatementType.CALLABLE)
