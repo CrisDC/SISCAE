@@ -1,6 +1,8 @@
-package pe.edu.unmsm.fisi.siscae.Service;
+package pe.edu.unmsm.fisi.siscae.service;
 
 import java.util.List;
+
+
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -10,18 +12,25 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import pe.edu.unmsm.fisi.siscae.configuracion.PersistenceConfiguration;
 import pe.edu.unmsm.fisi.siscae.configuracion.ServiceConfiguration;
-import pe.edu.unmsm.fisi.siscae.model.mantenimiento.AreaEstudio;
-import pe.edu.unmsm.fisi.siscae.service.IAreaEstudioService;
-
+import pe.edu.unmsm.fisi.siscae.model.mantenimiento.Externo;
+import pe.edu.unmsm.fisi.siscae.service.impl.mantenimiento.ExternoService;
 @ContextConfiguration(classes = { ServiceConfiguration.class, PersistenceConfiguration.class })
 @RunWith(SpringJUnit4ClassRunner.class)
-public class AreaEstudioServiceTest {
-	private @Autowired IAreaEstudioService areaEstudioService;
-	@Test
-	public void test(){
-		List<AreaEstudio> areasEstudio = areaEstudioService.buscarTodos();
-		areasEstudio.stream().forEach(areaEstudio -> {
-            System.out.println(areaEstudio.toString());
-        });
+public class ExternoServiceTest {
+	private @Autowired ExternoService externoService;
+	
+	
+	 @Test
+	    public void test()
+	    {
+		 
+		 List<Externo> externos = externoService.buscarTodos();
+		 externos.stream().forEach(externo -> {
+         System.out.println(externo.toString());
+         });
+		 
+		 
+	    }
 }
-}
+
+

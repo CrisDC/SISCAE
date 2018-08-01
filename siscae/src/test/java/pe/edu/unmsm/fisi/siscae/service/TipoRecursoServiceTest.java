@@ -1,4 +1,4 @@
-package pe.edu.unmsm.fisi.siscae.Service;
+package pe.edu.unmsm.fisi.siscae.service;
 
 import java.util.List;
 
@@ -10,21 +10,24 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import pe.edu.unmsm.fisi.siscae.configuracion.PersistenceConfiguration;
 import pe.edu.unmsm.fisi.siscae.configuracion.ServiceConfiguration;
-import pe.edu.unmsm.fisi.siscae.model.mantenimiento.Rol;
-import pe.edu.unmsm.fisi.siscae.service.impl.mantenimiento.RolService;
+import pe.edu.unmsm.fisi.siscae.model.mantenimiento.TipoRecurso;
+import pe.edu.unmsm.fisi.siscae.service.impl.mantenimiento.TipoRecursoService;
 
 @ContextConfiguration(classes = { ServiceConfiguration.class, PersistenceConfiguration.class })
 @RunWith(SpringJUnit4ClassRunner.class)
-public class RolServiceTest {
-	private @Autowired RolService rolService;
+
+public class TipoRecursoServiceTest {
+
+	private @Autowired TipoRecursoService tipoRecursoService;
 
 	@Test
 	public void test() {
 
-		List<Rol> roles = rolService.buscarTodos();
-		roles.stream().forEach(rol -> {
-			System.out.println(rol.toString());
+		List<TipoRecurso> tipoRecursos = tipoRecursoService.buscarTodos();
+		tipoRecursos.stream().forEach(tipoRecurso -> {
+			System.out.println(tipoRecurso.toString());
 		});
 
 	}
+
 }
