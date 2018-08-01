@@ -13,52 +13,54 @@ import pe.edu.unmsm.fisi.siscae.model.mantenimiento.AreaAdministrativo;
 import pe.edu.unmsm.fisi.siscae.service.IAreaAdministrativoService;
 import pe.edu.unmsm.fisi.siscae.service.impl.MantenibleService;
 import pe.edu.unmsm.fisi.siscae.utilitario.Operacion;
-import pe.edu.unmsm.fisi.siscae.utilitario.Operacion.OperacionParam;
+
 @Service
-public class AreaAdministrativoService extends MantenibleService<AreaAdministrativo> implements IAreaAdministrativoService {
-	
+public class AreaAdministrativoService extends MantenibleService<AreaAdministrativo>
+		implements IAreaAdministrativoService {
+
 	private IAreaAdministrativoMapper areaAdministrativoMapper;
-	
-	public AreaAdministrativoService(@Qualifier("IAreaAdministrativoMapper")IMantenibleMapper<AreaAdministrativo> mapper){
+
+	public AreaAdministrativoService(
+			@Qualifier("IAreaAdministrativoMapper") IMantenibleMapper<AreaAdministrativo> mapper) {
 		super(mapper);
-		
-		this.areaAdministrativoMapper= (IAreaAdministrativoMapper) mapper;
+
+		this.areaAdministrativoMapper = (IAreaAdministrativoMapper) mapper;
 	}
-	@Transactional(propagation=Propagation.REQUIRES_NEW)
+
+	@Transactional(propagation = Propagation.REQUIRES_NEW)
 	public List<AreaAdministrativo> buscarTodos() {
-		
+
 		return this.buscar(new AreaAdministrativo(), Operacion.SELECT);
 	}
 
-	@Transactional(propagation= Propagation.REQUIRES_NEW)
+	@Transactional(propagation = Propagation.REQUIRES_NEW)
 	public List<AreaAdministrativo> buscarPorIdAreaAdministrativo(Integer idAdministrativo) {
-		AreaAdministrativo areaAdministrativo= AreaAdministrativo.builder().idAdministrativo(idAdministrativo).build();
+		AreaAdministrativo areaAdministrativo = AreaAdministrativo.builder().idAdministrativo(idAdministrativo).build();
 		return this.buscar(areaAdministrativo, Operacion.SELECT);
 	}
 
-	@Transactional(propagation=Propagation.REQUIRED)
+	@Transactional(propagation = Propagation.REQUIRED)
 	public boolean existeAreaAdministrativo(Integer idAdministrativo) {
-		
+
 		return !this.buscarPorIdAreaAdministrativo(idAdministrativo).isEmpty();
 	}
 
-	@Transactional(propagation=Propagation.REQUIRES_NEW)
+	@Transactional(propagation = Propagation.REQUIRES_NEW)
 	public void registrarAreaAdministrativo(AreaAdministrativo areaAdministrativo) {
 		this.registrar(areaAdministrativo);
-		
+
 	}
 
-	@Transactional(propagation= Propagation.REQUIRES_NEW)
+	@Transactional(propagation = Propagation.REQUIRES_NEW)
 	public void actualizarAreaAdministrativo(AreaAdministrativo areaAdministrativo) {
 		this.actualizar(areaAdministrativo);
-		
+
 	}
 
 	@Transactional(propagation = Propagation.REQUIRES_NEW)
 	public void eliminarAreaAdministrativo(AreaAdministrativo areaAdministrativo) {
 		this.eliminar(areaAdministrativo);
-		
+
 	}
 
-	
 }

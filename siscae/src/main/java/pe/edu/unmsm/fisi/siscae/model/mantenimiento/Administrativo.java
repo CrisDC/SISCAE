@@ -23,6 +23,7 @@ import lombok.NoArgsConstructor;
 
 public class Administrativo {
 
+	private Persona persona;
 	
 	private Integer idAdministrativo;
 	

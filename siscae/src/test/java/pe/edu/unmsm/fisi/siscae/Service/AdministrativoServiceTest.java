@@ -11,24 +11,24 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import pe.edu.unmsm.fisi.siscae.configuracion.PersistenceConfiguration;
 import pe.edu.unmsm.fisi.siscae.configuracion.ServiceConfiguration;
-import pe.edu.unmsm.fisi.siscae.model.mantenimiento.TipoRecurso;
-import pe.edu.unmsm.fisi.siscae.service.impl.mantenimiento.TipoRecursoService;
+import pe.edu.unmsm.fisi.siscae.model.mantenimiento.Administrativo;
+import pe.edu.unmsm.fisi.siscae.service.impl.mantenimiento.AdministrativoService;
+
 @ContextConfiguration(classes = { ServiceConfiguration.class, PersistenceConfiguration.class })
 @RunWith(SpringJUnit4ClassRunner.class)
-
-public class TipoRecursoServiceTest {
+public class AdministrativoServiceTest {
 	
-	private @Autowired TipoRecursoService tipoRecursoService;
+	private @Autowired AdministrativoService administrativoService;
 	
 	
 	 @Test
 	    public void test()
 	    {
 		 
-		 List<TipoRecurso> tipoRecursos = tipoRecursoService.buscarTodos();
-		 tipoRecursos.stream().forEach(tipoRecurso -> {
-           System.out.println(tipoRecurso.toString());
-           });
+		 List<Administrativo> administrativos = administrativoService.buscarTodos();
+		 administrativos.stream().forEach(administrativo -> {
+            System.out.println(administrativo.toString());
+            });
 		 
 		 
 	    }

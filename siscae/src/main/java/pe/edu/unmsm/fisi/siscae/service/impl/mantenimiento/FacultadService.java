@@ -16,6 +16,7 @@ import pe.edu.unmsm.fisi.siscae.service.impl.MantenibleService;
 import pe.edu.unmsm.fisi.siscae.utilitario.Operacion;
 
 import static pe.edu.unmsm.fisi.siscae.utilitario.Operacion.OperacionParam.*;;
+
 @Service
 public class FacultadService extends MantenibleService<Facultad> implements IFacultadService {
 

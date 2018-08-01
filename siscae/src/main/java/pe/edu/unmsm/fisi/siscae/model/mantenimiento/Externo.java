@@ -11,7 +11,6 @@ import javax.validation.constraints.NotNull;
 
 import org.hibernate.validator.constraints.Length;
 import org.hibernate.validator.constraints.NotBlank;
-
 import com.fasterxml.jackson.annotation.JsonFormat;
 
 @Data
@@ -21,6 +20,7 @@ import com.fasterxml.jackson.annotation.JsonFormat;
 
 public class Externo {
 	
+	private Persona persona;
 	
 	private Integer idExterno;
 	

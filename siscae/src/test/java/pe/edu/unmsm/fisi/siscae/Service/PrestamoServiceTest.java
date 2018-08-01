@@ -2,7 +2,6 @@ package pe.edu.unmsm.fisi.siscae.Service;
 
 import java.util.List;
 
-
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,26 +10,24 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import pe.edu.unmsm.fisi.siscae.configuracion.PersistenceConfiguration;
 import pe.edu.unmsm.fisi.siscae.configuracion.ServiceConfiguration;
-import pe.edu.unmsm.fisi.siscae.model.mantenimiento.TipoRecurso;
-import pe.edu.unmsm.fisi.siscae.service.impl.mantenimiento.TipoRecursoService;
+import pe.edu.unmsm.fisi.siscae.model.mantenimiento.Prestamo;
+import pe.edu.unmsm.fisi.siscae.service.impl.mantenimiento.PrestamoService;
+
 @ContextConfiguration(classes = { ServiceConfiguration.class, PersistenceConfiguration.class })
 @RunWith(SpringJUnit4ClassRunner.class)
+public class PrestamoServiceTest {
 
-public class TipoRecursoServiceTest {
-	
-	private @Autowired TipoRecursoService tipoRecursoService;
+	private @Autowired PrestamoService prestamoService;
 	
 	
 	 @Test
 	    public void test()
 	    {
 		 
-		 List<TipoRecurso> tipoRecursos = tipoRecursoService.buscarTodos();
-		 tipoRecursos.stream().forEach(tipoRecurso -> {
-           System.out.println(tipoRecurso.toString());
-           });
-		 
+		 List<Prestamo> prestamos = prestamoService.buscarTodos();
+		 prestamos.stream().forEach(prestamo -> {
+            System.out.println(prestamo.toString());
+		 });
 		 
 	    }
-
 }
