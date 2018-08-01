@@ -16,7 +16,7 @@ import pe.edu.unmsm.fisi.siscae.service.IUsuarioService;
 
 @ContextConfiguration(classes = { ServiceConfiguration.class, PersistenceConfiguration.class })
 @RunWith(SpringJUnit4ClassRunner.class)
-public class UsuarioMapperTest
+public class SecUsuarioMapperTest
 {
     private @Autowired IUsuarioService usuarioService;;
 
