@@ -11,12 +11,12 @@ import pe.edu.unmsm.fisi.siscae.model.mantenimiento.Alumno;
 import pe.edu.unmsm.fisi.siscae.model.parametro.Parametro;
 
 public interface IAlumnoMapper extends  IMantenibleMapper<Alumno>{
-		@Select(value = { "{call MANT_Alumno ( " 
+		@Select(value = { "{call SP_MANT_ALUMNO ( " 
 	            + "#{operacion, jdbcType = VARCHAR, mode = IN},"
 	            + "#{operacionParam, jdbcType = VARCHAR, mode = IN},"
 	            + "#{objeto.persona.idPersona, jdbcType = INTEGER, mode = IN},"
 	            + "#{objeto.codigoAlumno, jdbcType = VARCHAR, mode = IN},"
-	            + "#{objeto estadoAlumno, jdbcType = VARCHAR, mode = IN},"
+	            + "#{objeto.estadoAlumno, jdbcType = VARCHAR, mode = IN},"
 	            + "#{objeto.idTipoAcademico,jdbcType = INTEGER, mode = IN},"
 	            + "#{objeto.idEscuela,jdbcType = INTEGER, mode = IN},"
 	            + "#{userAudit, jdbcType = VARCHAR, mode = IN})}" })//POR CONSULTAR 

@@ -25,7 +25,7 @@ public @interface IdEmpresa
 
     boolean existe();
 
-    int min() default 1;
+    int esPos() default 0;
 
     int max() default 4;
 

@@ -11,7 +11,7 @@ import pe.edu.unmsm.fisi.siscae.model.mantenimiento.Escuela;
 import pe.edu.unmsm.fisi.siscae.model.parametro.Parametro;
 
 public interface IEscuelaMapper  extends  IMantenibleMapper<Escuela>{
-	@Select(value = { "{call MANT_Escuela ( " 
+	@Select(value = { "{call SP_MANT_ESCUELA ( " 
             + "#{operacion, jdbcType = VARCHAR, mode = IN},"
             + "#{operacionParam, jdbcType = VARCHAR, mode = IN},"
             + "#{objeto.idEscuela, jdbcType = INTEGER, mode = IN},"

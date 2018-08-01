@@ -10,42 +10,46 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import pe.edu.unmsm.fisi.siscae.configuracion.PersistenceConfiguration;
 import pe.edu.unmsm.fisi.siscae.configuracion.ServiceConfiguration;
-import pe.edu.unmsm.fisi.siscae.model.mantenimiento.Externo;
+import pe.edu.unmsm.fisi.siscae.model.mantenimiento.Alumno;
 import pe.edu.unmsm.fisi.siscae.model.mantenimiento.Persona;
 import pe.edu.unmsm.fisi.siscae.model.parametro.Parametro;
 import pe.edu.unmsm.fisi.siscae.utilitario.Operacion;
+
 @ContextConfiguration(classes = { ServiceConfiguration.class, PersistenceConfiguration.class })
 @RunWith(SpringJUnit4ClassRunner.class)
-public class ExternoMapperTest {
-	
-	private @Autowired IExternoMapper externoMapper;
+public class AlumnoMapperTest {
+
+	private @Autowired IAlumnoMapper alumnoMapper;
 	
 	@Test
 	public void mantenerTipoGetTest(){
 		
 		Persona personaTest = new Persona();
-		personaTest.setIdPersona(3);
-		Externo externoTest = new Externo();
-		externoTest.setPersona(personaTest);
-		externoTest.setEstadoExterno("HABILITADO");
-		Parametro<Externo> operacion = new Parametro<Externo> (Operacion.SELECT, externoTest,"TEST USER");
+		Alumno alumnoTest = new Alumno();
+		personaTest.setIdPersona(2);
+		alumnoTest.setPersona(personaTest);
+		alumnoTest.setCodigoAlumno("16200197");
+		alumnoTest.setEstadoAlumno("ACTIVO");
+		alumnoTest.setIdTipoAcademico(1);
+		alumnoTest.setIdEscuela(1);
 		
-		List<Externo> externos = externoMapper.mantener(operacion);
-		externos.forEach(System.out::println);
+		Parametro<Alumno> operacion = new Parametro<>(Operacion.SELECT, alumnoTest, "TEST USER");
+		
+		List<Alumno> alumnos = alumnoMapper.mantener(operacion);
+		alumnos.forEach(System.out::println);
 		
 		operacion.setOperacion(Operacion.INSERT.name());
-		externos = externoMapper.mantener(operacion);
-		externos.forEach(System.out::println);
+		alumnos = alumnoMapper.mantener(operacion);
+		alumnos.forEach(System.out::println);
 		
-		externoTest.setEstadoExterno("PRUEBA UPDATE");
+		alumnoTest.setEstadoAlumno("INACTIVO");
 		operacion.setOperacion(Operacion.UPDATE.name());
-		externos = externoMapper.mantener(operacion);
-		externos.forEach(System.out::println);
+		alumnos = alumnoMapper.mantener(operacion);
+		alumnos.forEach(System.out::println);
 		
 		operacion.setOperacion(Operacion.DELETE.name());
-		externos = externoMapper.mantener(operacion);
-		externos.forEach(System.out::println);
+		alumnos = alumnoMapper.mantener(operacion);
+		alumnos.forEach(System.out::println);
 	}
 	
-
 }

@@ -13,7 +13,7 @@ import pe.edu.unmsm.fisi.siscae.model.parametro.Parametro;
 
 public interface IFacultadMapper  extends  IMantenibleMapper<Facultad> {
 	
-	@Select(value = { "{call MANT_Facultad ( " 
+	@Select(value = { "{call SP_MANT_FACULTAD ( " 
             + "#{operacion, jdbcType = VARCHAR, mode = IN},"
             + "#{operacionParam, jdbcType = VARCHAR, mode = IN},"
             + "#{objeto.idFacultad, jdbcType = INTEGER, mode = IN},"
