@@ -55,11 +55,11 @@ public class AreaEstudioMapperTest {
 			System.out.println(areaEstudio.toString());
 		});
 		
-		operacion.setOperacion(Operacion.DELETE.name());
+		/*operacion.setOperacion(Operacion.DELETE.name());
 		areaEstudios = areaEstudioMapper.mantener(operacion);
 		areaEstudios.stream().forEach(areaEstudio ->{
 			System.out.println(areaEstudio.toString());
-		});
+		});*/
 		
 	}
 

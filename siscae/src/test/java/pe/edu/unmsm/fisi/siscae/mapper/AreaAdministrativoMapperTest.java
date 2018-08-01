@@ -30,7 +30,7 @@ public class AreaAdministrativoMapperTest {
 		AreaAdministrativo areaAdministrativoTest= new AreaAdministrativo();
 		areaAdministrativoTest.setIdAdministrativo(1);
 		areaAdministrativoTest.setIdAreaEstudio(2);
-		areaAdministrativoTest.setFechaInicio(Date.valueOf("12/15/1990"));
+		areaAdministrativoTest.setFechaInicio(null);
 		areaAdministrativoTest.setCargo("administrador");
 		
 		operacion.setOperacion(Operacion.SELECT.name());
