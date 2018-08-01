@@ -41,7 +41,7 @@ public class AlumnoServiceTest {
 
 		alumnoTest.setEstadoAlumno("INACTIVO");
 		alumnoService.actualizarAlumno(alumnoTest);
-
+		
 		alumnoService.eliminarAlumno(alumnoTest);
 	}
 
