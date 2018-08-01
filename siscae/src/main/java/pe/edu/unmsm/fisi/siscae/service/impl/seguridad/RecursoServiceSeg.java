@@ -14,7 +14,7 @@ import pe.edu.unmsm.fisi.siscae.utilitario.Operacion;
 import pe.edu.unmsm.fisi.siscae.utilitario.Operacion.OperacionParam;
 
 @Service
-public class RecursoService implements IRecursoService
+public class RecursoServiceSeg implements IRecursoService
 {
 
 	@Override

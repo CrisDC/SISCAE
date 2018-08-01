@@ -3,17 +3,20 @@ package pe.edu.unmsm.fisi.siscae.service.impl.mantenimiento;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
 import pe.edu.unmsm.fisi.siscae.mapper.IAdministrativoMapper;
 import pe.edu.unmsm.fisi.siscae.mapper.base.IMantenibleMapper;
 import pe.edu.unmsm.fisi.siscae.model.mantenimiento.Administrativo;
+import pe.edu.unmsm.fisi.siscae.model.mantenimiento.Persona;
 import pe.edu.unmsm.fisi.siscae.service.IAdministrativoService;
 import pe.edu.unmsm.fisi.siscae.service.impl.MantenibleService;
 import pe.edu.unmsm.fisi.siscae.utilitario.Operacion;
 import pe.edu.unmsm.fisi.siscae.utilitario.Operacion.OperacionParam;
 
+@Service
 public class AdministrativoService extends MantenibleService<Administrativo> implements IAdministrativoService {
 
 	private IAdministrativoMapper administrativoMapper;
@@ -36,7 +39,8 @@ public class AdministrativoService extends MantenibleService<Administrativo> imp
 	@Transactional(propagation = Propagation.REQUIRED)
 	public List<Administrativo> buscarPorIdAdministrativo(Integer idAdministrativo) {
 
-		Administrativo administrativo = Administrativo.builder().idAdministrativo(idAdministrativo).build();
+		Administrativo administrativo = Administrativo.builder()
+				.persona(Persona.builder().idPersona(idAdministrativo).build()).build();
 
 		return this.buscar(administrativo, Operacion.SELECT, OperacionParam.PRIMARY_KEY);
 	}

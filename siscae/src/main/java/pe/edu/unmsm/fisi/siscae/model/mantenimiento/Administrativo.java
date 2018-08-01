@@ -17,8 +17,11 @@ import lombok.NoArgsConstructor;
 
 public class Administrativo {
 
-	private Integer idAdministrativo;
+	private Persona persona;
 	
+	@NotNull(message = "{NotNull.Administrativo.codigoAdm}")
+    @NotBlank(message = "{NotBlank.Administrativo.codigoAdm}")
+    @Length(min = 3, max = 20, message = "{Length.CodigoProcesoSwitch.codigoAdm}")
 	private String codigoAdm;
 	
 	private Date fechaRegistro;
