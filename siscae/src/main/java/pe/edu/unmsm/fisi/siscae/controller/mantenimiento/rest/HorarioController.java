@@ -28,7 +28,7 @@ import pe.edu.unmsm.fisi.siscae.utilitario.ValidatorUtil;
 import pe.edu.unmsm.fisi.siscae.validacion.grupo.accion.IActualizacion;
 import pe.edu.unmsm.fisi.siscae.validacion.grupo.accion.IRegistro;
 
-@Audit(tipo=Tipo.Horario, datos=Dato.Horario)
+@Audit(tipo=Tipo.HORARIO, datos=Dato.HORARIO)
 @RequestMapping("/horario")
 public class HorarioController {
 	
@@ -40,22 +40,22 @@ public class HorarioController {
     }
 	
 	 @Audit(accion = Accion.REGISTRO, comentario = Comentario.Registro)
-	    @PostMapping
-	    public ResponseEntity<?> registrarHorario(
+	 @PostMapping
+	 public ResponseEntity<?> registrarHorario(
 	            @Validated({ Default.class, IRegistro.class }) @RequestBody Horario horario,
 	            Errors error)
-	    {
-	        if (error.hasErrors())
+	 {
+	      if (error.hasErrors())
 	        {
 	            throw new BadRequestException(ValidatorUtil.obtenerMensajeValidacionError(error));
 	        }
 	        horarioService.registrarHorario(horario);
 	        return ResponseEntity.ok(ConstantesGenerales.REGISTRO_EXITOSO);
-	    }
+	  }
 	 
 	 @Audit(accion = Accion.Actualizacion, comentario = Comentario.Actualizacion)
-	    @PutMapping
-	    public ResponseEntity<?> actualizarHorario(
+	 @PutMapping
+	 public ResponseEntity<?> actualizarHorario(
 	            @Validated({ Default.class, IActualizacion.class }) @RequestBody Horario horario,
 	            Errors error)
 	    {
@@ -67,8 +67,8 @@ public class HorarioController {
 	        return ResponseEntity.ok(ConstantesGenerales.ACTUALIZACION_EXITOSA);
 	    }
 	 @Audit(accion = Accion.Eliminacion, comentario = Comentario.Eliminacion)
-	    @DeleteMapping
-	    public ResponseEntity<?> eliminarHorario(
+	 @DeleteMapping
+	 public ResponseEntity<?> eliminarHorario(
 	            @Validated(IActualizacion.class) @RequestBody Horario horario, Errors error)
 	    {
 	        if (error.hasErrors())

@@ -20,31 +20,35 @@ public class AreaAdministrativo {
 	private Integer idAreaEstudio;
 	private Integer idAdministrativo;
 	
-	@NotNull
+	@NotNull(message = "{NotNull.AreaAdministrativo.fecha_inicio}")
 	private Date fechaInicio;
 	
-	@NotNull
+	@NotNull(message = "{NotNull.AreaAdministrativo.fecha_fin}")
 	private Date fechaFin;
 	
-	@NotBlank
+	@NotNull(message = "{NotNull.AreaAdministrativo.cargo}")
+	@NotBlank(message = "{NotBlank.AreaAdministrativo.cargo}")
 	@Size(min=3,max=30)
     @Length(min = 3, max = 30)
 	private String cargo;
 	
-	@NotNull
+	@NotNull(message = "{NotNull.AreaAdministrativo.fecha_registro}")
 	@PastOrPresent
 	private Date fechaRegistro;
 	
-	@NotBlank
+	@NotNull(message = "{NotNull.AreaAdministrativo.usuario_registro}")
+	@NotBlank(message = "{NotBlank.AreaAdministrativo.usuario_registro}")
 	@Size(min=3,max=45)
 	@Length(min = 3, max = 45)
 	private String usuarioRegistro;
 	
-	@NotNull
+
+	@NotNull(message = "{NotNull.AreaAdministrativo.fecha_modificacion}")
 	@PastOrPresent
 	private Date fechaModificacion;
 	
-	@NotBlank
+	@NotNull(message = "{NotNull.AreaAdministrativo.usuario_modificacion}")
+	@NotBlank(message = "{NotBlank.AreaAdministrativo.usuario_modificacion}")
 	@Size(min=3,max=45)
 	@Length(min = 3, max = 45)
 	private String usuarioModificacion;

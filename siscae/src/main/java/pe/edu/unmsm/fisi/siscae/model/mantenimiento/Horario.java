@@ -22,10 +22,14 @@ import org.hibernate.validator.constraints.NotBlank;
 public class Horario {
 	
 	private  Integer idHorario;
+	
+	@NotNull(message = "{NotNull.Horario.hora_inicio}")
 	private  LocalTime horaInicio;
+	
+	@NotNull(message = "{NotNull.Horario.hora_fin}")
 	private LocalTime horaFin;
 	
-	@NotNull
+	@NotNull(message = "{NotNull.Horario.estado}")
 	private boolean estado;
 	
 	@Digits(integer=4, fraction=2)
@@ -36,20 +40,22 @@ public class Horario {
 	private Integer idTipoHorario;
 	private Integer idAreaEstudio;
 	
-	@NotNull
+	@NotNull(message = "{NotNull.Horario.fecha_registro}")
 	@PastOrPresent
 	private Date fechaRegistro;
 	
-	@NotBlank
+	@NotNull(message = "{NotNull.Horario.usuario_registro}")
+	@NotBlank(message = "{NotBlank.Horario.usuario_registro}")
 	@Size(min=3, max=45)
 	@Length(min = 3, max = 45)
 	private String usuarioRegistro;
 	
-	@NotNull
+	@NotNull(message = "{NotNull.Horario.fecha_modificacion}")
 	@PastOrPresent
 	private Date fechaModificacion;
 	
-	@NotBlank
+	@NotNull(message = "{NotNull.Horario.usuario_modificacion}")
+	@NotBlank(message = "{NotBlank.Horario.usuario_modificacion}")
 	@Size(min=3, max=45)
 	@Length(min = 3, max = 45)
 	private String usuarioModificacion;

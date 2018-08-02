@@ -29,7 +29,7 @@ import pe.edu.unmsm.fisi.siscae.utilitario.ValidatorUtil;
 import pe.edu.unmsm.fisi.siscae.validacion.grupo.accion.IActualizacion;
 import pe.edu.unmsm.fisi.siscae.validacion.grupo.accion.IRegistro;
 
-@Audit(tipo=Tipo.AreaAdministrativo, datos=Dato.AreaAdministrativo)
+@Audit(tipo=Tipo.AREA_ADMINISTRATIVA, datos=Dato.AREA_ADMINISTRATIVA)
 @RequestMapping("/areaAdministrativo")
 public class AreaAdministrativoController {
 private @Autowired IAreaAdministrativoService areaAdministrativoService;

@@ -28,7 +28,7 @@ import pe.edu.unmsm.fisi.siscae.utilitario.ValidatorUtil;
 import pe.edu.unmsm.fisi.siscae.validacion.grupo.accion.IActualizacion;
 import pe.edu.unmsm.fisi.siscae.validacion.grupo.accion.IRegistro;
 
-@Audit(tipo=Tipo.AreaEstudio, datos=Dato.AreaEstudio)
+@Audit(tipo=Tipo.AREA_ESTUDIO, datos=Dato.AREA_ESTUDIO)
 @RequestMapping("/areaEstudio")
 public class AreaEstudioController {
 	private @Autowired IAreaEstudioService areaEstudioService;
