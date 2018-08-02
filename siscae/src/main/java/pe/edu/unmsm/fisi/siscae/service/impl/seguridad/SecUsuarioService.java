@@ -8,7 +8,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
-import pe.edu.unmsm.fisi.siscae.mapper.IUsuarioMapper;
+import pe.edu.unmsm.fisi.siscae.mapper.ISecUsuarioMapper;
 import pe.edu.unmsm.fisi.siscae.mapper.base.IMantenibleMapper;
 import pe.edu.unmsm.fisi.siscae.model.mantenimiento.Usuario;
 import pe.edu.unmsm.fisi.siscae.model.seguridad.SecUsuario;
@@ -18,42 +18,45 @@ import pe.edu.unmsm.fisi.siscae.utilitario.Operacion;
 import pe.edu.unmsm.fisi.siscae.utilitario.VerboConstantes;
 
 @Service
-public class SecUsuarioService extends MantenibleService<Usuario> implements ISecUsuarioService
+public class SecUsuarioService extends MantenibleService<SecUsuario> implements ISecUsuarioService
 {
-    private IUsuarioMapper usuarioMapper;
+    private ISecUsuarioMapper usuarioMapper;
 
-    public SecUsuarioService(@Qualifier("IUsuarioMapper") IMantenibleMapper<Usuario> mapper)
+    public SecUsuarioService(@Qualifier("IUsuarioMapper") IMantenibleMapper<SecUsuario> mapper)
     {
         super(mapper);
-        this.usuarioMapper = (IUsuarioMapper) mapper;
+        this.usuarioMapper = (ISecUsuarioMapper) mapper;
     }
 
     @Transactional(propagation = Propagation.REQUIRES_NEW)
-    public List<Usuario> getLsUsuario()
+    public List<SecUsuario> getLsUsuario()
     {
-        return this.buscar(new Usuario(), Operacion.SELECT);
+        //return this.buscar(new SecUsuario(), Operacion.SELECT);
+    	return null;
     }
 
     @Transactional(propagation = Propagation.REQUIRES_NEW)
-    public void registrarUsuario(Usuario usuario)
+    public void registrarUsuario(SecUsuario usuario)
     {
         BCryptPasswordEncoder passwordEnconder = new BCryptPasswordEncoder();
         //String hashedPassword = passwordEnconder.encode(usuario.getPassword());
         //usuario.setPasswordEncriptado(hashedPassword);
         // secUsuarioMapper.registrarUsuario(usuario);
-        this.registrar(usuario);
+        //this.registrar(usuario);
+        
     }
 
     @Transactional(propagation = Propagation.REQUIRED)
-    public List<Usuario> buscarPorCodigoUsuario(String idUsuario)
+    public List<SecUsuario> buscarPorCodigoUsuario(String idUsuario)
     {
         // return secUsuarioMapper.buscarPorCodigoUsuario(idUsuario);
-        Usuario secUsuario = Usuario.builder().idUsuario(Integer.parseInt(idUsuario)).build();
-        return this.buscar(secUsuario, Operacion.SELECT);
+    	//SecUsuario secUsuario = SecUsuario.builder().idUsuario(Integer.parseInt(idUsuario)).build();
+        //return this.buscar(secUsuario, Operacion.SELECT);
+    	return null;
     }
 
     @Transactional(propagation = Propagation.REQUIRES_NEW)
-    public void actualizarUsuario(Usuario usuario)
+    public void actualizarUsuario(SecUsuario usuario)
     {
         /*if (usuario.getPassword().length() == 8)
         {
@@ -70,10 +73,11 @@ public class SecUsuarioService extends MantenibleService<Usuario> implements ISe
     }
 
     @Transactional(propagation = Propagation.REQUIRES_NEW)
-    public void deleteUsuario(Usuario usuario)
+    public void deleteUsuario(SecUsuario usuario)
     {
         // secUsuarioMapper.deleteUsuario(usuario);
-        this.eliminar(usuario);
+        //this.eliminar(usuario);
+    
     }
 
     @Override
@@ -83,7 +87,7 @@ public class SecUsuarioService extends MantenibleService<Usuario> implements ISe
     }
 
     @Override
-    public List<Usuario> obtenerPasswordPorCodigoUsuario(String idUsuario)
+    public List<SecUsuario> obtenerPasswordPorCodigoUsuario(String idUsuario)
     {
         return null;
     }

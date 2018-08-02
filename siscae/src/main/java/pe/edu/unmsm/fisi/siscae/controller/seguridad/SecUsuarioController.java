@@ -37,7 +37,7 @@ public @RestController class SecUsuarioController
 
     @Audit(accion = Accion.Consulta, comentario = Comentario.ConsultaTodos)
     @GetMapping(params = "accion=buscarTodos")
-    public List<Usuario> getLsUsuario()
+    public List<SecUsuario> getLsUsuario()
     {
         return secUsuarioService.getLsUsuario();
     }
@@ -45,7 +45,7 @@ public @RestController class SecUsuarioController
     @Audit(accion = Accion.REGISTRO, comentario = Comentario.Registro)
     @PostMapping
     public ResponseEntity<?> registrarUsuario(
-            @Validated({ IRegistro.class, Default.class }) @RequestBody Usuario usuario,
+            @Validated({ IRegistro.class, Default.class }) @RequestBody SecUsuario usuario,
             Errors error)
     {
         if (error.hasErrors())
@@ -60,7 +60,7 @@ public @RestController class SecUsuarioController
     @Audit(accion = Accion.Actualizacion, comentario = Comentario.Actualizacion)
     @PutMapping
     public ResponseEntity<?> actualizarUsuario(
-            @Validated({ IActualizacion.class, Default.class }) @RequestBody Usuario usuario,
+            @Validated({ IActualizacion.class, Default.class }) @RequestBody SecUsuario usuario,
             Errors error)
     {
         if (error.hasErrors())
@@ -76,7 +76,7 @@ public @RestController class SecUsuarioController
     @Audit(accion = Accion.Eliminacion, comentario = Comentario.Eliminacion)
     @DeleteMapping
     public ResponseEntity<?> eliminarUsuario(
-            @Validated(IActualizacion.class) @RequestBody Usuario usuario, Errors error)
+            @Validated(IActualizacion.class) @RequestBody SecUsuario usuario, Errors error)
     {
         if (error.hasErrors())
         {

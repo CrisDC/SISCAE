@@ -2,22 +2,21 @@ package pe.edu.unmsm.fisi.siscae.service;
 
 import java.util.List;
 
-import pe.edu.unmsm.fisi.siscae.model.mantenimiento.Usuario;
 import pe.edu.unmsm.fisi.siscae.model.seguridad.SecUsuario;
 
-public interface ISecUsuarioService extends IMantenibleService<Usuario>
+public interface ISecUsuarioService extends IMantenibleService<SecUsuario>
 {
-    public List<Usuario> getLsUsuario();
+    public List<SecUsuario> getLsUsuario();
 
-    public void registrarUsuario(Usuario usuario);
+    public void registrarUsuario(SecUsuario usuario);
 
-    public List<Usuario> buscarPorCodigoUsuario(String idUsuario);
+    public List<SecUsuario> buscarPorCodigoUsuario(String idUsuario);
 
-    public void actualizarUsuario(Usuario Usuario);
+    public void actualizarUsuario(SecUsuario Usuario);
 
-    public void deleteUsuario(Usuario Usuario);
+    public void deleteUsuario(SecUsuario Usuario);
 
     public Integer numCaducidadContrasenia(String usuario);
 
-    public List<Usuario> obtenerPasswordPorCodigoUsuario(String idUsuario);
+    public List<SecUsuario> obtenerPasswordPorCodigoUsuario(String idUsuario);
 }
