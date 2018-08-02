@@ -11,6 +11,7 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import pe.edu.unmsm.fisi.siscae.configuracion.PersistenceConfiguration;
 import pe.edu.unmsm.fisi.siscae.configuracion.ServiceConfiguration;
 import pe.edu.unmsm.fisi.siscae.model.mantenimiento.Externo;
+import pe.edu.unmsm.fisi.siscae.model.mantenimiento.Persona;
 import pe.edu.unmsm.fisi.siscae.model.parametro.Parametro;
 import pe.edu.unmsm.fisi.siscae.utilitario.Operacion;
 @ContextConfiguration(classes = { ServiceConfiguration.class, PersistenceConfiguration.class })
@@ -21,9 +22,12 @@ public class ExternoMapperTest {
 	
 	@Test
 	public void mantenerTipoGetTest(){
+		
+		Persona personaTest = new Persona();
+		personaTest.setIdPersona(3);
 		Externo externoTest = new Externo();
+		externoTest.setPersona(personaTest);
 		externoTest.setEstadoExterno("HABILITADO");
-		externoTest.setIdExterno(1);
 		Parametro<Externo> operacion = new Parametro<Externo> (Operacion.SELECT, externoTest,"TEST USER");
 		
 		List<Externo> externos = externoMapper.mantener(operacion);

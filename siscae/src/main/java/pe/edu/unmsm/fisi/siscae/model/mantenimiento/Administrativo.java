@@ -25,8 +25,6 @@ public class Administrativo {
 
 	private Persona persona;
 	
-	private Integer idAdministrativo;
-	
 	@NotNull(message = "{NotNull.Administrativo.codigoAdm}")
     @NotBlank(message = "{NotBlank.Administrativo.codigoAdm}")
     @Length(min = 3, max = 20, message = "{Length.CodigoProcesoSwitch.codigoAdm}")

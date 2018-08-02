@@ -1,7 +1,6 @@
 package pe.edu.unmsm.fisi.siscae.mapper;
 
 
-import java.util.Date;
 import java.util.List;
 
 import org.junit.Test;
@@ -13,6 +12,7 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import pe.edu.unmsm.fisi.siscae.configuracion.PersistenceConfiguration;
 import pe.edu.unmsm.fisi.siscae.configuracion.ServiceConfiguration;
 import pe.edu.unmsm.fisi.siscae.model.mantenimiento.Administrativo;
+import pe.edu.unmsm.fisi.siscae.model.mantenimiento.Persona;
 import pe.edu.unmsm.fisi.siscae.model.parametro.Parametro;
 import pe.edu.unmsm.fisi.siscae.utilitario.Operacion;
 
@@ -25,9 +25,10 @@ public class AdministrativoMapperTest {
 	@Test
 	public void mantenerTipoGetTest() {
 		
+		Persona personaTest = new Persona();
+		personaTest.setIdPersona(1);
 		Administrativo administrativo = new Administrativo(); 
-		
-		administrativo.setIdAdministrativo(1);
+		administrativo.setPersona(personaTest);
 		administrativo.setCodigoAdm("70099798");
 		
 		Parametro<Administrativo> operacion = new Parametro<>(Operacion.SELECT, administrativo, "TEST USER");		

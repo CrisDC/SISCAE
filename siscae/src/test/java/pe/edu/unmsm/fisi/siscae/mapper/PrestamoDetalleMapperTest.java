@@ -26,7 +26,7 @@ public class PrestamoDetalleMapperTest {
 		Parametro<PrestamoDetalle> operacion = new Parametro<>();
 
 		PrestamoDetalle prestamoDetalleTest = new PrestamoDetalle();
-		prestamoDetalleTest.setIdPrestamo(1);
+		prestamoDetalleTest.setIdPrestamo(3);
 		prestamoDetalleTest.setIdMaterial(2);
 		prestamoDetalleTest.setHoraEntrega(LocalTime.now());
 		operacion.setOperacion(Operacion.SELECT.name());

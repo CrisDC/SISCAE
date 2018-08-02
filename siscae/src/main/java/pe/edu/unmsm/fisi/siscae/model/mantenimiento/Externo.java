@@ -22,8 +22,6 @@ public class Externo {
 	
 	private Persona persona;
 	
-	private Integer idExterno;
-	
 	@NotNull(message = "{NotNull.Externo.estadoExterno}")
     @NotBlank(message = "{NotBlank.Prestamo.estadoExterno}")
     @Length(min = 3, max = 20, message = "{Length.CodigoProcesoSwitch.estadoExterno}")

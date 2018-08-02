@@ -12,7 +12,7 @@ import pe.edu.unmsm.fisi.siscae.model.parametro.Parametro;
 
 
 public interface IExternoMapper extends IMantenibleMapper<Externo> {
-	@Select(value = { "{call SP_MANT_EMPRESAS ( "
+	@Select(value = { "{call SP_MANT_EXTERNO ( "
             + "#{operacion, jdbcType = VARCHAR, mode = IN},"
             + "#{operacionParam, jdbcType = VARCHAR, mode = IN},"
             + "#{objeto.persona.idPersona, jdbcType = INTEGER, mode = IN},"

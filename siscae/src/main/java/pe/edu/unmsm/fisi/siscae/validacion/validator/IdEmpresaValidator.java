@@ -22,7 +22,7 @@ public class IdEmpresaValidator implements ConstraintValidator<IdEmpresa, String
     public void initialize(IdEmpresa anotacion)
     {
         this.existe = anotacion.existe();
-        this.min = anotacion.min();
+        this.min = anotacion.esPos();
         this.max = anotacion.max();
     }
 
