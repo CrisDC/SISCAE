@@ -1,4 +1,4 @@
-package pe.edu.unmsm.fisi.siscae.Service;
+package pe.edu.unmsm.fisi.siscae.service;
 
 public class UsuarioServiceTest {
 

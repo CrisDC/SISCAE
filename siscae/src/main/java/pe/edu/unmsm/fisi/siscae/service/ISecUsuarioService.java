@@ -13,9 +13,9 @@ public interface ISecUsuarioService extends IMantenibleService<Usuario>
 
     public List<Usuario> buscarPorCodigoUsuario(String idUsuario);
 
-    public void actualizarUsuario(Usuario usuario);
+    public void actualizarUsuario(Usuario Usuario);
 
-    public void deleteUsuario(Usuario usuario);
+    public void deleteUsuario(Usuario Usuario);
 
     public Integer numCaducidadContrasenia(String usuario);
 
