@@ -8,15 +8,12 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.haulmont.yarg.formatters.factory.ReportFormatterFactory;
+
 import com.haulmont.yarg.loaders.factory.DefaultLoaderFactory;
 import com.haulmont.yarg.loaders.impl.GroovyDataLoader;
-import com.haulmont.yarg.reporting.ReportOutputDocument;
+
 import com.haulmont.yarg.reporting.Reporting;
-import com.haulmont.yarg.reporting.RunParams;
-import com.haulmont.yarg.structure.Report;
-import com.haulmont.yarg.structure.ReportBand;
-import com.haulmont.yarg.structure.ReportOutputType;
+
 import com.haulmont.yarg.structure.impl.BandBuilder;
 import com.haulmont.yarg.structure.impl.ReportBuilder;
 import com.haulmont.yarg.structure.impl.ReportFieldFormatImpl;
