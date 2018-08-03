@@ -26,7 +26,7 @@ public @interface IdAdministrativo {
 
 	 int esPos() default 1;
 
-	 int max() default Integer.MAX_VALUE;
+	 int max() default Integer.MAX_VALUE;//xd
 	 
 
 	    Class<?>[] groups() default {};

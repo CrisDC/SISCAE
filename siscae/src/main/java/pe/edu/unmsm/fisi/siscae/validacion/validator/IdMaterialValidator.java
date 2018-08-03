@@ -18,7 +18,8 @@ public class IdMaterialValidator implements ConstraintValidator<IdMaterial,Integ
     private int min;
     private boolean existe;
 
-    private @Autowired IMaterialService materialService;
+    private @Autowired IMaterialService materialService;//xd
+
 
     
     public void initialize(IdMaterial anotacion)

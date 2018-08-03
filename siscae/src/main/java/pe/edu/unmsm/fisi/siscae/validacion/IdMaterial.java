@@ -28,7 +28,8 @@ public @interface IdMaterial {
 
 	 int esPos() default 0;
 
-	 int max() default 4;
+	 int max() default 4;//xd
+
 	 
 
 	    Class<?>[] groups() default {};
