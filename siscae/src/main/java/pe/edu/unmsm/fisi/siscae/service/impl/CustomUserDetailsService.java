@@ -14,23 +14,26 @@ import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
 import pe.edu.unmsm.fisi.siscae.configuracion.security.CustomUser;
+import pe.edu.unmsm.fisi.siscae.mapper.IRecursoMapper;
 import pe.edu.unmsm.fisi.siscae.mapper.ISecRecursoMapper;
 import pe.edu.unmsm.fisi.siscae.model.RecursoSistema;
+import pe.edu.unmsm.fisi.siscae.model.mantenimiento.Usuario;
 import pe.edu.unmsm.fisi.siscae.model.seguridad.SecUsuario;
 import pe.edu.unmsm.fisi.siscae.service.ISecUsuarioService;
+import pe.edu.unmsm.fisi.siscae.service.IUsuarioService;
 
 @Service
 public class CustomUserDetailsService implements UserDetailsService
 {
-    private @Autowired ISecUsuarioService usuarioService;
-    private @Autowired ISecRecursoMapper recursoMapper;
+    private @Autowired IUsuarioService usuarioService;
+    private @Autowired IRecursoMapper recursoMapper;
 
     @Override
     @Transactional(propagation = Propagation.REQUIRES_NEW)
     public UserDetails loadUserByUsername(String login) throws UsernameNotFoundException
     {
-        SecUsuario usuario = SecUsuario.builder().nombre("SOLI")
-                                                 .contrasenia("$2a$10$OHsJajOJrNZiZmdwBGMMZeKrAp8DbqmzfhgPYxDoONGWtXAl0Ig8u")
+        Usuario usuario = Usuario.builder().username("SOLI")
+                                                 .pass("$2a$10$OHsJajOJrNZiZmdwBGMMZeKrAp8DbqmzfhgPYxDoONGWtXAl0Ig8u")
                                                  .build();
                 //usuarioService.buscarPorIdUsuarioParaInicioSesion(login);
         System.out.println("Policia" + usuario);
@@ -40,7 +43,7 @@ public class CustomUserDetailsService implements UserDetailsService
             authorities.add(new SimpleGrantedAuthority("ROLE_A"));
          
             System.out.println("Policia" + usuario); //no esta activo el usuario usuario.esActivo()
-            return new CustomUser(usuario.getNombre(), usuario.getContrasenia(), true, true, true,
+            return new CustomUser(usuario.getUsername(), usuario.getPass(), true, true, true,
                     true, authorities);
         //getGrantedAuthorities(
           //                  recursoMapper.obtenerRecursosPermitidosPorIdUsuario(login) ));

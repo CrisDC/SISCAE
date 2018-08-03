@@ -16,21 +16,28 @@ import org.hibernate.validator.constraints.NotBlank;
 @AllArgsConstructor
 public class AreaEstudio {
 	private Integer idAreaEstudio;
-	@NotBlank
+	
+	@NotBlank(message = "{NotBlank.AreaEstudio.nombre}")
 	private String nombre;
-	@NotBlank
+	
+	@NotBlank(message = "{NotBlank.AreaEstudio.pabellon}")
 	private String pabellon;
-	@NotBlank
+	
+	@NotBlank(message = "{NotBlank.AreaEstudio.nivel}")
 	private String nivel ;
-	@NotNull
+	
+	@NotNull(message = "{NotNull.Horario.fecha_registro}")
 	@PastOrPresent
 	private Date fechaRegistro;
-	@NotBlank
+	
+	@NotBlank(message = "{NotBlank.AreaEstudio.usuario_registro}")
 	private String usuarioRegistro;
-	@NotNull
+	
+	@NotNull(message = "{NotNull.AreaEstudio.fecha_modificacion}")
 	@PastOrPresent
 	private Date fechaModificacion;
-	@NotBlank
+	
+	@NotBlank(message = "{NotBlank.AreaEstudio.usuario_modificacion}")
 	private String usuarioModificacion;
 	
 }

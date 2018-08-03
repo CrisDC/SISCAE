@@ -12,6 +12,7 @@ import pe.edu.unmsm.fisi.siscae.configuracion.PersistenceConfiguration;
 import pe.edu.unmsm.fisi.siscae.configuracion.ServiceConfiguration;
 import pe.edu.unmsm.fisi.siscae.model.mantenimiento.Alumno;
 import pe.edu.unmsm.fisi.siscae.model.mantenimiento.Persona;
+import pe.edu.unmsm.fisi.siscae.service.IAlumnoService;
 
 @ContextConfiguration(classes = { ServiceConfiguration.class, PersistenceConfiguration.class })
 @RunWith(SpringJUnit4ClassRunner.class)

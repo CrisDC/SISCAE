@@ -1,5 +1,8 @@
 package pe.edu.unmsm.fisi.siscae.service;
 
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertTrue;
+
 import java.util.List;
 
 import org.junit.Test;
@@ -11,6 +14,7 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import pe.edu.unmsm.fisi.siscae.configuracion.PersistenceConfiguration;
 import pe.edu.unmsm.fisi.siscae.configuracion.ServiceConfiguration;
 import pe.edu.unmsm.fisi.siscae.model.mantenimiento.AreaAdministrativo;
+import pe.edu.unmsm.fisi.siscae.model.mantenimiento.Horario;
 import pe.edu.unmsm.fisi.siscae.service.IAreaAdministrativoService;
 
 @ContextConfiguration(classes = { ServiceConfiguration.class, PersistenceConfiguration.class })
@@ -25,4 +29,66 @@ public class AreaAdministrativoServiceTest {
             System.out.println(areaAdministrativo.toString());
         });
 	}
+	@Test
+	public void registrarAreaAdministrativoTest(){
+		AreaAdministrativo areaAdministrativoTest= new AreaAdministrativo();
+		areaAdministrativoTest.setIdAdministrativo(1);
+		areaAdministrativoTest.setIdAreaEstudio(2);
+		areaAdministrativoTest.setFechaInicio(null);
+		areaAdministrativoTest.setCargo("administrador");
+		areaAdministrativoService.registrarAreaAdministrativo(areaAdministrativoTest);
+		
+		//Comprobacion de que si agrego
+		assertTrue(areaAdministrativoService.existeAreaAdministrativo(areaAdministrativoTest.getIdAdministrativo(),areaAdministrativoTest.getIdAreaEstudio()));
+	}
+	
+	@Test
+	public void buscarTodosTest(){
+		List<AreaAdministrativo> areasAdministrativo= areaAdministrativoService.buscarTodos();
+		int foundSize= areasAdministrativo.size();
+		System.out.println(foundSize);
+		areasAdministrativo.stream().forEach(areaAdministrativo -> {
+            System.out.println(areaAdministrativo.toString());
+        });
+	}
+	@Test
+	public void buscarPorIdAreaAdministrativoTest(){// puede ser tamaño uno 
+		
+		List<AreaAdministrativo> areasAdministrativo= areaAdministrativoService.buscarPorIdAreaAdministrativo(1,2);
+		areasAdministrativo.stream().forEach(areaAdministrativo -> {
+            System.out.println(areaAdministrativo.toString());
+        });
+	}
+	@Test
+	public void existeAreaAdministrativoTest(){
+		
+		assertTrue(areaAdministrativoService.existeAreaAdministrativo(1,2));// el id ingresado de arriba
+	}
+	
+	@Test
+	public void actualizarAreaAdministrativoTest(){
+		AreaAdministrativo areaAdministrativoTest= new AreaAdministrativo();
+		areaAdministrativoTest.setIdAdministrativo(1);
+		areaAdministrativoTest.setIdAreaEstudio(2);
+		areaAdministrativoTest.setFechaInicio(null);
+		areaAdministrativoTest.setCargo("administrador");
+		areaAdministrativoService.registrarAreaAdministrativo(areaAdministrativoTest);
+		
+		areaAdministrativoTest.setCargo("secretario");
+		areaAdministrativoService.actualizarAreaAdministrativo(areaAdministrativoTest);
+		
+		}
+	@Test
+	public void eliminarAreaAdministrativo(){
+		AreaAdministrativo areaAdministrativoTest= new AreaAdministrativo();
+		areaAdministrativoTest.setIdAdministrativo(2);
+		areaAdministrativoTest.setIdAreaEstudio(2);
+		areaAdministrativoTest.setFechaInicio(null);
+		areaAdministrativoTest.setCargo("administrador");
+		areaAdministrativoService.registrarAreaAdministrativo(areaAdministrativoTest);
+		areaAdministrativoService.eliminarAreaAdministrativo(areaAdministrativoTest);
+		assertFalse(areaAdministrativoService.existeAreaAdministrativo(areaAdministrativoTest.getIdAdministrativo(),areaAdministrativoTest.getIdAreaEstudio()));
+	
+	}
+	
 }

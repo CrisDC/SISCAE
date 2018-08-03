@@ -12,16 +12,16 @@ import javax.validation.Payload;
 
 import pe.edu.unmsm.fisi.siscae.validacion.validator.IdEmpresaValidator;
 
-@Documented
-@Constraint(validatedBy = IdEmpresaValidator.class)
+@Documented// indicar es una notacion
+@Constraint(validatedBy = IdEmpresaValidator.class)// que cosa va a validad quien me va a valida
 @Target({ ElementType.ANNOTATION_TYPE, ElementType.FIELD, ElementType.PARAMETER,
         ElementType.TYPE_USE })
 @Retention(RetentionPolicy.RUNTIME)
-@Repeatable(IdEmpresa.List.class)
+@Repeatable(IdEmpresa.List.class)// son para construir una anotacion confguracion
 public @interface IdEmpresa
 {
 
-    String message() default "{NoExiste.Empresa.id_empresa}";
+    String message() default "{NoExiste.Empresa.idEmpresa}";
 
     boolean existe();
 

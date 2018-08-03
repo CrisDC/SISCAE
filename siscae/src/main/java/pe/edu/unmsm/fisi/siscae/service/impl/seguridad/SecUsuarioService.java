@@ -8,11 +8,12 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
+import pe.edu.unmsm.fisi.siscae.mapper.ISecUsuarioMapper;
 import pe.edu.unmsm.fisi.siscae.mapper.IUsuarioMapper;
 import pe.edu.unmsm.fisi.siscae.mapper.base.IMantenibleMapper;
 import pe.edu.unmsm.fisi.siscae.model.mantenimiento.Usuario;
-import pe.edu.unmsm.fisi.siscae.model.seguridad.SecUsuario;
 import pe.edu.unmsm.fisi.siscae.service.ISecUsuarioService;
+import pe.edu.unmsm.fisi.siscae.service.IUsuarioService;
 import pe.edu.unmsm.fisi.siscae.service.impl.MantenibleService;
 import pe.edu.unmsm.fisi.siscae.utilitario.Operacion;
 import pe.edu.unmsm.fisi.siscae.utilitario.VerboConstantes;
@@ -31,7 +32,8 @@ public class SecUsuarioService extends MantenibleService<Usuario> implements ISe
     @Transactional(propagation = Propagation.REQUIRES_NEW)
     public List<Usuario> getLsUsuario()
     {
-        return this.buscar(new Usuario(), Operacion.SELECT);
+        //return this.buscar(new SecUsuario(), Operacion.SELECT);
+    	return null;
     }
 
     @Transactional(propagation = Propagation.REQUIRES_NEW)
@@ -41,15 +43,17 @@ public class SecUsuarioService extends MantenibleService<Usuario> implements ISe
         //String hashedPassword = passwordEnconder.encode(usuario.getPassword());
         //usuario.setPasswordEncriptado(hashedPassword);
         // secUsuarioMapper.registrarUsuario(usuario);
-        this.registrar(usuario);
+        //this.registrar(usuario);
+        
     }
 
     @Transactional(propagation = Propagation.REQUIRED)
     public List<Usuario> buscarPorCodigoUsuario(String idUsuario)
     {
         // return secUsuarioMapper.buscarPorCodigoUsuario(idUsuario);
-        Usuario secUsuario = Usuario.builder().idUsuario(Integer.parseInt(idUsuario)).build();
-        return this.buscar(secUsuario, Operacion.SELECT);
+    	//SecUsuario secUsuario = SecUsuario.builder().idUsuario(Integer.parseInt(idUsuario)).build();
+        //return this.buscar(secUsuario, Operacion.SELECT);
+    	return null;
     }
 
     @Transactional(propagation = Propagation.REQUIRES_NEW)
@@ -73,7 +77,8 @@ public class SecUsuarioService extends MantenibleService<Usuario> implements ISe
     public void deleteUsuario(Usuario usuario)
     {
         // secUsuarioMapper.deleteUsuario(usuario);
-        this.eliminar(usuario);
+        //this.eliminar(usuario);
+    
     }
 
     @Override

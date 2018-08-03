@@ -82,7 +82,7 @@ public class CodigoPasswordValidator implements ConstraintValidator<CodigoPasswo
             BCryptPasswordEncoder passwordEnconder = new BCryptPasswordEncoder();
 
 			List<Usuario> usuario = secUsuarioService.obtenerPasswordPorCodigoUsuario(idUsuario);
-			boolean passwordMatches = passwordEnconder.matches(password, usuario.get(0).getPass());
+			boolean passwordMatches = passwordEnconder.matches(password, usuario.get(0).getPass());//modificado el pass
 			if (!passwordMatches) {
 				ValidatorUtil.addCustomMessageWithTemplateWithProperty("{Noequals.Contrasenia.password}",
 						this.campoPassword, context);
