@@ -17,6 +17,7 @@ public interface IPrestamoDetalleMapper extends IMantenibleMapper<PrestamoDetall
         + "#{objeto.idPrestamo, jdbcType = INTEGER, mode = IN},"
         + "#{objeto.idMaterial, jdbcType = INTEGER, mode = IN},"
         + "#{objeto.horaEntrega, jdbcType = TIME, mode = IN},"
+        + "#{objeto.horaDevolucion, jdbcType = TIME, mode = IN},"
         + "#{userAudit, jdbcType = VARCHAR, mode = IN})}" })
 @Options(statementType = StatementType.CALLABLE)
 public List<PrestamoDetalle> mantener(Parametro parametro);

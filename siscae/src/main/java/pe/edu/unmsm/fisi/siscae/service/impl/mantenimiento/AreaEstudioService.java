@@ -33,12 +33,18 @@ public class AreaEstudioService extends MantenibleService<AreaEstudio> implement
 	@Transactional(propagation = Propagation.REQUIRED)
 	public List<AreaEstudio> buscarPorIdAreaEstudio(Integer idAreaEstudio) {
 		AreaEstudio areaEstudio = AreaEstudio.builder().idAreaEstudio(idAreaEstudio).build();
+		
 		return this.buscar(areaEstudio, Operacion.SELECT);
 	}
 
 	@Transactional(propagation = Propagation.REQUIRED)
 	public boolean existeAreaEstudio(Integer idAreaEstudio) {
 
+		System.out.println(idAreaEstudio+" SOY EL ID");
+		System.out.println(buscarPorIdAreaEstudio(idAreaEstudio).size()+ "SOY EL TAMAÑO");
+		// aqui imprimo todo 
+		buscarPorIdAreaEstudio(idAreaEstudio).forEach(System.out::println);
+		
 		return !this.buscarPorIdAreaEstudio(idAreaEstudio).isEmpty();
 	}
 

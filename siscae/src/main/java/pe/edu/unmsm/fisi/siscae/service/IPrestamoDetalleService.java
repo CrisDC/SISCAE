@@ -2,7 +2,6 @@ package pe.edu.unmsm.fisi.siscae.service;
 
 import java.util.List;
 
-import pe.edu.unmsm.fisi.siscae.model.mantenimiento.Horario;
 import pe.edu.unmsm.fisi.siscae.model.mantenimiento.PrestamoDetalle;
 
 public interface IPrestamoDetalleService extends IMantenibleService<PrestamoDetalle>{

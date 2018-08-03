@@ -13,7 +13,6 @@ import pe.edu.unmsm.fisi.siscae.configuracion.ServiceConfiguration;
 import pe.edu.unmsm.fisi.siscae.model.mantenimiento.AreaEstudio;
 import pe.edu.unmsm.fisi.siscae.model.parametro.Parametro;
 import pe.edu.unmsm.fisi.siscae.utilitario.Operacion;
-import pe.edu.unmsm.fisi.siscae.utilitario.Operacion.OperacionParam;
 
 @ContextConfiguration(classes = { ServiceConfiguration.class, PersistenceConfiguration.class })
 @RunWith(SpringJUnit4ClassRunner.class)
@@ -24,42 +23,29 @@ public class AreaEstudioMapperTest {
 	@Test
 	public void mantenerTipoGetTest() {
 
-		Parametro<AreaEstudio> operacion = new Parametro<>();
-
 		AreaEstudio areaEstudioTest = new AreaEstudio();
-		areaEstudioTest.setIdAreaEstudio(3);
+		areaEstudioTest.setIdAreaEstudio(10);
 		areaEstudioTest.setNombre("VIDEOFISI");
-		areaEstudioTest.setPabellon("PRIMER PABELLON");
-		areaEstudioTest.setNivel("PRIMER NIVEL");
+		areaEstudioTest.setPabellon("SEGUNDO PABELLON");
+		areaEstudioTest.setNivel("PRIMER");
 
+		Parametro<AreaEstudio> operacion = new Parametro<>(Operacion.SELECT, areaEstudioTest, "TEST USER");
 
-		operacion.setOperacion(Operacion.SELECT.name());
-		operacion.setObjeto(new AreaEstudio());
+		List<AreaEstudio> areasEstudios = areaEstudioMapper.mantener(operacion);
+		areasEstudios.forEach(System.out::println);
 		
-		List<AreaEstudio> areaEstudios = areaEstudioMapper.mantener(operacion);
-		areaEstudios.stream().forEach(areaEstudio ->{
-			System.out.println(areaEstudio.toString());
-		});
-		
-		operacion = new Parametro<>(Operacion.INSERT, OperacionParam.PRIMARY_KEY, areaEstudioTest, "Usuario de prueba");
-		areaEstudios.stream().forEach(areaEstudio ->{
-			System.out.println(areaEstudio.toString());
-		});
+		operacion.setOperacion(Operacion.INSERT.name());
+		areasEstudios = areaEstudioMapper.mantener(operacion);
+		areasEstudios.forEach(System.out::println);
 
-		areaEstudioTest.setNombre("SALA DE ESTUDIO");
-		
+		areaEstudioTest.setNombre("VIDEOFISI 2");
 		operacion.setOperacion(Operacion.UPDATE.name());
-		operacion.setObjeto(areaEstudioTest);
-		areaEstudios = areaEstudioMapper.mantener(operacion);
-		areaEstudios.stream().forEach(areaEstudio ->{
-			System.out.println(areaEstudio.toString());
-		});
+		areasEstudios = areaEstudioMapper.mantener(operacion);
+		areasEstudios.forEach(System.out::println);
 		
-		/*operacion.setOperacion(Operacion.DELETE.name());
-		areaEstudios = areaEstudioMapper.mantener(operacion);
-		areaEstudios.stream().forEach(areaEstudio ->{
-			System.out.println(areaEstudio.toString());
-		});*/
+		operacion.setOperacion(Operacion.DELETE.name());
+		areasEstudios = areaEstudioMapper.mantener(operacion);
+		areasEstudios.forEach(System.out::println);
 		
 	}
 

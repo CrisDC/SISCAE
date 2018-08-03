@@ -20,6 +20,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 public class PrestamoDetalle {
+	
 	private Integer idPrestamo;
 	private Integer idMaterial;
 	

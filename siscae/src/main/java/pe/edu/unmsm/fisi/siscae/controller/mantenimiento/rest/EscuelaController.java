@@ -21,9 +21,7 @@ import pe.edu.unmsm.fisi.siscae.aspecto.enumeracion.Accion;
 import pe.edu.unmsm.fisi.siscae.aspecto.enumeracion.Comentario;
 import pe.edu.unmsm.fisi.siscae.aspecto.enumeracion.Dato;
 import pe.edu.unmsm.fisi.siscae.aspecto.enumeracion.Tipo;
-import pe.edu.unmsm.fisi.siscae.model.mantenimiento.Empresa;
 import pe.edu.unmsm.fisi.siscae.model.mantenimiento.Escuela;
-import pe.edu.unmsm.fisi.siscae.service.IEmpresaService;
 import pe.edu.unmsm.fisi.siscae.service.IEscuelaService;
 import pe.edu.unmsm.fisi.siscae.service.excepcion.BadRequestException;
 import pe.edu.unmsm.fisi.siscae.utilitario.ConstantesGenerales;
@@ -31,7 +29,7 @@ import pe.edu.unmsm.fisi.siscae.utilitario.ValidatorUtil;
 import pe.edu.unmsm.fisi.siscae.validacion.grupo.accion.IActualizacion;
 import pe.edu.unmsm.fisi.siscae.validacion.grupo.accion.IRegistro;
 
-@Audit(tipo = Tipo.Esc, datos = Dato.Escuela)
+@Audit(tipo = Tipo.ESCUELA, datos = Dato.ESCUELA)
 @RequestMapping("/escuela ")
 public @RestController class EscuelaController {
 	private @Autowired IEscuelaService escuelaService;

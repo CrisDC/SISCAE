@@ -23,40 +23,30 @@ public class PrestamoDetalleMapperTest {
 
 	@Test
 	public void mantenerTipoGetTest() {
-		Parametro<PrestamoDetalle> operacion = new Parametro<>();
-
+		
 		PrestamoDetalle prestamoDetalleTest = new PrestamoDetalle();
 		prestamoDetalleTest.setIdPrestamo(3);
 		prestamoDetalleTest.setIdMaterial(2);
 		prestamoDetalleTest.setHoraEntrega(LocalTime.now());
-		operacion.setOperacion(Operacion.SELECT.name());
-		operacion.setObjeto(new PrestamoDetalle());
+		prestamoDetalleTest.setHoraDevolucion(LocalTime.now());
 		
+		Parametro<PrestamoDetalle> operacion = new Parametro<>(Operacion.SELECT, prestamoDetalleTest, "TEST USER");
+
 		List<PrestamoDetalle> prestamosDetalle = prestamoDetalleMapper.mantener(operacion);
-		prestamosDetalle.stream().forEach(prestamoDetalle ->{
-			System.out.println(prestamoDetalle.toString());
-		});
+		prestamosDetalle.forEach(System.out::println);
 		
-		operacion=new Parametro<>(Operacion.INSERT, OperacionParam.PRIMARY_KEY,prestamoDetalleTest, "Usuario de prueba");
-		prestamosDetalle.stream().forEach(prestamoDetalle ->{
-			System.out.println(prestamoDetalle.toString());
-		});
-				
-		prestamoDetalleTest.setHoraEntrega(LocalTime.now());
-		operacion.setOperacion(Operacion.UPDATE.name());
-		operacion.setObjeto(prestamoDetalleTest);
-		
+		operacion.setOperacion(Operacion.INSERT.name());
 		prestamosDetalle = prestamoDetalleMapper.mantener(operacion);
-		prestamosDetalle.stream().forEach(prestamoDetalle ->{
-			System.out.println(prestamoDetalle.toString());
-		});
+		prestamosDetalle.forEach(System.out::println);
+						
+		prestamoDetalleTest.setHoraDevolucion(LocalTime.now());
+		operacion.setOperacion(Operacion.UPDATE.name());
+		prestamosDetalle = prestamoDetalleMapper.mantener(operacion);
+		prestamosDetalle.forEach(System.out::println);
 		
 		operacion.setOperacion(Operacion.DELETE.name());
 		prestamosDetalle = prestamoDetalleMapper.mantener(operacion);
-		
-		prestamosDetalle.stream().forEach(prestamoDetalle ->{
-			System.out.println(prestamoDetalle.toString());
-		});
+		prestamosDetalle.forEach(System.out::println);
 	}
 
 }
