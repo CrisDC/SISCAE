@@ -3,6 +3,7 @@ package pe.edu.unmsm.fisi.siscae.service;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 
+import java.util.Date;
 import java.util.List;
 
 import org.junit.Test;
@@ -14,7 +15,6 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import pe.edu.unmsm.fisi.siscae.configuracion.PersistenceConfiguration;
 import pe.edu.unmsm.fisi.siscae.configuracion.ServiceConfiguration;
 import pe.edu.unmsm.fisi.siscae.model.mantenimiento.AreaAdministrativo;
-import pe.edu.unmsm.fisi.siscae.model.mantenimiento.Horario;
 import pe.edu.unmsm.fisi.siscae.service.IAreaAdministrativoService;
 
 @ContextConfiguration(classes = { ServiceConfiguration.class, PersistenceConfiguration.class })
@@ -22,6 +22,7 @@ import pe.edu.unmsm.fisi.siscae.service.IAreaAdministrativoService;
 public class AreaAdministrativoServiceTest {
 
 	private @Autowired IAreaAdministrativoService areaAdministrativoService;
+	
 	@Test
 	public void test(){
 		List<AreaAdministrativo> areasAdministrativo = areaAdministrativoService.buscarTodos();
@@ -34,7 +35,7 @@ public class AreaAdministrativoServiceTest {
 		AreaAdministrativo areaAdministrativoTest= new AreaAdministrativo();
 		areaAdministrativoTest.setIdAdministrativo(1);
 		areaAdministrativoTest.setIdAreaEstudio(2);
-		areaAdministrativoTest.setFechaInicio(null);
+		areaAdministrativoTest.setFechaInicio(new Date());
 		areaAdministrativoTest.setCargo("administrador");
 		areaAdministrativoService.registrarAreaAdministrativo(areaAdministrativoTest);
 		
@@ -69,8 +70,8 @@ public class AreaAdministrativoServiceTest {
 	public void actualizarAreaAdministrativoTest(){
 		AreaAdministrativo areaAdministrativoTest= new AreaAdministrativo();
 		areaAdministrativoTest.setIdAdministrativo(1);
-		areaAdministrativoTest.setIdAreaEstudio(2);
-		areaAdministrativoTest.setFechaInicio(null);
+		areaAdministrativoTest.setIdAreaEstudio(4);
+		areaAdministrativoTest.setFechaInicio(new Date());
 		areaAdministrativoTest.setCargo("administrador");
 		areaAdministrativoService.registrarAreaAdministrativo(areaAdministrativoTest);
 		
@@ -81,10 +82,10 @@ public class AreaAdministrativoServiceTest {
 	@Test
 	public void eliminarAreaAdministrativo(){
 		AreaAdministrativo areaAdministrativoTest= new AreaAdministrativo();
-		areaAdministrativoTest.setIdAdministrativo(2);
-		areaAdministrativoTest.setIdAreaEstudio(2);
-		areaAdministrativoTest.setFechaInicio(null);
-		areaAdministrativoTest.setCargo("administrador");
+		areaAdministrativoTest.setIdAdministrativo(1);
+		areaAdministrativoTest.setIdAreaEstudio(4);
+		areaAdministrativoTest.setFechaInicio(new Date());
+		areaAdministrativoTest.setCargo("administrador2");
 		areaAdministrativoService.registrarAreaAdministrativo(areaAdministrativoTest);
 		areaAdministrativoService.eliminarAreaAdministrativo(areaAdministrativoTest);
 		assertFalse(areaAdministrativoService.existeAreaAdministrativo(areaAdministrativoTest.getIdAdministrativo(),areaAdministrativoTest.getIdAreaEstudio()));

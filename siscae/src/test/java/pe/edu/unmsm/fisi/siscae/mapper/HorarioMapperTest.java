@@ -24,7 +24,6 @@ public class HorarioMapperTest {
 
 	@Test
 	public void mantenerTipoGetTest() {
-		Parametro<Horario> operacion = new Parametro<>();
 
 		Horario horarioTest = new Horario();
 		horarioTest.setIdHorario(1);
@@ -37,10 +36,10 @@ public class HorarioMapperTest {
 		horarioTest.setIdDia(1);
 		horarioTest.setIdTipoHorario(1);
 		horarioTest.setIdAreaEstudio(1);
-
-		operacion.setOperacion(Operacion.SELECT.name());
-		operacion.setObjeto(new Horario());
-
+		
+		
+		Parametro<Horario> operacion = new Parametro<>(Operacion.SELECT, horarioTest, "TEST USER");
+		
 		List<Horario> horarios = horarioMapper.mantener(operacion);
 		horarios.stream().forEach(horario -> {
 			System.out.println(horario.toString());
@@ -51,6 +50,12 @@ public class HorarioMapperTest {
 			System.out.println(horario.toString());
 		});
 
+		horarios.forEach(System.out::println);
+		
+		operacion.setOperacion(Operacion.INSERT.name());
+		horarios = horarioMapper.mantener(operacion);
+		horarios.forEach(System.out::println);
+				
 		horarioTest.setHoraFin(LocalTime.now());
 		operacion.setOperacion(Operacion.UPDATE.name());
 		operacion.setObjeto(horarioTest);
@@ -59,12 +64,15 @@ public class HorarioMapperTest {
 		horarios.stream().forEach(horario -> {
 			System.out.println(horario.toString());
 		});
+		horarios.forEach(System.out::println);
+		
 		operacion.setOperacion(Operacion.DELETE.name());
 		horarios = horarioMapper.mantener(operacion);
 
 		horarios.stream().forEach(horario -> {
 			System.out.println(horario.toString());
 		});
+		horarios.forEach(System.out::println);
 	}
 
 }

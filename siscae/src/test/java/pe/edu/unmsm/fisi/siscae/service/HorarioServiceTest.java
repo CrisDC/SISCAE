@@ -73,6 +73,7 @@ public class HorarioServiceTest {
 		horarioTest.setTiempoMax(2.00);
 		horarioTest.setDescripcion("HORARIO DE PRUEBA");
 		horarioTest.setIdTurno(1);
+		horarioTest.setIdTurno(5);
 		horarioTest.setIdDia(1);
 		horarioTest.setIdTipoHorario(1);
 		horarioTest.setIdAreaEstudio(1);
@@ -91,6 +92,7 @@ public class HorarioServiceTest {
 		horarioTest.setTiempoMax(2.00);
 		horarioTest.setDescripcion("HORARIO DE PRUEBA");
 		horarioTest.setIdTurno(1);
+		horarioTest.setIdTurno(8);
 		horarioTest.setIdDia(1);
 		horarioTest.setIdTipoHorario(1);
 		horarioTest.setIdAreaEstudio(1);

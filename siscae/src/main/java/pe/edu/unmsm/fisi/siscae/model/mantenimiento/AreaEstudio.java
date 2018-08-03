@@ -4,6 +4,11 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import pe.edu.unmsm.fisi.siscae.validacion.IdAreaEstudio;
+import pe.edu.unmsm.fisi.siscae.validacion.IdEmpresa;
+import pe.edu.unmsm.fisi.siscae.validacion.grupo.accion.IActualizacion;
+import pe.edu.unmsm.fisi.siscae.validacion.grupo.accion.IRegistro;
+
 import java.util.Date;
 
 import javax.validation.constraints.NotNull;

@@ -1,6 +1,6 @@
 package pe.edu.unmsm.fisi.siscae.mapper;
 
-import java.sql.Date;
+import java.util.Date;
 import java.util.List;
 
 import org.junit.Test;
@@ -25,41 +25,30 @@ public class AreaAdministrativoMapperTest {
 	@Test
 	public void mantenerTipoGetTest(){
 
-		Parametro<AreaAdministrativo> operacion = new Parametro<>();
 		
 		AreaAdministrativo areaAdministrativoTest= new AreaAdministrativo();
 		areaAdministrativoTest.setIdAdministrativo(1);
-		areaAdministrativoTest.setIdAreaEstudio(2);
-		areaAdministrativoTest.setFechaInicio(null);
+		areaAdministrativoTest.setIdAreaEstudio(1);
+		areaAdministrativoTest.setFechaInicio(new Date());
 		areaAdministrativoTest.setCargo("administrador");
 		
-		operacion.setOperacion(Operacion.SELECT.name());
-		operacion.setObjeto(new AreaAdministrativo());
-		
+		Parametro<AreaAdministrativo> operacion = new Parametro<>(Operacion.SELECT, areaAdministrativoTest, "TEST USER");
+				
 		List<AreaAdministrativo> areasAdministrativo = areaAdministrativoMapper.mantener(operacion);
-		areasAdministrativo.stream().forEach(areaAdministrativo ->{
-			System.out.println(areaAdministrativo.toString());
-		});
+		areasAdministrativo.forEach(System.out::println);
 		
-		operacion=new Parametro<>(Operacion.INSERT, OperacionParam.PRIMARY_KEY,areaAdministrativoTest, "Usuario de prueba");
-		areasAdministrativo.stream().forEach(horario ->{
-			System.out.println(horario.toString());
-		});
+		operacion.setOperacion(Operacion.INSERT.name());
+		areasAdministrativo=areaAdministrativoMapper.mantener(operacion);
+		areasAdministrativo.forEach(System.out::println);
 				
 		areaAdministrativoTest.setCargo("secretaria");
 		operacion.setOperacion(Operacion.UPDATE.name());
-		operacion.setObjeto(areaAdministrativoTest);
+		areasAdministrativo=areaAdministrativoMapper.mantener(operacion);
+		areasAdministrativo.forEach(System.out::println);
 		
-		areasAdministrativo = areaAdministrativoMapper.mantener(operacion);
-		areasAdministrativo.stream().forEach(areaAdministrativo ->{
-			System.out.println(areaAdministrativo.toString());
-		});
 		operacion.setOperacion(Operacion.DELETE.name());
 		areasAdministrativo = areaAdministrativoMapper.mantener(operacion);
-		
-		areasAdministrativo.stream().forEach(areaAdministrativo ->{
-			System.out.println(areaAdministrativo.toString());
-		});
+		areasAdministrativo.forEach(System.out::println);
 		
 		
 	
