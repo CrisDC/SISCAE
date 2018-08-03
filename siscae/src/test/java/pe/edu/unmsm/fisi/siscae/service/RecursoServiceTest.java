@@ -27,7 +27,7 @@ public class RecursoServiceTest {
 		recursoTest.setNumeroSerie("M-0012");
 		recursoTest.setDescripcion("OPERATIVO");
 		recursoTest.setMaxCapacidad(6);
-		recursoTest.setIdEstadoTabla(1);
+		recursoTest.setEstado(true);
 		recursoTest.setIdTipoRecurso(1);
 		recursoTest.setIdAreaEstudio(2);
 		recursoTest.setIdUbicacion(1);
