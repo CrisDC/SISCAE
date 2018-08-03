@@ -25,9 +25,8 @@ public class RecursoMapperTest {
 	@Test
 	public void mantenerTipoGetTest() {
 		Parametro<Recurso> operacion = new Parametro<>();
-		Recurso recursoTest = new Recurso(2, "C-0002", "PROBANDO INSERT", 1, true, 1, 1, 1, null, null, null, null,
+		Recurso recursoTest = new Recurso(5, "C-0002", "PROBANDO INSERT", 1, 1, 3, 4, 1, null, null, null, null,
 				null);
-		System.out.println("pase");
 		operacion.setOperacion(Operacion.SELECT.name());
 
 		operacion.setObjeto(new Recurso());

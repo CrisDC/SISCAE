@@ -30,38 +30,39 @@ public class HorarioMapperTest {
 		horarioTest.setIdHorario(1);
 		horarioTest.setHoraInicio(LocalTime.now());
 		horarioTest.setHoraFin(LocalTime.now());
-		horarioTest.setEstado(true);
+		horarioTest.setIdEstadoTabla(1);
 		horarioTest.setTiempoMax(2.00);
+		horarioTest.setDescripcion("HORARIO DE PRUEBA");
 		horarioTest.setIdTurno(1);
 		horarioTest.setIdDia(1);
 		horarioTest.setIdTipoHorario(1);
 		horarioTest.setIdAreaEstudio(1);
-		
+
 		operacion.setOperacion(Operacion.SELECT.name());
 		operacion.setObjeto(new Horario());
-		
+
 		List<Horario> horarios = horarioMapper.mantener(operacion);
-		horarios.stream().forEach(horario ->{
+		horarios.stream().forEach(horario -> {
 			System.out.println(horario.toString());
 		});
-		
-		operacion=new Parametro<>(Operacion.INSERT, OperacionParam.PRIMARY_KEY,horarioTest, "Usuario de prueba");
-		horarios.stream().forEach(horario ->{
+
+		operacion = new Parametro<>(Operacion.INSERT, OperacionParam.PRIMARY_KEY, horarioTest, "Usuario de prueba");
+		horarios.stream().forEach(horario -> {
 			System.out.println(horario.toString());
 		});
-				
+
 		horarioTest.setHoraFin(LocalTime.now());
 		operacion.setOperacion(Operacion.UPDATE.name());
 		operacion.setObjeto(horarioTest);
-		
+
 		horarios = horarioMapper.mantener(operacion);
-		horarios.stream().forEach(horario ->{
+		horarios.stream().forEach(horario -> {
 			System.out.println(horario.toString());
 		});
 		operacion.setOperacion(Operacion.DELETE.name());
 		horarios = horarioMapper.mantener(operacion);
-		
-		horarios.stream().forEach(horario ->{
+
+		horarios.stream().forEach(horario -> {
 			System.out.println(horario.toString());
 		});
 	}

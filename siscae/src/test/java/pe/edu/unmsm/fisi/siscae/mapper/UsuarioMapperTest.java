@@ -28,7 +28,7 @@ public class UsuarioMapperTest {
 		usuarioTest.setUsername("angel");
 		usuarioTest.setPass("a");
 		usuarioTest.setIdRol(1);
-		usuarioTest.setEstado("preso");
+		usuarioTest.setIdEstadoTabla(1);
 		usuarioTest.setIdPersona(1);
 		
 		Parametro<Usuario> operacion = new Parametro<Usuario>(Operacion.SELECT, usuarioTest, "TEST USER");

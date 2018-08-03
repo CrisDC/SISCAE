@@ -27,7 +27,7 @@ public class AlumnoServiceTest {
 		personaTest.setIdPersona(2);
 		alumnoTest.setPersona(personaTest);
 		alumnoTest.setCodigoAlumno("16200197");
-		alumnoTest.setEstadoAlumno("ACTIVO");
+		alumnoTest.setIdEstadoTabla(1);
 		alumnoTest.setIdTipoAcademico(1);
 		alumnoTest.setIdEscuela(1);
 
@@ -39,7 +39,7 @@ public class AlumnoServiceTest {
 
 		alumnoService.registrarAlumno(alumnoTest);
 
-		alumnoTest.setEstadoAlumno("INACTIVO");
+		alumnoTest.setIdEstadoTabla(2);
 		alumnoService.actualizarAlumno(alumnoTest);
 		
 		alumnoService.eliminarAlumno(alumnoTest);

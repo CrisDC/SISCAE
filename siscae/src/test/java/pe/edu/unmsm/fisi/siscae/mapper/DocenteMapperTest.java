@@ -28,7 +28,7 @@ public class DocenteMapperTest {
 		Docente docenteTest = new Docente();
 		personaTest.setIdPersona(2);
 		docenteTest.setPersona(personaTest);
-		docenteTest.setEstadoDocente("ACTIVO");
+		docenteTest.setIdEstadoTabla(1);
 
 		Parametro<Docente> operacion = new Parametro<>(Operacion.SELECT, docenteTest, "TEST USER");
 
@@ -39,7 +39,7 @@ public class DocenteMapperTest {
 		docentes = docenteMapper.mantener(operacion);
 		docentes.forEach(System.out::println);
 
-		docenteTest.setEstadoDocente("INACTIVO");
+		docenteTest.setIdEstadoTabla(2);
 		operacion.setOperacion(Operacion.UPDATE.name());
 		docentes = docenteMapper.mantener(operacion);
 		docentes.forEach(System.out::println);

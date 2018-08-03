@@ -40,7 +40,7 @@ public class Recurso {
 	private Integer maxCapacidad;
 	
 	@NotNull(message = "{NotNull.Recurso.estado}")
-	private Boolean estado;
+	private Integer idEstadoTabla;
 	
 	@NotNull(message = "{NotNull.Recurso.idTipoRecurso}")
 	@Pattern(regexp = Regex.SOLO_DIGITOS, message = "{Pattern.Recurso.idTipoRecurso}")

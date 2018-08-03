@@ -16,7 +16,7 @@ public interface IAlumnoMapper extends  IMantenibleMapper<Alumno>{
 	            + "#{operacionParam, jdbcType = VARCHAR, mode = IN},"
 	            + "#{objeto.persona.idPersona, jdbcType = INTEGER, mode = IN},"
 	            + "#{objeto.codigoAlumno, jdbcType = VARCHAR, mode = IN},"
-	            + "#{objeto.estadoAlumno, jdbcType = VARCHAR, mode = IN},"
+	            + "#{objeto.idEstadoTabla, jdbcType = INTEGER, mode = IN},"
 	            + "#{objeto.idTipoAcademico,jdbcType = INTEGER, mode = IN},"
 	            + "#{objeto.idEscuela,jdbcType = INTEGER, mode = IN},"
 	            + "#{userAudit, jdbcType = VARCHAR, mode = IN})}" })//POR CONSULTAR 

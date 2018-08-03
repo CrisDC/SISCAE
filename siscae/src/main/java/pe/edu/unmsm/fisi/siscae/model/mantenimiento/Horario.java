@@ -25,11 +25,12 @@ public class Horario {
 	private  LocalTime horaInicio;
 	private LocalTime horaFin;
 	
-	@NotNull
-	private boolean estado;
-	
 	@Digits(integer=4, fraction=2)
 	private double tiempoMax;
+	
+	private String descripcion;
+	
+	private Integer idEstadoTabla;
 	
 	private Integer idTurno;
 	private Integer idDia;

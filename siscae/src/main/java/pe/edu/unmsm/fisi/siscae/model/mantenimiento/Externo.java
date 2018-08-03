@@ -23,9 +23,7 @@ public class Externo {
 	private Persona persona;
 	
 	@NotNull(message = "{NotNull.Externo.estadoExterno}")
-    @NotBlank(message = "{NotBlank.Prestamo.estadoExterno}")
-    @Length(min = 3, max = 20, message = "{Length.CodigoProcesoSwitch.estadoExterno}")
-	private String estadoExterno;
+	private Integer idEstadoTabla;
 	
 	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd", timezone = "EST")
     @NotNull(message = "{NotNull.Prestamo.fechaRegistro}")

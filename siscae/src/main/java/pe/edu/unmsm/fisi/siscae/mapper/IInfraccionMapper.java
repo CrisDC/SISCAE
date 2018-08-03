@@ -17,7 +17,7 @@ public interface IInfraccionMapper extends IMantenibleMapper<Infraccion> {
             + "#{objeto.idInfraccion, jdbcType = INTEGER, mode = IN},"
             + "#{objeto.descripcion, jdbcType = VARCHAR, mode = IN},"
             + "#{objeto.fecha, jdbcType = DATE, mode = IN},"
-            + "#{objeto.estado,jdbcType = BOOLEAN, mode = IN},"
+            + "#{objeto.idEstadoTabla, jdbcType = INTEGER, mode = IN},"
             + "#{objeto.idPersona,jdbcType = INTEGER, mode = IN},"
             + "#{objeto.idTipoInfraccion,jdbcType = INTEGER, mode = IN},"
             + "#{userAudit, jdbcType = VARCHAR, mode = IN})}" })

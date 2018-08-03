@@ -28,7 +28,7 @@ public class InfraccionMapperTest {
 		infraccionTest.setIdInfraccion(2);
 		infraccionTest.setDescripcion("PRUEBA INSERCION");
 		infraccionTest.setFecha(new Date());
-		infraccionTest.setEstado(true);
+		infraccionTest.setIdEstadoTabla(1);
 		infraccionTest.setIdPersona(1);
 		infraccionTest.setIdTipoInfraccion(1);
 		Parametro<Infraccion> operacion = new Parametro<>(Operacion.SELECT, infraccionTest, "TEST USER");

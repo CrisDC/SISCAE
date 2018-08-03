@@ -33,8 +33,9 @@ public class HorarioServiceTest {
 		horarioTest.setIdHorario(1);
 		horarioTest.setHoraInicio(LocalTime.now());
 		horarioTest.setHoraFin(LocalTime.now());
-		horarioTest.setEstado(true);
+		horarioTest.setIdEstadoTabla(1);
 		horarioTest.setTiempoMax(2.00);
+		horarioTest.setDescripcion("HORARIO DE PRUEBA");
 		horarioTest.setIdTurno(1);
 		horarioTest.setIdDia(1);
 		horarioTest.setIdTipoHorario(1);
@@ -68,8 +69,9 @@ public class HorarioServiceTest {
 		horarioTest.setIdHorario(2);
 		horarioTest.setHoraInicio(LocalTime.now());
 		horarioTest.setHoraFin(LocalTime.now());
-		horarioTest.setEstado(true);
+		horarioTest.setIdEstadoTabla(2);
 		horarioTest.setTiempoMax(2.00);
+		horarioTest.setDescripcion("HORARIO DE PRUEBA");
 		horarioTest.setIdTurno(1);
 		horarioTest.setIdDia(1);
 		horarioTest.setIdTipoHorario(1);
@@ -83,8 +85,9 @@ public class HorarioServiceTest {
 		horarioTest.setIdHorario(3);
 		horarioTest.setHoraInicio(LocalTime.now());
 		horarioTest.setHoraFin(LocalTime.now());
-		horarioTest.setEstado(true);
+		horarioTest.setIdEstadoTabla(1);
 		horarioTest.setTiempoMax(2.00);
+		horarioTest.setDescripcion("HORARIO DE PRUEBA");
 		horarioTest.setIdTurno(1);
 		horarioTest.setIdDia(1);
 		horarioTest.setIdTipoHorario(1);

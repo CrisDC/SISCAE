@@ -31,8 +31,7 @@ public class Infraccion {
     @NotNull(message = "{NotNull.Infraccion.fecha}")
 	private Date fecha;
 	
-	/*falta aclarar dudas de los @*/
-	private Boolean estado;
+	private Integer idEstadoTabla;
 	
 	private Integer idPersona;
 	private Integer idTipoInfraccion;

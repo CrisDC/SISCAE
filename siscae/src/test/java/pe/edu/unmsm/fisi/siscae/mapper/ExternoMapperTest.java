@@ -27,7 +27,7 @@ public class ExternoMapperTest {
 		personaTest.setIdPersona(3);
 		Externo externoTest = new Externo();
 		externoTest.setPersona(personaTest);
-		externoTest.setEstadoExterno("HABILITADO");
+		externoTest.setIdEstadoTabla(1);
 		Parametro<Externo> operacion = new Parametro<Externo> (Operacion.SELECT, externoTest,"TEST USER");
 		
 		List<Externo> externos = externoMapper.mantener(operacion);
@@ -37,7 +37,7 @@ public class ExternoMapperTest {
 		externos = externoMapper.mantener(operacion);
 		externos.forEach(System.out::println);
 		
-		externoTest.setEstadoExterno("PRUEBA UPDATE");
+		externoTest.setIdEstadoTabla(2);
 		operacion.setOperacion(Operacion.UPDATE.name());
 		externos = externoMapper.mantener(operacion);
 		externos.forEach(System.out::println);

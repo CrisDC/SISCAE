@@ -23,7 +23,7 @@ public interface IPrestamoMapper extends IMantenibleMapper<Prestamo> {
 			+ "#{objeto.fecha, jdbcType = DATE, mode = IN},"
 			+ "#{objeto.horaEntrada, jdbcType = TIME, mode = IN},"
 			+ "#{objeto.horaSalida, jdbcType = TIME, mode = IN},"
-			+ "#{objeto.estadoPrestamo, jdbcType = VARCHAR, mode = IN},"
+			+ "#{objeto.idEstadoTabla, jdbcType = INTEGER, mode = IN},"
 			+ "#{objeto.idRecurso, jdbcType = INTEGER, mode = IN},"
 			+ "#{objeto.idAdministrativo, jdbcType = INTEGER, mode = IN},"
 			+ "#{objeto.idPersona, jdbcType = INTEGER, mode = IN},"

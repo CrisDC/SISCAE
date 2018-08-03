@@ -16,7 +16,7 @@ public interface IExternoMapper extends IMantenibleMapper<Externo> {
             + "#{operacion, jdbcType = VARCHAR, mode = IN},"
             + "#{operacionParam, jdbcType = VARCHAR, mode = IN},"
             + "#{objeto.persona.idPersona, jdbcType = INTEGER, mode = IN},"
-            + "#{objeto.estadoExterno, jdbcType = VARCHAR, mode = IN},"
+            + "#{objeto.idEstadoTabla, jdbcType = INTEGER, mode = IN},"
             + "#{userAudit, jdbcType = VARCHAR, mode = IN})}" })
 	@Options (statementType = StatementType.CALLABLE)
 	 public List<Externo> mantener (Parametro parametro);

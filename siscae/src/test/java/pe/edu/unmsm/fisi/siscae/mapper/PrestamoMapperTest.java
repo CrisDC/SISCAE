@@ -33,7 +33,7 @@ public class PrestamoMapperTest {
 		prestamo.setIdPrestamo(1);
 		prestamo.setFecha(new Date(1995, 07, 04));
 		prestamo.setHoraEntrada(lcl);
-		prestamo.setEstadoPrestamo("ocupado");
+		prestamo.setIdEstadoTabla(3);
 		prestamo.setIdRecurso(1);
 		prestamo.setIdAdministrativo(1);
 		prestamo.setIdPersona(1);

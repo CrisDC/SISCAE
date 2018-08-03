@@ -14,9 +14,9 @@ import lombok.NoArgsConstructor;
 		
 		private Persona persona;
 		private String codigoAlumno;
-		private String estadoAlumno;
-		private int idTipoAcademico;
-		private int idEscuela;
+		private Integer idEstadoTabla;
+		private Integer idTipoAcademico;
+		private Integer idEscuela;
 		private Date fechaRegistro;
 		private String usuarioRegistro;
 		private Date fechaModificacion;

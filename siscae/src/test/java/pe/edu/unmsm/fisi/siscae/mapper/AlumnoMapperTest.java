@@ -29,7 +29,7 @@ public class AlumnoMapperTest {
 		personaTest.setIdPersona(2);
 		alumnoTest.setPersona(personaTest);
 		alumnoTest.setCodigoAlumno("16200197");
-		alumnoTest.setEstadoAlumno("ACTIVO");
+		alumnoTest.setIdEstadoTabla(1);
 		alumnoTest.setIdTipoAcademico(1);
 		alumnoTest.setIdEscuela(1);
 		
@@ -42,7 +42,7 @@ public class AlumnoMapperTest {
 		alumnos = alumnoMapper.mantener(operacion);
 		alumnos.forEach(System.out::println);
 		
-		alumnoTest.setEstadoAlumno("INACTIVO");
+		alumnoTest.setIdEstadoTabla(2);
 		operacion.setOperacion(Operacion.UPDATE.name());
 		alumnos = alumnoMapper.mantener(operacion);
 		alumnos.forEach(System.out::println);

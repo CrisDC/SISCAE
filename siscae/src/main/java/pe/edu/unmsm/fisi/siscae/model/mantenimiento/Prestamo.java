@@ -36,9 +36,7 @@ public class Prestamo {
 	private LocalTime horaSalida;
 	
 	@NotNull(message = "{NotNull.Prestamo.estadoPrestamo}")
-    @NotBlank(message = "{NotBlank.Prestamo.estadoPrestamo}")
-    @Length(min = 3, max = 20, message = "{Length.CodigoProcesoSwitch.estadoPrestamo}")
-	private String estadoPrestamo;
+	private Integer idEstadoTabla;
 	
 	private Integer idRecurso;
 	

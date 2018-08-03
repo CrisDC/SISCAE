@@ -27,7 +27,7 @@ public class DocenteServiceTest {
 		Docente docenteTest = new Docente();
 		personaTest.setIdPersona(4);
 		docenteTest.setPersona(personaTest);
-		docenteTest.setEstadoDocente("ACTIVO");
+		docenteTest.setIdEstadoTabla(1);
 		
 		List<Docente> docentes = docenteService.buscarTodos();
 		docentes.forEach(System.out::println);
@@ -37,7 +37,7 @@ public class DocenteServiceTest {
 		
 		docenteService.registrarDocente(docenteTest);
 		
-		docenteTest.setEstadoDocente("INACTIVO");
+		docenteTest.setIdEstadoTabla(2);
 		docenteService.actualizarDocente(docenteTest);
 		
 		docenteService.eliminarDocente(docenteTest);

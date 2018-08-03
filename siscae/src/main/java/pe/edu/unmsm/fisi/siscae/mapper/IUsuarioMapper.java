@@ -18,7 +18,7 @@ public interface IUsuarioMapper extends IMantenibleMapper<Usuario>
 			+ "#{objeto.idUsuario, jdbcType = INTEGER, mode = IN},"
 			+ "#{objeto.username, jdbcType = VARCHAR, mode = IN},"
 			+ "#{objeto.pass, jdbcType = VARCHAR, mode = IN},"
-			+ "#{objeto.estado, jdbcType = VARCHAR, mode = IN},"
+			+ "#{objeto.idEstadoTabla, jdbcType = INTEGER, mode = IN},"
 			+ "#{objeto.idRol, jdbcType = INTEGER, mode = IN},"
 			+ "#{objeto.idPersona, jdbcType = INTEGER, mode = IN})}"} )
 	@Options(statementType = StatementType.CALLABLE)

@@ -25,10 +25,7 @@ public class Docente {
 	private Persona persona;
 	
 	@NotNull(message = "{NotNull.Docente.estadoDocente}")
-	@NotBlank(message = "{NotBlank.Docente.estadoDocente}")
-	@Length(min = 5, max = 20, message = "{Length.Docente.estadoDocente}", groups = IBasico.class)
-	@Pattern(regexp = Regex.SOLO_LETRAS_A_a, message = "{Pattern.Docente.estadoDocente}")
-	private String estadoDocente;
+	private Integer idEstadoTabla;
 	
 	private Date fechaRegistro;
 	

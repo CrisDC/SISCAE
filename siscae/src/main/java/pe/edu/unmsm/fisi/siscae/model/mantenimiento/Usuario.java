@@ -30,9 +30,7 @@ public class Usuario {
 	private String pass;
 	
 	@NotNull(message = "{NotNull.Usuario.estado}")
-    @NotBlank(message = "{NotBlank.Usuario.estado}")
-    @Length(min = 3, max = 20, message = "{Length.CodigoProcesoSwitch.estado}")
-	private String estado;
+	private Integer idEstadoTabla;
 	
 	private Integer idRol;
 	
