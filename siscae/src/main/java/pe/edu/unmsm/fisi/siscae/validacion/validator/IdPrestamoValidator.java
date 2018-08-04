@@ -34,13 +34,13 @@ public class IdPrestamoValidator implements ConstraintValidator<IdPrestamo,Integ
 
 		if (idPrestamo == null)
         {
-            ValidatorUtil.addCustomMessageWithTemplate("{NotNull.Empresa.idEmpresa}", context);
+            ValidatorUtil.addCustomMessageWithTemplate("{NotNull.Prestamo.idPrestamo}", context);
             return false;
         }
         
         if (idPrestamo >= max && idPrestamo <= min)
         {
-            ValidatorUtil.addCustomMessageWithTemplate("{Range.Empresa.idEmpresa}", context);
+            ValidatorUtil.addCustomMessageWithTemplate("{Range.Prestamo.idPrestamo}", context);
             return false;
         }
         boolean existePrestamo = prestamoService.existePrestamo(idPrestamo);

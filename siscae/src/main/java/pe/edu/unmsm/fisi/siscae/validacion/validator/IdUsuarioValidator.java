@@ -34,13 +34,13 @@ public class IdUsuarioValidator implements ConstraintValidator<IdUsuario,Integer
 
 		if (idUsuario == null)
         {
-            ValidatorUtil.addCustomMessageWithTemplate("{NotNull.Empresa.idEmpresa}", context);
+            ValidatorUtil.addCustomMessageWithTemplate("{NotNull.Usuario.idUsuario}", context);
             return false;
         }
         
         if (idUsuario >= max && idUsuario <= min)
         {
-            ValidatorUtil.addCustomMessageWithTemplate("{Range.Empresa.idEmpresa}", context);
+            ValidatorUtil.addCustomMessageWithTemplate("{Range.Usuario.idUsuario}", context);
             return false;
         }
         boolean existeUsuario = usuarioService.existeUsuario(idUsuario);

@@ -36,13 +36,13 @@ public class IdMaterialValidator implements ConstraintValidator<IdMaterial,Integ
 
 		if (idMaterial == null)
         {
-            ValidatorUtil.addCustomMessageWithTemplate("{NotNull.Empresa.idEmpresa}", context);
+            ValidatorUtil.addCustomMessageWithTemplate("{NotNull.Material.idMaterial}", context);
             return false;
         }
         
         if (idMaterial >= max && idMaterial <= min)
         {
-            ValidatorUtil.addCustomMessageWithTemplate("{Range.Empresa.idEmpresa}", context);
+            ValidatorUtil.addCustomMessageWithTemplate("{Range.Material.idMaterial}", context);
             return false;
         }
         boolean existeMaterial = materialService.existeMaterial(idMaterial);

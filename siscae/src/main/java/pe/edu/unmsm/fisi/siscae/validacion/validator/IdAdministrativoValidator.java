@@ -35,13 +35,13 @@ public class IdAdministrativoValidator implements ConstraintValidator<IdAdminist
 
 		if (idAdministrativo == null)
         {
-            ValidatorUtil.addCustomMessageWithTemplate("{NotNull.Empresa.idEmpresa}", context);
+            ValidatorUtil.addCustomMessageWithTemplate("{NotNull.Administrativo.idAdministrativo}", context);
             return false;
         }
         
         if (idAdministrativo >= max && idAdministrativo <= min)
         {
-            ValidatorUtil.addCustomMessageWithTemplate("{Range.Empresa.idEmpresa}", context);
+            ValidatorUtil.addCustomMessageWithTemplate("{Range.Administrativo.idAdministrativo}", context);
             return false;
         }
         boolean existeAdministrativo = administrativoService.existeAdministrativo(idAdministrativo);
