@@ -21,7 +21,7 @@ import pe.edu.unmsm.fisi.siscae.service.IAreaAdministrativoService;
 @RunWith(SpringJUnit4ClassRunner.class)
 public class AreaAdministrativoServiceTest {
 
-	private @Autowired IAreaAdministrativoService areaAdministrativoService;
+private @Autowired IAreaAdministrativoService areaAdministrativoService;
 	
 	@Test
 	public void test(){
@@ -33,6 +33,7 @@ public class AreaAdministrativoServiceTest {
 	@Test
 	public void registrarAreaAdministrativoTest(){
 		AreaAdministrativo areaAdministrativoTest= new AreaAdministrativo();
+		areaAdministrativoTest.setIdAreaAdministrativo(1);
 		areaAdministrativoTest.setIdAdministrativo(1);
 		areaAdministrativoTest.setIdAreaEstudio(2);
 		areaAdministrativoTest.setFechaInicio(new Date());
@@ -40,7 +41,7 @@ public class AreaAdministrativoServiceTest {
 		areaAdministrativoService.registrarAreaAdministrativo(areaAdministrativoTest);
 		
 		//Comprobacion de que si agrego
-		assertTrue(areaAdministrativoService.existeAreaAdministrativo(areaAdministrativoTest.getIdAdministrativo(),areaAdministrativoTest.getIdAreaEstudio()));
+		assertTrue(areaAdministrativoService.existeAreaAdministrativo(areaAdministrativoTest.getIdAreaAdministrativo()));
 	}
 	
 	@Test
@@ -55,7 +56,7 @@ public class AreaAdministrativoServiceTest {
 	@Test
 	public void buscarPorIdAreaAdministrativoTest(){// puede ser tamaño uno 
 		
-		List<AreaAdministrativo> areasAdministrativo= areaAdministrativoService.buscarPorIdAreaAdministrativo(1,2);
+		List<AreaAdministrativo> areasAdministrativo= areaAdministrativoService.buscarPorIdAreaAdministrativo(1);
 		areasAdministrativo.stream().forEach(areaAdministrativo -> {
             System.out.println(areaAdministrativo.toString());
         });
@@ -63,7 +64,7 @@ public class AreaAdministrativoServiceTest {
 	@Test
 	public void existeAreaAdministrativoTest(){
 		
-		assertTrue(areaAdministrativoService.existeAreaAdministrativo(1,2));// el id ingresado de arriba
+		assertTrue(areaAdministrativoService.existeAreaAdministrativo(1));// el id ingresado de arriba
 	}
 	
 	@Test
@@ -82,13 +83,14 @@ public class AreaAdministrativoServiceTest {
 	@Test
 	public void eliminarAreaAdministrativo(){
 		AreaAdministrativo areaAdministrativoTest= new AreaAdministrativo();
+		areaAdministrativoTest.setIdAreaAdministrativo(1);
 		areaAdministrativoTest.setIdAdministrativo(1);
 		areaAdministrativoTest.setIdAreaEstudio(4);
 		areaAdministrativoTest.setFechaInicio(new Date());
 		areaAdministrativoTest.setCargo("administrador2");
 		areaAdministrativoService.registrarAreaAdministrativo(areaAdministrativoTest);
 		areaAdministrativoService.eliminarAreaAdministrativo(areaAdministrativoTest);
-		assertFalse(areaAdministrativoService.existeAreaAdministrativo(areaAdministrativoTest.getIdAdministrativo(),areaAdministrativoTest.getIdAreaEstudio()));
+		assertFalse(areaAdministrativoService.existeAreaAdministrativo(areaAdministrativoTest.getIdAreaAdministrativo()));
 	
 	}
 	

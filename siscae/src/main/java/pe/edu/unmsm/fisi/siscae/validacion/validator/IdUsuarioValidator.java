@@ -17,7 +17,7 @@ public class IdUsuarioValidator implements ConstraintValidator<IdUsuario,Integer
     private int min;
     private boolean existe;
 
-    private @Autowired IUsuarioService usuarioService;//xd
+    private @Autowired IUsuarioService usuarioService;
 
 
     public void initialize(IdUsuario anotacion)

@@ -14,19 +14,19 @@ import pe.edu.unmsm.fisi.siscae.configuracion.ServiceConfiguration;
 import pe.edu.unmsm.fisi.siscae.model.mantenimiento.AreaAdministrativo;
 import pe.edu.unmsm.fisi.siscae.model.parametro.Parametro;
 import pe.edu.unmsm.fisi.siscae.utilitario.Operacion;
-import pe.edu.unmsm.fisi.siscae.utilitario.Operacion.OperacionParam;
 
 @ContextConfiguration(classes = { ServiceConfiguration.class, PersistenceConfiguration.class })
 @RunWith(SpringJUnit4ClassRunner.class)
 public class AreaAdministrativoMapperTest {
 
-	private @Autowired IAreaAdministrativoMapper areaAdministrativoMapper;
+private @Autowired IAreaAdministrativoMapper areaAdministrativoMapper;
 	
 	@Test
 	public void mantenerTipoGetTest(){
 
 		
 		AreaAdministrativo areaAdministrativoTest= new AreaAdministrativo();
+		areaAdministrativoTest.setIdAreaAdministrativo(1);
 		areaAdministrativoTest.setIdAdministrativo(1);
 		areaAdministrativoTest.setIdAreaEstudio(1);
 		areaAdministrativoTest.setFechaInicio(new Date());

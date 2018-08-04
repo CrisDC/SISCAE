@@ -15,6 +15,7 @@ import pe.edu.unmsm.fisi.siscae.model.mantenimiento.Horario;
 import pe.edu.unmsm.fisi.siscae.service.IHorarioService;
 import pe.edu.unmsm.fisi.siscae.service.impl.MantenibleService;
 import pe.edu.unmsm.fisi.siscae.utilitario.Operacion;
+import pe.edu.unmsm.fisi.siscae.utilitario.Operacion.OperacionParam;
 
 @Service
 public class HorarioService extends MantenibleService<Horario> implements IHorarioService {
@@ -36,7 +37,7 @@ public class HorarioService extends MantenibleService<Horario> implements IHorar
 	@Transactional(propagation=Propagation.REQUIRED)
 	public List<Horario> buscarPorIdHorario(Integer idHorario) {
 		Horario horario= Horario.builder().idHorario(idHorario).build();
-		return this.buscar(horario,Operacion.SELECT);
+		return this.buscar(horario,Operacion.SELECT,OperacionParam.PRIMARY_KEY);
 	}
 
 	@Transactional(propagation=Propagation.REQUIRED)

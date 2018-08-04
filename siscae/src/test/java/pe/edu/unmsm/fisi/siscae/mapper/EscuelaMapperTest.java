@@ -45,6 +45,4 @@ public class EscuelaMapperTest {
 		operacion.setOperacion(Operacion.DELETE.name());
 		escuelas = escuelaMapper.mantener(operacion);
 		escuelas.forEach(System.out::println);
-	}
-
-}
+	}}

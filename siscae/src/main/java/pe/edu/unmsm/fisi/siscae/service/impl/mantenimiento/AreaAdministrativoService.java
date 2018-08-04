@@ -13,6 +13,7 @@ import pe.edu.unmsm.fisi.siscae.model.mantenimiento.AreaAdministrativo;
 import pe.edu.unmsm.fisi.siscae.service.IAreaAdministrativoService;
 import pe.edu.unmsm.fisi.siscae.service.impl.MantenibleService;
 import pe.edu.unmsm.fisi.siscae.utilitario.Operacion;
+import pe.edu.unmsm.fisi.siscae.utilitario.Operacion.OperacionParam;
 
 @Service
 public class AreaAdministrativoService extends MantenibleService<AreaAdministrativo>
@@ -34,17 +35,16 @@ public class AreaAdministrativoService extends MantenibleService<AreaAdministrat
 	}
 
 	@Transactional(propagation = Propagation.REQUIRES_NEW)
-	public List<AreaAdministrativo> buscarPorIdAreaAdministrativo(Integer idAreaEstudio,Integer idAdministrativo) {
-		AreaAdministrativo areaAdministrativo = AreaAdministrativo.builder().build();
-		areaAdministrativo.setIdAreaEstudio(idAreaEstudio);
-		areaAdministrativo.setIdAdministrativo(idAdministrativo);
-		return this.buscar(areaAdministrativo, Operacion.SELECT);
+	public List<AreaAdministrativo> buscarPorIdAreaAdministrativo(Integer idAreaAdministrativo) {
+		AreaAdministrativo areaAdministrativo = AreaAdministrativo.builder().idAreaAdministrativo(idAreaAdministrativo).build();
+		
+		return this.buscar(areaAdministrativo, Operacion.SELECT,OperacionParam.PRIMARY_KEY);
 	}
 
 	@Transactional(propagation = Propagation.REQUIRED)
-	public boolean existeAreaAdministrativo(Integer idAreaEstudio,Integer idAdministrativo) {
+	public boolean existeAreaAdministrativo(Integer idAreaAdministrativo) {
 
-		return !this.buscarPorIdAreaAdministrativo( idAreaEstudio, idAdministrativo).isEmpty();
+		return !this.buscarPorIdAreaAdministrativo(idAreaAdministrativo).isEmpty();
 	}
 
 	@Transactional(propagation = Propagation.REQUIRES_NEW)
@@ -64,5 +64,4 @@ public class AreaAdministrativoService extends MantenibleService<AreaAdministrat
 		this.eliminar(areaAdministrativo);
 
 	}
-
 }
