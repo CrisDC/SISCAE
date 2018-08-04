@@ -20,7 +20,7 @@ import pe.edu.unmsm.fisi.siscae.service.impl.mantenimiento.UsuarioService;
 
 public class UsuarioServiceTest {
 
-	private @Autowired UsuarioService usuarioService;
+	private @Autowired UsuarioService usuarioService;//xd
 	
 	@Test
     public void test()

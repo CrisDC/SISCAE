@@ -17,7 +17,7 @@ public class IdPrestamoValidator implements ConstraintValidator<IdPrestamo,Integ
     private int min;
     private boolean existe;
 
-    private @Autowired IPrestamoService prestamoService;//xd
+    private @Autowired IPrestamoService prestamoService;
 
 
     

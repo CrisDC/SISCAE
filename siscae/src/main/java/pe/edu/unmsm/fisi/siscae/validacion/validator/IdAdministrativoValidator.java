@@ -19,7 +19,7 @@ public class IdAdministrativoValidator implements ConstraintValidator<IdAdminist
     private int min;
     private boolean existe;
 
-    private @Autowired IAdministrativoService administrativoService;//xd
+    private @Autowired IAdministrativoService administrativoService;
 
 
     public void initialize(IdAdministrativo anotacion)
