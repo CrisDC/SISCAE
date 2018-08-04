@@ -8,9 +8,9 @@ import pe.edu.unmsm.fisi.siscae.model.mantenimiento.AreaAdministrativo;
 public interface IAreaAdministrativoService extends IMantenibleService<AreaAdministrativo>{
 	public List<AreaAdministrativo> buscarTodos();
 
-    public List<AreaAdministrativo> buscarPorIdAreaAdministrativo(Integer idAreaEstudio,Integer idAdministrativo);
+    public List<AreaAdministrativo> buscarPorIdAreaAdministrativo(Integer idAreaAdministrativo);
 
-    public boolean existeAreaAdministrativo(Integer idAreaEstudio,Integer idAdministrativo);
+    public boolean existeAreaAdministrativo(Integer  idAreaAdministrativo);
 
     public void registrarAreaAdministrativo(AreaAdministrativo areaAdministrativo);
 

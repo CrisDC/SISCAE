@@ -20,7 +20,7 @@ import pe.edu.unmsm.fisi.siscae.validacion.validator.IdHorarioValidator;
 @Retention(RetentionPolicy.RUNTIME)
 @Repeatable(IdHorario.List.class)
 public @interface IdHorario {
-	String message() default "{NoExiste.Empresa.idHorario}";
+	String message() default "{NoExiste.Horario.idHorario}";
 	boolean existe();
 	int esPos() default Integer.MIN_VALUE;
 

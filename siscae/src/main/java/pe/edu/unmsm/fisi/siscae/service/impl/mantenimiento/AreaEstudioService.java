@@ -34,7 +34,7 @@ public class AreaEstudioService extends MantenibleService<AreaEstudio> implement
 	public List<AreaEstudio> buscarPorIdAreaEstudio(Integer idAreaEstudio) {
 		AreaEstudio areaEstudio = AreaEstudio.builder().idAreaEstudio(idAreaEstudio).build();
 		
-		return this.buscar(areaEstudio, Operacion.SELECT);
+		return this.buscar(areaEstudio, Operacion.SELECT,OperacionParam.PRIMARY_KEY);
 	}
 
 	@Transactional(propagation = Propagation.REQUIRED)

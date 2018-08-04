@@ -5,13 +5,9 @@ import javax.validation.ConstraintValidatorContext;
 
 import org.springframework.beans.factory.annotation.Autowired;
 
-import pe.edu.unmsm.fisi.siscae.model.mantenimiento.AreaEstudio;
 import pe.edu.unmsm.fisi.siscae.service.IAreaEstudioService;
-import pe.edu.unmsm.fisi.siscae.service.IHorarioService;
 import pe.edu.unmsm.fisi.siscae.utilitario.ValidatorUtil;
-import pe.edu.unmsm.fisi.siscae.validacion.CodigoInstitucion;
 import pe.edu.unmsm.fisi.siscae.validacion.IdAreaEstudio;
-import pe.edu.unmsm.fisi.siscae.validacion.IdHorario;
 
 public class IdAreaEstudioValidator implements ConstraintValidator<IdAreaEstudio, Integer> {
 	private int max;

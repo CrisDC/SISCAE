@@ -10,17 +10,17 @@ import java.lang.annotation.Target;
 import javax.validation.Constraint;
 import javax.validation.Payload;
 
-import pe.edu.unmsm.fisi.siscae.validacion.validator.IdAreaEstudioValidator;
+import pe.edu.unmsm.fisi.siscae.validacion.validator.IdEscuelaValidator;
 
 @Documented
-@Constraint(validatedBy = IdAreaEstudioValidator.class)
+
+@Constraint(validatedBy = IdEscuelaValidator.class)
 @Target({ ElementType.ANNOTATION_TYPE, ElementType.FIELD, ElementType.PARAMETER,
     ElementType.TYPE_USE })
 @Retention(RetentionPolicy.RUNTIME)
-@Repeatable(IdAreaEstudio.List.class)
-public @interface IdAreaEstudio {
-
-	String message() default "{NoExiste.AreaEstudio.IdAreaEstudio}";
+@Repeatable(IdEscuela.List.class)
+public @interface IdEscuela {
+	String message() default "{NoExiste.Escuela.idEscuela}";
 	boolean existe();
 	int esPos() default Integer.MIN_VALUE;
 
@@ -28,13 +28,12 @@ public @interface IdAreaEstudio {
     Class<?>[] groups() default {};
 
     Class<? extends Payload>[] payload() default {};
-    
     @Documented
     @Target({ ElementType.ANNOTATION_TYPE, ElementType.FIELD, ElementType.PARAMETER,
             ElementType.TYPE_USE })
     @Retention(RetentionPolicy.RUNTIME)
     @interface List
     {
-    	IdAreaEstudio[] value();
+        IdEscuela[] value();
     }
 }

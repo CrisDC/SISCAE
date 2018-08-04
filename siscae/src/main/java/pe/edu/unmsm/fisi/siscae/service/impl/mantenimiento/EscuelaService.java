@@ -62,6 +62,7 @@ public class EscuelaService extends MantenibleService<Escuela> implements IEscue
 		 this.eliminar(escuela);
 	}
 
+}
     
     
     
@@ -89,4 +90,4 @@ public class EscuelaService extends MantenibleService<Escuela> implements IEscue
     
     
   
-}
+
