@@ -1,18 +1,18 @@
 package pe.edu.unmsm.fisi.siscae.model.mantenimiento;
 
 import javax.validation.constraints.NotNull;
-
+import java.util.Date;
 import org.hibernate.validator.constraints.Length;
 import org.hibernate.validator.constraints.NotBlank;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
-import com.sun.star.bridge.oleautomation.Date;
+
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import pe.edu.unmsm.fisi.siscae.model.mantenimiento.Empresa.EmpresaBuilder;
+
 @Data
 @Builder
 @NoArgsConstructor
