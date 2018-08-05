@@ -10,31 +10,42 @@ import java.lang.annotation.Target;
 import javax.validation.Constraint;
 import javax.validation.Payload;
 
-import pe.edu.unmsm.fisi.siscae.validacion.validator.IdAreaEstudioValidator;
+import pe.edu.unmsm.fisi.siscae.validacion.validator.IdUsuarioValidator;
+
 
 @Documented
-@Constraint(validatedBy = IdAreaEstudioValidator.class)
+@Constraint(validatedBy = IdUsuarioValidator.class)
 @Target({ ElementType.ANNOTATION_TYPE, ElementType.FIELD, ElementType.PARAMETER,
     ElementType.TYPE_USE })
 @Retention(RetentionPolicy.RUNTIME)
-@Repeatable(IdAreaEstudio.List.class)
-public @interface IdAreaEstudio {
+@Repeatable(IdUsuario.List.class)
+public @interface IdUsuario {
 
-	String message() default "{NoExiste.AreaEstudio.IdAreaEstudio}";
-	boolean existe();
-	int esPos() default Integer.MIN_VALUE;
+	
+	String message() default "{NoExiste.Usuario.idUsuario}";
+	
+	
+	
+	 boolean existe();
 
-    int max() default Integer.MAX_VALUE/2;
-    Class<?>[] groups() default {};
+	 int esPos() default 0;
 
-    Class<? extends Payload>[] payload() default {};
-    
-    @Documented
+	 int max() default 4;//xd
+
+	 
+
+	    Class<?>[] groups() default {};
+
+	    Class<? extends Payload>[] payload() default {};
+
+	
+	
+	@Documented
     @Target({ ElementType.ANNOTATION_TYPE, ElementType.FIELD, ElementType.PARAMETER,
             ElementType.TYPE_USE })
     @Retention(RetentionPolicy.RUNTIME)
     @interface List
     {
-    	IdAreaEstudio[] value();
+		IdUsuario[] value();
     }
 }

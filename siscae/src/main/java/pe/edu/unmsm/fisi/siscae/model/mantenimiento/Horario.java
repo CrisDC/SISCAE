@@ -5,15 +5,22 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import pe.edu.unmsm.fisi.siscae.utilitario.Regex;
+
 import java.time.LocalTime;
 import java.util.Date;
 
 import javax.validation.constraints.Digits;
+import javax.validation.constraints.Max;
+import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.PastOrPresent;
+import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
 import org.hibernate.validator.constraints.Length;
 import org.hibernate.validator.constraints.NotBlank;
+
+import com.fasterxml.jackson.annotation.JsonFormat;
 
 @Data
 @Builder
@@ -21,7 +28,7 @@ import org.hibernate.validator.constraints.NotBlank;
 @AllArgsConstructor
 public class Horario {
 	
-	private  Integer idHorario;
+private  Integer idHorario;
 	
 	@NotNull(message = "{NotNull.Horario.hora_inicio}")
 	private  LocalTime horaInicio;
@@ -29,39 +36,62 @@ public class Horario {
 	@NotNull(message = "{NotNull.Horario.hora_fin}")
 	private LocalTime horaFin;
 	
-	@NotNull(message = "{NotNull.Horario.estado}")
-	private boolean estado;
-	
 	@Digits(integer=4, fraction=2)
-	private Double tiempoMax;
+	private double tiempoMax;
 	
+	@Size(min=3, max=60)
+	@Length(min = 3, max = 60)
+	@NotBlank(message = "{NotBlank.Horario.descripcion}")
+	@Pattern(regexp = Regex.ALFANUMERICO, message = "{Pattern.Horario.descripcion}")
 	private String descripcion;
 	
+	
+	@Min(1)
+	@Max(Integer.MAX_VALUE/2)
+	@Pattern(regexp = Regex.SOLO_DIGITOS, message = "{Pattern.Horario.id_estado_tabla}")
 	private Integer idEstadoTabla;
 	
+	@Min(1)
+	@Max(Integer.MAX_VALUE/2)
+	@Pattern(regexp = Regex.SOLO_DIGITOS, message = "{Pattern.Horario.id_turno}")
 	private Integer idTurno;
+	
+	@Min(1)
+	@Max(Integer.MAX_VALUE/2)
+	@Pattern(regexp = Regex.SOLO_DIGITOS, message = "{Pattern.Horario.id_dia}")
 	private Integer idDia;
+	
+	@Min(1)
+	@Max(Integer.MAX_VALUE/2)
+	@Pattern(regexp = Regex.SOLO_DIGITOS, message = "{Pattern.Horario.id_tipo_horario}")
 	private Integer idTipoHorario;
+	
+	@Min(1)
+	@Max(Integer.MAX_VALUE/2)
+	@Pattern(regexp = Regex.SOLO_DIGITOS, message = "{Pattern.Horario.id_area_estudio}")
 	private Integer idAreaEstudio;
 	
-	@NotNull(message = "{NotNull.Horario.fecha_registro}")
 	@PastOrPresent
+	@NotNull(message = "{NotNull.Horario.fecha_registro}")
+	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd", timezone = "EST")
 	private Date fechaRegistro;
 	
+	@Size(min=3, max=45)
+	@Length(min = 3, max = 45)
 	@NotNull(message = "{NotNull.Horario.usuario_registro}")
 	@NotBlank(message = "{NotBlank.Horario.usuario_registro}")
-	@Size(min=3, max=45)
-	@Length(min = 3, max = 45)
 	private String usuarioRegistro;
 	
-	@NotNull(message = "{NotNull.Horario.fecha_modificacion}")
 	@PastOrPresent
+	@NotNull(message = "{NotNull.Horario.fecha_modificacion}")
+	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd", timezone = "EST")
 	private Date fechaModificacion;
 	
-	@NotNull(message = "{NotNull.Horario.usuario_modificacion}")
-	@NotBlank(message = "{NotBlank.Horario.usuario_modificacion}")
 	@Size(min=3, max=45)
 	@Length(min = 3, max = 45)
+	@NotNull(message = "{NotNull.Horario.usuario_modificacion}")
+	@NotBlank(message = "{NotBlank.Horario.usuario_modificacion}")
+	@Pattern(regexp = Regex.ALFANUMERICO, message = "{Pattern.Horario.usuario_modificacion}")
 	private String usuarioModificacion;
 		
 }

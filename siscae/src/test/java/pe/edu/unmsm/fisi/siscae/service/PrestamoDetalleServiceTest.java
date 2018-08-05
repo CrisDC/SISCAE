@@ -20,7 +20,7 @@ import pe.edu.unmsm.fisi.siscae.model.mantenimiento.PrestamoDetalle;
 @RunWith(SpringJUnit4ClassRunner.class)
 public class PrestamoDetalleServiceTest {
 	private @Autowired IPrestamoDetalleService prestamoDetalleService;
-	/*
+	
 	@Test
 	public void registrarPrestamoDetalleTest(){
 		PrestamoDetalle prestamoDetalleTest= new PrestamoDetalle();
@@ -43,7 +43,7 @@ public class PrestamoDetalleServiceTest {
         });
 		
 	}
-	*/
+	
 	@Test
 	public void buscarPorIdPrestamoDetalleTest(){// puede ser tamaño uno 
 		
@@ -63,7 +63,6 @@ public class PrestamoDetalleServiceTest {
 		prestamoDetalleTest.setIdPrestamo(3);
 		prestamoDetalleTest.setIdMaterial(2);
 		prestamoDetalleTest.setHoraEntrega(LocalTime.now());
-		prestamoDetalleTest.setHoraDevolucion(LocalTime.now());
 		prestamoDetalleService.registrarPrestamoDetalle(prestamoDetalleTest);
 		
 		prestamoDetalleTest.setHoraEntrega(LocalTime.now());
@@ -77,7 +76,6 @@ public class PrestamoDetalleServiceTest {
 		prestamoDetalleTest.setIdPrestamo(4);
 		prestamoDetalleTest.setIdMaterial(2);
 		prestamoDetalleTest.setHoraEntrega(LocalTime.now());
-		prestamoDetalleTest.setHoraDevolucion(LocalTime.now());
 		prestamoDetalleService.registrarPrestamoDetalle(prestamoDetalleTest);
 		
 		prestamoDetalleService.eliminarPrestamoDetalle(prestamoDetalleTest);
@@ -85,5 +83,4 @@ public class PrestamoDetalleServiceTest {
 		
 
 	}
-	
 }

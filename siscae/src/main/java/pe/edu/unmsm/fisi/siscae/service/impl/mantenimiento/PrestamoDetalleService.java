@@ -13,6 +13,7 @@ import pe.edu.unmsm.fisi.siscae.model.mantenimiento.PrestamoDetalle;
 import pe.edu.unmsm.fisi.siscae.service.IPrestamoDetalleService;
 import pe.edu.unmsm.fisi.siscae.service.impl.MantenibleService;
 import pe.edu.unmsm.fisi.siscae.utilitario.Operacion;
+import pe.edu.unmsm.fisi.siscae.utilitario.Operacion.OperacionParam;
 @Service
 public class PrestamoDetalleService extends MantenibleService<PrestamoDetalle> implements IPrestamoDetalleService {
 	private IPrestamoDetalleMapper prestamoDetalleMapper;
@@ -34,7 +35,7 @@ public List<PrestamoDetalle> buscarPorIdPrestamoDetalle(Integer idPrestamo, Inte
 	PrestamoDetalle prestamoDetalle= PrestamoDetalle.builder().build();
 	prestamoDetalle.setIdMaterial(idMaterial);
 	prestamoDetalle.setIdPrestamo(idPrestamo);
-	return this.buscar(prestamoDetalle,Operacion.SELECT);
+	return this.buscar(prestamoDetalle,Operacion.SELECT,OperacionParam.PRIMARY_KEY);
 }
 
 @Transactional(propagation=Propagation.REQUIRED)
@@ -57,8 +58,5 @@ public void actualizarPrestamoDetalle(PrestamoDetalle prestamoDetalle) {
 @Transactional(propagation = Propagation.REQUIRES_NEW)
 public void eliminarPrestamoDetalle(PrestamoDetalle prestamoDetalle) {
 	this.eliminar( prestamoDetalle);
-	
-}
 
-
-}
+}}

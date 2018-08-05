@@ -25,7 +25,7 @@ public class PersonaMapperTest {
 	public void mantenerTipoGetTest() {
 
 		Persona personaTest = new Persona();
-		personaTest.setIdPersona(5);
+		personaTest.setIdPersona(1);
 		personaTest.setNumDocumento("73094338");
 		personaTest.setNombre("PERSONA DE PRUEBA");
 		personaTest.setAppPaterno("DE LA CRUZ");

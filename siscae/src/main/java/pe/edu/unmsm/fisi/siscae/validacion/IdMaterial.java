@@ -10,31 +10,40 @@ import java.lang.annotation.Target;
 import javax.validation.Constraint;
 import javax.validation.Payload;
 
-import pe.edu.unmsm.fisi.siscae.validacion.validator.IdAreaEstudioValidator;
+import pe.edu.unmsm.fisi.siscae.validacion.validator.IdMaterialValidator;
+
 
 @Documented
-@Constraint(validatedBy = IdAreaEstudioValidator.class)
+@Constraint(validatedBy = IdMaterialValidator.class)
 @Target({ ElementType.ANNOTATION_TYPE, ElementType.FIELD, ElementType.PARAMETER,
     ElementType.TYPE_USE })
 @Retention(RetentionPolicy.RUNTIME)
-@Repeatable(IdAreaEstudio.List.class)
-public @interface IdAreaEstudio {
+@Repeatable(IdMaterial.List.class)
+public @interface IdMaterial {
+	
+	String message() default "{NoExiste.Material.idMaterial}";
+	
+	
+	 boolean existe();
 
-	String message() default "{NoExiste.AreaEstudio.IdAreaEstudio}";
-	boolean existe();
-	int esPos() default Integer.MIN_VALUE;
+	 int esPos() default 0;
 
-    int max() default Integer.MAX_VALUE/2;
-    Class<?>[] groups() default {};
+	 int max() default 4;//xd
 
-    Class<? extends Payload>[] payload() default {};
-    
-    @Documented
+	 
+
+	    Class<?>[] groups() default {};
+
+	    Class<? extends Payload>[] payload() default {};
+
+	
+	@Documented
     @Target({ ElementType.ANNOTATION_TYPE, ElementType.FIELD, ElementType.PARAMETER,
             ElementType.TYPE_USE })
     @Retention(RetentionPolicy.RUNTIME)
     @interface List
     {
-    	IdAreaEstudio[] value();
+		IdMaterial[] value();
     }
+
 }

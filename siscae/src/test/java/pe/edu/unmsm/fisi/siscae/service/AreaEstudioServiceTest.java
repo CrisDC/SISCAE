@@ -19,9 +19,9 @@ import pe.edu.unmsm.fisi.siscae.service.IAreaEstudioService;
 @ContextConfiguration(classes = { ServiceConfiguration.class, PersistenceConfiguration.class })
 @RunWith(SpringJUnit4ClassRunner.class)
 public class AreaEstudioServiceTest {
-	private @Autowired IAreaEstudioService areaEstudioService;
+private @Autowired IAreaEstudioService areaEstudioService;
 	
-	/*
+	
 	@Test
 	public void registrarAreaEstudioTest(){
 		AreaEstudio areaEstudioTest = new AreaEstudio();
@@ -44,7 +44,6 @@ public class AreaEstudioServiceTest {
 	@Test
 	public void buscarPorIdAreaEstudio(){
 		List<AreaEstudio> areasEstudio= areaEstudioService.buscarPorIdAreaEstudio(11);
-		System.out.println("imprimire por id");
 		areasEstudio.stream().forEach(areaEstudio -> {
             System.out.println(areaEstudio.toString());
         });
@@ -69,7 +68,7 @@ public class AreaEstudioServiceTest {
 		areaEstudioTest.setNivel("SEGUNDO NIVEL");
 		areaEstudioService.actualizarAreaEstudio(areaEstudioTest);
 	}
-	*/
+	
 	@Test
 	public void eliminarAreaEstudio(){
 	
@@ -86,6 +85,5 @@ public class AreaEstudioServiceTest {
 		assertFalse(areaEstudioService.existeAreaEstudio(87));
 		
 	}
-	
 	
 }
