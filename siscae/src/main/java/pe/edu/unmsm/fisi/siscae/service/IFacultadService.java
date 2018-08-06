@@ -9,9 +9,9 @@ public interface IFacultadService extends IMantenibleService<Facultad>{
 	
 		public List<Facultad> buscarTodos();
 
-	    public List<Facultad> buscarPorIdFacultad(Integer idFacultad);
+	    public Facultad buscarPorId(Integer idFacultad);
 
-	    public boolean existeFacultad(Integer idFacultad);
+	    public boolean existe(Integer idFacultad);
 
 	    public void registrarFacultad(Facultad facultad);
 

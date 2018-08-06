@@ -45,7 +45,7 @@ public class IdMaterialValidator implements ConstraintValidator<IdMaterial,Integ
             ValidatorUtil.addCustomMessageWithTemplate("{Range.Material.idMaterial}", context);
             return false;
         }
-        boolean existeMaterial = materialService.existeMaterial(idMaterial);
+        boolean existeMaterial = materialService.existe(idMaterial);
         return existe ? existeMaterial : !existeMaterial;
 	}
     

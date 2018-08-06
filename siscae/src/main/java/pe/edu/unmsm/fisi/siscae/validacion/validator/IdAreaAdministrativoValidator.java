@@ -36,7 +36,7 @@ public class IdAreaAdministrativoValidator  implements ConstraintValidator<IdAre
             ValidatorUtil.addCustomMessageWithTemplate("{Range.AreaAdministrativo.idAreaAdministrativo}", context);
             return false;
         }
-        boolean existeAreaAdministrativo = areaAdministrativoService.existeAreaAdministrativo(idAreaAdministrativo);
+        boolean existeAreaAdministrativo = areaAdministrativoService.existe(idAreaAdministrativo);
         return existe ? existeAreaAdministrativo : !existeAreaAdministrativo;
 	}
 

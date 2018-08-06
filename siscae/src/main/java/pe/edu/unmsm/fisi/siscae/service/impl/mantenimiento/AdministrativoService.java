@@ -37,19 +37,20 @@ public class AdministrativoService extends MantenibleService<Administrativo> imp
 
 	@Override
 	@Transactional(propagation = Propagation.REQUIRED)
-	public List<Administrativo> buscarPorIdAdministrativo(Integer idAdministrativo) {
-
+	public Administrativo buscarPorId(Integer idAdministrativo) {
 		Administrativo administrativo = Administrativo.builder()
-				.persona(Persona.builder().idPersona(idAdministrativo).build()).build();
-
-		return this.buscar(administrativo, Operacion.SELECT, OperacionParam.PRIMARY_KEY);
+				.persona(Persona.builder().idPersona(idAdministrativo).build())
+				.build();
+		return super.buscarPorId(administrativo);
 	}
 
 	@Override
 	@Transactional(propagation = Propagation.REQUIRED)
-	public boolean existeAdministrativo(Integer idAdministrativo) {
-
-		return !this.buscarPorIdAdministrativo(idAdministrativo).isEmpty();
+	public boolean existe(Integer idAdministrativo) {
+		Administrativo administrativo = Administrativo.builder()
+				.persona(Persona.builder().idPersona(idAdministrativo).build())
+				.build();
+		return super.existe(administrativo);
 	}
 
 	@Override

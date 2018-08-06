@@ -8,9 +8,9 @@ public interface IEscuelaService extends IMantenibleService<Escuela>{
 	
 	public List<Escuela> buscarTodos();
 
-    public List<Escuela> buscarPorIdEscuela(Integer idEscuela);
+    public Escuela buscarPorId(Integer idEscuela);
 
-    public boolean existeEscuela(Integer idEscuela);
+    public boolean existe(Integer idEscuela);
 
     public void registrarEscuela(Escuela escuela);
 

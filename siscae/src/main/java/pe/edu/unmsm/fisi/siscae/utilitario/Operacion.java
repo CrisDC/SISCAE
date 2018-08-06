@@ -17,7 +17,9 @@ public enum Operacion
         LOGIN, 
         USUARIO,
         CODIGO_RPTA,
-        PRIMARY_KEY
+        PRIMARY_KEY,
+        ID_TABLA,
+        ID_ITEM
     }
     
     private OperacionParam parametro;

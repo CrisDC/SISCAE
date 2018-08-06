@@ -7,9 +7,9 @@ import pe.edu.unmsm.fisi.siscae.model.mantenimiento.Horario;
 public interface IHorarioService  extends IMantenibleService<Horario>{
 	public List<Horario> buscarTodos();
 
-    public List<Horario> buscarPorIdHorario(Integer idHorario);
+    public Horario buscarPorId(Integer idHorario);
 
-    public boolean existeHorario(Integer idHorario);
+    public boolean existe(Integer idHorario);
 
     public void registrarHorario(Horario horario);
 

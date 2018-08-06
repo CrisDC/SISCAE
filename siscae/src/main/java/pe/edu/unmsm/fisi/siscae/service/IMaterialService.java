@@ -11,9 +11,9 @@ public interface IMaterialService extends IMantenibleService<Material> {
 
 	public List<Material> buscarTodos();
 
-    public List<Material> buscarPorIdMaterial(Integer idMaterial);
+    public Material buscarPorId(Integer idMaterial);
 
-    public boolean existeMaterial(Integer idMaterial);
+    public boolean existe(Integer idMaterial);
 
     public void registrarMaterial(Material material);
 

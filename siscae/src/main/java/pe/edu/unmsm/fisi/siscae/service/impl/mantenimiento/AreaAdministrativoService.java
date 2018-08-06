@@ -35,16 +35,17 @@ public class AreaAdministrativoService extends MantenibleService<AreaAdministrat
 	}
 
 	@Transactional(propagation = Propagation.REQUIRES_NEW)
-	public List<AreaAdministrativo> buscarPorIdAreaAdministrativo(Integer idAreaAdministrativo) {
-		AreaAdministrativo areaAdministrativo = AreaAdministrativo.builder().idAreaAdministrativo(idAreaAdministrativo).build();
-		
-		return this.buscar(areaAdministrativo, Operacion.SELECT,OperacionParam.PRIMARY_KEY);
+	public AreaAdministrativo buscarPorId(Integer idAreaAdministrativo) {
+		AreaAdministrativo areaAdministrativo = AreaAdministrativo.builder().idAreaAdministrativo(idAreaAdministrativo)
+				.build();
+		return super.buscarPorId(areaAdministrativo);
 	}
 
 	@Transactional(propagation = Propagation.REQUIRED)
-	public boolean existeAreaAdministrativo(Integer idAreaAdministrativo) {
-
-		return !this.buscarPorIdAreaAdministrativo(idAreaAdministrativo).isEmpty();
+	public boolean existe(Integer idAreaAdministrativo) {
+		AreaAdministrativo areaAdministrativo = AreaAdministrativo.builder().idAreaAdministrativo(idAreaAdministrativo)
+				.build();
+		return super.existe(areaAdministrativo);
 	}
 
 	@Transactional(propagation = Propagation.REQUIRES_NEW)

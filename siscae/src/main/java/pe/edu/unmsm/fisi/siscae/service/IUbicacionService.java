@@ -8,9 +8,9 @@ public interface IUbicacionService extends IMantenibleService<Ubicacion> {
 
 	public List<Ubicacion> buscarTodos();
 
-	public List<Ubicacion> buscarPorIdUbicacion(Integer idUbicacion);
+	public Ubicacion buscarPorId(Integer idUbicacion);
 
-	public boolean existeUbicacion(Integer idUbicacion);
+	public boolean existe(Integer idUbicacion);
 
 	public void registrarUbicacion(Ubicacion ubicacion);
 

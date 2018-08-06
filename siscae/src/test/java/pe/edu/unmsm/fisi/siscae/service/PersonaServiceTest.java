@@ -37,8 +37,8 @@ public class PersonaServiceTest {
 		List<Persona> personas = personaService.buscarTodos();
 		personas.forEach(System.out::println);
 
-		personas = personaService.buscarPorIdPersona(1);
-		personas.forEach(System.out::println);
+		Persona persona = personaService.buscarPorId(1);
+		System.out.println(persona);
 
 		personaService.registrarPersona(personaTest);
 

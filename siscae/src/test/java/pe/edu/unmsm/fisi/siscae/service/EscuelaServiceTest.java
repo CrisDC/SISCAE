@@ -19,65 +19,65 @@ import pe.edu.unmsm.fisi.siscae.model.mantenimiento.Escuela;
 @RunWith(SpringJUnit4ClassRunner.class)
 public class EscuelaServiceTest {
 	private @Autowired IEscuelaService escuelaService;
+
 	@Test
-	public void registrarEscuelaTest(){
+	public void registrarEscuelaTest() {
 		Escuela escuelaTest = new Escuela();
 		escuelaTest.setIdEscuela(1);
 		escuelaTest.setNombre("Ingenieria de Sistemas");
 		escuelaTest.setIdFacultad(20);
 		escuelaService.registrarEscuela(escuelaTest);
-		assertTrue(escuelaService.existeEscuela(escuelaTest.getIdEscuela()));
-		
-		
+		assertTrue(escuelaService.existe(escuelaTest.getIdEscuela()));
 	}
+
 	@Test
-	public void buscarTodosTest(){
-		List<Escuela> escuelas= escuelaService.buscarTodos();
-		int foundSize= escuelas.size();
+	public void buscarTodosTest() {
+		List<Escuela> escuelas = escuelaService.buscarTodos();
+		int foundSize = escuelas.size();
 		System.out.println(foundSize);
 		escuelas.stream().forEach(escuela -> {
-            System.out.println(escuela.toString());
-        });
-		
+			System.out.println(escuela.toString());
+		});
+
 	}
+
 	@Test
-	public void buscarPorIdEscuelaTest(){// puede ser tamaño uno 
-		
-		List<Escuela> escuelas= escuelaService.buscarPorIdEscuela(1);
-		escuelas.stream().forEach(escuela -> {
-            System.out.println(escuela.toString());
-        });
+	public void buscarPorIdEscuelaTest() {// puede ser tamaño uno
+
+		Escuela escuela = escuelaService.buscarPorId(1);
+		System.out.println(escuela);
 	}
+
 	@Test
-	public void existeEscuelaTest(){
-		
-		assertTrue(escuelaService.existeEscuela(1));// el id ingresado de arriba
+	public void existeEscuelaTest() {
+
+		assertTrue(escuelaService.existe(1));// el id ingresado de arriba
 	}
-	
+
 	@Test
-	public void actualizarEscuelaTest(){
+	public void actualizarEscuelaTest() {
 		Escuela escuelaTest = new Escuela();
 		escuelaTest.setIdEscuela(2);
 		escuelaTest.setNombre("Ingenieria de Sistemas");
 		escuelaTest.setIdFacultad(20);
 		escuelaService.registrarEscuela(escuelaTest);
-		
+
 		escuelaTest.setIdEscuela(3);
 		escuelaService.actualizarEscuela(escuelaTest);
-		
+
 	}
+
 	@Test
-	public void eliminarEscuela(){
+	public void eliminarEscuela() {
 		Escuela escuelaTest = new Escuela();
 		escuelaTest.setIdEscuela(2);
 		escuelaTest.setNombre("Ingenieria de Sistemas");
 		escuelaTest.setIdFacultad(20);
 		escuelaService.registrarEscuela(escuelaTest);
-		
+
 		escuelaService.eliminarEscuela(escuelaTest);
-		assertFalse(escuelaService.existeEscuela(escuelaTest.getIdEscuela()));
-	
+		assertFalse(escuelaService.existe(escuelaTest.getIdEscuela()));
+
 	}
-		
-		
+
 }

@@ -18,33 +18,37 @@ import pe.edu.unmsm.fisi.siscae.service.IRecursoService;
 public class RecursoServiceTest {
 
 	private @Autowired IRecursoService recursoService;
-	
+
 	@Test
-	public void test(){
-		
+	public void test() {
+
 		Recurso recursoTest = new Recurso();
-		recursoTest.setIdRecurso(2);
+		recursoTest.setIdRecurso(8);
 		recursoTest.setNumeroSerie("M-0012");
 		recursoTest.setDescripcion("OPERATIVO");
 		recursoTest.setMaxCapacidad(6);
 		recursoTest.setIdEstadoTabla(1);
-		recursoTest.setIdTipoRecurso(1);
-		recursoTest.setIdAreaEstudio(2);
+		recursoTest.setIdTipoRecurso(3);
+		recursoTest.setIdAreaEstudio(4);
 		recursoTest.setIdUbicacion(1);
-		
+
 		List<Recurso> recursos = recursoService.buscarTodos();
 		recursos.forEach(System.out::println);
-		
-		recursos = recursoService.buscarPorIdRecurso(1);
-		recursos.forEach(System.out::println);
-		
+
+		boolean existe = recursoService.existe(8);
+
+		if (existe) {
+			Recurso recurso = recursoService.buscarPorId(8);
+			System.out.println(recurso);
+		}
+
 		recursoService.registrarRecurso(recursoTest);
-		
+
 		recursoTest.setDescripcion("PROBANDO UPDATE");
 		recursoService.actualizarRecurso(recursoTest);
-		
+
 		recursoService.eliminarRecurso(recursoTest);
-		
+
 	}
-	
+
 }

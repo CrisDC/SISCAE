@@ -29,34 +29,32 @@ public class ExternoService extends MantenibleService<Externo> implements IExter
 	@Override
 	@Transactional(propagation = Propagation.REQUIRES_NEW)
 	public List<Externo> buscarTodos() {
-		return this.buscar(new Externo(), Operacion.SELECT);
+		return super.buscar(new Externo(), Operacion.SELECT);
 	}
 
 	@Override
 	@Transactional(propagation = Propagation.REQUIRED)
-	public List<Externo> buscarPorIdExterno(Integer idExterno) {
+	public Externo buscarPorId(Integer idExterno) {
 		Externo externo = Externo.builder().persona(Persona.builder().idPersona(idExterno).build()).build();
-		return super.buscar(externo, Operacion.SELECT, OperacionParam.PRIMARY_KEY);
+		return super.buscarPorId(externo);
 	}
 
 	@Override
 	@Transactional(propagation = Propagation.REQUIRED)
-	public boolean existeExterno(Integer idExterno) {
-
-		return !this.buscarPorIdExterno(idExterno).isEmpty();
+	public boolean existe(Integer idExterno) {
+		Externo externo = Externo.builder().persona(Persona.builder().idPersona(idExterno).build()).build();
+		return super.existe(externo);
 	}
 
 	@Override
 	@Transactional(propagation = Propagation.REQUIRES_NEW)
 	public void registrarExterno(Externo externo) {
-		this.registrar(externo);
-
+		super.registrar(externo);
 	}
 
 	@Override
 	public void actualizarExterno(Externo externo) {
-
-		this.actualizar(externo);
+		super.actualizar(externo);
 	}
 
 	@Override

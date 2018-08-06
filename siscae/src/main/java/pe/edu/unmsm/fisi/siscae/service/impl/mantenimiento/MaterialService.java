@@ -35,16 +35,16 @@ public class MaterialService extends MantenibleService<Material> implements IMat
 
 	@Override
 	@Transactional(propagation = Propagation.REQUIRED)
-	public List<Material> buscarPorIdMaterial(Integer idMaterial) {
-
+	public Material buscarPorId(Integer idMaterial) {
 		Material material = Material.builder().idMaterial(idMaterial).build();
-		return this.buscar(material, Operacion.SELECT, OperacionParam.PRIMARY_KEY);
+		return super.buscarPorId(material);
 	}
 
 	@Override
 	@Transactional(propagation = Propagation.REQUIRED)
-	public boolean existeMaterial(Integer idMaterial) {
-		return !this.buscarPorIdMaterial(idMaterial).isEmpty();
+	public boolean existe(Integer idMaterial) {
+		Material material = Material.builder().idMaterial(idMaterial).build();
+		return super.existe(material);
 	}
 
 	@Override

@@ -37,7 +37,7 @@ public class IdEscuelaValidator implements ConstraintValidator<IdEscuela, Intege
             ValidatorUtil.addCustomMessageWithTemplate("{Range.Escuela.IdEscuela}", context);
             return false;
         }
-        boolean existeEscuela = escuelaService.existeEscuela(IdEscuela);
+        boolean existeEscuela = escuelaService.existe(IdEscuela);
         return existe ? existeEscuela : !existeEscuela;
 }
 }

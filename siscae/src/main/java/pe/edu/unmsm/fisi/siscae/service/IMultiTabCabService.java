@@ -9,9 +9,9 @@ public interface IMultiTabCabService extends IMantenibleService<MultiTabCab>
 
     public List<MultiTabCab> buscarTodos();
 
-    public List<MultiTabCab> buscarPorIdTabla(int idTabla);
+    public MultiTabCab buscarPorId(int idTabla);
 
-    public boolean existeIdTabla(Integer idTabla);
+    public boolean existe(Integer idTabla);
 
     public void registrarMultiTabCab(MultiTabCab multiTabCab);
 

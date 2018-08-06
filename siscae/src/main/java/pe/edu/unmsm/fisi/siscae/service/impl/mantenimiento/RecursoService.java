@@ -33,15 +33,16 @@ public class RecursoService extends MantenibleService<Recurso> implements IRecur
 
 	@Override
 	@Transactional(propagation = Propagation.REQUIRED)
-	public List<Recurso> buscarPorIdRecurso(Integer idRecurso) {
+	public Recurso buscarPorId(Integer idRecurso) {
 		Recurso recurso = Recurso.builder().idRecurso(idRecurso).build();
-		return super.buscar(recurso, Operacion.SELECT, OperacionParam.PRIMARY_KEY);
+		return super.buscarPorId(recurso);
 	}
 
 	@Override
 	@Transactional(propagation = Propagation.REQUIRED)
-	public boolean existeRecurso(Integer idRecurso) {
-		return !this.buscarPorIdRecurso(idRecurso).isEmpty();
+	public boolean existe(Integer idRecurso) {
+		Recurso recurso = Recurso.builder().idRecurso(idRecurso).build();
+		return super.existe(recurso);
 	}
 
 	@Override

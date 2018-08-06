@@ -38,7 +38,7 @@ public class IdExternoValidator implements ConstraintValidator<IdExterno,Integer
             ValidatorUtil.addCustomMessageWithTemplate("{Range.Externo.idExterno}", context);
             return false;
         }
-        boolean existeExterno = externoService.existeExterno(idExterno);
+        boolean existeExterno = externoService.existe(idExterno);
         return existe ? existeExterno : !existeExterno;
 	}
 	}

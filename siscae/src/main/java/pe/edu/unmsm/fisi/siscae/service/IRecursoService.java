@@ -7,9 +7,9 @@ import pe.edu.unmsm.fisi.siscae.model.mantenimiento.Recurso;
 public interface IRecursoService extends IMantenibleService<Recurso> {
 	public List<Recurso> buscarTodos();
 
-	public List<Recurso> buscarPorIdRecurso(Integer idRecurso);
+	public Recurso buscarPorId(Integer idRecurso);
 
-	public boolean existeRecurso(Integer idRecurso);
+	public boolean existe(Integer idRecurso);
 
 	public void registrarRecurso(Recurso recurso);
 

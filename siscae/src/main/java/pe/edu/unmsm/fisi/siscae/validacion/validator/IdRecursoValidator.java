@@ -34,7 +34,7 @@ public class IdRecursoValidator implements ConstraintValidator<IdRecurso, Intege
 			ValidatorUtil.addCustomMessageWithTemplate("{Range.Recurso.idRecurso}", context);
 			return false;
 		}
-		boolean existeRecurso = recursoService.existeRecurso(idRecurso);
+		boolean existeRecurso = recursoService.existe(idRecurso);
 		return existe ? existeRecurso : !existeRecurso;
 	}
 

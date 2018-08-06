@@ -39,7 +39,7 @@ public class CodigoRptaVisaService extends MantenibleService<CodigoRespuestaVisa
     {
         CodigoRespuestaVisa codigoRptaVisa = CodigoRespuestaVisa.builder()
                 .codigoRespuestaVisa(codigoRespuestaVisa).build();
-        return this.buscar(codigoRptaVisa, Operacion.SELECT, OperacionParam.CODIGO_RPTA);
+        return this.buscar(codigoRptaVisa, OperacionParam.CODIGO_RPTA);
     }
 
     @Transactional(propagation = Propagation.REQUIRED)

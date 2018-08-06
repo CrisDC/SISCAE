@@ -8,9 +8,9 @@ public interface IPersonaService extends IMantenibleService<Persona> {
 
 	public List<Persona> buscarTodos();
 
-	public List<Persona> buscarPorIdPersona(Integer idPersona);
+	public Persona buscarPorId(Integer idPersona);
 
-	public boolean existePersona(Integer idPersona);
+	public boolean existe(Integer idPersona);
 
 	public void registrarPersona(Persona persona);
 

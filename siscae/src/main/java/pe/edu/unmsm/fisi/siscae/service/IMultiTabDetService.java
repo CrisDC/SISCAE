@@ -4,19 +4,21 @@ import java.util.List;
 
 import pe.edu.unmsm.fisi.siscae.model.mantenimiento.MultiTabDet;
 
-public interface IMultiTabDetService extends IMantenibleService<MultiTabDet>
-{
-    public List<MultiTabDet> buscarTodos();
+public interface IMultiTabDetService extends IMantenibleService<MultiTabDet> {
+	public List<MultiTabDet> buscarTodos();
 
-    public List<MultiTabDet> buscarPorIdTablaIdItem(int idTabla, int idItem);
+	public MultiTabDet buscarPorId(int idTabla, int idItem);
 
-    public boolean existeMultiTabDet(int idTabla, int idItem);
+	public List<MultiTabDet> buscarPorIdTabla(int idTabla);
 
-    public void registrarMultiTabDet(MultiTabDet multiTabDet);
+	public List<MultiTabDet> buscarPorIdItem(int idItem);
 
-    public void actualizarMultiTabDet(MultiTabDet multiTabDet);
+	public boolean existe(int idTabla, int idItem);
 
-    public void eliminarMultiTabDet(MultiTabDet multiTabDet);
+	public void registrarMultiTabDet(MultiTabDet multiTabDet);
 
-    public List<MultiTabDet> buscarPorIdTabla(int idTabla);
+	public void actualizarMultiTabDet(MultiTabDet multiTabDet);
+
+	public void eliminarMultiTabDet(MultiTabDet multiTabDet);
+
 }

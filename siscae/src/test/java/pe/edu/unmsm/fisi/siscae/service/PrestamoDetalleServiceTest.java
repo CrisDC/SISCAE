@@ -20,67 +20,66 @@ import pe.edu.unmsm.fisi.siscae.model.mantenimiento.PrestamoDetalle;
 @RunWith(SpringJUnit4ClassRunner.class)
 public class PrestamoDetalleServiceTest {
 	private @Autowired IPrestamoDetalleService prestamoDetalleService;
-	
+
 	@Test
-	public void registrarPrestamoDetalleTest(){
-		PrestamoDetalle prestamoDetalleTest= new PrestamoDetalle();
+	public void registrarPrestamoDetalleTest() {
+		PrestamoDetalle prestamoDetalleTest = new PrestamoDetalle();
 		prestamoDetalleTest.setIdPrestamo(1);
 		prestamoDetalleTest.setIdMaterial(1);
 		prestamoDetalleTest.setHoraEntrega(LocalTime.now());
 		prestamoDetalleService.registrarPrestamoDetalle(prestamoDetalleTest);
-		
-		//Comprobacion de que si agrego
-		assertTrue(prestamoDetalleService.existePrestamoDetalle(prestamoDetalleTest.getIdPrestamo(),prestamoDetalleTest.getIdMaterial()));
+
+		// Comprobacion de que si agrego
+		assertTrue(prestamoDetalleService.existe(prestamoDetalleTest.getIdPrestamo(),
+				prestamoDetalleTest.getIdMaterial()));
 	}
-	
+
 	@Test
-	public void buscarTodosTest(){
-		List<PrestamoDetalle> prestamosDetalle=prestamoDetalleService.buscarTodos();
-		int foundSize= prestamosDetalle.size();
+	public void buscarTodosTest() {
+		List<PrestamoDetalle> prestamosDetalle = prestamoDetalleService.buscarTodos();
+		int foundSize = prestamosDetalle.size();
 		System.out.println(foundSize);
 		prestamosDetalle.stream().forEach(prestamoDetalle -> {
-            System.out.println(prestamoDetalle.toString());
-        });
-		
+			System.out.println(prestamoDetalle.toString());
+		});
+
 	}
-	
+
 	@Test
-	public void buscarPorIdPrestamoDetalleTest(){// puede ser tamaño uno 
-		
-		List<PrestamoDetalle> prestamosDetalle= prestamoDetalleService.buscarPorIdPrestamoDetalle(1,2);
-		prestamosDetalle.stream().forEach(prestamoDetalle -> {
-            System.out.println(prestamoDetalle.toString());
-        });
+	public void buscarPorIdPrestamoDetalleTest() {// puede ser tamaño uno
+		PrestamoDetalle prestamoDetalle = prestamoDetalleService.buscarPorId(1, 2);
+		System.out.println(prestamoDetalle);
 	}
+
 	@Test
-	public void existePrestamoDetalleTest(){
-		
-		assertTrue(prestamoDetalleService.existePrestamoDetalle(1,2));// el id ingresado de arriba
+	public void existePrestamoDetalleTest() {
+		assertTrue(prestamoDetalleService.existe(1, 2));// el id ingresado de arriba
 	}
+
 	@Test
-	public void actualizarPrestamoDetalleTest(){
-		PrestamoDetalle prestamoDetalleTest= new PrestamoDetalle();
+	public void actualizarPrestamoDetalleTest() {
+		PrestamoDetalle prestamoDetalleTest = new PrestamoDetalle();
 		prestamoDetalleTest.setIdPrestamo(3);
 		prestamoDetalleTest.setIdMaterial(2);
 		prestamoDetalleTest.setHoraEntrega(LocalTime.now());
 		prestamoDetalleService.registrarPrestamoDetalle(prestamoDetalleTest);
-		
+
 		prestamoDetalleTest.setHoraEntrega(LocalTime.now());
 		prestamoDetalleService.actualizarPrestamoDetalle(prestamoDetalleTest);
-		
+
 	}
-	
+
 	@Test
-	public void eliminarPrestamoDetalle(){
-		PrestamoDetalle prestamoDetalleTest= new PrestamoDetalle();
+	public void eliminarPrestamoDetalle() {
+		PrestamoDetalle prestamoDetalleTest = new PrestamoDetalle();
 		prestamoDetalleTest.setIdPrestamo(4);
 		prestamoDetalleTest.setIdMaterial(2);
 		prestamoDetalleTest.setHoraEntrega(LocalTime.now());
 		prestamoDetalleService.registrarPrestamoDetalle(prestamoDetalleTest);
-		
+
 		prestamoDetalleService.eliminarPrestamoDetalle(prestamoDetalleTest);
-		assertFalse(prestamoDetalleService.existePrestamoDetalle(prestamoDetalleTest.getIdPrestamo(),prestamoDetalleTest.getIdMaterial()));
-		
+		assertFalse(prestamoDetalleService.existe(prestamoDetalleTest.getIdPrestamo(),
+				prestamoDetalleTest.getIdMaterial()));
 
 	}
 }

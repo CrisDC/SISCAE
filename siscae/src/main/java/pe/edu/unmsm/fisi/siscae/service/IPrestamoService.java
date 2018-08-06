@@ -11,9 +11,9 @@ public interface IPrestamoService extends IMantenibleService<Prestamo> {
 
 	public List<Prestamo> buscarTodos();
 
-    public List<Prestamo> buscarPorIdPrestamo(Integer idPrestamo);
+    public Prestamo buscarPorId(Integer idPrestamo);
 
-    public boolean existePrestamo(Integer idPrestamo);
+    public boolean existe(Integer idPrestamo);
 
     public void registrarPrestamo(Prestamo prestamo);
 

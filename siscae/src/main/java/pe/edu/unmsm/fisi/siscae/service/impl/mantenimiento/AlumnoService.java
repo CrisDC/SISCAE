@@ -31,15 +31,16 @@ public class AlumnoService extends MantenibleService<Alumno> implements IAlumnoS
 
 	@Override
 	@Transactional(propagation = Propagation.REQUIRED)
-	public List<Alumno> buscarPorIdAlumno(Integer idAlumno) {
+	public Alumno buscarPorId(Integer idAlumno) {
 		Alumno alumno = Alumno.builder().persona(Persona.builder().idPersona(idAlumno).build()).build();
-		return super.buscar(alumno, Operacion.SELECT, Operacion.OperacionParam.PRIMARY_KEY);
+		return super.buscarPorId(alumno);
 	}
 
 	@Override
 	@Transactional(propagation = Propagation.REQUIRED)
-	public boolean existeAlumno(Integer idAlumno) {
-		return !this.buscarPorIdAlumno(idAlumno).isEmpty();
+	public boolean existe(Integer idAlumno) {
+		Alumno alumno = Alumno.builder().persona(Persona.builder().idPersona(idAlumno).build()).build();
+		return super.existe(alumno);
 	}
 
 	@Override

@@ -26,10 +26,6 @@ public @interface MultitabDet
 
     int max() default 4;
 
-    int idTabla();
-
-    String campoIdItem();
-
     boolean existe();
 
     Class<?>[] groups() default {};

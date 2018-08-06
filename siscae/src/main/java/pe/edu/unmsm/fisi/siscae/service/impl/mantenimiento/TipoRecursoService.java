@@ -35,7 +35,7 @@ public class TipoRecursoService extends MantenibleService<TipoRecurso> implement
 	@Transactional(propagation = Propagation.REQUIRED)
 	public List<TipoRecurso> buscarPorIdTipoRecurso(Integer idTipoRecurso) {
 		TipoRecurso tipoRecurso = TipoRecurso.builder().idTipoRecurso(idTipoRecurso).build();
-		return super.buscar(tipoRecurso, Operacion.SELECT, OperacionParam.PRIMARY_KEY);
+		return super.buscar(tipoRecurso, OperacionParam.PRIMARY_KEY);
 	}
 
 	@Override

@@ -37,7 +37,7 @@ public class IdHorarioValidator  implements ConstraintValidator<IdHorario,Intege
             ValidatorUtil.addCustomMessageWithTemplate("{Range.Horario.idHorario}", context);
             return false;
         }
-        boolean existeHorario = horarioService.existeHorario(idHorario);
+        boolean existeHorario = horarioService.existe(idHorario);
         return existe ? existeHorario : !existeHorario;
 	}
 

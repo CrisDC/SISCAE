@@ -38,7 +38,7 @@ public class IdRolValidator implements ConstraintValidator<IdRol, Integer>{
             ValidatorUtil.addCustomMessageWithTemplate("{Range.Rol.idRol}", context);
             return false;
         }
-        boolean existeRol = rolService.existeRol(idRol);
+        boolean existeRol = rolService.existe(idRol);
         return existe ? existeRol : !existeRol;
 	}
 	

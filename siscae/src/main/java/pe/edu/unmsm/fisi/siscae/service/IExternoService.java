@@ -6,9 +6,9 @@ import pe.edu.unmsm.fisi.siscae.model.mantenimiento.Externo;
 public interface IExternoService extends IMantenibleService<Externo> {
 	public List<Externo> buscarTodos();
 
-    public List<Externo> buscarPorIdExterno(Integer idExterno);
+    public Externo buscarPorId(Integer idExterno);
 
-    public boolean existeExterno(Integer idExterno);
+    public boolean existe(Integer idExterno);
 
     public void registrarExterno(Externo externo);
 

@@ -40,7 +40,7 @@ public class IdFacultadValidator implements  ConstraintValidator<IdFacultad,Inte
 	            ValidatorUtil.addCustomMessageWithTemplate("{Range.Facultad.idFacultad}", context);
 	            return false;
 	        }
-	        boolean existeFacultad= facultadService.existeFacultad(idFacultad);
+	        boolean existeFacultad= facultadService.existe(idFacultad);
 	        return existe ? existeFacultad: !existeFacultad;
 		}
 	

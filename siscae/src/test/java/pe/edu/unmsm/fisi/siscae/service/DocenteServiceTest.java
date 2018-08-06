@@ -20,29 +20,29 @@ import pe.edu.unmsm.fisi.siscae.service.IDocenteService;
 public class DocenteServiceTest {
 
 	private @Autowired IDocenteService docenteService;
-	
+
 	@Test
-	public void test(){
-		
+	public void test() {
+
 		Persona personaTest = new Persona();
 		Docente docenteTest = new Docente();
 		personaTest.setIdPersona(4);
 		docenteTest.setPersona(personaTest);
 		docenteTest.setIdEstadoTabla(1);
-		
+
 		List<Docente> docentes = docenteService.buscarTodos();
 		docentes.forEach(System.out::println);
-		
-		docentes = docenteService.buscarPorIdDocente(4);
-		docentes.forEach(System.out::println);
-		
+
+		Docente docente = docenteService.buscarPorId(4);
+		System.out.println(docente);
+
 		docenteService.registrarDocente(docenteTest);
-		
+
 		docenteTest.setIdEstadoTabla(2);
 		docenteService.actualizarDocente(docenteTest);
-		
+
 		docenteService.eliminarDocente(docenteTest);
-		
+
 	}
-	
+
 }

@@ -13,33 +13,29 @@ import pe.edu.unmsm.fisi.siscae.configuracion.PersistenceConfiguration;
 import pe.edu.unmsm.fisi.siscae.configuracion.ServiceConfiguration;
 import pe.edu.unmsm.fisi.siscae.model.mantenimiento.Facultad;
 
-
 @ContextConfiguration(classes = { ServiceConfiguration.class, PersistenceConfiguration.class })
 @RunWith(SpringJUnit4ClassRunner.class)
 public class FacultadServiceTest {
-	
+
 	private @Autowired IFacultadService facultadService;
 
 	@Test
-	
+
 	public void test() {
 
 		Facultad facultadTest = new Facultad();
 		facultadTest.setIdFacultad(6);
 		facultadTest.setNombre("Persona de prueba");
-		facultadTest.setFechaRegistro(new Date(1997,07,04));
+		facultadTest.setFechaRegistro(new Date(1997, 07, 04));
 		facultadTest.setUsuarioRegistro("JAIRO");
-		facultadTest.setFehaModificacion(new Date(1997,07,04));
+		facultadTest.setFehaModificacion(new Date(1997, 07, 04));
 		facultadTest.setUsuarioRegistro("Andre");
-		
-		
-	
 
 		List<Facultad> facultades = facultadService.buscarTodos();
 		facultades.forEach(System.out::println);
 
-		facultades = facultadService.buscarPorIdFacultad(1);
-		facultades.forEach(System.out::println);
+		Facultad facultad = facultadService.buscarPorId(1);
+		System.out.println(facultad);
 
 		facultadService.registrarFacultad(facultadTest);
 
@@ -48,7 +44,5 @@ public class FacultadServiceTest {
 
 		facultadService.eliminarFacultad(facultadTest);
 	}
-	
-	
 
 }

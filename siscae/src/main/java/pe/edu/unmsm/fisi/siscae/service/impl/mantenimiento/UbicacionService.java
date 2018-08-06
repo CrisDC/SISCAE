@@ -33,15 +33,16 @@ public class UbicacionService extends MantenibleService<Ubicacion> implements IU
 
 	@Override
 	@Transactional(propagation = Propagation.REQUIRED)
-	public List<Ubicacion> buscarPorIdUbicacion(Integer idUbicacion) {
+	public Ubicacion buscarPorId(Integer idUbicacion) {
 		Ubicacion ubicacion = Ubicacion.builder().idUbicacion(idUbicacion).build();
-		return super.buscar(ubicacion, Operacion.SELECT, OperacionParam.PRIMARY_KEY);
+		return super.buscarPorId(ubicacion);
 	}
 
 	@Override
 	@Transactional(propagation = Propagation.REQUIRED)
-	public boolean existeUbicacion(Integer idUbicacion) {
-		return !this.buscarPorIdUbicacion(idUbicacion).isEmpty();
+	public boolean existe(Integer idUbicacion) {
+		Ubicacion ubicacion = Ubicacion.builder().idUbicacion(idUbicacion).build();
+		return super.existe(ubicacion);
 	}
 
 	@Override

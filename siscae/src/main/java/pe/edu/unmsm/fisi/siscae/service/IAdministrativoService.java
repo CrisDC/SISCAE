@@ -11,9 +11,9 @@ public interface IAdministrativoService extends IMantenibleService<Administrativ
 
 	public List<Administrativo> buscarTodos();
 
-    public List<Administrativo> buscarPorIdAdministrativo(Integer idAdministrativo);
+    public Administrativo buscarPorId(Integer idAdministrativo);
 
-    public boolean existeAdministrativo(Integer idAdministrativo);
+    public boolean existe(Integer idAdministrativo);
 
     public void registrarAdministrativo(Administrativo administrativo);
 

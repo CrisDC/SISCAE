@@ -43,7 +43,7 @@ public class IdPrestamoValidator implements ConstraintValidator<IdPrestamo,Integ
             ValidatorUtil.addCustomMessageWithTemplate("{Range.Prestamo.idPrestamo}", context);
             return false;
         }
-        boolean existePrestamo = prestamoService.existePrestamo(idPrestamo);
+        boolean existePrestamo = prestamoService.existe(idPrestamo);
         return existe ? existePrestamo : !existePrestamo;
 	}
     

@@ -1,4 +1,5 @@
 package pe.edu.unmsm.fisi.siscae.service.impl.mantenimiento;
+
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -15,54 +16,49 @@ import pe.edu.unmsm.fisi.siscae.utilitario.Operacion.OperacionParam;
 
 public class RolService extends MantenibleService<Rol> implements IRolService {
 
-	
-	private  IRolMapper rolMapper;
-	
-	
-	 public RolService(@Qualifier("IRolMapper") IMantenibleMapper<Rol> mapper)
-	    {
-	        super(mapper);
-	        this.rolMapper = (IRolMapper) mapper;
-	    }
+	private IRolMapper rolMapper;
+
+	public RolService(@Qualifier("IRolMapper") IMantenibleMapper<Rol> mapper) {
+		super(mapper);
+		this.rolMapper = (IRolMapper) mapper;
+	}
+
 	@Override
 	@Transactional(propagation = Propagation.REQUIRES_NEW)
 	public List<Rol> buscarTodos() {
-		return this.buscar(new Rol(),Operacion.SELECT);
-	
+		return super.buscar(new Rol(), Operacion.SELECT);
 	}
 
 	@Override
 	@Transactional(propagation = Propagation.REQUIRED)
-	public List<Rol> buscarPorIdRol(Integer idRol) {
+	public Rol buscarPorId(Integer idRol) {
 		Rol rol = Rol.builder().idRol(idRol).build();
-		return this.buscar(rol, Operacion.SELECT, OperacionParam.PRIMARY_KEY);
+		return super.buscarPorId(rol);
 	}
 
 	@Override
 	@Transactional(propagation = Propagation.REQUIRED)
-	public boolean existeRol(Integer idRol) {
-		return !this.buscarPorIdRol(idRol).isEmpty();
+	public boolean existe(Integer idRol) {
+		Rol rol = Rol.builder().idRol(idRol).build();
+		return super.existe(rol);
 	}
 
 	@Override
 	@Transactional(propagation = Propagation.REQUIRES_NEW)
 	public void registrarRol(Rol rol) {
-		this.registrarRol(rol);
-		
+		super.registrar(rol);
 	}
 
 	@Override
 	@Transactional(propagation = Propagation.REQUIRES_NEW)
 	public void actualizarRol(Rol rol) {
-		this.actualizarRol(rol);
-		
+		super.actualizar(rol);
 	}
 
 	@Override
 	@Transactional(propagation = Propagation.REQUIRES_NEW)
 	public void eliminarRol(Rol rol) {
-		// TODO Auto-generated method stub
-		
+		super.eliminar(rol);
 	}
 
 }

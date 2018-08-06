@@ -7,9 +7,9 @@ import pe.edu.unmsm.fisi.siscae.model.mantenimiento.PrestamoDetalle;
 public interface IPrestamoDetalleService extends IMantenibleService<PrestamoDetalle>{
 	public List<PrestamoDetalle> buscarTodos();
 
-    public List<PrestamoDetalle> buscarPorIdPrestamoDetalle(Integer idPrestamo,Integer idMaterial);
+    public PrestamoDetalle buscarPorId(Integer idPrestamo,Integer idMaterial);
 
-    public boolean existePrestamoDetalle(Integer idPrestamo,Integer idMaterial);
+    public boolean existe(Integer idPrestamo,Integer idMaterial);
 
     public void registrarPrestamoDetalle(PrestamoDetalle prestamoDetalle);
 

@@ -8,9 +8,9 @@ public interface IDocenteService extends IMantenibleService<Docente> {
 
 	public List<Docente> buscarTodos();
 
-	public List<Docente> buscarPorIdDocente(Integer idDocente);
+	public Docente buscarPorId(Integer idDocente);
 
-	public boolean existeDocente(Integer idDocente);
+	public boolean existe(Integer idDocente);
 
 	public void registrarDocente(Docente docente);
 

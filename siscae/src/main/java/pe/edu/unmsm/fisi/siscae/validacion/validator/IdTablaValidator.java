@@ -37,7 +37,7 @@ public class IdTablaValidator implements ConstraintValidator<IdTabla, Integer>
             ValidatorUtil.addCustomMessageWithTemplate("{Range.MultiTaCab.idTabla}", context);
             return false;
         }
-        boolean existeIdTabla = multiTabCabService.existeIdTabla(idTabla);
+        boolean existeIdTabla = multiTabCabService.existe(idTabla);
         return existe ? existeIdTabla : !existeIdTabla;
     }
 }

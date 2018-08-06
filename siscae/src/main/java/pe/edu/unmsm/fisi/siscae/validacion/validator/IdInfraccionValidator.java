@@ -38,7 +38,7 @@ public class IdInfraccionValidator implements ConstraintValidator<IdInfraccion,I
             ValidatorUtil.addCustomMessageWithTemplate("{Range.Infraccion.idInfraccion}", context);
             return false;
         }
-        boolean existeInfraccion = infraccionService.existeInfraccion(idInfraccion);
+        boolean existeInfraccion = infraccionService.existe(idInfraccion);
         return existe ? existeInfraccion : !existeInfraccion;
 	}
 

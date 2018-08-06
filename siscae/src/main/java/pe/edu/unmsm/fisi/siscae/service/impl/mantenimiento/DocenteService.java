@@ -34,15 +34,16 @@ public class DocenteService extends MantenibleService<Docente> implements IDocen
 
 	@Override
 	@Transactional(propagation = Propagation.REQUIRED)
-	public List<Docente> buscarPorIdDocente(Integer idDocente) {
+	public Docente buscarPorId(Integer idDocente) {
 		Docente docente = Docente.builder().persona(Persona.builder().idPersona(idDocente).build()).build();
-		return super.buscar(docente, Operacion.SELECT, OperacionParam.PRIMARY_KEY);
+		return super.buscarPorId(docente);
 	}
 
 	@Override
 	@Transactional(propagation = Propagation.REQUIRED)
-	public boolean existeDocente(Integer idDocente) {
-		return !this.buscarPorIdDocente(idDocente).isEmpty();
+	public boolean existe(Integer idDocente) {
+		Docente docente = Docente.builder().persona(Persona.builder().idPersona(idDocente).build()).build();
+		return super.existe(docente);
 	}
 
 	@Override

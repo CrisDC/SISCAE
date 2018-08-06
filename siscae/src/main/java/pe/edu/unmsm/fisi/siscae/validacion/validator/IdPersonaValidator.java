@@ -34,7 +34,7 @@ public class IdPersonaValidator implements ConstraintValidator<IdPersona, Intege
 			ValidatorUtil.addCustomMessageWithTemplate("{Range.Persona.idPersona}", context);
 			return false;
 		}
-		boolean existePersona = personaService.existePersona(idPersona);
+		boolean existePersona = personaService.existe(idPersona);
 		return existe ? existePersona : !existePersona;
 	}
 

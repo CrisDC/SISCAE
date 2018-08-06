@@ -37,7 +37,7 @@ public class IdAreaEstudioValidator implements ConstraintValidator<IdAreaEstudio
             ValidatorUtil.addCustomMessageWithTemplate("{Range.AreaEstudio.IdAreaEstudio}", context);
             return false;
         }
-        boolean existeAreaEstudio = areaEstudioService.existeAreaEstudio(idAreaEstudio);
+        boolean existeAreaEstudio = areaEstudioService.existe(idAreaEstudio);
         return existe ? existeAreaEstudio : !existeAreaEstudio;
 	}
 

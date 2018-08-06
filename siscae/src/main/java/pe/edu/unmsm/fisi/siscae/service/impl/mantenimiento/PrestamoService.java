@@ -21,10 +21,8 @@ public class PrestamoService extends MantenibleService<Prestamo> implements IPre
 	private IPrestamoMapper prestamoMapper;
 
 	public PrestamoService(@Qualifier("IPrestamoMapper") IMantenibleMapper<Prestamo> mapper) {
-
 		super(mapper);
 		this.prestamoMapper = (IPrestamoMapper) mapper;
-
 	}
 
 	@Override
@@ -35,33 +33,30 @@ public class PrestamoService extends MantenibleService<Prestamo> implements IPre
 
 	@Override
 	@Transactional(propagation = Propagation.REQUIRED)
-	public List<Prestamo> buscarPorIdPrestamo(Integer idPrestamo) {
-
+	public Prestamo buscarPorId(Integer idPrestamo) {
 		Prestamo prestamo = Prestamo.builder().idAdministrativo(idPrestamo).build();
-		return this.buscar(prestamo, Operacion.SELECT, OperacionParam.PRIMARY_KEY);
+		return super.buscarPorId(prestamo);
 	}
 
 	@Override
 	@Transactional(propagation = Propagation.REQUIRED)
-	public boolean existePrestamo(Integer idPrestamo) {
-		return !this.buscarPorIdPrestamo(idPrestamo).isEmpty();
+	public boolean existe(Integer idPrestamo) {
+		Prestamo prestamo = Prestamo.builder().idAdministrativo(idPrestamo).build();
+		return super.existe(prestamo);
 	}
 
 	@Override
 	public void registrarPrestamo(Prestamo prestamo) {
-
 		this.registrar(prestamo);
 	}
 
 	@Override
 	public void actualizarPrestamo(Prestamo prestamo) {
-
 		this.actualizar(prestamo);
 	}
 
 	@Override
 	public void eliminarPrestamo(Prestamo prestamo) {
-
 		this.eliminar(prestamo);
 	}
 

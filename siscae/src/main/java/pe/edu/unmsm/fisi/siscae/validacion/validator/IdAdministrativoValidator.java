@@ -44,7 +44,7 @@ public class IdAdministrativoValidator implements ConstraintValidator<IdAdminist
             ValidatorUtil.addCustomMessageWithTemplate("{Range.Administrativo.idAdministrativo}", context);
             return false;
         }
-        boolean existeAdministrativo = administrativoService.existeAdministrativo(idAdministrativo);
+        boolean existeAdministrativo = administrativoService.existe(idAdministrativo);
         return existe ? existeAdministrativo : !existeAdministrativo;
  
 	}

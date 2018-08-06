@@ -28,41 +28,39 @@ public class UsuarioService extends MantenibleService<Usuario> implements IUsuar
 	@Override
 	@Transactional(propagation = Propagation.REQUIRES_NEW)
 	public List<Usuario> buscarTodos() {
-		return this.buscar(new Usuario(), Operacion.SELECT);
+		return super.buscar(new Usuario(), Operacion.SELECT);
 	}
 
 	@Override
 	@Transactional(propagation = Propagation.REQUIRED)
-	public List<Usuario> buscarPorIdUsuario(Integer idUsuario) {
+	public Usuario buscarPorId(Integer idUsuario) {
 		Usuario usuario = Usuario.builder().idUsuario(idUsuario).build();
-		return this.buscar(usuario, Operacion.SELECT, OperacionParam.PRIMARY_KEY);
+		return super.buscarPorId(usuario);
 	}
 
 	@Override
 	@Transactional(propagation = Propagation.REQUIRED)
-	public boolean existeUsuario(Integer idUsuario) {
-		return !this.buscarPorIdUsuario(idUsuario).isEmpty();
+	public boolean existe(Integer idUsuario) {
+		Usuario usuario = Usuario.builder().idUsuario(idUsuario).build();
+		return super.existe(usuario);
 	}
 
 	@Override
 	@Transactional(propagation = Propagation.REQUIRES_NEW)
 	public void registrarUsuario(Usuario usuario) {
-		this.registrarUsuario(usuario);
-
+		super.registrar(usuario);
 	}
 
 	@Override
 	@Transactional(propagation = Propagation.REQUIRES_NEW)
 	public void actualizarUsuario(Usuario usuario) {
-		this.actualizarUsuario(usuario);
-
+		super.actualizar(usuario);
 	}
 
 	@Override
 	@Transactional(propagation = Propagation.REQUIRES_NEW)
 	public void eliminarUsuario(Usuario usuario) {
-		this.eliminarUsuario(usuario);
-
+		super.eliminar(usuario);
 	}
 
 }

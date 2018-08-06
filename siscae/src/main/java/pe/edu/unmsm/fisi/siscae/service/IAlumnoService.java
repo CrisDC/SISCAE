@@ -8,9 +8,9 @@ public interface IAlumnoService extends IMantenibleService<Alumno> {
 	
 	public List<Alumno> buscarTodos();
 
-    public List<Alumno> buscarPorIdAlumno(Integer idAlumno);
+    public Alumno buscarPorId(Integer idAlumno);
     
-    public boolean existeAlumno(Integer idAlumno);
+    public boolean existe(Integer idAlumno);
 
     public void registrarAlumno(Alumno alumno);
 

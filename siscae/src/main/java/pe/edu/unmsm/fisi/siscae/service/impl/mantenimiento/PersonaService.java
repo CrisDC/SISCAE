@@ -33,15 +33,16 @@ public class PersonaService extends MantenibleService<Persona> implements IPerso
 
 	@Override
 	@Transactional(propagation = Propagation.REQUIRED)
-	public List<Persona> buscarPorIdPersona(Integer idPersona) {
+	public Persona buscarPorId(Integer idPersona) {
 		Persona persona = Persona.builder().idPersona(idPersona).build();
-		return super.buscar(persona, Operacion.SELECT, OperacionParam.PRIMARY_KEY);
+		return super.buscarPorId(persona);
 	}
 
 	@Override
 	@Transactional(propagation = Propagation.REQUIRED)
-	public boolean existePersona(Integer idPersona) {
-		return !this.buscarPorIdPersona(idPersona).isEmpty();
+	public boolean existe(Integer idPersona) {
+		Persona persona = Persona.builder().idPersona(idPersona).build();
+		return super.existe(persona);
 	}
 
 	@Override

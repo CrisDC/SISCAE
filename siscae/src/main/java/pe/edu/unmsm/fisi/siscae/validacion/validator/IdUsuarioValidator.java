@@ -44,7 +44,7 @@ public class IdUsuarioValidator implements ConstraintValidator<IdUsuario,Integer
             ValidatorUtil.addCustomMessageWithTemplate("{Range.Usuario.idUsuario}", context);
             return false;
         }
-        boolean existeUsuario = usuarioService.existeUsuario(idUsuario);
+        boolean existeUsuario = usuarioService.existe(idUsuario);
         return existe ? existeUsuario : !existeUsuario;
 	}
     

@@ -35,8 +35,8 @@ public class AlumnoServiceTest {
 		List<Alumno> alumnos = alumnoService.buscarTodos();
 		alumnos.forEach(System.out::println);
 
-		alumnos = alumnoService.buscarPorIdAlumno(1);
-		alumnos.forEach(System.out::println);
+		Alumno alumno = alumnoService.buscarPorId(1);
+		System.out.println(alumno);
 
 		alumnoService.registrarAlumno(alumnoTest);
 
