@@ -1,218 +1,214 @@
 $(document).ready(function() {
-	var csrf = $('meta[name=_csrf]').attr("content");
 	var $local = {
-			$modalUsuario : $("#modalUsuario"),
-			$registrarUsuario : $("#registrarUsuario"),
-			$actualizarUsuarioModal : $("#actualizarUsuarioModal"),
-			$tablaUsuarios : $("#tablaUsuarios"),
-			tablaUsuarios : "",
-			codigo_usuarioSeleccionado : "",
-			$filaSeleccionada : "",		
-			arregloSiNo : [ "1", "0" ],
-			filtrosSeleccionables : {},
+		$tablaMantenimiento : $("#tablaMantenimiento"),
+		tablaMantenimiento : "",
+		$modalMantenimiento : $("#modalMantenimiento"),
+		$aniadirMantenimento : $("#aniadirMantenimiento"),
+		$registrarMantenimiento : $("#registrarMantenimiento"),
+		$filaSeleccionada : "",
+		$actualizarMantenimiento : $("#actualizarMantenimiento"),
+		idUsuarioSeleccionado : ""
+	}
+	$formMantenimiento = $("#formMantenimiento");
 
-			$repetirContrasenia : $("#repetirContrasenia"),
-			requiereCambio : false,
-			$boton : $("#boton"),
-			$txtPassword : $("#txtPassword")
-		};
-	
-	$formUsuario = $("#formUsuario");
-	$formUsuarioModal = $("#formUsuarioModal");
-	$local.$repetirContrasenia.hide();
-	
 	$.fn.dataTable.ext.errMode = 'none';
 
-	$local.$tablaUsuarios.on('xhr.dt', function(e, settings, json, xhr) {
+	$local.$tablaMantenimiento.on('xhr.dt', function(e, settings, json, xhr) {
 		switch (xhr.status) {
 		case 500:
-			$local.tablaUsuarios.clear().draw();
-			$funcionUtil.notificarException(xhr.responseText, "Error Interno", "danger");
+			$local.tablaMantenimiento.clear().draw();
 			break;
 		}
 	});
-	
-	$local.tablaUsuarios = $local.$tablaUsuarios.DataTable({
+	$local.tablaMantenimiento = $local.$tablaMantenimiento.DataTable({
 		"ajax" : {
-			"url" : $variableUtil.root + "usuario?accion=buscarTodos",
+			"url" : $variableUtil.root + "Usuario?accion=buscarTodos",
 			"dataSrc" : ""
 		},
 		"language" : {
-			"emptyTable" : "No hay USUARIOS registradas"
+			"emptyTable" : "No hay Usuarios registrados"
 		},
 		"initComplete" : function() {
-			$local.$tablaUsuarios.wrap("<div class='table-responsive'></div>");
-			$local.filtrosSeleccionables["3"] = $local.arregloSiNo;
-			$tablaFuncion.aniadirFiltroDeBusquedaEnEncabezado(this, $local.$tablaUsuarios, $local.filtrosSeleccionables);
-
+			$local.$tablaMantenimiento.wrap("<div class='table-responsive'></div>");
+			$tablaFuncion.aniadirFiltroDeBusquedaEnEncabezado(this, $local.$tablaMantenimiento);
 		},
 		"columnDefs" : [ {
 			"targets" : [ 0, 1 ],
 			"className" : "all filtrable",
 		}, {
-			"targets" : 2,
-			"className" : "all seleccionable data-no-definida",
-			"render" : function(data, type, row) {
-				return $funcionUtil.insertarEtiquetaSiNo(row.activo);
-			}
+			"targets" : [ 2, 3 ],
+			"className" : "filtrable",
 		}, {
-			"targets" : 3,
+			"targets" : 4,
 			"className" : "all dt-center",
-
 			"defaultContent" : $variableUtil.botonActualizar + " " + $variableUtil.botonEliminar
 		} ],
-		"columns" : [
-				{
-					"data" : 'idUsuario',
-					"title" : 'Usuario'
-				},
-				{
-					"data" : 'idPerfil',
-					"title" : 'Perfil'
-				},
-				{
-					"data" : null,
-					"title" : 'Activo'
-				},
-				{
-					"title" :'Acción'
-				}]
+		"columns" : [ {
+			"data" : 'idUsuario',
+			"title" : "Id"
+		},{
+			"data" : 'username',
+			"title" : "Usuario"
+		},{
+			"data" : 'pass',
+			"title" : "Contraseña"
+		},{
+			"data" : 'estado',
+			"title" : "Estado"
+		},{
+			"data" : 'idRol',
+			"title" : "Id. Rol"
+		},{
+			"data" : 'nombreRol',
+			"title" : "Nombre del Rol"
+		},{
+			"data" : 'idPersona',
+			"title" : "Id. Persona"
+		},{
+			"data" : 'nombrePersona',
+			"title" : "Nombre"
+		},{
+			"data" : 'appPaterno',
+			"title" : "Apellido Pat."
+		},{
+			"data" : 'appMaterno',
+			"title" : "Apellido Mat."
+		},{
+			"data" : null,
+			"title" : 'Acción'
+		} ]
 	});
-	
-	$local.$tablaUsuarios.find("thead").on('change', 'select', function() {
+	$local.$tablaMantenimiento.find("thead").on('keyup', 'input', function() {
+		$local.tablaMantenimiento.column($(this).parent().index() + ':visible').search(this.value).draw();
+	});
+
+	$local.$tablaMantenimiento.find("thead").on('change', 'select', function() {
 		var val = $.fn.dataTable.util.escapeRegex($(this).val());
-		$local.tablaUsuarios.column($(this).parent().index() + ':visible').search(val ? '^' + val + '$' : '', true, false).draw();
+		$local.tablaMantenimiento.column($(this).parent().index() + ':visible').search(val ? '^' + val + '$' : '', true, false).draw();
 	});
-	
-	$local.$tablaUsuarios.find("thead").on('keyup', 'input.filtrable', function() {
-		$local.tablaUsuarios.column($(this).parent().index() + ':visible').search(this.value).draw();
-	});
-	
-	$local.$modalUsuario.PopupWindow({
+
+	$local.$modalMantenimiento.PopupWindow({
 		title : "Mantenimiento de Usuario",
 		autoOpen : false,
 		modal : false,
-		height : 410,
+		height : 400,
 		width : 626,
 	});
-	
-	$local.$boton.on("click", function() {
 
-		$local.$txtPassword.attr("readonly", false);
-		$local.$txtPassword.val("");
-		$local.requiereCambio = true;
-		$local.$repetirContrasenia.show();
+	$local.$aniadirMantenimento.on("click", function() {
+		$funcionUtil.prepararFormularioRegistro($formMantenimiento);
+		$local.$actualizarMantenimiento.addClass("hidden");
+		$local.$registrarMantenimiento.removeClass("hidden");
+		$local.$modalMantenimiento.PopupWindow("open");
 	});
-	
-	
 
-	$local.$registrarUsuario.on("click", function() {
+	$local.$modalMantenimiento.on("open.popupwindow", function() {
+		$formMantenimiento.find("input:not([disabled]):first").focus();
+	});
 
-		var usuario = $formUsuario.serializeJSON();
-		usuario.requiereCambio = true;
+	$local.$modalMantenimiento.on("close.popupwindow", function() {
+		$local.idUsuarioSeleccionado = "";
+	});
+	$formMantenimiento.find("input").keypress(function(event) {
+		if (event.which == 13) {
+			if (!$local.$registrarMantenimiento.hasClass("hidden")) {
+				$local.$registrarMantenimiento.trigger("click");
+				return false;
+			} else {
+				if (!$local.$actualizarMantenimiento.hasClass("hidden")) {
+					$local.$actualizarMantenimiento.trigger("click");
+				}
+				return false;
+			}
+		}
+	});
+	$local.$registrarMantenimiento.on("click", function() {
+		if (!$formMantenimiento.valid()) {
+			return;
+		}
+		var usuario = $formMantenimiento.serializeJSON();
 		$.ajax({
 			type : "POST",
-			url : $variableUtil.root + "usuario",
+			url : $variableUtil.root + "Usuario",
 			data : JSON.stringify(usuario),
 			beforeSend : function(xhr) {
-				$local.$registrarUsuario.attr("disabled", true).find("i").removeClass("fa-floppy-o").addClass("fa-spinner fa-pulse fa-fw");
+				$local.$registrarMantenimiento.attr("disabled", true).find("i").removeClass("fa-floppy-o").addClass("fa-spinner fa-pulse fa-fw");
 				xhr.setRequestHeader('Content-Type', 'application/json');
 				xhr.setRequestHeader("X-CSRF-TOKEN", $variableUtil.csrf);
 			},
 			statusCode : {
 				400 : function(response) {
-					$funcionUtil.limpiarMensajesDeError($formUsuario);
-					$funcionUtil.mostrarMensajeDeError(response.responseJSON, $formUsuario);
+					$funcionUtil.limpiarMensajesDeError($formMantenimiento);
+					$funcionUtil.mostrarMensajeDeError(response.responseJSON, $formMantenimiento);
 				}
 			},
-			success : function(usuarios) {
-				$funcionUtil.notificarException($variableUtil.registroExitoso, "fa-check", "Aviso", "success");
-				var usuario = usuarios[0];
-				var row = $local.tablaUsuarios.row.add({
-					"idUsuario" : usuario.idUsuario,
-					"idPerfil" : usuario.idPerfil,
-					"activo" : usuario.activo
-				}).draw();
+			success : function(response) {
+				$funcionUtil.notificarException(response, "fa-check", "Aviso", "success");
+				var row = $local.tablaMantenimiento.row.add(usuario).draw();
 				row.show().draw(false);
 				$(row.node()).animateHighlight();
-				$funcionUtil.prepararFormularioRegistro($formUsuario)
-
+				$local.$modalMantenimiento.PopupWindow("close");
 			},
 			error : function(response) {
 			},
 			complete : function(response) {
-				$local.$registrarUsuario.attr("disabled", false).find("i").addClass("fa-floppy-o").removeClass("fa-spinner fa-pulse fa-fw");
+				$local.$registrarMantenimiento.attr("disabled", false).find("i").addClass("fa-floppy-o").removeClass("fa-spinner fa-pulse fa-fw");
 			}
 		});
-
-	});
-	
-	$local.$tablaUsuarios.children("tbody").on("click", ".actualizar", function() {
-		$local.$repetirContrasenia.hide();
-		$funcionUtil.prepararFormularioActualizacion($formUsuarioModal);
+		$local.$tablaMantenimiento.children("tbody").on("click", ".actualizar", function() {
+		$funcionUtil.prepararFormularioActualizacion($formMantenimiento);
 		$local.$filaSeleccionada = $(this).parents("tr");
-		var usuario = $local.tablaUsuarios.row($local.$filaSeleccionada).data();
-		$local.codigo_usuarioSeleccionado = usuario.idUsuario;
-		$funcionUtil.llenarFormulario(usuario, $formUsuarioModal);
-		$local.$txtPassword.attr("readonly", true);
-		$local.requiereCambio = false;
-		$local.$txtPassword.val("12345678");
-
-		$local.$actualizarUsuarioModal.removeClass("hidden");
-
-		$local.$modalUsuario.PopupWindow("open");
+		var usuario = $local.tablaMantenimiento.row($local.$filaSeleccionada).data();
+		$local.idUsuarioSeleccionado = usuario.idUsuario;
+		$funcionUtil.llenarFormulario(usuario, $formMantenimiento);
+		$local.$actualizarMantenimiento.removeClass("hidden");
+		$local.$registrarMantenimiento.addClass("hidden");
+		$local.$modalMantenimiento.PopupWindow("open");
 	});
-	
-	$local.$actualizarUsuarioModal.on("click", function() {
-
-		var usuario = $formUsuarioModal.serializeJSON();
-		usuario.requiereCambio = $local.requiereCambio;
-		console.log("cambio usuario : "+usuario);
-
+	});
+	$local.$actualizarMantenimiento.on("click", function() {
+		if (!$formMantenimiento.valid()) {
+			return;
+		}
+		var usuario = $formMantenimiento.serializeJSON();
+		usuario.idUsuario = $local.idUsuarioSeleccionado;
 		$.ajax({
 			type : "PUT",
 			url : $variableUtil.root + "usuario",
 			data : JSON.stringify(usuario),
 			beforeSend : function(xhr) {
-				$local.$actualizarUsuarioModal.attr("disabled", true).find("i").removeClass("fa-pencil-square").addClass("fa-spinner fa-pulse fa-fw");
+				$local.$actualizarMantenimiento.attr("disabled", true).find("i").removeClass("fa-pencil-square").addClass("fa-spinner fa-pulse fa-fw");
 				xhr.setRequestHeader('Content-Type', 'application/json');
 				xhr.setRequestHeader("X-CSRF-TOKEN", $variableUtil.csrf);
 			},
 			statusCode : {
 				400 : function(response) {
-					$funcionUtil.limpiarMensajesDeError($formUsuarioModal);
-					$funcionUtil.mostrarMensajeDeError(response.responseJSON, $formUsuarioModal);
+					$funcionUtil.limpiarMensajesDeError($formMantenimiento);
+					$funcionUtil.mostrarMensajeDeError(response.responseJSON, $formMantenimiento);
 				}
 			},
-			success : function(usuarios) {
-				$funcionUtil.notificarException($variableUtil.actualizacionExitosa, "fa-check", "Aviso", "success");
-				$local.tablaUsuarios.row($local.$filaSeleccionada).remove().draw(false);
-				var usuario = usuarios[0];
-				var row = $local.tablaUsuarios.row.add({
-					"idUsuario" : usuario.idUsuario,
-					"idPerfil" : usuario.idPerfil,
-					"activo" : usuario.activo
-				}).draw();
+			success : function(response) {
+				$funcionUtil.notificarException(response, "fa-check", "Aviso", "success");
+				$local.tablaMantenimiento.row($local.$filaSeleccionada).remove().draw(false);
+				var row = $local.tablaMantenimiento.row.add(usuario).draw();
 				row.show().draw(false);
 				$(row.node()).animateHighlight();
-				$funcionUtil.prepararFormularioRegistro($formUsuarioModal)
-				$local.$modalUsuario.PopupWindow("close");
+				$local.$modalMantenimiento.PopupWindow("close");
 			},
 			error : function(response) {
 			},
 			complete : function(response) {
-				$local.$actualizarUsuarioModal.attr("disabled", false).find("i").addClass("fa-pencil-square").removeClass("fa-spinner fa-pulse fa-fw");
+				$local.$actualizarMantenimiento.attr("disabled", false).find("i").addClass("fa-pencil-square").removeClass("fa-spinner fa-pulse fa-fw");
 			}
 		});
 	});
-	
-	$local.$tablaUsuarios.children("tbody").on("click", ".eliminar", function() {
+	$local.$tablaMantenimiento.children("tbody").on("click", ".eliminar", function() {
 		$local.$filaSeleccionada = $(this).parents("tr");
-		var usuario = $local.tablaUsuarios.row($local.$filaSeleccionada).data();
+		var usuario = $local.tablaMantenimiento.row($local.$filaSeleccionada).data();
 		$.confirm({
 			icon : "fa fa-info-circle",
 			title : "Aviso",
-			content : "¿Desea eliminar el Usuario <b>'" + usuario.idUsuario + "'<b/>?",
+			content : "¿Desea eliminar el Usuario <b>'" + usuario.idUsuario + " - " + usuario.username + "'<b/>?",
 			buttons : {
 				Aceptar : {
 					action : function() {
@@ -233,7 +229,7 @@ $(document).ready(function() {
 									}
 								}).done(function(response) {
 									$funcionUtil.notificarException(response, "fa-check", "Aviso", "success");
-									$local.tablaUsuarios.row($local.$filaSeleccionada).remove().draw(false);
+									$local.tablaMantenimiento.row($local.$filaSeleccionada).remove().draw(false);
 									confirmar.close();
 								}).fail(function(xhr) {
 									confirmar.close();
@@ -242,7 +238,7 @@ $(document).ready(function() {
 										$funcionUtil.notificarException($funcionUtil.obtenerMensajeErrorEnCadena(xhr.responseJSON), "fa-warning", "Aviso", "warning");
 										break;
 									case 409:
-										var mensaje = $funcionUtil.obtenerMensajeError("El Usuario <b>" + usuario.idUsuario + " - " + usuario.password + "</b>", xhr.responseJSON, $variableUtil.accionEliminado);
+										var mensaje = $funcionUtil.obtenerMensajeError("El Usuario <b>" + usuario.idUsuario + " - " + usuario.username + "</b>", xhr.responseJSON, $variableUtil.accionEliminado);
 										$funcionUtil.notificarException(mensaje, "fa-warning", "Aviso", "warning");
 										break;
 									}
@@ -265,5 +261,9 @@ $(document).ready(function() {
 		});
 	});
 
-	
+
 });
+
+
+
+

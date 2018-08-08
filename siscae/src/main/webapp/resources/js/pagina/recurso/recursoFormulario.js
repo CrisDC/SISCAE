@@ -1,88 +1,89 @@
 $(document).ready(function() {
-
-	$formRecurso.validate({
-		focusCleanup : true,
+	$formMantenimiento.validate({
 		rules : {
 			idRecurso : {
+				required : true,
+				number : true,
+			},
+			numeroSerie : {
 				required : true,
 				notOnlySpace : true,
-				lettersonly : true
+				rangelength : [ 3, 20 ]
+            },
+            descripcion : {
+				required : true,
+				notOnlySpace : true,
+				rangelength : [ 3,20]
 			},
-			descripcion : {
+            estado : {
 				required : true,
 				notOnlySpace : true
-			}
+			},
+			idTipoRecurso : {
+				required : true,
+				number : true,
+			},
+			nombreTipoRecurso : {
+				required : true,
+				notOnlySpace : true,
+				rangelength : [ 3, 20 ]
+			},
+			idAreaEstudio : {
+				required : true,
+				number : true,
+			},
+			nombreAreaEstudio : {
+				required : true,
+				notOnlySpace : true,
+				rangelength : [ 3, 45 ]
+			},
+			idUbicacion : {
+				required : true,
+				number : true,
+			},
 		},
 		messages : {
 			idRecurso : {
-				required : "Ingrese un C&oacute;odigo de Recurso.",
-				notOnlySpace : "La descripci&oacute;n no puede contener solo espacios en blanco.",
-				lettersonly : "Ingese S&oacute;lo letras"
+				required : "Ingrese un C&oacute;digo de Recurso",
+				number : "El Id de Recurso debe contener solo números."
 			},
-			descripcion : {
-				required : "Ingrese una descripci&oacute;n.",
-				notOnlySpace : "La descripci&oacute;n no puede contener solo espacios en blanco."
-			}
-		},
-		highlight : function(element) {
-			$(element).closest('.form-group').addClass('has-error');
-		},
-		unhighlight : function(element) {
-			$(element).closest('.form-group').removeClass('has-error');
-		},
-		errorElement : 'span',
-		errorClass : 'help-block',
-		errorPlacement : function(error, element) {
-			if (element.parent('.input-group').length) {
-				error.insertAfter(element.parent());
-			} else if (element.parent().find("span.select2").length > 0) {
-				error.appendTo(element.parent());
-			} else {
-				error.insertAfter(element);
-			}
+			numeroSerie : {
+				required : "Ingrese un numero de serie",
+				notOnlySpace : "El numero de serie no puede contener solo espacios en blanco.",
+				rangelength : "El numero de serie debe contener entre 3 y 20 car&aacute;cteres."
+            },
+            descripcion : {
+				required : "Ingrese una descripcion",
+				notOnlySpace : "La descripcion no puede contener solo espacios en blanco.",
+				rangelength : "La descripcion debe contener entre 3 y 20 car&aacute;cteres."
+			},
+			estado : {
+				required : "Ingrese un estado",
+				number : "El estado debe contener solo números."
+			},
+			idRecurso : {
+				required : "Ingrese un C&oacute;digo de Tipo de Recurso",
+				number : "El Id de Tipo de Recurso debe contener solo números."
+			},
+			nombreTipoRecurso : {
+				required : "Ingrese un nombre de Tipo de Recurso",
+				notOnlySpace : "El nombre de Tipo de Recurso no puede contener solo espacios en blanco.",
+				rangelength : "El nombre de Tipo de Recurso debe contener entre 3 y 20 car&aacute;cteres."
+			},
+			idAreaEstudio : {
+				required : "Ingrese un C&oacute;digo de Area de estudio",
+				number : "El Id de Area de estudio debe contener solo números."
+			},
+			nombreAreaEstudio : {
+				required : "Ingrese un nombre de Area de Estudio",
+				notOnlySpace : "El nombre de Area de Estudio no puede contener solo espacios en blanco.",
+				rangelength : "El nombre de Area de Estudio debe contener entre 3 y 45 car&aacute;cteres."
+			},
+			idUbicacion : {
+				required : "Ingrese un C&oacute;digo de Ubicacion",
+				number : "El Id de Ubicacion debe contener solo números."
+			},
+
 		}
 	});
-	
-	$formRecursoModal.validate({
-		focusCleanup : true,
-		rules : {
-			idRecurso : {
-				required : true,
-				lettersonly : true
-			},
-			descripcion : {
-				required : true,
-				notOnlySpace : true
-			}
-		},
-		messages : {
-			idRecurso : {
-				required : "Ingrese un C&oacute;odigo de Recurso.",
-				number : "El C&oacute;digo de Recurso debe ser una letra.",
-
-			},
-			descripcion : {
-				required : "Ingrese una descripci&oacute;n.",
-				notOnlySpace : "La descripci&oacute;n no puede contener solo espacios en blanco."
-			}
-		},
-		highlight : function(element) {
-			$(element).closest('.form-group').addClass('has-error');
-		},
-		unhighlight : function(element) {
-			$(element).closest('.form-group').removeClass('has-error');
-		},
-		errorElement : 'span',
-		errorClass : 'help-block',
-		errorPlacement : function(error, element) {
-			if (element.parent('.input-group').length) {
-				error.insertAfter(element.parent());
-			} else if (element.parent().find("span.select2").length > 0) {
-				error.appendTo(element.parent());
-			} else {
-				error.insertAfter(element);
-			}
-		}
-	});
-
 });

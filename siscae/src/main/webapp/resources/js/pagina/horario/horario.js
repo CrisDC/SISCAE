@@ -7,7 +7,7 @@ $(document).ready(function() {
 		$registrarMantenimiento : $("#registrarMantenimiento"),
 		$filaSeleccionada : "",
 		$actualizarMantenimiento : $("#actualizarMantenimiento"),
-		idRecursoSeleccionado : ""
+		idHorarioSeleccionado : ""
 	}
 	$formMantenimiento = $("#formMantenimiento");
 
@@ -22,11 +22,11 @@ $(document).ready(function() {
 	});
 	$local.tablaMantenimiento = $local.$tablaMantenimiento.DataTable({
 		"ajax" : {
-			"url" : $variableUtil.root + "recurso?accion=buscarTodos",
+			"url" : $variableUtil.root + "horario?accion=buscarTodos",
 			"dataSrc" : ""
 		},
 		"language" : {
-			"emptyTable" : "No hay recursos registrados"
+			"emptyTable" : "No hay horarios registrados"
 		},
 		"initComplete" : function() {
 			$local.$tablaMantenimiento.wrap("<div class='table-responsive'></div>");
@@ -44,35 +44,47 @@ $(document).ready(function() {
 			"defaultContent" : $variableUtil.botonActualizar + " " + $variableUtil.botonEliminar
 		} ],
 		"columns" : [ {
-			"data" : 'idRecurso',
+			"data" : 'idHorario',
 			"title" : "Id"
 		},{
-			"data" : 'numeroSerie',
-			"title" : "Num de serie"
+			"data" : 'descripcionHorario',
+			"title" : "Descricion del Horario"
 		},{
-			"data" : 'descripcion',
-			"title" : "Descripcion"
+			"data" : 'horaInicio',
+			"title" : "Hora de inicio "
 		},{
-			"data" : 'maxCapacidad',
-			"title" : "Max Capacidad"
-		},{
-			"data" : 'estado',
+			"data" : 'horaFin',
+			"title" : "Hora de fin"
+		}, {
+			"data" : 'estadoHorario',
 			"title" : "Estado"
 		},{
-			"data" : 'idTipoRecurso',
-			"title" : "Tipo de recurso"
+			"data" : 'tiempoMaximo',
+			"title" : "Tiempo máximo"
 		},{
-			"data" : 'nombreTipoRecurso',
-			"title" : "Nombre del Tipo de recurso"
+			"data" : 'idTurno',
+			"title" : "Id de Turno"
+		},{
+			"data" : 'descripcionTurno',
+			"title" : "Descricion del Turno"
+		},{
+			"data" : 'idDia',
+			"title" : "Id de día"
+		},{
+			"data" : 'descripcionDia',
+			"title" : "Descricion del Dia"
+		},{
+			"data" : 'idTipoHorario',
+			"title" : "Id de Tipo de Horario"
+		},{
+			"data" : 'descripcionTipoHorario',
+			"title" : "Descricion del Tipo de Horario"
 		},{
 			"data" : 'idAreaEstudio',
-			"title" : "Area de Estudio"
+			"title" : "Id de Area de estudio"
 		},{
 			"data" : 'nombreAreaEstudio',
-			"title" : "Nombre Area de Estudio"
-		},{
-			"data" : 'idUbicacion',
-			"title" : "Ubicacion"
+			"title" : "Nombre del Area de estudio"
 		},{
 			"data" : null,
 			"title" : 'Acción'
@@ -88,7 +100,7 @@ $(document).ready(function() {
 	});
 
 	$local.$modalMantenimiento.PopupWindow({
-		title : "Mantenimiento de Recurso",
+		title : "Mantenimiento de horario",
 		autoOpen : false,
 		modal : false,
 		height : 400,
@@ -107,7 +119,7 @@ $(document).ready(function() {
 	});
 
 	$local.$modalMantenimiento.on("close.popupwindow", function() {
-		$local.idRecursoSeleccionado = "";
+		$local.idHorarioSeleccionado = "";
 	});
 	$formMantenimiento.find("input").keypress(function(event) {
 		if (event.which == 13) {
@@ -126,11 +138,11 @@ $(document).ready(function() {
 		if (!$formMantenimiento.valid()) {
 			return;
 		}
-		var recurso = $formMantenimiento.serializeJSON();
+		var horario = $formMantenimiento.serializeJSON();
 		$.ajax({
 			type : "POST",
-			url : $variableUtil.root + "recurso",
-			data : JSON.stringify(recurso),
+			url : $variableUtil.root + "horario",
+			data : JSON.stringify(horario),
 			beforeSend : function(xhr) {
 				$local.$registrarMantenimiento.attr("disabled", true).find("i").removeClass("fa-floppy-o").addClass("fa-spinner fa-pulse fa-fw");
 				xhr.setRequestHeader('Content-Type', 'application/json');
@@ -144,7 +156,7 @@ $(document).ready(function() {
 			},
 			success : function(response) {
 				$funcionUtil.notificarException(response, "fa-check", "Aviso", "success");
-				var row = $local.tablaMantenimiento.row.add(recurso).draw();
+				var row = $local.tablaMantenimiento.row.add(horario).draw();
 				row.show().draw(false);
 				$(row.node()).animateHighlight();
 				$local.$modalMantenimiento.PopupWindow("close");
@@ -158,24 +170,24 @@ $(document).ready(function() {
 		$local.$tablaMantenimiento.children("tbody").on("click", ".actualizar", function() {
 		$funcionUtil.prepararFormularioActualizacion($formMantenimiento);
 		$local.$filaSeleccionada = $(this).parents("tr");
-		var recurso = $local.tablaMantenimiento.row($local.$filaSeleccionada).data();
-		$local.idRecursoSeleccionado = recurso.idRecurso;
-		$funcionUtil.llenarFormulario(recurso, $formMantenimiento);
+		var horario = $local.tablaMantenimiento.row($local.$filaSeleccionada).data();
+		$local.idHorarioSeleccionado = horario.idHorario;
+		$funcionUtil.llenarFormulario(horario, $formMantenimiento);
 		$local.$actualizarMantenimiento.removeClass("hidden");
 		$local.$registrarMantenimiento.addClass("hidden");
 		$local.$modalMantenimiento.PopupWindow("open");
-	});
+		});
 	});
 	$local.$actualizarMantenimiento.on("click", function() {
 		if (!$formMantenimiento.valid()) {
 			return;
 		}
-		var recurso = $formMantenimiento.serializeJSON();
-		recurso.idRecurso = $local.idRecursoSeleccionado;
+		var horario = $formMantenimiento.serializeJSON();
+		horario.idHorario = $local.idHorarioSeleccionado;
 		$.ajax({
 			type : "PUT",
-			url : $variableUtil.root + "recurso",
-			data : JSON.stringify(recurso),
+			url : $variableUtil.root + "horario",
+			data : JSON.stringify(horario),
 			beforeSend : function(xhr) {
 				$local.$actualizarMantenimiento.attr("disabled", true).find("i").removeClass("fa-pencil-square").addClass("fa-spinner fa-pulse fa-fw");
 				xhr.setRequestHeader('Content-Type', 'application/json');
@@ -190,7 +202,7 @@ $(document).ready(function() {
 			success : function(response) {
 				$funcionUtil.notificarException(response, "fa-check", "Aviso", "success");
 				$local.tablaMantenimiento.row($local.$filaSeleccionada).remove().draw(false);
-				var row = $local.tablaMantenimiento.row.add(recurso).draw();
+				var row = $local.tablaMantenimiento.row.add(horario).draw();
 				row.show().draw(false);
 				$(row.node()).animateHighlight();
 				$local.$modalMantenimiento.PopupWindow("close");
@@ -201,14 +213,13 @@ $(document).ready(function() {
 				$local.$actualizarMantenimiento.attr("disabled", false).find("i").addClass("fa-pencil-square").removeClass("fa-spinner fa-pulse fa-fw");
 			}
 		});
-	});
-	$local.$tablaMantenimiento.children("tbody").on("click", ".eliminar", function() {
+		$local.$tablaMantenimiento.children("tbody").on("click", ".eliminar", function() {
 		$local.$filaSeleccionada = $(this).parents("tr");
-		var recurso = $local.tablaMantenimiento.row($local.$filaSeleccionada).data();
+		var empresa = $local.tablaMantenimiento.row($local.$filaSeleccionada).data();
 		$.confirm({
 			icon : "fa fa-info-circle",
 			title : "Aviso",
-			content : "¿Desea eliminar el recurso <b>'" + recurso.idRecurso + " - " + recurso.descripcion + "'<b/>?",
+			content : "¿Desea eliminar el horario <b>'" + horario.idHorario + " - " + horario.descripcionHorario+"'<b/>?",
 			buttons : {
 				Aceptar : {
 					action : function() {
@@ -220,8 +231,8 @@ $(document).ready(function() {
 								self.buttons.close.hide();
 								$.ajax({
 									type : "DELETE",
-									url : $variableUtil.root + "recurso",
-									data : JSON.stringify(recurso),
+									url : $variableUtil.root + "horario",
+									data : JSON.stringify(horario),
 									autoclose : true,
 									beforeSend : function(xhr) {
 										xhr.setRequestHeader('Content-Type', 'application/json');
@@ -238,7 +249,7 @@ $(document).ready(function() {
 										$funcionUtil.notificarException($funcionUtil.obtenerMensajeErrorEnCadena(xhr.responseJSON), "fa-warning", "Aviso", "warning");
 										break;
 									case 409:
-										var mensaje = $funcionUtil.obtenerMensajeError("El recurso <b>" + recurso.idRecurso + " - " + recurso.descripcion + "</b>", xhr.responseJSON, $variableUtil.accionEliminado);
+										var mensaje = $funcionUtil.obtenerMensajeError("El horario <b>" + horario.idHorario + " - " +  horario.descripcionHorario + "</b>", xhr.responseJSON, $variableUtil.accionEliminado);
 										$funcionUtil.notificarException(mensaje, "fa-warning", "Aviso", "warning");
 										break;
 									}
@@ -258,12 +269,7 @@ $(document).ready(function() {
 					keys : [ 'esc' ]
 				},
 			}
+			});
 		});
 	});
-
-
 });
-
-
-
-

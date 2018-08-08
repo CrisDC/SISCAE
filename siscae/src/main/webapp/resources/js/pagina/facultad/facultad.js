@@ -7,7 +7,7 @@ $(document).ready(function() {
 		$registrarMantenimiento : $("#registrarMantenimiento"),
 		$filaSeleccionada : "",
 		$actualizarMantenimiento : $("#actualizarMantenimiento"),
-		idRecursoSeleccionado : ""
+		idFacultadSeleccionado : ""
 	}
 	$formMantenimiento = $("#formMantenimiento");
 
@@ -22,11 +22,11 @@ $(document).ready(function() {
 	});
 	$local.tablaMantenimiento = $local.$tablaMantenimiento.DataTable({
 		"ajax" : {
-			"url" : $variableUtil.root + "recurso?accion=buscarTodos",
+			"url" : $variableUtil.root + "facultad?accion=buscarTodos",
 			"dataSrc" : ""
 		},
 		"language" : {
-			"emptyTable" : "No hay recursos registrados"
+			"emptyTable" : "No hay facultades registradas"
 		},
 		"initComplete" : function() {
 			$local.$tablaMantenimiento.wrap("<div class='table-responsive'></div>");
@@ -44,36 +44,12 @@ $(document).ready(function() {
 			"defaultContent" : $variableUtil.botonActualizar + " " + $variableUtil.botonEliminar
 		} ],
 		"columns" : [ {
-			"data" : 'idRecurso',
+			"data" : 'idFacultad',
 			"title" : "Id"
-		},{
-			"data" : 'numeroSerie',
-			"title" : "Num de serie"
-		},{
-			"data" : 'descripcion',
-			"title" : "Descripcion"
-		},{
-			"data" : 'maxCapacidad',
-			"title" : "Max Capacidad"
-		},{
-			"data" : 'estado',
-			"title" : "Estado"
-		},{
-			"data" : 'idTipoRecurso',
-			"title" : "Tipo de recurso"
-		},{
-			"data" : 'nombreTipoRecurso',
-			"title" : "Nombre del Tipo de recurso"
-		},{
-			"data" : 'idAreaEstudio',
-			"title" : "Area de Estudio"
-		},{
-			"data" : 'nombreAreaEstudio',
-			"title" : "Nombre Area de Estudio"
-		},{
-			"data" : 'idUbicacion',
-			"title" : "Ubicacion"
-		},{
+		}, {
+			"data" : 'nombre',
+			"title" : "Nombre"
+		}, {
 			"data" : null,
 			"title" : 'Acción'
 		} ]
@@ -88,7 +64,7 @@ $(document).ready(function() {
 	});
 
 	$local.$modalMantenimiento.PopupWindow({
-		title : "Mantenimiento de Recurso",
+		title : "Mantenimiento de Facultad",
 		autoOpen : false,
 		modal : false,
 		height : 400,
@@ -107,7 +83,7 @@ $(document).ready(function() {
 	});
 
 	$local.$modalMantenimiento.on("close.popupwindow", function() {
-		$local.idRecursoSeleccionado = "";
+		$local.idFacultadSeleccionado = "";
 	});
 	$formMantenimiento.find("input").keypress(function(event) {
 		if (event.which == 13) {
@@ -126,11 +102,11 @@ $(document).ready(function() {
 		if (!$formMantenimiento.valid()) {
 			return;
 		}
-		var recurso = $formMantenimiento.serializeJSON();
+		var facultad = $formMantenimiento.serializeJSON();
 		$.ajax({
 			type : "POST",
-			url : $variableUtil.root + "recurso",
-			data : JSON.stringify(recurso),
+			url : $variableUtil.root + "facultad",
+			data : JSON.stringify(facultad),
 			beforeSend : function(xhr) {
 				$local.$registrarMantenimiento.attr("disabled", true).find("i").removeClass("fa-floppy-o").addClass("fa-spinner fa-pulse fa-fw");
 				xhr.setRequestHeader('Content-Type', 'application/json');
@@ -144,7 +120,7 @@ $(document).ready(function() {
 			},
 			success : function(response) {
 				$funcionUtil.notificarException(response, "fa-check", "Aviso", "success");
-				var row = $local.tablaMantenimiento.row.add(recurso).draw();
+				var row = $local.tablaMantenimiento.row.add(facultad).draw();
 				row.show().draw(false);
 				$(row.node()).animateHighlight();
 				$local.$modalMantenimiento.PopupWindow("close");
@@ -158,24 +134,24 @@ $(document).ready(function() {
 		$local.$tablaMantenimiento.children("tbody").on("click", ".actualizar", function() {
 		$funcionUtil.prepararFormularioActualizacion($formMantenimiento);
 		$local.$filaSeleccionada = $(this).parents("tr");
-		var recurso = $local.tablaMantenimiento.row($local.$filaSeleccionada).data();
-		$local.idRecursoSeleccionado = recurso.idRecurso;
-		$funcionUtil.llenarFormulario(recurso, $formMantenimiento);
+		var facultad = $local.tablaMantenimiento.row($local.$filaSeleccionada).data();
+		$local.idFacultadSeleccionado = facultad.idFacultad;
+		$funcionUtil.llenarFormulario(facultad, $formMantenimiento);
 		$local.$actualizarMantenimiento.removeClass("hidden");
 		$local.$registrarMantenimiento.addClass("hidden");
 		$local.$modalMantenimiento.PopupWindow("open");
-	});
+		});
 	});
 	$local.$actualizarMantenimiento.on("click", function() {
 		if (!$formMantenimiento.valid()) {
 			return;
 		}
-		var recurso = $formMantenimiento.serializeJSON();
-		recurso.idRecurso = $local.idRecursoSeleccionado;
+		var facultad = $formMantenimiento.serializeJSON();
+		facultad.idFacultad = $local.idFacultadSeleccionado;
 		$.ajax({
 			type : "PUT",
-			url : $variableUtil.root + "recurso",
-			data : JSON.stringify(recurso),
+			url : $variableUtil.root + "facultad",
+			data : JSON.stringify(facultad),
 			beforeSend : function(xhr) {
 				$local.$actualizarMantenimiento.attr("disabled", true).find("i").removeClass("fa-pencil-square").addClass("fa-spinner fa-pulse fa-fw");
 				xhr.setRequestHeader('Content-Type', 'application/json');
@@ -190,7 +166,7 @@ $(document).ready(function() {
 			success : function(response) {
 				$funcionUtil.notificarException(response, "fa-check", "Aviso", "success");
 				$local.tablaMantenimiento.row($local.$filaSeleccionada).remove().draw(false);
-				var row = $local.tablaMantenimiento.row.add(recurso).draw();
+				var row = $local.tablaMantenimiento.row.add(facultad).draw();
 				row.show().draw(false);
 				$(row.node()).animateHighlight();
 				$local.$modalMantenimiento.PopupWindow("close");
@@ -204,11 +180,11 @@ $(document).ready(function() {
 	});
 	$local.$tablaMantenimiento.children("tbody").on("click", ".eliminar", function() {
 		$local.$filaSeleccionada = $(this).parents("tr");
-		var recurso = $local.tablaMantenimiento.row($local.$filaSeleccionada).data();
+		var facultad = $local.tablaMantenimiento.row($local.$filaSeleccionada).data();
 		$.confirm({
 			icon : "fa fa-info-circle",
 			title : "Aviso",
-			content : "¿Desea eliminar el recurso <b>'" + recurso.idRecurso + " - " + recurso.descripcion + "'<b/>?",
+			content : "¿Desea eliminar la facultad <b>'" + facultad.idFacultad + " - " + facultad.nombre + "'<b/>?",
 			buttons : {
 				Aceptar : {
 					action : function() {
@@ -220,8 +196,8 @@ $(document).ready(function() {
 								self.buttons.close.hide();
 								$.ajax({
 									type : "DELETE",
-									url : $variableUtil.root + "recurso",
-									data : JSON.stringify(recurso),
+									url : $variableUtil.root + "facultad",
+									data : JSON.stringify(facultad),
 									autoclose : true,
 									beforeSend : function(xhr) {
 										xhr.setRequestHeader('Content-Type', 'application/json');
@@ -238,7 +214,7 @@ $(document).ready(function() {
 										$funcionUtil.notificarException($funcionUtil.obtenerMensajeErrorEnCadena(xhr.responseJSON), "fa-warning", "Aviso", "warning");
 										break;
 									case 409:
-										var mensaje = $funcionUtil.obtenerMensajeError("El recurso <b>" + recurso.idRecurso + " - " + recurso.descripcion + "</b>", xhr.responseJSON, $variableUtil.accionEliminado);
+										var mensaje = $funcionUtil.obtenerMensajeError("La facultad <b>" + facultad.idFacultad + " - " + facultad.nombre + "</b>", xhr.responseJSON, $variableUtil.accionEliminado);
 										$funcionUtil.notificarException(mensaje, "fa-warning", "Aviso", "warning");
 										break;
 									}

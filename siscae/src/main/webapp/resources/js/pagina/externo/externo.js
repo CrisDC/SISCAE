@@ -7,7 +7,7 @@ $(document).ready(function() {
 		$registrarMantenimiento : $("#registrarMantenimiento"),
 		$filaSeleccionada : "",
 		$actualizarMantenimiento : $("#actualizarMantenimiento"),
-		idRecursoSeleccionado : ""
+		idExternoSeleccionado : ""
 	}
 	$formMantenimiento = $("#formMantenimiento");
 
@@ -22,11 +22,11 @@ $(document).ready(function() {
 	});
 	$local.tablaMantenimiento = $local.$tablaMantenimiento.DataTable({
 		"ajax" : {
-			"url" : $variableUtil.root + "recurso?accion=buscarTodos",
+			"url" : $variableUtil.root + "externo?accion=buscarTodos",
 			"dataSrc" : ""
 		},
 		"language" : {
-			"emptyTable" : "No hay recursos registrados"
+			"emptyTable" : "No hay externos registrados"
 		},
 		"initComplete" : function() {
 			$local.$tablaMantenimiento.wrap("<div class='table-responsive'></div>");
@@ -44,35 +44,29 @@ $(document).ready(function() {
 			"defaultContent" : $variableUtil.botonActualizar + " " + $variableUtil.botonEliminar
 		} ],
 		"columns" : [ {
-			"data" : 'idRecurso',
+			"data" : 'idExterno',
 			"title" : "Id"
 		},{
-			"data" : 'numeroSerie',
-			"title" : "Num de serie"
+			"data" : 'idTipoDocumento',
+			"title" : "Id de tipo de documento"
 		},{
-			"data" : 'descripcion',
-			"title" : "Descripcion"
+			"data" : 'descripcionTipoDocumento',
+			"title" : "Descripcion de tipo de documento"
 		},{
-			"data" : 'maxCapacidad',
-			"title" : "Max Capacidad"
+			"data" : 'numDocumento',
+			"title" : "Número de documento"
 		},{
-			"data" : 'estado',
+			"data" : 'estadoExterno',
 			"title" : "Estado"
 		},{
-			"data" : 'idTipoRecurso',
-			"title" : "Tipo de recurso"
+			"data" : 'nombre',
+			"title" : "Nombre"
 		},{
-			"data" : 'nombreTipoRecurso',
-			"title" : "Nombre del Tipo de recurso"
+			"data" : 'appPaterno',
+			"title" : "Apellido Paterno"
 		},{
-			"data" : 'idAreaEstudio',
-			"title" : "Area de Estudio"
-		},{
-			"data" : 'nombreAreaEstudio',
-			"title" : "Nombre Area de Estudio"
-		},{
-			"data" : 'idUbicacion',
-			"title" : "Ubicacion"
+			"data" : 'appMaterno',
+			"title" : "Apellido Materno"
 		},{
 			"data" : null,
 			"title" : 'Acción'
@@ -88,7 +82,7 @@ $(document).ready(function() {
 	});
 
 	$local.$modalMantenimiento.PopupWindow({
-		title : "Mantenimiento de Recurso",
+		title : "Mantenimiento de Externo",
 		autoOpen : false,
 		modal : false,
 		height : 400,
@@ -107,7 +101,7 @@ $(document).ready(function() {
 	});
 
 	$local.$modalMantenimiento.on("close.popupwindow", function() {
-		$local.idRecursoSeleccionado = "";
+		$local.idExternoSeleccionado = "";
 	});
 	$formMantenimiento.find("input").keypress(function(event) {
 		if (event.which == 13) {
@@ -126,11 +120,11 @@ $(document).ready(function() {
 		if (!$formMantenimiento.valid()) {
 			return;
 		}
-		var recurso = $formMantenimiento.serializeJSON();
+		var externo = $formMantenimiento.serializeJSON();
 		$.ajax({
 			type : "POST",
-			url : $variableUtil.root + "recurso",
-			data : JSON.stringify(recurso),
+			url : $variableUtil.root + "externo",
+			data : JSON.stringify(externo),
 			beforeSend : function(xhr) {
 				$local.$registrarMantenimiento.attr("disabled", true).find("i").removeClass("fa-floppy-o").addClass("fa-spinner fa-pulse fa-fw");
 				xhr.setRequestHeader('Content-Type', 'application/json');
@@ -144,7 +138,7 @@ $(document).ready(function() {
 			},
 			success : function(response) {
 				$funcionUtil.notificarException(response, "fa-check", "Aviso", "success");
-				var row = $local.tablaMantenimiento.row.add(recurso).draw();
+				var row = $local.tablaMantenimiento.row.add(externo).draw();
 				row.show().draw(false);
 				$(row.node()).animateHighlight();
 				$local.$modalMantenimiento.PopupWindow("close");
@@ -158,24 +152,24 @@ $(document).ready(function() {
 		$local.$tablaMantenimiento.children("tbody").on("click", ".actualizar", function() {
 		$funcionUtil.prepararFormularioActualizacion($formMantenimiento);
 		$local.$filaSeleccionada = $(this).parents("tr");
-		var recurso = $local.tablaMantenimiento.row($local.$filaSeleccionada).data();
-		$local.idRecursoSeleccionado = recurso.idRecurso;
-		$funcionUtil.llenarFormulario(recurso, $formMantenimiento);
+		var externo = $local.tablaMantenimiento.row($local.$filaSeleccionada).data();
+		$local.idExternoSeleccionado = externo.idExterno;
+		$funcionUtil.llenarFormulario(externo, $formMantenimiento);
 		$local.$actualizarMantenimiento.removeClass("hidden");
 		$local.$registrarMantenimiento.addClass("hidden");
 		$local.$modalMantenimiento.PopupWindow("open");
-	});
+		});
 	});
 	$local.$actualizarMantenimiento.on("click", function() {
 		if (!$formMantenimiento.valid()) {
 			return;
 		}
-		var recurso = $formMantenimiento.serializeJSON();
-		recurso.idRecurso = $local.idRecursoSeleccionado;
+		var externo = $formMantenimiento.serializeJSON();
+		externo.idExterno = $local.idExternoSeleccionado;
 		$.ajax({
 			type : "PUT",
-			url : $variableUtil.root + "recurso",
-			data : JSON.stringify(recurso),
+			url : $variableUtil.root + "externo",
+			data : JSON.stringify(externo),
 			beforeSend : function(xhr) {
 				$local.$actualizarMantenimiento.attr("disabled", true).find("i").removeClass("fa-pencil-square").addClass("fa-spinner fa-pulse fa-fw");
 				xhr.setRequestHeader('Content-Type', 'application/json');
@@ -190,7 +184,7 @@ $(document).ready(function() {
 			success : function(response) {
 				$funcionUtil.notificarException(response, "fa-check", "Aviso", "success");
 				$local.tablaMantenimiento.row($local.$filaSeleccionada).remove().draw(false);
-				var row = $local.tablaMantenimiento.row.add(recurso).draw();
+				var row = $local.tablaMantenimiento.row.add(externo).draw();
 				row.show().draw(false);
 				$(row.node()).animateHighlight();
 				$local.$modalMantenimiento.PopupWindow("close");
@@ -201,14 +195,13 @@ $(document).ready(function() {
 				$local.$actualizarMantenimiento.attr("disabled", false).find("i").addClass("fa-pencil-square").removeClass("fa-spinner fa-pulse fa-fw");
 			}
 		});
-	});
-	$local.$tablaMantenimiento.children("tbody").on("click", ".eliminar", function() {
+		$local.$tablaMantenimiento.children("tbody").on("click", ".eliminar", function() {
 		$local.$filaSeleccionada = $(this).parents("tr");
-		var recurso = $local.tablaMantenimiento.row($local.$filaSeleccionada).data();
+		var empresa = $local.tablaMantenimiento.row($local.$filaSeleccionada).data();
 		$.confirm({
 			icon : "fa fa-info-circle",
 			title : "Aviso",
-			content : "¿Desea eliminar el recurso <b>'" + recurso.idRecurso + " - " + recurso.descripcion + "'<b/>?",
+			content : "¿Desea eliminar al externo <b>'" + externo.idExterno + " - " +externo.numDocumento+"-"+ externo.nombre+" "+externo.appPaterno+" "+externo.appMaterno + "'<b/>?",
 			buttons : {
 				Aceptar : {
 					action : function() {
@@ -220,8 +213,8 @@ $(document).ready(function() {
 								self.buttons.close.hide();
 								$.ajax({
 									type : "DELETE",
-									url : $variableUtil.root + "recurso",
-									data : JSON.stringify(recurso),
+									url : $variableUtil.root + "externo",
+									data : JSON.stringify(externo),
 									autoclose : true,
 									beforeSend : function(xhr) {
 										xhr.setRequestHeader('Content-Type', 'application/json');
@@ -238,7 +231,7 @@ $(document).ready(function() {
 										$funcionUtil.notificarException($funcionUtil.obtenerMensajeErrorEnCadena(xhr.responseJSON), "fa-warning", "Aviso", "warning");
 										break;
 									case 409:
-										var mensaje = $funcionUtil.obtenerMensajeError("El recurso <b>" + recurso.idRecurso + " - " + recurso.descripcion + "</b>", xhr.responseJSON, $variableUtil.accionEliminado);
+										var mensaje = $funcionUtil.obtenerMensajeError("El externo <b>" + externo.idExterno + " - " +externo.numDocumento+"-" + externo.nombre+" "+externo.appPaterno+" "+externo.appMaterno+ "</b>", xhr.responseJSON, $variableUtil.accionEliminado);
 										$funcionUtil.notificarException(mensaje, "fa-warning", "Aviso", "warning");
 										break;
 									}
@@ -258,12 +251,7 @@ $(document).ready(function() {
 					keys : [ 'esc' ]
 				},
 			}
+			});
 		});
 	});
-
-
 });
-
-
-
-

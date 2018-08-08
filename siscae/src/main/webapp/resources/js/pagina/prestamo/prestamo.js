@@ -7,7 +7,7 @@ $(document).ready(function() {
 		$registrarMantenimiento : $("#registrarMantenimiento"),
 		$filaSeleccionada : "",
 		$actualizarMantenimiento : $("#actualizarMantenimiento"),
-		idRecursoSeleccionado : ""
+		idprestamoSeleccionado : ""
 	}
 	$formMantenimiento = $("#formMantenimiento");
 
@@ -22,11 +22,11 @@ $(document).ready(function() {
 	});
 	$local.tablaMantenimiento = $local.$tablaMantenimiento.DataTable({
 		"ajax" : {
-			"url" : $variableUtil.root + "recurso?accion=buscarTodos",
+			"url" : $variableUtil.root + "prestamo?accion=buscarTodos",
 			"dataSrc" : ""
 		},
 		"language" : {
-			"emptyTable" : "No hay recursos registrados"
+			"emptyTable" : "No hay prestamos registrados"
 		},
 		"initComplete" : function() {
 			$local.$tablaMantenimiento.wrap("<div class='table-responsive'></div>");
@@ -44,35 +44,49 @@ $(document).ready(function() {
 			"defaultContent" : $variableUtil.botonActualizar + " " + $variableUtil.botonEliminar
 		} ],
 		"columns" : [ {
-			"data" : 'idRecurso',
+			"data" : 'idPrestamo',
 			"title" : "Id"
 		},{
-			"data" : 'numeroSerie',
-			"title" : "Num de serie"
+			"data" : 'horaEntrada',
+			"title" : "Hora de entrada "
 		},{
-			"data" : 'descripcion',
-			"title" : "Descripcion"
-		},{
-			"data" : 'maxCapacidad',
-			"title" : "Max Capacidad"
-		},{
-			"data" : 'estado',
+			"data" : 'horaSalida',
+			"title" : "Hora de salida"
+		}, {"data": 'estadoPrestamo',
 			"title" : "Estado"
 		},{
-			"data" : 'idTipoRecurso',
-			"title" : "Tipo de recurso"
+			"data" : 'idRecurso',
+			"title" : "Id de Recurso "
 		},{
-			"data" : 'nombreTipoRecurso',
-			"title" : "Nombre del Tipo de recurso"
+			"data" : 'descripcionRecurso',
+			"title" : "Descripcion de Recurso "
 		},{
-			"data" : 'idAreaEstudio',
-			"title" : "Area de Estudio"
+			"data" : 'idAdministrativo',
+			"title" : "Id de Administrativo "
 		},{
-			"data" : 'nombreAreaEstudio',
-			"title" : "Nombre Area de Estudio"
+			"data" : 'codAdmin',
+			"title" : "Codigo de Administrativo "
 		},{
-			"data" : 'idUbicacion',
-			"title" : "Ubicacion"
+			"data" : 'nombreAdministrativo',
+			"title" : "Nombre"
+		},{
+			"data" : 'appPaternoAdmin',
+			"title" : "Apellido Paterno "
+		},{
+			"data" : 'appMaternoAdministrativo',
+			"title" : "Apellido Materno"
+		},{
+			"data" : 'idPersona',
+			"title" : "Id de Persona "
+		},{
+			"data" : 'nombrePersona',
+			"title" : "Nombre de Solicitante"
+		},{
+			"data" : 'appPaternoPersona',
+			"title" : "Apellido Paterno Solicitante"
+		},{
+			"data" : 'appMaternoPersona',
+			"title" : "Apellido Materno Solicitante"
 		},{
 			"data" : null,
 			"title" : 'Acción'
@@ -88,7 +102,7 @@ $(document).ready(function() {
 	});
 
 	$local.$modalMantenimiento.PopupWindow({
-		title : "Mantenimiento de Recurso",
+		title : "Mantenimiento de prestamo",
 		autoOpen : false,
 		modal : false,
 		height : 400,
@@ -107,7 +121,7 @@ $(document).ready(function() {
 	});
 
 	$local.$modalMantenimiento.on("close.popupwindow", function() {
-		$local.idRecursoSeleccionado = "";
+		$local.idPrestamoSeleccionado = "";
 	});
 	$formMantenimiento.find("input").keypress(function(event) {
 		if (event.which == 13) {
@@ -126,11 +140,11 @@ $(document).ready(function() {
 		if (!$formMantenimiento.valid()) {
 			return;
 		}
-		var recurso = $formMantenimiento.serializeJSON();
+		var prestamo = $formMantenimiento.serializeJSON();
 		$.ajax({
 			type : "POST",
-			url : $variableUtil.root + "recurso",
-			data : JSON.stringify(recurso),
+			url : $variableUtil.root + "prestamo",
+			data : JSON.stringify(prestamo),
 			beforeSend : function(xhr) {
 				$local.$registrarMantenimiento.attr("disabled", true).find("i").removeClass("fa-floppy-o").addClass("fa-spinner fa-pulse fa-fw");
 				xhr.setRequestHeader('Content-Type', 'application/json');
@@ -144,7 +158,7 @@ $(document).ready(function() {
 			},
 			success : function(response) {
 				$funcionUtil.notificarException(response, "fa-check", "Aviso", "success");
-				var row = $local.tablaMantenimiento.row.add(recurso).draw();
+				var row = $local.tablaMantenimiento.row.add(prestamo).draw();
 				row.show().draw(false);
 				$(row.node()).animateHighlight();
 				$local.$modalMantenimiento.PopupWindow("close");
@@ -158,24 +172,24 @@ $(document).ready(function() {
 		$local.$tablaMantenimiento.children("tbody").on("click", ".actualizar", function() {
 		$funcionUtil.prepararFormularioActualizacion($formMantenimiento);
 		$local.$filaSeleccionada = $(this).parents("tr");
-		var recurso = $local.tablaMantenimiento.row($local.$filaSeleccionada).data();
-		$local.idRecursoSeleccionado = recurso.idRecurso;
-		$funcionUtil.llenarFormulario(recurso, $formMantenimiento);
+		var prestamo = $local.tablaMantenimiento.row($local.$filaSeleccionada).data();
+		$local.idPrestamoSeleccionado = prestamo.idPrestamo;
+		$funcionUtil.llenarFormulario(prestamo, $formMantenimiento);
 		$local.$actualizarMantenimiento.removeClass("hidden");
 		$local.$registrarMantenimiento.addClass("hidden");
 		$local.$modalMantenimiento.PopupWindow("open");
-	});
+		});
 	});
 	$local.$actualizarMantenimiento.on("click", function() {
 		if (!$formMantenimiento.valid()) {
 			return;
 		}
-		var recurso = $formMantenimiento.serializeJSON();
-		recurso.idRecurso = $local.idRecursoSeleccionado;
+		var prestamo = $formMantenimiento.serializeJSON();
+		prestamo.idPrestamo = $local.idPrestamoSeleccionado;
 		$.ajax({
 			type : "PUT",
-			url : $variableUtil.root + "recurso",
-			data : JSON.stringify(recurso),
+			url : $variableUtil.root + "prestamo",
+			data : JSON.stringify(prestamo),
 			beforeSend : function(xhr) {
 				$local.$actualizarMantenimiento.attr("disabled", true).find("i").removeClass("fa-pencil-square").addClass("fa-spinner fa-pulse fa-fw");
 				xhr.setRequestHeader('Content-Type', 'application/json');
@@ -190,7 +204,7 @@ $(document).ready(function() {
 			success : function(response) {
 				$funcionUtil.notificarException(response, "fa-check", "Aviso", "success");
 				$local.tablaMantenimiento.row($local.$filaSeleccionada).remove().draw(false);
-				var row = $local.tablaMantenimiento.row.add(recurso).draw();
+				var row = $local.tablaMantenimiento.row.add(prestamo).draw();
 				row.show().draw(false);
 				$(row.node()).animateHighlight();
 				$local.$modalMantenimiento.PopupWindow("close");
@@ -201,14 +215,13 @@ $(document).ready(function() {
 				$local.$actualizarMantenimiento.attr("disabled", false).find("i").addClass("fa-pencil-square").removeClass("fa-spinner fa-pulse fa-fw");
 			}
 		});
-	});
-	$local.$tablaMantenimiento.children("tbody").on("click", ".eliminar", function() {
+		$local.$tablaMantenimiento.children("tbody").on("click", ".eliminar", function() {
 		$local.$filaSeleccionada = $(this).parents("tr");
-		var recurso = $local.tablaMantenimiento.row($local.$filaSeleccionada).data();
+		var empresa = $local.tablaMantenimiento.row($local.$filaSeleccionada).data();
 		$.confirm({
 			icon : "fa fa-info-circle",
 			title : "Aviso",
-			content : "¿Desea eliminar el recurso <b>'" + recurso.idRecurso + " - " + recurso.descripcion + "'<b/>?",
+			content : "¿Desea eliminar el prestamo <b>'" + prestamo.idPrestamo + " - " + prestamo.nombre+"'<b/>?",
 			buttons : {
 				Aceptar : {
 					action : function() {
@@ -220,8 +233,8 @@ $(document).ready(function() {
 								self.buttons.close.hide();
 								$.ajax({
 									type : "DELETE",
-									url : $variableUtil.root + "recurso",
-									data : JSON.stringify(recurso),
+									url : $variableUtil.root + "prestamo",
+									data : JSON.stringify(prestamo),
 									autoclose : true,
 									beforeSend : function(xhr) {
 										xhr.setRequestHeader('Content-Type', 'application/json');
@@ -238,7 +251,7 @@ $(document).ready(function() {
 										$funcionUtil.notificarException($funcionUtil.obtenerMensajeErrorEnCadena(xhr.responseJSON), "fa-warning", "Aviso", "warning");
 										break;
 									case 409:
-										var mensaje = $funcionUtil.obtenerMensajeError("El recurso <b>" + recurso.idRecurso + " - " + recurso.descripcion + "</b>", xhr.responseJSON, $variableUtil.accionEliminado);
+										var mensaje = $funcionUtil.obtenerMensajeError("El prestamo <b>" + prestamo.idPrestamo + " - " +  prestamo.nombre + "</b>", xhr.responseJSON, $variableUtil.accionEliminado);
 										$funcionUtil.notificarException(mensaje, "fa-warning", "Aviso", "warning");
 										break;
 									}
@@ -258,12 +271,7 @@ $(document).ready(function() {
 					keys : [ 'esc' ]
 				},
 			}
+			});
 		});
 	});
-
-
 });
-
-
-
-
