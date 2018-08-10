@@ -11,10 +11,9 @@ $(document).ready(function() {
 				soloalfanumericos: true,
 				rangelength : [ 8, 10 ]
 			},
-			estadoAlumno : {
+			idEstadoTabla : {
 				required : true,
-				notOnlySpace : true,
-				rangelength : [ 3, 70 ]
+				number:true
 			},
 			idTipoAcademico : {
 				required : true,
@@ -51,14 +50,13 @@ $(document).ready(function() {
 				soloalfanumericos : "El C&oacute;digo debe contener solo car&aacute;cteres alfanumericos.",
 				rangelength : "La C&oacute;digo debe contener entre 8 y 10 car&aacute;cteres."
 			},
-			estadoAlumno : {
+			idEstadoTabla : {
 				required : "Ingrese un estado de Alumno",
-				notOnlySpace : "El estado no puede contener solo espacios en blanco.",
-				rangelength : "El estado debe contener entre 3 y 20 car&aacute;cteres."
+				number:"El Id del estado debe contener solo n&uacute;meros."
 			},
 			idTipoAcademico : {
 				required : "Ingrese un Id de Tipo Academico",
-				number:"El Id del Tipo Academico debe contener solo n&uacute;meros.",
+				number:"El Id del Tipo Academico debe contener solo n&uacute;meros."
 			},
 			descripcionTipoAcademico : {
 				required : "Ingrese un tipo académico.",

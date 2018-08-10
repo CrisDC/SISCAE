@@ -6,7 +6,7 @@ $(document).ready(function() {
 				required : true,
 				number: true
 			},
-			nombreEscuela : {
+			nombre : {
 				required : true,
 				notOnlySpace : true,
 				rangelength : [ 3, 60 ]
@@ -26,7 +26,7 @@ $(document).ready(function() {
 				required : "Ingrese un Id de Escuela",
 				number : "El Id de Escuela debe contener debe contener solo n&uacute;meros.",
 			},
-			nombreEscuela : {
+			nombre : {
 				required : "Ingrese una nombre de Escuela.",
 				notOnlySpace : "El nombre de Escuela no puede contener solo espacios en blanco.",
 				rangelength : "El nombre de Escuela debe contener entre 3 y 70 car&aacute;cteres."

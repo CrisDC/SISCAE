@@ -11,10 +11,9 @@ $(document).ready(function() {
 				soloalfanumericos: true,
 				rangelength : [ 8, 45]
 			},
-			estadoDocente : {
+			idEstadoTabla : {
 				required : true,
-				notOnlySpace : true,
-				rangelength : [ 3, 70 ]
+				number:true
 			},
 			nombre : {
 				required : true,
@@ -42,10 +41,9 @@ $(document).ready(function() {
 				soloalfanumericos : "El número de documento debe contener solo car&aacute;cteres alfanumericos.",
 				rangelength : "La número de documento debe contener entre 8 y 45 car&aacute;cteres."
 			},
-			estadoDocente : {
+			idEstadoTabla : {
 				required : "Ingrese un estado de Docente",
-				notOnlySpace : "El estado no puede contener solo espacios en blanco.",
-				rangelength : "El estado debe contener entre 3 y 20 car&aacute;cteres."
+				number:"El Id del estado debe contener solo n&uacute;meros."
 			},
 			nombre : {
 				required : "Ingrese un Nombre.",

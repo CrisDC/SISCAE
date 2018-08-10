@@ -39,11 +39,6 @@ $(document).ready(function() {
 			idTipoDocumento : {
 				required : true,
 				number:true
-			},
-			descripcionTipoDocumento : {
-				required : "Ingrese un Tipo de documento.",
-				notOnlySpace : "El Tipo de documento no puede contener solo espacios en blanco.",
-				rangelength : "El Tipo de documento debe contener entre 2 y 45 car&aacute;cteres."
 			}
 		},
 		messages : {
@@ -84,11 +79,6 @@ $(document).ready(function() {
 			idTipoDocumento : {
 				required : "Ingrese un Tipo de documento",
 				number:"El Id del Tipo de documento  debe contener solo n&uacute;meros.",
-			},
-			descripcionTipoDocumento : {
-				required : "Ingrese un Tipo de documento.",
-				notOnlySpace : "El Tipo de documento no puede contener solo espacios en blanco.",
-				rangelength : "El Tipo de documento debe contener entre 2 y 45 car&aacute;cteres."
 			}
 		}
 	});

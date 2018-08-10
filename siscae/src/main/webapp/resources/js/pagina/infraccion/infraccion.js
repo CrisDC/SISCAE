@@ -47,10 +47,10 @@ $(document).ready(function() {
 			"data" : 'idInfraccion',
 			"title" : "Id"
 		}, {
-			"data" : 'descripcionInfraccion',
+			"data" : 'descripcion',
 			"title" : "Descripcion "
 		},{
-			"data" : 'estadoInfraccion',
+			"data" : 'idEstadoTabla',
 			"title" : "Estado"
 		},{
 			"data" : 'idPersona',

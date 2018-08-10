@@ -1032,5 +1032,438 @@
 			</div>
 		</div>
 	</th:block>
+	<!-- TABLAS SISCAE -->
+	<th:block th:fragment="persona">
+		<div class="form-group">
+			<label class="col-lg-2 control-label">Tipo de documento</label>
+			<div class="col-lg-10">
+				<select id="idTipoDocumento" class="form-control select2 elemento-desactivable"
+					name="idTipoDocumento">
+					<option value="" selected="selected" disabled="disabled">Seleccione el Tipo de Documento</option>
+					<option value="" selected="selected" >DNI</option>
+					<option value="" selected="selected" >Carné de extranjería</option>
+				</select>
+			</div>
+		</div>
+		<div class="form-group">
+			<label class="col-lg-2 control-label">Número de Documento</label>
+			<div class="col-lg-10">
+				<input class="form-control upperCase elemento-desactivable" name="numDocumento"
+					autofocus="autofocus" />
+			</div>
+		</div>
+		<div class="form-group">
+			<label class="col-lg-2 control-label">Nombre</label>
+			<div class="col-lg-10">
+				<input class="form-control" name="nombre">
+			</div>
+		</div>
+		<div class="form-group">
+			<label class="col-lg-2 control-label">Apellido Paterno </label>
+			<div class="col-lg-10">
+				<input class="form-control" name="appPaterno">
+			</div>
+		</div>
+		<div class="form-group">
+			<label class="col-lg-2 control-label">Apellido Materno</label>
+			<div class="col-lg-10">
+				<input class="form-control" name="appMaterno">
+			</div>
+		</div>
+		<div class="form-group">
+			<label class="col-lg-2 control-label">Sexo</label>
+			<div class="col-lg-10">
+				<select id="sexo" class="form-control select2 elemento-desactivable"
+					name="sexo">
+					<option value="" selected="selected" disabled="disabled">Seleccione el sexo</option>
+					<option value="" selected="selected" >Masculino</option>
+					<option value="" selected="selected" >Femenino</option>
+				</select>
+			</div>
+		</div>
+		<div class="form-group">
+			<label class="col-lg-2 control-label">Telefono</label>
+			<div class="col-lg-10">
+				<input class="form-control" name="numTelef">
+			</div>
+		</div>
+		
+	</th:block>
+	<th:block th:fragment="alumno">
+		<div class="form-group">
+			<label class="col-lg-2 control-label">Tipo de documento</label>
+			<div class="col-lg-10">
+				<select id="idTipoDocumento" class="form-control select2 elemento-desactivable"
+					name="idTipoDocumento">
+					<option value="" selected="selected" disabled="disabled">Seleccione el Tipo de Documento</option>
+					<option value="" >DNI</option>
+					<option value="" >Carné de extranjería</option>
+				</select>
+			</div>
+		</div>
+		<div class="form-group">
+			<label class="col-lg-2 control-label">Número de Documento</label>
+			<div class="col-lg-10">
+				<input class="form-control upperCase elemento-desactivable" name="numDocumento"
+					autofocus="autofocus" />
+			</div>
+		</div>
+		<div class="form-group">
+			<label class="col-lg-2 control-label">Código de Alumno</label>
+			<div class="col-lg-10">
+				<input class="form-control" name="codigoAlumno">
+			</div>
+		</div>
+		<div class="form-group">
+			<label class="col-lg-2 control-label">Nombre</label>
+			<div class="col-lg-10">
+				<input class="form-control" name="nombre">
+			</div>
+		</div>
+		<div class="form-group">
+			<label class="col-lg-2 control-label">Apellido Paterno </label>
+			<div class="col-lg-10">
+				<input class="form-control" name="appPaterno">
+			</div>
+		</div>
+		<div class="form-group">
+			<label class="col-lg-2 control-label">Apellido Materno</label>
+			<div class="col-lg-10">
+				<input class="form-control" name="appMaterno">
+			</div>
+		</div>
+		<div class="form-group">
+			<label class="col-lg-2 control-label">Sexo</label>
+			<div class="col-lg-10">
+				<select id="sexo" class="form-control select2 elemento-desactivable"
+					name="sexo">
+					<option value="" selected="selected" disabled="disabled">Seleccione el sexo</option>
+					<option value="" >Masculino</option>
+					<option value="">Femenino</option>
+				</select>
+			</div>
+		</div>
+		<div class="form-group">
+			<label class="col-lg-2 control-label">Telefono</label>
+			<div class="col-lg-10">
+				<input class="form-control" name="numTelef">
+			</div>
+		</div>
+		<div class="form-group">
+			<label class="col-lg-2 control-label">Estado del Alumno </label>
+			<div class="col-lg-10">
+				<select id="idEstadoTabla" class="form-control select2 elemento-desactivable"
+					name="idEstadoTabla">
+					<option value="" selected="selected" disabled="disabled">Seleccione  el estado</option>
+					<option th:each="estado : ${estado}" th:value="${estado.idEstadoTabla}"
+						th:text="|${estado.idEstadoTabla} - ${estado.descripcion}|"></option>
+				</select>
+			</div>
+		</div>
+		<div class="form-group">
+			<label class="col-lg-2 control-label">Tipo Académico</label>
+			<div class="col-lg-10">
+				<select id="idTipoAcademico" class="form-control select2 elemento-desactivable"
+					name="idTipoAcademico">
+					<option value="" selected="selected" disabled="disabled">Seleccione el tipo académico</option>
+					<option th:each="tipoAcademico : ${tipoAcademico}" th:value="${tipoAcademico.idTipoAcademico}"
+						th:text="|${tipoAcademico.idTipoAcademico} - ${tipoAcademico.descripcionTipoAcademico}|"></option>
+				</select>
+			</div>
+		</div>
+		<div class="form-group">
+			<label class="col-lg-2 control-label">Escuela a la que pertenece</label>
+			<div class="col-lg-10">
+				<select id="idEscuela" class="form-control select2 elemento-desactivable"
+					name="idEscuela">
+					<option value="" selected="selected" disabled="disabled">Seleccione una Escuela</option>
+					<option th:each="escuela : ${escuela}" th:value="${escuela.idEscuela}"
+						th:text="|${escuela.idEscuela} - ${escuela.nombre}|"></option>
+				</select>
+			</div>
+		</div>
+	</th:block>
+	<th:block th:fragment="docente">
+		<div class="form-group">
+			<label class="col-lg-2 control-label">Tipo de documento</label>
+			<div class="col-lg-10">
+				<select id="idTipoDocumento" class="form-control select2 elemento-desactivable"
+					name="idTipoDocumento">
+					<option value="" selected="selected" disabled="disabled">Seleccione el Tipo de Documento</option>
+					<option value=""  >DNI</option>
+					<option value=""  >Carné de extranjería</option>
+				</select>
+			</div>
+		</div>
+		<div class="form-group">
+			<label class="col-lg-2 control-label">Número de Documento</label>
+			<div class="col-lg-10">
+				<input class="form-control upperCase elemento-desactivable" name="numDocumento"
+					autofocus="autofocus" />
+			</div>
+		</div>
+		<div class="form-group">
+			<label class="col-lg-2 control-label">Nombre</label>
+			<div class="col-lg-10">
+				<input class="form-control" name="nombre">
+			</div>
+		</div>
+		<div class="form-group">
+			<label class="col-lg-2 control-label">Apellido Paterno </label>
+			<div class="col-lg-10">
+				<input class="form-control" name="appPaterno">
+			</div>
+		</div>
+		<div class="form-group">
+			<label class="col-lg-2 control-label">Apellido Materno</label>
+			<div class="col-lg-10">
+				<input class="form-control" name="appMaterno">
+			</div>
+		</div>
+		<div class="form-group">
+			<label class="col-lg-2 control-label">Sexo</label>
+			<div class="col-lg-10">
+				<select id="sexo" class="form-control select2 elemento-desactivable"
+					name="sexo">
+					<option value="" selected="selected" disabled="disabled">Seleccione el sexo</option>
+					<option value="" >Masculino</option>
+					<option value="" >Femenino</option>
+				</select>
+			</div>
+		</div>
+		<div class="form-group">
+			<label class="col-lg-2 control-label">Telefono</label>
+			<div class="col-lg-10">
+				<input class="form-control" name="numTelef">
+			</div>
+		</div>
+		<div class="form-group">
+			<label class="col-lg-2 control-label">Estado del Docente </label>
+			<div class="col-lg-10">
+				<select id="idEstadoTabla" class="form-control select2 elemento-desactivable"
+					name="idEstadoTabla">
+					<option value="" selected="selected" disabled="disabled">Seleccione  el estado</option>
+					<option th:each="estado : ${estado}" th:value="${estado.idEstadoTabla}"
+						th:text="|${estado.idEstadoTabla} - ${estado.descripcion}|"></option>
+				</select>
+			</div>
+		</div>
+	</th:block>
+	<th:block th:fragment="externo">
+		<div class="form-group">
+			<label class="col-lg-2 control-label">Tipo de documento</label>
+			<div class="col-lg-10">
+				<select id="idTipoDocumento" class="form-control select2 elemento-desactivable"
+					name="idTipoDocumento">
+					<option value="" selected="selected" disabled="disabled">Seleccione el Tipo de Documento</option>
+					<option value="" >DNI</option>
+					<option value=""  >Carné de extranjería</option>
+				</select>
+			</div>
+		</div>
+		<div class="form-group">
+			<label class="col-lg-2 control-label">Número de Documento</label>
+			<div class="col-lg-10">
+				<input class="form-control upperCase elemento-desactivable" name="numDocumento"
+					autofocus="autofocus" />
+			</div>
+		</div>
+		<div class="form-group">
+			<label class="col-lg-2 control-label">Nombre</label>
+			<div class="col-lg-10">
+				<input class="form-control" name="nombre">
+			</div>
+		</div>
+		<div class="form-group">
+			<label class="col-lg-2 control-label">Apellido Paterno </label>
+			<div class="col-lg-10">
+				<input class="form-control" name="appPaterno">
+			</div>
+		</div>
+		<div class="form-group">
+			<label class="col-lg-2 control-label">Apellido Materno</label>
+			<div class="col-lg-10">
+				<input class="form-control" name="appMaterno">
+			</div>
+		</div>
+		<div class="form-group">
+			<label class="col-lg-2 control-label">Sexo</label>
+			<div class="col-lg-10">
+				<select id="sexo" class="form-control select2 elemento-desactivable"
+					name="sexo">
+					<option value="" selected="selected" disabled="disabled">Seleccione el sexo</option>
+					<option value="" >Masculino</option>
+					<option value="" >Femenino</option>
+				</select>
+			</div>
+		</div>
+		<div class="form-group">
+			<label class="col-lg-2 control-label">Telefono</label>
+			<div class="col-lg-10">
+				<input class="form-control" name="numTelef">
+			</div>
+		</div>
+		<div class="form-group">
+			<label class="col-lg-2 control-label">Estado del Externo </label>
+			<div class="col-lg-10">
+				<select id="idEstadoTabla" class="form-control select2 elemento-desactivable"
+					name="idEstadoTabla">
+					<option value="" selected="selected" disabled="disabled">Seleccione  el estado</option>
+					<option th:each="estado : ${estado}" th:value="${estado.idEstadoTabla}"
+						th:text="|${estado.idEstadoTabla} - ${estado.descripcion}|"></option>
+				</select>
+			</div>
+		</div>
+	</th:block>
+	<th:block th:fragment="horario">
+		
+		<div class="form-group">
+			<label class="col-lg-2 control-label">Hora de inicio</label>
+			<div class="col-lg-10">
+				<input class="form-control" name="horaInicio">
+			</div>
+		</div>
+		<div class="form-group">
+			<label class="col-lg-2 control-label">Hora de fin</label>
+			<div class="col-lg-10">
+				<input class="form-control" name="horaFin">
+			</div>
+		</div>
+		<div class="form-group">
+			<label class="col-lg-2 control-label">Tiempo máximo</label>
+			<div class="col-lg-10">
+				<input class="form-control" name="tiempoMaximo">
+			</div>
+		</div>
+		<div class="form-group">
+			<label class="col-lg-2 control-label">Descripción</label>
+			<div class="col-lg-10">
+				<input class="form-control" name="descripcion">
+			</div>
+		</div>
+		<div class="form-group">
+			<label class="col-lg-2 control-label">Estado del Horario </label>
+			<div class="col-lg-10">
+				<select id="idEstadoTabla" class="form-control select2 elemento-desactivable"
+					name="idEstadoTabla">
+					<option value="" selected="selected" disabled="disabled">Seleccione  el estado</option>
+					<option th:each="estado : ${estado}" th:value="${estado.idEstadoTabla}"
+						th:text="|${estado.idEstadoTabla} - ${estado.descripcion}|"></option>
+				</select>
+			</div>
+		</div>
+		<div class="form-group">
+			<label class="col-lg-2 control-label">Turno </label>
+			<div class="col-lg-10">
+				<select id="idTurno" class="form-control select2 elemento-desactivable"
+					name="idTurno">
+					<option value="" selected="selected" disabled="disabled">Seleccione el turno</option>
+					<option th:each="turno : ${turno}" th:value="${turno.idTurno}"
+						th:text="|${turno.idTurno - ${turno.descripcion}|"></option>
+				</select>
+			</div>
+		</div>
+		<div class="form-group">
+			<label class="col-lg-2 control-label">Día </label>
+			<div class="col-lg-10">
+				<select id="idDia" class="form-control select2 elemento-desactivable"
+					name="idDia">
+					<option value="" selected="selected" disabled="disabled">Seleccione el día</option>
+					<option th:each="dia : ${dia}" th:value="${dia.idDia}"
+						th:text="|${dia.idDia - ${dia.descripcion}|"></option>
+				</select>
+			</div>
+		</div>
+		<div class="form-group">
+			<label class="col-lg-2 control-label">Tipo de Horario </label>
+			<div class="col-lg-10">
+				<select id="idTipoHorario" class="form-control select2 elemento-desactivable"
+					name="idTipoHorario">
+					<option value="" selected="selected" disabled="disabled">Seleccione el tipo de Horario</option>
+					<option th:each="tipoHorario : ${tipoHorario}" th:value="${tipoHorario.idTipoHorario}"
+						th:text="|${tipoHorario.idTipoHorario - ${tipoHorario.descripcion}|"></option>
+				</select>
+			</div>
+		</div>
+		<div class="form-group">
+			<label class="col-lg-2 control-label">Área de estudio </label>
+			<div class="col-lg-10">
+				<select id="idAreaEstudio" class="form-control select2 elemento-desactivable"
+					name="idAreaEstudio">
+					<option value="" selected="selected" disabled="disabled">Seleccione el Área de estudio</option>
+					<option th:each="areaEstudio : ${areaEstudio}" th:value="${areaEstudio.idAreaEstudio}"
+						th:text="|${areaEstudio.idAreaEstudio - ${areaEstudio.nombre}|"></option>
+				</select>
+			</div>
+		</div>
+	</th:block>
+	<th:block th:fragment="infraccion">
+		
+		<div class="form-group">
+			<label class="col-lg-2 control-label">Número de Documento del Infractor</label>
+			<div class="col-lg-10">
+				<input class="form-control upperCase elemento-desactivable" name="idPersona"
+					autofocus="autofocus" />
+			</div>
+		</div>
+		<div class="form-group">
+			<label class="col-lg-2 control-label">Descripcion</label>
+			<div class="col-lg-10">
+				<input class="form-control" name="descripcion">
+			</div>
+		</div>
+		<div class="form-group">
+			<label class="col-lg-2 control-label">Infracción </label>
+			<div class="col-lg-10">
+				<select id="idTipoInfraccion" class="form-control select2 elemento-desactivable"
+					name="idTipoInfraccion">
+					<option value="" selected="selected" disabled="disabled">Seleccione la infracción</option>
+					<option th:each="tipoInfraccion : ${tipoInfraccion}" th:value="${tipoInfraccion.idTipoInfraccion}"
+						th:text="|${tipoInfraccion.idTipoInfraccion} - ${tipoInfraccion.descripcion}|"></option>
+				</select>
+			</div>
+		</div>
+		<div class="form-group">
+			<label class="col-lg-2 control-label">Estado de la Infracción </label>
+			<div class="col-lg-10">
+				<select id="idEstadoTabla" class="form-control select2 elemento-desactivable"
+					name="idEstadoTabla">
+					<option value="" selected="selected" disabled="disabled">Seleccione  el estado</option>
+					<option th:each="estado : ${estado}" th:value="${estado.idEstadoTabla}"
+						th:text="|${estado.idEstadoTabla} - ${estado.descripcion}|"></option>
+				</select>
+			</div>
+		</div>
+	</th:block>
+	<th:block th:fragment="facultad">	
+		<div class="form-group">
+			<label class="col-lg-2 control-label">Nombre de la Facultad</label>
+			<div class="col-lg-10">
+				<input class="form-control upperCase elemento-desactivable" name="nombre"
+					autofocus="autofocus" />
+			</div>
+		</div>
+	</th:block>	
+	<th:block th:fragment="escuela">
+		<div class="form-group">
+			<label class="col-lg-2 control-label">Nombre de Escuela</label>
+			<div class="col-lg-10">
+				<input class="form-control upperCase elemento-desactivable" name="nombre"
+					autofocus="autofocus" />
+			</div>
+		</div>
+		<div class="form-group">
+			<label class="col-lg-2 control-label">Facultad a la que pertenece</label>
+			<div class="col-lg-10">
+				<select id="idFacultad" class="form-control select2 elemento-desactivable"
+					name="idFacultad">
+					<option value="" selected="selected" disabled="disabled">Seleccione una Facultad</option>
+					<option th:each="facultad : ${facultad}" th:value="${facultad.idFacultad}"
+						th:text="|${facultad.idFacultad} - ${facultad.nombre}|"></option>
+				</select>
+			</div>
+		</div>
+	</th:block>
+	
 </body>
 </html>

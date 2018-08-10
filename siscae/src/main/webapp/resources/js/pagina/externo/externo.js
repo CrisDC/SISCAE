@@ -56,7 +56,7 @@ $(document).ready(function() {
 			"data" : 'numDocumento',
 			"title" : "Número de documento"
 		},{
-			"data" : 'estadoExterno',
+			"data" : 'idEstadoTabla',
 			"title" : "Estado"
 		},{
 			"data" : 'nombre',

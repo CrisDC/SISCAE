@@ -50,7 +50,7 @@ $(document).ready(function() {
 			"data" : 'numDocumento',
 			"title" : "Número de documento"
 		},{
-			"data" : 'estadoDocente',
+			"data" : 'idEstadoTabla',
 			"title" : "Estado"
 		},{
 			"data" : 'nombre',

@@ -47,7 +47,7 @@ $(document).ready(function() {
 			"data" : 'idEscuela',
 			"title" : "Id"
 		}, {
-			"data" : 'nombreEscuela',
+			"data" : 'nombre',
 			"title" : "Nombre de la Escuela"
 		},{
 			"data" : 'idFacultad',
@@ -190,7 +190,7 @@ $(document).ready(function() {
 		$.confirm({
 			icon : "fa fa-info-circle",
 			title : "Aviso",
-			content : "¿Desea eliminar la escuela <b>'" + escuela.idEscuela + " - " + escuela.nombreEscuela + "'<b/>?",
+			content : "¿Desea eliminar la escuela <b>'" + escuela.idEscuela + " - " + escuela.nombre + "'<b/>?",
 			buttons : {
 				Aceptar : {
 					action : function() {
@@ -220,7 +220,7 @@ $(document).ready(function() {
 										$funcionUtil.notificarException($funcionUtil.obtenerMensajeErrorEnCadena(xhr.responseJSON), "fa-warning", "Aviso", "warning");
 										break;
 									case 409:
-										var mensaje = $funcionUtil.obtenerMensajeError("La escuela <b>" + escuela.idEscuela + " - " + escuela.nombreEscuela + "</b>", xhr.responseJSON, $variableUtil.accionEliminado);
+										var mensaje = $funcionUtil.obtenerMensajeError("La escuela <b>" + escuela.idEscuela + " - " + escuela.nombre + "</b>", xhr.responseJSON, $variableUtil.accionEliminado);
 										$funcionUtil.notificarException(mensaje, "fa-warning", "Aviso", "warning");
 										break;
 									}

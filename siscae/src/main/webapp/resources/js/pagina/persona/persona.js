@@ -46,18 +46,16 @@ $(document).ready(function() {
 		"columns" : [ {
 			"data" : 'idPersona',
 			"title" : "Id"
-		}, {
+		},{
 			"data" : 'numDocumento',
 			"title" : "Numero de documento"
 		},{
 			"data" : 'nombre',
 			"title" : "Nombre"
-		},
-		{
+		},{
 			"data" : 'appPaterno',
 			"title" : "Apellido Paterno"
-		},
-		{
+		},{
 			"data" : 'appMaterno',
 			"title" : "Apellido Materno"
 		},{
@@ -69,9 +67,6 @@ $(document).ready(function() {
 		},{
 			"data" : 'idTipoDocumento',
 			"title" : "Id de Tipo de documento"
-		},{
-			"data" : 'descripcionTipoDocumento',
-			"title" : "Descripcion de tipo de documento"
 		},{
 			"data" : null,
 			"title" : 'Acción'

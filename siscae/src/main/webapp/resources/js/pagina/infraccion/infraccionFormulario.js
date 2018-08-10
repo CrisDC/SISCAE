@@ -6,15 +6,18 @@ $(document).ready(function() {
 				required : true,
 				number:true
 			},
-			descripcionInfraccion : {
+			descripcion : {
 				required : true,
 				soloalfanumericos: true,
 				rangelength : [ 7, 15]
 			},
-			estadoInfraccion : {
+			idEstadoTabla : {
 				required : true,
-				notOnlySpace : true,
-				rangelength : [ 3, 70 ]
+				number:true
+			},
+			idPersona : {
+				required : true,
+				number:true
 			},
 			nombre : {
 				required : true,
@@ -46,15 +49,18 @@ $(document).ready(function() {
 				required : "Ingrese un Id de Persona",
 				number:"El Id de la Persona debe contener solo n&uacute;meros.",
 			},
-			descripcionInfraccion : {
+			descripcion : {
 				required : "Ingrese una descripcion de Infraccion  ",
 				soloalfanumericos : "La descripcion debe contener solo car&aacute;cteres alfanumericos.",
 				rangelength : "La descripcion debe contener entre 7 y 15 car&aacute;cteres."
 			},
-			estadoInfraccion : {
+			idEstadoTabla : {
 				required : "Ingrese un estado de Infraccion",
-				notOnlySpace : "El estado no puede contener solo espacios en blanco.",
-				rangelength : "El estado debe contener entre 3 y 20 car&aacute;cteres."
+				number:"El Id del estado debe contener solo n&uacute;meros.",
+			},
+			idPersona : {
+				required : "Ingrese un Id de Persona",
+				number:"El Id de la Persona debe contener solo n&uacute;meros.",
 			},
 			nombre : {
 				required : "Ingrese un Nombre.",

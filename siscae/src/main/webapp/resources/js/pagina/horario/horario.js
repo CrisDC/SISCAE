@@ -47,7 +47,7 @@ $(document).ready(function() {
 			"data" : 'idHorario',
 			"title" : "Id"
 		},{
-			"data" : 'descripcionHorario',
+			"data" : 'descripcion',
 			"title" : "Descricion del Horario"
 		},{
 			"data" : 'horaInicio',
@@ -56,7 +56,7 @@ $(document).ready(function() {
 			"data" : 'horaFin',
 			"title" : "Hora de fin"
 		}, {
-			"data" : 'estadoHorario',
+			"data" : 'idEstadoTabla',
 			"title" : "Estado"
 		},{
 			"data" : 'tiempoMaximo',

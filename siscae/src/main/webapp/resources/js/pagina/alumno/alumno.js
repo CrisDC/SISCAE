@@ -50,7 +50,7 @@ $(document).ready(function() {
 			"data" : 'codigoAlumno',
 			"title" : "Codigo "
 		}, {
-			"data" : 'estadoAlumno',
+			"data" : 'idEstadoTabla',
 			"title" : "Estado"
 		},{
 			"data" : 'idTipoAcademico',

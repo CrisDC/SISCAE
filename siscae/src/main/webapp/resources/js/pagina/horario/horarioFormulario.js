@@ -6,7 +6,7 @@ $(document).ready(function() {
 				required : true,
 				number:true
 			},
-			descripcionHorario : {
+			descripcion : {
 				required : true,
 				notOnlySpace : true,
 				rangelength : [ 3, 70 ]
@@ -19,10 +19,9 @@ $(document).ready(function() {
 				required : true,
 				number:true
 			},
-			estadoHorario : {
+			idEstadoTabla : {
 				required : true,
-				notOnlySpace : true,
-				rangelength : [ 3, 70 ]
+				number:true
 			},
 			tiempoMaximo : {
 				required : true,
@@ -70,7 +69,7 @@ $(document).ready(function() {
 				required : "Ingrese un Id de Horario",
 				number:"El Id del Horario debe contener solo n&uacute;meros.",
 			},
-			descripcionHorario : {
+			descripcion: {
 				required : "Ingrese una descripci&oacute;n de Horario.",
 				notOnlySpace : "La descripci&oacute;n de Horario no puede contener solo espacios en blanco.",
 				rangelength : "La descripci&oacute;n de Horario debe contener entre 3 y 70 car&aacute;cteres."
@@ -83,10 +82,9 @@ $(document).ready(function() {
 				required : "Ingrese una hora de fin",
 				number:"La hora de fin debe contener solo n&uacute;meros.",
 			},
-			estadoHorario : {
-				required : "Ingrese un estado de Horario",
-				notOnlySpace : "El estado no puede contener solo espacios en blanco.",
-				rangelength : "El estado debe contener entre 3 y 20 car&aacute;cteres."
+			idEstadoTabla : {
+				required : "Ingrese el estado del horario ",
+				number:"El Id del estado debe contener solo n&uacute;meros."
 			},
 			idTurno : {
 				required : "Ingrese un Id de Turno",
