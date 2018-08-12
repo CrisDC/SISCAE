@@ -1489,5 +1489,276 @@
 		</div>
 	</th:block>
 	
+		<!-- Tabla Administrativo -->
+	<th:block th:fragment="administrativo">
+		<div class="form-group">
+			<label class="col-lg-2 control-label">Codigo Administrativo</label>
+			<div class="col-lg-10">
+				<input class="form-control upperCase elemento-desactivable" type="text" name="codigoAdm"
+					autofocus="autofocus" />
+			</div>
+		</div>
+	</th:block>
+	
+	<!-- Tabla Area-Administrativo -->
+	<th:block th:fragment="areaAdministrativo">
+		<div class="form-group">
+			<label class="col-lg-2 control-label">Area de Estudio</label>
+			<div class="col-lg-10">
+				<select id="idAreaEstudio" class="form-control select2 elemento-desactivable"
+					name="idAreaEstudio">
+					<option value="" selected="selected" disabled="disabled">Seleccione un Area de Estudio</option>
+					<option th:each="areaEstudio : ${areaEstudios}" th:value="${areaEstudio.idAreaEstudio}"
+						th:text="|${areaEstudio.idAreaEstudio} - ${areaEstudio.nombre}|"></option>
+				</select>
+			</div>
+		</div>
+		<div class="form-group">
+			<label class="col-lg-2 control-label">Administrativo</label>
+			<div class="col-lg-10">
+				<select id="idAdministrativo" class="form-control select2 elemento-desactivable"
+					name="idAdministrativo">
+					<option value="" selected="selected" disabled="disabled">Seleccione un Administrativo</option>
+					<option th:each="administrativo : ${administrativos}" th:value="${administrativo.idAdministrativo}"
+						th:text="|${administrativo.idAdministrativo} - ${administrativo.persona.nombre}|"></option>
+				</select>
+			</div>
+		</div>
+		<div class="form-group">
+			<label class="col-lg-2 control-label">Fecha de inicio</label>
+			<div class="col-lg-10">
+				<input class="form-control upperCase elemento-desactivable" type="date" name="fechaInicio" autofocus="autofocus" />
+			</div>
+		</div>
+		<div class="form-group">
+			<label class="col-lg-2 control-label">Fecha de Fin</label>
+			<div class="col-lg-10">
+				<input class="form-control upperCase elemento-desactivable" type="date" name="fechaFin" autofocus="autofocus" />
+			</div>
+		</div>
+		<div class="form-group">
+			<label class="col-lg-2 control-label">Cargo</label>
+			<div class="col-lg-10">
+				<input class="form-control upperCase elemento-desactivable" type="text" name="cargo" autofocus="autofocus" />
+			</div>
+		</div>
+	</th:block>
+	
+	
+	<!-- Tabla Area Estudio-->
+	<th:block th:fragment="areaEstudio">
+		<div class="form-group">
+			<label class="col-lg-2 control-label">Nombre</label>
+			<div class="col-lg-10">
+				<input class="form-control upperCase elemento-desactivable" type="text" name="nombre" autofocus="autofocus" />
+			</div>
+		</div>
+		<div class="form-group">
+			<label class="col-lg-2 control-label">Pabellon</label>
+			<div class="col-lg-10">
+				<input class="form-control upperCase elemento-desactivable" type="text" name="pabellon" autofocus="autofocus" />
+			</div>
+		</div>
+		<div class="form-group">
+			<label class="col-lg-2 control-label">Nivel</label>
+			<div class="col-lg-10">
+				<input class="form-control upperCase elemento-desactivable" type="text" name="nivel" autofocus="autofocus" />
+			</div>
+		</div>
+	</th:block>
+	
+	<!-- Tabla Material-->
+	<th:block th:fragment="material">
+		<div class="form-group">
+			<label class="col-lg-2 control-label">Nombre</label>
+			<div class="col-lg-10">
+				<input class="form-control upperCase elemento-desactivable" type="text" name="nombreMaterial" autofocus="autofocus" />
+			</div>
+		</div>
+		<div class="form-group">
+			<label class="col-lg-2 control-label">Id. Tipo de Material</label>
+			<div class="col-lg-10">
+				<input class="form-control upperCase elemento-desactivable" type="number" name="idTipoMaterial" autofocus="autofocus" />
+			</div>
+		</div>
+	</th:block>
+	
+	<!-- Tabla Recurso-->
+	<th:block th:fragment="recurso">
+		<div class="form-group">
+			<label class="col-lg-2 control-label">Numero de Serie</label>
+			<div class="col-lg-10">
+				<input class="form-control upperCase elemento-desactivable" type="text" name="numeroSerie" autofocus="autofocus" />
+			</div>
+		</div>
+		<div class="form-group">
+			<label class="col-lg-2 control-label">Descripcion</label>
+			<div class="col-lg-10">
+				<input class="form-control upperCase elemento-desactivable" type="number" name="descripcion" autofocus="autofocus" />
+			</div>
+		</div>
+		<div class="form-group">
+			<label class="col-lg-2 control-label">Max. Capacidad</label>
+			<div class="col-lg-10">
+				<input class="form-control upperCase elemento-desactivable" type="number" name="maxCapacidad" autofocus="autofocus" />
+			</div>
+		</div>
+		
+		<div class="form-group">
+			<label class="col-lg-2 control-label">Estado del Recurso</label>
+			<div class="col-lg-10">
+				<select id="idEstadoTabla" class="form-control select2 elemento-desactivable"
+					name="idEstadoTabla">
+					<option value="" selected="selected" disabled="disabled">Seleccione el estado</option>
+					<option th:each="estado : ${estados}" th:value="${estado.idEstadoTabla}"
+						th:text="|${estado.idEstadoTabla} - ${estado.descripcion}|"></option>
+				</select>
+			</div>
+		</div>
+		
+		<div class="form-group">
+			<label class="col-lg-2 control-label">Tipo de Recurso</label>
+			<div class="col-lg-10">
+				<select id="idTipoRecurso" class="form-control select2 elemento-desactivable"
+					name="idTipoRecurso">
+					<option value="" selected="selected" disabled="disabled">Seleccione el tipo de recurso</option>
+					<option th:each="tipoRecurso : ${tipoRecursos}" th:value="${estado.idEstadoTabla}"
+						th:text="|${tipoRecurso.idTipoRecurso} - ${tipoRecurso.nombre}|"></option>
+				</select>
+			</div>
+		</div>
+		
+		<div class="form-group">
+			<label class="col-lg-2 control-label">Area de Estudio</label>
+			<div class="col-lg-10">
+				<select id="idAreaEstudio" class="form-control select2 elemento-desactivable"
+					name="idAreaEstudio">
+					<option value="" selected="selected" disabled="disabled">Seleccione el area de estudio</option>
+					<option th:each="areaEstudio : ${areasEstudio}" th:value="${areaEstudio.idAreaEstudio}"
+						th:text="|${areaEstudio.idAreaEstudio} - ${areaEstudio.nombre}|"></option>
+				</select>
+			</div>
+		</div>
+		
+		<div class="form-group">
+			<label class="col-lg-2 control-label">Ubicacion</label>
+			<div class="col-lg-10">
+				<select id="idUbicacion" class="form-control select2 elemento-desactivable"
+					name="idUbicacion">
+					<option value="" selected="selected" disabled="disabled">Seleccione la ubicacion</option>
+					<option th:each="ubicacion : ${ubicaciones}" th:value="${ubicacion.idUbicacion}"
+						th:text="|${ubicacion.idUbicacion} - ${ubicacion.coordenadaX} , ${ubicacion.coordenadaY}|"></option>
+				</select>
+			</div>
+		</div>
+		<div class="form-group">
+			<label class="col-lg-2 control-label">Recurso Padre</label>
+			<div class="col-lg-10">
+				<select id="idRecursoPadre" class="form-control select2 elemento-desactivable"
+					name="idRecursoPadre">
+					<option value="" selected="selected" disabled="disabled">Seleccione el recurso padre</option>
+					<option th:each="recurso : ${recursos}" th:value="${recurso.idRecurso}"
+						th:text="|${recurso.idRecurso} - ${recurso.descripcion}|"></option>
+				</select>
+			</div>
+		</div>
+	</th:block>
+	
+	<!-- Tabla Rol -->
+	<th:block th:fragment="rol">
+		<div class="form-group">
+			<label class="col-lg-2 control-label">Nombre</label>
+			<div class="col-lg-10">
+				<input class="form-control upperCase elemento-desactivable" type="text" name="nombre" autofocus="autofocus" />
+			</div>
+		</div>
+	</th:block>
+	
+	<!-- Tabla Tipo Recurso -->
+	<th:block th:fragment="tipoRecurso">
+		<div class="form-group">
+			<label class="col-lg-2 control-label">Nombre</label>
+			<div class="col-lg-10">
+				<input class="form-control upperCase elemento-desactivable" type="text" name="nombre" autofocus="autofocus" />
+			</div>
+		</div>
+		<div class="form-group">
+			<label class="col-lg-2 control-label">Descripcion</label>
+			<div class="col-lg-10">
+				<input class="form-control upperCase elemento-desactivable" type="text" name="descripcion" autofocus="autofocus" />
+			</div>
+		</div>
+		<div class="form-group">
+			<label class="col-lg-2 control-label">Uso</label>
+			<div class="col-lg-10">
+				<input class="form-control upperCase elemento-desactivable" type="text" name="uso" autofocus="autofocus" />
+			</div>
+		</div>
+	</th:block>
+	
+	<!-- Tabla Ubicacion -->
+	<th:block th:fragment="ubicacion">
+		<div class="form-group">
+			<label class="col-lg-2 control-label">Coordenada X</label>
+			<div class="col-lg-10">
+				<input class="form-control upperCase elemento-desactivable" name="coordenadaX" autofocus="autofocus" />
+			</div>
+		</div>
+		<div class="form-group">
+			<label class="col-lg-2 control-label">Coordenada Y</label>
+			<div class="col-lg-10">
+				<input class="form-control upperCase elemento-desactivable" name="coordenadaY" autofocus="autofocus" />
+			</div>
+		</div>
+	</th:block>
+	
+	<!-- Tabla Usuario -->
+	<th:block th:fragment="usuario">
+		<div class="form-group">
+			<label class="col-lg-2 control-label">Usuario</label>
+			<div class="col-lg-10">
+				<input class="form-control upperCase elemento-desactivable" type="text" name="username" autofocus="autofocus" />
+			</div>
+		</div>
+		<div class="form-group">
+			<label class="col-lg-2 control-label">Contraseña</label>
+			<div class="col-lg-10">
+				<input class="form-control upperCase elemento-desactivable" type="password" name="pass" autofocus="autofocus" />
+			</div>
+		</div>
+		<div class="form-group">
+			<label class="col-lg-2 control-label">Estado del Usuario</label>
+			<div class="col-lg-10">
+				<select id="idEstadoTabla" class="form-control select2 elemento-desactivable" name="idEstadoTabla">
+					<option value="" selected="selected" disabled="disabled">Seleccione el estado</option>
+					<option th:each="estado : ${estados}" th:value="${estado.idEstadoTabla}"
+						th:text="|${estado.idEstadoTabla} - ${estado.descripcion}|"></option>
+				</select>
+			</div>
+		</div>
+		<div class="form-group">
+			<label class="col-lg-2 control-label">Rol</label>
+			<div class="col-lg-10">
+				<select id="idRol" class="form-control select2 elemento-desactivable" name="idRol">
+					<option value="" selected="selected" disabled="disabled">Seleccione el rol</option>
+					<option th:each="rol : ${roles}" th:value="${rol.idRol}"
+						th:text="|${rol.idRol} - ${rol.nombre}|"></option>
+				</select>
+			</div>
+		</div>
+		<div class="form-group">
+			<label class="col-lg-2 control-label">Persona</label>
+			<div class="col-lg-10">
+				<select id="idPersona" class="form-control select2 elemento-desactivable" name="idPersona">
+					<option value="" selected="selected" disabled="disabled">Seleccione la persona</option>
+					<option th:each="persona : ${personas}" th:value="${persona.idPersona}"
+						th:text="|${persona.idPersona} - ${persona.nombre}  ${persona.appPaterno} ${persona.appMaterno} |"></option>
+				</select>
+			</div>
+		</div>
+	</th:block>
+	
+	
+	
 </body>
 </html>
