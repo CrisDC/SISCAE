@@ -2,28 +2,14 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="pe.edu.unmsm.fisi.siscae.mapper.IUsuarioMapper">
 
-	 <resultMap id="UsuarioResultMap" type="SecUsuario">
+	 <resultMap id="UsuarioResultMap" type="Usuario">
 	    <result property="nombre" column="VARCHAR" />
 	    <result property="contrasenia" column="VARCHAR" />
 	    <result property="estado" column="VARCHAR" />
 	    <result property="numeroIntentos" column="INTEGER" />
 	    <result property="idPerfil" column="INTEGER" />
 	  </resultMap>
-  
-	<select id="mantener"  resultMap="UsuarioResultMap" statementType = "CALLABLE" >
-		 { call MANT_USUARIOS ( 
-            #{operacion, 				jdbcType = VARCHAR, mode = IN},
-            #{operacionParam, 			jdbcType = VARCHAR, mode = IN},
-            #{objeto.idUsuario, 		jdbcType = VARCHAR, mode = IN},
-            #{objeto.nombre, 			jdbcType = VARCHAR, mode = IN},
-            #{objeto.contrasenia,  		jdbcType = VARCHAR, mode = IN},
-            #{objeto.estado, 			jdbcType = VARCHAR, mode = IN},
-            #{objeto.numeroIntentos,	jdbcType = NUMERIC, mode = IN},
-            #{objeto.idPerfil, 			jdbcType = NUMERIC, mode = IN},
-            #{objeto.usuarios, 			jdbcType = CURSOR, 	 javaType=java.sql.ResultSet,  mode = OUT, resultMap=UsuarioResultMap}
-            )
-        }
-	</select>
+
 	
 	<select id="buscarUsuarioPorId" resultType="Usuario" >
 		select 	vIdUsuario as id_usuario, 

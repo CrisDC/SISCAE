@@ -30,6 +30,14 @@ public @Controller class MantenimientoController
     private @Autowired IMultiTabDetService multiTabDetService;
 
     @Audit(tipo = Tipo.ModoEntPos)
+    @GetMapping("/{mantenimiento:recurso}")
+    public String irPaginaMantenimientoRecurso(@PathVariable String mantenimiento, ModelMap model)
+    {
+        model.addAttribute("mantenimiento", mantenimiento);
+        return "seguras/mantenimiento/mantenimiento";
+    }
+    
+    @Audit(tipo = Tipo.ModoEntPos)
     @GetMapping("/{mantenimiento:modoEntradaPos}")
     public String irPaginaMantenimientoModoEntradaPos(@PathVariable String mantenimiento, ModelMap model)
     {
