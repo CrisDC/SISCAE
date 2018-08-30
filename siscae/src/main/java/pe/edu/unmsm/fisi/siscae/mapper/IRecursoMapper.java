@@ -17,7 +17,6 @@ public interface IRecursoMapper extends IMantenibleMapper<Recurso> {
 			+ "#{objeto.idRecurso, jdbcType = INTEGER, mode = IN},"
 			+ "#{objeto.numeroSerie, jdbcType = VARCHAR, mode = IN},"
 			+ "#{objeto.descripcion, jdbcType = VARCHAR, mode = IN},"
-			+ "#{objeto.maxCapacidad, jdbcType = INTEGER, mode = IN},"
 			+ "#{objeto.idEstadoTabla, jdbcType = INTEGER, mode = IN},"
 			+ "#{objeto.idTipoRecurso, jdbcType = INTEGER, mode = IN},"
 			+ "#{objeto.idAreaEstudio, jdbcType = INTEGER, mode = IN},"
