@@ -7,7 +7,7 @@ $(document).ready(function() {
 		$registrarMantenimiento : $("#registrarMantenimiento"),
 		$filaSeleccionada : "",
 		$actualizarMantenimiento : $("#actualizarMantenimiento"),
-		idHorarioSeleccionado : ""
+		idAreaEstudioSeleccionado : ""
 	}
 	$formMantenimiento = $("#formMantenimiento");
 
@@ -22,69 +22,39 @@ $(document).ready(function() {
 	});
 	$local.tablaMantenimiento = $local.$tablaMantenimiento.DataTable({
 		"ajax" : {
-			"url" : $variableUtil.root + "horario?accion=buscarTodos",
+			"url" : $variableUtil.root + "areaEstudio?accion=buscarTodos",
 			"dataSrc" : ""
 		},
 		"language" : {
-			"emptyTable" : "No hay horarios registrados"
+			"emptyTable" : "No hay areas de estudios registradas"
 		},
 		"initComplete" : function() {
 			$local.$tablaMantenimiento.wrap("<div class='table-responsive'></div>");
 			$tablaFuncion.aniadirFiltroDeBusquedaEnEncabezado(this, $local.$tablaMantenimiento);
 		},
 		"columnDefs" : [ {
-			"targets" : [ 0, 1 ],
+			"targets" : [ 0, 1, 2, 3 ],
 			"className" : "all filtrable",
-		}, {
-			"targets" : [ 2, 3 ],
-			"className" : "filtrable",
 		}, {
 			"targets" : 4,
 			"className" : "all dt-center",
 			"defaultContent" : $variableUtil.botonActualizar + " " + $variableUtil.botonEliminar
 		} ],
 		"columns" : [ {
-			"data" : 'idHorario',
-			"title" : "Id"
-		},{
-			"data" : 'descripcion',
-			"title" : "Descricion del Horario"
-		},{
-			"data" : 'horaInicio',
-			"title" : "Hora de inicio "
-		},{
-			"data" : 'horaFin',
-			"title" : "Hora de fin"
-		}, {
-			"data" : 'idEstadoTabla',
-			"title" : "Estado"
-		},{
-			"data" : 'tiempoMaximo',
-			"title" : "Tiempo máximo"
-		},{
-			"data" : 'idTurno',
-			"title" : "Id de Turno"
-		},{
-			"data" : 'descripcionTurno',
-			"title" : "Descricion del Turno"
-		},{
-			"data" : 'idDia',
-			"title" : "Id de día"
-		},{
-			"data" : 'descripcionDia',
-			"title" : "Descricion del Dia"
-		},{
-			"data" : 'idTipoHorario',
-			"title" : "Id de Tipo de Horario"
-		},{
-			"data" : 'descripcionTipoHorario',
-			"title" : "Descricion del Tipo de Horario"
-		},{
 			"data" : 'idAreaEstudio',
-			"title" : "Id de Area de estudio"
-		},{
-			"data" : 'nombreAreaEstudio',
-			"title" : "Nombre del Area de estudio"
+			"title" : "Id"
+		}, {
+			"data" : 'nombre',
+			"title" : "Nombre"
+		}, {
+			"data" : 'pabellon',
+			"title" : "Pabellon"
+		}, {
+			"data" : 'nivel',
+			"title" : "Nivel"
+		}, {
+			"data" : 'aforo',
+			"title" : "Aforo"
 		},{
 			"data" : null,
 			"title" : 'Acción'
@@ -100,7 +70,7 @@ $(document).ready(function() {
 	});
 
 	$local.$modalMantenimiento.PopupWindow({
-		title : "Mantenimiento de horario",
+		title : "Mantenimiento de Area de Estudio",
 		autoOpen : false,
 		modal : false,
 		height : 400,
@@ -119,7 +89,7 @@ $(document).ready(function() {
 	});
 
 	$local.$modalMantenimiento.on("close.popupwindow", function() {
-		$local.idHorarioSeleccionado = "";
+		$local.idAreaEstudioSeleccionado = "";
 	});
 	$formMantenimiento.find("input").keypress(function(event) {
 		if (event.which == 13) {
@@ -138,11 +108,11 @@ $(document).ready(function() {
 		if (!$formMantenimiento.valid()) {
 			return;
 		}
-		var horario = $formMantenimiento.serializeJSON();
+		var areaEstudio = $formMantenimiento.serializeJSON();
 		$.ajax({
 			type : "POST",
-			url : $variableUtil.root + "horario",
-			data : JSON.stringify(horario),
+			url : $variableUtil.root + "areaEstudio",
+			data : JSON.stringify(areaEstudio),
 			beforeSend : function(xhr) {
 				$local.$registrarMantenimiento.attr("disabled", true).find("i").removeClass("fa-floppy-o").addClass("fa-spinner fa-pulse fa-fw");
 				xhr.setRequestHeader('Content-Type', 'application/json');
@@ -156,7 +126,7 @@ $(document).ready(function() {
 			},
 			success : function(response) {
 				$funcionUtil.notificarException(response, "fa-check", "Aviso", "success");
-				var row = $local.tablaMantenimiento.row.add(horario).draw();
+				var row = $local.tablaMantenimiento.row.add(areaEstudio).draw();
 				row.show().draw(false);
 				$(row.node()).animateHighlight();
 				$local.$modalMantenimiento.PopupWindow("close");
@@ -170,24 +140,24 @@ $(document).ready(function() {
 		$local.$tablaMantenimiento.children("tbody").on("click", ".actualizar", function() {
 		$funcionUtil.prepararFormularioActualizacion($formMantenimiento);
 		$local.$filaSeleccionada = $(this).parents("tr");
-		var horario = $local.tablaMantenimiento.row($local.$filaSeleccionada).data();
-		$local.idHorarioSeleccionado = horario.idHorario;
-		$funcionUtil.llenarFormulario(horario, $formMantenimiento);
+		var areaEstudio = $local.tablaMantenimiento.row($local.$filaSeleccionada).data();
+		$local.idAreaEstudioSeleccionado = areaEstudio.idAreaEstudio;
+		$funcionUtil.llenarFormulario(areaEstudio, $formMantenimiento);
 		$local.$actualizarMantenimiento.removeClass("hidden");
 		$local.$registrarMantenimiento.addClass("hidden");
 		$local.$modalMantenimiento.PopupWindow("open");
-		});
+	});
 	});
 	$local.$actualizarMantenimiento.on("click", function() {
 		if (!$formMantenimiento.valid()) {
 			return;
 		}
-		var horario = $formMantenimiento.serializeJSON();
-		horario.idHorario = $local.idHorarioSeleccionado;
+		var areaEstudio = $formMantenimiento.serializeJSON();
+		areaEstudio.idAreaEstudio = $local.idAreaEstudioSeleccionado;
 		$.ajax({
 			type : "PUT",
-			url : $variableUtil.root + "horario",
-			data : JSON.stringify(horario),
+			url : $variableUtil.root + "areaEstudio",
+			data : JSON.stringify(areaEstudio),
 			beforeSend : function(xhr) {
 				$local.$actualizarMantenimiento.attr("disabled", true).find("i").removeClass("fa-pencil-square").addClass("fa-spinner fa-pulse fa-fw");
 				xhr.setRequestHeader('Content-Type', 'application/json');
@@ -202,7 +172,7 @@ $(document).ready(function() {
 			success : function(response) {
 				$funcionUtil.notificarException(response, "fa-check", "Aviso", "success");
 				$local.tablaMantenimiento.row($local.$filaSeleccionada).remove().draw(false);
-				var row = $local.tablaMantenimiento.row.add(horario).draw();
+				var row = $local.tablaMantenimiento.row.add(areaEstudio).draw();
 				row.show().draw(false);
 				$(row.node()).animateHighlight();
 				$local.$modalMantenimiento.PopupWindow("close");
@@ -213,13 +183,14 @@ $(document).ready(function() {
 				$local.$actualizarMantenimiento.attr("disabled", false).find("i").addClass("fa-pencil-square").removeClass("fa-spinner fa-pulse fa-fw");
 			}
 		});
-		$local.$tablaMantenimiento.children("tbody").on("click", ".eliminar", function() {
+	});
+	$local.$tablaMantenimiento.children("tbody").on("click", ".eliminar", function() {
 		$local.$filaSeleccionada = $(this).parents("tr");
-		var empresa = $local.tablaMantenimiento.row($local.$filaSeleccionada).data();
+		var areaEstudio = $local.tablaMantenimiento.row($local.$filaSeleccionada).data();
 		$.confirm({
 			icon : "fa fa-info-circle",
 			title : "Aviso",
-			content : "¿Desea eliminar el horario <b>'" + horario.idHorario + " - " + horario.descripcionHorario+"'<b/>?",
+			content : "¿Desea eliminar la Area de Estudio <b>'" + areaEstudio.idAreaEstudio + " - " + areaEstudio.nombre + "'<b/>?",
 			buttons : {
 				Aceptar : {
 					action : function() {
@@ -231,8 +202,8 @@ $(document).ready(function() {
 								self.buttons.close.hide();
 								$.ajax({
 									type : "DELETE",
-									url : $variableUtil.root + "horario",
-									data : JSON.stringify(horario),
+									url : $variableUtil.root + "areaEstudio",
+									data : JSON.stringify(areaEstudio),
 									autoclose : true,
 									beforeSend : function(xhr) {
 										xhr.setRequestHeader('Content-Type', 'application/json');
@@ -249,7 +220,7 @@ $(document).ready(function() {
 										$funcionUtil.notificarException($funcionUtil.obtenerMensajeErrorEnCadena(xhr.responseJSON), "fa-warning", "Aviso", "warning");
 										break;
 									case 409:
-										var mensaje = $funcionUtil.obtenerMensajeError("El horario <b>" + horario.idHorario + " - " +  horario.descripcionHorario + "</b>", xhr.responseJSON, $variableUtil.accionEliminado);
+										var mensaje = $funcionUtil.obtenerMensajeError("La area de estudio <b>" + areaEstudio.idAreaEstudio + " - " + areaEstudio.nombre + "</b>", xhr.responseJSON, $variableUtil.accionEliminado);
 										$funcionUtil.notificarException(mensaje, "fa-warning", "Aviso", "warning");
 										break;
 									}
@@ -269,7 +240,24 @@ $(document).ready(function() {
 					keys : [ 'esc' ]
 				},
 			}
-			});
 		});
 	});
+	
+	$local.$tablaMantenimiento.children("tbody").on("click", ".actualizar", function() {
+		$funcionUtil.prepararFormularioActualizacion($formMantenimiento);
+		$local.$filaSeleccionada = $(this).parents("tr");
+		var areaEstudio = $local.tablaMantenimiento.row($local.$filaSeleccionada).data();
+		$local.idAreaEstudioSeleccionado = areaEstudio.idAreaEstudio;
+		$funcionUtil.llenarFormulario(areaEstudio, $formMantenimiento);
+		$local.$actualizarMantenimiento.removeClass("hidden");
+		$local.$registrarMantenimiento.addClass("hidden");
+		$local.$modalMantenimiento.PopupWindow("open");
+	});
+
+
+
 });
+
+
+
+

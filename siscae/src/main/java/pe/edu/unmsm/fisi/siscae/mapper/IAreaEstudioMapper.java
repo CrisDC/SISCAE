@@ -18,6 +18,7 @@ public interface IAreaEstudioMapper extends IMantenibleMapper<AreaEstudio> {
             + "#{objeto.nombre, jdbcType = VARCHAR, mode = IN},"
             + "#{objeto.pabellon, jdbcType = VARCHAR, mode = IN},"
             + "#{objeto.nivel,jdbcType = VARCHAR, mode = IN}," 
+            + "#{objeto.aforo, jdbcType = INTEGER, mode = IN},"
 			+ "#{userAudit, jdbcType = VARCHAR, mode = IN})}" })
     @Options(statementType = StatementType.CALLABLE)
 	public List<AreaEstudio> mantener(Parametro parametro);

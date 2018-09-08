@@ -42,6 +42,8 @@ private Integer idAreaEstudio;
 	@Pattern(regexp = Regex.ALFANUMERICO, message = "{Pattern.AreaEstudio.nivel}")
 	private String nivel ;
 	
+	private Integer aforo;
+	
 	@PastOrPresent
 	@NotNull(message = "{NotNull.Horario.fecha_registro}")
 	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd", timezone = "EST")

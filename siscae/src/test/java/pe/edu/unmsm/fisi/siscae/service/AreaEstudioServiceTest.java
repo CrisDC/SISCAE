@@ -28,6 +28,7 @@ public class AreaEstudioServiceTest {
 		areaEstudioTest.setNombre("VIDEOFII");
 		areaEstudioTest.setPabellon("PRIMER PABELLON");
 		areaEstudioTest.setNivel("PRIMER NIVEL");
+		areaEstudioTest.setAforo(1);
 		areaEstudioService.registrarAreaEstudio(areaEstudioTest);
 
 		assertTrue(areaEstudioService.existe(areaEstudioTest.getIdAreaEstudio()));
@@ -62,7 +63,8 @@ public class AreaEstudioServiceTest {
 		areaEstudioTest.setNombre("VIDEOMATE");
 		areaEstudioTest.setPabellon("PRIMER PABELLON");
 		areaEstudioTest.setNivel("PRIMER NIVEL");
-
+		areaEstudioTest.setAforo(1);
+		
 		areaEstudioService.registrarAreaEstudio(areaEstudioTest);
 
 		areaEstudioTest.setNivel("SEGUNDO NIVEL");
@@ -77,7 +79,7 @@ public class AreaEstudioServiceTest {
 		areaEstudioTest.setNombre("VIDEOGEO");
 		areaEstudioTest.setPabellon("SEGUNDO PABELLON");
 		areaEstudioTest.setNivel("SEGUNDO NIVEL");
-
+		areaEstudioTest.setAforo(1);
 		areaEstudioService.registrarAreaEstudio(areaEstudioTest);
 
 		areaEstudioService.eliminarAreaEstudio(areaEstudioTest);

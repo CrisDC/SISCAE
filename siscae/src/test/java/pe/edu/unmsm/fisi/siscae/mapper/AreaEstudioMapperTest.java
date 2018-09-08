@@ -28,6 +28,7 @@ public class AreaEstudioMapperTest {
 		areaEstudioTest.setNombre("VIDEOFISI");
 		areaEstudioTest.setPabellon("SEGUNDO PABELLON");
 		areaEstudioTest.setNivel("PRIMER");
+		areaEstudioTest.setAforo(1);
 
 		Parametro<AreaEstudio> operacion = new Parametro<>(Operacion.SELECT, areaEstudioTest, "TEST USER");
 
