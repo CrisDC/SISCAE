@@ -44,6 +44,20 @@ public @Controller class MantenimientoController
         return "seguras/mantenimiento/mantenimiento";
     }
    
+    @Audit(tipo = Tipo.ESCUELA)
+    @GetMapping("/{mantenimiento:escuela}")
+    public String irPaginaMantenimientoEscuela(@PathVariable String mantenimiento, ModelMap model)
+    {
+        model.addAttribute("mantenimiento", mantenimiento);
+        return "seguras/mantenimiento/mantenimiento";
+    }
+    @Audit(tipo = Tipo.FACULTAD)
+    @GetMapping("/{mantenimiento:facultad}")
+    public String irPaginaMantenimientoFacultad(@PathVariable String mantenimiento, ModelMap model)
+    {
+        model.addAttribute("mantenimiento", mantenimiento);
+        return "seguras/mantenimiento/mantenimiento";
+    }
     
    
 }
