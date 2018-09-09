@@ -29,13 +29,13 @@ import pe.edu.unmsm.fisi.siscae.utilitario.ValidatorUtil;
 import pe.edu.unmsm.fisi.siscae.validacion.grupo.accion.IActualizacion;
 import pe.edu.unmsm.fisi.siscae.validacion.grupo.accion.IRegistro;
 
-@Audit(tipo = Tipo.Inf, datos = Dato.Infraccion)
+@Audit(tipo = Tipo.INFRACCION, datos = Dato.Infraccion)
 @RequestMapping("/infraccion")
 public @RestController class InfraccionController {
 	
 	private @Autowired InfraccionService infraccionService;
 
-    @Audit(accion = Accion.Consulta, comentario = Comentario.ConsultaTodos)
+    @Audit(accion = Accion.CONSULTA, comentario = Comentario.ConsultaTodos)
     @GetMapping(params = "accion=buscarTodos")
     public List<Infraccion> buscarTodos()
     {
@@ -56,7 +56,7 @@ public @RestController class InfraccionController {
         return ResponseEntity.ok(ConstantesGenerales.REGISTRO_EXITOSO);
     }
 	
-    @Audit(accion = Accion.Actualizacion, comentario = Comentario.Actualizacion)
+    @Audit(accion = Accion.ACTUALIZACION, comentario = Comentario.Actualizacion)
     @PutMapping
     public ResponseEntity<?> actualizarInfraccion(
             @Validated({ Default.class, IActualizacion.class }) @RequestBody Infraccion infraccion,
@@ -71,7 +71,7 @@ public @RestController class InfraccionController {
     } 
 	
     
-    @Audit(accion = Accion.Eliminacion, comentario = Comentario.Eliminacion)
+    @Audit(accion = Accion.ELIMINACION, comentario = Comentario.Eliminacion)
     @DeleteMapping
     public ResponseEntity<?> eliminarInfraccion(
             @Validated(IActualizacion.class) @RequestBody Infraccion infraccion, Errors error)

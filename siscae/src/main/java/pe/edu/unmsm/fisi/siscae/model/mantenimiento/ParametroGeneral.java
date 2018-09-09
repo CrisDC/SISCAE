@@ -15,8 +15,6 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import pe.edu.unmsm.fisi.siscae.validacion.CodigoInstitucion;
-import pe.edu.unmsm.fisi.siscae.validacion.IdEmpresa;
 
 @Data
 @Builder
@@ -39,9 +37,6 @@ public class ParametroGeneral
     private String config;
 
   
-
-    @CodigoInstitucion(existe = true)
-    private Integer codigoInstitucion;
     private String repositorioPrepago;
     
     @NotNull(message = "{NotNull.ParametroGeneral.repositorioCompensacion}")
@@ -55,8 +50,6 @@ public class ParametroGeneral
     @Digits(integer = 6, fraction = 2, message = "{Digits.ParametroGeneral.surchargeDolares}")
     private double surchargeDolares;
 
-    @IdEmpresa(existe = true)
-    private String idEmpresa;
     
     @NotNull(message = "{NotNull.ParametroGeneral.porcentajeIgv}")
     @Range(min = 0, max = 100, message = "{Range.ParametroGeneral.porcentajeIgv}")

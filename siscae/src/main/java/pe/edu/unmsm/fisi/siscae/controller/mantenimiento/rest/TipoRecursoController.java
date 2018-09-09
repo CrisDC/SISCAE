@@ -21,7 +21,6 @@ import pe.edu.unmsm.fisi.siscae.aspecto.enumeracion.Accion;
 import pe.edu.unmsm.fisi.siscae.aspecto.enumeracion.Comentario;
 import pe.edu.unmsm.fisi.siscae.aspecto.enumeracion.Dato;
 import pe.edu.unmsm.fisi.siscae.aspecto.enumeracion.Tipo;
-import pe.edu.unmsm.fisi.siscae.model.mantenimiento.Empresa;
 import pe.edu.unmsm.fisi.siscae.model.mantenimiento.TipoRecurso;
 import pe.edu.unmsm.fisi.siscae.service.ITipoRecursoService;
 import pe.edu.unmsm.fisi.siscae.service.excepcion.BadRequestException;
@@ -29,12 +28,12 @@ import pe.edu.unmsm.fisi.siscae.utilitario.ConstantesGenerales;
 import pe.edu.unmsm.fisi.siscae.utilitario.ValidatorUtil;
 import pe.edu.unmsm.fisi.siscae.validacion.grupo.accion.IActualizacion;
 import pe.edu.unmsm.fisi.siscae.validacion.grupo.accion.IRegistro;
-@Audit(tipo = Tipo.TipRec, datos = Dato.TipoRecurso)
+@Audit(tipo = Tipo.TIPO_RECURSO, datos = Dato.TipoRecurso)
 @RequestMapping("/tipoRecurso")
 public  @RestController class TipoRecursoController {
 	private @Autowired ITipoRecursoService tipoRecursoService;
 
-    @Audit(accion = Accion.Consulta, comentario = Comentario.ConsultaTodos)
+    @Audit(accion = Accion.CONSULTA, comentario = Comentario.ConsultaTodos)
     @GetMapping(params = "accion=buscarTodos")
     public List<TipoRecurso> buscarTodos()
     {
@@ -55,7 +54,7 @@ public  @RestController class TipoRecursoController {
         return ResponseEntity.ok(ConstantesGenerales.REGISTRO_EXITOSO);
     }
 
-    @Audit(accion = Accion.Actualizacion, comentario = Comentario.Actualizacion)
+    @Audit(accion = Accion.ACTUALIZACION, comentario = Comentario.Actualizacion)
     @PutMapping
     public ResponseEntity<?> actualizarTipoRecurso(
             @Validated({ Default.class, IActualizacion.class }) @RequestBody TipoRecurso tiporecurso,
@@ -69,7 +68,7 @@ public  @RestController class TipoRecursoController {
         return ResponseEntity.ok(ConstantesGenerales.ACTUALIZACION_EXITOSA);
     } 
     
-    @Audit(accion = Accion.Eliminacion, comentario = Comentario.Eliminacion)
+    @Audit(accion = Accion.ELIMINACION, comentario = Comentario.Eliminacion)
     @DeleteMapping
     public ResponseEntity<?> eliminarTipoRecurso(
             @Validated(IActualizacion.class) @RequestBody TipoRecurso tiporecurso, Errors error)

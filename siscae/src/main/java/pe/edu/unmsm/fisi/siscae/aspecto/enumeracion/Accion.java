@@ -4,9 +4,9 @@ public enum Accion
 {
     REGISTRO("I"),  
     Visita("V"),
-    Actualizacion("U"), 
-    Eliminacion("D"),
-    Consulta("S"),
+    ACTUALIZACION("U"), 
+    ELIMINACION("D"),
+    CONSULTA("S"),
     Reporte("R"),
     Ejecucion("E"),
     Acceso("A"),

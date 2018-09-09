@@ -54,7 +54,7 @@ private @Autowired IAreaAdministrativoService areaAdministrativoService;
 	        return ResponseEntity.ok(ConstantesGenerales.REGISTRO_EXITOSO);
 	    }
 	 
-	 @Audit(accion = Accion.Actualizacion, comentario = Comentario.Actualizacion)
+	 @Audit(accion = Accion.ACTUALIZACION, comentario = Comentario.Actualizacion)
 	    @PutMapping
 	    public ResponseEntity<?> actualizarAreaAdministrativo(
 	            @Validated({ Default.class, IActualizacion.class }) @RequestBody AreaAdministrativo areaAdministrativo,
@@ -67,7 +67,7 @@ private @Autowired IAreaAdministrativoService areaAdministrativoService;
 	        areaAdministrativoService.actualizarAreaAdministrativo(areaAdministrativo);
 	        return ResponseEntity.ok(ConstantesGenerales.ACTUALIZACION_EXITOSA);
 	    }
-	 @Audit(accion = Accion.Eliminacion, comentario = Comentario.Eliminacion)
+	 @Audit(accion = Accion.ELIMINACION, comentario = Comentario.Eliminacion)
 	    @DeleteMapping
 	    public ResponseEntity<?> eliminarAreaAdministrativo(
 	            @Validated(IActualizacion.class) @RequestBody AreaAdministrativo areaAdministrativo, Errors error)

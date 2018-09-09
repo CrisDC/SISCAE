@@ -30,7 +30,6 @@ public class AreaEstudioServiceTest {
 		areaEstudioTest.setNivel("PRIMER NIVEL");
 		areaEstudioTest.setAforo(1);
 		areaEstudioService.registrarAreaEstudio(areaEstudioTest);
-
 		assertTrue(areaEstudioService.existe(areaEstudioTest.getIdAreaEstudio()));
 
 	}
@@ -51,9 +50,7 @@ public class AreaEstudioServiceTest {
 
 	@Test
 	public void existeAreaEstudioTest() {
-
 		assertTrue(areaEstudioService.existe(11));// el id ingresado de arriba
-
 	}
 
 	@Test

@@ -34,7 +34,7 @@ import pe.edu.unmsm.fisi.siscae.validacion.grupo.accion.IRegistro;
 public @RestController class EscuelaController {
 	private @Autowired IEscuelaService escuelaService;
 
-    @Audit(accion = Accion.Consulta, comentario = Comentario.ConsultaTodos)
+    @Audit(accion = Accion.CONSULTA, comentario = Comentario.ConsultaTodos)
     @GetMapping(params = "accion=buscarTodos")
     public List<Escuela> buscarTodos()
     {
@@ -55,7 +55,7 @@ public @RestController class EscuelaController {
         return ResponseEntity.ok(ConstantesGenerales.REGISTRO_EXITOSO);
     }
 
-    @Audit(accion = Accion.Actualizacion, comentario = Comentario.Actualizacion)
+    @Audit(accion = Accion.ACTUALIZACION, comentario = Comentario.Actualizacion)
     @PutMapping
     public ResponseEntity<?> actualizarEscuela(
             @Validated({ Default.class, IActualizacion.class }) @RequestBody Escuela escuela,
@@ -69,7 +69,7 @@ public @RestController class EscuelaController {
         return ResponseEntity.ok(ConstantesGenerales.ACTUALIZACION_EXITOSA);
     }
 
-    @Audit(accion = Accion.Eliminacion, comentario = Comentario.Eliminacion)
+    @Audit(accion = Accion.ELIMINACION, comentario = Comentario.Eliminacion)
     @DeleteMapping
     public ResponseEntity<?> eliminarEscuela(
             @Validated(IActualizacion.class) @RequestBody Escuela  escuela , Errors error)

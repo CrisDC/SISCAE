@@ -11,14 +11,12 @@ import org.springframework.web.bind.annotation.GetMapping;
 
 import pe.edu.unmsm.fisi.siscae.controller.excepcion.anotacion.Vista;
 import pe.edu.unmsm.fisi.siscae.service.IParametroGeneralService;
-import pe.edu.unmsm.fisi.siscae.service.ISecUsuarioService;
-import pe.edu.unmsm.fisi.siscae.service.IUsuarioService;
 
 @Vista
 public @Controller class HomeController
 {
     private @Autowired IParametroGeneralService parametroGeneralService;
-    private @Autowired ISecUsuarioService iSecUsuarioService;
+
 
     @GetMapping(value = "/irPaginaInicio")
     public String irPageInicio(Principal principal, HttpSession session)

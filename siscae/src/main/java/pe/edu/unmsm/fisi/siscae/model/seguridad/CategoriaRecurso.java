@@ -17,6 +17,6 @@ public class CategoriaRecurso
     private int idCategoria;
     private String categoria;
     private String accionCategoria;
-    private List<SecRecurso> recursos;
+   
     private List<MultiTabDet> acciones;
 }

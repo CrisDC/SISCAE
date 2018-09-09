@@ -26,17 +26,17 @@ $(document).ready(function() {
 			"dataSrc" : ""
 		},
 		"language" : {
-			"emptyTable" : "No hay areas de estudios registradas"
+			"emptyTable" : "No hay áreas de estudios registradas"
 		},
 		"initComplete" : function() {
 			$local.$tablaMantenimiento.wrap("<div class='table-responsive'></div>");
 			$tablaFuncion.aniadirFiltroDeBusquedaEnEncabezado(this, $local.$tablaMantenimiento);
 		},
 		"columnDefs" : [ {
-			"targets" : [ 0, 1, 2, 3 ],
+			"targets" : [ 0, 1, 2, 3, 4 ],
 			"className" : "all filtrable",
 		}, {
-			"targets" : 4,
+			"targets" : 5,
 			"className" : "all dt-center",
 			"defaultContent" : $variableUtil.botonActualizar + " " + $variableUtil.botonEliminar
 		} ],
@@ -60,6 +60,7 @@ $(document).ready(function() {
 			"title" : 'Acción'
 		} ]
 	});
+	
 	$local.$tablaMantenimiento.find("thead").on('keyup', 'input', function() {
 		$local.tablaMantenimiento.column($(this).parent().index() + ':visible').search(this.value).draw();
 	});
@@ -137,7 +138,9 @@ $(document).ready(function() {
 				$local.$registrarMantenimiento.attr("disabled", false).find("i").addClass("fa-floppy-o").removeClass("fa-spinner fa-pulse fa-fw");
 			}
 		});
-		$local.$tablaMantenimiento.children("tbody").on("click", ".actualizar", function() {
+	});
+	
+	$local.$tablaMantenimiento.children("tbody").on("click", ".actualizar", function() {
 		$funcionUtil.prepararFormularioActualizacion($formMantenimiento);
 		$local.$filaSeleccionada = $(this).parents("tr");
 		var areaEstudio = $local.tablaMantenimiento.row($local.$filaSeleccionada).data();
@@ -147,7 +150,7 @@ $(document).ready(function() {
 		$local.$registrarMantenimiento.addClass("hidden");
 		$local.$modalMantenimiento.PopupWindow("open");
 	});
-	});
+	
 	$local.$actualizarMantenimiento.on("click", function() {
 		if (!$formMantenimiento.valid()) {
 			return;
@@ -184,6 +187,7 @@ $(document).ready(function() {
 			}
 		});
 	});
+	
 	$local.$tablaMantenimiento.children("tbody").on("click", ".eliminar", function() {
 		$local.$filaSeleccionada = $(this).parents("tr");
 		var areaEstudio = $local.tablaMantenimiento.row($local.$filaSeleccionada).data();
@@ -243,16 +247,7 @@ $(document).ready(function() {
 		});
 	});
 	
-	$local.$tablaMantenimiento.children("tbody").on("click", ".actualizar", function() {
-		$funcionUtil.prepararFormularioActualizacion($formMantenimiento);
-		$local.$filaSeleccionada = $(this).parents("tr");
-		var areaEstudio = $local.tablaMantenimiento.row($local.$filaSeleccionada).data();
-		$local.idAreaEstudioSeleccionado = areaEstudio.idAreaEstudio;
-		$funcionUtil.llenarFormulario(areaEstudio, $formMantenimiento);
-		$local.$actualizarMantenimiento.removeClass("hidden");
-		$local.$registrarMantenimiento.addClass("hidden");
-		$local.$modalMantenimiento.PopupWindow("open");
-	});
+
 
 
 

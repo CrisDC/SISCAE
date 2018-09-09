@@ -1,12 +1,5 @@
 package pe.edu.unmsm.fisi.siscae.controller.mantenimiento.rest;
 
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.RequestMapping;
-
-import pe.edu.unmsm.fisi.siscae.aspecto.anotacion.Audit;
-import pe.edu.unmsm.fisi.siscae.aspecto.enumeracion.Dato;
-import pe.edu.unmsm.fisi.siscae.aspecto.enumeracion.Tipo;
 import java.util.List;
 
 import javax.validation.groups.Default;
@@ -29,9 +22,7 @@ import pe.edu.unmsm.fisi.siscae.aspecto.enumeracion.Comentario;
 import pe.edu.unmsm.fisi.siscae.aspecto.enumeracion.Dato;
 import pe.edu.unmsm.fisi.siscae.aspecto.enumeracion.Tipo;
 import pe.edu.unmsm.fisi.siscae.model.mantenimiento.Alumno;
-import pe.edu.unmsm.fisi.siscae.model.mantenimiento.Empresa;
 import pe.edu.unmsm.fisi.siscae.service.IAlumnoService;
-import pe.edu.unmsm.fisi.siscae.service.IEmpresaService;
 import pe.edu.unmsm.fisi.siscae.service.excepcion.BadRequestException;
 import pe.edu.unmsm.fisi.siscae.utilitario.ConstantesGenerales;
 import pe.edu.unmsm.fisi.siscae.utilitario.ValidatorUtil;
@@ -39,13 +30,13 @@ import pe.edu.unmsm.fisi.siscae.validacion.grupo.accion.IActualizacion;
 import pe.edu.unmsm.fisi.siscae.validacion.grupo.accion.IRegistro;
 
 
-@Audit(tipo = Tipo.Alum, datos = Dato.Alumno)
+@Audit(tipo = Tipo.ALUMNO, datos = Dato.Alumno)
 @RequestMapping("/alumno")
 
 public @RestController class AlumnoController {
 	private @Autowired IAlumnoService alumnoService;
 
-    @Audit(accion = Accion.Consulta, comentario = Comentario.ConsultaTodos)
+    @Audit(accion = Accion.CONSULTA, comentario = Comentario.ConsultaTodos)
     @GetMapping(params = "accion=buscarTodos")
     public List<Alumno> buscarTodos()
     {
@@ -66,7 +57,7 @@ public @RestController class AlumnoController {
         return ResponseEntity.ok(ConstantesGenerales.REGISTRO_EXITOSO);
     }
 
-    @Audit(accion = Accion.Actualizacion, comentario = Comentario.Actualizacion)
+    @Audit(accion = Accion.ACTUALIZACION, comentario = Comentario.Actualizacion)
     @PutMapping
     public ResponseEntity<?> actualizarAlumno(
             @Validated({ Default.class, IActualizacion.class }) @RequestBody Alumno alumno,
@@ -80,7 +71,7 @@ public @RestController class AlumnoController {
         return ResponseEntity.ok(ConstantesGenerales.ACTUALIZACION_EXITOSA);
     }
 
-    @Audit(accion = Accion.Eliminacion, comentario = Comentario.Eliminacion)
+    @Audit(accion = Accion.ELIMINACION, comentario = Comentario.Eliminacion)
     @DeleteMapping
     public ResponseEntity<?> eliminarAlumno(
             @Validated(IActualizacion.class) @RequestBody Alumno alumno, Errors error)

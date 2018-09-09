@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
 import pe.edu.unmsm.fisi.siscae.aspecto.anotacion.Audit;
 import pe.edu.unmsm.fisi.siscae.aspecto.enumeracion.Accion;
@@ -28,55 +29,49 @@ import pe.edu.unmsm.fisi.siscae.utilitario.ValidatorUtil;
 import pe.edu.unmsm.fisi.siscae.validacion.grupo.accion.IActualizacion;
 import pe.edu.unmsm.fisi.siscae.validacion.grupo.accion.IRegistro;
 
-@Audit(tipo=Tipo.AREA_ESTUDIO, datos=Dato.AREA_ESTUDIO)
+@Audit(tipo = Tipo.AREA_ESTUDIO, datos = Dato.AREA_ESTUDIO)
 @RequestMapping("/areaEstudio")
-public class AreaEstudioController {
+
+public @RestController class  AreaEstudioController {
 	private @Autowired IAreaEstudioService areaEstudioService;
-	
+
+	@Audit(accion = Accion.CONSULTA, comentario = Comentario.ConsultaTodos)
 	@GetMapping(params = "accion=buscarTodos")
-    public List<AreaEstudio> buscarTodos()
-    {
-        return areaEstudioService.buscarTodos();
-    }
-	
-	 @Audit(accion = Accion.REGISTRO, comentario = Comentario.Registro)
-	    @PostMapping
-	    public ResponseEntity<?> registrarAreaEstudio(
-	            @Validated({ Default.class, IRegistro.class }) @RequestBody AreaEstudio areaEstudio,
-	            Errors error)
-	    {
-	        if (error.hasErrors())
-	        {
-	            throw new BadRequestException(ValidatorUtil.obtenerMensajeValidacionError(error));
-	        }
-	        areaEstudioService.registrarAreaEstudio(areaEstudio);
-	        return ResponseEntity.ok(ConstantesGenerales.REGISTRO_EXITOSO);
-	    }
-	 
-	 @Audit(accion = Accion.Actualizacion, comentario = Comentario.Actualizacion)
-	    @PutMapping
-	    public ResponseEntity<?> actualizarAreaEstudio(
-	            @Validated({ Default.class, IActualizacion.class }) @RequestBody AreaEstudio areaEstudio,
-	            Errors error)
-	    {
-	        if (error.hasErrors())
-	        {
-	            throw new BadRequestException(ValidatorUtil.obtenerMensajeValidacionError(error));
-	        }
-	        areaEstudioService.actualizarAreaEstudio(areaEstudio);
-	        return ResponseEntity.ok(ConstantesGenerales.ACTUALIZACION_EXITOSA);
-	    }
-	 @Audit(accion = Accion.Eliminacion, comentario = Comentario.Eliminacion)
-	    @DeleteMapping
-	    public ResponseEntity<?> eliminarAreaEstudio(
-	            @Validated(IActualizacion.class) @RequestBody AreaEstudio areaEstudio, Errors error)
-	    {
-	        if (error.hasErrors())
-	        {
-	            throw new BadRequestException(ValidatorUtil.obtenerMensajeValidacionError(error));
-	        }
-	        areaEstudioService.eliminarAreaEstudio(areaEstudio);
-	        return ResponseEntity.ok(ConstantesGenerales.ELIMINACION_EXITOSA);
-	    }
-	 
+	public List<AreaEstudio> buscarTodos() {
+		return areaEstudioService.buscarTodos();
+	}
+
+	@Audit(accion = Accion.REGISTRO, comentario = Comentario.Registro)
+	@PostMapping
+	public ResponseEntity<?> registrarAreaEstudio(
+			@Validated({ Default.class, IRegistro.class }) @RequestBody AreaEstudio areaEstudio, Errors error) {
+		if (error.hasErrors()) {
+			throw new BadRequestException(ValidatorUtil.obtenerMensajeValidacionError(error));
+		}
+		areaEstudioService.registrarAreaEstudio(areaEstudio);
+		return ResponseEntity.ok(ConstantesGenerales.REGISTRO_EXITOSO);
+	}
+
+	@Audit(accion = Accion.ACTUALIZACION, comentario = Comentario.Actualizacion)
+	@PutMapping
+	public ResponseEntity<?> actualizarAreaEstudio(
+			@Validated({ Default.class, IActualizacion.class }) @RequestBody AreaEstudio areaEstudio, Errors error) {
+		if (error.hasErrors()) {
+			throw new BadRequestException(ValidatorUtil.obtenerMensajeValidacionError(error));
+		}
+		areaEstudioService.actualizarAreaEstudio(areaEstudio);
+		return ResponseEntity.ok(ConstantesGenerales.ACTUALIZACION_EXITOSA);
+	}
+
+	@Audit(accion = Accion.ELIMINACION, comentario = Comentario.Eliminacion)
+	@DeleteMapping
+	public ResponseEntity<?> eliminarAreaEstudio(@Validated(IActualizacion.class) @RequestBody AreaEstudio areaEstudio,
+			Errors error) {
+		if (error.hasErrors()) {
+			throw new BadRequestException(ValidatorUtil.obtenerMensajeValidacionError(error));
+		}
+		areaEstudioService.eliminarAreaEstudio(areaEstudio);
+		return ResponseEntity.ok(ConstantesGenerales.ELIMINACION_EXITOSA);
+	}
+
 }

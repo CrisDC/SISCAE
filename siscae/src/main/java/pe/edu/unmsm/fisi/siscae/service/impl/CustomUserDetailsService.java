@@ -15,11 +15,8 @@ import org.springframework.transaction.annotation.Transactional;
 
 import pe.edu.unmsm.fisi.siscae.configuracion.security.CustomUser;
 import pe.edu.unmsm.fisi.siscae.mapper.IRecursoMapper;
-import pe.edu.unmsm.fisi.siscae.mapper.ISecRecursoMapper;
 import pe.edu.unmsm.fisi.siscae.model.RecursoSistema;
 import pe.edu.unmsm.fisi.siscae.model.mantenimiento.Usuario;
-import pe.edu.unmsm.fisi.siscae.model.seguridad.SecUsuario;
-import pe.edu.unmsm.fisi.siscae.service.ISecUsuarioService;
 import pe.edu.unmsm.fisi.siscae.service.IUsuarioService;
 
 @Service

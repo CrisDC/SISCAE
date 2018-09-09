@@ -53,7 +53,7 @@ public class HorarioController {
 	        return ResponseEntity.ok(ConstantesGenerales.REGISTRO_EXITOSO);
 	  }
 	 
-	 @Audit(accion = Accion.Actualizacion, comentario = Comentario.Actualizacion)
+	 @Audit(accion = Accion.ACTUALIZACION, comentario = Comentario.Actualizacion)
 	 @PutMapping
 	 public ResponseEntity<?> actualizarHorario(
 	            @Validated({ Default.class, IActualizacion.class }) @RequestBody Horario horario,
@@ -66,7 +66,7 @@ public class HorarioController {
 	        horarioService.actualizarHorario(horario);
 	        return ResponseEntity.ok(ConstantesGenerales.ACTUALIZACION_EXITOSA);
 	    }
-	 @Audit(accion = Accion.Eliminacion, comentario = Comentario.Eliminacion)
+	 @Audit(accion = Accion.ELIMINACION, comentario = Comentario.Eliminacion)
 	 @DeleteMapping
 	 public ResponseEntity<?> eliminarHorario(
 	            @Validated(IActualizacion.class) @RequestBody Horario horario, Errors error)

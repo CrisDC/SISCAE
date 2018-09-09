@@ -14,7 +14,7 @@ public enum Comentario
     Eliminacion("Se intenta eliminar el(a) %s %s"),
     Reporte("Se intenta generar el(a) reporte de %s"),
     Visita("Se intenta visitar la página de %s"),
-    VisitaConsulta("Se intenta visitar la página de Consulta de %s"),
+    VisitaConsulta("Se intenta visitar la página de CONSULTA de %s"),
     Ejecucion("Se intenta ejecutar el proceso de %s %s"),
     OperacionWebService("Se intenta realizar una operación mediante WS"),
     
@@ -29,7 +29,7 @@ public enum Comentario
     Ninguno(""), 
     ConsultaPorUsuario("Un usuario intenta consultar sus solicitudes"), 
     
-    CONSULTA_POR_CRITERIOS("Consulta por criterios");
+    CONSULTA_POR_CRITERIOS("CONSULTA por criterios");
     
     
     private final String nombre;       

@@ -37,14 +37,14 @@ public @RestController class MultiTabDetController
 {
     private @Autowired IMultiTabDetService multiTabDetService;
 
-    @Audit(accion = Accion.Consulta, comentario = Comentario.ConsultaTodos)
+    @Audit(accion = Accion.CONSULTA, comentario = Comentario.ConsultaTodos)
     @GetMapping(params = "accion=buscarTodos")
     public List<MultiTabDet> buscarTodos()
     {
         return multiTabDetService.buscarTodos();
     }
 
-    @Audit(accion = Accion.Consulta, comentario = Comentario.Consulta)
+    @Audit(accion = Accion.CONSULTA, comentario = Comentario.Consulta)
     @GetMapping("/multiTabCab/{idTabla}")
     public List<MultiTabDet> buscarPorIdTabla(@IdTabla(existe = true) @PathVariable int idTabla)
     {
@@ -65,7 +65,7 @@ public @RestController class MultiTabDetController
         return ResponseEntity.ok(ConstantesGenerales.REGISTRO_EXITOSO);
     }
 
-    @Audit(accion = Accion.Actualizacion, comentario = Comentario.Actualizacion)
+    @Audit(accion = Accion.ACTUALIZACION, comentario = Comentario.Actualizacion)
     @PutMapping
     public ResponseEntity<?> actualizarMultiTabDet(@Validated({ Default.class,
             IActualizacion.class }) @RequestBody MultiTabDet multiTabDet, Errors error)
@@ -78,7 +78,7 @@ public @RestController class MultiTabDetController
         return ResponseEntity.ok(ConstantesGenerales.ACTUALIZACION_EXITOSA);
     }
 
-    @Audit(accion = Accion.Eliminacion, comentario = Comentario.Eliminacion)
+    @Audit(accion = Accion.ELIMINACION, comentario = Comentario.Eliminacion)
     @DeleteMapping
     public ResponseEntity<?> eliminarMultiTabDet(
             @Validated(IActualizacion.class) @RequestBody MultiTabDet multiTabDet, Errors error)

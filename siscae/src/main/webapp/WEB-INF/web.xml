@@ -47,8 +47,8 @@
 			</param-value>
     </init-param>
     <init-param>
-    	<param-name>contextConfigLocation</param-name>
-     	<param-value>
+      <param-name>contextConfigLocation</param-name>
+      <param-value>
 				pe.edu.unmsm.fisi.siscae.configuracion.MvcConfiguration
 		</param-value>
     </init-param>

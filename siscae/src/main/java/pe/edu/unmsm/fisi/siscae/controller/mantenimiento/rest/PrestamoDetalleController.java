@@ -55,7 +55,7 @@ public class PrestamoDetalleController {
       return ResponseEntity.ok(ConstantesGenerales.REGISTRO_EXITOSO);
 	}
 	
-	@Audit(accion = Accion.Actualizacion, comentario = Comentario.Actualizacion)
+	@Audit(accion = Accion.ACTUALIZACION, comentario = Comentario.Actualizacion)
     @PutMapping
     public ResponseEntity<?> actualizarPrestamoDetalle(
             @Validated({ Default.class, IActualizacion.class }) @RequestBody PrestamoDetalle prestamoDetalle,
@@ -69,7 +69,7 @@ public class PrestamoDetalleController {
         return ResponseEntity.ok(ConstantesGenerales.ACTUALIZACION_EXITOSA);
     }
 	
-	@Audit(accion = Accion.Eliminacion, comentario = Comentario.Eliminacion)
+	@Audit(accion = Accion.ELIMINACION, comentario = Comentario.Eliminacion)
 	 @DeleteMapping
 	 public ResponseEntity<?> eliminarPrestamoDetalle(
 	            @Validated(IActualizacion.class) @RequestBody PrestamoDetalle prestamoDetalle, Errors error)

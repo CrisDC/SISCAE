@@ -26,7 +26,6 @@ public class AreaEstudioService extends MantenibleService<AreaEstudio> implement
 
 	@Transactional(propagation = Propagation.REQUIRES_NEW)
 	public List<AreaEstudio> buscarTodos() {
-
 		return this.buscar(new AreaEstudio(), Operacion.SELECT);
 	}
 

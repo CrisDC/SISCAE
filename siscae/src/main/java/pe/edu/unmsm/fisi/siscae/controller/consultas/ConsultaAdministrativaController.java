@@ -20,92 +20,13 @@ public @Controller class ConsultaAdministrativaController
 
     /*Consultas Debito*/
 
-    @Audit(tipo = Tipo.ConAdminAtm)
-    @GetMapping("/{consulta:atm}")
+    @Audit(tipo = Tipo.CON_ADM_ALUMNO)
+    @GetMapping("/{consulta:alumno}")
     public String irPaginaConsultaAdministrativaAtm(@PathVariable String consulta, ModelMap model)
     {
         model.addAttribute("consulta", consulta);
         return "seguras/consulta/administrativa";
     }
-    
-    @Audit(tipo = Tipo.ConAdminAg)
-    @GetMapping("/{consulta:agencia}")
-    public String irPaginaConsultaAdministrativaAgencia(@PathVariable String consulta,
-            ModelMap model)
-    {
-        model.addAttribute("consulta", consulta);
-        return "seguras/consulta/administrativa";
-    }
-
-    @Audit(tipo = Tipo.ConAdminCliente)
-    @GetMapping("/{consulta:clientePersona}")
-    public String irPaginaConsultaAdministrativaCliente(@PathVariable String consulta,
-            ModelMap model)
-    {
-        model.addAttribute("consulta", consulta);
-        return "seguras/consulta/administrativa";
-    }
-
-    @Audit(tipo = Tipo.ConAdminCta)
-    @GetMapping("/{consulta:cuenta}")
-    public String irPaginaConsultaAdministrativaCuenta(@PathVariable String consulta,
-            ModelMap model)
-    {
-        model.addAttribute("consulta", consulta);
-        return "seguras/consulta/administrativa";
-    }
-
-    @Audit(tipo = Tipo.ConAdminTarjeta)
-    @GetMapping("/{consulta:tarjeta}")
-    public String irPaginaConsultaAdministrativaTarjeta(@PathVariable String consulta,
-            ModelMap model)
-    {
-        model.addAttribute("consulta", consulta);
-        return "seguras/consulta/administrativa";
-    }
-
-    /*Consultas Prepago*/
-    
-    @Audit(tipo = Tipo.ConAdminPersonaPP)
-    @GetMapping("/{consulta:personaPP}")
-    public String irPaginaConsultaAdministrativaPersonaPP(@PathVariable String consulta, ModelMap model)
-    {
-        model.addAttribute("consulta", consulta);
-        return "seguras/consulta/administrativa";
-    }
-    
-    @Audit(tipo = Tipo.ConAdminTarjetaPP)
-    @GetMapping("/{consulta:tarjetaPP}")
-    public String irPaginaConsultaAdministrativaTarjetaPP(@PathVariable String consulta, ModelMap model)
-    {
-        model.addAttribute("consulta", consulta);
-        return "seguras/consulta/administrativa";
-    }
-    
-    @Audit(tipo = Tipo.ConAdminCuentaPP)
-    @GetMapping("/{consulta:cuentaPP}")
-    public String irPaginaConsultaAdministrativaCuentaPP(@PathVariable String consulta, ModelMap model)
-    {
-        model.addAttribute("consulta", consulta);
-        return "seguras/consulta/administrativa";
-    }
-    
-    @Audit(tipo = Tipo.ConAdminLotePP)
-    @GetMapping("/{consulta:lotePP}")
-    public String irPaginaConsultaAdministrativaLotePP(@PathVariable String consulta, ModelMap model)
-    {
-        model.addAttribute("consulta", consulta);
-        return "seguras/consulta/administrativa";
-    }
-    
-    @Audit(tipo = Tipo.ConAdminRecargaPP)
-    @GetMapping("/{consulta:recargaPP}")
-    public String irPaginaConsultaAdministrativaRecargaPP(@PathVariable String consulta, ModelMap model)
-    {
-        model.addAttribute("consulta", consulta);
-        return "seguras/consulta/administrativa";
-    }
-    
     
     
 }

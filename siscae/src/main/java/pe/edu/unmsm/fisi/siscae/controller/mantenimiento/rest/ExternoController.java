@@ -23,19 +23,18 @@ import pe.edu.unmsm.fisi.siscae.aspecto.enumeracion.Tipo;
 import pe.edu.unmsm.fisi.siscae.model.mantenimiento.Externo;
 import pe.edu.unmsm.fisi.siscae.service.IExternoService;
 import pe.edu.unmsm.fisi.siscae.service.excepcion.BadRequestException;
-import pe.edu.unmsm.fisi.siscae.service.impl.mantenimiento.ExternoService;
 import pe.edu.unmsm.fisi.siscae.utilitario.ConstantesGenerales;
 import pe.edu.unmsm.fisi.siscae.utilitario.ValidatorUtil;
 import pe.edu.unmsm.fisi.siscae.validacion.grupo.accion.IActualizacion;
 import pe.edu.unmsm.fisi.siscae.validacion.grupo.accion.IRegistro;
 
-@Audit(tipo = Tipo.Ex, datos = Dato.Externo)
+@Audit(tipo = Tipo.EXTERNO, datos = Dato.Externo)
 @RequestMapping("/externo")
 public @RestController class ExternoController {
 
 	private @Autowired IExternoService externoService;
 
-    @Audit(accion = Accion.Consulta, comentario = Comentario.ConsultaTodos)
+    @Audit(accion = Accion.CONSULTA, comentario = Comentario.ConsultaTodos)
     @GetMapping(params = "accion=buscarTodos")
     public List<Externo> buscarTodos()
     {
@@ -56,7 +55,7 @@ public @RestController class ExternoController {
         return ResponseEntity.ok(ConstantesGenerales.REGISTRO_EXITOSO);
     }
     
-    @Audit(accion = Accion.Actualizacion, comentario = Comentario.Actualizacion)
+    @Audit(accion = Accion.ACTUALIZACION, comentario = Comentario.Actualizacion)
     @PutMapping
     public ResponseEntity<?> actualizarTipoRecurso(
             @Validated({ Default.class, IActualizacion.class }) @RequestBody Externo externo,
@@ -71,7 +70,7 @@ public @RestController class ExternoController {
     } 
     
     
-    @Audit(accion = Accion.Eliminacion, comentario = Comentario.Eliminacion)
+    @Audit(accion = Accion.ELIMINACION, comentario = Comentario.Eliminacion)
     @DeleteMapping
     public ResponseEntity<?> eliminarExterno(
             @Validated(IActualizacion.class) @RequestBody Externo externo, Errors error)

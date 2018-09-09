@@ -35,7 +35,7 @@ public @RestController class PersonaController {
 
 	private @Autowired IPersonaService personaService;
 
-	@Audit(accion = Accion.Consulta, comentario = Comentario.ConsultaTodos)
+	@Audit(accion = Accion.CONSULTA, comentario = Comentario.ConsultaTodos)
 	@GetMapping(params = "accion=buscarTodos")
 	public List<Persona> buscarTodos() {
 		return personaService.buscarTodos();
@@ -53,7 +53,7 @@ public @RestController class PersonaController {
 		return ResponseEntity.ok(ConstantesGenerales.REGISTRO_EXITOSO);
 	}
 
-	@Audit(accion = Accion.Actualizacion, comentario = Comentario.Actualizacion)
+	@Audit(accion = Accion.ACTUALIZACION, comentario = Comentario.Actualizacion)
 	@PutMapping
 	public ResponseEntity<?> actualizarPersona(
 			@Validated({ Default.class, IActualizacion.class }) @RequestBody Persona persona, Errors error) {
@@ -65,7 +65,7 @@ public @RestController class PersonaController {
 		return ResponseEntity.ok(ConstantesGenerales.ACTUALIZACION_EXITOSA);
 	}
 
-	@Audit(accion = Accion.Eliminacion, comentario = Comentario.Eliminacion)
+	@Audit(accion = Accion.ELIMINACION, comentario = Comentario.Eliminacion)
 	@DeleteMapping
 	public ResponseEntity<?> eliminarPersona(@Validated(IActualizacion.class) @RequestBody Persona persona,
 			Errors error) {

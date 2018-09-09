@@ -10,7 +10,6 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import pe.edu.unmsm.fisi.siscae.configuracion.PersistenceConfiguration;
 import pe.edu.unmsm.fisi.siscae.configuracion.ServiceConfiguration;
-import pe.edu.unmsm.fisi.siscae.model.mantenimiento.Institucion;
 import pe.edu.unmsm.fisi.siscae.model.mantenimiento.Recurso;
 import pe.edu.unmsm.fisi.siscae.model.parametro.Parametro;
 import pe.edu.unmsm.fisi.siscae.utilitario.Operacion;

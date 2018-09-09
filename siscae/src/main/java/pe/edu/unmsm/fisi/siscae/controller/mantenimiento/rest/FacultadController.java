@@ -21,9 +21,7 @@ import pe.edu.unmsm.fisi.siscae.aspecto.enumeracion.Accion;
 import pe.edu.unmsm.fisi.siscae.aspecto.enumeracion.Comentario;
 import pe.edu.unmsm.fisi.siscae.aspecto.enumeracion.Dato;
 import pe.edu.unmsm.fisi.siscae.aspecto.enumeracion.Tipo;
-import pe.edu.unmsm.fisi.siscae.model.mantenimiento.Empresa;
 import pe.edu.unmsm.fisi.siscae.model.mantenimiento.Facultad;
-import pe.edu.unmsm.fisi.siscae.service.IEmpresaService;
 import pe.edu.unmsm.fisi.siscae.service.IFacultadService;
 import pe.edu.unmsm.fisi.siscae.service.excepcion.BadRequestException;
 import pe.edu.unmsm.fisi.siscae.utilitario.ConstantesGenerales;
@@ -31,18 +29,18 @@ import pe.edu.unmsm.fisi.siscae.utilitario.ValidatorUtil;
 import pe.edu.unmsm.fisi.siscae.validacion.grupo.accion.IActualizacion;
 import pe.edu.unmsm.fisi.siscae.validacion.grupo.accion.IRegistro;
 
-@Audit(tipo = Tipo.Fac, datos = Dato.Facultad)
+@Audit(tipo = Tipo.FACULTAD, datos = Dato.Facultad)
 @RequestMapping("/facultad")
 public @RestController class FacultadController {
 	 private @Autowired IFacultadService facultadService;
 
-	    @Audit(accion = Accion.Consulta, comentario = Comentario.ConsultaTodos)
+	    @Audit(accion = Accion.CONSULTA, comentario = Comentario.ConsultaTodos)
 	    @GetMapping(params = "accion=buscarTodos")
 	    public List<Facultad> buscarTodos()
 	    {
 	        return facultadService.buscarTodos();
 	    }
-
+	
 	    @Audit(accion = Accion.REGISTRO, comentario = Comentario.Registro)
 	    @PostMapping
 	    public ResponseEntity<?> registrarFacultad(
@@ -57,7 +55,7 @@ public @RestController class FacultadController {
 	        return ResponseEntity.ok(ConstantesGenerales.REGISTRO_EXITOSO);
 	    }
 
-	    @Audit(accion = Accion.Actualizacion, comentario = Comentario.Actualizacion)
+	    @Audit(accion = Accion.ACTUALIZACION, comentario = Comentario.Actualizacion)
 	    @PutMapping
 	    public ResponseEntity<?> actualizarFacultad(
 	            @Validated({ Default.class, IActualizacion.class }) @RequestBody Facultad facultad,
@@ -71,7 +69,7 @@ public @RestController class FacultadController {
 	        return ResponseEntity.ok(ConstantesGenerales.ACTUALIZACION_EXITOSA);
 	    }
 
-	    @Audit(accion = Accion.Eliminacion, comentario = Comentario.Eliminacion)
+	    @Audit(accion = Accion.ELIMINACION, comentario = Comentario.Eliminacion)
 	    @DeleteMapping
 	    public ResponseEntity<?> eliminarFacultad(
 	            @Validated(IActualizacion.class) @RequestBody Facultad facultad, Errors error)
