@@ -33,13 +33,10 @@ $(document).ready(function() {
 			$tablaFuncion.aniadirFiltroDeBusquedaEnEncabezado(this, $local.$tablaMantenimiento);
 		},
 		"columnDefs" : [ {
-			"targets" : [ 0, 1 ],
+			"targets" : [ 0, 1, 2 ],
 			"className" : "all filtrable",
 		}, {
-			"targets" : [ 2, 3 ],
-			"className" : "filtrable",
-		}, {
-			"targets" : 4,
+			"targets" : 3,
 			"className" : "all dt-center",
 			"defaultContent" : $variableUtil.botonActualizar + " " + $variableUtil.botonEliminar
 		} ],
@@ -54,7 +51,7 @@ $(document).ready(function() {
 			"title" : "Id de Facultad"
 		}, {
 			"data" : 'nombreFacultad',
-			"title" : "Nombre de la Facultad "
+			"title" : "Facultad "
 		},  {
 			"data" : null,
 			"title" : 'Acción'
@@ -240,6 +237,16 @@ $(document).ready(function() {
 					keys : [ 'esc' ]
 				},
 			}
+		});
+		$local.$tablaMantenimiento.children("tbody").on("click", ".actualizar", function() {
+			$funcionUtil.prepararFormularioActualizacion($formMantenimiento);
+			$local.$filaSeleccionada = $(this).parents("tr");
+			var recurso = $local.tablaMantenimiento.row($local.$filaSeleccionada).data();
+			$local.idRecursoSeleccionado = recurso.idRecurso;
+			$funcionUtil.llenarFormulario(recurso, $formMantenimiento);
+			$local.$actualizarMantenimiento.removeClass("hidden");
+			$local.$registrarMantenimiento.addClass("hidden");
+			$local.$modalMantenimiento.PopupWindow("open");
 		});
 	});
 

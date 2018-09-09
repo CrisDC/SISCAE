@@ -43,6 +43,7 @@ public @Controller class MantenimientoController
         model.addAttribute("mantenimiento", mantenimiento);
         return "seguras/mantenimiento/mantenimiento";
     }
+
    
     @Audit(tipo = Tipo.ESCUELA)
     @GetMapping("/{mantenimiento:escuela}")
