@@ -54,7 +54,22 @@ public @Controller class MantenimientoController
     }
     // Fin de mario agrego esto
     
-    
+    //Vieri agrego esto
+    @Audit(tipo = Tipo.ModoEntPos)
+    @GetMapping("/{mantenimiento:escuela}")
+    public String irPaginaMantenimientoEscuela(@PathVariable String mantenimiento, ModelMap model)
+    {
+        model.addAttribute("mantenimiento", mantenimiento);
+        return "seguras/mantenimiento/mantenimiento";
+    }
+    @Audit(tipo = Tipo.ModoEntPos)
+    @GetMapping("/{mantenimiento:facultad}")
+    public String irPaginaMantenimientoFacultad(@PathVariable String mantenimiento, ModelMap model)
+    {
+        model.addAttribute("mantenimiento", mantenimiento);
+        return "seguras/mantenimiento/mantenimiento";
+    }
+    // Fin de Vieri agrego esto
     
     @Audit(tipo = Tipo.ModoEntPos)
     @GetMapping("/{mantenimiento:modoEntradaPos}")
