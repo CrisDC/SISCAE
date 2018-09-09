@@ -34,52 +34,43 @@ import pe.edu.unmsm.fisi.siscae.validacion.grupo.accion.IRegistro;
 public @RestController class EscuelaController {
 	private @Autowired IEscuelaService escuelaService;
 
-    @Audit(accion = Accion.CONSULTA, comentario = Comentario.ConsultaTodos)
-    @GetMapping(params = "accion=buscarTodos")
-    public List<Escuela> buscarTodos()
-    {
-        return escuelaService.buscarTodos();
-    }
+	@Audit(accion = Accion.CONSULTA, comentario = Comentario.ConsultaTodos)
+	@GetMapping(params = "accion=buscarTodos")
+	public List<Escuela> buscarTodos() {
+		return escuelaService.buscarTodos();
+	}
 
-    @Audit(accion = Accion.REGISTRO, comentario = Comentario.Registro)
-    @PostMapping
-    public ResponseEntity<?> registrarEscuela(
-            @Validated({ Default.class, IRegistro.class }) @RequestBody Escuela escuela,
-            Errors error)
-    {
-        if (error.hasErrors())
-        {
-            throw new BadRequestException(ValidatorUtil.obtenerMensajeValidacionError(error));
-        }
-        escuelaService.registrarEscuela(escuela);
-        return ResponseEntity.ok(ConstantesGenerales.REGISTRO_EXITOSO);
-    }
+	@Audit(accion = Accion.REGISTRO, comentario = Comentario.Registro)
+	@PostMapping
+	public ResponseEntity<?> registrarEscuela(
+			@Validated({ Default.class, IRegistro.class }) @RequestBody Escuela escuela, Errors error) {
+		if (error.hasErrors()) {
+			throw new BadRequestException(ValidatorUtil.obtenerMensajeValidacionError(error));
+		}
+		escuelaService.registrarEscuela(escuela);
+		return ResponseEntity.ok(ConstantesGenerales.REGISTRO_EXITOSO);
+	}
 
-    @Audit(accion = Accion.ACTUALIZACION, comentario = Comentario.Actualizacion)
-    @PutMapping
-    public ResponseEntity<?> actualizarEscuela(
-            @Validated({ Default.class, IActualizacion.class }) @RequestBody Escuela escuela,
-            Errors error)
-    {
-        if (error.hasErrors())
-        {
-            throw new BadRequestException(ValidatorUtil.obtenerMensajeValidacionError(error));
-        }
-        escuelaService.actualizarEscuela(escuela);
-        return ResponseEntity.ok(ConstantesGenerales.ACTUALIZACION_EXITOSA);
-    }
+	@Audit(accion = Accion.ACTUALIZACION, comentario = Comentario.Actualizacion)
+	@PutMapping
+	public ResponseEntity<?> actualizarEscuela(
+			@Validated({ Default.class, IActualizacion.class }) @RequestBody Escuela escuela, Errors error) {
+		if (error.hasErrors()) {
+			throw new BadRequestException(ValidatorUtil.obtenerMensajeValidacionError(error));
+		}
+		escuelaService.actualizarEscuela(escuela);
+		return ResponseEntity.ok(ConstantesGenerales.ACTUALIZACION_EXITOSA);
+	}
 
-    @Audit(accion = Accion.ELIMINACION, comentario = Comentario.Eliminacion)
-    @DeleteMapping
-    public ResponseEntity<?> eliminarEscuela(
-            @Validated(IActualizacion.class) @RequestBody Escuela  escuela , Errors error)
-    {
-        if (error.hasErrors())
-        {
-            throw new BadRequestException(ValidatorUtil.obtenerMensajeValidacionError(error));
-        }
-        escuelaService.eliminarEscuela(escuela );
-        return ResponseEntity.ok(ConstantesGenerales.ELIMINACION_EXITOSA);
-    }
+	@Audit(accion = Accion.ELIMINACION, comentario = Comentario.Eliminacion)
+	@DeleteMapping
+	public ResponseEntity<?> eliminarEscuela(@Validated(IActualizacion.class) @RequestBody Escuela escuela,
+			Errors error) {
+		if (error.hasErrors()) {
+			throw new BadRequestException(ValidatorUtil.obtenerMensajeValidacionError(error));
+		}
+		escuelaService.eliminarEscuela(escuela);
+		return ResponseEntity.ok(ConstantesGenerales.ELIMINACION_EXITOSA);
+	}
 
 }
