@@ -42,7 +42,7 @@ public class MultiTabDetService extends MantenibleService<MultiTabDet> implement
 	@Override
 	@Transactional(propagation = Propagation.REQUIRED)
 	public List<MultiTabDet> buscarPorIdItem(int idItem) {
-		MultiTabDet multiTabDet = MultiTabDet.builder().idTabla(idItem).build();
+		MultiTabDet multiTabDet = MultiTabDet.builder().idItem(idItem).build();
 		return super.buscar(multiTabDet, OperacionParam.ID_ITEM);
 	}
 

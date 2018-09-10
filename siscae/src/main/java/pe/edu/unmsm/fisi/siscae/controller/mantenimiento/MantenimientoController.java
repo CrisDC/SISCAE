@@ -11,6 +11,7 @@ import pe.edu.unmsm.fisi.siscae.aspecto.enumeracion.Accion;
 import pe.edu.unmsm.fisi.siscae.aspecto.enumeracion.Comentario;
 import pe.edu.unmsm.fisi.siscae.aspecto.enumeracion.Tipo;
 import pe.edu.unmsm.fisi.siscae.controller.excepcion.anotacion.Vista;
+import pe.edu.unmsm.fisi.siscae.service.IEscuelaService;
 import pe.edu.unmsm.fisi.siscae.service.IMultiTabDetService;
 
 @Vista
@@ -19,6 +20,7 @@ public @Controller class MantenimientoController
 {
 
     private @Autowired IMultiTabDetService multiTabDetService;
+    private @Autowired IEscuelaService escuelaService;
 
     @Audit(tipo = Tipo.RECURSO)
     @GetMapping("/{mantenimiento:recurso}")
@@ -43,7 +45,6 @@ public @Controller class MantenimientoController
         model.addAttribute("mantenimiento", mantenimiento);
         return "seguras/mantenimiento/mantenimiento";
     }
-
    
     @Audit(tipo = Tipo.ESCUELA)
     @GetMapping("/{mantenimiento:escuela}")
@@ -60,5 +61,22 @@ public @Controller class MantenimientoController
         return "seguras/mantenimiento/mantenimiento";
     }
     
+    @Audit(tipo = Tipo.DOCENTE)
+    @GetMapping("/{mantenimiento:docente}")
+    public String irPaginaMantenimientoDocente(@PathVariable String mantenimiento, ModelMap model)
+    {
+        model.addAttribute("mantenimiento", mantenimiento);
+        return "seguras/mantenimiento/mantenimiento";
+    }
+    
+    @Audit(tipo = Tipo.ALUMNO)
+    @GetMapping("/{mantenimiento:alumno}")
+    public String irPaginaMantenimientoAlumno(@PathVariable String mantenimiento, ModelMap model)
+    {
+        model.addAttribute("mantenimiento", mantenimiento);
+        model.addAttribute("tiposAcademico", this.multiTabDetService.buscarPorIdTabla(3));
+        model.addAttribute("escuelas", this.escuelaService.buscarTodos());
+        return "seguras/mantenimiento/mantenimiento";
+    }
    
 }

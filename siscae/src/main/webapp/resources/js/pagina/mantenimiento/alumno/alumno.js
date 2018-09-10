@@ -33,40 +33,40 @@ $(document).ready(function() {
 			$tablaFuncion.aniadirFiltroDeBusquedaEnEncabezado(this, $local.$tablaMantenimiento);
 		},
 		"columnDefs" : [ {
-			"targets" : [ 0, 1 ],
+			"targets" : [ 0, 1, 2 ],
 			"className" : "all filtrable",
 		}, {
-			"targets" : [ 2, 3 ],
+			"targets" : [ 2, 3, 4, 5, 6, 7 ],
 			"className" : "filtrable",
 		}, {
-			"targets" : 4,
+			"targets" : 8,
 			"className" : "all dt-center",
 			"defaultContent" : $variableUtil.botonActualizar + " " + $variableUtil.botonEliminar
 		} ],
 		"columns" : [ {
-			"data" : 'idAlumno',
-			"title" : "Id"
-		},{
 			"data" : 'codigoAlumno',
 			"title" : "Codigo "
 		}, {
-			"data" : 'idEstadoTabla',
-			"title" : "Estado"
-		},{
-			"data" : 'idTipoAcademico',
-			"title" : "Id de Tipo Academico"
-		},{
-			"data" : 'descripcionTipoAcademico',
-			"title" : "Descripcion de Tipo Academico"
-		},{
-			"data" : 'nombre',
+			"data" : 'nombres',
 			"title" : "Nombre"
 		},{
 			"data" : 'appPaterno',
-			"title" : "Apellido Paterno"
+			"title" : "Apellido paterno"
 		},{
 			"data" : 'appMaterno',
-			"title" : "Apellido Materno"
+			"title" : "Apellido materno"
+		},{
+			"data" : 'numeroDocumento',
+			"title" : "Número de documento"
+		},{
+			"data" : 'nombreEscuela',
+			"title" : "Escuela profesional"
+		},{
+			"data" : 'nombreAcademico',
+			"title" : "Tipo de académico"
+		},{
+			"data" : 'estado',
+			"title" : "Estado"
 		},{
 			"data" : null,
 			"title" : 'Acción'
@@ -148,8 +148,11 @@ $(document).ready(function() {
 			complete : function(response) {
 				$local.$registrarMantenimiento.attr("disabled", false).find("i").addClass("fa-floppy-o").removeClass("fa-spinner fa-pulse fa-fw");
 			}
-		});
-		$local.$tablaMantenimiento.children("tbody").on("click", ".actualizar", function() {
+		});	
+		
+	});
+	
+	$local.$tablaMantenimiento.children("tbody").on("click", ".actualizar", function() {
 		$funcionUtil.prepararFormularioActualizacion($formMantenimiento);
 		$local.$filaSeleccionada = $(this).parents("tr");
 		var alumno = $local.tablaMantenimiento.row($local.$filaSeleccionada).data();
@@ -158,8 +161,8 @@ $(document).ready(function() {
 		$local.$actualizarMantenimiento.removeClass("hidden");
 		$local.$registrarMantenimiento.addClass("hidden");
 		$local.$modalMantenimiento.PopupWindow("open");
-		});
 	});
+	
 	$local.$actualizarMantenimiento.on("click", function() {
 		if (!$formMantenimiento.valid()) {
 			return;

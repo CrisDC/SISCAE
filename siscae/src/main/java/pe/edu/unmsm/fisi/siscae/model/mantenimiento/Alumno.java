@@ -19,8 +19,11 @@ public class Alumno {
 	private Integer idEstadoTabla;
 	private Integer idTipoAcademico;
 	private Integer idEscuela;
-	private Date fechaRegistro;
-	private String usuarioRegistro;
-	private Date fechaModificacion;
-	private String usuarioModificacion;
+	private String numeroDocumento;
+	private String nombres;
+	private String appPaterno;
+	private String appMaterno;
+	private String estado;
+	private String nombreEscuela;
+	private String nombreAcademico;
 }
