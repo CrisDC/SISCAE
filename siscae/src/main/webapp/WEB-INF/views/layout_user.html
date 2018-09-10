@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html>
+
+<head th:replace="template/fragments/head::head">
+</head>
+
+<body class="fix-header fix-sidebar">
+	<div id="main-wrapper">
+		<div th:replace="template/fragments/headerSiscae::header"></div>
+
+		<div th:replace="template/fragments/sidebar::sidebar"></div>
+
+
+		<div layout:fragment="content"></div>
+
+
+		<div th:replace="template/fragments/footer :: footer"></div>
+
+	</div>
+
+</body>
+</html>
