@@ -63,4 +63,11 @@ public class PersonaService extends MantenibleService<Persona> implements IPerso
 		super.eliminar(persona);
 	}
 
+	@Override
+	@Transactional(propagation = Propagation.REQUIRED)
+	public Persona buscarPorNumeroDocumentoIdentidad(String numeroDocumento) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
 }

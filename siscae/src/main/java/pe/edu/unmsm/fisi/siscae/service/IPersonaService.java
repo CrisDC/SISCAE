@@ -17,5 +17,7 @@ public interface IPersonaService extends IMantenibleService<Persona> {
 	public void actualizarPersona(Persona persona);
 
 	public void eliminarPersona(Persona persona);
+	
+	public Persona buscarPorNumeroDocumentoIdentidad(String numeroDocumento);
 
 }

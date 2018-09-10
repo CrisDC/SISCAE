@@ -33,13 +33,10 @@ $(document).ready(function() {
 			$tablaFuncion.aniadirFiltroDeBusquedaEnEncabezado(this, $local.$tablaMantenimiento);
 		},
 		"columnDefs" : [ {
-			"targets" : [ 0, 1 ],
+			"targets" : [ 0, , 1 ],
 			"className" : "all filtrable",
-		}, {
-			"targets" : [ 2, 3 ],
-			"className" : "filtrable",
-		}, {
-			"targets" : 4,
+		},{
+			"targets" : 2,
 			"className" : "all dt-center",
 			"defaultContent" : $variableUtil.botonActualizar + " " + $variableUtil.botonEliminar
 		} ],
@@ -47,22 +44,8 @@ $(document).ready(function() {
 			"data" : 'idDocente',
 			"title" : "Id"
 		},{
-			"data" : 'numDocumento',
-			"title" : "Número de documento"
-		},{
 			"data" : 'idEstadoTabla',
 			"title" : "Estado"
-		},{
-			"data" : 'nombre',
-			"title" : "Nombre"
-		},
-		{
-			"data" : 'appPaterno',
-			"title" : "Apellido Paterno"
-		},
-		{
-			"data" : 'appMaterno',
-			"title" : "Apellido Materno"
 		},{
 			"data" : null,
 			"title" : 'Acción'
@@ -197,7 +180,7 @@ $(document).ready(function() {
 		$.confirm({
 			icon : "fa fa-info-circle",
 			title : "Aviso",
-			content : "¿Desea eliminar al docente <b>'" + docente.idDocente + " - " + docente.numDocumento+"-"+ docente.nombre+" "+docente.appPaterno+" "+docente.appMaterno + "'<b/>?",
+			content : "¿Desea eliminar al docente <b>'" + docente.idDocente + "'<b/>?",
 			buttons : {
 				Aceptar : {
 					action : function() {
@@ -227,7 +210,7 @@ $(document).ready(function() {
 										$funcionUtil.notificarException($funcionUtil.obtenerMensajeErrorEnCadena(xhr.responseJSON), "fa-warning", "Aviso", "warning");
 										break;
 									case 409:
-										var mensaje = $funcionUtil.obtenerMensajeError("El docente <b>" + docente.idDocente + " - " + docente.numDocumento+"-" +docente.nombre+" "+docente.appPaterno+" "+docente.appMaterno+ "</b>", xhr.responseJSON, $variableUtil.accionEliminado);
+										var mensaje = $funcionUtil.obtenerMensajeError("El docente <b>" + docente.idDocente + "</b>", xhr.responseJSON, $variableUtil.accionEliminado);
 										$funcionUtil.notificarException(mensaje, "fa-warning", "Aviso", "warning");
 										break;
 									}

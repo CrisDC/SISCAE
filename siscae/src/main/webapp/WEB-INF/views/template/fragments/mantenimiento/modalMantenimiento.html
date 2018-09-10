@@ -1123,19 +1123,19 @@
 		<div class="form-group">
 			<label class="col-lg-2 control-label">Nombre</label>
 			<div class="col-lg-10">
-				<input class="form-control" name="nombre">
+				<input class="form-control" name="nombre" disabled="disabled">
 			</div>
 		</div>
 		<div class="form-group">
 			<label class="col-lg-2 control-label">Apellido Paterno </label>
 			<div class="col-lg-10">
-				<input class="form-control" name="appPaterno">
+				<input class="form-control" name="appPaterno" disabled="disabled">
 			</div>
 		</div>
 		<div class="form-group">
 			<label class="col-lg-2 control-label">Apellido Materno</label>
 			<div class="col-lg-10">
-				<input class="form-control" name="appMaterno">
+				<input class="form-control" name="appMaterno" disabled="disabled">
 			</div>
 		</div>
 		<div class="form-group">
@@ -1152,21 +1152,21 @@
 		<div class="form-group">
 			<label class="col-lg-2 control-label">Telefono</label>
 			<div class="col-lg-10">
-				<input class="form-control" name="numTelef">
+				<input class="form-control" name="numTelef" disabled="disabled">
 			</div>
 		</div>
 		<div class="form-group">
 			<label class="col-lg-2 control-label">Fecha de nacimiento</label>
 			<div class="col-lg-10">
-				<input type="date" class="date" name="fechaNac">
+				<input type="date" class="date" name="fechaNac" disabled="disabled">
 			</div>
 		</div>
 		<div class="form-group">
 			<label class="col-lg-2 control-label">Estado del Alumno </label>
 			<div class="col-lg-10">
-				<select id="idEstadoTabla" class="form-control select2 elemento-desactivable"
+				<select id="idEstadoTabla" class="form-control select2"
 					name="idEstadoTabla">
-					<option value="" selected="selected" disabled="disabled">Seleccione  el estado</option>
+					<option value="" selected="selected">Seleccione  el estado</option>
 					<option th:each="estado : ${estado}" th:value="${estado.idEstadoTabla}"
 						th:text="|${estado.idEstadoTabla} - ${estado.descripcion}|"></option>
 				</select>
@@ -1175,22 +1175,22 @@
 		<div class="form-group">
 			<label class="col-lg-2 control-label">Tipo Académico</label>
 			<div class="col-lg-10">
-				<select id="idTipoAcademico" class="form-control select2 elemento-desactivable"
+				<select id="idTipoAcademico" class="form-control select2"
 					name="idTipoAcademico">
-					<option value="" selected="selected" disabled="disabled">Seleccione el tipo académico</option>
-					<option th:each="tipoAcademico : ${tipoAcademico}" th:value="${tipoAcademico.idTipoAcademico}"
-						th:text="|${tipoAcademico.idTipoAcademico} - ${tipoAcademico.descripcionTipoAcademico}|"></option>
+					<option value="" selected="selected">Seleccione el tipo académico</option>
+					<option th:each="tiposAcademico : ${tiposAcademico}" th:value="${tiposAcademico.idItem}"
+						th:text="|${tiposAcademico.idItem} - ${tiposAcademico.descripcionCorta}|"></option>
 				</select>
 			</div>
 		</div>
 		<div class="form-group">
 			<label class="col-lg-2 control-label">Escuela a la que pertenece</label>
 			<div class="col-lg-10">
-				<select id="idEscuela" class="form-control select2 elemento-desactivable"
+				<select id="idEscuela" class="form-control select2"
 					name="idEscuela">
-					<option value="" selected="selected" disabled="disabled">Seleccione una Escuela</option>
-					<option th:each="escuela : ${escuela}" th:value="${escuela.idEscuela}"
-						th:text="|${escuela.idEscuela} - ${escuela.nombre}|"></option>
+					<option value="" selected="selected">Seleccione una Escuela</option>
+					<option th:each="escuelas : ${escuelas}" th:value="${escuelas.idEscuela}"
+						th:text="|${escuelas.nombre}|"></option>
 				</select>
 			</div>
 		</div>
