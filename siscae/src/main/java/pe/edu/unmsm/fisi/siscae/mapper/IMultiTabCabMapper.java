@@ -12,7 +12,7 @@ import pe.edu.unmsm.fisi.siscae.model.parametro.Parametro;
 
 public interface IMultiTabCabMapper extends IMantenibleMapper<MultiTabCab>
 {
-    @Select(value = { "{call MANT_MULTI_TAB_CAB ( "
+    @Select(value = { "{call SP_MANT_MULTI_TAB_CAB ( "
     		+ "#{operacion, jdbcType = VARCHAR, mode = IN},"
     		+ "#{operacionParam, jdbcType = VARCHAR, mode = IN},"
             + "#{objeto.idTabla, jdbcType = INTEGER, mode = IN},"

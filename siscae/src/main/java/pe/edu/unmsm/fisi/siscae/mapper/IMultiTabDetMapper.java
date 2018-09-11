@@ -12,7 +12,7 @@ import pe.edu.unmsm.fisi.siscae.model.parametro.Parametro;
 
 public interface IMultiTabDetMapper extends IMantenibleMapper<MultiTabDet>
 {
-    @Select(value = { "{call MANT_MULTI_TAB_DET ( " 
+    @Select(value = { "{call SP_MANT_MULTI_TAB_DET ( " 
             + "#{operacion, jdbcType = VARCHAR, mode = IN},"
             + "#{operacionParam, jdbcType = VARCHAR, mode = IN},"
             + "#{objeto.iditem, jdbcType = INTEGER, mode = IN},"
