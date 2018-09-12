@@ -31,8 +31,8 @@ public @Controller class MantenimientoController
     }
     
    
-    @Audit(tipo = Tipo.AREA_ADMINISTRATIVA)/*En el ModeloLogico dice AreaAdministrativo JR*/
-    @GetMapping("/{mantenimiento:areaAdministrativ}")
+    @Audit(tipo = Tipo.AREA_ADMINISTRATIVA)
+    @GetMapping("/{mantenimiento:areaAdministrativa}")
     public String irPaginaMantenimientoAreaAdministrativo(@PathVariable String mantenimiento, ModelMap model)
     {
         model.addAttribute("mantenimiento", mantenimiento);
@@ -117,6 +117,22 @@ public @Controller class MantenimientoController
     @Audit(tipo = Tipo.MulTabDet)
     @GetMapping("/{mantenimiento:multiTabDet}")
     public String irPaginaMantenimientoMultiTabDet(@PathVariable String mantenimiento, ModelMap model)
+    {
+        model.addAttribute("mantenimiento", mantenimiento);
+        return "seguras/mantenimiento/mantenimiento";
+    }
+    
+    @Audit(tipo = Tipo.INFRACCION)
+    @GetMapping("/{mantenimiento:infraccion}")
+    public String irPaginaMantenimientoInfraccion(@PathVariable String mantenimiento, ModelMap model)
+    {
+        model.addAttribute("mantenimiento", mantenimiento);
+        return "seguras/mantenimiento/mantenimiento";
+    }
+    
+    @Audit(tipo = Tipo.PERSONA)
+    @GetMapping("/{mantenimiento:persona}")
+    public String irPaginaMantenimientoPersona(@PathVariable String mantenimiento, ModelMap model)
     {
         model.addAttribute("mantenimiento", mantenimiento);
         return "seguras/mantenimiento/mantenimiento";
