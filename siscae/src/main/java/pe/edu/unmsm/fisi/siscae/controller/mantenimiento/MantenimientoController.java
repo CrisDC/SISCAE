@@ -53,6 +53,14 @@ public @Controller class MantenimientoController
         model.addAttribute("mantenimiento", mantenimiento);
         return "seguras/mantenimiento/mantenimiento";
     }
+    
+    @Audit(tipo = Tipo.EXTERNO)
+    @GetMapping("/{mantenimiento:e}")
+    public String irPaginaMantenimientoExterno( String mantenimiento, ModelMap model)
+    {
+        model.addAttribute("mantenimiento", mantenimiento);
+        return "seguras/mantenimiento/mantenimiento";
+    }
     @Audit(tipo = Tipo.FACULTAD)
     @GetMapping("/{mantenimiento:facultad}")
     public String irPaginaMantenimientoFacultad(@PathVariable String mantenimiento, ModelMap model)
@@ -78,7 +86,14 @@ public @Controller class MantenimientoController
         model.addAttribute("escuelas", this.escuelaService.buscarTodos());
         return "seguras/mantenimiento/mantenimiento";
     }
-    
+
+    @Audit(tipo = Tipo.MATERIAL)
+    @GetMapping("/{mantenimiento:mantenimiento}")
+    public String irPaginaMantenimientoMaterial(@PathVariable String mantenimiento, ModelMap model)
+    {
+        model.addAttribute("mantenimiento", mantenimiento);
+        return "seguras/mantenimiento/mantenimiento";
+    }
 
     @Audit(tipo = Tipo.MulTabCab)
     @GetMapping("/{mantenimiento:multiTabCab}")
