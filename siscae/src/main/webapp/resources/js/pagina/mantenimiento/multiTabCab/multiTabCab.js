@@ -39,15 +39,12 @@ $(document).ready(function() {
 			"targets" : [ 0, 1 ],
 			"className" : "all filtrable",
 		}, {
-			"targets" : 2,
+			"targets" : 1,
 			"className" : "all dt-center",
 			"width" : "10%",
 			"defaultContent" : $variableUtil.botonActualizar + " " + $variableUtil.botonEliminar + " " + $variableUtil.botonAniadirDetalle
 		} ],
 		"columns" : [ {
-			"data" : 'idTabla',
-			"title" : "Id Tabla"
-		}, {
 			"data" : 'descripcion',
 			"title" : "Descripción"
 		}, {
@@ -125,7 +122,7 @@ $(document).ready(function() {
 			success : function(response) {
 				$funcionUtil.notificarException(response, "fa-check", "Aviso", "success");
 				var row = $local.tablaMantenimiento.row.add({
-					"idTabla" : multiTabCab.idTabla,
+					//"idTabla" : multiTabCab.idTabla,
 					"descripcion" : multiTabCab.descripcion
 				}).draw();
 				row.show().draw(false);
@@ -144,7 +141,7 @@ $(document).ready(function() {
 		$funcionUtil.prepararFormularioActualizacion($formMantenimiento);
 		$local.$filaSeleccionada = $(this).parents("tr");
 		var multiTabCab = $local.tablaMantenimiento.row($local.$filaSeleccionada).data();
-		$local.id_tablaSeleccionado = multiTabCab.idTabla;
+		//$local.id_tablaSeleccionado = multiTabCab.idTabla;
 		$funcionUtil.llenarFormulario(multiTabCab, $formMantenimiento);
 		$local.$actualizarMantenimiento.removeClass("hidden");
 		$local.$registrarMantenimiento.addClass("hidden");
@@ -156,7 +153,7 @@ $(document).ready(function() {
 			return;
 		}
 		var multiTabCab = $formMantenimiento.serializeJSON();
-		multiTabCab.idTabla = $local.id_tablaSeleccionado;
+		//multiTabCab.idTabla = $local.id_tablaSeleccionado;
 		$.ajax({
 			type : "PUT",
 			url : $variableUtil.root + "multiTabCab",
@@ -176,7 +173,7 @@ $(document).ready(function() {
 				$funcionUtil.notificarException(response, "fa-check", "Aviso", "success");
 				$local.tablaMantenimiento.row($local.$filaSeleccionada).remove().draw(false);
 				var row = $local.tablaMantenimiento.row.add({
-					"idTabla" : $local.id_tablaSeleccionado,
+					//"idTabla" : $local.id_tablaSeleccionado,
 					"descripcion" : multiTabCab.descripcion
 				}).draw();
 				row.show().draw(false);
@@ -253,7 +250,7 @@ $(document).ready(function() {
 	$local.$tablaMantenimiento.children("tbody").on("click", ".aniadir-detalle", function() {
 		$local.$filaSeleccionada = $(this).parents("tr");
 		var multiTabCab = $local.tablaMantenimiento.row($local.$filaSeleccionada).data();
-		$(document).trigger("abrirDetalleMantenimiento",  [multiTabCab.idTabla, $local.tablaMantenimiento]);
+		//$(document).trigger("abrirDetalleMantenimiento",  [multiTabCab.idTabla, $local.tablaMantenimiento]);
 		
 		
 	});
