@@ -105,7 +105,7 @@ public @Controller class MantenimientoController
         model.addAttribute("mantenimiento", mantenimiento);
         return "seguras/mantenimiento/mantenimiento";
     }
-
+/**/
     @Audit(tipo = Tipo.MulTabCab)
     @GetMapping("/{mantenimiento:multiTabCab}")
     public String irPaginaMantenimientoMultiTabCab(@PathVariable String mantenimiento, ModelMap model)
