@@ -83,7 +83,7 @@ $(document).ready(function() {
 	});
 
 	$local.$modalMantenimiento.on("close.popupwindow", function() {
-		$local.idAlumnoSeleccionado = "";
+		$local.idadministrativoSeleccionado = "";
 	});
 	$formMantenimiento.find("input").keypress(function(event) {
 		if (event.which == 13) {
