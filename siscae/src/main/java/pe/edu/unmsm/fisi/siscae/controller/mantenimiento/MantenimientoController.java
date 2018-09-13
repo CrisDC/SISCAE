@@ -21,7 +21,7 @@ public @Controller class MantenimientoController
 
     private @Autowired IMultiTabDetService multiTabDetService;
     private @Autowired IEscuelaService escuelaService;
-/**/
+/* */
     @Audit(tipo = Tipo.RECURSO)
     @GetMapping("/{mantenimiento:recurso}")
     public String irPaginaMantenimientoRecurso(@PathVariable String mantenimiento, ModelMap model)
