@@ -2,14 +2,14 @@ $(document).ready(function() {
 
 	$formMantenimiento.validate({
 		rules : {
-			idAlumno : {
+			idAdministrativo : {
 				required : true,
 				number:true
 			},
-			codigoAlumno : {
+			codigoAdministrativo : {
 				required : true,
 				soloalfanumericos: true,
-				rangelength : [ 8, 10 ]
+				rangelength : [ 8, 20 ]
 			},
 			idEstadoTabla : {
 				required : true,

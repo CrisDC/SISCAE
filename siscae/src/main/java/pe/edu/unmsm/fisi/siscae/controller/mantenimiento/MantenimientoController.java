@@ -21,7 +21,6 @@ public @Controller class MantenimientoController
 
     private @Autowired IMultiTabDetService multiTabDetService;
     private @Autowired IEscuelaService escuelaService;
-
     @Audit(tipo = Tipo.RECURSO)
     @GetMapping("/{mantenimiento:recurso}")
     public String irPaginaMantenimientoRecurso(@PathVariable String mantenimiento, ModelMap model)
@@ -78,5 +77,13 @@ public @Controller class MantenimientoController
         model.addAttribute("escuelas", this.escuelaService.buscarTodos());
         return "seguras/mantenimiento/mantenimiento";
     }
+    @Audit(tipo = Tipo.ADMINISTRATIVO)
+    @GetMapping("/{mantenimiento:administrativo}")
+    public String irPaginaMantenimientoAdministrativo(@PathVariable String mantenimiento, ModelMap model)
+    {
+        model.addAttribute("mantenimiento", mantenimiento);
+        return "seguras/mantenimiento/mantenimiento";
+    }
+  
    
 }
