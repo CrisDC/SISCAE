@@ -21,6 +21,8 @@ public @Controller class MantenimientoController
 
     private @Autowired IMultiTabDetService multiTabDetService;
     private @Autowired IEscuelaService escuelaService;
+
+/*   */
     @Audit(tipo = Tipo.RECURSO)
     @GetMapping("/{mantenimiento:recurso}")
     public String irPaginaMantenimientoRecurso(@PathVariable String mantenimiento, ModelMap model)
@@ -29,6 +31,17 @@ public @Controller class MantenimientoController
         model.addAttribute("mantenimiento", mantenimiento);
         return "seguras/mantenimiento/mantenimiento";
     }
+    
+   
+    @Audit(tipo = Tipo.AREA_ADMINISTRATIVA)
+    @GetMapping("/{mantenimiento:areaAdministrativa}")
+    public String irPaginaMantenimientoAreaAdministrativo(@PathVariable String mantenimiento, ModelMap model)
+    {
+        model.addAttribute("mantenimiento", mantenimiento);
+        return "seguras/mantenimiento/mantenimiento";
+    }
+    
+    
     
     @Audit(tipo = Tipo.AREA_ESTUDIO)
     @GetMapping("/{mantenimiento:areaEstudio}")
@@ -49,6 +62,14 @@ public @Controller class MantenimientoController
     @Audit(tipo = Tipo.ESCUELA)
     @GetMapping("/{mantenimiento:escuela}")
     public String irPaginaMantenimientoEscuela(@PathVariable String mantenimiento, ModelMap model)
+    {
+        model.addAttribute("mantenimiento", mantenimiento);
+        return "seguras/mantenimiento/mantenimiento";
+    }
+    
+    @Audit(tipo = Tipo.EXTERNO)
+    @GetMapping("/{mantenimiento:e}")
+    public String irPaginaMantenimientoExterno( String mantenimiento, ModelMap model)
     {
         model.addAttribute("mantenimiento", mantenimiento);
         return "seguras/mantenimiento/mantenimiento";
@@ -86,5 +107,45 @@ public @Controller class MantenimientoController
         return "seguras/mantenimiento/mantenimiento";
     }
   
+
+    @Audit(tipo = Tipo.MATERIAL)
+    @GetMapping("/{mantenimiento:mantenimiento}")
+    public String irPaginaMantenimientoMaterial(@PathVariable String mantenimiento, ModelMap model)
+    {
+        model.addAttribute("mantenimiento", mantenimiento);
+        return "seguras/mantenimiento/mantenimiento";
+    }
+/**/
+    @Audit(tipo = Tipo.MulTabCab)
+    @GetMapping("/{mantenimiento:multiTabCab}")
+    public String irPaginaMantenimientoMultiTabCab(@PathVariable String mantenimiento, ModelMap model)
+    {
+        model.addAttribute("mantenimiento", mantenimiento);
+        return "seguras/mantenimiento/mantenimiento";
+    }
+    
+    @Audit(tipo = Tipo.MulTabDet)
+    @GetMapping("/{mantenimiento:multiTabDet}")
+    public String irPaginaMantenimientoMultiTabDet(@PathVariable String mantenimiento, ModelMap model)
+    {
+        model.addAttribute("mantenimiento", mantenimiento);
+        return "seguras/mantenimiento/mantenimiento";
+    }
+    /**/
+    @Audit(tipo = Tipo.INFRACCION)
+    @GetMapping("/{mantenimiento:infraccion}")
+    public String irPaginaMantenimientoInfraccion(@PathVariable String mantenimiento, ModelMap model)
+    {
+        model.addAttribute("mantenimiento", mantenimiento);
+        return "seguras/mantenimiento/mantenimiento";
+    }
+    
+    @Audit(tipo = Tipo.PERSONA)
+    @GetMapping("/{mantenimiento:persona}")
+    public String irPaginaMantenimientoPersona(@PathVariable String mantenimiento, ModelMap model)
+    {
+        model.addAttribute("mantenimiento", mantenimiento);
+        return "seguras/mantenimiento/mantenimiento";
+    }
    
 }

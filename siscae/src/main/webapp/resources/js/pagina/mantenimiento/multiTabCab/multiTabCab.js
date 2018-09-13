@@ -47,7 +47,7 @@ $(document).ready(function() {
 		"columns" : [ {
 		
 			"data" : 'idTabla',
-			"title" : "Id Tabla"
+			"title" : "Id Tabla" 
 		}, {
 			"data" : 'descripcion',
 			"title" : "Descripción"
