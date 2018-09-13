@@ -45,6 +45,7 @@ $(document).ready(function() {
 			"defaultContent" : $variableUtil.botonActualizar + " " + $variableUtil.botonEliminar + " " + $variableUtil.botonAniadirDetalle
 		} ],
 		"columns" : [ {
+		
 			"data" : 'idTabla',
 			"title" : "Id Tabla"
 		}, {

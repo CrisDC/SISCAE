@@ -25,6 +25,7 @@ public @Controller class MantenimientoController
     @GetMapping("/{mantenimiento:recurso}")
     public String irPaginaMantenimientoRecurso(@PathVariable String mantenimiento, ModelMap model)
     {
+    	
         model.addAttribute("mantenimiento", mantenimiento);
         return "seguras/mantenimiento/mantenimiento";
     }

@@ -7,6 +7,7 @@ $(document).ready(function() {
 				number:true
 			},
 			codigoAdministrativo : {
+			
 				required : true,
 				soloalfanumericos: true,
 				rangelength : [ 8, 20 ]
