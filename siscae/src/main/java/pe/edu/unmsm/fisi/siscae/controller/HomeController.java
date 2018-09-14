@@ -31,17 +31,11 @@ public @Controller class HomeController
        //session.setAttribute("usuario", iUsuarioService.buscarUsuarioPorId(username));
     }
     
-    /*
     @GetMapping("/inicio")
 	public String irPaginaInicio(Model model, Principal principal) {
 		//model.addAttribute("nDias", iSecUsuarioService.numCaducidadContrasenia(principal.getName()));
 		model.addAttribute("usuario",principal.getName());
 		return "seguras/inicio";
-	}*/
-    
-    @GetMapping("/inicio")
-	public String irPaginaInicioS() {
-		return "template/fragments/guiuser/inicio";
 	}
     
    

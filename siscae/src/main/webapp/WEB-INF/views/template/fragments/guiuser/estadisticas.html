@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorate="~{layout_user}">
+
+<head>
+
+</head>
+
+<body>
+	<div layout:fragment="content">
+
+		<!-- Page wrapper  -->
+		<div class="page-wrapper">
+			<!-- Bread crumb -->
+			<div class="row page-titles">
+				<div class="col-md-5 align-self-center">
+					<h3 class="text-primary">Estadisticas</h3>
+				</div>
+				<div class="col-md-7 align-self-center">
+					<ol class="breadcrumb">
+						<li class="breadcrumb-item"><a href="javascript:void(0)">Resultados
+								del aula de estudios</a></li>
+					</ol>
+				</div>
+			</div>
+			<!-- End Bread crumb -->
+			<!-- Container fluid  -->
+			<div class="container-fluid">
+				<!-- Start Page Content -->
+				<div class="row">
+					<div class="col-12">
+						<div class="card">
+							<!-- /# row -->
+							<div class="row">
+								<div class="col-lg-6">
+									<div class="card">
+										<div class="card-title">
+											<h4>Pie Chart</h4>
+										</div>
+										<div class="flot-container">
+											<div id="flot-pie" class="flot-pie-container"></div>
+										</div>
+									</div>
+									<!-- /# card -->
+								</div>
+								<!-- /# column -->
+
+								<div class="col-lg-6">
+									<div class="card">
+										<div class="card-title">
+											<h4>Line Chart</h4>
+										</div>
+										<div class="flot-container">
+											<div id="chart1"></div>
+										</div>
+									</div>
+									<!-- /# card -->
+								</div>
+							</div>
+							<!-- /# column -->
+						</div>
+					</div>
+				</div>
+			</div>
+			<!-- End PAge Content -->
+		</div>
+
+	</div>
+</body>
+
+</html>
