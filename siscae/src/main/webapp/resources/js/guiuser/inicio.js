@@ -6,29 +6,12 @@
 		var targ = $(e.target)
 		console.log(targ[0]);
 		let recurso=targ[0].id;
-		/*swal("Solicitud de cubiculo "+recurso, {
+		swal("Solicitud de cubiculo "+recurso, {
 			title: "Solicitud de cubiculo "+recurso,
 			text: "Ingrese su carnet de biblioteca por el scanner",
 			content: "input",
-			icon: "images/nuevo_gif.gif",
-		});*/
-		swal({
-  title: 'Multiple inputs',
-  html:
-    '<input id="swal-input1" class="swal2-input">' +
-    '<input id="swal-input2" class="swal2-input">',
-  focusConfirm: false,
-  preConfirm: function () {
-    return new Promise(function (resolve) {
-      resolve([
-        $('#swal-input1').val(),
-        $('#swal-input2').val()
-      ])
-    })
-  }
-}).then(function (result) {
-  swal(JSON.stringify(result))
-}).catch(swal.noop)
+			icon: "resources/images/nuevo_gif.gif",
+		});
 		
 	})
 
@@ -42,14 +25,14 @@ $('#salida').click(function () {
 		title: "Registrar salida",
 		text: "Ingrese su carnet de biblioteca por el scanner",
 		content: "input",
-		icon: "images/nuevo_gif.gif",
+		icon: "resources/images/nuevo_gif.gif",
 	});
 	$.get('/prestamo', { userId : 1234 }, function(resp) {
 		console.log(resp);
 	});
 })
 
-
+/*
 $.ajax({
 	// la URL para la petición
 	url : '/prestamo',
@@ -83,4 +66,4 @@ $.ajax({
 	complete : function(xhr, status) {
 		alert('Petición realizada');
 	}
-});
+});*/
