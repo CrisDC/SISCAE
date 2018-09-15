@@ -36,7 +36,7 @@ $(document).ready(function() {
 			$tablaFuncion.aniadirFiltroDeBusquedaEnEncabezado(this, $local.$tablaMantenimiento);
 		},
 		"columnDefs" : [ {
-			"targets" : [ 0, 1 ],
+			"targets" : [ 0 ],
 			"className" : "all filtrable",
 		}, {
 			"targets" : 1,
@@ -44,10 +44,7 @@ $(document).ready(function() {
 			"width" : "10%",
 			"defaultContent" : $variableUtil.botonActualizar + " " + $variableUtil.botonEliminar + " " + $variableUtil.botonAniadirDetalle
 		} ],
-		"columns" : [ {		
-			"data" : 'idTabla',
-			"title" : "Id Tabla" 
-		}, {
+		"columns" : [ {
 
 			"data" : 'descripcion',
 			"title" : "Descripción"
@@ -151,6 +148,15 @@ $(document).ready(function() {
 		$local.$registrarMantenimiento.addClass("hidden");
 		$local.$modalMantenimiento.PopupWindow("open");
 	});
+	
+	$local.$tablaMantenimiento.children("tbody").on("click", ".aniadir-detalle", function() {
+		if ($local.permisoDetalle == "false") {
+			return;
+		}
+		$local.$filaSeleccionada = $(this).parents("tr");
+		var multiTabCab = $local.tablaMantenimiento.row($local.$filaSeleccionada).data();
+		$(document).trigger("abrirDetalleMantenimiento", [ multiTabCab.idTabla, $local.tablaMantenimiento ]);
+	});
 
 	$local.$actualizarMantenimiento.on("click", function() {
 		if (!$formMantenimiento.valid()) {
@@ -249,14 +255,6 @@ $(document).ready(function() {
 				},
 			}
 		});
-	});
-
-	$local.$tablaMantenimiento.children("tbody").on("click", ".aniadir-detalle", function() {
-		$local.$filaSeleccionada = $(this).parents("tr");
-		var multiTabCab = $local.tablaMantenimiento.row($local.$filaSeleccionada).data();
-		//$(document).trigger("abrirDetalleMantenimiento",  [multiTabCab.idTabla, $local.tablaMantenimiento]);
-		
-		
 	});
 	
 	$local.$tablaMantenimiento.children("tbody").on("click", ".actualizar", function() {

@@ -15,8 +15,8 @@ public interface IMultiTabDetMapper extends IMantenibleMapper<MultiTabDet>
     @Select(value = { "{call SP_MANT_MULTI_TAB_DET ( " 
             + "#{operacion, jdbcType = VARCHAR, mode = IN},"
             + "#{operacionParam, jdbcType = VARCHAR, mode = IN},"
-            + "#{objeto.iditem, jdbcType = INTEGER, mode = IN},"
-            + "#{objeto.idTabla, jdbcType = VARCHAR, mode = IN},"
+            + "#{objeto.idItem, jdbcType = INTEGER, mode = IN},"
+            + "#{objeto.idTabla, jdbcType = INTEGER, mode = IN},"
             + "#{objeto.descripcion, jdbcType = VARCHAR, mode = IN},"
             + "#{objeto.descripcionCorta, jdbcType = VARCHAR, mode = IN},"
             + "#{userAudit, jdbcType = VARCHAR, mode = IN})}" })

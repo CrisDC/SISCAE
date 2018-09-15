@@ -29,37 +29,35 @@ $(document).ready(function() {
 	});
 	
 	$localDetalle.tablaDetalleMantenimiento = $localDetalle.$tablaDetalleMantenimiento.DataTable({
+		"ajax" : {
+			"url" : $variableUtil.root + "multiTabDet?accion=buscarTodos",
+			"dataSrc" : ""
+		},
 		"language" : {
 			"emptyTable" : "No hay tablas registradas."
 		},
 		"initComplete" : function() {
+			$local.$tablaMantenimiento.wrap("<div class='table-responsive'></div>");
 			$tablaFuncion.aniadirFiltroDeBusquedaEnEncabezado(this, $localDetalle.$tablaDetalleMantenimiento);
 		},
 		"columnDefs" : [ {
-			"targets" : 0,
-			"className" : "all filtrable",
+			"targets" : [0, 1],
+			"className" : "filtrable",
 			"width" : "5%",
 		}, {
-			"targets" : 1,
+			"targets" : [0, 1],
 			"className" : "all  filtrable",
-			"width" : "5%",
 		}, {
 			"targets" : 2,
-			"className" : "all  filtrable",
-		}, {
-			"targets" : 3,
 			"className" : "all dt-center",
 			"width" : "10%",
 			"defaultContent" : $variableUtil.botonActualizar + " " + $variableUtil.botonEliminar
 		} ],
 		"columns" : [ {
-			"data" : 'idItem',
-			"title" : "Id."
-		}, {
-			"data" : 'descripcionItem',
+			"data" : 'descripcion',
 			"title" : "Descripción"
 		}, {
-			"data" : 'abreviatura',
+			"data" : 'descripcionCorta',
 			"title" : "Abreviatura"
 		}, {
 			"data" : null,
