@@ -96,7 +96,7 @@ public @Controller class MantenimientoController
     public String irPaginaMantenimientoAlumno(@PathVariable String mantenimiento, ModelMap model)
     {
         model.addAttribute("mantenimiento", mantenimiento);
-        //model.addAttribute("tiposAcademico", this.multiTabDetService.buscarPorIdTabla(3));
+        model.addAttribute("tiposAcademico", this.multiTabDetService.buscarPorIdTabla(3));
         model.addAttribute("escuelas", this.escuelaService.buscarTodos());
         return "seguras/mantenimiento/mantenimiento";
     }
