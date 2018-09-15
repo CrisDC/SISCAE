@@ -1,26 +1,18 @@
 
 <!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org"
-	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
-	xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
+<html>
 	
 <head th:fragment="head">
 	<meta charset="utf-8"></meta>
 	<meta http-equiv="X-UA-Compatible" content="IE=edge"></meta>
 	<meta name="viewport" content="width=device-width, initial-scale=1"></meta>
-	<meta th:name="${_csrf.parameterName}" th:content="${_csrf.token}"></meta>
-	<meta name="root" th:content="@{/}"/>
-	<title th:text="#{configuracion.layout.titulo}" layout:title-pattern="$DECORATOR_TITLE - $CONTENT_TITLE"></title>
-		
-	<!-- Bootstrap Core CSS -->
-    <link th:href="@{/resources/css/guiuser/lib/bootstrap/bootstrap.min.css}" rel="stylesheet">
-    <!-- Custom CSS -->
+	<title>FISI | SISCAE</title>
+	
     <link th:href="@{/resources/css/guiuser/lib/calendar2/semantic.ui.min.css}" rel="stylesheet">
     <link th:href="@{/resources/css/guiuser/lib/calendar2/pignose.calendar.min.css}" rel="stylesheet">
     <link th:href="@{/resources/css/guiuser/lib/owl.carousel.min.css}" rel="stylesheet" />
     <link th:href="@{/resources/css/guiuser/lib/owl.theme.default.min.css}" rel="stylesheet" />
         
-    <link th:href="@{https://fonts.googleapis.com/css?family=Open+Sans:300i,400,600,700,800}" rel="stylesheet">
     <link th:href="@{/resources/css/guiuser/lib/icons/font-awesome/css/font-awesome.min.css}" rel="stylesheet">
     <link th:href="@{/resources/css/guiuser/lib/icons/simple-line-icons/css/simple-line-icons.css}" rel="stylesheet">
     <link th:href="@{/resources/css/guiuser/lib/icons/weather-icons/css/weather-icons.min.css}" rel="stylesheet">
@@ -33,13 +25,18 @@
     <link th:href="@{/resources/css/guiuser/spinners.css}" rel="stylesheet" />
     <link th:href="@{/resources/css/guiuser/animate.css}" rel="stylesheet" />
     <link th:href="@{/resources/css/guiuser/sweetalert.css}" rel="stylesheet" />
+    
+
+    <!-- Bootstrap Core CSS -->
+    <link th:href="@{/resources/css/guiuser/lib/bootstrap/bootstrap.min.css}" rel="stylesheet">
+    <!-- Custom CSS -->
+    <link th:href="@{/resources/css/guiuser/lib/calendar2/semantic.ui.min.css}" rel="stylesheet">
+    <link th:href="@{/resources/css/guiuser/lib/calendar2/pignose.calendar.min.css}" rel="stylesheet">
+    <link th:href="@{/resources/css/guiuser/lib/owl.carousel.min.css}" rel="stylesheet" />
+    <link th:href="@{/resources/css/guiuser/lib/owl.theme.default.min.css}" rel="stylesheet"/>
+    <link th:href="@{/resources/css/guiuser/helper.css}" rel="stylesheet}}">
     <link th:href="@{/resources/css/guiuser/style.css}" rel="stylesheet">
-    
-
-
-    
-	<link rel="icon" th:href="@{/resources/image/logo_icono.ico}" type="image/x-icon" />
-	<th:block layout:fragment="style"></th:block>
+	
 </head>
 <body>
 

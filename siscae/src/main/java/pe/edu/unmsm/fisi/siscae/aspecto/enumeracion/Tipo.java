@@ -42,7 +42,7 @@ public enum Tipo
     
     SolicitudTramite("Solicitud de Trámite"), 
     CON_ADM_ALUMNO("CONSULTA de Alumnos"), 
-    CON_MOV_PRESTAMOS("Consulta de Prestamos de Recursos"), 
+    CON_MOV_ESTADO("Consulta de Estado del Aula de Estudio"), 
     CON_MOV_INFRACCIONES("Consulta de Infracciones")
     ;
 

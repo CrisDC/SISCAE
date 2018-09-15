@@ -138,8 +138,8 @@ $(document).ready(function() {
 				$funcionUtil.notificarException(response, "fa-check", "Aviso", "success");
 				var row = $localDetalle.tablaDetalleMantenimiento.row.add({
 					"idItem" : multiTabDet.idItem,
-					"descripcionItem" : multiTabDet.descripcionItem,
-					"abreviatura" : multiTabDet.abreviatura
+					"descripcion" : multiTabDet.descripcion,
+					"descripcionCorta" : multiTabDet.descripcionCorta
 				}).draw();
 				row.show().draw(false);
 				$(row.node()).animateHighlight();
@@ -193,8 +193,8 @@ $(document).ready(function() {
 				var row = $localDetalle.tablaDetalleMantenimiento.row.add({
 					"idTabla": multiTabDet.idTabla,
 					"idItem" : multiTabDet.idItem,
-					"descripcionItem" : multiTabDet.descripcionItem,
-					"abreviatura" : multiTabDet.abreviatura
+					"descripcion" : multiTabDet.descripcion,
+					"descripcionCorta" : multiTabDet.descripcionCorta
 				}).draw();
 				row.show().draw(false);
 				$(row.node()).animateHighlight();
