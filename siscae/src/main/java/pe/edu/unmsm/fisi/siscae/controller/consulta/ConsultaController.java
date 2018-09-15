@@ -18,15 +18,15 @@ import pe.edu.unmsm.fisi.siscae.controller.excepcion.anotacion.Vista;
 public @Controller class ConsultaController
 {
 	private static final String CONSULTA_MOVIMIENTOS = "seguras/consulta/movimientos/";
-	private static final String CONSULTA_PRESTAMOS = CONSULTA_MOVIMIENTOS + "prestamos";
+	private static final String CONSULTA_ESTADO = CONSULTA_MOVIMIENTOS + "estado";
 	private static final String CONSULTA_INFRACCIONES = CONSULTA_MOVIMIENTOS + "infracciones";
 	
-    @Audit(tipo = Tipo.CON_MOV_PRESTAMOS)
-    @GetMapping("/{consulta:prestamos}")
+    @Audit(tipo = Tipo.CON_MOV_ESTADO)
+    @GetMapping("/{consulta:estado}")
     public String irPaginaConsultaPrestamos(@PathVariable String consulta, ModelMap model)
     {
         model.addAttribute("consulta", consulta);
-        return CONSULTA_PRESTAMOS;
+        return CONSULTA_ESTADO;
     }
     
     @Audit(tipo = Tipo.CON_MOV_INFRACCIONES)
