@@ -1,0 +1,123 @@
+<!DOCTYPE>
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorate="~{layout_user}">
+<head>
+</head>
+<body>
+
+	<div layout:fragment="content">
+		<div class="page-wrapper">
+			<!-- Bread crumb -->
+			<div class="row page-titles">
+				<div class="col-md-5 align-self-center">
+					<h3 class="text-primary">Registrar por modulo</h3>
+				</div>
+				<div class="col-md-7 align-self-center">
+					<ol class="breadcrumb">
+						<li class="breadcrumb-item"><a href="javascript:void(0)">Infracciones</a>
+						</li>
+						<li class="breadcrumb-item active">Registrar por modulo</li>
+					</ol>
+				</div>
+			</div>
+			<!-- End Bread crumb -->
+			<!-- Container fluid  -->
+			<div class="container-fluid">
+				<!-- Start Page Content -->
+				<div class="row">
+					<div class="col-12">
+						<div class="card">
+							<div class="card-body">
+								<h4 class="card-title">Registro de infraccion por modulo</h4>
+								<p>Imponga una infraccion al modulo correspondiente</p>
+								<form>
+									<div class="recurso">
+										<img th:src="@{js/guiuserimages/cubo_rojo.png" width="40" height="40">
+										<p>2</p>
+										<p class="ocupado">OCUPADO</p>
+										<p>16200116</p>
+										<button class="btn btn-danger sweet-success-cancel sweetalert">APLICAR</button>
+									</div>
+									<div class="recurso">
+										<img th:src="@{js/guiuserimages/cubo_amarillo.png" width="40" height="40">
+										<p>4</p>
+										<p class="liberable">LIBERABLE</p>
+										<p>17200138</p>
+										<button class="btn btn-danger">APLICAR</button>
+									</div>
+									<div class="recurso">
+										<img th:src="@{js/guiuserimages/cubo_rojo.png" width="40" height="40">
+										<p>7</p>
+										<p class="ocupado">OCUPADO</p>
+										<p>15200108</p>
+										<button class="btn btn-danger">APLICAR</button>
+									</div>
+									<div class="recurso">
+										<img th:src="@{js/guiuserimages/cubo_rojo.png" width="40" height="40">
+										<p>12</p>
+										<p class="ocupado">OCUPADO</p>
+										<p>18200124</p>
+										<button class="btn btn-danger">APLICAR</button>
+									</div>
+								</form>
+							</div>
+						</div>
+					</div>
+				</div>
+				<!-- End PAge Content -->
+			</div>
+			<!-- End Container fluid  -->
+
+		</div>
+		<!-- End Page wrapper  -->
+		
+		
+		
+		<!-- All Jquery -->
+    <script th:src="@{js/guiuser/lib/jquery/jquery.min.js}"></script>
+    <!-- Bootstrap tether Core JavaScript -->
+    <script th:src="@{js/guiuser/lib/bootstrap/js/popper.min.js}"></script>
+    <script th:src="@{js/guiuser/lib/bootstrap/js/bootstrap.min.js}"></script>
+    <!-- slimscrollbar scrollbar JavaScript -->
+    <script th:src="@{js/guiuser/jquery.slimscroll.js}"></script>
+    <!--Menu sidebar -->
+    <script th:src="@{js/guiuser/sidebarmenu.js}"></script>
+    <!--stickey kit -->
+    <script th:src="@{js/guiuser/lib/sticky-kit-master/dist/sticky-kit.min.js}"></script>
+    <!--Custom JavaScript -->
+
+
+    <!-- Amchart -->
+    <script th:src="@{js/guiuser/lib/morris-chart/raphael-min.js}"></script>
+    <script th:src="@{js/guiuser/lib/morris-chart/morris.js}"></script>
+    <script th:src="@{js/guiuser/lib/morris-chart/dashboard1-init.js}"></script>
+
+
+    <script th:src="@{js/guiuser/lib/calendar-2/moment.latest.min.js}"></script>
+    <!-- scripit init-->
+    <script th:src="@{js/guiuser/lib/calendar-2/semantic.ui.min.js}"></script>
+    <!-- scripit init-->
+    <script th:src="@{js/guiuser/lib/calendar-2/prism.min.js}"></script>
+    <!-- scripit init-->
+    <script th:src="@{js/guiuser/lib/calendar-2/pignose.calendar.min.js}"></script>
+    <!-- scripit init-->
+    <script th:src="@{js/guiuser/lib/calendar-2/pignose.init.js}"></script>
+
+    <script th:src="@{js/guiuser/lib/owl-carousel/owl.carousel.min.js}"></script>
+    <script th:src="@{js/guiuser/lib/owl-carousel/owl.carousel-init.js}"></script>
+    <script th:src="@{js/guiuser/scripts.js}"></script>
+    <script th:src="@{js/guiuser/inicio.js}"></script>
+    <!-- scripit init-->
+    <script th:src="@{js/guiuser/lib/bootstrap/js/popper.min.js}"></script>
+    <script th:src="@{js/guiuser/lib/sweetalert/sweetalert.min.js}"></script>
+    <!-- scripit init-->
+    <script th:src="@{js/guiuser/lib/sweetalert/sweetalert.init.js}"></script>
+
+    <script th:src="@{js/guiuser/custom.min.js}"></script>
+
+	</div>
+
+
+</body>
+</html>

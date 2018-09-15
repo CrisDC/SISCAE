@@ -22,29 +22,12 @@
 			<th:block sec:authorize="isAuthenticated()">
 				<li><a th:href="@{/inicio}"> <span class="fa fa-home"></span>Inicio </a></li>
 				
-				<!--  MANTENIMIENTOS 
+				<!--  MANTENIMIENTOS -->
 				<li class="xn-openable">
 					<a><span class="fa fa-file"></span><span class="xn-text">Mantenimientos</span></a>
 					<ul>
-						<li class="xn-openable">
-							<a title="Parámetros Generales"><span class="fa fa-file"></span><span> Generales</span></a>
-							<ul>
-								<li ><a th:href="@{/empresa}"> <span class="fa fa-file"></span>Empresa</a></li>
-								<li ><a th:href="@{/institucion}"> <span class="fa fa-file"></span>Instituciones</a></li>
-								<li ><a th:href="@{/membresia}"> <span class="fa fa-file"></span>Membresías</a></li>
-							</ul>
-						</li>
-					</ul>
-				</li> -->
-				
-				<!--  SOLICITUDES -->
-				<li class="xn-openable">
-					<a><span class="fa fa-file"></span><span class="xn-text">Mantenimientos</span></a>
-					<ul>
-
-						<!-- PORFAVOR INSERTAR EN ORDEN ALFABETICO - Mario!! -->
 						<li ><a th:href="@{/administrativo}"> <span class="fa fa-file"></span>Administrativo</a></li>
-							<li ><a th:href="@{/alumno}"> <span class="fa fa-file"></span>Alumno</a></li>
+						<li ><a th:href="@{/alumno}"> <span class="fa fa-file"></span>Alumno</a></li>
 						<li ><a th:href="@{/areaEstudio}"> <span class="fa fa-file"></span>Area de Estudio</a></li>
 						<li ><a th:href="@{/areaAdministrativa}"> <span class="fa fa-file"></span>Area Administrativa</a></li>
 						<li ><a th:href="@{/docente}"> <span class="fa fa-file"></span>Docente</a></li>
@@ -58,13 +41,17 @@
 						<li ><a th:href="@{/recurso}"> <span class="fa fa-file"></span>Recursos</a></li>
 						<li ><a th:href="@{/multiTabCab}"> <span class="fa fa-file"></span>Tabla de tablas</a></li>
 						<li ><a th:href="@{/multiTabDet}"> <span class="fa fa-file"></span>Tabla de tablas Detalle</a></li>
-
-								</ul>
-					
-
+					</ul>
 				</li>
 				  
-				
+				<!--  CONSULTAS -->
+				<li class="xn-openable">
+					<a><span class="fa fa-file"></span><span class="xn-text">Consultas</span></a>
+					<ul>
+						<li ><a th:href="@{/consulta/movimientos/prestamos}"> <span class="fa fa-file"></span>Prestamos</a></li>
+						
+					</ul>
+				</li>
 				
 				<!--  PERFIL DE USUARIO -->
 				<li class="xn-openable">
@@ -73,6 +60,7 @@
 						<li><a th:href="@{/seguridad/contrasenia}"> <span class="fa fa-key"></span><span> Cambio Contraseña</span></a></li>
 					</ul>
 				</li>
+				
 			</th:block>
 		</ul>
 	</div>

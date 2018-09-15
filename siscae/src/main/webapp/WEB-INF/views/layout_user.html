@@ -1,21 +1,35 @@
+
 <!DOCTYPE html>
-<html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
 
-<head th:replace="template/fragments/head::head">
-</head>
-
+<head th:replace="template/fragments/head::head"> </head>
 <body class="fix-header fix-sidebar">
 	<div id="main-wrapper">
 		<div th:replace="template/fragments/headerSiscae::header"></div>
-
 		<div th:replace="template/fragments/sidebar::sidebar"></div>
-
-
+		
 		<div layout:fragment="content"></div>
 
+
 	</div>
-	
+
 	<div th:replace="template/fragments/footer :: footer"></div>
-	
+	<script src="https://code.jquery.com/jquery-2.2.3.min.js"
+		integrity="sha256-a23g1Nt4dtEYOj7bR+vTu7+T8VP13humZFBJNIYoEJo="
+		crossorigin="anonymous"></script>
+	<script>
+		/*<![CDATA[*/
+	    	window.jQuery || document.write('<script src="[[@{/resources/js/jquery/jquery-2.2.3.min.js}]]"><\/script>')
+	 	/*]]>*/
+	</script>
+	<script type="text/javascript" th:src="@{/resources/js/bootstrap/bootstrap.min.js}"></script>
+	<script type="text/javascript" th:src="@{/resources/js/jquery/jquery.mCustomScrollbar.min.js}"></script>
+	<script type="text/javascript" th:src="@{/resources/js/jquery/jquery.bestupper.min.js}"></script>
+	<script type="text/javascript" th:src="@{/resources/js/jquery/jquery-confirm.min.js}"></script>
+	<script type="text/javascript" th:src="@{/resources/js/util/util.js}"></script>
+	<th:block layout:fragment="script"></th:block>
 </body>
 </html>
