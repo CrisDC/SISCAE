@@ -34,8 +34,8 @@ public @Controller class MantenimientoController
     }
     
    
-    @Audit(tipo = Tipo.AREA_ADMINISTRATIVA)
-    @GetMapping("/{mantenimiento:areaAdministrativa}")
+    @Audit(tipo = Tipo.AREA_ADMINISTRATIVO)
+    @GetMapping("/{mantenimiento:areaAdministrativo}")
     public String irPaginaMantenimientoAreaAdministrativo(@PathVariable String mantenimiento, ModelMap model)
     {
         model.addAttribute("mantenimiento", mantenimiento);

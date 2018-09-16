@@ -3,7 +3,7 @@ package pe.edu.unmsm.fisi.siscae.aspecto.enumeracion;
 public enum Tipo
 {
     /*Mantenimiento*/
-    AREA_ADMINISTRATIVA("Área administrativa"),
+    AREA_ADMINISTRATIVO("Área administrativa"),
     AREA_ESTUDIO("Área estudio"),
     HORARIO("Horario"),
     UBICACION("Ubicación"),
