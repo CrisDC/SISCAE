@@ -39,7 +39,7 @@ $(document).ready(function() {
 			"targets" : [ 2, 3 ],
 			"className" : "filtrable",
 		}, {
-			"targets" : 4,
+			"targets" : 10,
 			"className" : "all dt-center",
 			"defaultContent" : $variableUtil.botonActualizar + " " + $variableUtil.botonEliminar
 		} ],
