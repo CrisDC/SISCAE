@@ -59,7 +59,7 @@ public enum Dato
     MATERIAL(""),
     MULTI_TAB_CAB(""),
     MULTI_TAB_DET(""),
-    
+    ROL(""),
     /*Movimientos*/
     INFRACCION(""),
     PRESTAMO(""),
