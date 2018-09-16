@@ -33,17 +33,14 @@ $(document).ready(function() {
 			$tablaFuncion.aniadirFiltroDeBusquedaEnEncabezado(this, $local.$tablaMantenimiento);
 		},
 		"columnDefs" : [ {
-			"targets" : [ 0, 1, 2, 3, 4, , 5, 6, 7, 8, 9],
+			"targets" : [ 0, 1, 2, 3, 4, 5],
 			"className" : "all filtrable",
 		}, {
-			"targets" : 10,
+			"targets" : 6,
 			"className" : "all dt-center",
 			"defaultContent" : $variableUtil.botonActualizar + " " + $variableUtil.botonEliminar
 		} ],
 		"columns" : [ {
-			"data" : 'idRecurso',
-			"title" : "Id"
-		},{
 			"data" : 'numeroSerie',
 			"title" : "Num de serie"
 		},{
@@ -56,20 +53,11 @@ $(document).ready(function() {
 			"data" : 'estado',
 			"title" : "Estado"
 		},{
-			"data" : 'idTipoRecurso',
-			"title" : "Tipo de recurso"
-		},{
 			"data" : 'nombreTipoRecurso',
 			"title" : "Nombre del Tipo de recurso"
 		},{
-			"data" : 'idAreaEstudio',
-			"title" : "Area de Estudio"
-		},{
 			"data" : 'nombreAreaEstudio',
 			"title" : "Nombre Area de Estudio"
-		},{
-			"data" : 'idUbicacion',
-			"title" : "Ubicacion"
 		},{
 			"data" : null,
 			"title" : 'Acción'
