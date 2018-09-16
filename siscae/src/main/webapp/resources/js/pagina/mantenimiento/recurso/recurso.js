@@ -178,7 +178,7 @@ $(document).ready(function() {
 			}
 		});
 	});
-	$local.$tablaMantenimiento.children("tbody").on("click", ".eliminar", function() {
+		$local.$tablaMantenimiento.children("tbody").on("click", ".eliminar", function() {
 		$local.$filaSeleccionada = $(this).parents("tr");
 		var recurso = $local.tablaMantenimiento.row($local.$filaSeleccionada).data();
 		$.confirm({

@@ -26,7 +26,7 @@ $(document).ready(function() {
 			"dataSrc" : ""
 		},
 		"language" : {
-			"emptyTable" : "No hay personas registradas"
+			"emptyTable" : "No hay rols registradas"
 		},
 		"initComplete" : function() {
 			$local.$tablaMantenimiento.wrap("<div class='table-responsive'></div>");
@@ -58,7 +58,7 @@ $(document).ready(function() {
 	});
 
 	$local.$modalMantenimiento.PopupWindow({
-		title : "Mantenimiento de Persona",
+		title : "Mantenimiento del Rol",
 		autoOpen : false,
 		modal : false,
 		height : 400,
@@ -77,7 +77,7 @@ $(document).ready(function() {
 	});
 
 	$local.$modalMantenimiento.on("close.popupwindow", function() {
-		$local.idPersonaSeleccionada = "";
+		$local.idRolSeleccionado = "";
 	});
 	$formMantenimiento.find("input").keypress(function(event) {
 		if (event.which == 13) {
@@ -92,15 +92,16 @@ $(document).ready(function() {
 			}
 		}
 	});
+
 	$local.$registrarMantenimiento.on("click", function() {
 		if (!$formMantenimiento.valid()) {
 			return;
 		}
-		var persona = $formMantenimiento.serializeJSON();
+		var rol = $formMantenimiento.serializeJSON();
 		$.ajax({
 			type : "POST",
-			url : $variableUtil.root + "persona",
-			data : JSON.stringify(persona),
+			url : $variableUtil.root + "rol",
+			data : JSON.stringify(rol),
 			beforeSend : function(xhr) {
 				$local.$registrarMantenimiento.attr("disabled", true).find("i").removeClass("fa-floppy-o").addClass("fa-spinner fa-pulse fa-fw");
 				xhr.setRequestHeader('Content-Type', 'application/json');
@@ -114,7 +115,7 @@ $(document).ready(function() {
 			},
 			success : function(response) {
 				$funcionUtil.notificarException(response, "fa-check", "Aviso", "success");
-				var row = $local.tablaMantenimiento.row.add(persona).draw();
+				var row = $local.tablaMantenimiento.row.add(rol).draw();
 				row.show().draw(false);
 				$(row.node()).animateHighlight();
 				$local.$modalMantenimiento.PopupWindow("close");
@@ -125,27 +126,17 @@ $(document).ready(function() {
 				$local.$registrarMantenimiento.attr("disabled", false).find("i").addClass("fa-floppy-o").removeClass("fa-spinner fa-pulse fa-fw");
 			}
 		});
-		$local.$tablaMantenimiento.children("tbody").on("click", ".actualizar", function() {
-		$funcionUtil.prepararFormularioActualizacion($formMantenimiento);
-		$local.$filaSeleccionada = $(this).parents("tr");
-		var persona = $local.tablaMantenimiento.row($local.$filaSeleccionada).data();
-		$local.idpersonaSeleccionada = persona.idPersona;
-		$funcionUtil.llenarFormulario(persona, $formMantenimiento);
-		$local.$actualizarMantenimiento.removeClass("hidden");
-		$local.$registrarMantenimiento.addClass("hidden");
-		$local.$modalMantenimiento.PopupWindow("open");
-		});
 	});
 	$local.$actualizarMantenimiento.on("click", function() {
 		if (!$formMantenimiento.valid()) {
 			return;
 		}
-		var persona = $formMantenimiento.serializeJSON();
-		persona.idPersona = $local.idPersonaSeleccionada;
+		var rol = $formMantenimiento.serializeJSON();
+		rol.idrol = $local.idRolSeleccionado;
 		$.ajax({
 			type : "PUT",
-			url : $variableUtil.root + "persona",
-			data : JSON.stringify(persona),
+			url : $variableUtil.root + "rol",
+			data : JSON.stringify(rol),
 			beforeSend : function(xhr) {
 				$local.$actualizarMantenimiento.attr("disabled", true).find("i").removeClass("fa-pencil-square").addClass("fa-spinner fa-pulse fa-fw");
 				xhr.setRequestHeader('Content-Type', 'application/json');
@@ -160,7 +151,7 @@ $(document).ready(function() {
 			success : function(response) {
 				$funcionUtil.notificarException(response, "fa-check", "Aviso", "success");
 				$local.tablaMantenimiento.row($local.$filaSeleccionada).remove().draw(false);
-				var row = $local.tablaMantenimiento.row.add(persona).draw();
+				var row = $local.tablaMantenimiento.row.add(rol).draw();
 				row.show().draw(false);
 				$(row.node()).animateHighlight();
 				$local.$modalMantenimiento.PopupWindow("close");
@@ -171,13 +162,14 @@ $(document).ready(function() {
 				$local.$actualizarMantenimiento.attr("disabled", false).find("i").addClass("fa-pencil-square").removeClass("fa-spinner fa-pulse fa-fw");
 			}
 		});
+	});
 		$local.$tablaMantenimiento.children("tbody").on("click", ".eliminar", function() {
 		$local.$filaSeleccionada = $(this).parents("tr");
-		var persona = $local.tablaMantenimiento.row($local.$filaSeleccionada).data();
+		var rol = $local.tablaMantenimiento.row($local.$filaSeleccionada).data();
 		$.confirm({
 			icon : "fa fa-info-circle",
 			title : "Aviso",
-			content : "¿Desea eliminar a la persona <b>'" + persona.idPersona + " - " +persona.numDocumento+"-"+ persona.nombre+" "+persona.appPaterno+" "+persona.appMaterno + "'<b/>?",
+			content : "¿Desea eliminar al rol <b>'" + rol.idrol + " - " + rol.nombre+"'<b/>?",
 			buttons : {
 				Aceptar : {
 					action : function() {
@@ -189,8 +181,8 @@ $(document).ready(function() {
 								self.buttons.close.hide();
 								$.ajax({
 									type : "DELETE",
-									url : $variableUtil.root + "persona",
-									data : JSON.stringify(persona),
+									url : $variableUtil.root + "rol",
+									data : JSON.stringify(rol),
 									autoclose : true,
 									beforeSend : function(xhr) {
 										xhr.setRequestHeader('Content-Type', 'application/json');
@@ -207,7 +199,7 @@ $(document).ready(function() {
 										$funcionUtil.notificarException($funcionUtil.obtenerMensajeErrorEnCadena(xhr.responseJSON), "fa-warning", "Aviso", "warning");
 										break;
 									case 409:
-										var mensaje = $funcionUtil.obtenerMensajeError("La persona <b>" + persona.idPersona + " - " +persona.numDocumento+"-" +persona.nombre+" "+persona.appPaterno+" "+persona.appMaterno+ "</b>", xhr.responseJSON, $variableUtil.accionEliminado);
+										var mensaje = $funcionUtil.obtenerMensajeError("La rol <b>" + rol.idrol + " - " + rol.nombre +"</b>", xhr.responseJSON, $variableUtil.accionEliminado);
 										$funcionUtil.notificarException(mensaje, "fa-warning", "Aviso", "warning");
 										break;
 									}
@@ -229,5 +221,5 @@ $(document).ready(function() {
 			}
 			});
 		});
-	});
+		
 });
