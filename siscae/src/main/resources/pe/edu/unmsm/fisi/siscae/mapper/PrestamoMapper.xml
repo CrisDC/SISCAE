@@ -14,8 +14,8 @@
 			    nombre, 
 			    app_paterno,
 			    app_materno,
-		        as codigo_alumno
-		  FROM ESTADO_AULAS vwcdep
+		        codigo_alumno
+		  FROM ESTADO_AULA vwcdep
 	</sql>
 
 	<select id="buscarPorNumeroDocumentoIdentidad" resultType="DocumentoPublico">
