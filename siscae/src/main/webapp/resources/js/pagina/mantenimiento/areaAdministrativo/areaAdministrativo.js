@@ -39,22 +39,16 @@ $(document).ready(function() {
 			"targets" : [ 2, 3 ],
 			"className" : "filtrable",
 		}, {
-			"targets" : 10,
+			"targets" : 8,
 			"className" : "all dt-center",
 			"defaultContent" : $variableUtil.botonActualizar + " " + $variableUtil.botonEliminar
 		} ],
-		"columns" : [ {
-			"data" : 'idAreaAdministrativo',
-			"title" : "Id Area-Administrativo"
-		}, {
-			"data" : 'idAreaEstudio',
-			"title" : "Id Area Estudio"
-		},  {
+		"columns" : [{
 			"data" : 'nombreAreaEstudio',
 			"title" : "Id Area Estudio"
 		}, {
-			"data" : 'idAdministrativo',
-			"title" : "Id Administrativo"
+			"data" : 'codigo',
+			"title" : "Codigo Administrativo"
 		}, {
 			"data" : 'nombreAdministrativo',
 			"title" : "Nombre Adm."
@@ -64,16 +58,16 @@ $(document).ready(function() {
 		}, {
 			"data" : 'appMatAdministrativo',
 			"title" : "Apellido Mat Adm."
+		},  {
+			"data" : 'cargo',
+			"title" : "Cargo"
 		}, {
 			"data" : 'fechaInicio',
 			"title" : "Fecha de inicio"
 		}, {
 			"data" : 'fechaFin',
-			"title" : "Fecha fin"
-		},  {
-			"data" : 'cargo',
-			"title" : "Cargo"
-		}, {
+			"title" : "Fecha Fin"
+		},{
 			"data" : null,
 			"title" : 'Acción'
 		} ]

@@ -79,6 +79,6 @@ public class AreaAdministrativo {
 	private String nombreAdministrativo;
 	private String appPatAdministrativo;
 	private String appMatAdministrativo;
-	
+	private String codigo;
 	
 }
