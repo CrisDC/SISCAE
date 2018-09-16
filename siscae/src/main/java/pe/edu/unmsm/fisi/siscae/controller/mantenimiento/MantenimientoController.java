@@ -149,5 +149,22 @@ public @Controller class MantenimientoController
         model.addAttribute("mantenimiento", mantenimiento);
         return "seguras/mantenimiento/mantenimiento";
     }
+    @Audit(tipo = Tipo.TIPO_RECURSO)
+    @GetMapping("/{mantenimiento:tipoRecurso}")
+    public String irPaginaMantenimientoTipoRecurso(@PathVariable String mantenimiento, ModelMap model)
+    {
+    	
+        model.addAttribute("mantenimiento", mantenimiento);
+        return "seguras/mantenimiento/mantenimiento";
+    }
+    
+    @Audit(tipo = Tipo.ROL)
+    @GetMapping("/{mantenimiento:rol}")
+    public String irPaginaMantenimientoRol(@PathVariable String mantenimiento, ModelMap model)
+    {
+    	
+        model.addAttribute("mantenimiento", mantenimiento);
+        return "seguras/mantenimiento/mantenimiento";
+    }
    
 }

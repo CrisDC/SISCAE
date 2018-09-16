@@ -22,7 +22,7 @@ public enum Tipo
     INFRACCION("Infraccion"),
     PRESTAMO("Prestamo"),
     PRESTAMO_DETALLE("Detalle de prestamo"),
-    
+    ROL("Rol"),
     
     MulTabCab("Tabla de Tablas"),
     MulTabDet("Detalle de Tabla de Tablas"),

@@ -39,14 +39,11 @@ $(document).ready(function() {
 			"targets" : [ 2, 3 ],
 			"className" : "filtrable",
 		}, {
-			"targets" : 4,
+			"targets" : 3,
 			"className" : "all dt-center",
 			"defaultContent" : $variableUtil.botonActualizar + " " + $variableUtil.botonEliminar
 		} ],
-		"columns" : [ {
-			"data" : 'idTipoRecurso',
-			"title" : "Id"
-		}, {
+		"columns" : [{
 			"data" : 'nombre',
 			"title" : "Nombre"
 		}, {
