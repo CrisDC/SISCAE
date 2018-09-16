@@ -11,10 +11,10 @@ import pe.edu.unmsm.fisi.siscae.model.mantenimiento.Rol;
 import pe.edu.unmsm.fisi.siscae.model.parametro.Parametro;
 
 public interface IRolMapper extends IMantenibleMapper<Rol> {
-
 	@Select( value = {"{call SP_MANT_ROL("
 			+ "#{operacion, jdbcType = VARCHAR, mode = IN},"
-			+"#{objeto.idRol, jdbcType = INTEGER, mode = IN}"
+			+ "#{operacionParam, jdbcType = VARCHAR, mode = IN},"
+			+ "#{objeto.idRol, jdbcType = INTEGER, mode = IN},"
 			+ "#{objeto.nombre, jdbcType = VARCHAR, mode = IN},"
 			+ "#{userAudit, jdbcType = VARCHAR, mode = IN})}"} )
 	@Options(statementType = StatementType.CALLABLE)
