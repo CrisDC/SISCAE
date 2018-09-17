@@ -59,6 +59,7 @@ public enum Dato
     MATERIAL(""),
     MULTI_TAB_CAB(""),
     MULTI_TAB_DET(""),
+    ESTADO_TABLA(""),
     
     /*Movimientos*/
     INFRACCION(""),

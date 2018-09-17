@@ -1167,8 +1167,8 @@
 				<select id="idEstadoTabla" class="form-control select2"
 					name="idEstadoTabla">
 					<option value="" selected="selected">Seleccione  el estado</option>
-					<option th:each="estado : ${estado}" th:value="${estado.idEstadoTabla}"
-						th:text="|${estado.idEstadoTabla} - ${estado.descripcion}|"></option>
+					<option th:each="estados : ${estados}" th:value="${estados.idEstadoTabla}"
+						th:text="|${estados.descripcion}|"></option>
 				</select>
 			</div>
 		</div>

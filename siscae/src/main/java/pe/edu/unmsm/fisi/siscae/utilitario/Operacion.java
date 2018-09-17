@@ -19,7 +19,8 @@ public enum Operacion
         CODIGO_RPTA,
         PRIMARY_KEY,
         ID_TABLA,
-        ID_ITEM
+        ID_ITEM,
+        TABLA_ORIGEN
     }
     
     private OperacionParam parametro;

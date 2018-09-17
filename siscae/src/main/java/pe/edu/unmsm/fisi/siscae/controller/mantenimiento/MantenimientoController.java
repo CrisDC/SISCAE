@@ -12,6 +12,7 @@ import pe.edu.unmsm.fisi.siscae.aspecto.enumeracion.Comentario;
 import pe.edu.unmsm.fisi.siscae.aspecto.enumeracion.Tipo;
 import pe.edu.unmsm.fisi.siscae.controller.excepcion.anotacion.Vista;
 import pe.edu.unmsm.fisi.siscae.service.IEscuelaService;
+import pe.edu.unmsm.fisi.siscae.service.IEstadoTablaService;
 import pe.edu.unmsm.fisi.siscae.service.IMultiTabDetService;
 
 @Vista
@@ -21,6 +22,7 @@ public @Controller class MantenimientoController
 
     private @Autowired IMultiTabDetService multiTabDetService;
     private @Autowired IEscuelaService escuelaService;
+    private @Autowired IEstadoTablaService estadoTablaService;
 
 
 /*   */
@@ -96,6 +98,7 @@ public @Controller class MantenimientoController
     public String irPaginaMantenimientoAlumno(@PathVariable String mantenimiento, ModelMap model)
     {
         model.addAttribute("mantenimiento", mantenimiento);
+        model.addAttribute("estados", this.estadoTablaService.buscarporTablaOrigen("MAE_ALUMNO"));
         model.addAttribute("tiposAcademico", this.multiTabDetService.buscarPorIdTabla(3));
         model.addAttribute("escuelas", this.escuelaService.buscarTodos());
         return "seguras/mantenimiento/mantenimiento";
