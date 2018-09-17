@@ -2,7 +2,7 @@ package pe.edu.unmsm.fisi.siscae.service;
 
 import java.util.List;
 
-import pe.edu.unmsm.fisi.siscae.model.criterio.CriterioBusquedaNumeroDocumento;
+import pe.edu.unmsm.fisi.siscae.model.criterio.NumeroDocumentoIdentidadCriterioBusqueda;
 import pe.edu.unmsm.fisi.siscae.model.mantenimiento.SolicitudTramite;
 
 public interface ISolicitudTramiteService extends IMantenibleService<SolicitudTramite>
@@ -22,6 +22,6 @@ public interface ISolicitudTramiteService extends IMantenibleService<SolicitudTr
 
     public List<SolicitudTramite> buscarPorUsuario(String idUsuario);
     
-    public List<SolicitudTramite> buscarPorNumeroDocumento(CriterioBusquedaNumeroDocumento criterioBusquedaNumeroDocumento);
+    public List<SolicitudTramite> buscarPorNumeroDocumento(NumeroDocumentoIdentidadCriterioBusqueda criterioBusquedaNumeroDocumento);
 
 }

@@ -54,4 +54,5 @@ public class TipoRecurso {
     @Length(min = 3, max = 45, message = "{Length.CodigoProcesoSwitch.usuarioModificacion}")
 	private String usuarioModificacion;
 
+	private int maxCapacidad;
 }

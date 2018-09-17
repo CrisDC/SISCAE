@@ -14,7 +14,7 @@ import lombok.NoArgsConstructor;
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-public class CriterioBusquedaNumeroDocumento
+public class NumeroDocumentoIdentidadCriterioBusqueda
 {
    // @Pattern(regexp = Regex.SOLO_DIGITOS, message = "{Pattern.CriterioBusquedaTipoDocumento.tipoDocumento}")
    // @MultitabDet(idTabla = MultiTablaUtil.TABLA_TIPO_DOCUMENTO, existe = true, campoIdItem = "tipoDocumento", message = "{NoExiste.CriterioBusquedaTipoDocumento.tipoDocumento}")

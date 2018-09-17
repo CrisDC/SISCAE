@@ -33,17 +33,14 @@ $(document).ready(function() {
 			$tablaFuncion.aniadirFiltroDeBusquedaEnEncabezado(this, $local.$tablaMantenimiento);
 		},
 		"columnDefs" : [ {
-			"targets" : [ 0, 1, 2, 3, 4 ],
+			"targets" : [ 0, 1, 2, 3 ],
 			"className" : "all filtrable",
 		}, {
-			"targets" : 5,
+			"targets" : 4,
 			"className" : "all dt-center",
 			"defaultContent" : $variableUtil.botonActualizar + " " + $variableUtil.botonEliminar
 		} ],
-		"columns" : [ {
-			"data" : 'idAreaEstudio',
-			"title" : "Id"
-		}, {
+		"columns" : [{
 			"data" : 'nombre',
 			"title" : "Nombre"
 		}, {

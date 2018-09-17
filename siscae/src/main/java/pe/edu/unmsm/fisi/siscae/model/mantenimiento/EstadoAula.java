@@ -1,8 +1,7 @@
-package pe.edu.unmsm.fisi.siscae.model.consulta;
+package pe.edu.unmsm.fisi.siscae.model.mantenimiento;
 
 import java.time.LocalTime;
 import java.util.Date;
-
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -12,8 +11,7 @@ import lombok.NoArgsConstructor;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class PrestamoRecurso
-{
+public class EstadoAula {
 	int idRecurso;
 	String numero;
 	String tipoRecurso;

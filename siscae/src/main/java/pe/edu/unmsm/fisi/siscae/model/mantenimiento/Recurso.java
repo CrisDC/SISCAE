@@ -71,4 +71,7 @@ public class Recurso {
 
 	private String usuarioModificacion;
 
+	private String estado;
+	private String nombreTipoRecurso;
+	private String nombreAreaEstudio;
 }

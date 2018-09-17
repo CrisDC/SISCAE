@@ -74,4 +74,11 @@ public class AreaAdministrativo {
 	@NotBlank(message = "{NotBlank.AreaAdministrativo.usuario_modificacion}")
 	@Pattern(regexp = Regex.ALFANUMERICO, message = "{Pattern.AreaAdministrativo.usuario_modificacion}")
 	private String usuarioModificacion;
+
+	private String nombreAreaEstudio;
+	private String nombreAdministrativo;
+	private String appPatAdministrativo;
+	private String appMatAdministrativo;
+	private String codigo;
+	
 }

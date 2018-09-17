@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
 import pe.edu.unmsm.fisi.siscae.aspecto.anotacion.Audit;
 import pe.edu.unmsm.fisi.siscae.aspecto.enumeracion.Accion;
@@ -29,9 +30,9 @@ import pe.edu.unmsm.fisi.siscae.utilitario.ValidatorUtil;
 import pe.edu.unmsm.fisi.siscae.validacion.grupo.accion.IActualizacion;
 import pe.edu.unmsm.fisi.siscae.validacion.grupo.accion.IRegistro;
 
-@Audit(tipo=Tipo.AREA_ADMINISTRATIVA, datos=Dato.AREA_ADMINISTRATIVA)
+@Audit(tipo=Tipo.AREA_ADMINISTRATIVO, datos=Dato.AreaAdministrativo)
 @RequestMapping("/areaAdministrativo")
-public class AreaAdministrativoController {
+public @RestController class AreaAdministrativoController {
 private @Autowired IAreaAdministrativoService areaAdministrativoService;
 	
 	@GetMapping(params = "accion=buscarTodos")

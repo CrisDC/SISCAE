@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
 import pe.edu.unmsm.fisi.siscae.aspecto.anotacion.Audit;
 import pe.edu.unmsm.fisi.siscae.aspecto.enumeracion.Accion;
@@ -30,7 +31,7 @@ import pe.edu.unmsm.fisi.siscae.validacion.grupo.accion.IRegistro;
 
 @Audit(tipo=Tipo.PRESTAMO_DETALLE, datos=Dato.PRESTAMO_DETALLE)
 @RequestMapping("/prestamoDetalle")
-public class PrestamoDetalleController {
+public @RestController class PrestamoDetalleController {
 	
 	private @Autowired IPrestamoDetalleService prestamoDetalleService;
 	

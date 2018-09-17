@@ -18,6 +18,7 @@ public interface IAreaAdministrativoMapper  extends IMantenibleMapper<AreaAdmini
             + "#{objeto.idAreaEstudio, jdbcType = INTEGER, mode = IN},"
             + "#{objeto.idAdministrativo, jdbcType = INTEGER, mode = IN},"
             + "#{objeto.fechaInicio, jdbcType = DATE, mode = IN},"
+            + "#{objeto.fechaFin, jdbcType = DATE, mode = IN},"
             + "#{objeto.cargo, jdbcType = VARCHAR, mode = IN},"
 			+ "#{userAudit, jdbcType = VARCHAR, mode = IN})}" })
     @Options(statementType = StatementType.CALLABLE)

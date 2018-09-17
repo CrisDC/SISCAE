@@ -36,8 +36,8 @@ public @Controller class MantenimientoController
     }
     
    
-    @Audit(tipo = Tipo.AREA_ADMINISTRATIVA)
-    @GetMapping("/{mantenimiento:areaAdministrativa}")
+    @Audit(tipo = Tipo.AREA_ADMINISTRATIVO)
+    @GetMapping("/{mantenimiento:areaAdministrativo}")
     public String irPaginaMantenimientoAreaAdministrativo(@PathVariable String mantenimiento, ModelMap model)
     {
         model.addAttribute("mantenimiento", mantenimiento);
@@ -149,6 +149,23 @@ public @Controller class MantenimientoController
     @GetMapping("/{mantenimiento:persona}")
     public String irPaginaMantenimientoPersona(@PathVariable String mantenimiento, ModelMap model)
     {
+        model.addAttribute("mantenimiento", mantenimiento);
+        return "seguras/mantenimiento/mantenimiento";
+    }
+    @Audit(tipo = Tipo.TIPO_RECURSO)
+    @GetMapping("/{mantenimiento:tipoRecurso}")
+    public String irPaginaMantenimientoTipoRecurso(@PathVariable String mantenimiento, ModelMap model)
+    {
+    	
+        model.addAttribute("mantenimiento", mantenimiento);
+        return "seguras/mantenimiento/mantenimiento";
+    }
+    
+    @Audit(tipo = Tipo.ROL)
+    @GetMapping("/{mantenimiento:rol}")
+    public String irPaginaMantenimientoRol(@PathVariable String mantenimiento, ModelMap model)
+    {
+    	
         model.addAttribute("mantenimiento", mantenimiento);
         return "seguras/mantenimiento/mantenimiento";
     }

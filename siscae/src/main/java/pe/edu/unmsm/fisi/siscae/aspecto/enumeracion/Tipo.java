@@ -3,7 +3,7 @@ package pe.edu.unmsm.fisi.siscae.aspecto.enumeracion;
 public enum Tipo
 {
     /*Mantenimiento*/
-    AREA_ADMINISTRATIVA("Área administrativa"),
+    AREA_ADMINISTRATIVO("Área administrativa"),
     AREA_ESTUDIO("Área estudio"),
     HORARIO("Horario"),
     UBICACION("Ubicación"),
@@ -24,6 +24,7 @@ public enum Tipo
     PRESTAMO_DETALLE("Detalle de prestamo"),
     ESTADO_TABLA("Estado de tablas"),
     
+    ROL("Rol"),
     
     MulTabCab("Tabla de Tablas"),
     MulTabDet("Detalle de Tabla de Tablas"),
@@ -43,7 +44,7 @@ public enum Tipo
     
     SolicitudTramite("Solicitud de Trámite"), 
     CON_ADM_ALUMNO("CONSULTA de Alumnos"), 
-    CON_MOV_PRESTAMOS("Consulta de Prestamos de Recursos"), 
+    CON_MOV_PRESTAMO("Prestamo de recurso"), 
     CON_MOV_INFRACCIONES("Consulta de Infracciones")
     ;
 

@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="pe.edu.unmsm.fisi.siscae.mapper.IConsultaPrestamoMapper">
+
+	<sql id="fragmentoSelectBuscarPrestamos">
+		SELECT  id_recurso,
+			    numero,
+		        tipo_recurso,
+		        max_capacidad,
+			    fecha_prestamo,
+			    hora_entrada,
+			    hora_salida,
+			    estado, 
+			    nombre, 
+			    app_paterno,
+			    app_materno,
+		        codigo_alumno
+		  FROM ESTADO_AULA 
+	</sql>
+
+	<select id="buscarPorNumeroDocumentoIdentidad" resultType="PrestamoRecurso">
+		<include refid="fragmentoSelectBuscarPrestamos" />
+		<where>
+			<if test="tipoDocumentoIdentidad != null and tipoDocumentoIdentidad != ''">
+				vwcdep.cod_tip_doc_ide = #{tipoDocumentoIdentidad}
+			</if>
+			<if test="numeroDocumentoIdentidad != null and numeroDocumentoIdentidad != ''">
+				AND vwcdep.num_doc_ide = #{numeroDocumentoIdentidad}
+			</if>
+		</where>
+	</select>
+
+	<select id="buscarPorCriterio" resultType="PrestamoRecurso">
+		<include refid="fragmentoSelectBuscarPrestamos" />
+		<where>
+			<if test="idRecurso != null and idRecurso != '-1'">
+				vwcdep.id_recurso = #{idRecurso}
+			</if>
+		</where>
+	</select>
+
+
+</mapper>

@@ -7,7 +7,7 @@ $(document).ready(function() {
 		$registrarMantenimiento : $("#registrarMantenimiento"),
 		$filaSeleccionada : "",
 		$actualizarMantenimiento : $("#actualizarMantenimiento"),
-		idAreaAdministrativoSeleccionado : ""
+		idRolSeleccionado : ""
 	}
 	$formMantenimiento = $("#formMantenimiento");
 
@@ -22,58 +22,28 @@ $(document).ready(function() {
 	});
 	$local.tablaMantenimiento = $local.$tablaMantenimiento.DataTable({
 		"ajax" : {
-			"url" : $variableUtil.root + "areaAdministrativo?accion=buscarTodos",
+			"url" : $variableUtil.root + "rol?accion=buscarTodos",
 			"dataSrc" : ""
 		},
 		"language" : {
-			"emptyTable" : "No hay Areas Administrativas registradas"
+			"emptyTable" : "No hay rols registradas"
 		},
 		"initComplete" : function() {
 			$local.$tablaMantenimiento.wrap("<div class='table-responsive'></div>");
 			$tablaFuncion.aniadirFiltroDeBusquedaEnEncabezado(this, $local.$tablaMantenimiento);
 		},
 		"columnDefs" : [ {
-			"targets" : [ 0, 1 ],
+			"targets" : 0,
 			"className" : "all filtrable",
-		}, {
-			"targets" : [ 2, 3 ],
-			"className" : "filtrable",
-		}, {
-			"targets" : 4,
+		},{
+			"targets" : 1,
 			"className" : "all dt-center",
 			"defaultContent" : $variableUtil.botonActualizar + " " + $variableUtil.botonEliminar
 		} ],
-		"columns" : [ {
-			"data" : 'idAreaAdministrativo',
-			"title" : "Id Area-Administrativo"
-		}, {
-			"data" : 'idAreaEstudio',
-			"title" : "Id Area Estudio"
-		},  {
-			"data" : 'nombreAreaEstudio',
-			"title" : "Id Area Estudio"
-		}, {
-			"data" : 'idAdministrativo',
-			"title" : "Id Administrativo"
-		}, {
-			"data" : 'nombreAdministrativo',
-			"title" : "Nombre Adm."
-		}, {
-			"data" : 'appPatAdministrativo',
-			"title" : "Apellido Pat Adm."
-		}, {
-			"data" : 'appMatAdministrativo',
-			"title" : "Apellido Mat Adm."
-		}, {
-			"data" : 'fechaInicio',
-			"title" : "Fecha de inicio"
-		}, {
-			"data" : 'fechaFin',
-			"title" : "Fecha fin"
-		},  {
-			"data" : 'cargo',
-			"title" : "Cargo"
-		}, {
+		"columns" : [{
+			"data" : 'nombre',
+			"title" : "Descripcion"
+		},{
 			"data" : null,
 			"title" : 'Acción'
 		} ]
@@ -88,7 +58,7 @@ $(document).ready(function() {
 	});
 
 	$local.$modalMantenimiento.PopupWindow({
-		title : "Mantenimiento de Area-Administrativo",
+		title : "Mantenimiento del Rol",
 		autoOpen : false,
 		modal : false,
 		height : 400,
@@ -107,7 +77,7 @@ $(document).ready(function() {
 	});
 
 	$local.$modalMantenimiento.on("close.popupwindow", function() {
-		$local.idAreaAdministrativoSeleccionado = "";
+		$local.idRolSeleccionado = "";
 	});
 	$formMantenimiento.find("input").keypress(function(event) {
 		if (event.which == 13) {
@@ -122,15 +92,16 @@ $(document).ready(function() {
 			}
 		}
 	});
+
 	$local.$registrarMantenimiento.on("click", function() {
 		if (!$formMantenimiento.valid()) {
 			return;
 		}
-		var areaAdministrativo = $formMantenimiento.serializeJSON();
+		var rol = $formMantenimiento.serializeJSON();
 		$.ajax({
 			type : "POST",
-			url : $variableUtil.root + "areaAdministrativo",
-			data : JSON.stringify(areaAdministrativo),
+			url : $variableUtil.root + "rol",
+			data : JSON.stringify(rol),
 			beforeSend : function(xhr) {
 				$local.$registrarMantenimiento.attr("disabled", true).find("i").removeClass("fa-floppy-o").addClass("fa-spinner fa-pulse fa-fw");
 				xhr.setRequestHeader('Content-Type', 'application/json');
@@ -144,7 +115,7 @@ $(document).ready(function() {
 			},
 			success : function(response) {
 				$funcionUtil.notificarException(response, "fa-check", "Aviso", "success");
-				var row = $local.tablaMantenimiento.row.add(areaAdministrativo).draw();
+				var row = $local.tablaMantenimiento.row.add(rol).draw();
 				row.show().draw(false);
 				$(row.node()).animateHighlight();
 				$local.$modalMantenimiento.PopupWindow("close");
@@ -155,27 +126,17 @@ $(document).ready(function() {
 				$local.$registrarMantenimiento.attr("disabled", false).find("i").addClass("fa-floppy-o").removeClass("fa-spinner fa-pulse fa-fw");
 			}
 		});
-		$local.$tablaMantenimiento.children("tbody").on("click", ".actualizar", function() {
-		$funcionUtil.prepararFormularioActualizacion($formMantenimiento);
-		$local.$filaSeleccionada = $(this).parents("tr");
-		var areaAdministrativo = $local.tablaMantenimiento.row($local.$filaSeleccionada).data();
-		$local.idAreaAdministrativoSeleccionado = areaAdministrativo.idAreaAdministrativo;
-		$funcionUtil.llenarFormulario(areaAdministrativo, $formMantenimiento);
-		$local.$actualizarMantenimiento.removeClass("hidden");
-		$local.$registrarMantenimiento.addClass("hidden");
-		$local.$modalMantenimiento.PopupWindow("open");
-	});
 	});
 	$local.$actualizarMantenimiento.on("click", function() {
 		if (!$formMantenimiento.valid()) {
 			return;
 		}
-		var areaAdministrativo = $formMantenimiento.serializeJSON();
-		areaAdministrativo.idAreaAdministrativo = $local.idAreaAdministrativoSeleccionado;
+		var rol = $formMantenimiento.serializeJSON();
+		rol.idrol = $local.idRolSeleccionado;
 		$.ajax({
 			type : "PUT",
-			url : $variableUtil.root + "areaAdministrativo",
-			data : JSON.stringify(areaAdministrativo),
+			url : $variableUtil.root + "rol",
+			data : JSON.stringify(rol),
 			beforeSend : function(xhr) {
 				$local.$actualizarMantenimiento.attr("disabled", true).find("i").removeClass("fa-pencil-square").addClass("fa-spinner fa-pulse fa-fw");
 				xhr.setRequestHeader('Content-Type', 'application/json');
@@ -190,7 +151,7 @@ $(document).ready(function() {
 			success : function(response) {
 				$funcionUtil.notificarException(response, "fa-check", "Aviso", "success");
 				$local.tablaMantenimiento.row($local.$filaSeleccionada).remove().draw(false);
-				var row = $local.tablaMantenimiento.row.add(areaAdministrativo).draw();
+				var row = $local.tablaMantenimiento.row.add(rol).draw();
 				row.show().draw(false);
 				$(row.node()).animateHighlight();
 				$local.$modalMantenimiento.PopupWindow("close");
@@ -202,13 +163,13 @@ $(document).ready(function() {
 			}
 		});
 	});
-	$local.$tablaMantenimiento.children("tbody").on("click", ".eliminar", function() {
+		$local.$tablaMantenimiento.children("tbody").on("click", ".eliminar", function() {
 		$local.$filaSeleccionada = $(this).parents("tr");
-		var areaAdministrativo = $local.tablaMantenimiento.row($local.$filaSeleccionada).data();
+		var rol = $local.tablaMantenimiento.row($local.$filaSeleccionada).data();
 		$.confirm({
 			icon : "fa fa-info-circle",
 			title : "Aviso",
-			content : "¿Desea eliminar la Area Administrativo <b>'" + areaAdministrativo.idAreaAdministrativo + "'<b/>?",
+			content : "¿Desea eliminar al rol <b>'" + rol.idrol + " - " + rol.nombre+"'<b/>?",
 			buttons : {
 				Aceptar : {
 					action : function() {
@@ -220,8 +181,8 @@ $(document).ready(function() {
 								self.buttons.close.hide();
 								$.ajax({
 									type : "DELETE",
-									url : $variableUtil.root + "areaAdministrativo",
-									data : JSON.stringify(areaAdministrativo),
+									url : $variableUtil.root + "rol",
+									data : JSON.stringify(rol),
 									autoclose : true,
 									beforeSend : function(xhr) {
 										xhr.setRequestHeader('Content-Type', 'application/json');
@@ -238,7 +199,7 @@ $(document).ready(function() {
 										$funcionUtil.notificarException($funcionUtil.obtenerMensajeErrorEnCadena(xhr.responseJSON), "fa-warning", "Aviso", "warning");
 										break;
 									case 409:
-										var mensaje = $funcionUtil.obtenerMensajeError("La Area Administrativo <b>" + areaAdministrativo.idAreaAdministrativo + "</b>", xhr.responseJSON, $variableUtil.accionEliminado);
+										var mensaje = $funcionUtil.obtenerMensajeError("La rol <b>" + rol.idrol + " - " + rol.nombre +"</b>", xhr.responseJSON, $variableUtil.accionEliminado);
 										$funcionUtil.notificarException(mensaje, "fa-warning", "Aviso", "warning");
 										break;
 									}
@@ -258,12 +219,7 @@ $(document).ready(function() {
 					keys : [ 'esc' ]
 				},
 			}
+			});
 		});
-	});
-
-
+		
 });
-
-
-
-
