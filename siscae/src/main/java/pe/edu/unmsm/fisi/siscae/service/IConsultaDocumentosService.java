@@ -2,13 +2,13 @@ package pe.edu.unmsm.fisi.siscae.service;
 
 import java.util.List;
 
-import pe.edu.unmsm.fisi.siscae.model.Documento;
-import pe.edu.unmsm.fisi.siscae.model.criterio.CriterioBusquedaDocumento;
-import pe.edu.unmsm.fisi.siscae.model.criterio.CriterioBusquedaNumeroDocumento;
+import pe.edu.unmsm.fisi.siscae.model.criterio.ConsultaPrestamosCriterioBusqueda;
+import pe.edu.unmsm.fisi.siscae.model.criterio.NumeroDocumentoIdentidadCriterioBusqueda;
+import pe.edu.unmsm.fisi.siscae.model.mantenimiento.Prestamo;
 
 public interface IConsultaDocumentosService
 {    
-    List<Documento> buscarPorCriterio(CriterioBusquedaDocumento criterioBusquedaDocumento);    
-    List<Documento> buscarPorNumeroDocumento(CriterioBusquedaNumeroDocumento criterioBusquedaNumeroDocumento);
-    Documento buscarPorNumeroEmision(CriterioBusquedaDocumento criterioBusquedaDocumento);    
+	public List<Prestamo> buscarTodos();
+	public List<Prestamo> buscarPorCriterio(ConsultaPrestamosCriterioBusqueda criterioBusqueda);
+	public List<Prestamo> buscarPorNumeroDocumentoIdentidad(NumeroDocumentoIdentidadCriterioBusqueda criterioBusqueda); 
 }
