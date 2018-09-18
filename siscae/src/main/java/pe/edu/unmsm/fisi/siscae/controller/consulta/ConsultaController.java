@@ -1,5 +1,6 @@
 package pe.edu.unmsm.fisi.siscae.controller.consulta;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -11,6 +12,7 @@ import pe.edu.unmsm.fisi.siscae.aspecto.enumeracion.Accion;
 import pe.edu.unmsm.fisi.siscae.aspecto.enumeracion.Comentario;
 import pe.edu.unmsm.fisi.siscae.aspecto.enumeracion.Tipo;
 import pe.edu.unmsm.fisi.siscae.controller.excepcion.anotacion.Vista;
+import pe.edu.unmsm.fisi.siscae.service.IConsultaPrestamosService;
 
 @Vista
 @Audit(accion = Accion.Visita, comentario = Comentario.VisitaConsulta)
@@ -21,10 +23,14 @@ public @Controller class ConsultaController
 	private static final String CONSULTA_PRESTAMO = CONSULTA_MOVIMIENTOS + "prestamo";
 	private static final String CONSULTA_INFRACCIONES = CONSULTA_MOVIMIENTOS + "infracciones";
 	
+	private @Autowired IConsultaPrestamosService consultaPrestamosService;
+
+	
     @Audit(tipo = Tipo.CON_MOV_PRESTAMO)
     @GetMapping("/{consulta:prestamo}")
     public String irPaginaConsultaPrestamos(@PathVariable String consulta, ModelMap model)
     {
+    	 model.addAttribute("prestamos",  consultaPrestamosService.buscarTodos());
         model.addAttribute("consulta", consulta);
         return CONSULTA_PRESTAMO;
     }

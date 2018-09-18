@@ -1,40 +1,36 @@
-package pe.edu.unmsm.fisi.siscae.service.impl.mantenimiento;
+package pe.edu.unmsm.fisi.siscae.service.impl.consulta;
 
 import java.util.List;
 
-import org.springframework.beans.factory.annotation.Qualifier;
-import org.springframework.transaction.annotation.Propagation;
-import org.springframework.transaction.annotation.Transactional;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
-import pe.edu.unmsm.fisi.siscae.mapper.IConsultaPrestamosMapper;
-import pe.edu.unmsm.fisi.siscae.model.Documento;
+import pe.edu.unmsm.fisi.siscae.mapper.IConsultaPrestamoMapper;
 import pe.edu.unmsm.fisi.siscae.model.consulta.PrestamoRecurso;
 import pe.edu.unmsm.fisi.siscae.model.criterio.ConsultaPrestamosCriterioBusqueda;
-import pe.edu.unmsm.fisi.siscae.model.criterio.CriterioBusquedaDocumento;
 import pe.edu.unmsm.fisi.siscae.model.criterio.NumeroDocumentoIdentidadCriterioBusqueda;
 import pe.edu.unmsm.fisi.siscae.service.IConsultaPrestamosService;
 
 
-
+@Service
 public class ConsultaPrestamosService implements IConsultaPrestamosService{
 
+	private @Autowired IConsultaPrestamoMapper consultaPrestamosMapper;
+	
 	@Override
 	public List<PrestamoRecurso> buscarTodos() {
-		// TODO Auto-generated method stub
-		return null;
+		return consultaPrestamosMapper.buscarTodos();
 	}
 
 	@Override
 	public List<PrestamoRecurso> buscarPorCriterio(ConsultaPrestamosCriterioBusqueda criterioBusqueda) {
-		// TODO Auto-generated method stub
-		return null;
+		return consultaPrestamosMapper.buscarPorCriterio(criterioBusqueda);
 	}
 
 	@Override
 	public List<PrestamoRecurso> buscarPorNumeroDocumentoIdentidad(
 			NumeroDocumentoIdentidadCriterioBusqueda criterioBusqueda) {
-		// TODO Auto-generated method stub
-		return null;
+		return consultaPrestamosMapper.buscarPorNumeroDocumentoIdentidad(criterioBusqueda);
 	}
 	
 	

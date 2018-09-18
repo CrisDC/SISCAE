@@ -15,9 +15,13 @@
 			    app_paterno,
 			    app_materno,
 		        codigo_alumno
-		  FROM ESTADO_AULA 
+		  FROM ESTADO_AULAS 
 	</sql>
 
+	<select id="buscarTodos" resultType="PrestamoRecurso">
+		<include refid="fragmentoSelectBuscarPrestamos" />
+	</select>
+	
 	<select id="buscarPorNumeroDocumentoIdentidad" resultType="PrestamoRecurso">
 		<include refid="fragmentoSelectBuscarPrestamos" />
 		<where>

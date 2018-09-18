@@ -30,55 +30,49 @@ import pe.edu.unmsm.fisi.siscae.utilitario.ValidatorUtil;
 import pe.edu.unmsm.fisi.siscae.validacion.grupo.accion.IActualizacion;
 import pe.edu.unmsm.fisi.siscae.validacion.grupo.accion.IRegistro;
 
-@Audit(tipo=Tipo.AREA_ADMINISTRATIVO, datos=Dato.AreaAdministrativo)
+@Audit(tipo = Tipo.AREA_ADMINISTRATIVO, datos = Dato.AreaAdministrativo)
 @RequestMapping("/areaAdministrativo")
 public @RestController class AreaAdministrativoController {
-private @Autowired IAreaAdministrativoService areaAdministrativoService;
-	
+	private @Autowired IAreaAdministrativoService areaAdministrativoService;
+
 	@GetMapping(params = "accion=buscarTodos")
-    public List<AreaAdministrativo> buscarTodos()
-    {
-        return areaAdministrativoService.buscarTodos();
-    }
-	
-	 @Audit(accion = Accion.REGISTRO, comentario = Comentario.Registro)
-	    @PostMapping
-	    public ResponseEntity<?> registrarAreaAdministrativo(
-	            @Validated({ Default.class, IRegistro.class }) @RequestBody AreaAdministrativo areaAdministrativo,
-	            Errors error)
-	    {
-	        if (error.hasErrors())
-	        {
-	            throw new BadRequestException(ValidatorUtil.obtenerMensajeValidacionError(error));
-	        }
-	        areaAdministrativoService.registrarAreaAdministrativo(areaAdministrativo);
-	        return ResponseEntity.ok(ConstantesGenerales.REGISTRO_EXITOSO);
-	    }
-	 
-	 @Audit(accion = Accion.ACTUALIZACION, comentario = Comentario.Actualizacion)
-	    @PutMapping
-	    public ResponseEntity<?> actualizarAreaAdministrativo(
-	            @Validated({ Default.class, IActualizacion.class }) @RequestBody AreaAdministrativo areaAdministrativo,
-	            Errors error)
-	    {
-	        if (error.hasErrors())
-	        {
-	            throw new BadRequestException(ValidatorUtil.obtenerMensajeValidacionError(error));
-	        }
-	        areaAdministrativoService.actualizarAreaAdministrativo(areaAdministrativo);
-	        return ResponseEntity.ok(ConstantesGenerales.ACTUALIZACION_EXITOSA);
-	    }
-	 @Audit(accion = Accion.ELIMINACION, comentario = Comentario.Eliminacion)
-	    @DeleteMapping
-	    public ResponseEntity<?> eliminarAreaAdministrativo(
-	            @Validated(IActualizacion.class) @RequestBody AreaAdministrativo areaAdministrativo, Errors error)
-	    {
-	        if (error.hasErrors())
-	        {
-	            throw new BadRequestException(ValidatorUtil.obtenerMensajeValidacionError(error));
-	        }
-	        areaAdministrativoService.eliminarAreaAdministrativo(areaAdministrativo);
-	        return ResponseEntity.ok(ConstantesGenerales.ELIMINACION_EXITOSA);
-	    }
-	 
+	public List<AreaAdministrativo> buscarTodos() {
+		return areaAdministrativoService.buscarTodos();
+	}
+
+	@Audit(accion = Accion.REGISTRO, comentario = Comentario.Registro)
+	@PostMapping
+	public ResponseEntity<?> registrarAreaAdministrativo(
+			@Validated({ Default.class, IRegistro.class }) @RequestBody AreaAdministrativo areaAdministrativo,
+			Errors error) {
+		if (error.hasErrors()) {
+			throw new BadRequestException(ValidatorUtil.obtenerMensajeValidacionError(error));
+		}
+		areaAdministrativoService.registrarAreaAdministrativo(areaAdministrativo);
+		return ResponseEntity.ok(ConstantesGenerales.REGISTRO_EXITOSO);
+	}
+
+	@Audit(accion = Accion.ACTUALIZACION, comentario = Comentario.Actualizacion)
+	@PutMapping
+	public ResponseEntity<?> actualizarAreaAdministrativo(
+			@Validated({ Default.class, IActualizacion.class }) @RequestBody AreaAdministrativo areaAdministrativo,
+			Errors error) {
+		if (error.hasErrors()) {
+			throw new BadRequestException(ValidatorUtil.obtenerMensajeValidacionError(error));
+		}
+		areaAdministrativoService.actualizarAreaAdministrativo(areaAdministrativo);
+		return ResponseEntity.ok(ConstantesGenerales.ACTUALIZACION_EXITOSA);
+	}
+
+	@Audit(accion = Accion.ELIMINACION, comentario = Comentario.Eliminacion)
+	@DeleteMapping
+	public ResponseEntity<?> eliminarAreaAdministrativo(
+			@Validated(IActualizacion.class) @RequestBody AreaAdministrativo areaAdministrativo, Errors error) {
+		if (error.hasErrors()) {
+			throw new BadRequestException(ValidatorUtil.obtenerMensajeValidacionError(error));
+		}
+		areaAdministrativoService.eliminarAreaAdministrativo(areaAdministrativo);
+		return ResponseEntity.ok(ConstantesGenerales.ELIMINACION_EXITOSA);
+	}
+
 }
