@@ -37,6 +37,8 @@ private Integer idEscuela;
 	@Pattern(regexp = Regex.SOLO_DIGITOS, message = "{Pattern.Escuela.id_Facultad}")
 	private Integer idFacultad;
 	
+	private String nombreFacultad;// agregue karen
+	
 	@NotNull(message = "{NotNull.Escuela.fecha_registro}")
 	@PastOrPresent
 	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd", timezone = "EST")

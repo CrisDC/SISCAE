@@ -73,9 +73,6 @@ $(document).ready(function() {
 				{
 					"data" : null,
 					"title" : 'Activo'
-				},
-				{
-					"title" :'Accion'
 				}]
 	});
 	

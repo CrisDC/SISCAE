@@ -33,10 +33,10 @@ $(document).ready(function() {
 			$tablaFuncion.aniadirFiltroDeBusquedaEnEncabezado(this, $local.$tablaMantenimiento);
 		},
 		"columnDefs" : [ {
-			"targets" : [ 0, 1, 2 ],
+			"targets" : [ 0, 1, 2, 3 ],
 			"className" : "all filtrable",
 		}, {
-			"targets" : 3,
+			"targets" : 4,
 			"className" : "all dt-center",
 			"defaultContent" : $variableUtil.botonActualizar + " " + $variableUtil.botonEliminar
 		} ],
@@ -47,8 +47,8 @@ $(document).ready(function() {
 			"data" : 'nombre',
 			"title" : "Nombre de la Escuela"
 		},{
-			"data" : 'idFacultad',
-			"title" : "Id de Facultad"
+			"data" : 'nombreFacultad',
+			"title" : "Nombre de la Facultad"//agregue
 		}, {
 			"data" : 'nombreFacultad',
 			"title" : "Facultad "

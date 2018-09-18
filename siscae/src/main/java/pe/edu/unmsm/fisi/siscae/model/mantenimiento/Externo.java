@@ -43,6 +43,12 @@ public class Externo {
     @NotBlank(message = "{NotBlank.Prestamo.usuarioModificacion}")
     @Length(min = 3, max = 45, message = "{Length.CodigoProcesoSwitch.usuarioModificacion}")
 	private String usuarioModificacion;
+	
+	private String descripcionCorta;
+	private Integer numDocumento;
+	private String nombre;
+	private String appPaterno;
+	private String appMaterno;
 
 
 }

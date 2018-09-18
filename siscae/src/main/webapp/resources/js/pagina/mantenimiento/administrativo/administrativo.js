@@ -33,13 +33,10 @@ $(document).ready(function() {
 			$tablaFuncion.aniadirFiltroDeBusquedaEnEncabezado(this, $local.$tablaMantenimiento);
 		},
 		"columnDefs" : [ {
-			"targets" : [ 0, 1, 2 ],
+			"targets" : [ 0, 1 ],
 			"className" : "all filtrable",
 		}, {
-			"targets" : [ 2, 3, 4, 5, 6, 7 ],
-			"className" : "filtrable",
-		}, {
-			"targets" : 8,
+			"targets" : 2,
 			"className" : "all dt-center",
 			"defaultContent" : $variableUtil.botonActualizar + " " + $variableUtil.botonEliminar
 		} ],
