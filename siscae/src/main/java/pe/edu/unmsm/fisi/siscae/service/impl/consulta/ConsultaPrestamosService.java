@@ -34,5 +34,4 @@ public class ConsultaPrestamosService implements IConsultaPrestamosService{
 	}
 	
 	
-
 }

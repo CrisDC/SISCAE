@@ -48,21 +48,20 @@
 										<div class="p-20">
 											<div class="row">
 
-												<div th:each="prestamo : ${prestamos}" class="recurso" id="for-each">
-													
-													<img th:src="@{/resources/images/cubo_verde.png}"
-														width="40" height="40">
-													
-													<p th:value="${prestamo.numero}" 
-															th:text="${prestamo.numero}"  ></p>
-													<p class="disponible">DISPONIBLE</p>
+												<div th:each="prestamo : ${prestamos}" class="recurso"
+													id="for-each">
+													<img th:if="${prestamo.estado} == 'DISPONIBLE' or ${prestamo.estado} == ''" th:src="@{/resources/images/cubo_verde.png}" width="40" height="40">
+													<img th:if="${prestamo.estado} == 'OCUPADO'" th:src="@{/resources/images/cubo_rojo.png}" width="40" height="40">
+													<img th:if="${prestamo.estado} == 'LIBERABLE'" th:src="@{/resources/images/cubo_amarillo.png}" width="40" height="40">
+													<p th:text="${prestamo.numero}"></p>
+													<p th:text="${prestamo.estado}" th:class="${prestamo.estado eq 'OCUPADO'}? 'ocupado' : 'disponible'"></p>
 													<p>
 														<b>T. restante</b>
 													</p>
-													<p>No iniciado</p>
+													<p th:text="${prestamo.estado eq 'DISPONIBLE'}? 'No iniciado' : ${prestamo.horaEntrada}"></p>
 												</div>
-												
-													
+
+
 											</div>
 										</div>
 									</div>
@@ -159,53 +158,73 @@
 			</div>
 		</div>
 		<!-- End Page wrapper  -->
-		
+
 		<!-- All Jquery -->
-    <script th:src="@{/resources/js/guiuser/lib/jquery/jquery.min.js}"></script>
-    <!-- Bootstrap tether Core JavaScript -->
-    <script th:src="@{/resources/js/guiuser/lib/bootstrap/js/popper.min.js}"></script>
-    <script th:src="@{/resources/js/guiuser/lib/bootstrap/js/bootstrap.min.js}"></script>
-    <!-- slimscrollbar scrollbar JavaScript -->
-    <script th:src="@{/resources/js/guiuser/jquery.slimscroll.js}"></script>
-    <!--Menu sidebar -->
-    <script th:src="@{/resources/js/guiuser/sidebarmenu.js}"></script>
-    <!--stickey kit -->
-    <script th:src="@{/resources/js/guiuser/lib/sticky-kit-master/dist/sticky-kit.min.js}"></script>
-    <!--Custom JavaScript -->
+		<script th:src="@{/resources/js/guiuser/lib/jquery/jquery.min.js}"></script>
+		<!-- Bootstrap tether Core JavaScript -->
+		<script
+			th:src="@{/resources/js/guiuser/lib/bootstrap/js/popper.min.js}"></script>
+		<script
+			th:src="@{/resources/js/guiuser/lib/bootstrap/js/bootstrap.min.js}"></script>
+		<!-- slimscrollbar scrollbar JavaScript -->
+		<script th:src="@{/resources/js/guiuser/jquery.slimscroll.js}"></script>
+		<!--Menu sidebar -->
+		<script th:src="@{/resources/js/guiuser/sidebarmenu.js}"></script>
+		<!--stickey kit -->
+		<script
+			th:src="@{/resources/js/guiuser/lib/sticky-kit-master/dist/sticky-kit.min.js}"></script>
+		<!--Custom JavaScript -->
 
 
-    <!-- Amchart -->
-    <script th:src="@{/resources/js/guiuser/lib/morris-chart/raphael-min.js}"></script>
-    <script th:src="@{/resources/js/guiuser/lib/morris-chart/morris.js}"></script>
-    <script th:src="@{/resources/js/guiuser/lib/morris-chart/dashboard1-init.js}"></script>
+		<!-- Amchart -->
+		<script
+			th:src="@{/resources/js/guiuser/lib/morris-chart/raphael-min.js}"></script>
+		<script th:src="@{/resources/js/guiuser/lib/morris-chart/morris.js}"></script>
+		<script
+			th:src="@{/resources/js/guiuser/lib/morris-chart/dashboard1-init.js}"></script>
 
 
-    <script th:src="@{/resources/js/guiuser/lib/calendar-2/moment.latest.min.js}"></script>
-    <!-- scripit init-->
-    <script th:src="@{/resources/js/guiuser/lib/calendar-2/semantic.ui.min.js}"></script>
-    <!-- scripit init-->
-    <script th:src="@{/resources/js/guiuser/lib/calendar-2/prism.min.js}"></script>
-    <!-- scripit init-->
-    <script th:src="@{/resources/js/guiuser/lib/calendar-2/pignose.calendar.min.js}"></script>
-    <!-- scripit init-->
-    <script th:src="@{/resources/js/guiuser/lib/calendar-2/pignose.init.js}"></script>
+		<script
+			th:src="@{/resources/js/guiuser/lib/calendar-2/moment.latest.min.js}"></script>
+		<!-- scripit init-->
+		<script
+			th:src="@{/resources/js/guiuser/lib/calendar-2/semantic.ui.min.js}"></script>
+		<!-- scripit init-->
+		<script th:src="@{/resources/js/guiuser/lib/calendar-2/prism.min.js}"></script>
+		<!-- scripit init-->
+		<script
+			th:src="@{/resources/js/guiuser/lib/calendar-2/pignose.calendar.min.js}"></script>
+		<!-- scripit init-->
+		<script
+			th:src="@{/resources/js/guiuser/lib/calendar-2/pignose.init.js}"></script>
 
-    <script th:src="@{/resources/js/guiuser/lib/owl-carousel/owl.carousel.min.js}"></script>
-    <script th:src="@{/resources/js/guiuser/lib/owl-carousel/owl.carousel-init.js}"></script>
-    <script th:src="@{/resources/js/guiuser/scripts.js}"></script>
-    <!-- scripit init-->
-    <script th:src="@{/resources/js/guiuser/inicio.js}"></script>
-    <script th:src="@{/resources/js/guiuser/custom.min.js}"></script>
+		<script
+			th:src="@{/resources/js/guiuser/lib/owl-carousel/owl.carousel.min.js}"></script>
+		<script
+			th:src="@{/resources/js/guiuser/lib/owl-carousel/owl.carousel-init.js}"></script>
+		<script th:src="@{/resources/js/guiuser/scripts.js}"></script>
+		<!-- scripit init-->
+		<script th:src="@{/resources/js/guiuser/inicio.js}"></script>
+		<script th:src="@{/resources/js/guiuser/custom.min.js}"></script>
 
-    <script th:src="@{/resources/js/guiuser/lib/datatables/datatables.min.js}"></script>
-    <script th:src="@{/resources/js/guiuser/lib/datatables/cdn.datatables.net/buttons/1.2.2/js/dataTables.buttons.min.js}"></script>
-    <script th:src="@{/resources/js/guiuser/lib/datatables/cdn.datatables.net/buttons/1.2.2/js/buttons.flash.min.js}"></script>
-    <script th:src="@{/resources/js/guiuser/lib/datatables/cdnjs.cloudflare.com/ajax/libs/jszip/2.5.0/jszip.min.js}"></script>
-    <script th:src="@{/resources/js/guiuser/lib/datatables/cdn.rawgit.com/bpampuch/pdfmake/0.1.18/build/pdfmake.min.js}"></script>
-    <script th:src="@{/resources/js/guiuser/lib/datatables/cdn.rawgit.com/bpampuch/pdfmake/0.1.18/build/vfs_fonts.js}"></script>
-    <script th:src="@{/resources/js/guiuser/lib/datatables/cdn.datatables.net/buttons/1.2.2/js/buttons.html5.min.js}"></script>
-    <script th:src="@{/resources/js/guiuser/lib/datatables/cdn.datatables.net/buttons/1.2.2/js/buttons.print.min.js}"></script>
-    <script th:src="@{/resources/js/guiuser/lib/datatables/datatables-init.js}"></script>
+		<script
+			th:src="@{/resources/js/guiuser/lib/datatables/datatables.min.js}"></script>
+		<script
+			th:src="@{/resources/js/guiuser/lib/datatables/cdn.datatables.net/buttons/1.2.2/js/dataTables.buttons.min.js}"></script>
+		<script
+			th:src="@{/resources/js/guiuser/lib/datatables/cdn.datatables.net/buttons/1.2.2/js/buttons.flash.min.js}"></script>
+		<script
+			th:src="@{/resources/js/guiuser/lib/datatables/cdnjs.cloudflare.com/ajax/libs/jszip/2.5.0/jszip.min.js}"></script>
+		<script
+			th:src="@{/resources/js/guiuser/lib/datatables/cdn.rawgit.com/bpampuch/pdfmake/0.1.18/build/pdfmake.min.js}"></script>
+		<script
+			th:src="@{/resources/js/guiuser/lib/datatables/cdn.rawgit.com/bpampuch/pdfmake/0.1.18/build/vfs_fonts.js}"></script>
+		<script
+			th:src="@{/resources/js/guiuser/lib/datatables/cdn.datatables.net/buttons/1.2.2/js/buttons.html5.min.js}"></script>
+		<script
+			th:src="@{/resources/js/guiuser/lib/datatables/cdn.datatables.net/buttons/1.2.2/js/buttons.print.min.js}"></script>
+		<script
+			th:src="@{/resources/js/guiuser/lib/datatables/datatables-init.js}"></script>
 
 	</div>
 </body>

@@ -14,8 +14,9 @@
 			    nombre, 
 			    app_paterno,
 			    app_materno,
-		        codigo_alumno
-		  FROM ESTADO_AULAS 
+		        codigo_alumno,
+		        area_estudio
+		  FROM WV_ESTADO_AULAS 
 	</sql>
 
 	<select id="buscarTodos" resultType="PrestamoRecurso">
@@ -26,10 +27,10 @@
 		<include refid="fragmentoSelectBuscarPrestamos" />
 		<where>
 			<if test="tipoDocumentoIdentidad != null and tipoDocumentoIdentidad != ''">
-				vwcdep.cod_tip_doc_ide = #{tipoDocumentoIdentidad}
+				WV_ESTADO_AULAS .cod_tip_doc_ide = #{tipoDocumentoIdentidad}
 			</if>
 			<if test="numeroDocumentoIdentidad != null and numeroDocumentoIdentidad != ''">
-				AND vwcdep.num_doc_ide = #{numeroDocumentoIdentidad}
+				AND WV_ESTADO_AULAS .num_doc_ide = #{numeroDocumentoIdentidad}
 			</if>
 		</where>
 	</select>
@@ -37,8 +38,8 @@
 	<select id="buscarPorCriterio" resultType="PrestamoRecurso">
 		<include refid="fragmentoSelectBuscarPrestamos" />
 		<where>
-			<if test="idRecurso != null and idRecurso != '-1'">
-				vwcdep.id_recurso = #{idRecurso}
+			<if test="areaEstudio != null and areaEstudio != '-1'">
+				WV_ESTADO_AULAS.area_estudio = #{areaEstudio}
 			</if>
 		</where>
 	</select>

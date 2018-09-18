@@ -12,6 +12,7 @@ import pe.edu.unmsm.fisi.siscae.aspecto.enumeracion.Accion;
 import pe.edu.unmsm.fisi.siscae.aspecto.enumeracion.Comentario;
 import pe.edu.unmsm.fisi.siscae.aspecto.enumeracion.Tipo;
 import pe.edu.unmsm.fisi.siscae.controller.excepcion.anotacion.Vista;
+import pe.edu.unmsm.fisi.siscae.model.criterio.ConsultaPrestamosCriterioBusqueda;
 import pe.edu.unmsm.fisi.siscae.service.IConsultaPrestamosService;
 
 @Vista
@@ -30,8 +31,11 @@ public @Controller class ConsultaController
     @GetMapping("/{consulta:prestamo}")
     public String irPaginaConsultaPrestamos(@PathVariable String consulta, ModelMap model)
     {
-    	 model.addAttribute("prestamos",  consultaPrestamosService.buscarTodos());
-        model.addAttribute("consulta", consulta);
+    	//model.addAttribute("prestamos",  consultaPrestamosService.buscarTodos());
+    	ConsultaPrestamosCriterioBusqueda criterioBusqueda = new ConsultaPrestamosCriterioBusqueda();
+    	criterioBusqueda.setAreaEstudio("BIBLIOTECA");
+    	model.addAttribute("prestamos",  consultaPrestamosService.buscarPorCriterio(criterioBusqueda));
+    	model.addAttribute("consulta", consulta);
         return CONSULTA_PRESTAMO;
     }
     
