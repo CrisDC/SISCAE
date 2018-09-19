@@ -44,9 +44,9 @@ public enum Tipo
     
     SolicitudTramite("Solicitud de Trámite"), 
     CON_ADM_ALUMNO("CONSULTA de Alumnos"), 
-    CON_MOV_PRESTAMO("Prestamo de recurso"), 
-    CON_MOV_INFRACCIONES("Consulta de Infracciones")
-    ;
+    CON_MOV_PRESTAMO("Prestamo de recurso"),
+    CON_MOV_NUEVOS("Registro de nuevos"), 
+    CON_MOV_INFRACCIONES("Consulta de Infracciones");
 
     private final String nombre;
 
