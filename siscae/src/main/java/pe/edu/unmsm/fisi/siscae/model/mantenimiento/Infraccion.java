@@ -53,4 +53,11 @@ public class Infraccion {
     @NotBlank(message = "{NotBlank.Infraccion.usuarioModificacion}")
     @Length(min = 3, max = 45, message = "{Length.CodigoProcesoSwitch.usuarioModificacion}")
 	private String usuarioModificacion;
+	private String descripcionTabla;
+	private String nombre;
+	private String appPaterno;
+	private String appMaterno;
+	private String descripcionTipoInfraccion;
+	
+	
 }

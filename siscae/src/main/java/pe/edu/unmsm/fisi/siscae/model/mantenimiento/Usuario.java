@@ -35,6 +35,7 @@ public class Usuario {
 	private Integer idRol;
 	
 	private Integer idPersona;
+	private String nombreRol;
  
 	
 	

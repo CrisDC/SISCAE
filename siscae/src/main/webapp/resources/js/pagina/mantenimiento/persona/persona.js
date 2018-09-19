@@ -33,20 +33,20 @@ $(document).ready(function() {
 			$tablaFuncion.aniadirFiltroDeBusquedaEnEncabezado(this, $local.$tablaMantenimiento);
 		},
 		"columnDefs" : [ {
-			"targets" : [ 0, 1, 2, 3, 4, 5, 6, 7 ],
+			"targets" : [ 0, 1, 2, 3, 4, 5, 6],
 			"className" : "all filtrable",
 		
 		}, {
-			"targets" : 8,
+			"targets" : 7,
 			"className" : "all dt-center",
 			"defaultContent" : $variableUtil.botonActualizar + " " + $variableUtil.botonEliminar
 		} ],
-		"columns" : [ {
-			"data" : 'idPersona',
-			"title" : "Id"
-		},{
+		"columns" : [{
 			"data" : 'numDocumento',
 			"title" : "Numero de documento"
+		},{
+			"data" : 'descripcionCorta',
+			"title" : "Tipo de documento"
 		},{
 			"data" : 'nombre',
 			"title" : "Nombre"
@@ -62,9 +62,6 @@ $(document).ready(function() {
 		},{
 			"data" : 'numTelef',
 			"title" : "Telefono"
-		},{
-			"data" : 'idTipoDocumento',
-			"title" : "Id de Tipo de documento"
 		},{
 			"data" : null,
 			"title" : 'Acción'

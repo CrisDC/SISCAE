@@ -232,16 +232,18 @@ $(document).ready(function() {
 				},
 			}
 		});
+		
+		$local.$tablaMantenimiento.children("tbody").on("click", ".actualizar", function() {
+			$funcionUtil.prepararFormularioActualizacion($formMantenimiento);
+			$local.$filaSeleccionada = $(this).parents("tr");
+			var facultad = $local.tablaMantenimiento.row($local.$filaSeleccionada).data();
+			$local.idFacultadSeleccionado = facultad.idFacultad;
+			$funcionUtil.llenarFormulario(facultad, $formMantenimiento);
+			$local.$actualizarMantenimiento.removeClass("hidden");
+			$local.$registrarMantenimiento.addClass("hidden");
+			$local.$modalMantenimiento.PopupWindow("open");
 	});
-	$local.$tablaMantenimiento.children("tbody").on("click", ".actualizar", function() {
-		$funcionUtil.prepararFormularioActualizacion($formMantenimiento);
-		$local.$filaSeleccionada = $(this).parents("tr");
-		var recurso = $local.tablaMantenimiento.row($local.$filaSeleccionada).data();
-		$local.idRecursoSeleccionado = recurso.idRecurso;
-		$funcionUtil.llenarFormulario(recurso, $formMantenimiento);
-		$local.$actualizarMantenimiento.removeClass("hidden");
-		$local.$registrarMantenimiento.addClass("hidden");
-		$local.$modalMantenimiento.PopupWindow("open");
+	
 	});
 
 });

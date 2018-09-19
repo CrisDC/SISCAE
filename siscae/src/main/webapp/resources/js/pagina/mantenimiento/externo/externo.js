@@ -47,7 +47,7 @@ $(document).ready(function() {
 			"data" : 'numDocumento',
 			"title" : "Número de documento"
 		},{
-			"data" : 'idEstadoTabla',
+			"data" : 'descripcion',
 			"title" : "Estado"
 		},{
 			"data" : 'nombre',
@@ -243,6 +243,16 @@ $(document).ready(function() {
 				},
 			}
 			});
+		
+		$local.$tablaMantenimiento.children("tbody").on("click", ".actualizar", function() {
+			$funcionUtil.prepararFormularioActualizacion($formMantenimiento);
+			$local.$filaSeleccionada = $(this).parents("tr");
+			var externo = $local.tablaMantenimiento.row($local.$filaSeleccionada).data();
+			$local.idExternoSeleccionado = externo.idExterno;
+			$funcionUtil.llenarFormulario(externo, $formMantenimiento);
+			$local.$actualizarMantenimiento.removeClass("hidden");
+			$local.$registrarMantenimiento.addClass("hidden");
+			$local.$modalMantenimiento.PopupWindow("open");
 		});
 	});
 });
