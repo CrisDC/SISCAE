@@ -29,8 +29,8 @@ import pe.edu.unmsm.fisi.siscae.utilitario.ValidatorUtil;
 import pe.edu.unmsm.fisi.siscae.validacion.grupo.accion.IActualizacion;
 import pe.edu.unmsm.fisi.siscae.validacion.grupo.accion.IRegistro;
 
-@Audit(tipo = Tipo.ESCUELA, datos = Dato.ESCUELA)
-@RequestMapping("/escuela ")
+@Audit(tipo = Tipo.ESCUELA, datos = Dato.Escuela)
+@RequestMapping("/escuela")
 public @RestController class EscuelaController {
 	private @Autowired IEscuelaService escuelaService;
 

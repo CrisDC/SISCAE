@@ -33,10 +33,10 @@ $(document).ready(function() {
 			$tablaFuncion.aniadirFiltroDeBusquedaEnEncabezado(this, $local.$tablaMantenimiento);
 		},
 		"columnDefs" : [ {
-			"targets" : [ 0, 1, 2, 3 ],
+			"targets" : [ 0, 1, 2 ],
 			"className" : "all filtrable",
 		}, {
-			"targets" : 4,
+			"targets" : 3,
 			"className" : "all dt-center",
 			"defaultContent" : $variableUtil.botonActualizar + " " + $variableUtil.botonEliminar
 		} ],
@@ -46,9 +46,6 @@ $(document).ready(function() {
 		}, {
 			"data" : 'nombre',
 			"title" : "Nombre de la Escuela"
-		},{
-			"data" : 'nombreFacultad',
-			"title" : "Nombre de la Facultad"//agregue
 		}, {
 			"data" : 'nombreFacultad',
 			"title" : "Facultad "
@@ -241,9 +238,9 @@ $(document).ready(function() {
 		$local.$tablaMantenimiento.children("tbody").on("click", ".actualizar", function() {
 			$funcionUtil.prepararFormularioActualizacion($formMantenimiento);
 			$local.$filaSeleccionada = $(this).parents("tr");
-			var recurso = $local.tablaMantenimiento.row($local.$filaSeleccionada).data();
-			$local.idRecursoSeleccionado = recurso.idRecurso;
-			$funcionUtil.llenarFormulario(recurso, $formMantenimiento);
+			var escuela = $local.tablaMantenimiento.row($local.$filaSeleccionada).data();
+			$local.idescuelaSeleccionado = escuela.idEscuela;
+			$funcionUtil.llenarFormulario(escuela, $formMantenimiento);
 			$local.$actualizarMantenimiento.removeClass("hidden");
 			$local.$registrarMantenimiento.addClass("hidden");
 			$local.$modalMantenimiento.PopupWindow("open");
