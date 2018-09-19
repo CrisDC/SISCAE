@@ -1,5 +1,6 @@
 package pe.edu.unmsm.fisi.siscae.model.consulta;
 
+import java.sql.Time;
 import java.time.LocalTime;
 import java.util.Date;
 
@@ -19,8 +20,8 @@ public class PrestamoRecurso
 	String tipoRecurso;
 	int maxCapacidad;
 	Date fechaPrestamo;
-	LocalTime horaEntrada;
-	LocalTime horaSalida;
+	Time horaEntrada; // este tipo de datos si funciona
+	Time horaSalida; // este tipo de datos si funciona
 	String estado;
 	String nombre;
 	String appPaterno;

@@ -56,7 +56,8 @@
 													<p th:if="${(prestamo.estado eq 'DISPONIBLE') or (prestamo.estado eq null)}" th:text="DISPONIBLE" class="disponible"></p>
 													<p th:if="${prestamo.estado} == 'OCUPADO'" th:text="OCUPADO" class="ocupado"></p>
 													<p th:if="${prestamo.estado} == 'LIBERABLE'" th:text="LIBERABLE" class="liberable"></p>
-													<p th:if="${prestamo.estado} == 'OCUPADO'" th:text="${prestamo.horaEntrada}" ></p>
+													<p th:text="${prestamo.estado eq 'DISPONIBLE'}? '' : ${prestamo.horaEntrada}"></p>
+													
 												</div>
 
 
