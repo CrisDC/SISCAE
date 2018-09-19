@@ -84,65 +84,16 @@
 													</thead>
 													<tbody>
 													
-														<tr>
-															<td>1</td>
-															<td><span class="badge badge-primary">DISPONIBLE</span>
-															</td>
-															<td>-</td>
-															<td>-</td>
-															<td>-</td>
-															<td>-</td>
-															<td>-</td>
-														</tr>
-														<tr>
-															<td>2</td>
-															<td><span class="badge badge-primary">DISPONIBLE</span>
-															</td>
-															<td>-</td>
-															<td>-</td>
-															<td>-</td>
-															<td>-</td>
-															<td>-</td>
-														</tr>
-														<tr>
-															<td>3</td>
-															<td><span class="badge badge-primary">DISPONIBLE</span>
-															</td>
-															<td>-</td>
-															<td>-</td>
-															<td>-</td>
-															<td>-</td>
-															<td>-</td>
-														</tr>
-														<tr>
-															<td>4</td>
-															<td><span class="badge badge-primary">DISPONIBLE</span>
-															</td>
-															<td>-</td>
-															<td>-</td>
-															<td>-</td>
-															<td>-</td>
-															<td>-</td>
-														</tr>
-														<tr>
-															<td>5</td>
-															<td><span class="badge badge-danger">OCUPADO</span>
-															</td>
-															<td>16200116</td>
-															<td>MARIO</td>
-															<td>CORTEZ ESCARATE</td>
-															<td>10:15:28</td>
-															<td>01:39:25</td>
-														</tr>
-														<tr>
-															<td>5</td>
-															<td><span class="badge badge-warning">LIBERABLE</span>
-															</td>
-															<td>16200138</td>
-															<td>KAREN</td>
-															<td>MUÑOZ ZAVALAETA</td>
-															<td>11:16:30</td>
-															<td>00:40:21</td>
+														<tr th:each="prestamo : ${prestamos}">
+															<td th:text="${prestamo.numero}"></td>
+															<td th:if="${(prestamo.estado eq 'DISPONIBLE') or (prestamo.estado eq null)}"><span class="badge badge-primary">DISPONIBLE</span></td></td>
+															<td th:if="${prestamo.estado} == 'OCUPADO'"><span class="badge badge-danger">OCUPADO</span></td>
+															<td th:if="${prestamo.estado} == 'LIBERABLE'"><span class="badge badge-warning">LIBERABLE</span></td>
+															<td th:text="${(prestamo.estado eq 'DISPONIBLE') or (prestamo.estado eq null)}? '-' : ${prestamo.codigoAlumno}"></td>
+															<td th:text="${(prestamo.estado eq 'DISPONIBLE') or (prestamo.estado eq null)}? '-' : ${prestamo.nombre}"></td>
+															<td th:text="${(prestamo.estado eq 'DISPONIBLE') or (prestamo.estado eq null)}? '-' : ${prestamo.appPaterno} + ' ' + ${prestamo.appMaterno}"></td>
+															<td th:text="${(prestamo.estado eq 'DISPONIBLE') or (prestamo.estado eq null)}? '-' : ${prestamo.horaEntrada}"></td>
+															<td th:text="${(prestamo.estado eq 'DISPONIBLE') or (prestamo.estado eq null)}? '-' : ${#dates.format(#dates.createNow(),'YYYY/MM/dd HH:mm')}"></td>
 														</tr>
 													</tbody>
 												</table>
