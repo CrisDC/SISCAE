@@ -47,29 +47,24 @@
 									<div class="tab-pane active" id="esquema" role="tabpanel">
 										<div class="p-20">
 											<div class="row">
-
-												<div th:each="prestamo : ${prestamos}" class="recurso"
-													id="for-each">
-													<img th:if="${prestamo.estado} == 'DISPONIBLE' or ${prestamo.estado} == ''" th:src="@{/resources/images/cubo_verde.png}" width="40" height="40">
+												<div th:each="prestamo : ${prestamos}" class="recurso" id="for-each">
+													<img th:if="${(prestamo.estado eq 'DISPONIBLE') or (prestamo.estado eq null)}" th:src="@{/resources/images/cubo_verde.png}" width="40" height="40">
 													<img th:if="${prestamo.estado} == 'OCUPADO'" th:src="@{/resources/images/cubo_rojo.png}" width="40" height="40">
 													<img th:if="${prestamo.estado} == 'LIBERABLE'" th:src="@{/resources/images/cubo_amarillo.png}" width="40" height="40">
 													<p th:text="${prestamo.numero}"></p>
-													<p th:text="${prestamo.estado}" th:class="${prestamo.estado eq 'OCUPADO'}? 'ocupado' : 'disponible'"></p>
-													<p>
-														<b>T. restante</b>
-													</p>
-													<p th:text="${prestamo.estado eq 'DISPONIBLE'}? 'No iniciado' : ${prestamo.horaEntrada}"></p>
+													<p th:if="${(prestamo.estado eq 'DISPONIBLE') or (prestamo.estado eq null)}" th:text="DISPONIBLE" class="disponible"></p>
+													<p th:if="${prestamo.estado} == 'OCUPADO'" th:text="OCUPADO" class="ocupado"></p>
+													<p th:if="${prestamo.estado} == 'LIBERABLE'" th:text="LIBERABLE" class="liberable"></p>
+													<p th:text="${prestamo.estado eq 'DISPONIBLE'}? '' : ${prestamo.horaEntrada}"></p>
 												</div>
-
-
 											</div>
 										</div>
 									</div>
 
 									<div class="tab-pane  p-20" id="tabla" role="tabpanel">
-										<div class="card">
-											<h3>Estado de la biblioteca</h3>
+											
 											<div class="table-responsive m-t-40">
+											<h3>Estado de la biblioteca</h3>
 												<table id="myTable"
 													class="table table-bordered table-striped">
 													<thead>
@@ -84,70 +79,21 @@
 														</tr>
 													</thead>
 													<tbody>
-														<tr>
-															<td>1</td>
-															<td><span class="badge badge-primary">DISPONIBLE</span>
-															</td>
-															<td>-</td>
-															<td>-</td>
-															<td>-</td>
-															<td>-</td>
-															<td>-</td>
-														</tr>
-														<tr>
-															<td>2</td>
-															<td><span class="badge badge-primary">DISPONIBLE</span>
-															</td>
-															<td>-</td>
-															<td>-</td>
-															<td>-</td>
-															<td>-</td>
-															<td>-</td>
-														</tr>
-														<tr>
-															<td>3</td>
-															<td><span class="badge badge-primary">DISPONIBLE</span>
-															</td>
-															<td>-</td>
-															<td>-</td>
-															<td>-</td>
-															<td>-</td>
-															<td>-</td>
-														</tr>
-														<tr>
-															<td>4</td>
-															<td><span class="badge badge-primary">DISPONIBLE</span>
-															</td>
-															<td>-</td>
-															<td>-</td>
-															<td>-</td>
-															<td>-</td>
-															<td>-</td>
-														</tr>
-														<tr>
-															<td>5</td>
-															<td><span class="badge badge-danger">OCUPADO</span>
-															</td>
-															<td>16200116</td>
-															<td>MARIO</td>
-															<td>CORTEZ ESCARATE</td>
-															<td>10:15:28</td>
-															<td>01:39:25</td>
-														</tr>
-														<tr>
-															<td>5</td>
-															<td><span class="badge badge-warning">LIBERABLE</span>
-															</td>
-															<td>16200138</td>
-															<td>KAREN</td>
-															<td>MUÑOZ ZAVALAETA</td>
-															<td>11:16:30</td>
-															<td>00:40:21</td>
+													
+														<tr th:each="prestamo : ${prestamos}">
+															<td th:text="${prestamo.numero}"></td>
+															<td th:if="${(prestamo.estado eq 'DISPONIBLE') or (prestamo.estado eq null)}"><span class="badge badge-primary">DISPONIBLE</span></td></td>
+															<td th:if="${prestamo.estado} == 'OCUPADO'"><span class="badge badge-danger">OCUPADO</span></td>
+															<td th:if="${prestamo.estado} == 'LIBERABLE'"><span class="badge badge-warning">LIBERABLE</span></td>
+															<td th:text="${(prestamo.estado eq 'DISPONIBLE') or (prestamo.estado eq null)}? '-' : ${prestamo.codigoAlumno}"></td>
+															<td th:text="${(prestamo.estado eq 'DISPONIBLE') or (prestamo.estado eq null)}? '-' : ${prestamo.nombre}"></td>
+															<td th:text="${(prestamo.estado eq 'DISPONIBLE') or (prestamo.estado eq null)}? '-' : ${prestamo.appPaterno} + ' ' + ${prestamo.appMaterno}"></td>
+															<td th:text="${(prestamo.estado eq 'DISPONIBLE') or (prestamo.estado eq null)}? '-' : ${prestamo.horaEntrada}"></td>
+															<td th:text="${(prestamo.estado eq 'DISPONIBLE') or (prestamo.estado eq null)}? '-' : ${#dates.format(#dates.createNow(),'YYYY/MM/dd HH:mm')}"></td>
 														</tr>
 													</tbody>
 												</table>
 											</div>
-										</div>
 									</div>
 								</div>
 							</div>
@@ -179,9 +125,6 @@
 		<!-- Amchart -->
 		<script
 			th:src="@{/resources/js/guiuser/lib/morris-chart/raphael-min.js}"></script>
-		<script th:src="@{/resources/js/guiuser/lib/morris-chart/morris.js}"></script>
-		<script
-			th:src="@{/resources/js/guiuser/lib/morris-chart/dashboard1-init.js}"></script>
 
 
 		<script

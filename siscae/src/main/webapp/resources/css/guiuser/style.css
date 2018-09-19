@@ -6939,18 +6939,21 @@ tbody tr td:last-child {
 .ocupado{
   color: #df003a;
   text-transform: uppercase;
+  width: 90px;
 
 }
 
 .disponible{
   color: #18A15F;
   text-transform: uppercase;
+  width: 90px;
 }
 
 
 .liberable{
   color: #DADF51;
   text-transform: uppercase;
+  width: 90px;
 }
 
 /*

@@ -23,6 +23,8 @@ public @Controller class ConsultaController
 	private static final String CONSULTA_MOVIMIENTOS = "seguras/consulta/movimientos/";
 	private static final String CONSULTA_PRESTAMO = CONSULTA_MOVIMIENTOS + "prestamo";
 	private static final String CONSULTA_INFRACCIONES = CONSULTA_MOVIMIENTOS + "infracciones";
+	private static final String CONSULTA_NUEVOS = CONSULTA_MOVIMIENTOS + "nuevos";
+	private static final String CONSULTA_REGISTRAR = CONSULTA_MOVIMIENTOS + "registrar";
 	
 	private @Autowired IConsultaPrestamosService consultaPrestamosService;
 
@@ -37,6 +39,25 @@ public @Controller class ConsultaController
     	model.addAttribute("prestamos",  consultaPrestamosService.buscarPorCriterio(criterioBusqueda));
     	model.addAttribute("consulta", consulta);
         return CONSULTA_PRESTAMO;
+    }
+    
+    @Audit(tipo = Tipo.CON_MOV_NUEVOS)
+    @GetMapping("/{consulta:nuevos}")
+    public String irPaginaConsultaNuevos(@PathVariable String consulta, ModelMap model)
+    {
+        model.addAttribute("consulta", consulta);
+        return CONSULTA_NUEVOS;
+    }
+    
+    @Audit(tipo = Tipo.CON_MOV_REGISTRAR)
+    @GetMapping("/{consulta:registrar}")
+    public String irPaginaConsultaRegistrar(@PathVariable String consulta, ModelMap model)
+    {
+    	ConsultaPrestamosCriterioBusqueda criterioBusqueda = new ConsultaPrestamosCriterioBusqueda();
+    	criterioBusqueda.setAreaEstudio("BIBLIOTECA");
+    	model.addAttribute("prestamos",  consultaPrestamosService.buscarPorCriterio(criterioBusqueda));
+    	model.addAttribute("consulta", consulta);
+        return CONSULTA_REGISTRAR;
     }
     
     @Audit(tipo = Tipo.CON_MOV_INFRACCIONES)
