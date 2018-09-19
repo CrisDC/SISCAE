@@ -24,35 +24,35 @@ import pe.edu.unmsm.fisi.siscae.utilitario.Regex;
 @NoArgsConstructor
 @AllArgsConstructor
 public class Escuela {
-private Integer idEscuela;
-	
-	@Size(min=3, max=60)
+	private Integer idEscuela;
+
+	@Size(min = 3, max = 60)
 	@Length(min = 3, max = 60)
 	@NotBlank(message = "{NotBlank.Escuela.nombre}")
 	@Pattern(regexp = Regex.SOLO_LETRAS_A_a, message = "{Pattern.Escuela.nombre}")
 	private String nombre;
-	
-	@Max(Integer.MAX_VALUE/2)
+
+	@Max(Integer.MAX_VALUE / 2)
 	@Min(1)
 	@Pattern(regexp = Regex.SOLO_DIGITOS, message = "{Pattern.Escuela.idFacultad}")
 	private Integer idFacultad;
-	
+
 	private String nombreFacultad;// agregue karen
-	
+
 	@NotNull(message = "{NotNull.Escuela.fecha_registro}")
 	@PastOrPresent
 	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd", timezone = "EST")
 	private Date fechaRegistro;
-	
+
 	@NotNull(message = "{NotNull.Escuela.usuario_registro}")
 	@NotBlank(message = "{NotBlank.Escuela.usuario_registro}")
 	@Pattern(regexp = Regex.ALFANUMERICO, message = "{Pattern.Escuela.usuario_registro}")
 	private String usuarioRegistro;
-	
+
 	@NotNull(message = "{NotNull.Escuela.fecha_modificacion}")
 	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd", timezone = "EST")
 	private Date fechaModificacion;
-	
+
 	@NotNull(message = "{NotNull.Escuela.usuario_modificacion}")
 	@NotBlank(message = "{NotBlank.Escuela.usuario_modificacion}")
 	@Pattern(regexp = Regex.ALFANUMERICO, message = "{Pattern.Escuela.usuario_modificacion}")
