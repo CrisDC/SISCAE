@@ -33,17 +33,14 @@ $(document).ready(function() {
 			$tablaFuncion.aniadirFiltroDeBusquedaEnEncabezado(this, $local.$tablaMantenimiento);
 		},
 		"columnDefs" : [ {
-			"targets" : [ 0, 1, 2, 3, 4, 5, 6, 7, 8, 9 ],
+			"targets" : [ 0, 1, 2, 3, 4, 5, 6, 7, 8 ],
 			"className" : "all filtrable",
 		}, {
-			"targets" : 10,
+			"targets" : 9,
 			"className" : "all dt-center",
 			"defaultContent" : $variableUtil.botonActualizar + " " + $variableUtil.botonEliminar
 		} ],
-		"columns" : [ {
-			"data" : 'idHorario',
-			"title" : "Id"
-		},{
+		"columns" : [{
 			"data" : 'horaInicio',
 			"title" : "Hora de inicio "
 		},{
