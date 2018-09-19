@@ -34,7 +34,7 @@ private Integer idEscuela;
 	
 	@Max(Integer.MAX_VALUE/2)
 	@Min(1)
-	@Pattern(regexp = Regex.SOLO_DIGITOS, message = "{Pattern.Escuela.id_Facultad}")
+	@Pattern(regexp = Regex.SOLO_DIGITOS, message = "{Pattern.Escuela.idFacultad}")
 	private Integer idFacultad;
 	
 	private String nombreFacultad;// agregue karen
