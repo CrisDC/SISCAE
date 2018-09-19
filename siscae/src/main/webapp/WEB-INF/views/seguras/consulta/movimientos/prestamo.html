@@ -47,7 +47,6 @@
 									<div class="tab-pane active" id="esquema" role="tabpanel">
 										<div class="p-20">
 											<div class="row">
-
 												<div th:each="prestamo : ${prestamos}" class="recurso" id="for-each">
 													<img th:if="${(prestamo.estado eq 'DISPONIBLE') or (prestamo.estado eq null)}" th:src="@{/resources/images/cubo_verde.png}" width="40" height="40">
 													<img th:if="${prestamo.estado} == 'OCUPADO'" th:src="@{/resources/images/cubo_rojo.png}" width="40" height="40">
@@ -57,10 +56,7 @@
 													<p th:if="${prestamo.estado} == 'OCUPADO'" th:text="OCUPADO" class="ocupado"></p>
 													<p th:if="${prestamo.estado} == 'LIBERABLE'" th:text="LIBERABLE" class="liberable"></p>
 													<p th:text="${prestamo.estado eq 'DISPONIBLE'}? '' : ${prestamo.horaEntrada}"></p>
-													
 												</div>
-
-
 											</div>
 										</div>
 									</div>

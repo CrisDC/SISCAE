@@ -24,7 +24,7 @@ public @Controller class ConsultaController
 	private static final String CONSULTA_PRESTAMO = CONSULTA_MOVIMIENTOS + "prestamo";
 	private static final String CONSULTA_INFRACCIONES = CONSULTA_MOVIMIENTOS + "infracciones";
 	private static final String CONSULTA_NUEVOS = CONSULTA_MOVIMIENTOS + "nuevos";
-	private static final String CONSULTA_REGISTRO = CONSULTA_MOVIMIENTOS + "registro";
+	private static final String CONSULTA_REGISTRAR = CONSULTA_MOVIMIENTOS + "registrar";
 	
 	private @Autowired IConsultaPrestamosService consultaPrestamosService;
 
@@ -49,12 +49,15 @@ public @Controller class ConsultaController
         return CONSULTA_NUEVOS;
     }
     
-    @Audit(tipo = Tipo.CON_MOV_REGISTRO)
-    @GetMapping("/{consulta:registro}")
-    public String irPaginaConsultaRegistro(@PathVariable String consulta, ModelMap model)
+    @Audit(tipo = Tipo.CON_MOV_REGISTRAR)
+    @GetMapping("/{consulta:registrar}")
+    public String irPaginaConsultaRegistrar(@PathVariable String consulta, ModelMap model)
     {
-        model.addAttribute("consulta", consulta);
-        return CONSULTA_REGISTRO;
+    	ConsultaPrestamosCriterioBusqueda criterioBusqueda = new ConsultaPrestamosCriterioBusqueda();
+    	criterioBusqueda.setAreaEstudio("BIBLIOTECA");
+    	model.addAttribute("prestamos",  consultaPrestamosService.buscarPorCriterio(criterioBusqueda));
+    	model.addAttribute("consulta", consulta);
+        return CONSULTA_REGISTRAR;
     }
     
     @Audit(tipo = Tipo.CON_MOV_INFRACCIONES)
