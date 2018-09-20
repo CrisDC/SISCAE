@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="pe.edu.unmsm.fisi.siscae.mapper.IConsultaInfraccionesMapper">
+
+	<sql id="fragmentoSelectBuscarInfracciones">
+		SELECT  numero_documento,
+			    nombre, 
+			    app_paterno,
+			    app_materno,
+		        tipo_recurso,
+			    fecha_infraccion,
+			    estado_infraccion,
+			    area_estudio
+		  FROM WV_INFRACCIONES_AULAS 
+	</sql>
+
+	<select id="buscarTodos" resultType="Infracciones">
+		<include refid="fragmentoSelectBuscarInfracciones" />
+	</select>
+	
+	<select id="buscarPorNumeroDocumentoIdentidad" resultType="Infracciones">
+		<include refid="fragmentoSelectBuscarInfracciones" />
+		<where>
+			<if test="tipoDocumentoIdentidad != null and tipoDocumentoIdentidad != ''">
+				WV_INFRACCIONES_AULAS .cod_tip_doc_ide = #{tipoDocumentoIdentidad}
+			</if>
+			<if test="numeroDocumentoIdentidad != null and numeroDocumentoIdentidad != ''">
+				AND WV_INFRACCIONES_AULAS .num_doc_ide = #{numeroDocumentoIdentidad}
+			</if>
+		</where>
+	</select>
+
+	<select id="buscarPorCriterio" resultType="Infracciones">
+		<include refid="fragmentoSelectBuscarInfracciones" />
+		<where>
+			<if test="areaEstudio != null and areaEstudio != '-1'">
+				WV_INFRACCIONES_AULAS.area_estudio = #{areaEstudio}
+			</if>
+		</where>
+	</select>
+
+
+</mapper>
