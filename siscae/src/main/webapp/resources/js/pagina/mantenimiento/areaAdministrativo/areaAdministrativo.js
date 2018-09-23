@@ -45,7 +45,7 @@ $(document).ready(function() {
 		} ],
 		"columns" : [{
 			"data" : 'nombreAreaEstudio',
-			"title" : "Id Area Estudio"
+			"title" : "Area Estudio"
 		}, {
 			"data" : 'codigo',
 			"title" : "Codigo Administrativo"

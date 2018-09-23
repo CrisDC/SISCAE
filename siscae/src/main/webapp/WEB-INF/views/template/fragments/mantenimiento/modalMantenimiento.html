@@ -1123,7 +1123,7 @@
 		<div class="form-group">
 			<label class="col-lg-2 control-label">Nombre</label>
 			<div class="col-lg-10">
-				<input class="form-control" name="nombre" disabled="disabled">
+				<input class="form-control" name="nombres" disabled="disabled">
 			</div>
 		</div>
 		<div class="form-group">
@@ -1505,22 +1505,22 @@
 		<div class="form-group">
 			<label class="col-lg-2 control-label">Area de Estudio</label>
 			<div class="col-lg-10">
-				<select id="idAreaEstudio" class="form-control select2 elemento-desactivable"
+				<select id="idAreaEstudio" class="form-control select2"
 					name="idAreaEstudio">
-					<option value="" selected="selected" disabled="disabled">Seleccione un Area de Estudio</option>
-					<option th:each="areaEstudio : ${areaEstudios}" th:value="${areaEstudio.idAreaEstudio}"
-						th:text="|${areaEstudio.idAreaEstudio} - ${areaEstudio.nombre}|"></option>
+					<option value="" selected="selected">Seleccione el area de estudio</option>
+					<option th:each="areaEstudio : ${areaEstudio}" th:value="${areaEstudio.idAreaEstudio}"
+						th:text="|${areaEstudio.nombre}|"></option>
 				</select>
 			</div>
 		</div>
 		<div class="form-group">
 			<label class="col-lg-2 control-label">Administrativo</label>
 			<div class="col-lg-10">
-				<select id="idAdministrativo" class="form-control select2 elemento-desactivable"
+				<select id="idAdministrativo" class="form-control select2 upperCase elemento-desactivable"
 					name="idAdministrativo">
-					<option value="" selected="selected" disabled="disabled">Seleccione un Administrativo</option>
+					<option value="" selected="selected">Seleccione un Administrativo</option>
 					<option th:each="administrativo : ${administrativos}" th:value="${administrativo.idAdministrativo}"
-						th:text="|${administrativo.idAdministrativo} - ${administrativo.persona.nombre}|"></option>
+						th:text="|${administrativo.persona.nombre}|"></option>
 				</select>
 			</div>
 		</div>
@@ -1539,7 +1539,7 @@
 		<div class="form-group">
 			<label class="col-lg-2 control-label">Cargo</label>
 			<div class="col-lg-10">
-				<input class="form-control upperCase elemento-desactivable" type="text" name="cargo" autofocus="autofocus" />
+				<input class="form-control" type="text" name="cargo" autofocus="autofocus" />
 			</div>
 		</div>
 	</th:block>
@@ -1594,7 +1594,7 @@
 		<div class="form-group">
 			<label class="col-lg-2 control-label">Descripcion</label>
 			<div class="col-lg-10">
-				<input class="form-control upperCase elemento-desactivable" type="number" name="descripcion" autofocus="autofocus" />
+				<input class="form-control" name="descripcion" autofocus="autofocus" />
 			</div>
 		</div>
 		<div class="form-group">
@@ -1607,11 +1607,11 @@
 		<div class="form-group">
 			<label class="col-lg-2 control-label">Estado del Recurso</label>
 			<div class="col-lg-10">
-				<select id="idEstadoTabla" class="form-control select2 elemento-desactivable"
+				<select id="idEstadoTabla" class="form-control select2"
 					name="idEstadoTabla">
-					<option value="" selected="selected" disabled="disabled">Seleccione el estado</option>
-					<option th:each="estado : ${estados}" th:value="${estado.idEstadoTabla}"
-						th:text="|${estado.idEstadoTabla} - ${estado.descripcion}|"></option>
+					<option value="" selected="selected">Seleccione  el estado</option>
+					<option th:each="estados : ${estados}" th:value="${estados.idEstadoTabla}"
+						th:text="|${estados.descripcion}|"></option>
 				</select>
 			</div>
 		</div>
@@ -1621,9 +1621,9 @@
 			<div class="col-lg-10">
 				<select id="idTipoRecurso" class="form-control select2 elemento-desactivable"
 					name="idTipoRecurso">
-					<option value="" selected="selected" disabled="disabled">Seleccione el tipo de recurso</option>
-					<option th:each="tipoRecurso : ${tipoRecursos}" th:value="${estado.idEstadoTabla}"
-						th:text="|${tipoRecurso.idTipoRecurso} - ${tipoRecurso.nombre}|"></option>
+					<option value="" selected="selected">Seleccione el tipo de recurso</option>
+					<option th:each="tipoRecursos : ${tipoRecursos}" th:value="${tipoRecursos.idTipoRecurso}"
+						th:text="|${tipoRecursos.nombre}|"></option>
 				</select>
 			</div>
 		</div>
@@ -1631,11 +1631,11 @@
 		<div class="form-group">
 			<label class="col-lg-2 control-label">Area de Estudio</label>
 			<div class="col-lg-10">
-				<select id="idAreaEstudio" class="form-control select2 elemento-desactivable"
+				<select id="idAreaEstudio" class="form-control select2"
 					name="idAreaEstudio">
-					<option value="" selected="selected" disabled="disabled">Seleccione el area de estudio</option>
-					<option th:each="areaEstudio : ${areasEstudio}" th:value="${areaEstudio.idAreaEstudio}"
-						th:text="|${areaEstudio.idAreaEstudio} - ${areaEstudio.nombre}|"></option>
+					<option value="" selected="selected">Seleccione el area de estudio</option>
+					<option th:each="areaEstudio : ${areaEstudio}" th:value="${areaEstudio.idAreaEstudio}"
+						th:text="|${areaEstudio.nombre}|"></option>
 				</select>
 			</div>
 		</div>

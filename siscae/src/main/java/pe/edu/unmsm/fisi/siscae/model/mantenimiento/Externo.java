@@ -44,6 +44,7 @@ public class Externo {
     @Length(min = 3, max = 45, message = "{Length.CodigoProcesoSwitch.usuarioModificacion}")
 	private String usuarioModificacion;
 	
+	private Integer idExterno;
 	private String descripcionCorta;
 	private Integer numDocumento;
 	private String nombre;
