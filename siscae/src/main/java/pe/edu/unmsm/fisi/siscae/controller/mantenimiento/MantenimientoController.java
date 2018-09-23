@@ -33,6 +33,7 @@ public @Controller class MantenimientoController
     	
         model.addAttribute("mantenimiento", mantenimiento);
         return "seguras/mantenimiento/mantenimiento";
+        
     }
     
    
