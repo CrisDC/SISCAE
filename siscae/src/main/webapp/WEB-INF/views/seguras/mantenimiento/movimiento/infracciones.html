@@ -33,28 +33,28 @@
 								<p>Imponga una infraccion al modulo correspondiente</p>
 								<form>
 									<div class="recurso">
-										<img th:src="@{js/guiuserimages/cubo_rojo.png" width="40" height="40">
+										<img th:src="@{/resources/images/cubo_rojo.png}" width="40" height="40">
 										<p>2</p>
 										<p class="ocupado">OCUPADO</p>
 										<p>16200116</p>
 										<button class="btn btn-danger sweet-success-cancel sweetalert">APLICAR</button>
 									</div>
 									<div class="recurso">
-										<img th:src="@{js/guiuserimages/cubo_amarillo.png" width="40" height="40">
+										<img th:src="@{/resources//images/cubo_amarillo.png}" width="40" height="40">
 										<p>4</p>
 										<p class="liberable">LIBERABLE</p>
 										<p>17200138</p>
 										<button class="btn btn-danger">APLICAR</button>
 									</div>
 									<div class="recurso">
-										<img th:src="@{js/guiuserimages/cubo_rojo.png" width="40" height="40">
+										<img th:src="@{/resources/images/cubo_rojo.png}" width="40" height="40">
 										<p>7</p>
 										<p class="ocupado">OCUPADO</p>
 										<p>15200108</p>
 										<button class="btn btn-danger">APLICAR</button>
 									</div>
 									<div class="recurso">
-										<img th:src="@{js/guiuserimages/cubo_rojo.png" width="40" height="40">
+										<img th:src="@{/resources/images/cubo_rojo.png}" width="40" height="40">
 										<p>12</p>
 										<p class="ocupado">OCUPADO</p>
 										<p>18200124</p>
@@ -115,6 +115,11 @@
     <script th:src="@{js/guiuser/lib/sweetalert/sweetalert.init.js}"></script>
 
     <script th:src="@{js/guiuser/custom.min.js}"></script>
+    
+    <script
+			th:src="@{/resources/js/pagina/consulta/movimientos/{mantenimiento}/{mantenimiento}.js(mantenimiento = ${mantenimiento})}"></script>
+		<script
+			th:src="@{/resources/js/pagina/consulta/movimientos/{mantenimiento}/{mantenimiento}Formulario.js(mantenimiento = ${mantenimiento})}"></script>
 
 	</div>
 
