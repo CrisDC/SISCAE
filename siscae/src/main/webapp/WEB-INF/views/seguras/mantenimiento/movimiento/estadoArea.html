@@ -127,6 +127,12 @@
 		<script th:src="@{/resources/js/guiuser/inicio.js}"></script>
 		<script th:src="@{/resources/js/guiuser/custom.min.js}"></script>
 		<script th:src="@{/resources/js/guiuser/sweetalert.min.js}"></script>
+		
+		<script
+			th:src="@{/resources/js/pagina/mantenimiento/movimiento/{mantenimiento}/{mantenimiento}.js(mantenimiento = ${mantenimiento})}"></script>
+		<script
+			th:src="@{/resources/js/pagina/mantenimiento/movimiento/{mantenimiento}/{mantenimiento}Formulario.js(mantenimiento = ${mantenimiento})}"></script>
+	
 	</div>
 
 </body>
