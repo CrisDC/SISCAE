@@ -40,6 +40,9 @@ public enum Tipo
     Usuario("Usuario"),
     
     
+    /*Movimientos*/
+    MOV_PRESTAMO("Moviminetos de prestamos"),
+    
     Ninguno(""), 
     
     SolicitudTramite("Solicitud de Trámite"), 
@@ -48,6 +51,7 @@ public enum Tipo
     CON_MOV_NUEVOS("Registro de nuevos solicitantes"), 
     CON_MOV_REGISTRAR("Realizar prestamo de recurso"), 
     CON_MOV_INFRACCIONES("Consulta de Infracciones");
+
 
     private final String nombre;
 

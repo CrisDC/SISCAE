@@ -203,9 +203,8 @@ public @Controller class MantenimientoController
     	model.addAttribute("consulta", mantenimiento);
         model.addAttribute("mantenimiento", mantenimiento);
         return "seguras/mantenimiento/movimiento/estadoArea"; 
-    }
-    
-    
+    }	
+
     
     
     

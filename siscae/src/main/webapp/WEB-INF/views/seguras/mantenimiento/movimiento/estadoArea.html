@@ -58,12 +58,11 @@
 										<div class="p-20">
 
 											<p>Seleccione su cubiculo disponible</p>
-											<div class="row">
+											<div class="row" id="for-each">
 
 
 
-												<div th:each="prestamo : ${prestamos}" class="recurso"
-													id="for-each">
+												<div th:each="prestamo : ${prestamos}" class="recurso">
 													<img
 														th:if="${(prestamo.estado eq 'DISPONIBLE') or (prestamo.estado eq null)}"
 														th:src="@{/resources/images/cubo_verde.png}" width="40"
@@ -82,8 +81,8 @@
 														th:text="OCUPADO" class="ocupado"></p>
 													<p th:if="${prestamo.estado} == 'LIBERABLE'"
 														th:text="LIBERABLE" class="liberable"></p>
-													<button th:id="${prestamo.numero}"
-														th:class="${(prestamo.estado eq 'DISPONIBLE') or (prestamo.estado eq null)} ? 'btn btn-info' : 'invisible' ">SOLICITAR</button>
+													<button th:id="${prestamo.numero}" th:key="${prestamo.idRecurso}"
+														th:class="${(prestamo.estado eq 'DISPONIBLE') or (prestamo.estado eq null)} ? 'btn btn-info solicitar' : 'invisible' ">SOLICITAR</button>
 												</div>
 
 
@@ -199,9 +198,9 @@
 		<script th:src="@{/resources/js/guiuser/sweetalert.min.js}"></script>
 
 		<script
-			th:src="@{/resources/js/pagina/consulta/movimientos/{mantenimiento}/{mantenimiento}.js(mantenimiento = ${mantenimiento})}"></script>
+			th:src="@{/resources/js/pagina/consulta/movimientos/{mantenimiento}s/{mantenimiento}s.js(mantenimiento = ${mantenimiento})}"></script>
 		<script
-			th:src="@{/resources/js/pagina/consulta/movimientos/{mantenimiento}/{mantenimiento}Formulario.js(mantenimiento = ${mantenimiento})}"></script>
+			th:src="@{/resources/js/pagina/consulta/movimientos/{mantenimiento}s/{mantenimiento}sFormulario.js(mantenimiento = ${mantenimiento})}"></script>
 
 	</div>
 
