@@ -27,14 +27,14 @@ $(document).ready(function(){
 		        	"idRecurso": idRecurso,
 		        	"numDocumento": inputValue
 		    };
-			prestamo.
+			
 			$.ajax({
                 url : "movimientoPrestamo",
                 type : 'POST',
                 data : JSON.stringify(prestamo),
-    			beforeSend : function(xhr) {
+                beforeSend : function(xhr) {
     				xhr.setRequestHeader('Content-Type', 'application/json');
-    				//xhr.setRequestHeader("X-CSRF-TOKEN", token);
+    				xhr.setRequestHeader("X-CSRF-TOKEN", $variableUtil.csrf);
     			},
     			statusCode : {
     				400 : function(response) {
