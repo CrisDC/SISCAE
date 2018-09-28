@@ -41,7 +41,7 @@ $(document).ready(function() {
 			"defaultContent" : $variableUtil.botonActualizar + " " + $variableUtil.botonEliminar
 		} ],
 		"columns" : [  {
-			"data" : 'codAdm',
+			"data" : 'codigoAdm',
 			"title" : "Codigo"
 		},{
 			"data" : 'nombre',

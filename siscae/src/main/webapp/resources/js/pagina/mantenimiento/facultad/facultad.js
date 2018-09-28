@@ -33,17 +33,14 @@ $(document).ready(function() {
 			$tablaFuncion.aniadirFiltroDeBusquedaEnEncabezado(this, $local.$tablaMantenimiento);
 		},
 		"columnDefs" : [ {
-			"targets" : [ 0, 1 ],
+			"targets" : [ 0],
 			"className" : "all filtrable",
 		}, {
-			"targets" : 2,
+			"targets" : 1,
 			"className" : "all dt-center",
 			"defaultContent" : $variableUtil.botonActualizar + " " + $variableUtil.botonEliminar
 		} ],
 		"columns" : [ {
-			"data" : 'idFacultad',
-			"title" : "Id"
-		}, {
 			"data" : 'nombre',
 			"title" : "Nombre"
 		}, {

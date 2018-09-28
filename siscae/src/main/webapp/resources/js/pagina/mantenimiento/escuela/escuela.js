@@ -33,17 +33,14 @@ $(document).ready(function() {
 			$tablaFuncion.aniadirFiltroDeBusquedaEnEncabezado(this, $local.$tablaMantenimiento);
 		},
 		"columnDefs" : [ {
-			"targets" : [ 0, 1, 2 ],
+			"targets" : [ 0, 1],
 			"className" : "all filtrable",
 		}, {
-			"targets" : 3,
+			"targets" : 2,
 			"className" : "all dt-center",
 			"defaultContent" : $variableUtil.botonActualizar + " " + $variableUtil.botonEliminar
 		} ],
 		"columns" : [ {
-			"data" : 'idEscuela',
-			"title" : "Id"
-		}, {
 			"data" : 'nombre',
 			"title" : "Nombre de la Escuela"
 		}, {
