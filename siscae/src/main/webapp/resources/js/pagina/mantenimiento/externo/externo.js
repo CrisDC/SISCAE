@@ -41,13 +41,7 @@ $(document).ready(function() {
 			"defaultContent" : $variableUtil.botonActualizar + " " + $variableUtil.botonEliminar
 		} ],
 		"columns" : [ {
-			"data" : 'descripcionCorta',
-			"title" : "Descripcion de tipo de documento"
-		},{
-			"data" : 'numDocumento',
-			"title" : "Número de documento"
-		},{
-			"data" : 'descripcion',
+			"data" : 'estado',
 			"title" : "Estado"
 		},{
 			"data" : 'nombre',

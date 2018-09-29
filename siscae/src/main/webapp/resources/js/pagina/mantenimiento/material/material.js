@@ -41,7 +41,7 @@ $(document).ready(function() {
 			"defaultContent" : $variableUtil.botonActualizar + " " + $variableUtil.botonEliminar
 		} ],
 		"columns" : [ {
-			"data" : 'nombre',
+			"data" : 'nombreMaterial',
 			"title" : "Nombre"
 		},{
 			"data" : 'tipo',

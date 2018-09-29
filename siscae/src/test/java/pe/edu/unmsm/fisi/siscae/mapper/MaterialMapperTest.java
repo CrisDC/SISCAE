@@ -29,7 +29,7 @@ public class MaterialMapperTest {
 		
 		material.setIdMaterial(1);
 		material.setNombreMaterial("libro");
-		material.setIdTipoMaterial(1);
+		material.setIdTipoMaterial(10);
 
 		Parametro<Material> operacion = new Parametro<>(Operacion.SELECT, material, "TEST USER");	
 		

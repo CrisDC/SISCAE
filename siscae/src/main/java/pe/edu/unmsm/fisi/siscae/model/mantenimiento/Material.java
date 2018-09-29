@@ -27,7 +27,7 @@ public class Material {
 	@NotNull(message = "{NotNull.Material.nombreMaterial}")
     @NotBlank(message = "{NotBlank.Material.nombreMaterial}")
     @Length(min = 3, max = 45, message = "{Length.CodigoProcesoSwitch.nombreMaterial}")
-	private String nombre;
+	private String nombreMaterial;
 	
 	private Integer idTipoMaterial;
 	
