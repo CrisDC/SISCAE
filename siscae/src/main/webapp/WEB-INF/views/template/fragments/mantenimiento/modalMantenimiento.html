@@ -1095,6 +1095,7 @@
 		</div>
 		
 	</th:block>
+	<!-- Tabla Alumno -->
 	<th:block th:fragment="alumno">
 		<div class="form-group">
 			<label class="col-lg-2 control-label">Tipo de documento</label>
@@ -1110,32 +1111,32 @@
 		<div class="form-group">
 			<label class="col-lg-2 control-label">Número de Documento</label>
 			<div class="col-lg-10">
-				<input class="form-control upperCase elemento-desactivable" name="numDocumento"
+				<input class="form-control upperCase elemento-desactivable" name="numeroDocumento"
 					autofocus="autofocus" />
 			</div>
 		</div>
 		<div class="form-group">
 			<label class="col-lg-2 control-label">Código de Alumno</label>
 			<div class="col-lg-10">
-				<input class="form-control" name="codigoAlumno">
+				<input class="form-control upperCase elemento-desactivable" name="codigoAlumno">
 			</div>
 		</div>
 		<div class="form-group">
 			<label class="col-lg-2 control-label">Nombre</label>
 			<div class="col-lg-10">
-				<input class="form-control" name="nombres" disabled="disabled">
+				<input class="form-control upperCase elemento-desactivable" name="nombres" >
 			</div>
 		</div>
 		<div class="form-group">
 			<label class="col-lg-2 control-label">Apellido Paterno </label>
 			<div class="col-lg-10">
-				<input class="form-control" name="appPaterno" disabled="disabled">
+				<input class="form-control upperCase elemento-desactivable" name="appPaterno">
 			</div>
 		</div>
 		<div class="form-group">
-			<label class="col-lg-2 control-label">Apellido Materno</label>
+			<label class="col-lg-2 control-label upperCase elemento-desactivable">Apellido Materno</label>
 			<div class="col-lg-10">
-				<input class="form-control" name="appMaterno" disabled="disabled">
+				<input class="form-control" name="appMaterno" >
 			</div>
 		</div>
 		<div class="form-group">
@@ -1152,13 +1153,13 @@
 		<div class="form-group">
 			<label class="col-lg-2 control-label">Telefono</label>
 			<div class="col-lg-10">
-				<input class="form-control" name="numTelef" disabled="disabled">
+				<input class="form-control" name="numTelef">
 			</div>
 		</div>
 		<div class="form-group">
 			<label class="col-lg-2 control-label">Fecha de nacimiento</label>
 			<div class="col-lg-10">
-				<input type="date" class="date" name="fechaNac" disabled="disabled">
+				<input type="date" class="date" name="fechaNac" >
 			</div>
 		</div>
 		<div class="form-group">
@@ -1459,6 +1460,7 @@
 			</div>
 		</div>
 	</th:block>
+	<!-- Tabla Facultad -->
 	<th:block th:fragment="facultad">	
 		<div class="form-group">
 			<label class="col-lg-2 control-label">Nombre de la Facultad</label>
@@ -1468,6 +1470,7 @@
 			</div>
 		</div>
 	</th:block>	
+	<!-- Tabla Escuela -->
 	<th:block th:fragment="escuela">
 		<div class="form-group">
 			<label class="col-lg-2 control-label">Nombre de Escuela</label>
@@ -1483,7 +1486,7 @@
 					name="idFacultad">
 					<option value="" selected="selected" disabled="disabled">Seleccione una Facultad</option>
 					<option th:each="facultad : ${facultad}" th:value="${facultad.idFacultad}"
-						th:text="|${facultad.idFacultad} - ${facultad.nombre}|"></option>
+						th:text="|${facultad.nombre}|"></option>
 				</select>
 			</div>
 		</div>
@@ -1496,6 +1499,41 @@
 			<div class="col-lg-10">
 				<input class="form-control upperCase elemento-desactivable" type="text" name="codigoAdm"
 					autofocus="autofocus" />
+			</div>
+		</div>
+		<div class="form-group">
+			<label class="col-lg-2 control-label">Nombre</label>
+			<div class="col-lg-10">
+				<input class="form-control" name="nombre">
+			</div>
+		</div>
+		<div class="form-group">
+			<label class="col-lg-2 control-label">Apellido Paterno </label>
+			<div class="col-lg-10">
+				<input class="form-control" name="appPaterno">
+			</div>
+		</div>
+		<div class="form-group">
+			<label class="col-lg-2 control-label">Apellido Materno</label>
+			<div class="col-lg-10">
+				<input class="form-control" name="appMaterno">
+			</div>
+		</div>
+		<div class="form-group">
+			<label class="col-lg-2 control-label">Sexo</label>
+			<div class="col-lg-10">
+				<select id="sexo" class="form-control select2 elemento-desactivable"
+					name="sexo">
+					<option value="" selected="selected" disabled="disabled">Seleccione el sexo</option>
+					<option value="" selected="selected" >Masculino</option>
+					<option value="" selected="selected" >Femenino</option>
+				</select>
+			</div>
+		</div>
+		<div class="form-group">
+			<label class="col-lg-2 control-label">Telefono</label>
+			<div class="col-lg-10">
+				<input class="form-control select2 elemento-desactivable" name="numTelef">
 			</div>
 		</div>
 	</th:block>
@@ -1539,7 +1577,7 @@
 		<div class="form-group">
 			<label class="col-lg-2 control-label">Cargo</label>
 			<div class="col-lg-10">
-				<input class="form-control" type="text" name="cargo" autofocus="autofocus" />
+				<input class="form-control " type="text" name="cargo" autofocus="autofocus" />
 			</div>
 		</div>
 	</th:block>
@@ -1556,13 +1594,19 @@
 		<div class="form-group">
 			<label class="col-lg-2 control-label">Pabellon</label>
 			<div class="col-lg-10">
-				<input class="form-control upperCase elemento-modificable" type="text" name="pabellon" autofocus="autofocus" />
+				<input class="form-control upperCase elemento-desactivable" type="text" name="pabellon" autofocus="autofocus" />
 			</div>
 		</div>
 		<div class="form-group">
 			<label class="col-lg-2 control-label">Nivel</label>
 			<div class="col-lg-10">
-				<input class="form-control upperCase elemento-modificable" type="text" name="nivel" autofocus="autofocus" />
+				<input class="form-control upperCase elemento-desactivable" type="text" name="nivel" autofocus="autofocus" />
+			</div>
+		</div>
+		<div class="form-group">
+			<label class="col-lg-2 control-label">Aforo</label>
+			<div class="col-lg-10">
+				<input class="form-control upperCase elemento-desactivable" type="text" name="aforo" autofocus="autofocus" />
 			</div>
 		</div>
 	</th:block>
@@ -1640,28 +1684,7 @@
 			</div>
 		</div>
 		
-		<div class="form-group">
-			<label class="col-lg-2 control-label">Ubicacion</label>
-			<div class="col-lg-10">
-				<select id="idUbicacion" class="form-control select2 elemento-desactivable"
-					name="idUbicacion">
-					<option value="" selected="selected" disabled="disabled">Seleccione la ubicacion</option>
-					<option th:each="ubicacion : ${ubicaciones}" th:value="${ubicacion.idUbicacion}"
-						th:text="|${ubicacion.idUbicacion} - ${ubicacion.coordenadaX} , ${ubicacion.coordenadaY}|"></option>
-				</select>
-			</div>
-		</div>
-		<div class="form-group">
-			<label class="col-lg-2 control-label">Recurso Padre</label>
-			<div class="col-lg-10">
-				<select id="idRecursoPadre" class="form-control select2 elemento-desactivable"
-					name="idRecursoPadre">
-					<option value="" selected="selected" disabled="disabled">Seleccione el recurso padre</option>
-					<option th:each="recurso : ${recursos}" th:value="${recurso.idRecurso}"
-						th:text="|${recurso.idRecurso} - ${recurso.descripcion}|"></option>
-				</select>
-			</div>
-		</div>
+		
 	</th:block>
 	
 	<!-- Tabla Rol -->
@@ -1674,26 +1697,33 @@
 		</div>
 	</th:block>
 	
+	
 	<!-- Tabla Tipo Recurso -->
 	<th:block th:fragment="tipoRecurso">
 		<div class="form-group">
 			<label class="col-lg-2 control-label">Nombre</label>
 			<div class="col-lg-10">
-				<input class="form-control upperCase elemento-modificable" type="text" name="nombre" autofocus="autofocus" />
+				<input class="form-control upperCase upperCase elemento-desactivable" type="text" name="nombre" autofocus="autofocus" />
 			</div>
 		</div>
 		<div class="form-group">
 			<label class="col-lg-2 control-label">Descripcion</label>
 			<div class="col-lg-10">
-				<input class="form-control upperCase elemento-modificable" type="text" name="descripcion" autofocus="autofocus" />
+				<input class="form-control upperCase upperCase elemento-desactivable" type="text" name="descripcion" autofocus="autofocus" />
 			</div>
 		</div>
 		<div class="form-group">
 			<label class="col-lg-2 control-label">Uso</label>
 			<div class="col-lg-10">
-				<input class="form-control upperCase elemento-modificable" type="text" name="uso" autofocus="autofocus" />
+				<select id="sexo" class="form-control "
+					name="sexo">
+					<option value="" selected="selected" disabled="disabled">Seleccione el uso</option>
+					<option value="" >Individual</option>
+					<option value="" >Grupal</option>
+				</select>
 			</div>
 		</div>
+				
 	</th:block>
 	
 	<!-- Tabla Ubicacion -->

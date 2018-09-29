@@ -17,6 +17,7 @@ import pe.edu.unmsm.fisi.siscae.service.IAreaEstudioService;
 import pe.edu.unmsm.fisi.siscae.service.IConsultaPrestamosService;
 import pe.edu.unmsm.fisi.siscae.service.IEscuelaService;
 import pe.edu.unmsm.fisi.siscae.service.IEstadoTablaService;
+import pe.edu.unmsm.fisi.siscae.service.IFacultadService;
 import pe.edu.unmsm.fisi.siscae.service.IMultiTabDetService;
 import pe.edu.unmsm.fisi.siscae.service.ITipoRecursoService;
 
@@ -33,6 +34,7 @@ public @Controller class MantenimientoController
     private @Autowired ITipoRecursoService tipoRecursoService;
     private @Autowired IAdministrativoService administrativoService;
     private @Autowired IConsultaPrestamosService consultaPrestamosService;
+    private @Autowired IFacultadService facultadService;
     
 
 /*   */
@@ -85,6 +87,7 @@ public @Controller class MantenimientoController
     public String irPaginaMantenimientoEscuela(@PathVariable String mantenimiento, ModelMap model)
     {
         model.addAttribute("mantenimiento", mantenimiento);
+        model.addAttribute("facultad", this.facultadService.buscarTodos());
         return "seguras/mantenimiento/mantenimiento";
     }
     
