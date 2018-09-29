@@ -1,17 +1,19 @@
-$('#salida').click(function () {
-	swal("Registrar salida",{
-		title: "Registrar salida",
-		text: "Ingrese su carnet de biblioteca por el scanner",
-		content: "input",
-		icon: "resources/images/nuevo_gif.gif",
-	});
-	$.get('/prestamo', { userId : 1234 }, function(resp) {
-		console.log(resp);
-	});
-})
-
 //Capturar el id de un button en el div con id for-each
 $(document).ready(function(){
+
+	
+	$('#salida').click(function () {
+		swal("Registrar salida",{
+			title: "Registrar salida",
+			text: "Ingrese su carnet de biblioteca por el scanner",
+			content: "input",
+			icon: "resources/images/nuevo_gif.gif",
+		});
+		$.get('/prestamo', { userId : 1234 }, function(resp) {
+			console.log(resp);
+		});
+	})
+	
       $('body #for-each').on('click', 'button', function(){
         let idRecurso = $(this).attr('key');
         let numRecurso = $(this).attr('id');
@@ -25,11 +27,11 @@ $(document).ready(function(){
 			
 			var prestamo ={
 		        	"idRecurso": idRecurso,
-		        	"numDocumento": inputValue
+		        	"numDocumentoSolicitante": inputValue
 		    };
 			
 			$.ajax({
-                url : "movimientoPrestamo",
+                url :  $variableUtil.root + "movimientoPrestamo",
                 type : 'POST',
                 data : JSON.stringify(prestamo),
                 beforeSend : function(xhr) {

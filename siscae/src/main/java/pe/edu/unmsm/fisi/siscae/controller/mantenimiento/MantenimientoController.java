@@ -132,7 +132,7 @@ public @Controller class MantenimientoController
 
 
     @Audit(tipo = Tipo.MATERIAL)
-    @GetMapping("/{mantenimiento:mantenimiento}")
+    @GetMapping("/{mantenimiento:material}")
     public String irPaginaMantenimientoMaterial(@PathVariable String mantenimiento, ModelMap model)
     {
         model.addAttribute("mantenimiento", mantenimiento);

@@ -16,6 +16,7 @@ import pe.edu.unmsm.fisi.siscae.aspecto.enumeracion.Accion;
 import pe.edu.unmsm.fisi.siscae.aspecto.enumeracion.Comentario;
 import pe.edu.unmsm.fisi.siscae.aspecto.enumeracion.Dato;
 import pe.edu.unmsm.fisi.siscae.aspecto.enumeracion.Tipo;
+import pe.edu.unmsm.fisi.siscae.configuracion.security.SecurityContextFacade;
 import pe.edu.unmsm.fisi.siscae.model.mantenimiento.AreaAdministrativo;
 import pe.edu.unmsm.fisi.siscae.model.mantenimiento.MovimientoPrestamo;
 import pe.edu.unmsm.fisi.siscae.service.IAreaAdministrativoService;
@@ -38,6 +39,9 @@ public @RestController class MovimientoPrestamoController {
 		if (error.hasErrors()) {
 			throw new BadRequestException(ValidatorUtil.obtenerMensajeValidacionError(error));
 		}
+		movimientoPrestamo.setNombreUsuario(SecurityContextFacade.obtenerNombreUsuario()); 
+		System.out.println(movimientoPrestamo);
+		SecurityContextFacade.obtenerNombreUsuario();
 		movimientoPrestamoService.registrarMovimientoPrestamo(movimientoPrestamo);
 		return ResponseEntity.ok(ConstantesGenerales.REGISTRO_EXITOSO);
 	}

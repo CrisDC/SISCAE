@@ -22,7 +22,7 @@ public class Usuario {
 	@NotNull(message = "{NotNull.Usuario.username}")
     @NotBlank(message = "{NotBlank.Usuario.username}")
     @Length(min = 3, max = 45, message = "{Length.CodigoProcesoSwitch.username}")
-	private String username;
+	private String nombre;
 	
 	@NotNull(message = "{NotNull.Usuario.pass}")
     @NotBlank(message = "{NotBlank.Usuario.pass}")

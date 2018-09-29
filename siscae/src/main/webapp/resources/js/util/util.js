@@ -493,7 +493,7 @@ $(document).ready(function() {
 	// $(".upperCase").on("keyup", function() {
 	// this.value = this.value.toUpperCase();
 	// });
-	$(".upperCase").bestupper();
+	//$(".upperCase").bestupper();
 
 	$('body').tooltip({
 		selector : "[data-tooltip=tooltip]",

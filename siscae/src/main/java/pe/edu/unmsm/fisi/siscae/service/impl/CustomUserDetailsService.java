@@ -29,18 +29,14 @@ public class CustomUserDetailsService implements UserDetailsService
     @Transactional(propagation = Propagation.REQUIRES_NEW)
     public UserDetails loadUserByUsername(String login) throws UsernameNotFoundException
     {
-        Usuario usuario = Usuario.builder().username("SOLI")
-                                                 .pass("$2a$10$OHsJajOJrNZiZmdwBGMMZeKrAp8DbqmzfhgPYxDoONGWtXAl0Ig8u")
-                                                 .build();
-                //usuarioService.buscarPorIdUsuarioParaInicioSesion(login);
-        System.out.println("Policia" + usuario);
+        Usuario usuario = usuarioService.buscarPorId(login);
         if (usuario != null)
         {
             List<GrantedAuthority> authorities = new ArrayList<GrantedAuthority>();
             authorities.add(new SimpleGrantedAuthority("ROLE_A"));
          
-            System.out.println("Policia" + usuario); //no esta activo el usuario usuario.esActivo()
-            return new CustomUser(usuario.getUsername(), usuario.getPass(), true, true, true,
+            System.out.println("Politica" + usuario); //no esta activo el usuario usuario.esActivo()
+            return new CustomUser(usuario.getNombre(), usuario.getPass(), true, true, true,
                     true, authorities);
         //getGrantedAuthorities(
           //                  recursoMapper.obtenerRecursosPermitidosPorIdUsuario(login) ));
