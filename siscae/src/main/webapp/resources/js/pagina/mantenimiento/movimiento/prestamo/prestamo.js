@@ -215,8 +215,12 @@ $(document).ready(function() {
 				$local.$actualizarMantenimiento.attr("disabled", false).find("i").addClass("fa-pencil-square").removeClass("fa-spinner fa-pulse fa-fw");
 			}
 		});
-		$local.$tablaMantenimiento.children("tbody").on("click", ".eliminar", function() {
-		$local.$filaSeleccionada = $(this).parents("tr");
+		
+		
+		$local.$DIVREcurso.on("click", ".solicitar", function() {
+		
+			
+			$local.$filaSeleccionada = $(this).parents("tr");
 		var empresa = $local.tablaMantenimiento.row($local.$filaSeleccionada).data();
 		$.confirm({
 			icon : "fa fa-info-circle",

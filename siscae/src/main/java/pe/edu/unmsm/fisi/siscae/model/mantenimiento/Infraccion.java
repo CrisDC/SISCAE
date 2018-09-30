@@ -35,22 +35,12 @@ public class Infraccion {
 	
 	private Integer idPersona;
 	private Integer idTipoInfraccion;
-	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd", timezone = "EST")
-    @NotNull(message = "{NotNull.Infraccion.fechaRegistro}")
-	private Date fechaRegistro;
-	
-	@NotNull(message = "{NotNull.Infraccion.usuarioRegistro}")
-    @NotBlank(message = "{NotBlank.Infraccion.usuarioRegistro}")
-    @Length(min = 3, max = 45, message = "{Length.CodigoProcesoSwitch.usuarioRegistro}")
-	private String usuarioRegistro;
+
+	private String descripcionTabla;
+	private String nombre;
+	private String appPaterno;
+	private String appMaterno;
+	private String descripcionTipoInfraccion;
 	
 	
-	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd", timezone = "EST")
-    @NotNull(message = "{NotNull.Infraccion.fechaModificacion}")
-	private Date fechaModificacion;
-	
-	@NotNull(message = "{NotNull.Infraccion.usuarioModificacion}")
-    @NotBlank(message = "{NotBlank.Infraccion.usuarioModificacion}")
-    @Length(min = 3, max = 45, message = "{Length.CodigoProcesoSwitch.usuarioModificacion}")
-	private String usuarioModificacion;
 }

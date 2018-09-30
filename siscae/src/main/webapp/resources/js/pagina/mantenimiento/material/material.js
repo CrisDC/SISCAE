@@ -36,18 +36,12 @@ $(document).ready(function() {
 			"targets" : [ 0, 1 ],
 			"className" : "all filtrable",
 		}, {
-			"targets" : [ 2, 3 ],
-			"className" : "filtrable",
-		}, {
-			"targets" : 4,
+			"targets" : 2,
 			"className" : "all dt-center",
 			"defaultContent" : $variableUtil.botonActualizar + " " + $variableUtil.botonEliminar
 		} ],
 		"columns" : [ {
-			"data" : 'idMaterial',
-			"title" : "Id"
-		},{
-			"data" : 'nombre',
+			"data" : 'nombreMaterial',
 			"title" : "Nombre"
 		},{
 			"data" : 'tipo',

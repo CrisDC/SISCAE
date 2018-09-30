@@ -5,5 +5,6 @@ import lombok.Data;
 @Data
 public class ConsultaPrestamosCriterioBusqueda {
 
-	private String idRecurso;
+	//private String idRecurso;
+	private String areaEstudio;
 }

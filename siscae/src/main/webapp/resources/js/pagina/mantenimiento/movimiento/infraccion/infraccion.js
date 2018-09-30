@@ -33,13 +33,11 @@ $(document).ready(function() {
 			$tablaFuncion.aniadirFiltroDeBusquedaEnEncabezado(this, $local.$tablaMantenimiento);
 		},
 		"columnDefs" : [ {
-			"targets" : [ 0, 1 ],
+			"targets" : [ 0, 1, 2, 3, 4, 5, 6  ],
 			"className" : "all filtrable",
+		
 		}, {
-			"targets" : [ 2, 3 ],
-			"className" : "filtrable",
-		}, {
-			"targets" : 4,
+			"targets" : 7,
 			"className" : "all dt-center",
 			"defaultContent" : $variableUtil.botonActualizar + " " + $variableUtil.botonEliminar
 		} ],
@@ -50,11 +48,8 @@ $(document).ready(function() {
 			"data" : 'descripcion',
 			"title" : "Descripcion "
 		},{
-			"data" : 'idEstadoTabla',
-			"title" : "Estado"
-		},{
-			"data" : 'idPersona',
-			"title" : "Id de Persona"
+			"data" : 'descripcionTabla',
+			"title" : "Estado de Infraccion"
 		},{
 			"data" : 'nombre',
 			"title" : "Nombre "
@@ -64,9 +59,6 @@ $(document).ready(function() {
 		},{
 			"data" : 'appMaterno',
 			"title" : "Apellido Materno "
-		},{
-			"data" : 'idTipoInfraccion',
-			"title" : "Id de Tipo de Infraccion"
 		},{
 			"data" : 'descripcionTipoInfraccion',
 			"title" : "Tipo de infraccion cometida"

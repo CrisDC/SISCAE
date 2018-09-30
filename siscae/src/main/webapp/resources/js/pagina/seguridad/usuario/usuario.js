@@ -47,35 +47,31 @@ $(document).ready(function() {
 
 		},
 		"columnDefs" : [ {
-			"targets" : [ 0, 1 ],
+			"targets" : [ 0 ],
 			"className" : "all filtrable",
 		}, {
-			"targets" : 2,
+			"targets" : 1,
 			"className" : "all seleccionable data-no-definida",
 			"render" : function(data, type, row) {
 				return $funcionUtil.insertarEtiquetaSiNo(row.activo);
 			}
 		}, {
-			"targets" : 3,
+			"targets" : 2,
 			"className" : "all dt-center",
 
 			"defaultContent" : $variableUtil.botonActualizar + " " + $variableUtil.botonEliminar
 		} ],
 		"columns" : [
 				{
-					"data" : 'idUsuario',
+					"data" : 'username',
 					"title" : 'Usuario'
-				},
-				{
-					"data" : 'idPerfil',
-					"title" : 'Perfil'
+				},{
+					"data" : 'nombre',
+					"title" : 'Rol'
 				},
 				{
 					"data" : null,
 					"title" : 'Activo'
-				},
-				{
-					"title" :'Accion'
 				}]
 	});
 	

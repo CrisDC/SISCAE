@@ -33,22 +33,20 @@ $(document).ready(function() {
 			$tablaFuncion.aniadirFiltroDeBusquedaEnEncabezado(this, $local.$tablaMantenimiento);
 		},
 		"columnDefs" : [ {
-			"targets" : [ 0, 1 ],
+			"targets" : [ 0, 1, 2, 3, 4, 5, 6],
 			"className" : "all filtrable",
+		
 		}, {
-			"targets" : [ 2, 3 ],
-			"className" : "filtrable",
-		}, {
-			"targets" : 4,
+			"targets" : 7,
 			"className" : "all dt-center",
 			"defaultContent" : $variableUtil.botonActualizar + " " + $variableUtil.botonEliminar
 		} ],
-		"columns" : [ {
-			"data" : 'idPersona',
-			"title" : "Id"
-		},{
+		"columns" : [{
 			"data" : 'numDocumento',
 			"title" : "Numero de documento"
+		},{
+			"data" : 'descripcionCorta',
+			"title" : "Tipo de documento"
 		},{
 			"data" : 'nombre',
 			"title" : "Nombre"
@@ -64,9 +62,6 @@ $(document).ready(function() {
 		},{
 			"data" : 'numTelef',
 			"title" : "Telefono"
-		},{
-			"data" : 'idTipoDocumento',
-			"title" : "Id de Tipo de documento"
 		},{
 			"data" : null,
 			"title" : 'Acción'
@@ -149,7 +144,10 @@ $(document).ready(function() {
 				$local.$registrarMantenimiento.attr("disabled", false).find("i").addClass("fa-floppy-o").removeClass("fa-spinner fa-pulse fa-fw");
 			}
 		});
-		$local.$tablaMantenimiento.children("tbody").on("click", ".actualizar", function() {
+		
+	});
+	
+	$local.$tablaMantenimiento.children("tbody").on("click", ".actualizar", function() {
 		$funcionUtil.prepararFormularioActualizacion($formMantenimiento);
 		$local.$filaSeleccionada = $(this).parents("tr");
 		var persona = $local.tablaMantenimiento.row($local.$filaSeleccionada).data();
@@ -159,7 +157,7 @@ $(document).ready(function() {
 		$local.$registrarMantenimiento.addClass("hidden");
 		$local.$modalMantenimiento.PopupWindow("open");
 		});
-	});
+	
 	$local.$actualizarMantenimiento.on("click", function() {
 		if (!$formMantenimiento.valid()) {
 			return;

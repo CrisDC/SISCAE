@@ -92,7 +92,6 @@ $(document).ready(function() {
 			}
 		}
 	});
-
 	$local.$registrarMantenimiento.on("click", function() {
 		if (!$formMantenimiento.valid()) {
 			return;
@@ -126,13 +125,17 @@ $(document).ready(function() {
 				$local.$registrarMantenimiento.attr("disabled", false).find("i").addClass("fa-floppy-o").removeClass("fa-spinner fa-pulse fa-fw");
 			}
 		});
+		
 	});
+	
+	
+	
 	$local.$actualizarMantenimiento.on("click", function() {
 		if (!$formMantenimiento.valid()) {
 			return;
 		}
 		var rol = $formMantenimiento.serializeJSON();
-		rol.idrol = $local.idRolSeleccionado;
+		rol.idRol = $local.idRolSeleccionado;
 		$.ajax({
 			type : "PUT",
 			url : $variableUtil.root + "rol",
@@ -169,7 +172,7 @@ $(document).ready(function() {
 		$.confirm({
 			icon : "fa fa-info-circle",
 			title : "Aviso",
-			content : "¿Desea eliminar al rol <b>'" + rol.idrol + " - " + rol.nombre+"'<b/>?",
+			content : "¿Desea eliminar al rol <b>'" + rol.idRol + " - " + rol.nombre+"'<b/>?",
 			buttons : {
 				Aceptar : {
 					action : function() {
@@ -199,7 +202,7 @@ $(document).ready(function() {
 										$funcionUtil.notificarException($funcionUtil.obtenerMensajeErrorEnCadena(xhr.responseJSON), "fa-warning", "Aviso", "warning");
 										break;
 									case 409:
-										var mensaje = $funcionUtil.obtenerMensajeError("La rol <b>" + rol.idrol + " - " + rol.nombre +"</b>", xhr.responseJSON, $variableUtil.accionEliminado);
+										var mensaje = $funcionUtil.obtenerMensajeError("La rol <b>" + rol.idRol + " - " + rol.nombre +"</b>", xhr.responseJSON, $variableUtil.accionEliminado);
 										$funcionUtil.notificarException(mensaje, "fa-warning", "Aviso", "warning");
 										break;
 									}
@@ -220,6 +223,18 @@ $(document).ready(function() {
 				},
 			}
 			});
+		});
+		
+		
+		$local.$tablaMantenimiento.children("tbody").on("click", ".actualizar", function() {
+			$funcionUtil.prepararFormularioActualizacion($formMantenimiento);
+			$local.$filaSeleccionada = $(this).parents("tr");
+			var rol = $local.tablaMantenimiento.row($local.$filaSeleccionada).data();
+			$local.idRolSeleccionado = rol.idRol;
+			$funcionUtil.llenarFormulario(rol, $formMantenimiento);
+			$local.$actualizarMantenimiento.removeClass("hidden");
+			$local.$registrarMantenimiento.addClass("hidden");
+			$local.$modalMantenimiento.PopupWindow("open");
 		});
 		
 });

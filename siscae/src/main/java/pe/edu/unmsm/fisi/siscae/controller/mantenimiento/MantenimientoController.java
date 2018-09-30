@@ -11,9 +11,15 @@ import pe.edu.unmsm.fisi.siscae.aspecto.enumeracion.Accion;
 import pe.edu.unmsm.fisi.siscae.aspecto.enumeracion.Comentario;
 import pe.edu.unmsm.fisi.siscae.aspecto.enumeracion.Tipo;
 import pe.edu.unmsm.fisi.siscae.controller.excepcion.anotacion.Vista;
+import pe.edu.unmsm.fisi.siscae.model.criterio.ConsultaPrestamosCriterioBusqueda;
+import pe.edu.unmsm.fisi.siscae.service.IAdministrativoService;
+import pe.edu.unmsm.fisi.siscae.service.IAreaEstudioService;
+import pe.edu.unmsm.fisi.siscae.service.IConsultaPrestamosService;
 import pe.edu.unmsm.fisi.siscae.service.IEscuelaService;
 import pe.edu.unmsm.fisi.siscae.service.IEstadoTablaService;
+import pe.edu.unmsm.fisi.siscae.service.IFacultadService;
 import pe.edu.unmsm.fisi.siscae.service.IMultiTabDetService;
+import pe.edu.unmsm.fisi.siscae.service.ITipoRecursoService;
 
 @Vista
 @Audit(accion = Accion.Visita, comentario = Comentario.Visita)
@@ -23,7 +29,13 @@ public @Controller class MantenimientoController
     private @Autowired IMultiTabDetService multiTabDetService;
     private @Autowired IEscuelaService escuelaService;
     private @Autowired IEstadoTablaService estadoTablaService;
-
+    
+    private @Autowired IAreaEstudioService areaEstudioService;
+    private @Autowired ITipoRecursoService tipoRecursoService;
+    private @Autowired IAdministrativoService administrativoService;
+    private @Autowired IConsultaPrestamosService consultaPrestamosService;
+    private @Autowired IFacultadService facultadService;
+    
 
 /*   */
     @Audit(tipo = Tipo.RECURSO)
@@ -32,7 +44,12 @@ public @Controller class MantenimientoController
     {
     	
         model.addAttribute("mantenimiento", mantenimiento);
+        
+        model.addAttribute("areaEstudio", this.areaEstudioService.buscarTodos());
+        model.addAttribute("estados",this.estadoTablaService.buscarporTablaOrigen("MAE_RECURSO"));
+        model.addAttribute("tipoRecursos", this.tipoRecursoService.buscarTodos());
         return "seguras/mantenimiento/mantenimiento";
+        
     }
     
    
@@ -41,6 +58,9 @@ public @Controller class MantenimientoController
     public String irPaginaMantenimientoAreaAdministrativo(@PathVariable String mantenimiento, ModelMap model)
     {
         model.addAttribute("mantenimiento", mantenimiento);
+        
+        model.addAttribute("areaEstudio", this.areaEstudioService.buscarTodos());
+       
         return "seguras/mantenimiento/mantenimiento";
     }
     
@@ -67,11 +87,12 @@ public @Controller class MantenimientoController
     public String irPaginaMantenimientoEscuela(@PathVariable String mantenimiento, ModelMap model)
     {
         model.addAttribute("mantenimiento", mantenimiento);
+        model.addAttribute("facultad", this.facultadService.buscarTodos());
         return "seguras/mantenimiento/mantenimiento";
     }
     
     @Audit(tipo = Tipo.EXTERNO)
-    @GetMapping("/{mantenimiento:e}")
+    @GetMapping("/{mantenimiento:externo}")
     public String irPaginaMantenimientoExterno( String mantenimiento, ModelMap model)
     {
         model.addAttribute("mantenimiento", mantenimiento);
@@ -114,7 +135,7 @@ public @Controller class MantenimientoController
 
 
     @Audit(tipo = Tipo.MATERIAL)
-    @GetMapping("/{mantenimiento:mantenimiento}")
+    @GetMapping("/{mantenimiento:material}")
     public String irPaginaMantenimientoMaterial(@PathVariable String mantenimiento, ModelMap model)
     {
         model.addAttribute("mantenimiento", mantenimiento);
@@ -136,15 +157,7 @@ public @Controller class MantenimientoController
         model.addAttribute("mantenimiento", mantenimiento);
         return "seguras/mantenimiento/mantenimiento";
     }
-    /**/
-    @Audit(tipo = Tipo.INFRACCION)
-    @GetMapping("/{mantenimiento:infraccion}")
-    public String irPaginaMantenimientoInfraccion(@PathVariable String mantenimiento, ModelMap model)
-    {
-        model.addAttribute("mantenimiento", mantenimiento);
-        return "seguras/mantenimiento/mantenimiento";
-    }
-    
+
     @Audit(tipo = Tipo.PERSONA)
     @GetMapping("/{mantenimiento:persona}")
     public String irPaginaMantenimientoPersona(@PathVariable String mantenimiento, ModelMap model)
@@ -170,4 +183,32 @@ public @Controller class MantenimientoController
         return "seguras/mantenimiento/mantenimiento";
     }
    
+    
+    
+    /**/
+    @Audit(tipo = Tipo.INFRACCION)
+    @GetMapping("/{mantenimiento:infracciones}")
+    public String irPaginaMantenimientoInfraccion(@PathVariable String mantenimiento, ModelMap model)
+    {
+        model.addAttribute("mantenimiento", mantenimiento);
+        return "seguras/mantenimiento/movimiento/infracciones";
+    }
+    
+    
+    /**/
+    @Audit(tipo = Tipo.PRESTAMO)
+    @GetMapping("/{mantenimiento:prestamo}")
+    public String irPaginaMantenimientoPrestamos(@PathVariable String mantenimiento, ModelMap model)
+    {	//model.addAttribute("prestamos",  consultaPrestamosService.buscarTodos());
+    	ConsultaPrestamosCriterioBusqueda criterioBusqueda = new ConsultaPrestamosCriterioBusqueda();
+    	criterioBusqueda.setAreaEstudio("BIBLIOTECA");
+    	model.addAttribute("prestamos",  consultaPrestamosService.buscarPorCriterio(criterioBusqueda));
+    	model.addAttribute("consulta", mantenimiento);
+        model.addAttribute("mantenimiento", mantenimiento);
+        return "seguras/mantenimiento/movimiento/estadoArea"; 
+    }	
+
+    
+    
+    
 }

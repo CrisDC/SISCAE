@@ -17,7 +17,7 @@ import pe.edu.unmsm.fisi.siscae.model.parametro.Parametro;
 
 
 
-public interface IConsultaPrestamosMapper  {
+public interface IConsultaPrestamoMapper  {
 	
 	public List<PrestamoRecurso> buscarTodos();
 	public List<PrestamoRecurso> buscarPorCriterio(ConsultaPrestamosCriterioBusqueda criterioBusqueda);

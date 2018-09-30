@@ -33,30 +33,15 @@ $(document).ready(function() {
 			$tablaFuncion.aniadirFiltroDeBusquedaEnEncabezado(this, $local.$tablaMantenimiento);
 		},
 		"columnDefs" : [ {
-			"targets" : [ 0, 1 ],
+			"targets" : [ 0, 1, 2, 3, 4, 5 ],
 			"className" : "all filtrable",
 		}, {
-			"targets" : [ 2, 3 ],
-			"className" : "filtrable",
-		}, {
-			"targets" : 4,
+			"targets" : 6,
 			"className" : "all dt-center",
 			"defaultContent" : $variableUtil.botonActualizar + " " + $variableUtil.botonEliminar
 		} ],
 		"columns" : [ {
-			"data" : 'idExterno',
-			"title" : "Id"
-		},{
-			"data" : 'idTipoDocumento',
-			"title" : "Id de tipo de documento"
-		},{
-			"data" : 'descripcionTipoDocumento',
-			"title" : "Descripcion de tipo de documento"
-		},{
-			"data" : 'numDocumento',
-			"title" : "Número de documento"
-		},{
-			"data" : 'idEstadoTabla',
+			"data" : 'estado',
 			"title" : "Estado"
 		},{
 			"data" : 'nombre',
@@ -195,6 +180,7 @@ $(document).ready(function() {
 				$local.$actualizarMantenimiento.attr("disabled", false).find("i").addClass("fa-pencil-square").removeClass("fa-spinner fa-pulse fa-fw");
 			}
 		});
+	});
 		$local.$tablaMantenimiento.children("tbody").on("click", ".eliminar", function() {
 		$local.$filaSeleccionada = $(this).parents("tr");
 		var empresa = $local.tablaMantenimiento.row($local.$filaSeleccionada).data();
@@ -252,6 +238,19 @@ $(document).ready(function() {
 				},
 			}
 			});
-		});
+		
+		
 	});
+		
+		$local.$tablaMantenimiento.children("tbody").on("click", ".actualizar", function() {
+			$funcionUtil.prepararFormularioActualizacion($formMantenimiento);
+			$local.$filaSeleccionada = $(this).parents("tr");
+			var externo = $local.tablaMantenimiento.row($local.$filaSeleccionada).data();
+			$local.idExternoSeleccionado = externo.idExterno;
+			$funcionUtil.llenarFormulario(externo, $formMantenimiento);
+			$local.$actualizarMantenimiento.removeClass("hidden");
+			$local.$registrarMantenimiento.addClass("hidden");
+			$local.$modalMantenimiento.PopupWindow("open");
+		});
+	
 });

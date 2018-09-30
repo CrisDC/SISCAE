@@ -27,9 +27,11 @@ public class Persona {
 	@IdPersona(existe = true, groups = IActualizacion.class)
 	@IdPersona(existe = false, message = "Existe.Persona.idPersona", groups = IRegistro.class)
 	private Integer idPersona;
-
+	
+	private String descripcionCorta;
+	
 	@NotNull(message = "{NotNull.Persona.numDocumento}")
-	@NotBlank(message = "{NotBlank.Persona.numDocumento}")
+	@NotBlank(message ="{NotBlank.Persona.numDocumento}")
 	@Length(min = 5, max = 20, message = "{Length.Persona.numDocumento}", groups = IBasico.class)
 	private String numDocumento;
 
@@ -77,5 +79,6 @@ public class Persona {
 	private Date fechaModificacion;
 
 	private String usuarioModificacion;
+	
 
 }

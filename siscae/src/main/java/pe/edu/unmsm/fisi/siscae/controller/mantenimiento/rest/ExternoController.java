@@ -57,7 +57,7 @@ public @RestController class ExternoController {
     
     @Audit(accion = Accion.ACTUALIZACION, comentario = Comentario.Actualizacion)
     @PutMapping
-    public ResponseEntity<?> actualizarTipoRecurso(
+    public ResponseEntity<?> actualizarTipoExterno(
             @Validated({ Default.class, IActualizacion.class }) @RequestBody Externo externo,
             Errors error)
     {

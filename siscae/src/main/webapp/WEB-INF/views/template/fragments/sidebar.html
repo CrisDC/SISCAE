@@ -12,46 +12,27 @@
                     <ul id="sidebarnav">
                         <li class="nav-label">BIBLIOTECA</li>
                         <li>
-                            <a href="estado-aula-estudio.html" aria-expanded="false">
+                            <a th:href="@{/prestamo}" aria-expanded="false">
                                 <i class="fa fa-th-large"></i>
-                                <span class="hide-menu">Estado del aula</span>
+                                <span class="hide-menu">Estado del area</span>
                             </a>
 
                         </li>
                         <li>
-                            <a class="has-arrow  " href="#" aria-expanded="false">
+                            <a th:href="@{/consulta/movimientos/nuevos}" aria-expanded="false">
                                 <i class="fa fa-user"></i>
-                                <span class="hide-menu">Solicitantes</span>
+                                <span class="hide-menu">Solicitantes nuevos</span>
                             </a>
-                            <ul aria-expanded="false" class="collapse">
-                                <li>
-                                    <a href="registrar.html">Registrar nuevo</a>
-                                </li>
-                                <li>
-                                    <a href="inicio-prestamo.html">Prestamos</a>
-                                </li>
-                            </ul>
                         </li>
 
                         <li>
-                            <a class="has-arrow  " href="#" aria-expanded="false">
+                            <a th:href="@{/infracciones}" aria-expanded="false">
                                 <i class="fa fa-book"></i>
                                 <span class="hide-menu">Infracciones</span>
                             </a>
-                            <ul aria-expanded="false" class="collapse">
-                                <li>
-                                    <a href="ver-infracciones.html">Ver</a>
-                                </li>
-                                <li>
-                                    <a href="infraccion-documento.html">Registrar por documento</a>
-                                </li>
-                                <li>
-                                    <a href="infraccion-modulo.html">Registrar por modulo</a>
-                                </li>
-                            </ul>
                         </li>
                         <li>
-                            <a href="estadisticas.html" aria-expanded="false">
+                            <a th:href="@{/consulta/movimientos/estadisticas}" aria-expanded="false">
                                 <i class="fa fa-bar-chart"></i>
                                 <span class="hide-menu">Estadisticas</span>
                             </a>

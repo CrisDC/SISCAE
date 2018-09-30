@@ -33,22 +33,31 @@ $(document).ready(function() {
 			$tablaFuncion.aniadirFiltroDeBusquedaEnEncabezado(this, $local.$tablaMantenimiento);
 		},
 		"columnDefs" : [ {
-			"targets" : [ 0, 1, 2 ],
+			"targets" : [ 0, 1, 2, 3, 4, 5 ],
 			"className" : "all filtrable",
 		}, {
-			"targets" : [ 2, 3, 4, 5, 6, 7 ],
-			"className" : "filtrable",
-		}, {
-			"targets" : 8,
+			"targets" : 6,
 			"className" : "all dt-center",
 			"defaultContent" : $variableUtil.botonActualizar + " " + $variableUtil.botonEliminar
 		} ],
-		"columns" : [ {
-			"data" : 'idAdministrativo',
-			"title" : "Id administrativo "
-		}, {
-			"data" : 'codAdministrativo',
+		"columns" : [  {
+			"data" : 'codigoAdm',
 			"title" : "Codigo"
+		},{
+			"data" : 'nombre',
+			"title" : "Nombre"
+		},{
+			"data" : 'appPaterno',
+			"title" : "Apellido Paterno"
+		},{
+			"data" : 'appMaterno',
+			"title" : "Apellido Materno"
+		},{
+			"data" : 'sexo',
+			"title" : "Sexo"
+		},{
+			"data" : 'numTelef',
+			"title" : "Telefono"
 		},{
 			"data" : null,
 			"title" : 'Acción'
@@ -180,6 +189,7 @@ $(document).ready(function() {
 				$local.$actualizarMantenimiento.attr("disabled", false).find("i").addClass("fa-pencil-square").removeClass("fa-spinner fa-pulse fa-fw");
 			}
 		});
+	});
 		$local.$tablaMantenimiento.children("tbody").on("click", ".eliminar", function() {
 		$local.$filaSeleccionada = $(this).parents("tr");
 		var empresa = $local.tablaMantenimiento.row($local.$filaSeleccionada).data();
@@ -237,6 +247,19 @@ $(document).ready(function() {
 				},
 			}
 			});
-		});
+		
+		
 	});
+		
+		$local.$tablaMantenimiento.children("tbody").on("click", ".actualizar", function() {
+			$funcionUtil.prepararFormularioActualizacion($formMantenimiento);
+			$local.$filaSeleccionada = $(this).parents("tr");
+			var administrativo = $local.tablaMantenimiento.row($local.$filaSeleccionada).data();
+			$local.idAdministrativoSeleccionado = administrativo.idAdministrativo;
+			$funcionUtil.llenarFormulario(administrativo, $formMantenimiento);
+			$local.$actualizarMantenimiento.removeClass("hidden");
+			$local.$registrarMantenimiento.addClass("hidden");
+			$local.$modalMantenimiento.PopupWindow("open");
+		});
+		
 });

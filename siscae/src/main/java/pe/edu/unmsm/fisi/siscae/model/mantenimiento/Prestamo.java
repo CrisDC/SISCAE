@@ -44,22 +44,4 @@ public class Prestamo {
 	
 	private Integer idPersona;
 	
-	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd", timezone = "EST")
-    @NotNull(message = "{NotNull.Prestamo.fechaRegistro}")
-	private Date fechaRegistro;
-	
-	@NotNull(message = "{NotNull.Prestamo.usuarioRegistro}")
-    @NotBlank(message = "{NotBlank.Prestamo.usuarioRegistro}")
-    @Length(min = 3, max = 45, message = "{Length.CodigoProcesoSwitch.usuarioRegistro}")
-	private String usuarioRegistro;
-	
-	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd", timezone = "EST")
-    @NotNull(message = "{NotNull.Prestamo.fechaModificacion}")
-	private Date fechaModificacion;
-	
-	@NotNull(message = "{NotNull.Prestamo.usuarioModificacion}")
-    @NotBlank(message = "{NotBlank.Prestamo.usuarioModificacion}")
-    @Length(min = 3, max = 45, message = "{Length.CodigoProcesoSwitch.usuarioModificacion}")
-	private String usuarioModificacion;
-
 }

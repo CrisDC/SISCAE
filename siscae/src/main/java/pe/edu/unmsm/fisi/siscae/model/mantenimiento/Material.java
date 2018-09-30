@@ -20,8 +20,6 @@ import lombok.NoArgsConstructor;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-
-
 public class Material {
 
 	private Integer idMaterial;
@@ -51,5 +49,5 @@ public class Material {
     @Length(min = 3, max = 45, message = "{Length.CodigoProcesoSwitch.usuarioModificacion}")
 	private String usuarioModificacion;
 	
-	
+	private String tipo;
 }

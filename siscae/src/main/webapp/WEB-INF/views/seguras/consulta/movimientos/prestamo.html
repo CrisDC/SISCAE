@@ -22,185 +22,73 @@
 			</div>
 			<!-- End Bread crumb -->
 
-			<!-- Container fluid  -->
-			<div class="container-fluid">
-				<!-- Start Page Content -->
-				<div class="row">
-					<div class="col-12">
-						<div class="card">
-							<div class="card-body p-b-0">
-								<!-- Nav tabs -->
-								<ul class="nav nav-tabs customtab2" role="tablist">
-									<li class="nav-item"><a class="nav-link active"
-										data-toggle="tab" href="#esquema" role="tab"> <span
-											class="hidden-sm-up"> <i class="ti-home"></i></span> <span
-											class="hidden-xs-down">Esquema</span>
-									</a></li>
-									<li class="nav-item"><a class="nav-link" data-toggle="tab"
-										href="#tabla" role="tab"> <span class="hidden-sm-up"><i
-												class="ti-user"></i> </span> <span class="hidden-xs-down">Tabla</span>
-									</a></li>
-								</ul>
-
-								<!-- Tab panes -->
-								<div class="tab-content">
-									<div class="tab-pane active" id="esquema" role="tabpanel">
-										<div class="p-20">
-											<div class="row">
-
-												<div class="recurso" id="for-each">
-													<img th:src="@{/resources/images/cubo_verde.png}"
-														width="40" height="40">
-													<p>1</p>
-													<p class="disponible">DISPONIBLE</p>
-													<p>
-														<b>T. restante</b>
-													</p>
-													<p>No iniciado</p>
-												</div>
-											</div>
-										</div>
-									</div>
-
-									<div class="tab-pane  p-20" id="tabla" role="tabpanel">
-										<div class="card">
-											<h3>Estado de la biblioteca</h3>
-											<div class="table-responsive m-t-40">
-												<table id="myTable"
-													class="table table-bordered table-striped">
-													<thead>
-														<tr>
-															<th>Recurso</th>
-															<th>Estado</th>
-															<th>Codigo</th>
-															<th>Nombre</th>
-															<th>Apellidos</th>
-															<th>Hora de entrada</th>
-															<th>Tiempo restante</th>
-														</tr>
-													</thead>
-													<tbody>
-														<tr>
-															<td>1</td>
-															<td><span class="badge badge-primary">DISPONIBLE</span>
-															</td>
-															<td>-</td>
-															<td>-</td>
-															<td>-</td>
-															<td>-</td>
-															<td>-</td>
-														</tr>
-														<tr>
-															<td>2</td>
-															<td><span class="badge badge-primary">DISPONIBLE</span>
-															</td>
-															<td>-</td>
-															<td>-</td>
-															<td>-</td>
-															<td>-</td>
-															<td>-</td>
-														</tr>
-														<tr>
-															<td>3</td>
-															<td><span class="badge badge-primary">DISPONIBLE</span>
-															</td>
-															<td>-</td>
-															<td>-</td>
-															<td>-</td>
-															<td>-</td>
-															<td>-</td>
-														</tr>
-														<tr>
-															<td>4</td>
-															<td><span class="badge badge-primary">DISPONIBLE</span>
-															</td>
-															<td>-</td>
-															<td>-</td>
-															<td>-</td>
-															<td>-</td>
-															<td>-</td>
-														</tr>
-														<tr>
-															<td>5</td>
-															<td><span class="badge badge-danger">OCUPADO</span>
-															</td>
-															<td>16200116</td>
-															<td>MARIO</td>
-															<td>CORTEZ ESCARATE</td>
-															<td>10:15:28</td>
-															<td>01:39:25</td>
-														</tr>
-														<tr>
-															<td>5</td>
-															<td><span class="badge badge-warning">LIBERABLE</span>
-															</td>
-															<td>16200138</td>
-															<td>KAREN</td>
-															<td>MUÑOZ ZAVALAETA</td>
-															<td>11:16:30</td>
-															<td>00:40:21</td>
-														</tr>
-													</tbody>
-												</table>
-											</div>
-										</div>
-									</div>
-								</div>
-							</div>
-						</div>
-					</div>
-				</div>
-				<!-- End PAge Content -->
-			</div>
+			
 		</div>
 		<!-- End Page wrapper  -->
-		
+
 		<!-- All Jquery -->
-    <script th:src="@{/resources/js/guiuser/lib/jquery/jquery.min.js}"></script>
-    <!-- Bootstrap tether Core JavaScript -->
-    <script th:src="@{/resources/js/guiuser/lib/bootstrap/js/popper.min.js}"></script>
-    <script th:src="@{/resources/js/guiuser/lib/bootstrap/js/bootstrap.min.js}"></script>
-    <!-- slimscrollbar scrollbar JavaScript -->
-    <script th:src="@{/resources/js/guiuser/jquery.slimscroll.js}"></script>
-    <!--Menu sidebar -->
-    <script th:src="@{/resources/js/guiuser/sidebarmenu.js}"></script>
-    <!--stickey kit -->
-    <script th:src="@{/resources/js/guiuser/lib/sticky-kit-master/dist/sticky-kit.min.js}"></script>
-    <!--Custom JavaScript -->
+		<script th:src="@{/resources/js/guiuser/lib/jquery/jquery.min.js}"></script>
+		<!-- Bootstrap tether Core JavaScript -->
+		<script
+			th:src="@{/resources/js/guiuser/lib/bootstrap/js/popper.min.js}"></script>
+		<script
+			th:src="@{/resources/js/guiuser/lib/bootstrap/js/bootstrap.min.js}"></script>
+		<!-- slimscrollbar scrollbar JavaScript -->
+		<script th:src="@{/resources/js/guiuser/jquery.slimscroll.js}"></script>
+		<!--Menu sidebar -->
+		<script th:src="@{/resources/js/guiuser/sidebarmenu.js}"></script>
+		<!--stickey kit -->
+		<script
+			th:src="@{/resources/js/guiuser/lib/sticky-kit-master/dist/sticky-kit.min.js}"></script>
+		<!--Custom JavaScript -->
 
 
-    <!-- Amchart -->
-    <script th:src="@{/resources/js/guiuser/lib/morris-chart/raphael-min.js}"></script>
-    <script th:src="@{/resources/js/guiuser/lib/morris-chart/morris.js}"></script>
-    <script th:src="@{/resources/js/guiuser/lib/morris-chart/dashboard1-init.js}"></script>
+		<!-- Amchart -->
+		<script
+			th:src="@{/resources/js/guiuser/lib/morris-chart/raphael-min.js}"></script>
 
 
-    <script th:src="@{/resources/js/guiuser/lib/calendar-2/moment.latest.min.js}"></script>
-    <!-- scripit init-->
-    <script th:src="@{/resources/js/guiuser/lib/calendar-2/semantic.ui.min.js}"></script>
-    <!-- scripit init-->
-    <script th:src="@{/resources/js/guiuser/lib/calendar-2/prism.min.js}"></script>
-    <!-- scripit init-->
-    <script th:src="@{/resources/js/guiuser/lib/calendar-2/pignose.calendar.min.js}"></script>
-    <!-- scripit init-->
-    <script th:src="@{/resources/js/guiuser/lib/calendar-2/pignose.init.js}"></script>
+		<script
+			th:src="@{/resources/js/guiuser/lib/calendar-2/moment.latest.min.js}"></script>
+		<!-- scripit init-->
+		<script
+			th:src="@{/resources/js/guiuser/lib/calendar-2/semantic.ui.min.js}"></script>
+		<!-- scripit init-->
+		<script th:src="@{/resources/js/guiuser/lib/calendar-2/prism.min.js}"></script>
+		<!-- scripit init-->
+		<script
+			th:src="@{/resources/js/guiuser/lib/calendar-2/pignose.calendar.min.js}"></script>
+		<!-- scripit init-->
+		<script
+			th:src="@{/resources/js/guiuser/lib/calendar-2/pignose.init.js}"></script>
 
-    <script th:src="@{/resources/js/guiuser/lib/owl-carousel/owl.carousel.min.js}"></script>
-    <script th:src="@{/resources/js/guiuser/lib/owl-carousel/owl.carousel-init.js}"></script>
-    <script th:src="@{/resources/js/guiuser/scripts.js}"></script>
-    <!-- scripit init-->
-    <script th:src="@{/resources/js/guiuser/inicio.js}"></script>
-    <script th:src="@{/resources/js/guiuser/custom.min.js}"></script>
+		<script
+			th:src="@{/resources/js/guiuser/lib/owl-carousel/owl.carousel.min.js}"></script>
+		<script
+			th:src="@{/resources/js/guiuser/lib/owl-carousel/owl.carousel-init.js}"></script>
+		<script th:src="@{/resources/js/guiuser/scripts.js}"></script>
+		<!-- scripit init-->
+		<script th:src="@{/resources/js/guiuser/inicio.js}"></script>
+		<script th:src="@{/resources/js/guiuser/custom.min.js}"></script>
 
-    <script th:src="@{/resources/js/guiuser/lib/datatables/datatables.min.js}"></script>
-    <script th:src="@{/resources/js/guiuser/lib/datatables/cdn.datatables.net/buttons/1.2.2/js/dataTables.buttons.min.js}"></script>
-    <script th:src="@{/resources/js/guiuser/lib/datatables/cdn.datatables.net/buttons/1.2.2/js/buttons.flash.min.js}"></script>
-    <script th:src="@{/resources/js/guiuser/lib/datatables/cdnjs.cloudflare.com/ajax/libs/jszip/2.5.0/jszip.min.js}"></script>
-    <script th:src="@{/resources/js/guiuser/lib/datatables/cdn.rawgit.com/bpampuch/pdfmake/0.1.18/build/pdfmake.min.js}"></script>
-    <script th:src="@{/resources/js/guiuser/lib/datatables/cdn.rawgit.com/bpampuch/pdfmake/0.1.18/build/vfs_fonts.js}"></script>
-    <script th:src="@{/resources/js/guiuser/lib/datatables/cdn.datatables.net/buttons/1.2.2/js/buttons.html5.min.js}"></script>
-    <script th:src="@{/resources/js/guiuser/lib/datatables/cdn.datatables.net/buttons/1.2.2/js/buttons.print.min.js}"></script>
-    <script th:src="@{/resources/js/guiuser/lib/datatables/datatables-init.js}"></script>
+		<script
+			th:src="@{/resources/js/guiuser/lib/datatables/datatables.min.js}"></script>
+		<script
+			th:src="@{/resources/js/guiuser/lib/datatables/cdn.datatables.net/buttons/1.2.2/js/dataTables.buttons.min.js}"></script>
+		<script
+			th:src="@{/resources/js/guiuser/lib/datatables/cdn.datatables.net/buttons/1.2.2/js/buttons.flash.min.js}"></script>
+		<script
+			th:src="@{/resources/js/guiuser/lib/datatables/cdnjs.cloudflare.com/ajax/libs/jszip/2.5.0/jszip.min.js}"></script>
+		<script
+			th:src="@{/resources/js/guiuser/lib/datatables/cdn.rawgit.com/bpampuch/pdfmake/0.1.18/build/pdfmake.min.js}"></script>
+		<script
+			th:src="@{/resources/js/guiuser/lib/datatables/cdn.rawgit.com/bpampuch/pdfmake/0.1.18/build/vfs_fonts.js}"></script>
+		<script
+			th:src="@{/resources/js/guiuser/lib/datatables/cdn.datatables.net/buttons/1.2.2/js/buttons.html5.min.js}"></script>
+		<script
+			th:src="@{/resources/js/guiuser/lib/datatables/cdn.datatables.net/buttons/1.2.2/js/buttons.print.min.js}"></script>
+		<script
+			th:src="@{/resources/js/guiuser/lib/datatables/datatables-init.js}"></script>
 
 	</div>
 </body>

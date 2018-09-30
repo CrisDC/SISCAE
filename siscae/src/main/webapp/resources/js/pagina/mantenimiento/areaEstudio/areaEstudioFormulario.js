@@ -13,12 +13,12 @@ $(document).ready(function() {
 			pabellon: {
 				required : true,
 				notOnlySpace : true,
-				rangelength : [ 3,45]
+				rangelength : [ 0,45]
 			},
 			nivel: {
 				required : true,
 				notOnlySpace : true,
-				rangelength : [ 3,45]
+				rangelength : [ 0,45]
 			},
 			
 		},
