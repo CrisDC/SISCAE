@@ -27,12 +27,5 @@ public class Docente {
 	@NotNull(message = "{NotNull.Docente.estadoDocente}")
 	private Integer idEstadoTabla;
 	
-	private Date fechaRegistro;
-	
-	private String usuarioRegistro;
-	
-	private Date fechaModificacion;
-	
-	private String usuarioModificacion;
 
 }

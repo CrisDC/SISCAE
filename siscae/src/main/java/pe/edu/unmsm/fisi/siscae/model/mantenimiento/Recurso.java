@@ -63,13 +63,7 @@ public class Recurso {
 	@Pattern(regexp = Regex.SOLO_DIGITOS, message = "{Pattern.Recurso.idRecursoPadre}")
 	private Integer idRecursoPadre;
 
-	private Date fechaRegistro;
-
-	private String usuarioRegistro;
-
-	private Date fechaModificacion;
-
-	private String usuarioModificacion;
+	
 
 	private String estado;
 	private String nombreTipoRecurso;

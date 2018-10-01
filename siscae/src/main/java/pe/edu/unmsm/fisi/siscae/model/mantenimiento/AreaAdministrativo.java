@@ -50,30 +50,7 @@ public class AreaAdministrativo {
 	@Pattern(regexp = Regex.ALFANUMERICO, message = "{Pattern.AreaAdministrativo.cargo}")
 	private String cargo;
 	
-	@PastOrPresent
-	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd", timezone = "EST")
-	@NotNull(message = "{NotNull.AreaAdministrativo.fecha_registro}")
-	private Date fechaRegistro;
-	
-	@Size(min=3,max=45)
-	@Length(min = 3, max = 45)
-	@NotNull(message = "{NotNull.AreaAdministrativo.usuario_registro}")
-	@NotBlank(message = "{NotBlank.AreaAdministrativo.usuario_registro}")
-	@Pattern(regexp = Regex.ALFANUMERICO, message = "{Pattern.AreaAdministrativo.usuario_registro}")
-	private String usuarioRegistro;
-	
 
-	@NotNull(message = "{NotNull.AreaAdministrativo.fecha_modificacion}")
-	@PastOrPresent
-	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd", timezone = "EST")
-	private Date fechaModificacion;
-	
-	@Size(min=3,max=45)
-	@Length(min = 3, max = 45)
-	@NotNull(message = "{NotNull.AreaAdministrativo.usuario_modificacion}")
-	@NotBlank(message = "{NotBlank.AreaAdministrativo.usuario_modificacion}")
-	@Pattern(regexp = Regex.ALFANUMERICO, message = "{Pattern.AreaAdministrativo.usuario_modificacion}")
-	private String usuarioModificacion;
 
 	private String nombreAreaEstudio;
 	private String nombreAdministrativo;

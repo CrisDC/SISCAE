@@ -17,9 +17,6 @@ public class MultiTabDet
 	private Integer idTabla;
     private String descripcion;
     private String descripcionCorta;
-    private Date fechaRegistro;
-    private String usuarioRegistro;
-    private Date fechaModificacion;
-    private String usuarioModificacion;
+    
     
 }

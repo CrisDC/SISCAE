@@ -71,27 +71,6 @@ private  Integer idHorario;
 	@Pattern(regexp = Regex.SOLO_DIGITOS, message = "{Pattern.Horario.id_area_estudio}")
 	private Integer idAreaEstudio;
 	
-	@PastOrPresent
-	@NotNull(message = "{NotNull.Horario.fecha_registro}")
-	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd", timezone = "EST")
-	private Date fechaRegistro;
 	
-	@Size(min=3, max=45)
-	@Length(min = 3, max = 45)
-	@NotNull(message = "{NotNull.Horario.usuario_registro}")
-	@NotBlank(message = "{NotBlank.Horario.usuario_registro}")
-	private String usuarioRegistro;
-	
-	@PastOrPresent
-	@NotNull(message = "{NotNull.Horario.fecha_modificacion}")
-	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd", timezone = "EST")
-	private Date fechaModificacion;
-	
-	@Size(min=3, max=45)
-	@Length(min = 3, max = 45)
-	@NotNull(message = "{NotNull.Horario.usuario_modificacion}")
-	@NotBlank(message = "{NotBlank.Horario.usuario_modificacion}")
-	@Pattern(regexp = Regex.ALFANUMERICO, message = "{Pattern.Horario.usuario_modificacion}")
-	private String usuarioModificacion;
 		
 }

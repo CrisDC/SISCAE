@@ -31,23 +31,6 @@ public class Material {
 	
 	private Integer idTipoMaterial;
 	
-	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd", timezone = "EST")
-    @NotNull(message = "{NotNull.Material.fechaRegistro}")
-	private Date fechaRegistro;
-	
-	@NotNull(message = "{NotNull.Material.usuarioRegistro}")
-    @NotBlank(message = "{NotBlank.Material.usuarioRegistro}")
-    @Length(min = 3, max = 45, message = "{Length.CodigoProcesoSwitch.usuarioRegistro}")
-	private String usuarioRegistro;
-	
-	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd", timezone = "EST")
-    @NotNull(message = "{NotNull.Material.fechaModificacion}")
-	private Date fechaModificacion;
-	
-	@NotNull(message = "{NotNull.Material.usuarioModificacion}")
-    @NotBlank(message = "{NotBlank.Material.usuarioModificacion}")
-    @Length(min = 3, max = 45, message = "{Length.CodigoProcesoSwitch.usuarioModificacion}")
-	private String usuarioModificacion;
 	
 	private String tipo;
 }
