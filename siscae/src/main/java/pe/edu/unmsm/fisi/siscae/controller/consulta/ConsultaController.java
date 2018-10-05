@@ -11,9 +11,11 @@ import pe.edu.unmsm.fisi.siscae.aspecto.anotacion.Audit;
 import pe.edu.unmsm.fisi.siscae.aspecto.enumeracion.Accion;
 import pe.edu.unmsm.fisi.siscae.aspecto.enumeracion.Comentario;
 import pe.edu.unmsm.fisi.siscae.aspecto.enumeracion.Tipo;
+import pe.edu.unmsm.fisi.siscae.configuracion.security.SecurityContextFacade;
 import pe.edu.unmsm.fisi.siscae.controller.excepcion.anotacion.Vista;
 import pe.edu.unmsm.fisi.siscae.model.criterio.ConsultaPrestamosCriterioBusqueda;
 import pe.edu.unmsm.fisi.siscae.service.IConsultaPrestamosService;
+import pe.edu.unmsm.fisi.siscae.service.IUsuarioService;
 
 @Vista
 @Audit(accion = Accion.Visita, comentario = Comentario.VisitaConsulta)
@@ -26,6 +28,7 @@ public @Controller class ConsultaController
 	private static final String CONSULTA_NUEVOS_SOLICITANTES = CONSULTA_MOVIMIENTOS + "nuevosSolicitantes";
 	
 	private @Autowired IConsultaPrestamosService consultaPrestamosService;
+	private @Autowired IUsuarioService iUsuarioService;
 
 	
     @Audit(tipo = Tipo.CON_MOV_ESTADO_AREA)
@@ -34,6 +37,11 @@ public @Controller class ConsultaController
     {
     	ConsultaPrestamosCriterioBusqueda criterioBusqueda = new ConsultaPrestamosCriterioBusqueda();
     	criterioBusqueda.setAreaEstudio("BIBLIOTECA");
+    	
+    	
+    	System.out.println(SecurityContextFacade.obtenerNombreUsuario());
+    	
+    	
     	model.addAttribute("prestamos",  consultaPrestamosService.buscarPorCriterio(criterioBusqueda));
     	model.addAttribute("consulta", consulta);
         return CONSULTA_ESTADO_AREA;
