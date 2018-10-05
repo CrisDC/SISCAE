@@ -185,7 +185,7 @@ public @Controller class MantenimientoController
    
     
     
-    /**/
+    /*
     @Audit(tipo = Tipo.INFRACCION)
     @GetMapping("/{mantenimiento:infracciones}")
     public String irPaginaMantenimientoInfraccion(@PathVariable String mantenimiento, ModelMap model)
@@ -195,7 +195,7 @@ public @Controller class MantenimientoController
     }
     
     
-    /**/
+    
     @Audit(tipo = Tipo.PRESTAMO)
     @GetMapping("/{mantenimiento:prestamo}")
     public String irPaginaMantenimientoPrestamos(@PathVariable String mantenimiento, ModelMap model)
@@ -207,7 +207,7 @@ public @Controller class MantenimientoController
         model.addAttribute("mantenimiento", mantenimiento);
         return "seguras/mantenimiento/movimiento/estadoArea"; 
     }	
-
+    */
     
     
     

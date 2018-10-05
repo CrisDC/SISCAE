@@ -17,48 +17,36 @@ import pe.edu.unmsm.fisi.siscae.service.IConsultaPrestamosService;
 
 @Vista
 @Audit(accion = Accion.Visita, comentario = Comentario.VisitaConsulta)
-@RequestMapping("/consulta/movimientos")
+@RequestMapping("/movimiento")
 public @Controller class ConsultaController
 {
-	private static final String CONSULTA_MOVIMIENTOS = "seguras/consulta/movimientos/";
-	private static final String CONSULTA_PRESTAMO = CONSULTA_MOVIMIENTOS + "prestamo";
+	private static final String CONSULTA_MOVIMIENTOS = "seguras/movimiento/";
+	private static final String CONSULTA_ESTADO_AREA = CONSULTA_MOVIMIENTOS + "estadoArea";
 	private static final String CONSULTA_INFRACCIONES = CONSULTA_MOVIMIENTOS + "infracciones";
-	private static final String CONSULTA_NUEVOS = CONSULTA_MOVIMIENTOS + "nuevos";
-	private static final String CONSULTA_REGISTRAR = CONSULTA_MOVIMIENTOS + "registrar";
+	private static final String CONSULTA_NUEVOS_SOLICITANTES = CONSULTA_MOVIMIENTOS + "nuevosSolicitantes";
 	
 	private @Autowired IConsultaPrestamosService consultaPrestamosService;
 
 	
-    @Audit(tipo = Tipo.CON_MOV_PRESTAMO)
-    @GetMapping("/{consulta:prestamo}")
-    public String irPaginaConsultaPrestamos(@PathVariable String consulta, ModelMap model)
+    @Audit(tipo = Tipo.CON_MOV_ESTADO_AREA)
+    @GetMapping("/{consulta:estadoArea}")
+    public String irPaginaConsultaPrestamosEstadoArea(@PathVariable String consulta, ModelMap model)
     {
-    	//model.addAttribute("prestamos",  consultaPrestamosService.buscarTodos());
     	ConsultaPrestamosCriterioBusqueda criterioBusqueda = new ConsultaPrestamosCriterioBusqueda();
     	criterioBusqueda.setAreaEstudio("BIBLIOTECA");
     	model.addAttribute("prestamos",  consultaPrestamosService.buscarPorCriterio(criterioBusqueda));
     	model.addAttribute("consulta", consulta);
-        return CONSULTA_PRESTAMO;
+        return CONSULTA_ESTADO_AREA;
     }
     
-    @Audit(tipo = Tipo.CON_MOV_NUEVOS)
-    @GetMapping("/{consulta:nuevos}")
+    @Audit(tipo = Tipo.CON_MOV_NUEVOS_SOLICITANTES)
+    @GetMapping("/{consulta:nuevosSolicitantes}")
     public String irPaginaConsultaNuevos(@PathVariable String consulta, ModelMap model)
     {
         model.addAttribute("consulta", consulta);
-        return CONSULTA_NUEVOS;
+        return CONSULTA_NUEVOS_SOLICITANTES;
     }
     
-    @Audit(tipo = Tipo.CON_MOV_REGISTRAR)
-    @GetMapping("/{consulta:registrar}")
-    public String irPaginaConsultaRegistrar(@PathVariable String consulta, ModelMap model)
-    {
-    	ConsultaPrestamosCriterioBusqueda criterioBusqueda = new ConsultaPrestamosCriterioBusqueda();
-    	criterioBusqueda.setAreaEstudio("BIBLIOTECA");
-    	model.addAttribute("prestamos",  consultaPrestamosService.buscarPorCriterio(criterioBusqueda));
-    	model.addAttribute("consulta", consulta);
-        return CONSULTA_REGISTRAR;
-    }
     
     @Audit(tipo = Tipo.CON_MOV_INFRACCIONES)
     @GetMapping("/{consulta:infracciones}")
