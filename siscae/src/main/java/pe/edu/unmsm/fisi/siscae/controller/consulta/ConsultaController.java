@@ -34,6 +34,7 @@ public @Controller class ConsultaController
 	private static final String CONSULTA_ESTADO_AREA = CONSULTA_MOVIMIENTOS + "estadoArea";
 	private static final String CONSULTA_INFRACCIONES = CONSULTA_MOVIMIENTOS + "infracciones";
 	private static final String CONSULTA_NUEVOS_SOLICITANTES = CONSULTA_MOVIMIENTOS + "nuevosSolicitantes";
+	private static final String CONSULTA_ESTADISTICAS = CONSULTA_MOVIMIENTOS + "estadisticas";
 	
 	private @Autowired IConsultaPrestamosService consultaPrestamosService;
 	private @Autowired IUsuarioService usuarioService;
@@ -84,6 +85,27 @@ public @Controller class ConsultaController
     {
         model.addAttribute("consulta", consulta);
         return CONSULTA_INFRACCIONES;
+    }
+    
+    @Audit(tipo = Tipo.CON_MOV_ESTADISTICAS)
+    @GetMapping("/{consulta:estadisticas}")
+    public String irPaginaConsultaEstadisticas(@PathVariable String consulta, ModelMap model)
+    {
+    	System.out.println(SecurityContextFacade.getAuthenticatedUser());
+    	int idAdministrativo=3;
+AreaAdministrativo areaAdministrativo = null;
+    	
+    	ArrayList<AreaAdministrativo> listaAreaAdministrativo = (ArrayList) areaAdministrativoService.buscarTodos();  
+    	for(int i=0;i<listaAreaAdministrativo.size();i++){
+    		if(listaAreaAdministrativo.get(i).getIdAdministrativo()==idAdministrativo){
+    			areaAdministrativo = listaAreaAdministrativo.get(i);
+    		}
+    	}
+    	ConsultaPrestamosCriterioBusqueda criterioBusqueda = new ConsultaPrestamosCriterioBusqueda();
+    	criterioBusqueda.setAreaEstudio(areaAdministrativo.getNombreAreaEstudio());
+        model.addAttribute("consulta", consulta);
+    	model.addAttribute("areaAdministrativo", areaAdministrativo);
+        return CONSULTA_ESTADISTICAS;
     }
     
     

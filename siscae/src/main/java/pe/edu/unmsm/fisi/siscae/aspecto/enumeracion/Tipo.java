@@ -50,7 +50,8 @@ public enum Tipo
     CON_MOV_ESTADO_AREA("Prestamo de recurso"),
     CON_MOV_NUEVOS_SOLICITANTES("Registro de nuevos solicitantes"), 
     CON_MOV_REGISTRAR("Realizar prestamo de recurso"), 
-    CON_MOV_INFRACCIONES("Consulta de Infracciones");
+    CON_MOV_INFRACCIONES("Consulta de Infracciones"),
+	CON_MOV_ESTADISTICAS("Consulta de Estadisticas");
 	
 
     private final String nombre;
