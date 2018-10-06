@@ -46,19 +46,24 @@ public @Controller class ConsultaController
     {
     	//Capturamos el idPersona del usuario que inicio sesion
     	System.out.println("haber la magia: "+SecurityContextFacade.getAuthenticatedUser().getIdUsuario());
-    	int idAdministrativo=2; // idPersona == idAdministrativo, Aqui debemos asignar lo del usuario al
+    	ArrayList<Usuario> listaUsuario = (ArrayList) usuarioService.buscarTodos();
+    	Usuario usuario = null;
+    	for(int i=0;i<listaUsuario.size();i++){
+    		if(listaUsuario.get(i).getIdPersona()==SecurityContextFacade.getAuthenticatedUser().getIdUsuario()){
+    			usuario = listaUsuario.get(i);
+    		}
+    	}
     	
+    	System.out.println(usuario.getIdPersona());
     	
-    	//Provisional, hasta preguntar andres si se puede hacer una consulta por un criterio (buscar AreaAdministrativo por idAdministrativo)
     	AreaAdministrativo areaAdministrativo = null;
     	
     	ArrayList<AreaAdministrativo> listaAreaAdministrativo = (ArrayList) areaAdministrativoService.buscarTodos();  
     	for(int i=0;i<listaAreaAdministrativo.size();i++){
-    		if(listaAreaAdministrativo.get(i).getIdAdministrativo()==idAdministrativo){
+    		if(listaAreaAdministrativo.get(i).getIdAdministrativo()==usuario.getIdPersona()){
     			areaAdministrativo = listaAreaAdministrativo.get(i);
     		}
     	}
-    	
     	
     	ConsultaPrestamosCriterioBusqueda criterioBusqueda = new ConsultaPrestamosCriterioBusqueda();
     	criterioBusqueda.setAreaEstudio(areaAdministrativo.getNombreAreaEstudio());
