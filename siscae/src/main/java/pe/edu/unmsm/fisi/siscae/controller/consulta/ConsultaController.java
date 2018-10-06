@@ -46,7 +46,7 @@ public @Controller class ConsultaController
     {
     	//Capturamos el idPersona del usuario que inicio sesion
     	System.out.println(SecurityContextFacade.getAuthenticatedUser());
-    	int idAdministrativo=3; // idPersona == idAdministrativo, Aqui debemos asignar lo del usuario al
+    	int idAdministrativo=2; // idPersona == idAdministrativo, Aqui debemos asignar lo del usuario al
     	
     	
     	//Provisional, hasta preguntar andres si se puede hacer una consulta por un criterio (buscar AreaAdministrativo por idAdministrativo)

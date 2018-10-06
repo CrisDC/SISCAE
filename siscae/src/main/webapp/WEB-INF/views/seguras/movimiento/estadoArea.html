@@ -13,12 +13,11 @@
 			<!-- Bread crumb -->
 			<div class="row page-titles">
 				<div class="col-md-5 align-self-center">
-					<h3 th:text="'Estado de ' + ${areaAdministrativo.nombreAreaEstudio.toLowerCase()}" class="text-primary"></h3>
+					<h3 th:text="'Estado de la ' + ${areaAdministrativo.nombreAreaEstudio.toLowerCase()}" class="text-primary"></h3>
 				</div>
 				<div class="col-md-7 align-self-center">
 					<ol class="breadcrumb">
-						<li class="breadcrumb-item"><a href="javascript:void(0)">Estado
-								del aula</a></li>
+						<li class="breadcrumb-item"><a href="javascript:void(0)">Estado del area</a></li>
 					</ol>
 				</div>
 			</div>
@@ -57,32 +56,38 @@
 									<div class="tab-pane active" id="esquema" role="tabpanel">
 										<div class="p-20">
 
-											<p>Seleccione su cubiculo disponible</p>
+											<p>Seleccione su recurso disponible</p>
 											<div class="row" id="for-each">
-
-
 
 												<div th:each="prestamo : ${prestamos}" class="recurso">
 													<img
-														th:if="${(prestamo.estado eq 'DISPONIBLE') or (prestamo.estado eq null)}"
-														th:src="@{/resources/images/cubo_verde.png}" width="40"
-														height="40"> <img
-														th:if="${prestamo.estado} == 'OCUPADO'"
-														th:src="@{/resources/images/cubo_rojo.png}" width="40"
-														height="40"> <img
-														th:if="${prestamo.estado} == 'LIBERABLE'"
-														th:src="@{/resources/images/cubo_amarillo.png}" width="40"
-														height="40">
+														th:if="(${prestamo.estado} == 'DISPONIBLE') and (${areaAdministrativo.nombreAreaEstudio} == 'BIBLIOTECA')"
+														th:src="@{/resources/images/cubo_verde.png}" width="40" height="40"> 
+													<img
+														th:if="(${prestamo.estado} == 'OCUPADO') and (${areaAdministrativo.nombreAreaEstudio} == 'BIBLIOTECA')"
+														th:src="@{/resources/images/cubo_rojo.png}" width="40" height="40"> 
+													<img
+														th:if="(${prestamo.estado} == 'LIBERABLE') and (${areaAdministrativo.nombreAreaEstudio} == 'BIBLIOTECA')"
+														th:src="@{/resources/images/cubo_amarillo.png}" width="40" height="40">
+														
+													<img
+														th:if="${areaAdministrativo.nombreAreaEstudio} == 'VIDEOTECA'"
+														th:src="@{/resources/images/pantalla.png}" width="40" height="40">
+														
+													<img
+														th:if="${areaAdministrativo.nombreAreaEstudio} == 'SALA DE ESTUDIOS'"
+														th:src="@{/resources/images/mesa.png}" width="100" height="100">
+														
 													<p th:text="${prestamo.numero}"></p>
 													<p
-														th:if="${(prestamo.estado eq 'DISPONIBLE') or (prestamo.estado eq null)}"
+														th:if="${prestamo.estado} == 'DISPONIBLE'"
 														th:text="DISPONIBLE" class="disponible"></p>
 													<p th:if="${prestamo.estado} == 'OCUPADO'"
 														th:text="OCUPADO" class="ocupado"></p>
 													<p th:if="${prestamo.estado} == 'LIBERABLE'"
 														th:text="LIBERABLE" class="liberable"></p>
 													<button th:id="${prestamo.numero}" th:key="${prestamo.idRecurso}"
-														th:class="${(prestamo.estado eq 'DISPONIBLE') or (prestamo.estado eq null)} ? 'btn btn-info solicitar' : 'invisible' ">SOLICITAR</button>
+														th:class="${prestamo.estado} == 'DISPONIBLE' ? 'btn btn-info solicitar' : 'invisible' ">SOLICITAR</button>
 												</div>
 
 
