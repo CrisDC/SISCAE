@@ -39,7 +39,7 @@ $(document).ready(function() {
 			"targets" : [ 2, 3 ],
 			"className" : "filtrable",
 		}, {
-			"targets" : 3,
+			"targets" : 4,
 			"className" : "all dt-center",
 			"defaultContent" : $variableUtil.botonActualizar + " " + $variableUtil.botonEliminar
 		} ],
@@ -47,11 +47,14 @@ $(document).ready(function() {
 			"data" : 'nombre',
 			"title" : "Nombre"
 		}, {
-			"data" : 'fechaRegistro',
-			"title" : "Fecha de registro"
+			"data" : 'descripcion',
+			"title" : "Descripcion"
 		}, {
 			"data" : 'uso',
 			"title" : "Uso"
+		}, {
+			"data" : 'maxCapacidad',
+			"title" : "Max Capacidad"
 		}, {
 			"data" : null,
 			"title" : 'Acción'

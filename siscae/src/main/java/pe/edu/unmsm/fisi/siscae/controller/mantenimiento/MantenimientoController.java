@@ -93,11 +93,13 @@ public @Controller class MantenimientoController
     
     @Audit(tipo = Tipo.EXTERNO)
     @GetMapping("/{mantenimiento:externo}")
-    public String irPaginaMantenimientoExterno( String mantenimiento, ModelMap model)
+    public String irPaginaMantenimientoExterno(@PathVariable String mantenimiento, ModelMap model)
     {
         model.addAttribute("mantenimiento", mantenimiento);
         return "seguras/mantenimiento/mantenimiento";
     }
+    
+    
     @Audit(tipo = Tipo.FACULTAD)
     @GetMapping("/{mantenimiento:facultad}")
     public String irPaginaMantenimientoFacultad(@PathVariable String mantenimiento, ModelMap model)
@@ -183,31 +185,7 @@ public @Controller class MantenimientoController
         return "seguras/mantenimiento/mantenimiento";
     }
    
-    
-    
-    /*
-    @Audit(tipo = Tipo.INFRACCION)
-    @GetMapping("/{mantenimiento:infracciones}")
-    public String irPaginaMantenimientoInfraccion(@PathVariable String mantenimiento, ModelMap model)
-    {
-        model.addAttribute("mantenimiento", mantenimiento);
-        return "seguras/mantenimiento/movimiento/infracciones";
-    }
-    
-    
-    
-    @Audit(tipo = Tipo.PRESTAMO)
-    @GetMapping("/{mantenimiento:prestamo}")
-    public String irPaginaMantenimientoPrestamos(@PathVariable String mantenimiento, ModelMap model)
-    {	//model.addAttribute("prestamos",  consultaPrestamosService.buscarTodos());
-    	ConsultaPrestamosCriterioBusqueda criterioBusqueda = new ConsultaPrestamosCriterioBusqueda();
-    	criterioBusqueda.setAreaEstudio("BIBLIOTECA");
-    	model.addAttribute("prestamos",  consultaPrestamosService.buscarPorCriterio(criterioBusqueda));
-    	model.addAttribute("consulta", mantenimiento);
-        model.addAttribute("mantenimiento", mantenimiento);
-        return "seguras/mantenimiento/movimiento/estadoArea"; 
-    }	
-    */
+   
     
     
     
