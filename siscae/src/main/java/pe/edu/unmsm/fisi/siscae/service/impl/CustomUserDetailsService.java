@@ -36,7 +36,7 @@ public class CustomUserDetailsService implements UserDetailsService
             authorities.add(new SimpleGrantedAuthority("ROLE_A"));
          
             System.out.println("Politica" + usuario); //no esta activo el usuario usuario.esActivo()
-            return new CustomUser(usuario.getNombre(), usuario.getPass(), true, true, true,
+            return new CustomUser(usuario.getIdUsuario(),usuario.getNombre(), usuario.getPass(), true, true, true,
                     true, authorities);
         //getGrantedAuthorities(
           //                  recursoMapper.obtenerRecursosPermitidosPorIdUsuario(login) ));

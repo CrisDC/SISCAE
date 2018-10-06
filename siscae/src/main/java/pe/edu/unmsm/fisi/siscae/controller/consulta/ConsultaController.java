@@ -45,7 +45,7 @@ public @Controller class ConsultaController
     public String irPaginaConsultaPrestamosEstadoArea(@PathVariable String consulta, ModelMap model)
     {
     	//Capturamos el idPersona del usuario que inicio sesion
-    	System.out.println(SecurityContextFacade.getAuthenticatedUser());
+    	System.out.println("haber la magia: "+SecurityContextFacade.getAuthenticatedUser().getIdUsuario());
     	int idAdministrativo=2; // idPersona == idAdministrativo, Aqui debemos asignar lo del usuario al
     	
     	
