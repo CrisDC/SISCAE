@@ -30,11 +30,12 @@
 							<div class="card-body p-b-0">
 								<!-- Nav tabs -->
 								<ul class="nav nav-tabs customtab2" role="tablist">
-									<li class="nav-item"><a class="nav-link active"
-										data-toggle="tab" href="#prestamos" role="tab"> <span
-											class="hidden-sm-up"> <i class="ti-home"></i></span> <span
-											class="hidden-xs-down">Prestamos</span>
-									</a></li>
+									<li class="nav-item">
+										<a class="nav-link active" data-toggle="tab" href="#prestamos" role="tab"> 
+										<span class="hidden-sm-up"> <i class="ti-home"></i></span> 
+										<span class="hidden-xs-down">Prestamos</span>
+										</a>
+									</li>
 									<li class="nav-item">
 										<a class="nav-link" data-toggle="tab" href="#infracciones" role="tab"> 
 											<span class="hidden-sm-up"><i class="ti-user"></i></span> 
@@ -56,11 +57,114 @@
 										</a>
 									</li>
 								</ul>
+								<!-- Tab panes -->
+								<div class="tab-content">
+									<div class="tab-pane active" id="prestamos" role="tabpanel">
+										<div class="p-20">
+										</div>
+									</div>
+									<div class="tab-pane active" id="infracciones" role="tabpanel">
+										<div class="p-20">
+										</div>
+									</div>
+									<div class="tab-pane active" id="solicitante" role="tabpanel">
+										<div class="p-20">
+										</div>
+									</div>
+									<div class="tab-pane active" id="reporte" role="tabpanel">
+										<div class="table-responsive m-t-40">
+											<div class="tab-pane  p-20">
+												<h3>Reporte de Prestamos</h3>
+																<table id="myTable"
+																	class="table table-bordered table-striped">
+																	<thead>
+																		<tr>
+																			<th>Recurso</th>
+																			<th>Escuela</th>
+																			<th>Codigo</th>
+																			<th>Nombre</th>
+																			<th>Apellidos</th>
+																			<th>Turno</th>
+																			<th>Fecha de registro</th>
+																			<th>Tiempo de estadia</th>
+																		</tr>
+																	</thead>
+																	<tbody>
+																		<tr >
+																			<td>Cubiculo 01</td>
+																			<td>Ingenieria de Sistemas</td>
+																			<td>16200127</td>
+																			<td>Vieri Enrique</td>
+																			<td>Garcia Moreno</td>
+																			<td>Tarde</td>
+																			<td>05/10/18</td>
+																			<td>3</td>
+																		</tr>
+																		
+																	</tbody>
+																</table>
+											</div>
+										</div>
+									</div>
+								</div>
 							</div>
 						</div>
 					</div>
 				</div>
-				<!-- End PAge Content -->
+				<!-- Tab panes -->
+				
+			</div>
+		</div>
+		
+		<!-- All Jquery -->
+		<script th:src="@{/resources/js/guiuser/lib/jquery/jquery.min.js}"></script>
+		<!-- Bootstrap tether Core JavaScript -->
+		<script
+			th:src="@{/resources/js/guiuser/lib/bootstrap/js/popper.min.js}"></script>
+		<script
+			th:src="@{/resources/js/guiuser/lib/bootstrap/js/bootstrap.min.js}"></script>
+		<!-- slimscrollbar scrollbar JavaScript -->
+		<script th:src="@{/resources/js/guiuser/jquery.slimscroll.js}"></script>
+		<!--Menu sidebar -->
+		<script th:src="@{/resources/js/guiuser/sidebarmenu.js}"></script>
+		<!--stickey kit -->
+		<script
+			th:src="@{/resources/js/guiuser/lib/sticky-kit-master/dist/sticky-kit.min.js}"></script>
+		<!--Custom JavaScript -->
+		<!-- Amchart -->
+		<script
+			th:src="@{/resources/js/guiuser/lib/morris-chart/raphael-min.js}"></script>
+		<script th:src="@{/resources/js/guiuser/lib/morris-chart/morris.js}"></script>
+		<script
+			th:src="@{/resources/js/guiuser/lib/morris-chart/dashboard1-init.js}"></script>
+
+
+		<script
+			th:src="@{/resources/js/guiuser/lib/calendar-2/moment.latest.min.js}"></script>
+		<!-- scripit init-->
+		<script
+			th:src="@{/resources/js/guiuser/lib/calendar-2/semantic.ui.min.js}"></script>
+		<!-- scripit init-->
+		<script th:src="@{/resources/js/guiuser/lib/calendar-2/prism.min.js}"></script>
+		<!-- scripit init-->
+		<script
+			th:src="@{/resources/js/guiuser/lib/calendar-2/pignose.calendar.min.js}"></script>
+		<!-- scripit init-->
+		<script
+			th:src="@{/resources/js/guiuser/lib/calendar-2/pignose.init.js}"></script>
+
+		<script
+			th:src="@{/resources/js/guiuser/lib/owl-carousel/owl.carousel.min.js}"></script>
+		<script
+			th:src="@{/resources/js/guiuser/lib/owl-carousel/owl.carousel-init.js}"></script>
+		<script th:src="@{/resources/js/guiuser/scripts.js}"></script>
+		<!-- scripit init-->
+<!-- 		<script th:src="@{/resources/js/guiuser/inicio.js}"></script> -->
+		<script th:src="@{/resources/js/guiuser/custom.min.js}"></script>
+		<script th:src="@{/resources/js/guiuser/sweetalert.min.js}"></script>
+		<script th:src="@{/resources/js/util/util.js}"></script>
+		
+			<script th:src="@{/resources/js/util/formularioUtil.js}"></script>
 	</div>
 </body>
 
