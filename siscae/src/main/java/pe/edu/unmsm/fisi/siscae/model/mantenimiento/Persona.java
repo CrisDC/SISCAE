@@ -72,13 +72,6 @@ public class Persona {
 	@NotBlank(message = "{NotBlank.Persona.idTipoDocumento}")
 	private Integer idTipoDocumento;
 
-	private Date fechaRegistro;
-
-	private String usuarioRegistro;
-
-	private Date fechaModificacion;
-
-	private String usuarioModificacion;
 	
 
 }

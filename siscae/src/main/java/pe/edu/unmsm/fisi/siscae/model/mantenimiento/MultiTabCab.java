@@ -32,8 +32,5 @@ public class MultiTabCab
     @Length(min = 3, max = 80, message = "{Length.MultiTabCab.descripcion}")
     private String descripcion;
     
-    private Date fechaRegistro;
-    private String usuarioRegistro;
-    private Date fechaModificacion;
-    private String usuarioModificacion;
+   
 }

@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorate="~{layout_user}">
+
+<head>
+</head>
+<body>
+	<div layout:fragment="content">
+		<!-- Page wrapper  -->
+		<div class="page-wrapper">
+			<!-- Bread crumb -->
+			<div class="row page-titles">
+				<div class="col-md-5 align-self-center">
+					<h3 th:text="'Estadisticas de ' + ${areaAdministrativo.nombreAreaEstudio.toLowerCase()}" class="text-primary"></h3>
+				</div>
+				<div class="col-md-7 align-self-center">
+					<ol class="breadcrumb">
+						<li class="breadcrumb-item"><a href="javascript:void(0)">Estadisticas</a></li>
+					</ol>
+				</div>
+			</div>
+			<!-- End Bread crumb -->
+			<!-- Container fluid  -->
+			<div class="container-fluid">
+				<!-- Start Page Content -->
+				<div class="row">
+					<div class="col-12">
+						<div class="card">
+							<div class="card-body p-b-0">
+								<!-- Nav tabs -->
+								<ul class="nav nav-tabs customtab2" role="tablist">
+									<li class="nav-item"><a class="nav-link active"
+										data-toggle="tab" href="#prestamos" role="tab"> <span
+											class="hidden-sm-up"> <i class="ti-home"></i></span> <span
+											class="hidden-xs-down">Prestamos</span>
+									</a></li>
+									<li class="nav-item">
+										<a class="nav-link" data-toggle="tab" href="#infracciones" role="tab"> 
+											<span class="hidden-sm-up"><i class="ti-user"></i></span> 
+											<span class="hidden-xs-down">Infracciones</span>
+										</a>
+									</li>
+
+									<li class="nav-item">
+										<a class="nav-link" data-toggle="tab" href="#solicitante" role="tab"> 
+										<span class="hidden-sm-up"><i class="ti-user"></i> </span> 
+										<span class="hidden-xs-down">Solitantes mas frecuentes</span>
+										</a>
+									</li>
+									
+									<li class="nav-item">
+										<a class="nav-link" data-toggle="tab" href="#reporte" role="tab"> 
+										<span class="hidden-sm-up"><i class="ti-user"></i> </span> 
+										<span class="hidden-xs-down">Reporte</span>
+										</a>
+									</li>
+								</ul>
+							</div>
+						</div>
+					</div>
+				</div>
+				<!-- End PAge Content -->
+	</div>
+</body>
+
+</html>

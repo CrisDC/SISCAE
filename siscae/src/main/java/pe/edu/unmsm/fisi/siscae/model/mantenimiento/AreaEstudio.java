@@ -24,46 +24,26 @@ import com.fasterxml.jackson.annotation.JsonFormat;
 public class AreaEstudio {
 private Integer idAreaEstudio;
 	
-	@Size(min=3, max=45)
-	@Length(min = 3, max = 45)
-	@NotBlank(message = "{NotBlank.AreaEstudio.nombre}")
+	@Size(min=1, max=45)
+	@Length(min = 0, max = 45)
+	
 	@Pattern(regexp = Regex.ALFANUMERICO, message = "{Pattern.AreaEstudio.nombre}")
 	private String nombre;
 	
-	@Size(min=3, max=45)
-	@Length(min = 3, max = 45)
-	@NotBlank(message = "{NotBlank.AreaEstudio.pabellon}")
+	@Size(min=1, max=45)
+	@Length(min = 0, max = 45)
+	
 	@Pattern(regexp = Regex.ALFANUMERICO, message = "{Pattern.AreaEstudio.pabellon}")
 	private String pabellon;
 	
-	@Size(min=3, max=45)
-	@Length(min = 3, max = 45)
-	@NotBlank(message = "{NotBlank.AreaEstudio.nivel}")
+	@Size(min=1, max=45)
+	@Length(min = 0, max = 45)
+	
 	@Pattern(regexp = Regex.ALFANUMERICO, message = "{Pattern.AreaEstudio.nivel}")
 	private String nivel ;
 	
 	private Integer aforo;
 	
-	@PastOrPresent
-	@NotNull(message = "{NotNull.Horario.fecha_registro}")
-	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd", timezone = "EST")
-	private Date fechaRegistro;
 	
-	@Size(min=3, max=45)
-	@Length(min = 3, max = 45)
-	@NotBlank(message = "{NotBlank.AreaEstudio.usuario_registro}")
-	@Pattern(regexp = Regex.ALFANUMERICO, message = "{Pattern.AreaEstudio.usuario_registro}")
-	private String usuarioRegistro;
-	
-	@PastOrPresent
-	@NotNull(message = "{NotNull.Area_Estudio.fecha_modificacion}")
-	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd", timezone = "EST")
-	private Date fechaModificacion;
-	
-	@Size(min=3, max=45)
-	@Length(min = 3, max = 45)
-	@NotBlank(message = "{NotBlank.AreaEstudio.usuario_modificacion}")
-	@Pattern(regexp = Regex.ALFANUMERICO, message = "{Pattern.AreaEstudio.usuario_modificacion}")
-	private String usuarioModificacion;
 	
 }

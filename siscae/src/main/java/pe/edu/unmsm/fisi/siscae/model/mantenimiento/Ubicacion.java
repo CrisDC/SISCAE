@@ -16,9 +16,6 @@ public class Ubicacion {
 	private Integer idUbicacion;
 	private Double coordenadaX;
 	private Double coordenadaY;
-	private Date fechaRegistro;
-	private String usuarioRegistro;
-	private Date fechaModificacion;
-	private String usuarioModificacion;
+	
 
 }

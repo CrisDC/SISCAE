@@ -8,7 +8,7 @@ $(document).ready(function() {
 			nombre : {
 				required : true,
 				notOnlySpace : true,
-				rangelength : [ 3,45]
+				rangelength : [0,45]
 			},
 			pabellon: {
 				required : true,

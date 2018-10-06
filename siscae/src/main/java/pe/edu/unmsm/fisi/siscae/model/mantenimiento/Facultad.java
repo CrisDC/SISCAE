@@ -26,22 +26,5 @@ public class Facultad {
 	 @Length(min = 3, max = 60, message = "{Length.CodigoProcesoSwitch.nombre}")
 	 private  String nombre;
 	 
-	 @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd", timezone = "EST")
-	 @NotNull(message = "{NotNull.Facultad.fechaRegistro}")
-	 private Date fechaRegistro;
-	 
-	 @NotNull(message = "{NotNull.Facultad.usuarioRegistro}")
-	 @NotBlank(message = "{NotBlank.Facultad.usuarioRegistro}")
-	 @Length(min = 3, max = 45, message = "{Length.CodigoProcesoSwitch.usuarioRegistro}")
-	 private String usuarioRegistro;
-	 
-	 @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd", timezone = "EST")
-	 @NotNull(message = "{NotNull.Facultad.fehaModificacion}")
-	 private Date fehaModificacion;
-	 
-	 @NotNull(message = "{NotNull.Facultad.usuarioModificacion}")
-	 @NotBlank(message = "{NotBlank.Facultad.usuarioModificacion}")
-	 @Length(min = 3, max = 45, message = "{Length.CodigoProcesoSwitch.usuarioModificacion}")
-	 private String usuarioModificacion;
-	//LOS COMENTARIOS VAN A TODOS MENOS A LOS INTEGER 
+	
 }
