@@ -114,7 +114,7 @@
 														<th>Nombre</th>
 														<th>Apellidos</th>
 														<th>Hora de entrada</th>
-														<!--<th>Tiempo restante</th> -->
+														<th>Tiempo restante</th>
 													</tr>
 												</thead>
 												<tbody>
@@ -130,7 +130,7 @@
 														<td th:text="${prestamo.estado} == 'DISPONIBLE' ? '-' : ${prestamo.nombre}"></td>
 														<td th:text="${prestamo.estado} == 'DISPONIBLE' ? '-' : ${prestamo.appPaterno} + ' ' + ${prestamo.appMaterno}"></td>
 														<td th:text="${prestamo.estado} == 'DISPONIBLE' ? '-' : ${prestamo.horaEntrada}"></td>
-														<!-- <td th:text="${prestamo.estado} == 'DISPONIBLE' ? '-' : ${#dates.format(#dates.createNow(),'YYYY/MM/dd HH:mm')}"></td>    -->                   
+														<td th:text="${prestamo.estado} == 'DISPONIBLE' ? '-' : ${#dates.format(#dates.createNow(),'YYYY/MM/dd HH:mm')}"></td>                  
 													</tr>
 												</tbody>
 											</table>
