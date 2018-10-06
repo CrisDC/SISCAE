@@ -16,11 +16,11 @@
 		  FROM WV_REPORTE_PRESTAMOS 
 	</sql>
 
-	<select id="buscarTodos" resultType="ReporteEstadisticoPrestamos">
+	<select id="buscarTodos" resultType="ReporteEstadisticaPrestamos">
 		<include refid="fragmentoSelectBuscarReporteEstadisticaPrestamos" />
 	</select>
 	
-	<select id="buscarPorNumeroDocumentoIdentidad" resultType="ReporteEstadisticoPrestamos">
+	<select id="buscarPorNumeroDocumentoIdentidad" resultType="ReporteEstadisticaPrestamos">
 		<include refid="fragmentoSelectBuscarReporteEstadisticaPrestamos" />
 		<where>
 			<if test="tipoDocumentoIdentidad != null and tipoDocumentoIdentidad != ''">
@@ -32,7 +32,7 @@
 		</where>
 	</select>
 
-	<select id="buscarPorCriterio" resultType="ReporteEstadisticoPrestamos">
+	<select id="buscarPorCriterio" resultType="ReporteEstadisticaPrestamos">
 		<include refid="fragmentoSelectBuscarReporteEstadisticaPrestamos" />
 		<where>
 			<if test="areaEstudio != null and areaEstudio != '-1'">

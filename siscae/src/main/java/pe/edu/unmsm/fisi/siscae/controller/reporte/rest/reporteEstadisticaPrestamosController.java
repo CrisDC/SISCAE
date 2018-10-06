@@ -7,20 +7,19 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-
 import pe.edu.unmsm.fisi.siscae.model.criterio.ReporteEstadisticaPrestamosCriterioBusqueda;
-import pe.edu.unmsm.fisi.siscae.model.reporte.ReporteEstadisticoPrestamos;
+import pe.edu.unmsm.fisi.siscae.model.reporte.ReporteEstadisticaPrestamos;
 import pe.edu.unmsm.fisi.siscae.service.IReporteEstadisticaPrestamosService;
 
 @RequestMapping("/reporteEstadisticoPrestamo")
-public @RestController class reporteEstadisticoPrestamoContoller {
+public @RestController class reporteEstadisticaPrestamosController {
 	private @Autowired IReporteEstadisticaPrestamosService reporteEstadisticaPrestamosService;
 	@GetMapping(params = "accion=buscarTodos")
-	public List<ReporteEstadisticoPrestamos> buscarTodos() {
+	public List<ReporteEstadisticaPrestamos> buscarTodos() {
 		return reporteEstadisticaPrestamosService.buscarTodos();
 	}
 	@GetMapping(params = "accion=buscarPorCriterio")
-	public List<ReporteEstadisticoPrestamos> buscarPorCriterio(ReporteEstadisticaPrestamosCriterioBusqueda criterioBusqueda) {
+	public List<ReporteEstadisticaPrestamos> buscarPorCriterio(ReporteEstadisticaPrestamosCriterioBusqueda criterioBusqueda) {
 		return reporteEstadisticaPrestamosService.buscarPorCriterio(criterioBusqueda);
 	}
 }
