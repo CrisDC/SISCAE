@@ -75,7 +75,7 @@
 														th:src="@{/resources/images/pantalla.png}" width="40" height="40">
 														
 													<img
-														th:if="${areaAdministrativo.nombreAreaEstudio} == 'SALA DE ESTUDIOS'"
+														th:if="${areaAdministrativo.nombreAreaEstudio} == 'SALA GRUPAL'"
 														th:src="@{/resources/images/mesa.png}" width="100" height="100">
 														
 													<p th:text="${prestamo.numero}"></p>
@@ -86,6 +86,9 @@
 														th:text="OCUPADO" class="ocupado"></p>
 													<p th:if="${prestamo.estado} == 'LIBERABLE'"
 														th:text="LIBERABLE" class="liberable"></p>
+														
+													<p th:if="${areaAdministrativo.nombreAreaEstudio} == 'SALA GRUPAL'" th:text="'Capacidad 0/' + ${prestamo.maxCapacidad}"></p>
+													
 													<button th:id="${prestamo.numero}" th:key="${prestamo.idRecurso}"
 														th:class="${prestamo.estado} == 'DISPONIBLE' ? 'btn btn-info solicitar' : 'invisible' ">SOLICITAR</button>
 												</div>
@@ -111,31 +114,23 @@
 														<th>Nombre</th>
 														<th>Apellidos</th>
 														<th>Hora de entrada</th>
-														<th>Tiempo restante</th>
+														<!--<th>Tiempo restante</th> -->
 													</tr>
 												</thead>
 												<tbody>
 
 													<tr th:each="prestamo : ${prestamos}">
 														<td th:text="${prestamo.numero}"></td>
-														<td
-															th:if="${(prestamo.estado eq 'DISPONIBLE') or (prestamo.estado eq null)}"><span
-															class="badge badge-primary">DISPONIBLE</span></td>
-														</td>
-														<td th:if="${prestamo.estado} == 'OCUPADO'"><span
-															class="badge badge-danger">OCUPADO</span></td>
-														<td th:if="${prestamo.estado} == 'LIBERABLE'"><span
-															class="badge badge-warning">LIBERABLE</span></td>
-														<td
-															th:text="${(prestamo.estado eq 'DISPONIBLE') or (prestamo.estado eq null)}? '-' : ${prestamo.codigoAlumno}"></td>
-														<td
-															th:text="${(prestamo.estado eq 'DISPONIBLE') or (prestamo.estado eq null)}? '-' : ${prestamo.nombre}"></td>
-														<td
-															th:text="${(prestamo.estado eq 'DISPONIBLE') or (prestamo.estado eq null)}? '-' : ${prestamo.appPaterno} + ' ' + ${prestamo.appMaterno}"></td>
-														<td
-															th:text="${(prestamo.estado eq 'DISPONIBLE') or (prestamo.estado eq null)}? '-' : ${prestamo.horaEntrada}"></td>
-														<td
-															th:text="${(prestamo.estado eq 'DISPONIBLE') or (prestamo.estado eq null)}? '-' : ${#dates.format(#dates.createNow(),'YYYY/MM/dd HH:mm')}"></td>
+														
+														<td th:if="${prestamo.estado} == 'DISPONIBLE'"><span class="badge badge-primary">DISPONIBLE</span></td>
+														<td th:if="${prestamo.estado} == 'OCUPADO'"><span class="badge badge-danger">OCUPADO</span></td>
+														<td th:if="${prestamo.estado} == 'LIBERABLE'"><span class="badge badge-warning">LIBERABLE</span></td>
+														
+														<td th:text="${prestamo.estado} == 'DISPONIBLE' ? '-' : ${prestamo.codigoAlumno}"></td>
+														<td th:text="${prestamo.estado} == 'DISPONIBLE' ? '-' : ${prestamo.nombre}"></td>
+														<td th:text="${prestamo.estado} == 'DISPONIBLE' ? '-' : ${prestamo.appPaterno} + ' ' + ${prestamo.appMaterno}"></td>
+														<td th:text="${prestamo.estado} == 'DISPONIBLE' ? '-' : ${prestamo.horaEntrada}"></td>
+														<!-- <td th:text="${prestamo.estado} == 'DISPONIBLE' ? '-' : ${#dates.format(#dates.createNow(),'YYYY/MM/dd HH:mm')}"></td>    -->                   
 													</tr>
 												</tbody>
 											</table>

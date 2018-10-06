@@ -28,90 +28,78 @@ import pe.edu.unmsm.fisi.siscae.service.IUsuarioService;
 @Vista
 @Audit(accion = Accion.Visita, comentario = Comentario.VisitaConsulta)
 @RequestMapping("/movimiento")
-public @Controller class ConsultaController
-{
+public @Controller class ConsultaController {
 	private static final String CONSULTA_MOVIMIENTOS = "seguras/movimiento/";
 	private static final String CONSULTA_ESTADO_AREA = CONSULTA_MOVIMIENTOS + "estadoArea";
 	private static final String CONSULTA_INFRACCIONES = CONSULTA_MOVIMIENTOS + "infracciones";
 	private static final String CONSULTA_NUEVOS_SOLICITANTES = CONSULTA_MOVIMIENTOS + "nuevosSolicitantes";
 	private static final String CONSULTA_ESTADISTICAS = CONSULTA_MOVIMIENTOS + "estadisticas";
-	
+
 	private @Autowired IConsultaPrestamosService consultaPrestamosService;
 	private @Autowired IUsuarioService usuarioService;
 	private @Autowired IAreaAdministrativoService areaAdministrativoService;
-	
-    @Audit(tipo = Tipo.CON_MOV_ESTADO_AREA)
-    @GetMapping("/{consulta:estadoArea}")
-    public String irPaginaConsultaPrestamosEstadoArea(@PathVariable String consulta, ModelMap model)
-    {
-    	//Capturamos el idPersona del usuario que inicio sesion
-    	System.out.println("haber la magia: "+SecurityContextFacade.getAuthenticatedUser().getIdUsuario());
-    	ArrayList<Usuario> listaUsuario = (ArrayList) usuarioService.buscarTodos();
-    	Usuario usuario = null;
-    	for(int i=0;i<listaUsuario.size();i++){
-    		if(listaUsuario.get(i).getIdPersona()==SecurityContextFacade.getAuthenticatedUser().getIdUsuario()){
-    			usuario = listaUsuario.get(i);
-    		}
-    	}
-    	
-    	System.out.println(usuario.getIdPersona());
-    	
-    	AreaAdministrativo areaAdministrativo = null;
-    	
-    	ArrayList<AreaAdministrativo> listaAreaAdministrativo = (ArrayList) areaAdministrativoService.buscarTodos();  
-    	for(int i=0;i<listaAreaAdministrativo.size();i++){
-    		if(listaAreaAdministrativo.get(i).getIdAdministrativo()==usuario.getIdPersona()){
-    			areaAdministrativo = listaAreaAdministrativo.get(i);
-    		}
-    	}
-    	
-    	ConsultaPrestamosCriterioBusqueda criterioBusqueda = new ConsultaPrestamosCriterioBusqueda();
-    	criterioBusqueda.setAreaEstudio(areaAdministrativo.getNombreAreaEstudio());
-    	
-    	
-    	model.addAttribute("prestamos",  consultaPrestamosService.buscarPorCriterio(criterioBusqueda));
-    	model.addAttribute("consulta", consulta);
-    	model.addAttribute("areaAdministrativo", areaAdministrativo);
-        return CONSULTA_ESTADO_AREA;
-    }
-    
-    @Audit(tipo = Tipo.CON_MOV_NUEVOS_SOLICITANTES)
-    @GetMapping("/{consulta:nuevosSolicitantes}")
-    public String irPaginaConsultaNuevos(@PathVariable String consulta, ModelMap model)
-    {
-        model.addAttribute("consulta", consulta);
-        return CONSULTA_NUEVOS_SOLICITANTES;
-    }
-    
-    
-    @Audit(tipo = Tipo.CON_MOV_INFRACCIONES)
-    @GetMapping("/{consulta:infracciones}")
-    public String irPaginaConsultaInfracciones(@PathVariable String consulta, ModelMap model)
-    {
-        model.addAttribute("consulta", consulta);
-        return CONSULTA_INFRACCIONES;
-    }
-    
-    @Audit(tipo = Tipo.CON_MOV_ESTADISTICAS)
-    @GetMapping("/{consulta:estadisticas}")
-    public String irPaginaConsultaEstadisticas(@PathVariable String consulta, ModelMap model)
-    {
-    	System.out.println(SecurityContextFacade.getAuthenticatedUser());
-    	int idAdministrativo=3;
-AreaAdministrativo areaAdministrativo = null;
-    	
-    	ArrayList<AreaAdministrativo> listaAreaAdministrativo = (ArrayList) areaAdministrativoService.buscarTodos();  
-    	for(int i=0;i<listaAreaAdministrativo.size();i++){
-    		if(listaAreaAdministrativo.get(i).getIdAdministrativo()==idAdministrativo){
-    			areaAdministrativo = listaAreaAdministrativo.get(i);
-    		}
-    	}
-    	ConsultaPrestamosCriterioBusqueda criterioBusqueda = new ConsultaPrestamosCriterioBusqueda();
-    	criterioBusqueda.setAreaEstudio(areaAdministrativo.getNombreAreaEstudio());
-        model.addAttribute("consulta", consulta);
-    	model.addAttribute("areaAdministrativo", areaAdministrativo);
-        return CONSULTA_ESTADISTICAS;
-    }
-    
-    
+
+	@Audit(tipo = Tipo.CON_MOV_ESTADO_AREA)
+	@GetMapping("/{consulta:estadoArea}")
+	public String irPaginaConsultaPrestamosEstadoArea(@PathVariable String consulta, ModelMap model) {
+
+		ArrayList<Usuario> listaUsuario = (ArrayList) usuarioService.buscarTodos();
+		Usuario usuario = null;
+		for (int i = 0; i < listaUsuario.size(); i++) {
+			if (listaUsuario.get(i).getIdUsuario() == SecurityContextFacade.getAuthenticatedUser().getIdUsuario()) {
+				usuario = listaUsuario.get(i);
+			}
+		}
+
+		AreaAdministrativo areaAdministrativo = null;
+		ArrayList<AreaAdministrativo> listaAreaAdministrativo = (ArrayList) areaAdministrativoService.buscarTodos();
+		for (int i = 0; i < listaAreaAdministrativo.size(); i++) {
+			if (listaAreaAdministrativo.get(i).getIdAdministrativo() == usuario.getIdPersona()) {
+				areaAdministrativo = listaAreaAdministrativo.get(i);
+			}
+		}
+
+		ConsultaPrestamosCriterioBusqueda criterioBusqueda = new ConsultaPrestamosCriterioBusqueda();
+		criterioBusqueda.setAreaEstudio(areaAdministrativo.getNombreAreaEstudio());
+
+		model.addAttribute("prestamos", consultaPrestamosService.buscarPorCriterio(criterioBusqueda));
+		model.addAttribute("consulta", consulta);
+		model.addAttribute("areaAdministrativo", areaAdministrativo);
+		return CONSULTA_ESTADO_AREA;
+	}
+
+	@Audit(tipo = Tipo.CON_MOV_NUEVOS_SOLICITANTES)
+	@GetMapping("/{consulta:nuevosSolicitantes}")
+	public String irPaginaConsultaNuevos(@PathVariable String consulta, ModelMap model) {
+		model.addAttribute("consulta", consulta);
+		return CONSULTA_NUEVOS_SOLICITANTES;
+	}
+
+	@Audit(tipo = Tipo.CON_MOV_INFRACCIONES)
+	@GetMapping("/{consulta:infracciones}")
+	public String irPaginaConsultaInfracciones(@PathVariable String consulta, ModelMap model) {
+		model.addAttribute("consulta", consulta);
+		return CONSULTA_INFRACCIONES;
+	}
+
+	@Audit(tipo = Tipo.CON_MOV_ESTADISTICAS)
+	@GetMapping("/{consulta:estadisticas}")
+	public String irPaginaConsultaEstadisticas(@PathVariable String consulta, ModelMap model) {
+		System.out.println(SecurityContextFacade.getAuthenticatedUser());
+		int idAdministrativo = 3;
+		AreaAdministrativo areaAdministrativo = null;
+
+		ArrayList<AreaAdministrativo> listaAreaAdministrativo = (ArrayList) areaAdministrativoService.buscarTodos();
+		for (int i = 0; i < listaAreaAdministrativo.size(); i++) {
+			if (listaAreaAdministrativo.get(i).getIdAdministrativo() == idAdministrativo) {
+				areaAdministrativo = listaAreaAdministrativo.get(i);
+			}
+		}
+		ConsultaPrestamosCriterioBusqueda criterioBusqueda = new ConsultaPrestamosCriterioBusqueda();
+		criterioBusqueda.setAreaEstudio(areaAdministrativo.getNombreAreaEstudio());
+		model.addAttribute("consulta", consulta);
+		model.addAttribute("areaAdministrativo", areaAdministrativo);
+		return CONSULTA_ESTADISTICAS;
+	}
+
 }
