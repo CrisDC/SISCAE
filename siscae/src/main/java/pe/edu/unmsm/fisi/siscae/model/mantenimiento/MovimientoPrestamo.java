@@ -6,7 +6,6 @@ import lombok.Data;
 public class MovimientoPrestamo {
 	
 	String numDocumentoSolicitante;
-    int idUsuario;
-    String nombreUsuario;
+    String userName;
     int idRecurso;
 }

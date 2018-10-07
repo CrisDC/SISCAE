@@ -39,8 +39,9 @@ public @RestController class MovimientoPrestamoController {
 		if (error.hasErrors()) {
 			throw new BadRequestException(ValidatorUtil.obtenerMensajeValidacionError(error));
 		}
-		movimientoPrestamo.setNombreUsuario(SecurityContextFacade.obtenerNombreUsuario()); 
+		movimientoPrestamo.setUserName(SecurityContextFacade.obtenerNombreUsuario()); 
 		System.out.println(movimientoPrestamo);
+		
 		SecurityContextFacade.obtenerNombreUsuario();
 		movimientoPrestamoService.registrarMovimientoPrestamo(movimientoPrestamo);
 		return ResponseEntity.ok(ConstantesGenerales.REGISTRO_EXITOSO);
