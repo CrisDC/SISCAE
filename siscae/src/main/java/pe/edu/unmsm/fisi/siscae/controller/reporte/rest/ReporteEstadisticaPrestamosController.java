@@ -10,9 +10,9 @@ import org.springframework.web.bind.annotation.RestController;
 import pe.edu.unmsm.fisi.siscae.model.criterio.ReporteEstadisticaPrestamosCriterioBusqueda;
 import pe.edu.unmsm.fisi.siscae.model.reporte.ReporteEstadisticaPrestamos;
 import pe.edu.unmsm.fisi.siscae.service.IReporteEstadisticaPrestamosService;
-
+ 
 @RequestMapping("/reporteEstadisticoPrestamo")
-public @RestController class reporteEstadisticaPrestamosController {
+public @RestController class ReporteEstadisticaPrestamosController {
 	private @Autowired IReporteEstadisticaPrestamosService reporteEstadisticaPrestamosService;
 	@GetMapping(params = "accion=buscarTodos")
 	public List<ReporteEstadisticaPrestamos> buscarTodos() {
