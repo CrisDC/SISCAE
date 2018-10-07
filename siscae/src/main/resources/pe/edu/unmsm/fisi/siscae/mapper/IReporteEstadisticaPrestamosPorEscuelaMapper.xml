@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="pe.edu.unmsm.fisi.siscae.mapper.IReporteEstadisticaPrestamosPorEscuelaMapper">
+
+	<sql id="fragmentoSelectBuscarReporteEstadisticaPrestamosPorEscuela">
+		SELECT  id_escuela,
+			    escuela,
+		        area_estudio,
+		        numero_prestamo,
+			    promedio_tiempo
+		  FROM reporte_estadistica_prestamo_por_escuela 
+	</sql>
+
+	<select id="buscarTodos" resultType="ReporteEstadisticaPrestamosPorEscuela">
+		<include refid="fragmentoSelectBuscarReporteEstadisticaPrestamosPorEscuela" />
+	</select>
+	
+	<select id="buscarPorNumeroDocumentoIdentidad" resultType="ReporteEstadisticaPrestamosPorEscuela">
+		<include refid="fragmentoSelectBuscarReporteEstadisticaPrestamosPorEscuela" />
+		<where>
+			<if test="tipoDocumentoIdentidad != null and tipoDocumentoIdentidad != ''">
+				reporte_estadistica_prestamo_por_escuela  .cod_tip_doc_ide = #{tipoDocumentoIdentidad}
+			</if>
+			<if test="numeroDocumentoIdentidad != null and numeroDocumentoIdentidad != ''">
+				AND reporte_estadistica_prestamo_por_escuela  .num_doc_ide = #{numeroDocumentoIdentidad}
+			</if>
+		</where>
+	</select>
+
+	<select id="buscarPorCriterio" resultType="ReporteEstadisticaPrestamosPorEscuela">
+		<include refid="fragmentoSelectBuscarReporteEstadisticaPrestamosPorEscuela" />
+		<where>
+			<if test="areaEstudio != null and areaEstudio != '-1'">
+				reporte_estadistica_prestamo_por_escuela .area_estudio = #{areaEstudio}
+			</if>
+		</where>
+	</select>
+
+
+</mapper>
