@@ -1,4 +1,4 @@
-//Capturar el id de un button en el div con id for-each
+// Capturar el id de un button en el div con id for-each
 $(document).ready(function(){
 
 	
@@ -8,10 +8,50 @@ $(document).ready(function(){
 			text: "Ingrese su carnet de biblioteca por el scanner",
 			content: "input",
 			icon: "resources/images/nuevo_gif.gif",
-		});
-		$.get('/prestamo', { userId : 1234 }, function(resp) {
-			console.log(resp);
-		});
+		}).then(function (inputValue) {
+			
+			var finPrestamo ={
+		        	"numDocumentoSolicitante": inputValue
+		    };
+
+			$.ajax({
+                url :  $variableUtil.root + "movimientoFinPrestamo",
+                type : 'POST',
+                data : JSON.stringify(finPrestamo),
+                beforeSend : function(xhr) {
+    				xhr.setRequestHeader('Content-Type', 'application/json');
+    				xhr.setRequestHeader("X-CSRF-TOKEN", $variableUtil.csrf);
+    			},
+    			statusCode : {
+    				400 : function(response) {
+    					swal(response.responseJSON);
+    				}
+    			},
+    			success : function(response) {
+    				swal("Registro de salida", "Usted marco su salida con exito", "success");
+    				location.reload();
+    			},
+    			error : function(response) {
+    				swal("Error", "Ha ocurrido un problema con el servidor", "warning"); 
+    			},
+    			complete : function(response) {
+    				
+    			}
+
+			}, function (dismiss) {
+			  // dismiss can be 'cancel', 'overlay',
+			  // 'close', and 'timer'
+			  
+			}
+
+			)
+      })
+		
+		
+		
+		
+		
+		
 	})
 	
       $('body #for-each').on('click', 'button', function(){
