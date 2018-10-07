@@ -7,14 +7,12 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import pe.edu.unmsm.fisi.siscae.model.consulta.PrestamoRecurso;
-import pe.edu.unmsm.fisi.siscae.model.consulta.PrestamoRecurso.PrestamoRecursoBuilder;
 
 @Data
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class ReporteEstadisticoPrestamos {
+public class ReporteEstadisticaPrestamos {
 	String recurso;
 	String escuela;
 	String codigo;

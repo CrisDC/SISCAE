@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="pe.edu.unmsm.fisi.siscae.mapper.IReporteEstadisticaPrestamosMapper">
+
+	<sql id="fragmentoSelectBuscarReporteEstadisticaPrestamos">
+		SELECT  recurso,
+			    escuela,
+		        codigo,
+		        nombre,
+			    app_paterno,
+			    app_materno,
+			    turno,
+			   	fecha_registro, 
+			    estadia, 
+			    area_estudio
+		  FROM WV_REPORTE_PRESTAMOS 
+	</sql>
+
+	<select id="buscarTodos" resultType="ReporteEstadisticaPrestamos">
+		<include refid="fragmentoSelectBuscarReporteEstadisticaPrestamos" />
+	</select>
+	
+	<select id="buscarPorNumeroDocumentoIdentidad" resultType="ReporteEstadisticaPrestamos">
+		<include refid="fragmentoSelectBuscarReporteEstadisticaPrestamos" />
+		<where>
+			<if test="tipoDocumentoIdentidad != null and tipoDocumentoIdentidad != ''">
+				WV_REPORTE_PRESTAMOS  .cod_tip_doc_ide = #{tipoDocumentoIdentidad}
+			</if>
+			<if test="numeroDocumentoIdentidad != null and numeroDocumentoIdentidad != ''">
+				AND WV_REPORTE_PRESTAMOS  .num_doc_ide = #{numeroDocumentoIdentidad}
+			</if>
+		</where>
+	</select>
+
+	<select id="buscarPorCriterio" resultType="ReporteEstadisticaPrestamos">
+		<include refid="fragmentoSelectBuscarReporteEstadisticaPrestamos" />
+		<where>
+			<if test="areaEstudio != null and areaEstudio != '-1'">
+				WV_REPORTE_PRESTAMOS .area_estudio = #{areaEstudio}
+			</if>
+		</where>
+	</select>
+
+
+</mapper>

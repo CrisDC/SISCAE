@@ -41,6 +41,7 @@ public @RestController class MovimientoPrestamoController {
 		}
 		movimientoPrestamo.setNombreUsuario(SecurityContextFacade.obtenerNombreUsuario()); 
 		System.out.println(movimientoPrestamo);
+		
 		SecurityContextFacade.obtenerNombreUsuario();
 		movimientoPrestamo.setNumDocumentoSolicitante(movimientoPrestamo.getNumDocumentoSolicitante().trim());
 		movimientoPrestamoService.registrarMovimientoPrestamo(movimientoPrestamo);
