@@ -44,10 +44,11 @@ $(document).ready(function(){
     				}
     			},
     			success : function(response) {
-    				swal('Peticion realizada con exito');
+    				swal("Peticion realizada con exito", "Usted esta prestando el recurso "+numRecurso, "success");
+    				location.reload();
     			},
     			error : function(response) {
-    				swal('Problemas con el servidor');
+    				swal("Error", "Ha ocurrido un problema con el servidor", "warning"); 
     			},
     			complete : function(response) {
     				
