@@ -51,8 +51,8 @@ public @Controller class ConsultaController {
 			}
 		}
 
-		AreaAdministrativo areaAdministrativo = null;
 		ArrayList<AreaAdministrativo> listaAreaAdministrativo = (ArrayList) areaAdministrativoService.buscarTodos();
+		AreaAdministrativo areaAdministrativo = null;	
 		for (int i = 0; i < listaAreaAdministrativo.size(); i++) {
 			if (listaAreaAdministrativo.get(i).getIdAdministrativo() == usuario.getIdPersona()) {
 				areaAdministrativo = listaAreaAdministrativo.get(i);
@@ -71,7 +71,27 @@ public @Controller class ConsultaController {
 	@Audit(tipo = Tipo.CON_MOV_NUEVOS_SOLICITANTES)
 	@GetMapping("/{consulta:nuevosSolicitantes}")
 	public String irPaginaConsultaNuevos(@PathVariable String consulta, ModelMap model) {
+		
+		
+		ArrayList<Usuario> listaUsuario = (ArrayList) usuarioService.buscarTodos();
+		Usuario usuario = null;
+		for (int i = 0; i < listaUsuario.size(); i++) {
+			if (listaUsuario.get(i).getIdUsuario() == SecurityContextFacade.getAuthenticatedUser().getIdUsuario()) {
+				usuario = listaUsuario.get(i);
+			}
+		}
+
+		ArrayList<AreaAdministrativo> listaAreaAdministrativo = (ArrayList) areaAdministrativoService.buscarTodos();
+		AreaAdministrativo areaAdministrativo = null;	
+		for (int i = 0; i < listaAreaAdministrativo.size(); i++) {
+			if (listaAreaAdministrativo.get(i).getIdAdministrativo() == usuario.getIdPersona()) {
+				areaAdministrativo = listaAreaAdministrativo.get(i);
+			}
+		}
+
 		model.addAttribute("consulta", consulta);
+		model.addAttribute("areaAdministrativo", areaAdministrativo);
+		
 		return CONSULTA_NUEVOS_SOLICITANTES;
 	}
 

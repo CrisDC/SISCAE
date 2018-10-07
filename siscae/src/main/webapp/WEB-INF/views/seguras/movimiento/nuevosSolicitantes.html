@@ -36,19 +36,17 @@
 									<div class="form-group">
 										<label>Tipo de documento</label>
 										<div class="input-group">
-											<select class="form-control custom-select">
-												<option>Ingrese el tipo de documento</option>
-												<option value="Category 1">DNI</option>
-												<option value="Category 2">Codigo de Alumno</option>
-												<option value="Category 3">Documento de extranjeria</option>
+											<select class="form-control custom-select" id="tipoDocumento" name="tipoDocumento">
+												<option value="" selected="selected" disabled="disabled">Ingrese el tipo de documento</option>
+												<option th:each="tipoDocumento : ${tipoDocumentos}" 
+														th:value="${tipoDocumento.idItem}" th:text="${tipoDocumento.descripcion}"></option>
 											</select>
 										</div>
 									</div>
 									<div class="form-group">
 										<label>Numero de documento</label>
 										<div class="input-group">
-											<input type="number" class="form-control"
-												placeholder="Ingrese su numero de documento">
+											<input type="number" class="form-control" id="numDocumento" name="numDocumento" placeholder="Ingrese su numero de documento">
 										</div>
 									</div>
 									<div class="form-group">
