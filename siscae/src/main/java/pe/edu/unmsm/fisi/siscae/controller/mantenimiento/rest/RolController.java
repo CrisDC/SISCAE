@@ -8,7 +8,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.Errors;
 import org.springframework.validation.annotation.Validated;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -36,8 +39,8 @@ public @RestController class RolController {
 	public List<Rol> buscarTodos(){
 		return rolService.buscarTodos();
 	}
-	
-	
+	@Audit(accion = Accion.REGISTRO, comentario = Comentario.Registro)
+	@PostMapping
 	public ResponseEntity<?> registrarRol(
 			@Validated({ Default.class, IRegistro.class }) @RequestBody Rol rol, Errors error){
 		if(error.hasErrors()){
@@ -47,6 +50,10 @@ public @RestController class RolController {
 		return ResponseEntity.ok(ConstantesGenerales.REGISTRO_EXITOSO);
 		
 	}
+	
+	@Audit(accion = Accion.ACTUALIZACION, comentario = Comentario.Actualizacion)
+	@PutMapping
+	
 	public ResponseEntity<?> actualizarRol(
 			@Validated({ Default.class, IRegistro.class }) @RequestBody Rol rol, Errors error){
 		
@@ -56,7 +63,8 @@ public @RestController class RolController {
 		rolService.actualizarRol(rol);
 		return ResponseEntity.ok(ConstantesGenerales.ACTUALIZACION_EXITOSA);
 	}
-	
+	@Audit(accion = Accion.ELIMINACION, comentario = Comentario.Eliminacion)
+	@DeleteMapping
 	public ResponseEntity<?> eliminarRol(
 			@Validated({ Default.class, IRegistro.class }) @RequestBody Rol rol, Errors error){
 		

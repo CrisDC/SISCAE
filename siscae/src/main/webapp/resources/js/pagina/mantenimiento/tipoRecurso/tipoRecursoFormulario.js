@@ -8,17 +8,17 @@ $(document).ready(function() {
 			nombre : {
 				required : true,
 				notOnlySpace : true,
-				rangelength : [ 3, 20 ]
+				rangelength : [ 0, 20 ]
 			},
 			descripcion : {
 				required : true,
 				notOnlySpace : true,
-				rangelength : [ 3, 45 ]
+				rangelength : [ 0, 45 ]
 			},
 			uso : {
 				required : true,
 				notOnlySpace : true,
-				rangelength : [ 3, 20 ]
+				rangelength : [ 0, 20 ]
 			},
 			
 		},

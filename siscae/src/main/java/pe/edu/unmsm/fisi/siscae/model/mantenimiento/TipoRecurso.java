@@ -21,19 +21,16 @@ import com.fasterxml.jackson.annotation.JsonFormat;
 public class TipoRecurso {
 	private Integer idTipoRecurso;
 	
-	@NotNull(message = "{NotNull.Externo.nombre}")
-    @NotBlank(message = "{NotBlank.Externo.nombre}")
+	
     @Length(min = 3, max = 20, message = "{Length.CodigoProcesoSwitch.nombre}")
 	private String nombre;
 	
-	@NotNull(message = "{NotNull.Externo.nombre}")
-    @NotBlank(message = "{NotBlank.Externo.nombre}")
-    @Length(min = 10, max  = 45, message = "{Length.CodigoProcesoSwitch.nombre}")
+	
+    @Length(min = 3, max  = 45, message = "{Length.CodigoProcesoSwitch.descripcion}")
 	private String descripcion;
 	
-	@NotNull(message = "{NotNull.Externo.nombre}")
-    @NotBlank(message = "{NotBlank.Externo.nombre}")
-    @Length(min = 10, max  = 20, message = "{Length.CodigoProcesoSwitch.nombre}")
+	
+    @Length(min = 3, max  = 20, message = "{Length.CodigoProcesoSwitch.uso}")
 	private String uso;
 	
 

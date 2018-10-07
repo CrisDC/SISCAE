@@ -28,16 +28,16 @@ public class Escuela {
 
 	@Size(min = 3, max = 60)
 	@Length(min = 3, max = 60)
-	@NotBlank(message = "{NotBlank.Escuela.nombre}")
-	@Pattern(regexp = Regex.SOLO_LETRAS_A_a, message = "{Pattern.Escuela.nombre}")
+	//@NotBlank(message = "{NotBlank.Escuela.nombre}")
+	//@Pattern(regexp = Regex.SOLO_LETRAS_A_a, message = "{Pattern.Escuela.nombre}")
 	private String nombre;
 
 	@Max(Integer.MAX_VALUE / 2)
 	@Min(1)
-	@Pattern(regexp = Regex.SOLO_DIGITOS, message = "{Pattern.Escuela.idFacultad}")
+	//@Pattern(regexp = Regex.SOLO_DIGITOS, message = "{Pattern.Escuela.idFacultad}")
 	private Integer idFacultad;
 
 	private String nombreFacultad;// agregue karen
 
-	
+	private String codigo;
 }
