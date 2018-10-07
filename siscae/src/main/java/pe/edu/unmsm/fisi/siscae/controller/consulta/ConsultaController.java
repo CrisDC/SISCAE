@@ -1,6 +1,7 @@
 package pe.edu.unmsm.fisi.siscae.controller.consulta;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -9,13 +10,13 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import antlr.collections.List;
 import pe.edu.unmsm.fisi.siscae.aspecto.anotacion.Audit;
 import pe.edu.unmsm.fisi.siscae.aspecto.enumeracion.Accion;
 import pe.edu.unmsm.fisi.siscae.aspecto.enumeracion.Comentario;
 import pe.edu.unmsm.fisi.siscae.aspecto.enumeracion.Tipo;
 import pe.edu.unmsm.fisi.siscae.configuracion.security.SecurityContextFacade;
 import pe.edu.unmsm.fisi.siscae.controller.excepcion.anotacion.Vista;
+import pe.edu.unmsm.fisi.siscae.model.consulta.PrestamoRecurso;
 import pe.edu.unmsm.fisi.siscae.model.criterio.ConsultaPrestamosCriterioBusqueda;
 import pe.edu.unmsm.fisi.siscae.model.mantenimiento.Administrativo;
 import pe.edu.unmsm.fisi.siscae.model.mantenimiento.AreaAdministrativo;
@@ -43,7 +44,7 @@ public @Controller class ConsultaController {
 	@GetMapping("/{consulta:estadoArea}")
 	public String irPaginaConsultaPrestamosEstadoArea(@PathVariable String consulta, ModelMap model) {
 
-		ArrayList<Usuario> listaUsuario = (ArrayList) usuarioService.buscarTodos();
+		List<Usuario> listaUsuario = usuarioService.buscarTodos();
 		Usuario usuario = null;
 		for (int i = 0; i < listaUsuario.size(); i++) {
 			if (listaUsuario.get(i).getIdUsuario() == SecurityContextFacade.getAuthenticatedUser().getIdUsuario()) {
@@ -52,7 +53,7 @@ public @Controller class ConsultaController {
 		}
 
 		AreaAdministrativo areaAdministrativo = null;
-		ArrayList<AreaAdministrativo> listaAreaAdministrativo = (ArrayList) areaAdministrativoService.buscarTodos();
+		List<AreaAdministrativo> listaAreaAdministrativo = areaAdministrativoService.buscarTodos();
 		for (int i = 0; i < listaAreaAdministrativo.size(); i++) {
 			if (listaAreaAdministrativo.get(i).getIdAdministrativo() == usuario.getIdPersona()) {
 				areaAdministrativo = listaAreaAdministrativo.get(i);
@@ -78,6 +79,32 @@ public @Controller class ConsultaController {
 	@Audit(tipo = Tipo.CON_MOV_INFRACCIONES)
 	@GetMapping("/{consulta:infracciones}")
 	public String irPaginaConsultaInfracciones(@PathVariable String consulta, ModelMap model) {
+		
+		Usuario usuario = null;
+		List<Usuario> listaUsuario = usuarioService.buscarTodos();
+		for (int i = 0; i < listaUsuario.size(); i++) {
+			if (listaUsuario.get(i).getIdUsuario() == SecurityContextFacade.getAuthenticatedUser().getIdUsuario()) {
+				usuario = listaUsuario.get(i);
+				break;
+			}
+		}
+
+		AreaAdministrativo areaAdministrativo = null;
+		List<AreaAdministrativo> listaAreaAdministrativo = areaAdministrativoService.buscarTodos();
+		for (int i = 0; i < listaAreaAdministrativo.size(); i++) {
+			if (listaAreaAdministrativo.get(i).getIdAdministrativo() == usuario.getIdPersona()) {
+				areaAdministrativo = listaAreaAdministrativo.get(i);
+				break;
+			}
+		}
+		
+		ConsultaPrestamosCriterioBusqueda criterioBusqueda = new ConsultaPrestamosCriterioBusqueda();
+		criterioBusqueda.setAreaEstudio(areaAdministrativo.getNombreAreaEstudio());
+		
+		List<PrestamoRecurso> prestamos = consultaPrestamosService.buscarPorCriterio(criterioBusqueda);
+		
+		model.addAttribute("prestamos", prestamos);
+		model.addAttribute("areaAdministrativo", areaAdministrativo);
 		model.addAttribute("consulta", consulta);
 		return CONSULTA_INFRACCIONES;
 	}
