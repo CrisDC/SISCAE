@@ -40,10 +40,14 @@ public @RestController class MovimientoPrestamoController {
 			throw new BadRequestException(ValidatorUtil.obtenerMensajeValidacionError(error));
 		}
 		movimientoPrestamo.setNombreUsuario(SecurityContextFacade.obtenerNombreUsuario()); 
+		
 		System.out.println(movimientoPrestamo);
-		SecurityContextFacade.obtenerNombreUsuario();
+		System.out.println("Atributo 'numDocumentoSolicitante': "+movimientoPrestamo.getNumDocumentoSolicitante());
+		System.out.println("Atributo 'nombreUsuario': "+movimientoPrestamo.getNombreUsuario());
+		System.out.println("Atributo 'idRecurso': "+movimientoPrestamo.getIdRecurso());
+		
+		
 		movimientoPrestamoService.registrarMovimientoPrestamo(movimientoPrestamo);
 		return ResponseEntity.ok(ConstantesGenerales.REGISTRO_EXITOSO);
 	}
-
 }

@@ -14,7 +14,7 @@ public interface IMovimientoPrestamoMapper extends IMantenibleMapper<MovimientoP
 
 	@Select(value = { "{call SP_REGISTRAR_INICIO_PRESTAMO ( "
             + "#{objeto.numDocumentoSolicitante, jdbcType = VARCHAR, mode = IN},"
-            + "#{objeto.idUsuario, jdbcType = INTEGER, mode = IN},"
+            + "#{objeto.nombreUsuario, jdbcType = VARCHAR, mode = IN},"
 			+ "#{objeto.idRecurso, jdbcType = INTEGER, mode = IN})}" })
     @Options(statementType = StatementType.CALLABLE)
     public List<MovimientoPrestamo> mantener(Parametro parametro);
