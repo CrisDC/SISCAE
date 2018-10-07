@@ -48,7 +48,7 @@ public enum Tipo
     SolicitudTramite("Solicitud de Trámite"), 
     CON_ADM_ALUMNO("CONSULTA de Alumnos"), 
     CON_MOV_ESTADO_AREA("Prestamo de recurso"),
-    CON_MOV_NUEVOS_SOLICITANTES("Registro de nuevos solicitantes"), 
+    CON_MOV_SOLICITANTES("Solicitantes"), 
     CON_MOV_REGISTRAR("Realizar prestamo de recurso"), 
     CON_MOV_INFRACCIONES("Consulta de Infracciones"),
 	CON_MOV_ESTADISTICAS("Consulta de Estadisticas");

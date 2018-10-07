@@ -32,7 +32,7 @@ public @Controller class ConsultaController {
 	private static final String CONSULTA_MOVIMIENTOS = "seguras/movimiento/";
 	private static final String CONSULTA_ESTADO_AREA = CONSULTA_MOVIMIENTOS + "estadoArea";
 	private static final String CONSULTA_INFRACCIONES = CONSULTA_MOVIMIENTOS + "infracciones";
-	private static final String CONSULTA_NUEVOS_SOLICITANTES = CONSULTA_MOVIMIENTOS + "nuevosSolicitantes";
+	private static final String CONSULTA_SOLICITANTES = CONSULTA_MOVIMIENTOS + "solicitantes";
 	private static final String CONSULTA_ESTADISTICAS = CONSULTA_MOVIMIENTOS + "estadisticas";
 
 	private @Autowired IConsultaPrestamosService consultaPrestamosService;
@@ -68,8 +68,8 @@ public @Controller class ConsultaController {
 		return CONSULTA_ESTADO_AREA;
 	}
 
-	@Audit(tipo = Tipo.CON_MOV_NUEVOS_SOLICITANTES)
-	@GetMapping("/{consulta:nuevosSolicitantes}")
+	@Audit(tipo = Tipo.CON_MOV_SOLICITANTES)
+	@GetMapping("/{consulta:solicitantes}")
 	public String irPaginaConsultaNuevos(@PathVariable String consulta, ModelMap model) {
 		
 		
@@ -92,7 +92,7 @@ public @Controller class ConsultaController {
 		model.addAttribute("consulta", consulta);
 		model.addAttribute("areaAdministrativo", areaAdministrativo);
 		
-		return CONSULTA_NUEVOS_SOLICITANTES;
+		return CONSULTA_SOLICITANTES;
 	}
 
 	@Audit(tipo = Tipo.CON_MOV_INFRACCIONES)
