@@ -7,7 +7,7 @@ $(document).ready(function(){
 			title: "Registrar salida",
 			text: "Ingrese su carnet de biblioteca por el scanner",
 			content: "input",
-			icon: "resources/images/nuevo_gif.gif",
+			icon: "/siscae/resources/images/lectora.gif",
 		}).then(function (inputValue) {
 			
 			var finPrestamo ={
@@ -61,7 +61,7 @@ $(document).ready(function(){
 			title: "Solicitud de recurso "+numRecurso,
 			text: "Ingrese su carnet de biblioteca por el scanner",
 			content: "input",
-			icon: "resources/images/nuevo_gif.gif",
+			icon: "/siscae/resources/images/lectora.gif",
 		
 		}).then(function (inputValue) {
 			
