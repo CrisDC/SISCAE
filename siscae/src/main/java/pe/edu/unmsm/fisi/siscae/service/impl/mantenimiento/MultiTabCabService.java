@@ -55,4 +55,5 @@ public class MultiTabCabService extends MantenibleService<MultiTabCab> implement
 	public void eliminarMultiTabCab(MultiTabCab multiTabCab) {
 		this.eliminar(multiTabCab);
 	}
+
 }

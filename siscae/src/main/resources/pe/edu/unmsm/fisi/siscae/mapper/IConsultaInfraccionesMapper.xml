@@ -7,9 +7,8 @@
 			    nombre, 
 			    app_paterno,
 			    app_materno,
-		        tipo_recurso,
+		        tipo_infraccion,
 			    fecha_infraccion,
-			    estado_infraccion,
 			    area_estudio
 		  FROM WV_INFRACCIONES_AULAS 
 	</sql>

@@ -71,6 +71,9 @@ private  Integer idHorario;
 	@Pattern(regexp = Regex.SOLO_DIGITOS, message = "{Pattern.Horario.id_area_estudio}")
 	private Integer idAreaEstudio;
 	
-	
-		
+	private String nombreAreaEstudio;
+	private String nombreTipoHorario;
+	private String dia;
+	private String turno;
+	private String estado;
 }

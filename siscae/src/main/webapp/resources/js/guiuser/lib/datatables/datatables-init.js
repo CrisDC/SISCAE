@@ -2,6 +2,9 @@ $(document).ready(function() {
         $('#myTable').DataTable();
         $(document).ready(function() {
             var table = $('#example').DataTable({
+            	"language": {
+                    "url": "//cdn.datatables.net/plug-ins/1.10.16/i18n/Spanish.json"
+                },
                 "columnDefs": [{
                     "visible": false,
                     "targets": 2

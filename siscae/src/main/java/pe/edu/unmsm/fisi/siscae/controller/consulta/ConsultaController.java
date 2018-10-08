@@ -19,10 +19,14 @@ import pe.edu.unmsm.fisi.siscae.controller.excepcion.anotacion.Vista;
 import pe.edu.unmsm.fisi.siscae.model.consulta.PrestamoRecurso;
 import pe.edu.unmsm.fisi.siscae.model.criterio.ConsultaPrestamosCriterioBusqueda;
 import pe.edu.unmsm.fisi.siscae.model.mantenimiento.AreaAdministrativo;
+import pe.edu.unmsm.fisi.siscae.model.mantenimiento.Escuela;
+import pe.edu.unmsm.fisi.siscae.model.mantenimiento.MultiTabCab;
 import pe.edu.unmsm.fisi.siscae.model.mantenimiento.MultiTabDet;
 import pe.edu.unmsm.fisi.siscae.model.mantenimiento.Usuario;
 import pe.edu.unmsm.fisi.siscae.service.IAreaAdministrativoService;
 import pe.edu.unmsm.fisi.siscae.service.IConsultaPrestamosService;
+import pe.edu.unmsm.fisi.siscae.service.IEscuelaService;
+import pe.edu.unmsm.fisi.siscae.service.IMultiTabCabService;
 import pe.edu.unmsm.fisi.siscae.service.IMultiTabDetService;
 import pe.edu.unmsm.fisi.siscae.service.IUsuarioService;
 
@@ -42,12 +46,16 @@ public @Controller class ConsultaController {
 	private @Autowired IUsuarioService usuarioService;
 	private @Autowired IAreaAdministrativoService areaAdministrativoService;
 	private @Autowired IMultiTabDetService multiTabDetService;
+	private @Autowired IMultiTabCabService multiTabCabService;
+	
+	private @Autowired IEscuelaService escuelaService;
 
 	@Audit(tipo = Tipo.CON_MOV_ESTADO_AREA)
 	@GetMapping("/{consulta:estadoArea}")
 	public String irPaginaConsultaPrestamosEstadoArea(@PathVariable String consulta, ModelMap model) {
 
 		List<Usuario> listaUsuario = usuarioService.buscarTodos();
+
 		Usuario usuario = null;
 		for (int i = 0; i < listaUsuario.size(); i++) {
 			if (listaUsuario.get(i).getIdUsuario() == SecurityContextFacade.getAuthenticatedUser().getIdUsuario()) {
@@ -58,7 +66,7 @@ public @Controller class ConsultaController {
 		AreaAdministrativo areaAdministrativo = null;
 		List<AreaAdministrativo> listaAreaAdministrativo = areaAdministrativoService.buscarTodos();
 		for (int i = 0; i < listaAreaAdministrativo.size(); i++) {
-			if (listaAreaAdministrativo.get(i).getIdAdministrativo() == usuario.getIdPersona()) {
+			if (listaAreaAdministrativo.get(i).getIdAdministrativo().equals(usuario.getIdPersona())) {
 				areaAdministrativo = listaAreaAdministrativo.get(i);
 			}
 		}
@@ -76,7 +84,7 @@ public @Controller class ConsultaController {
 	@GetMapping("/{consulta:solicitantes}")
 	public String irPaginaConsultaNuevos(@PathVariable String consulta, ModelMap model) {
 		
-		
+		//Busqueda del usuario - PROVISIONAL
 		ArrayList<Usuario> listaUsuario = (ArrayList) usuarioService.buscarTodos();
 		Usuario usuario = null;
 		for (int i = 0; i < listaUsuario.size(); i++) {
@@ -92,7 +100,34 @@ public @Controller class ConsultaController {
 				areaAdministrativo = listaAreaAdministrativo.get(i);
 			}
 		}
-
+		
+		
+		//Cargando elementos a los combos
+		ArrayList<MultiTabCab> listaMultiCab = (ArrayList) multiTabCabService.buscarTodos();
+		MultiTabCab multiTabCab = null;
+		for (int i = 0; i < listaMultiCab.size(); i++) {
+			if (listaMultiCab.get(i).getNombre().equals("TIPO DOCUMENTO")) {
+				multiTabCab = listaMultiCab.get(i);
+			}
+		}
+		ArrayList<MultiTabDet> listaTipoDocumento = (ArrayList) multiTabDetService.buscarPorIdTabla(multiTabCab.getIdTabla());
+		
+		
+		ArrayList<MultiTabCab> listaMultiCab2 = (ArrayList) multiTabCabService.buscarTodos();
+		MultiTabCab multiTabCab2 = null;
+		for (int i = 0; i < listaMultiCab2.size(); i++) {
+			if (listaMultiCab2.get(i).getNombre().equals("TIPO ACADEMICO")) {
+				multiTabCab2 = listaMultiCab2.get(i);
+			}
+		}
+		ArrayList<MultiTabDet> listaTipoAcademico = (ArrayList) multiTabDetService.buscarPorIdTabla(multiTabCab2.getIdTabla());
+		
+		
+		ArrayList<Escuela> listaEscuelas = (ArrayList) escuelaService.buscarTodos();
+		
+		model.addAttribute("tipoDocumentos", listaTipoDocumento);
+		model.addAttribute("tipoAcademicos", listaTipoAcademico);
+		model.addAttribute("escuelas", listaEscuelas);
 		model.addAttribute("consulta", consulta);
 		model.addAttribute("areaAdministrativo", areaAdministrativo);
 		

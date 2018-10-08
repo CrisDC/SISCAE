@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="pe.edu.unmsm.fisi.siscae.mapper.ISolicitantesDetallesMapper">
+
+	<sql id="fragmentoSelectBuscarSolicitantesDetalles">
+		SELECT  codigo,
+				app_paterno,
+				app_materno,
+				nombre,
+				escuela,
+				num_documento,
+				solicitante
+		  FROM vw_solicitantes 
+	</sql>
+
+	<select id="buscarTodos" resultType="SolicitantesDetalles">
+		<include refid="fragmentoSelectBuscarSolicitantesDetalles" />
+	</select>
+	
+	<select id="buscarPorNumeroDocumentoIdentidad" resultType="SolicitantesDetalles">
+		<include refid="fragmentoSelectBuscarSolicitantesDetalles" />
+		<where>
+			<if test="tipoDocumentoIdentidad != null and tipoDocumentoIdentidad != ''">
+				vw_solicitantes .cod_tip_doc_ide = #{tipoDocumentoIdentidad}
+			</if>
+			<if test="numeroDocumentoIdentidad != null and numeroDocumentoIdentidad != ''">
+				AND vw_solicitantes .num_doc_ide = #{numeroDocumentoIdentidad}
+			</if>
+		</where>
+	</select>
+
+	<select id="buscarPorCriterio" resultType="SolicitantesDetalles">
+		<include refid="fragmentoSelectBuscarSolicitantesDetalles" />
+		<where>
+			<if test="codigo != null and codigo != '-1'">
+				vw_solicitantes.codigo = #{codigo}
+			</if>
+		</where>
+	</select>
+
+
+</mapper>

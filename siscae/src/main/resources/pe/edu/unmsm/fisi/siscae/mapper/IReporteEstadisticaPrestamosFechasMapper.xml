@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="pe.edu.unmsm.fisi.siscae.mapper.IReporteEstadisticaPrestamosFechasMapper">
+
+	<sql id="fragmentoSelectBuscarReporteEstadisticaPrestamosFechas">
+		SELECT  recurso,
+				id_escuela,
+			    nombre_tipo,
+			    escuela,
+			    id_persona,
+		        codigo,
+		        nombre,
+			    app_paterno,
+			    app_materno,
+			    id_area_estudio, 
+			    area_estudio,
+			    turno,
+			    hora_prestamo,
+			    anio,
+			    mes,
+			    dia,
+			    estadia
+			    
+		  FROM wv_reporte_prestamos_fechas
+	</sql>
+
+	<select id="buscarTodos" resultType="ReporteEstadisticaPrestamosFechas">
+		<include refid="fragmentoSelectBuscarReporteEstadisticaPrestamosFechas" />
+	</select>
+	
+	<select id="buscarPorNumeroDocumentoIdentidad" resultType="ReporteEstadisticaPrestamosFechas">
+		<include refid="fragmentoSelectBuscarReporteEstadisticaPrestamosFechas" />
+		<where>
+			<if test="tipoDocumentoIdentidad != null and tipoDocumentoIdentidad != ''">
+				wv_reporte_prestamos_fechas .cod_tip_doc_ide = #{tipoDocumentoIdentidad}
+			</if>
+			<if test="numeroDocumentoIdentidad != null and numeroDocumentoIdentidad != ''">
+				AND wv_reporte_prestamos_fechas .num_doc_ide = #{numeroDocumentoIdentidad}
+			</if>
+		</where>
+	</select>
+
+	<select id="buscarPorCriterio" resultType="ReporteEstadisticaPrestamosFechas">
+		<include refid="fragmentoSelectBuscarReporteEstadisticaPrestamosFechas" />
+		<where>
+			<if test="areaEstudio != null and areaEstudio != '-1'">
+				wv_reporte_prestamos_fechas.area_estudio = #{areaEstudio}
+			</if>
+		</where>
+	</select>
+
+
+</mapper>

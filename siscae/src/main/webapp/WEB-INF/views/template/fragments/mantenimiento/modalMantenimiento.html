@@ -1033,22 +1033,24 @@
 		</div>
 	</th:block>
 	<!-- TABLAS SISCAE -->
+	
+	<!-- TABLA Persona -->
 	<th:block th:fragment="persona">
 		<div class="form-group">
 			<label class="col-lg-2 control-label">Tipo de documento</label>
 			<div class="col-lg-10">
 				<select id="idTipoDocumento" class="form-control select2 elemento-desactivable"
 					name="idTipoDocumento">
-					<option value="" selected="selected" disabled="disabled">Seleccione el Tipo de Documento</option>
-					<option value="" selected="selected" >DNI</option>
-					<option value="" selected="selected" >Carné de extranjería</option>
+					<option value="" selected="selected">Seleccione  el tipo de documento</option>
+					<option th:each="tipoDocumento : ${tipoDocumento}" th:value="${tipoDocumento.idItem}"
+						th:text="|${tipoDocumento.descripcion}|"></option>
 				</select>
 			</div>
 		</div>
 		<div class="form-group">
 			<label class="col-lg-2 control-label">Número de Documento</label>
 			<div class="col-lg-10">
-				<input class="form-control upperCase elemento-desactivable" name="numDocumento"
+				<input class="form-control numbersOnly elemento-desactivable" name="numDocumento"
 					autofocus="autofocus" />
 			</div>
 		</div>
@@ -1076,15 +1078,15 @@
 				<select id="sexo" class="form-control select2 elemento-desactivable"
 					name="sexo">
 					<option value="" selected="selected" disabled="disabled">Seleccione el sexo</option>
-					<option value="" selected="selected" >Masculino</option>
-					<option value="" selected="selected" >Femenino</option>
+					<option  selected="selected" th:value="MASCULINO" th:text="MASCULINO">Masculino</option>
+					<option  selected="selected" th:value="FEMENINO" th:text="FEMENINO" >Femenino</option>
 				</select>
 			</div>
 		</div>
 		<div class="form-group">
 			<label class="col-lg-2 control-label">Telefono</label>
 			<div class="col-lg-10">
-				<input class="form-control" name="numTelef">
+				<input class="form-control numbersOnly" name="numTelef">
 			</div>
 		</div>
 		<div class="form-group">
@@ -1343,6 +1345,9 @@
 		</div>
 		-->
 	</th:block>
+	
+	<!--TABLA HORARIO -->
+	
 	<th:block th:fragment="horario">
 		
 		<div class="form-group">
@@ -1376,7 +1381,7 @@
 					name="idEstadoTabla">
 					<option value="" selected="selected" disabled="disabled">Seleccione  el estado</option>
 					<option th:each="estado : ${estado}" th:value="${estado.idEstadoTabla}"
-						th:text="|${estado.idEstadoTabla} - ${estado.descripcion}|"></option>
+						th:text="|${estado.descripcion}|"></option>
 				</select>
 			</div>
 		</div>
@@ -1386,8 +1391,8 @@
 				<select id="idTurno" class="form-control select2 elemento-desactivable"
 					name="idTurno">
 					<option value="" selected="selected" disabled="disabled">Seleccione el turno</option>
-					<option th:each="turno : ${turno}" th:value="${turno.idTurno}"
-						th:text="|${turno.idTurno - ${turno.descripcion}|"></option>
+					<option th:each="turno : ${turno}" th:value="${turno.idItem}"
+						th:text="|${turno.descripcionCorta}|"></option>
 				</select>
 			</div>
 		</div>
@@ -1397,8 +1402,8 @@
 				<select id="idDia" class="form-control select2 elemento-desactivable"
 					name="idDia">
 					<option value="" selected="selected" disabled="disabled">Seleccione el día</option>
-					<option th:each="dia : ${dia}" th:value="${dia.idDia}"
-						th:text="|${dia.idDia - ${dia.descripcion}|"></option>
+					<option th:each="dia : ${dia}" th:value="${dia.idItem}"
+						th:text="|${dia.descripcion}|"></option>
 				</select>
 			</div>
 		</div>
@@ -1408,8 +1413,8 @@
 				<select id="idTipoHorario" class="form-control select2 elemento-desactivable"
 					name="idTipoHorario">
 					<option value="" selected="selected" disabled="disabled">Seleccione el tipo de Horario</option>
-					<option th:each="tipoHorario : ${tipoHorario}" th:value="${tipoHorario.idTipoHorario}"
-						th:text="|${tipoHorario.idTipoHorario - ${tipoHorario.descripcion}|"></option>
+					<option th:each="tipoHorario : ${tipoHorario}" th:value="${tipoHorario.idItem}"
+						th:text="|${tipoHorario.descripcion}|"></option>
 				</select>
 			</div>
 		</div>
@@ -1418,9 +1423,9 @@
 			<div class="col-lg-10">
 				<select id="idAreaEstudio" class="form-control select2 elemento-desactivable"
 					name="idAreaEstudio">
-					<option value="" selected="selected" disabled="disabled">Seleccione el Área de estudio</option>
+					<option value="" selected="selected">Seleccione el area de estudio</option>
 					<option th:each="areaEstudio : ${areaEstudio}" th:value="${areaEstudio.idAreaEstudio}"
-						th:text="|${areaEstudio.idAreaEstudio - ${areaEstudio.nombre}|"></option>
+						th:text="|${areaEstudio.nombre}|"></option>
 				</select>
 			</div>
 		</div>
@@ -1492,7 +1497,7 @@
 		<div class="form-group">
 			<label class="col-lg-2 control-label">Codigo de Escuela</label>
 			<div class="col-lg-10">
-				<input class="form-control upperCase elemento-desactivable" name="codigo"
+				<input class="form-control numbersOnly elemento-desactivable" name="codigo"
 					autofocus="autofocus" />
 			</div>
 		</div>

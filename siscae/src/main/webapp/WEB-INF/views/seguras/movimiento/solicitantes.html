@@ -12,13 +12,12 @@
 			<!-- Bread crumb -->
 			<div class="row page-titles">
 				<div class="col-md-5 align-self-center">
-					<h3 class="text-primary">Registrar nuevo</h3>
+					<h3 class="text-primary">Solicitantes</h3>
 				</div>
 				<div class="col-md-7 align-self-center">
 					<ol class="breadcrumb">
 						<li class="breadcrumb-item"><a href="javascript:void(0)">Solicitantes</a>
 						</li>
-						<li class="breadcrumb-item active">Registrar nuevo</li>
 					</ol>
 				</div>
 			</div>
@@ -30,20 +29,22 @@
 					<div class="col-12">
 						<div class="card">
 							<div class="card-body">
+								
 								<!-- Nav tabs -->
 								<ul class="nav nav-tabs customtab2" role="tablist">
 									<li class="nav-item"><a class="nav-link active"
-										data-toggle="tab" href="#esquema" role="tab"> <span
+										data-toggle="tab" href="#nuevo" role="tab"> <span
 											class="hidden-sm-up"> <i class="ti-home"></i></span> <span
-											class="hidden-xs-down">Solicitar</span>
+											class="hidden-xs-down">Nuevo</span>
 									</a></li>
 									<li class="nav-item">
 										<a class="nav-link" data-toggle="tab" href="#tabla" role="tab"> 
 											<span class="hidden-sm-up"><i class="ti-user"></i></span> 
-											<span class="hidden-xs-down">Detalles</span>
+											<span class="hidden-xs-down">Ver todos</span>
 										</a>
 									</li>
 								</ul>
+								
 								<!-- Tab panes -->
 								<div class="tab-content">
 								
@@ -57,13 +58,13 @@
 												class="table table-bordered table-striped">
 												<thead>
 													<tr>
-														<th>Recurso</th>
-														<th>Estado</th>
 														<th>Codigo</th>
-														<th>Nombre</th>
-														<th>Apellidos</th>
-														<th>Hora de entrada</th>
-														<th>Tiempo restante</th>
+														<th>Ap. Paterno</th>
+														<th>Ap. Materno</th>
+														<th>Nombres</th>
+														<th>Escuela</th>
+														<th>Numero Documento</th>
+														<th>Solicitante</th>
 													</tr>
 												</thead>
 												<tbody>
@@ -83,13 +84,9 @@
 									</div>
 								
 								
+					
 								
-								
-								
-								
-								
-								
-									<div class="tab-pane active" id="esquema" role="tabpanel">
+									<div class="tab-pane active" id="nuevo" role="tabpanel">
 										<div class="p-20">
 										<h4 class="card-title">Registro de solicitantes nuevos</h4>
 										<p>Ingrese los datos nuevos del solicitante</p>
@@ -97,7 +94,7 @@
 											<div class="form-group">
 												<label>Tipo de documento</label>
 												<div class="input-group">
-													<select class="form-control custom-select" id="tipoDocumento" name="tipoDocumento">
+													<select class="form-control js-example-basic-single" id="tipoDocumento" name="tipoDocumento">
 														<option value="" selected="selected" disabled="disabled">Ingrese el tipo de documento</option>
 														<option th:each="tipoDocumento : ${tipoDocumentos}" 
 																th:value="${tipoDocumento.idItem}" th:text="${tipoDocumento.descripcion}"></option>
@@ -113,75 +110,73 @@
 											<div class="form-group">
 												<label>Apellido Paterno</label>
 												<div class="input-group">
-													<input type="text" class="form-control"
+													<input type="text" class="form-control" id="appPaterno" name="appPaterno"
 														placeholder="Ingrese su apellido paterno">
 												</div>
 											</div>
 											<div class="form-group">
 												<label>Apellido Materno</label>
 												<div class="input-group">
-													<input type="text" class="form-control"
+													<input type="text" class="form-control" id="appMaterno" name="appMaterno"
 														placeholder="Ingrese su apellido materno">
 												</div>
 											</div>
 											<div class="form-group">
 												<label>Nombres</label>
 												<div class="input-group">
-													<input type="text" class="form-control"
-														placeholder="Ingrese su apellido materno">
+													<input type="text" class="form-control" id="nombre" name="nombre"
+														placeholder="Ingrese sus nombres">
 												</div>
 											</div>
 											<div class="form-group">
 												<label>Sexo</label>
 												<div class="input-group">
-													<select class="form-control custom-select">
-														<option>Ingrese el sexo</option>
-														<option value="M">Masculino</option>
-														<option value="F">Femenino</option>
+													<select class="form-control js-example-basic-single" id="sexo" name="sexo">
+														<option th:value="-1" selected="selected" disabled="disabled">Ingrese el sexo</option>
+														<option th:value="'M'">Masculino</option>
+														<option th:value="'F'">Femenino</option>
 													</select>
 												</div>
 											</div>
 											<div class="form-group">
-												<label>Fecha de nacimiento</label> <input type="date"
-													class="form-control" placeholder="dd/mm/yyyy">
+												<label>Fecha de nacimiento</label> 
+												<input id="fechaNac" name="fechaNac" type="date" class="form-control" placeholder="dd/mm/yyyy">
 											</div>
 											<div class="form-group">
-												<label>Telefono</label> <input type="number"
-													class="form-control" placeholder="Ingrese su telefono">
+												<label>Telefono</label> 
+												<input id="telefono" name="telefono" type="number" class="form-control" placeholder="Ingrese su telefono">
 											</div>
 		
 											<div class="form-group">
 												<label>Ocupacion</label>
 												<div class="input-group">
-													<select class="form-control custom-select">
+													<select class="form-control js-example-basic-single">
 														<option>Ingrese la ocupacion</option>
-														<option value="Category 1" id="selectalumno">Alumno</option>
-														<option value="Category 2">Docente</option>
-														<option value="Category 3">Otro</option>
+														<option value="alumno" id="selectalumno">ALUMNO</option>
+														<option value="docente">DOCENTE</option>
+														<option value="externo">OTRO</option>
 													</select>
 												</div>
 											</div>
 		
-											<div class="form-group hidden" id="tipoacademico">
+											<div class="form-group" id="tipoacademico">
 												<label>Tipo Academico</label>
 												<div class="input-group">
-													<select class="form-control custom-select">
-														<option>Ingrese el tipo academico</option>
-														<option value="Category 1">PREGRADO</option>
-														<option value="Category 2">POSTGRADO</option>
+													<select class="form-control js-example-basic-single">
+														<option value="" selected="selected" disabled="disabled">Seleccione el tipo academico</option>
+														<option th:each="tipoAcademico : ${tipoAcademicos}" 
+																th:value="${tipoAcademico.idItem}" th:text="${tipoAcademico.descripcion}"></option>
 													</select>
 												</div>
 											</div>
 		
-											<div class="form-group hidden">
+											<div class="form-group">
 												<label>Escuela</label>
 												<div class="input-group">
-													<select class="form-control custom-select">
-														<option>Ingrese la escuela</option>
-														<option value="Category 1">Igenieria de
-															Sistemas/option>
-														<option value="Category 2">Ingenieria de Software</option>
-														<option value="Category 3">Ingenieria Industrial</option>
+													<select class="form-control js-example-basic-single">
+														<option value="" selected="selected" disabled="disabled">Ingrese su escuela</option>
+														<option th:each="escuela : ${escuelas}" 
+																th:value="${escuela.idEscuela}" th:text="${escuela.nombre}"></option>
 													</select>
 												</div>
 											</div>
@@ -208,6 +203,7 @@
 
 		</div>
 		<!-- End Page wrapper  -->
+		
 		<!-- All Jquery -->
 		<script th:src="@{/resources/js/guiuser/lib/jquery/jquery.min.js}"></script>
 		<!-- Bootstrap tether Core JavaScript -->
@@ -223,55 +219,31 @@
 		<script
 			th:src="@{/resources/js/guiuser/lib/sticky-kit-master/dist/sticky-kit.min.js}"></script>
 		<!--Custom JavaScript -->
-
-
-		<!-- Amchart -->
-		<script
-			th:src="@{/resources/js/guiuser/lib/morris-chart/raphael-min.js}"></script>
-
-
-		<script
-			th:src="@{/resources/js/guiuser/lib/calendar-2/moment.latest.min.js}"></script>
-		<!-- scripit init-->
-		<script
-			th:src="@{/resources/js/guiuser/lib/calendar-2/semantic.ui.min.js}"></script>
-		<!-- scripit init-->
-		<script th:src="@{/resources/js/guiuser/lib/calendar-2/prism.min.js}"></script>
-		<!-- scripit init-->
-		<script
-			th:src="@{/resources/js/guiuser/lib/calendar-2/pignose.calendar.min.js}"></script>
-		<!-- scripit init-->
-		<script
-			th:src="@{/resources/js/guiuser/lib/calendar-2/pignose.init.js}"></script>
-
-		<script
-			th:src="@{/resources/js/guiuser/lib/owl-carousel/owl.carousel.min.js}"></script>
-		<script
-			th:src="@{/resources/js/guiuser/lib/owl-carousel/owl.carousel-init.js}"></script>
+		
 		<script th:src="@{/resources/js/guiuser/scripts.js}"></script>
 		<!-- scripit init-->
-		<script th:src="@{/resources/js/guiuser/inicio.js}"></script>
 		<script th:src="@{/resources/js/guiuser/custom.min.js}"></script>
-
-		<script
-			th:src="@{/resources/js/guiuser/lib/datatables/datatables.min.js}"></script>
-		<script
-			th:src="@{/resources/js/guiuser/lib/datatables/cdn.datatables.net/buttons/1.2.2/js/dataTables.buttons.min.js}"></script>
-		<script
-			th:src="@{/resources/js/guiuser/lib/datatables/cdn.datatables.net/buttons/1.2.2/js/buttons.flash.min.js}"></script>
-		<script
-			th:src="@{/resources/js/guiuser/lib/datatables/cdnjs.cloudflare.com/ajax/libs/jszip/2.5.0/jszip.min.js}"></script>
-		<script
-			th:src="@{/resources/js/guiuser/lib/datatables/cdn.rawgit.com/bpampuch/pdfmake/0.1.18/build/pdfmake.min.js}"></script>
-		<script
-			th:src="@{/resources/js/guiuser/lib/datatables/cdn.rawgit.com/bpampuch/pdfmake/0.1.18/build/vfs_fonts.js}"></script>
-		<script
-			th:src="@{/resources/js/guiuser/lib/datatables/cdn.datatables.net/buttons/1.2.2/js/buttons.html5.min.js}"></script>
-		<script
-			th:src="@{/resources/js/guiuser/lib/datatables/cdn.datatables.net/buttons/1.2.2/js/buttons.print.min.js}"></script>
-		<script
-			th:src="@{/resources/js/guiuser/lib/datatables/datatables-init.js}"></script>
-
+		<script th:src="@{/resources/js/guiuser/sweetalert.min.js}"></script>
+		<script th:src="@{/resources/js/util/util.js}"></script>
+		<script th:src="@{/resources/js/util/formularioUtil.js}"></script>
+		
+		<!-- select2-->
+		<script th:src="@{/resources/js/guiuser/select2.min.js}"></script>
+		
+		<!-- JS de datatables -->
+		<script th:src="@{/resources/js/guiuser/lib/datatables/datatables.min.js}"></script>
+	    <script th:src="@{/resources/js/guiuser/lib/datatables/cdn.datatables.net/buttons/1.2.2/js/dataTables.buttons.min.js}"></script>
+	    <script th:src="@{/resources/js/guiuser/lib/datatables/cdn.datatables.net/buttons/1.2.2/js/buttons.flash.min.js}"></script>
+	    <script th:src="@{/resources/js/guiuser/lib/datatables/cdnjs.cloudflare.com/ajax/libs/jszip/2.5.0/jszip.min.js}"></script>
+	    <script th:src="@{/resources/js/guiuser/lib/datatables/cdn.rawgit.com/bpampuch/pdfmake/0.1.18/build/pdfmake.min.js}"></script>
+	    <script th:src="@{/resources/js/guiuser/lib/datatables/cdn.rawgit.com/bpampuch/pdfmake/0.1.18/build/vfs_fonts.js}"></script>
+	    <script th:src="@{/resources/js/guiuser/lib/datatables/cdn.datatables.net/buttons/1.2.2/js/buttons.html5.min.js}"></script>
+	    <script th:src="@{/resources/js/guiuser/lib/datatables/cdn.datatables.net/buttons/1.2.2/js/buttons.print.min.js}"></script>
+	    <script th:src="@{/resources/js/guiuser/lib/datatables/datatables-init.js}"></script>
+	    
+	    
+	    <!-- Conexion con servidor -->
+		<script th:src="@{/resources/js/pagina/consulta/movimientos/solicitantes/solicitantes.js}"></script>
 		
 	</div>
 

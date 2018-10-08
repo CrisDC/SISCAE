@@ -26,10 +26,6 @@ public class FacultadServiceTest {
 		Facultad facultadTest = new Facultad();
 		facultadTest.setIdFacultad(6);
 		facultadTest.setNombre("Persona de prueba");
-		facultadTest.setFechaRegistro(new Date(1997, 07, 04));
-		facultadTest.setUsuarioRegistro("JAIRO");
-		facultadTest.setFehaModificacion(new Date(1997, 07, 04));
-		facultadTest.setUsuarioRegistro("Andre");
 
 		List<Facultad> facultades = facultadService.buscarTodos();
 		facultades.forEach(System.out::println);
