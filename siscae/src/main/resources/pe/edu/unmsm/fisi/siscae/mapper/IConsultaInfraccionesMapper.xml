@@ -4,12 +4,19 @@
 
 	<sql id="fragmentoSelectBuscarInfracciones">
 		SELECT  numero_documento,
-			    nombre, 
-			    app_paterno,
-			    app_materno,
-		        tipo_recurso,
+				tipo_documento,
+			    nombre_tipo,
+			    nombre_completo, 
+			    id_escuela_programa,
+			    escuela_programa,
+			    codigo_infraccion,
+			    gravedad,
+		        tipo_infraccion,
+		        descripcion,
+		        hora_infraccion,
 			    fecha_infraccion,
-			    estado_infraccion,
+			    turno,
+			    id_area_estudio,
 			    area_estudio
 		  FROM WV_INFRACCIONES_AULAS 
 	</sql>

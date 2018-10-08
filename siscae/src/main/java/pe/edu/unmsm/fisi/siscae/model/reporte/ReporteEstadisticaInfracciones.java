@@ -15,12 +15,19 @@ import pe.edu.unmsm.fisi.siscae.model.reporte.ReporteEstadisticaPrestamos.Report
 @AllArgsConstructor
 public class ReporteEstadisticaInfracciones {
 
-	String codigo;
-	String nombre;
-	String appPaterno;
-	String appMaterno;
+	String numeroDocumento;
+	String tipoDocumento;
+	String nombreTipo;
+	String nombreCompleto;
+	int idEscuelaPrograma;
+	String escuelaPrograma;
+	int codigoInfraccion;
+	String gravedad;
 	String tipoInfraccion;
+	String descripcion;
+	Time horaInfraccion;
 	Date fechaInfraccion;
-	String estadoInfraccion;
+	String turno;
+	int idAreaEstudio;
 	String areaEstudio;
 }
