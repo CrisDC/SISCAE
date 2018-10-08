@@ -1381,7 +1381,7 @@
 					name="idEstadoTabla">
 					<option value="" selected="selected" disabled="disabled">Seleccione  el estado</option>
 					<option th:each="estado : ${estado}" th:value="${estado.idEstadoTabla}"
-						th:text="|${estado.idEstadoTabla} - ${estado.descripcion}|"></option>
+						th:text="|${estado.descripcion}|"></option>
 				</select>
 			</div>
 		</div>
@@ -1392,7 +1392,7 @@
 					name="idTurno">
 					<option value="" selected="selected" disabled="disabled">Seleccione el turno</option>
 					<option th:each="turno : ${turno}" th:value="${turno.idItem}"
-						th:text="|${turno.idTurno - ${turno.descripcion}|"></option>
+						th:text="|${turno.descripcionCorta}|"></option>
 				</select>
 			</div>
 		</div>
@@ -1403,7 +1403,7 @@
 					name="idDia">
 					<option value="" selected="selected" disabled="disabled">Seleccione el día</option>
 					<option th:each="dia : ${dia}" th:value="${dia.idItem}"
-						th:text="|${dia.idDia - ${dia.descripcion}|"></option>
+						th:text="|${dia.descripcion}|"></option>
 				</select>
 			</div>
 		</div>
@@ -1414,7 +1414,7 @@
 					name="idTipoHorario">
 					<option value="" selected="selected" disabled="disabled">Seleccione el tipo de Horario</option>
 					<option th:each="tipoHorario : ${tipoHorario}" th:value="${tipoHorario.idItem}"
-						th:text="|${tipoHorario.idTipoHorario - ${tipoHorario.descripcion}|"></option>
+						th:text="|${tipoHorario.descripcion}|"></option>
 				</select>
 			</div>
 		</div>
@@ -1423,9 +1423,9 @@
 			<div class="col-lg-10">
 				<select id="idAreaEstudio" class="form-control select2 elemento-desactivable"
 					name="idAreaEstudio">
-					<option value="" selected="selected" disabled="disabled">Seleccione el Área de estudio</option>
+					<option value="" selected="selected">Seleccione el area de estudio</option>
 					<option th:each="areaEstudio : ${areaEstudio}" th:value="${areaEstudio.idAreaEstudio}"
-						th:text="|${areaEstudio.idAreaEstudio - ${areaEstudio.nombre}|"></option>
+						th:text="|${areaEstudio.nombre}|"></option>
 				</select>
 			</div>
 		</div>

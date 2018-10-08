@@ -4,13 +4,20 @@
 
 	<sql id="fragmentoSelectBuscarReporteEstadisticaInfracciones">
 		SELECT  
-		        codigo,
-		        nombre,
-			    app_paterno,
-			    app_materno,
-			    tipo_infraccion,
-			   	fecha_infraccion, 
-			    estado_infraccion, 
+		        numero_documento,
+				tipo_documento,
+			    nombre_tipo,
+			    nombre_completo, 
+			    id_escuela_programa,
+			    escuela_programa,
+			    codigo_infraccion,
+			    gravedad,
+		        tipo_infraccion,
+		        descripcion,
+		        hora_infraccion,
+			    fecha_infraccion,
+			    turno,
+			    id_area_estudio,
 			    area_estudio
 		  FROM wv_reporte_estadistica_infracciones 
 	</sql>
