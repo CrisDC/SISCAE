@@ -1,0 +1,19 @@
+.icono-siscae{
+	background-image: url("iconoSiscaeMax.png");
+	background-repeat: no-repeat;
+	background-size: cover;
+    -moz-background-size: cover;
+    -webkit-background-size: cover;
+    -o-background-size: cover;
+    width: 75px !important;
+    height: 92px !important;
+}
+
+.fondo-login{
+	background-image: url("sala.jpg");
+	background-repeat: no-repeat;
+	background-size: cover;
+    -moz-background-size: cover;
+    -webkit-background-size: cover;
+    -o-background-size: cover;
+}
