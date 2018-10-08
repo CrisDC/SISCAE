@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="pe.edu.unmsm.fisi.siscae.mapper.IReporteEstadisticaPrestamosUsuarioMasFrecuenteMapper">
+
+	<sql id="fragmentoSelectBuscarReporteEstadisticaPrestamosUsuarioMasFrecuente">
+		SELECT  area_estudio,
+				codigo,
+				numero_visitas,
+				nombre,
+				app_paterno,
+				app_materno
+				
+			    
+		  FROM reporte_estadistica_prestamo_usuario_mas_frecuente
+	</sql>
+
+	<select id="buscarTodos" resultType="ReporteEstadisticaPrestamosUsuarioMasFrecuente">
+		<include refid="fragmentoSelectBuscarReporteEstadisticaPrestamosUsuarioMasFrecuente" />
+	</select>
+	
+	<select id="buscarPorNumeroDocumentoIdentidad" resultType="ReporteEstadisticaPrestamosUsuarioMasFrecuente">
+		<include refid="fragmentoSelectBuscarReporteEstadisticaPrestamosUsuarioMasFrecuente" />
+		<where>
+			<if test="tipoDocumentoIdentidad != null and tipoDocumentoIdentidad != ''">
+				reporte_estadistica_prestamo_usuario_mas_frecuente .cod_tip_doc_ide = #{tipoDocumentoIdentidad}
+			</if>
+			<if test="numeroDocumentoIdentidad != null and numeroDocumentoIdentidad != ''">
+				AND reporte_estadistica_prestamo_usuario_mas_frecuente .num_doc_ide = #{numeroDocumentoIdentidad}
+			</if>
+		</where>
+	</select>
+
+	<select id="buscarPorCriterio" resultType="ReporteEstadisticaPrestamosUsuarioMasFrecuente">
+		<include refid="fragmentoSelectBuscarReporteEstadisticaPrestamosUsuarioMasFrecuente" />
+		<where>
+			<if test="areaEstudio != null and areaEstudio != '-1'">
+				reporte_estadistica_prestamo_usuario_mas_frecuente.area_estudio = #{areaEstudio}
+			</if>
+		</where>
+	</select>
+
+
+</mapper>

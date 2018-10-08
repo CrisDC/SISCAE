@@ -7,25 +7,17 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import pe.edu.unmsm.fisi.siscae.model.reporte.ReporteEstadisticaInfracciones.ReporteEstadisticaInfraccionesBuilder;
 
 @Data
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class ReporteEstadisticaPrestamos {
-	String recurso;
-	int idEscuela;
-	String escuela;
-	String nombreTipo;
-	int idPersona;
-	String codigo;
+public class ReporteEstadisticaInfraccionesUsuarioMasFrecuente {
+	String areaEstudio;
+	String dni;
+	String numeroInfracciones;
 	String nombre;
 	String appPaterno;
 	String appMaterno;
-	String turno;
-	Date fechaRegistro;
-	Time estadia;
-	int idAreaEstudio;
-	String areaEstudio;
-	
 }
