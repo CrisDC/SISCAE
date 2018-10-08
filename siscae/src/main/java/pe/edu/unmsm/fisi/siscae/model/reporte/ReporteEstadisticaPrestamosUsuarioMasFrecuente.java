@@ -12,7 +12,7 @@ import lombok.NoArgsConstructor;
 public class ReporteEstadisticaPrestamosUsuarioMasFrecuente {
 	String areaEstudio;
 	String codigo;
-	String numeroVisitas;
+	int numeroVisitas;
 	String nombre;
 	String appPaterno;
 	String appMaterno;
