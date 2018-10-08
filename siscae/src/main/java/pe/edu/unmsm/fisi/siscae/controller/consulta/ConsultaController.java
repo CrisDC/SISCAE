@@ -62,11 +62,11 @@ public @Controller class ConsultaController {
 				usuario = listaUsuario.get(i);
 			}
 		}
-
+		
 		ArrayList<AreaAdministrativo> listaAreaAdministrativo = (ArrayList) areaAdministrativoService.buscarTodos();
 		AreaAdministrativo areaAdministrativo = null;	
 		for (int i = 0; i < listaAreaAdministrativo.size(); i++) {
-			if (listaAreaAdministrativo.get(i).getIdAdministrativo() == usuario.getIdPersona()) {
+			if (listaAreaAdministrativo.get(i).getIdAdministrativo().equals(usuario.getIdPersona())) {
 				areaAdministrativo = listaAreaAdministrativo.get(i);
 			}
 		}

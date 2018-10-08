@@ -4,7 +4,7 @@
 </head>
 <body>
 	<!-- Left Sidebar  -->
-        <div th:fragment="sidebar" class="left-sidebar">
+        <div th:if="(${areaAdministrativo.cargo} != 'SOLICITANTE')" th:fragment="sidebar" class="left-sidebar">
             <!-- Sidebar scroll-->
             <div class="scroll-sidebar">
                 <!-- Sidebar navigation-->
