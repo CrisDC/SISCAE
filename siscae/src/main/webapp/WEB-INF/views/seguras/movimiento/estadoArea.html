@@ -55,7 +55,8 @@
 								<div class="tab-content">
 									<div class="tab-pane active" id="esquema" role="tabpanel">
 										<div class="p-20">
-
+										
+										
 											<p>Seleccione su recurso disponible</p>
 											<div class="row" id="for-each">
 											
@@ -86,7 +87,10 @@
 													<p th:if="${prestamo.estado} == 'LIBERABLE'" th:text="LIBERABLE" class="liberable"></p>
 													<p th:if="${areaAdministrativo.nombreAreaEstudio} == 'SALA GRUPAL'" th:text="'Capacidad 0/' + ${prestamo.maxCapacidad}"></p>
 													
-													<button th:id="${prestamo.numero}" th:key="${prestamo.idRecurso}" th:class="${prestamo.estado} == 'DISPONIBLE' ? 'btn btn-info solicitar' : 'invisible' ">SOLICITAR</button>
+													<button th:if="${areaAdministrativo.nombreAreaEstudio} == 'BIBLIOTECA'" th:id="${prestamo.numero}" th:grupal="no" th:key="${prestamo.idRecurso}" th:class="${prestamo.estado} == 'DISPONIBLE' ? 'btn btn-info solicitar' : 'invisible' ">SOLICITAR</button>
+													<button th:if="(${areaAdministrativo.nombreAreaEstudio} == 'SALA GRUPAL') or (${areaAdministrativo.nombreAreaEstudio} == 'VIDEOTECA')" th:grupal="si" th:id="${prestamo.numero}"  th:key="${prestamo.idRecurso}" type="button"  th:class="${prestamo.estado} == 'DISPONIBLE' ? 'btn btn-info solicitar' : 'invisible' ">SOLICITAR</button>
+													
+												
 												</div>
 											
 											</th:block>
@@ -143,10 +147,64 @@
 
 
 		</div>
-
-
-
-
+		
+		
+		<!-- MODAL -->
+		<div class="modal fade" id="modalPrestamoRecurso" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+		  <div class="modal-dialog modal-dialog-centered" role="document">
+		    <div class="modal-content">
+		    
+		      
+		      <div class="modal-body">
+					<h3 id="infoRecurso">Solcititud de recurso</h3>
+					<p>Ingrese su carnet por el scanner</p>
+					<div class="form-group">
+						<div class="input-group justify-content-center">
+							<img th:src="@{/resources/images/lectora.gif}" width="350" height="200">
+						</div>
+						<div class="input-group">
+							<input type="text" class="form-control col-9 m-r-30" id="numDocumento" name="numDocumento" autofocus placeholder="Numero de documento">
+							<button class="form-control col-2 btn btn-info">OK</button>
+						
+						</div>
+						<div class="table-responsive m-t-40">
+							<table id="tablaPrestamoGrupal" class="table table-bordered table-striped">
+								<thead>
+									<tr>
+										<th>Recurso</th>
+										<th>Codigo</th>
+										<th>Accion</th>
+									</tr>
+								</thead>
+								<tbody>
+									<tr>
+										<td>3</td>
+										<td>16200116</td>
+										<td><button class="btn btn-danger">Borrar</button></td>
+									</tr>
+									
+									<tr>
+										<td>3</td>
+										<td>16200117</td>
+										<td><button class="btn btn-danger">Borrar</button></td>
+									</tr>
+								</tbody>
+							
+							</table>
+						</div>
+				  </div>	        
+			  </div>			      
+		      
+		      <div class="modal-footer">
+		        <button id="cerrarModal" type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+		        <button type="button" class="btn btn-succes">Confirmar</button>
+		      </div>
+		    </div>
+		  </div>
+		</div>
+		<!-- END MODAL -->
+		
+		
 		<!-- All Jquery -->
 		<script th:src="@{/resources/js/guiuser/lib/jquery/jquery.min.js}"></script>
 		<!-- Bootstrap tether Core JavaScript -->
@@ -162,39 +220,12 @@
 		<script
 			th:src="@{/resources/js/guiuser/lib/sticky-kit-master/dist/sticky-kit.min.js}"></script>
 		<!--Custom JavaScript -->
-		<!-- Amchart -->
-		<script
-			th:src="@{/resources/js/guiuser/lib/morris-chart/raphael-min.js}"></script>
-		<script th:src="@{/resources/js/guiuser/lib/morris-chart/morris.js}"></script>
-		<script
-			th:src="@{/resources/js/guiuser/lib/morris-chart/dashboard1-init.js}"></script>
-
-
-		<script
-			th:src="@{/resources/js/guiuser/lib/calendar-2/moment.latest.min.js}"></script>
-		<!-- scripit init-->
-		<script
-			th:src="@{/resources/js/guiuser/lib/calendar-2/semantic.ui.min.js}"></script>
-		<!-- scripit init-->
-		<script th:src="@{/resources/js/guiuser/lib/calendar-2/prism.min.js}"></script>
-		<!-- scripit init-->
-		<script
-			th:src="@{/resources/js/guiuser/lib/calendar-2/pignose.calendar.min.js}"></script>
-		<!-- scripit init-->
-		<script
-			th:src="@{/resources/js/guiuser/lib/calendar-2/pignose.init.js}"></script>
-
-		<script
-			th:src="@{/resources/js/guiuser/lib/owl-carousel/owl.carousel.min.js}"></script>
-		<script
-			th:src="@{/resources/js/guiuser/lib/owl-carousel/owl.carousel-init.js}"></script>
+		
 		<script th:src="@{/resources/js/guiuser/scripts.js}"></script>
 		<!-- scripit init-->
-<!-- 		<script th:src="@{/resources/js/guiuser/inicio.js}"></script> -->
 		<script th:src="@{/resources/js/guiuser/custom.min.js}"></script>
 		<script th:src="@{/resources/js/guiuser/sweetalert.min.js}"></script>
 		<script th:src="@{/resources/js/util/util.js}"></script>
-		
 		<script th:src="@{/resources/js/util/formularioUtil.js}"></script>
 		
 		<!-- JS de datatables -->
