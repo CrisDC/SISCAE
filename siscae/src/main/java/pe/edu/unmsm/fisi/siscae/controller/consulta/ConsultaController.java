@@ -111,9 +111,7 @@ public @Controller class ConsultaController {
 			}
 		}
 		ArrayList<MultiTabDet> listaTipoDocumento = (ArrayList) multiTabDetService.buscarPorIdTabla(multiTabCab.getIdTabla());
-		for (int i = 0; i < listaTipoDocumento.size(); i++) {
-			System.out.println(listaTipoDocumento.get(i).getDescripcion());
-		}
+		
 		
 		ArrayList<MultiTabCab> listaMultiCab2 = (ArrayList) multiTabCabService.buscarTodos();
 		MultiTabCab multiTabCab2 = null;
