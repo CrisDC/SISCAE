@@ -1,3 +1,4 @@
+
 <!DOCTYPE>
 <html xmlns:th="http://www.thymeleaf.org"
 	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
@@ -52,8 +53,8 @@
 								
 									<div class="tab-pane  p-20" id="tabla" role="tabpanel">
 
-										<div class="table-responsive m-t-40">
-											<h3>Estado del aula</h3>
+										<div class="table-responsive m-t-30">
+											<h3>Solicitantes registrados</h3>
 											<table id="myTable"
 												class="table table-bordered table-striped">
 												<thead>
@@ -62,29 +63,26 @@
 														<th>Ap. Paterno</th>
 														<th>Ap. Materno</th>
 														<th>Nombres</th>
-														<th>Escuela</th>
 														<th>Numero Documento</th>
+														<th>Escuela</th>
 														<th>Solicitante</th>
 													</tr>
 												</thead>
 												<tbody>
 
-													<tr>
-														<td></td>														
-														<td></td>
-														<td></td>
-														<td></td>
-														<td></td>
-														<td></td>
-														<td></td>
+													<tr th:each="solicitante : ${solicitantes}" th:class="fila-personalizada">
+														<td th:text="${solicitante.codigo}"></td>														
+														<td th:text="${solicitante.appPaterno}"></td>
+														<td th:text="${solicitante.appMaterno}"></td>
+														<td th:text="${solicitante.nombre}"></td>
+														<td th:text="${solicitante.numDocumento}"></td>
+														<td th:text="${solicitante.escuela}"></td>
+														<td th:text="${solicitante.solicitante}"></td>
 													</tr>
 												</tbody>
 											</table>
 										</div>
 									</div>
-								
-								
-					
 								
 									<div class="tab-pane active" id="nuevo" role="tabpanel">
 										<div class="p-20">
@@ -249,3 +247,4 @@
 
 </body>
 </html>
+
