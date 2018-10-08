@@ -79,6 +79,12 @@ public @Controller class MantenimientoController
     public String irPaginaMantenimientoHorario(@PathVariable String mantenimiento, ModelMap model)
     {
         model.addAttribute("mantenimiento", mantenimiento);
+        model.addAttribute("estado",this.estadoTablaService.buscarporTablaOrigen("MAE_HORARIO"));
+        model.addAttribute("areaEstudio", this.areaEstudioService.buscarTodos());
+        model.addAttribute("turno", this.multiTabDetService.buscarPorIdTabla(5));
+        model.addAttribute("dia", this.multiTabDetService.buscarPorIdTabla(6));
+        model.addAttribute("tipoHorario", this.multiTabDetService.buscarPorIdTabla(9));
+        
         return "seguras/mantenimiento/mantenimiento";
     }
    
@@ -165,6 +171,7 @@ public @Controller class MantenimientoController
     public String irPaginaMantenimientoPersona(@PathVariable String mantenimiento, ModelMap model)
     {
         model.addAttribute("mantenimiento", mantenimiento);
+        model.addAttribute("tipoDocumento", this.multiTabDetService.buscarPorIdTabla(1));
         return "seguras/mantenimiento/mantenimiento";
     }
     @Audit(tipo = Tipo.TIPO_RECURSO)

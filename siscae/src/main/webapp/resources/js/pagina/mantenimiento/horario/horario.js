@@ -41,32 +41,32 @@ $(document).ready(function() {
 			"defaultContent" : $variableUtil.botonActualizar + " " + $variableUtil.botonEliminar
 		} ],
 		"columns" : [{
+			"data" : 'descripcion',
+			"title" : "Descripcion"
+		}, {
 			"data" : 'horaInicio',
 			"title" : "Hora de inicio "
 		},{
 			"data" : 'horaFin',
-			"title" : "Hora de fin"
+			"title" : "Hora fin"
 		},{
 			"data" : 'tiempoMaximo',
 			"title" : "Tiempo máximo"
 		}, {
-			"data" : 'descripcion',
-			"title" : "Descripcion"
-		}, {
-			"data" : 'idEstadoTabla',
+			"data" : 'estado',
 			"title" : "Estado"
 		},{
-			"data" : 'idTurno',
+			"data" : 'turno',
 			"title" : "Turno"
 		},{
-			"data" : 'idDia',
+			"data" : 'dia',
 			"title" : "Día"
 		},{
-			"data" : 'idTipoHorario',
+			"data" : 'nombreTipoHorario',
 			"title" : "Tipo de Horario"
 		},{
-			"data" : 'idAreaEstudio',
-			"title" : "Id de Area de estudio"
+			"data" : 'nombreAreaEstudio',
+			"title" : "Area de estudio"
 		},{
 			"data" : null,
 			"title" : 'Acción'

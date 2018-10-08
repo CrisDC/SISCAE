@@ -29,7 +29,7 @@ $(document).ready(function() {
 			sexo : {
 				required : true,
 				notOnlySpace : true,
-				rangelength : [ 2, 10 ]
+				rangelength : [ 0, 10 ]
 			},
 			numTelef : {
 				required : true,

@@ -121,6 +121,7 @@ $(document).ready(function() {
 				row.show().draw(false);
 				$(row.node()).animateHighlight();
 				$local.$modalMantenimiento.PopupWindow("close");
+				console.log(escuelaResponse);
 			},
 			error : function(escuelaResponse) {
 			},

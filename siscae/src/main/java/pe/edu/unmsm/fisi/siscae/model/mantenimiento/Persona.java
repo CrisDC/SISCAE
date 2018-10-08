@@ -24,8 +24,8 @@ import pe.edu.unmsm.fisi.siscae.validacion.grupo.accion.IRegistro;
 @AllArgsConstructor
 public class Persona {
 
-	@IdPersona(existe = true, groups = IActualizacion.class)
-	@IdPersona(existe = false, message = "Existe.Persona.idPersona", groups = IRegistro.class)
+	//@IdPersona(existe = true, groups = IActualizacion.class)
+	//@IdPersona(existe = false, message = "Existe.Persona.idPersona", groups = IRegistro.class)
 	private Integer idPersona;
 	
 	private String descripcionCorta;
@@ -59,8 +59,8 @@ public class Persona {
 	@Length(min = 3, max = 10, message = "{Length.Persona.Sexo}", groups = IBasico.class)
 	private String sexo;
 
-	@NotNull(message = "{NotNull.Persona.fechaNac}")
-	@NotBlank(message = "{NotBlank.Persona.fechaNac}")
+	//@NotNull(message = "{NotNull.Persona.fechaNac}")
+	//@NotBlank(message = "{NotBlank.Persona.fechaNac}")
 	private Date fechaNac;
 
 	@NotNull(message = "{NotNull.Persona.numTelef}")
@@ -68,8 +68,8 @@ public class Persona {
 	@Length(min = 3, max = 20, message = "{Length.Persona.numTelef}", groups = IBasico.class)
 	private String numTelef;
 
-	@NotNull(message = "{NotNull.Persona.idTipoDocumento}")
-	@NotBlank(message = "{NotBlank.Persona.idTipoDocumento}")
+	//@NotNull(message = "{NotNull.Persona.idTipoDocumento}")
+	//@NotBlank(message = "{NotBlank.Persona.idTipoDocumento}")
 	private Integer idTipoDocumento;
 
 	
