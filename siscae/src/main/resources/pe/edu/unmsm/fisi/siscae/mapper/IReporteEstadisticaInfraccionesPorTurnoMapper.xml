@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="pe.edu.unmsm.fisi.siscae.mapper.IReporteEstadisticainfraccionesesPorTurnoMapper">
+
+	<sql id="fragmentoSelectBuscarReporteEstadisticainfraccionesesPorTurno">
+		SELECT  
+		        id_area_estudio,
+				area_estudio,
+		        nombre_turno,
+		        numero_infracciones
+		  FROM reporte_estadistica_infracciones_por_turno 
+	</sql>
+
+	<select id="buscarTodos" resultType="ReporteEstadisticainfraccionesesPorTurno">
+		<include refid="fragmentoSelectBuscarReporteEstadisticainfraccionesesPorTurno" />
+	</select>
+	
+	<select id="buscarPorNumeroDocumentoIdentidad" resultType="ReporteEstadisticainfraccionesesPorTurno">
+		<include refid="fragmentoSelectBuscarReporteEstadisticainfraccionesesPorTurno" />
+		<where>
+			<if test="tipoDocumentoIdentidad != null and tipoDocumentoIdentidad != ''">
+				reporte_estadistica_infracciones_por_turno  .cod_tip_doc_ide = #{tipoDocumentoIdentidad}
+			</if>
+			<if test="numeroDocumentoIdentidad != null and numeroDocumentoIdentidad != ''">
+				AND reporte_estadistica_infracciones_por_turno  .num_doc_ide = #{numeroDocumentoIdentidad}
+			</if>
+		</where>
+	</select>
+
+	<select id="buscarPorCriterio" resultType="ReporteEstadisticainfraccionesesPorTurno">
+		<include refid="fragmentoSelectBuscarReporteEstadisticainfraccionesesPorTurno" />
+		<where>
+			<if test="areaEstudio != null and areaEstudio != '-1'">
+				reporte_estadistica_infracciones_por_turno .area_estudio = #{areaEstudio}
+			</if>
+		</where>
+	</select>
+
+
+</mapper>
