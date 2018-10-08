@@ -83,11 +83,7 @@
 									</div>
 								
 								
-								
-								
-								
-								
-								
+					
 								
 									<div class="tab-pane active" id="esquema" role="tabpanel">
 										<div class="p-20">
@@ -134,20 +130,20 @@
 											<div class="form-group">
 												<label>Sexo</label>
 												<div class="input-group">
-													<select class="form-control custom-select">
-														<option>Ingrese el sexo</option>
-														<option value="M">Masculino</option>
-														<option value="F">Femenino</option>
+													<select class="form-control custom-select" id="sexo" name="sexo">
+														<option th:value="" selected="selected" disabled="disabled">Ingrese el sexo</option>
+														<option th:value="M">Masculino</option>
+														<option th:value="F">Femenino</option>
 													</select>
 												</div>
 											</div>
 											<div class="form-group">
-												<label>Fecha de nacimiento</label> <input type="date"
-													class="form-control" placeholder="dd/mm/yyyy">
+												<label>Fecha de nacimiento</label> 
+												<input type="date" class="form-control" placeholder="dd/mm/yyyy" id="fechaNacimiento" name="fechaNacimiento">
 											</div>
 											<div class="form-group">
-												<label>Telefono</label> <input type="number"
-													class="form-control" placeholder="Ingrese su telefono">
+												<label>Telefono</label> 
+												<input type="number" class="form-control" placeholder="Ingrese su telefono" id="telefono" name="telefono">
 											</div>
 		
 											<div class="form-group">
@@ -155,9 +151,9 @@
 												<div class="input-group">
 													<select class="form-control custom-select">
 														<option>Ingrese la ocupacion</option>
-														<option value="Category 1" id="selectalumno">Alumno</option>
-														<option value="Category 2">Docente</option>
-														<option value="Category 3">Otro</option>
+														<option value="alumno" id="selectalumno">ALUMNO</option>
+														<option value="docente">DOCENTE</option>
+														<option value="externo">OTRO</option>
 													</select>
 												</div>
 											</div>
@@ -167,8 +163,9 @@
 												<div class="input-group">
 													<select class="form-control custom-select">
 														<option>Ingrese el tipo academico</option>
-														<option value="Category 1">PREGRADO</option>
-														<option value="Category 2">POSTGRADO</option>
+														<option value="" selected="selected" disabled="disabled">Seleccione el tipo academico</option>
+														<option th:each="tipoAcademico : ${tipoAcademicos}" 
+																th:value="${tipoAcademico.idItem}" th:text="${tipoAcademico.descripcion}"></option>
 													</select>
 												</div>
 											</div>
@@ -177,11 +174,9 @@
 												<label>Escuela</label>
 												<div class="input-group">
 													<select class="form-control custom-select">
-														<option>Ingrese la escuela</option>
-														<option value="Category 1">Igenieria de
-															Sistemas/option>
-														<option value="Category 2">Ingenieria de Software</option>
-														<option value="Category 3">Ingenieria Industrial</option>
+														<option value="" selected="selected" disabled="disabled">Ingrese su escuela</option>
+														<option th:each="escuela : ${escuelas}" 
+																th:value="${escuela.idEscuela}" th:text="${escuela.nombre}"></option>
 													</select>
 												</div>
 											</div>

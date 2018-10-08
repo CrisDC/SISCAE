@@ -58,8 +58,10 @@
 
 											<p>Seleccione su recurso disponible</p>
 											<div class="row" id="for-each">
-
-												<div th:each="prestamo : ${prestamos}" class="recurso">
+											
+											<th:block th:each="prestamo : ${prestamos}">
+											
+												<div class="recurso">
 													<img
 														th:if="(${prestamo.estado} == 'DISPONIBLE') and (${prestamo.tipoRecurso} == 'CUBICULO')"
 														th:src="@{/resources/images/cubo_verde.png}" width="40" height="40"> 
@@ -86,7 +88,8 @@
 													
 													<button th:id="${prestamo.numero}" th:key="${prestamo.idRecurso}" th:class="${prestamo.estado} == 'DISPONIBLE' ? 'btn btn-info solicitar' : 'invisible' ">SOLICITAR</button>
 												</div>
-
+											
+											</th:block>
 
 											</div>
 
