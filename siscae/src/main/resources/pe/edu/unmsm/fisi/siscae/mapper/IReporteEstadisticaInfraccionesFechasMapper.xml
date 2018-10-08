@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="pe.edu.unmsm.fisi.siscae.mapper.IReporteEstadisticaInfraccionesFechasMapper">
+
+	<sql id="fragmentoSelectBuscarReporteEstadisticaInfraccionesFechas">
+		SELECT  numero_documento,
+				tipo_documento,
+			    nombre_tipo,
+			    app_paterno,
+			    app_materno,
+			    nombre,
+			    id_escuela_programa,
+			    escuela_programa,
+			    codigo_infraccion,
+			    gravedad,
+			    tipo_infraccion,
+			    descripcion,
+			    id_area_estudio, 
+			    area_estudio,
+			    hora_infraccion,
+			    anio,
+			    mes,
+			    dia,
+			    turno
+			    
+		  FROM reporte_estadistica_infracciones_fechas
+	</sql>
+
+	<select id="buscarTodos" resultType="ReporteEstadisticaInfraccionesFechas">
+		<include refid="fragmentoSelectBuscarReporteEstadisticaInfraccionesFechas" />
+	</select>
+	
+	<select id="buscarPorNumeroDocumentoIdentidad" resultType="ReporteEstadisticaInfraccionesFechas">
+		<include refid="fragmentoSelectBuscarReporteEstadisticaInfraccionesFechas" />
+		<where>
+			<if test="tipoDocumentoIdentidad != null and tipoDocumentoIdentidad != ''">
+				reporte_estadistica_infracciones_fechas .cod_tip_doc_ide = #{tipoDocumentoIdentidad}
+			</if>
+			<if test="numeroDocumentoIdentidad != null and numeroDocumentoIdentidad != ''">
+				AND reporte_estadistica_infracciones_fechas .num_doc_ide = #{numeroDocumentoIdentidad}
+			</if>
+		</where>
+	</select>
+
+	<select id="buscarPorCriterio" resultType="ReporteEstadisticaInfraccionesFechas">
+		<include refid="fragmentoSelectBuscarReporteEstadisticaInfraccionesFechas" />
+		<where>
+			<if test="areaEstudio != null and areaEstudio != '-1'">
+				reporte_estadistica_infracciones_fechas.area_estudio = #{areaEstudio}
+			</if>
+		</where>
+	</select>
+
+
+</mapper>

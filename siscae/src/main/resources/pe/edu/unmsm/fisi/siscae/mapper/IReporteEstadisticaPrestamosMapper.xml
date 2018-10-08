@@ -4,14 +4,18 @@
 
 	<sql id="fragmentoSelectBuscarReporteEstadisticaPrestamos">
 		SELECT  recurso,
+				id_escuela,
 			    escuela,
+			    id_persona,
+			    nombre_tipo,
 		        codigo,
 		        nombre,
 			    app_paterno,
 			    app_materno,
 			    turno,
 			   	fecha_registro, 
-			    estadia, 
+			    estadia,
+			    id_area_estudio, 
 			    area_estudio
 		  FROM WV_REPORTE_PRESTAMOS 
 	</sql>

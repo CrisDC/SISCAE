@@ -7,12 +7,11 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-
 @Data
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class ReporteEstadisticaPrestamos {
+public class ReporteEstadisticaPrestamosFechas {
 	String recurso;
 	int idEscuela;
 	String escuela;
@@ -22,10 +21,12 @@ public class ReporteEstadisticaPrestamos {
 	String nombre;
 	String appPaterno;
 	String appMaterno;
-	String turno;
-	Date fechaRegistro;
-	Time estadia;
 	int idAreaEstudio;
 	String areaEstudio;
-	
+	String turno;
+	String horaPrestamo;
+	String anio;
+	String mes;
+	String dia;
+	String estadia;
 }

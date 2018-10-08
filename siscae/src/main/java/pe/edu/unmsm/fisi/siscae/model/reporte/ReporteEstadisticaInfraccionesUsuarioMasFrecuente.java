@@ -12,20 +12,12 @@ import lombok.NoArgsConstructor;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class ReporteEstadisticaPrestamos {
-	String recurso;
-	int idEscuela;
-	String escuela;
-	String nombreTipo;
-	int idPersona;
-	String codigo;
-	String nombre;
+public class ReporteEstadisticaInfraccionesUsuarioMasFrecuente {
+	String areaEstudio;
+	String dni;
+	String numeroInfracciones;
 	String appPaterno;
 	String appMaterno;
-	String turno;
-	Date fechaRegistro;
-	Time estadia;
-	int idAreaEstudio;
-	String areaEstudio;
+	String nombre;
 	
 }
