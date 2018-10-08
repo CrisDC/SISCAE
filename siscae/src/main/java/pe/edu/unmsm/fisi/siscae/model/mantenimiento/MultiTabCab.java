@@ -21,8 +21,8 @@ import pe.edu.unmsm.fisi.siscae.validacion.grupo.accion.IRegistro;
 @AllArgsConstructor
 public class MultiTabCab
 {
-    @IdTabla(existe = true, groups = IActualizacion.class)
-    @IdTabla(existe = false, message = "{Existe.MultiTabCab.idTabla}", groups = IRegistro.class)
+   // @IdTabla(existe = true, groups = IActualizacion.class)
+    //@IdTabla(existe = false, message = "{Existe.MultiTabCab.idTabla}", groups = IRegistro.class)
     private int idTabla;
     
     private String nombre;

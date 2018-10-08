@@ -14,43 +14,32 @@ import org.springframework.web.bind.annotation.RestController;
 import pe.edu.unmsm.fisi.siscae.aspecto.anotacion.Audit;
 import pe.edu.unmsm.fisi.siscae.aspecto.enumeracion.Accion;
 import pe.edu.unmsm.fisi.siscae.aspecto.enumeracion.Comentario;
-import pe.edu.unmsm.fisi.siscae.aspecto.enumeracion.Dato;
-import pe.edu.unmsm.fisi.siscae.aspecto.enumeracion.Tipo;
 import pe.edu.unmsm.fisi.siscae.configuracion.security.SecurityContextFacade;
-import pe.edu.unmsm.fisi.siscae.model.mantenimiento.AreaAdministrativo;
-import pe.edu.unmsm.fisi.siscae.model.mantenimiento.MovimientoPrestamo;
-import pe.edu.unmsm.fisi.siscae.service.IAreaAdministrativoService;
-import pe.edu.unmsm.fisi.siscae.service.IMovimientoPrestamoService;
+import pe.edu.unmsm.fisi.siscae.model.mantenimiento.MovimientoInfraccion;
+import pe.edu.unmsm.fisi.siscae.service.IMovimientoInfraccionService;
 import pe.edu.unmsm.fisi.siscae.service.excepcion.BadRequestException;
 import pe.edu.unmsm.fisi.siscae.utilitario.ConstantesGenerales;
 import pe.edu.unmsm.fisi.siscae.utilitario.ValidatorUtil;
 import pe.edu.unmsm.fisi.siscae.validacion.grupo.accion.IRegistro;
 
-@RequestMapping("/movimientoPrestamo")
-public @RestController class MovimientoPrestamoController {
-	
-	private @Autowired IMovimientoPrestamoService movimientoPrestamoService;
-	
+@RequestMapping("/movimientoInfraccion")
+public @RestController class MovimientoInfraccionController {
+
+	private @Autowired IMovimientoInfraccionService movimientoInfraccionService;
+
 	@Audit(accion = Accion.REGISTRO, comentario = Comentario.Registro)
 	@PostMapping
-	public ResponseEntity<?> registrarAreaAdministrativo(
-			@Validated({ Default.class, IRegistro.class }) @RequestBody MovimientoPrestamo movimientoPrestamo,
+	public ResponseEntity<?> registrarInfraccion(
+			@Validated({ Default.class, IRegistro.class }) @RequestBody MovimientoInfraccion movimientoInfraccion,
 			Errors error) {
+
 		if (error.hasErrors()) {
 			throw new BadRequestException(ValidatorUtil.obtenerMensajeValidacionError(error));
 		}
-		movimientoPrestamo.setNombreUsuario(SecurityContextFacade.obtenerNombreUsuario()); 
-		
-		System.out.println(movimientoPrestamo);
-		
-		SecurityContextFacade.obtenerNombreUsuario();
-		movimientoPrestamo.setNumDocumentoSolicitante(movimientoPrestamo.getNumDocumentoSolicitante().trim());
-		System.out.println("Atributo 'numDocumentoSolicitante': "+movimientoPrestamo.getNumDocumentoSolicitante());
-		System.out.println("Atributo 'nombreUsuario': "+movimientoPrestamo.getNombreUsuario());
-		System.out.println("Atributo 'idRecurso': "+movimientoPrestamo.getIdRecurso());
-		
-		
-		movimientoPrestamoService.registrarMovimientoPrestamo(movimientoPrestamo);
+
+		movimientoInfraccion.setNombreUsuario(SecurityContextFacade.obtenerNombreUsuario());
+		movimientoInfraccionService.registrarInfraccion(movimientoInfraccion);
 		return ResponseEntity.ok(ConstantesGenerales.REGISTRO_EXITOSO);
 	}
+
 }

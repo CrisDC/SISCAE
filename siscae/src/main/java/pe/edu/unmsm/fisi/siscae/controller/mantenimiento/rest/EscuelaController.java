@@ -42,35 +42,39 @@ public @RestController class EscuelaController {
 
 	@Audit(accion = Accion.REGISTRO, comentario = Comentario.Registro)
 	@PostMapping
-	public ResponseEntity<?> registrarEscuela(
+	public Escuela registrarEscuela(
 			@Validated({ Default.class, IRegistro.class }) @RequestBody Escuela escuela, Errors error) {
 		if (error.hasErrors()) {
 			throw new BadRequestException(ValidatorUtil.obtenerMensajeValidacionError(error));
 		}
+		
+		System.out.print(escuela.getIdFacultad());
+		
 		escuelaService.registrarEscuela(escuela);
-		return ResponseEntity.ok(ConstantesGenerales.REGISTRO_EXITOSO);
+		
+		return escuelaService.buscarPorId(escuela.getIdEscuela());
 	}
 
 	@Audit(accion = Accion.ACTUALIZACION, comentario = Comentario.Actualizacion)
 	@PutMapping
-	public ResponseEntity<?> actualizarEscuela(
+	public Escuela actualizarEscuela(
 			@Validated({ Default.class, IActualizacion.class }) @RequestBody Escuela escuela, Errors error) {
 		if (error.hasErrors()) {
 			throw new BadRequestException(ValidatorUtil.obtenerMensajeValidacionError(error));
 		}
 		escuelaService.actualizarEscuela(escuela);
-		return ResponseEntity.ok(ConstantesGenerales.ACTUALIZACION_EXITOSA);
+		return escuelaService.buscarPorId(escuela.getIdEscuela());
 	}
 
 	@Audit(accion = Accion.ELIMINACION, comentario = Comentario.Eliminacion)
 	@DeleteMapping
-	public ResponseEntity<?> eliminarEscuela(@Validated(IActualizacion.class) @RequestBody Escuela escuela,
+	public Escuela eliminarEscuela(@Validated(IActualizacion.class) @RequestBody Escuela escuela,
 			Errors error) {
 		if (error.hasErrors()) {
 			throw new BadRequestException(ValidatorUtil.obtenerMensajeValidacionError(error));
 		}
 		escuelaService.eliminarEscuela(escuela);
-		return ResponseEntity.ok(ConstantesGenerales.ELIMINACION_EXITOSA);
+		return escuelaService.buscarPorId(escuela.getIdEscuela());
 	}
 
 }

@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="pe.edu.unmsm.fisi.siscae.mapper.IReporteEstadisticaPrestamosPorTipoSolicitanteMapper">
+
+	<sql id="fragmentoSelectBuscarReporteEstadisticaPrestamosPorTipoSolicitante">
+		SELECT  
+				area_estudio,
+		        nombre_tipo,
+		        numero_visitas,
+			    promedio_tiempo
+		  FROM reporte_estadistica_prestamo_por_tipo 
+	</sql>
+
+	<select id="buscarTodos" resultType="ReporteEstadisticaPrestamosPorTipoSolicitante">
+		<include refid="fragmentoSelectBuscarReporteEstadisticaPrestamosPorTipoSolicitante" />
+	</select>
+	
+	<select id="buscarPorNumeroDocumentoIdentidad" resultType="ReporteEstadisticaPrestamosPorTipoSolicitante">
+		<include refid="fragmentoSelectBuscarReporteEstadisticaPrestamosPorTipoSolicitante" />
+		<where>
+			<if test="tipoDocumentoIdentidad != null and tipoDocumentoIdentidad != ''">
+				reporte_estadistica_prestamo_por_tipo  .cod_tip_doc_ide = #{tipoDocumentoIdentidad}
+			</if>
+			<if test="numeroDocumentoIdentidad != null and numeroDocumentoIdentidad != ''">
+				AND reporte_estadistica_prestamo_por_tipo  .num_doc_ide = #{numeroDocumentoIdentidad}
+			</if>
+		</where>
+	</select>
+
+	<select id="buscarPorCriterio" resultType="ReporteEstadisticaPrestamosPorTipoSolicitante">
+		<include refid="fragmentoSelectBuscarReporteEstadisticaPrestamosPorTipoSolicitante" />
+		<where>
+			<if test="areaEstudio != null and areaEstudio != '-1'">
+				reporte_estadistica_prestamo_por_tipo .area_estudio = #{areaEstudio}
+			</if>
+		</where>
+	</select>
+
+
+</mapper>

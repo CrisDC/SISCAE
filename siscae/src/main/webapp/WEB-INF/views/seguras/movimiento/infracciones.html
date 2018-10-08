@@ -70,87 +70,23 @@
 											</p>
 														
 											<button th:if = "(${prestamo.estado} == 'OCUPADO') or (${prestamo.estado} == 'LIBERABLE')" 
-												th:id="${prestamo.numero}" th:key="${prestamo.idRecurso}"
-												th:class="'btn btn-danger sweet-success-cancel sweetalert'">APLICAR
+												th:id="${prestamo.numero}" 
+												th:key="${prestamo.idRecurso}"
+												class="btn btn-danger"
+												data-toggle="modal"
+												data-target="#infraccionModal"
+												th:attr="data-doc=${prestamo.numDocumento},
+														 data-codigo=${prestamo.codigoAlumno},
+														 data-nombre=${prestamo.nombre},
+														 data-apellidos=${prestamo.appPaterno} + ' ' + ${prestamo.appMaterno}">APLICAR
 											</button>
 											
 										</div>
 										
 									</th:block>
-									<!-- 
-									<div th:each="prestamo : ${prestamos}" class="recurso">
- 
-										<img
-											th:if="(${prestamo.estado} == 'OCUPADO') and (${areaAdministrativo.nombreAreaEstudio} == 'BIBLIOTECA')"
-											th:src="@{/resources/images/cubo_rojo.png}" width="40" height="40"> 
-										<img
-											th:if="(${prestamo.estado} == 'LIBERABLE') and (${areaAdministrativo.nombreAreaEstudio} == 'BIBLIOTECA')"
-											th:src="@{/resources/images/cubo_amarillo.png}" width="40" height="40">
-												
-										<img
-											th:if="((${prestamo.estado} == 'OCUPADO') or (${prestamo.estado} == 'LIBERABLE')) and (${areaAdministrativo.nombreAreaEstudio} == 'VIDEOTECA')"
-											th:src="@{/resources/images/pantalla.png}" width="40" height="40">
-												
-										<img
-											th:if="((${prestamo.estado} == 'OCUPADO') or (${prestamo.estado} == 'LIBERABLE')) and (${areaAdministrativo.nombreAreaEstudio} == 'SALA GRUPAL')"
-											th:src="@{/resources/images/mesa.png}" width="100" height="100">
-														
-										<p 	th:if = "(${prestamo.estado} == 'OCUPADO') or (${prestamo.estado} == 'LIBERABLE')"
-											th:text="${prestamo.numero}"></p>
-											
-										<p th:if="${prestamo.estado} == 'OCUPADO'"
-											th:text="OCUPADO" class="ocupado">
-										</p>
-										
-										<p th:if="${prestamo.estado} == 'LIBERABLE'"
-											th:text="LIBERABLE" class="liberable">
-										</p>
-														
-										<p 	th:if="((${prestamo.estado} == 'OCUPADO') or (${prestamo.estado} == 'LIBERABLE')) and (${areaAdministrativo.nombreAreaEstudio} == 'SALA GRUPAL')" 
-											th:text="'Capacidad 0/' + ${prestamo.maxCapacidad}">
-										</p>
-													
-										<button th:if = "(${prestamo.estado} == 'OCUPADO') or (${prestamo.estado} == 'LIBERABLE')" 
-											th:id="${prestamo.numero}" th:key="${prestamo.idRecurso}"
-											th:class="'btn btn-danger sweet-success-cancel sweetalert'">APLICAR
-										</button>
-										
-									</div>
-									 -->
+									
 								</div>
 								
-								<!--
-								<form>
-									<div class="recurso">
-										<img th:src="@{/resources/images/cubo_rojo.png}" width="40" height="40">
-										<p>2</p>
-										<p class="ocupado">OCUPADO</p>
-										<p>16200116</p>
-										<button class="btn btn-danger sweet-success-cancel sweetalert">APLICAR</button>
-									</div>
-									<div class="recurso">
-										<img th:src="@{/resources//images/cubo_amarillo.png}" width="40" height="40">
-										<p>4</p>
-										<p class="liberable">LIBERABLE</p>
-										<p>17200138</p>
-										<button class="btn btn-danger">APLICAR</button>
-									</div>
-									<div class="recurso">
-										<img th:src="@{/resources/images/cubo_rojo.png}" width="40" height="40">
-										<p>7</p>
-										<p class="ocupado">OCUPADO</p>
-										<p>15200108</p>
-										<button class="btn btn-danger">APLICAR</button>
-									</div>
-									<div class="recurso">
-										<img th:src="@{/resources/images/cubo_rojo.png}" width="40" height="40">
-										<p>12</p>
-										<p class="ocupado">OCUPADO</p>
-										<p>18200124</p>
-										<button class="btn btn-danger">APLICAR</button>
-									</div>
-								</form>
-								 -->
 							</div>
 						</div>
 					</div>
@@ -162,54 +98,136 @@
 		</div>
 		<!-- End Page wrapper  -->
 		
-		
+		<!-- Modal -->
+		<div class="modal fade" id="infraccionModal" tabindex="-1" role="dialog" aria-labelledby="infraccionModalLabel" aria-hidden="true">
+		  <div class="modal-dialog modal-lg" role="document">
+		    <div class="modal-content">
+		      <div class="modal-header">
+		        <h5 class="modal-title" id="infraccionModalLabel">Aplicar infraccion</h5>		       
+		      </div>
+		      <div class="modal-body">
+		        <div class="container-fluid">
+		        	<div class="row">
+		        		<div class="col-md-6">
+		        			<div class="panel panel-danger">
+		        				<div class="panel-heading">
+		        					Datos del alumno
+		        				</div>
+					        	<ul class="list-group">
+					        		<li class="list-group-item">
+					        			<div class="row">
+					        				<div class="col-md-5">
+					        					<h5>Codigo</h5>
+					        				</div>
+					        				<div class="col-md-7" id="codigoAlumno"></div>
+					        			</div>
+					        		</li>
+					        		<li class="list-group-item">
+					        			<div class="row">
+					        				<div class="col-md-5">
+					        					<h5>Nombre</h5>
+					        				</div>
+					        				<div class="col-md-7" id="nombreAlumno"></div>
+					        			</div>
+					        		</li>
+					        		<li class="list-group-item">
+					        			<div class="row">
+					        				<div class="col-md-5">
+					        					<h5>Apellidos</h5>
+					        				</div>
+					        				<div class="col-md-7" id="apellidosAlumno"></div>
+					        			</div>
+					        		</li>
+					        		<li class="list-group-item">
+					        			<div class="row">
+					        				<div class="col-md-5">
+					        					<h5>Num. de doc.</h5>
+					        				</div>
+					        				<div class="col-md-7" id="numDoc"></div>
+					        			</div>
+					        		</li>
+					        		
+					        	</ul>
+		        			</div>
+		        		</div>
+		        		<div class="col-md-6">
+		        			<form action="">
+		        				<div class="form-row">
+								    <div class="form-group col-md-12">
+								      <label for="inputInfraccion">Tipo de infraccion</label>
+								      <select id="tipoInfraccion" class="form-control select2" name="tipoInfraccion">
+											<option value="0" selected="selected">SELECCIONE LA INFRACCION</option>
+											<option th:each="infraccion : ${tipoInfracciones}" th:value="${infraccion.idItem}"
+												th:text="|${infraccion.descripcionCorta}|"></option>
+									  </select>
+								    </div>
+								</div>
+								<div class="form-row">
+									<div class="form-group col-md-12">
+										<label for="inputDescripcionInfraccion">Descripcion</label>
+										<textarea class="form-control" id="inputDescripcionInfraccion" rows="3" cols=""></textarea>
+									</div>
+								</div>
+		        			</form>
+		        		</div>
+		        	</div>
+		        </div> 
+		      </div>
+		      <div class="modal-footer">
+		        <button type="button" id="btnClose" class="btn btn-secondary" data-dismiss="modal">Close</button>
+		        <button type="button" id="btnRegistrar" class="btn btn-danger">Registrar infraccion</button>
+		      </div>
+		    </div>
+		  </div>
+		</div>
 		
 		<!-- All Jquery -->
-    <script th:src="@{js/guiuser/lib/jquery/jquery.min.js}"></script>
+    <script th:src="@{/resources/js/guiuser/lib/jquery/jquery.min.js}"></script>
     <!-- Bootstrap tether Core JavaScript -->
-    <script th:src="@{js/guiuser/lib/bootstrap/js/popper.min.js}"></script>
-    <script th:src="@{js/guiuser/lib/bootstrap/js/bootstrap.min.js}"></script>
+    <script th:src="@{/resources/js/guiuser/lib/bootstrap/js/popper.min.js}"></script>
+    <script th:src="@{/resources/js/guiuser/lib/bootstrap/js/bootstrap.min.js}"></script>
     <!-- slimscrollbar scrollbar JavaScript -->
-    <script th:src="@{js/guiuser/jquery.slimscroll.js}"></script>
+    <script th:src="@{/resources/js/guiuser/jquery.slimscroll.js}"></script>
     <!--Menu sidebar -->
-    <script th:src="@{js/guiuser/sidebarmenu.js}"></script>
+    <script th:src="@{/resources/js/guiuser/sidebarmenu.js}"></script>
     <!--stickey kit -->
-    <script th:src="@{js/guiuser/lib/sticky-kit-master/dist/sticky-kit.min.js}"></script>
+    <script th:src="@{/resources/js/guiuser/lib/sticky-kit-master/dist/sticky-kit.min.js}"></script>
     <!--Custom JavaScript -->
 
 
     <!-- Amchart -->
-    <script th:src="@{js/guiuser/lib/morris-chart/raphael-min.js}"></script>
-    <script th:src="@{js/guiuser/lib/morris-chart/morris.js}"></script>
-    <script th:src="@{js/guiuser/lib/morris-chart/dashboard1-init.js}"></script>
+    <script th:src="@{/resources/js/guiuser/lib/morris-chart/raphael-min.js}"></script>
+    <script th:src="@{/resources/js/guiuser/lib/morris-chart/morris.js}"></script>
+    <script th:src="@{/resources/js/guiuser/lib/morris-chart/dashboard1-init.js}"></script>
 
 
-    <script th:src="@{js/guiuser/lib/calendar-2/moment.latest.min.js}"></script>
+    <script th:src="@{/resources/js/guiuser/lib/calendar-2/moment.latest.min.js}"></script>
     <!-- scripit init-->
-    <script th:src="@{js/guiuser/lib/calendar-2/semantic.ui.min.js}"></script>
+    <script th:src="@{/resources/js/guiuser/lib/calendar-2/semantic.ui.min.js}"></script>
     <!-- scripit init-->
-    <script th:src="@{js/guiuser/lib/calendar-2/prism.min.js}"></script>
+    <script th:src="@{/resources/js/guiuser/lib/calendar-2/prism.min.js}"></script>
     <!-- scripit init-->
-    <script th:src="@{js/guiuser/lib/calendar-2/pignose.calendar.min.js}"></script>
+    <script th:src="@{/resources/js/guiuser/lib/calendar-2/pignose.calendar.min.js}"></script>
     <!-- scripit init-->
-    <script th:src="@{js/guiuser/lib/calendar-2/pignose.init.js}"></script>
+    <script th:src="@{/resources/js/guiuser/lib/calendar-2/pignose.init.js}"></script>
 
-    <script th:src="@{js/guiuser/lib/owl-carousel/owl.carousel.min.js}"></script>
-    <script th:src="@{js/guiuser/lib/owl-carousel/owl.carousel-init.js}"></script>
-    <script th:src="@{js/guiuser/scripts.js}"></script>
-    <script th:src="@{js/guiuser/inicio.js}"></script>
+    <script th:src="@{/resources/js/guiuser/lib/owl-carousel/owl.carousel.min.js}"></script>
+    <script th:src="@{/resources/js/guiuser/lib/owl-carousel/owl.carousel-init.js}"></script>
+    <script th:src="@{/resources/js/guiuser/scripts.js}"></script>
+    <!-- <script th:src="@{/resources/js/guiuser/inicio.js}"></script> -->
     <!-- scripit init-->
-    <script th:src="@{js/guiuser/lib/bootstrap/js/popper.min.js}"></script>
-    <script th:src="@{js/guiuser/lib/sweetalert/sweetalert.min.js}"></script>
+    <script th:src="@{/resources/js/guiuser/lib/bootstrap/js/popper.min.js}"></script>
+    <script th:src="@{/resources/js/util/util.js}"></script>
+    <script th:src="@{/resources/js/guiuser/lib/sweetalert/sweetalert.min.js}"></script>
     <!-- scripit init-->
-    <script th:src="@{js/guiuser/lib/sweetalert/sweetalert.init.js}"></script>
+    <script th:src="@{/resources/js/guiuser/lib/sweetalert/sweetalert.init.js}"></script>
 
-    <script th:src="@{js/guiuser/custom.min.js}"></script>
+    <script th:src="@{/resources/js/guiuser/custom.min.js}"></script>
     
     <script
-			th:src="@{/resources/js/pagina/consulta/movimientos/{mantenimiento}/{mantenimiento}.js(mantenimiento = ${mantenimiento})}"></script>
+			th:src="@{/resources/js/pagina/consulta/movimientos/infracciones/infracciones.js}"></script>
 	<script
-			th:src="@{/resources/js/pagina/consulta/movimientos/{mantenimiento}/{mantenimiento}Formulario.js(mantenimiento = ${mantenimiento})}"></script>
+			th:src="@{/resources/js/pagina/consulta/movimientos/infracciones/infraccionesFormulario.js}"></script>
 
 	</div>
 

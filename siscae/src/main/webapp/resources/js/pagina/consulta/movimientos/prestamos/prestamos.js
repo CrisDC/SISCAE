@@ -1,4 +1,4 @@
-//Capturar el id de un button en el div con id for-each
+// Capturar el id de un button en el div con id for-each
 $(document).ready(function(){
 
 	
@@ -7,87 +7,101 @@ $(document).ready(function(){
 			title: "Registrar salida",
 			text: "Ingrese su carnet de biblioteca por el scanner",
 			content: "input",
-			icon: "resources/images/nuevo_gif.gif",
-		});
-		$.get('/prestamo', { userId : 1234 }, function(resp) {
-			console.log(resp);
-		});
-	})
-	
-    $('body #for-each').on('click', 'button', function(){
-        
-    	  
-    	let idRecurso = $(this).attr('key');
-        let numRecurso = $(this).attr('id');
-        
-        let esGrupal = $(this).attr('grupal');
-        
-        
-        if(esGrupal=='no'){
-        	
-        	swal({
-    			title: "Solicitud de recurso "+numRecurso,
-    			text: "Ingrese su carnet de biblioteca por el scanner",
-    			content: "input",
-    			icon: "resources/images/nuevo_gif.gif",
-    		
-    		}).then(function (inputValue) {
-    			
-    			var prestamo ={
-    		        	"idRecurso": idRecurso,
-    		        	"numDocumentoSolicitante": inputValue
-    		    };
-    			
-    			$.ajax({
-                    url :  $variableUtil.root + "movimientoPrestamo",
-                    type : 'POST',
-                    data : JSON.stringify(prestamo),
-                    beforeSend : function(xhr) {
-        				xhr.setRequestHeader('Content-Type', 'application/json');
-        				xhr.setRequestHeader("X-CSRF-TOKEN", $variableUtil.csrf);
-        			},
-        			statusCode : {
-        				400 : function(response) {
-        					swal(response.responseJSON);
-        				}
-        			},
-        			success : function(response) {
-        				swal('Peticion realizada con exito');
-        			},
-        			error : function(response) {
-        				swal('Problemas con el servidor');
-        			},
-        			complete : function(response) {
-        				
-        			}
+			icon: "/siscae/resources/images/lectora.gif",
+		}).then(function (inputValue) {
+			
+			var finPrestamo ={
+		        	"numDocumentoSolicitante": inputValue
+		    };
 
-    			}, function (dismiss) {
-    			  // dismiss can be 'cancel', 'overlay',
-    			  // 'close', and 'timer'
-    			  
+			$.ajax({
+                url :  $variableUtil.root + "movimientoFinPrestamo",
+                type : 'POST',
+                data : JSON.stringify(finPrestamo),
+                beforeSend : function(xhr) {
+    				xhr.setRequestHeader('Content-Type', 'application/json');
+    				xhr.setRequestHeader("X-CSRF-TOKEN", $variableUtil.csrf);
+    			},
+    			statusCode : {
+    				400 : function(response) {
+    					swal(response.responseJSON);
+    				}
+    			},
+    			success : function(response) {
+    				swal("Registro de salida", "Usted marco su salida con exito", "success");
+    				location.reload();
+    			},
+    			error : function(response) {
+    				swal("Error", "Ha ocurrido un problema con el servidor", "warning"); 
+    			},
+    			complete : function(response) {
+    				
     			}
 
-    			)
-          })
-        	
-        	
-        	
-        }else{
-        	
-        	
-        	$('exampleModalCenter').modal('show');
-        	
-        	
-        }
-        
-    })
-    
-    
-    
-    $('#cerrarModal').click(function () {
-    	$('#myModal').modal().hide();
+			}, function (dismiss) {
+			  // dismiss can be 'cancel', 'overlay',
+			  // 'close', and 'timer'
+			  
+			}
+
+			)
+      })
+		
+		
+		
+		
+		
+		
 	})
-    
-    
+	
+      $('body #for-each').on('click', 'button', function(){
+        let idRecurso = $(this).attr('key');
+        let numRecurso = $(this).attr('id');
+        swal({
+			title: "Solicitud de recurso "+numRecurso,
+			text: "Ingrese su carnet de biblioteca por el scanner",
+			content: "input",
+			icon: "/siscae/resources/images/lectora.gif",
+		
+		}).then(function (inputValue) {
+			
+			var prestamo ={
+		        	"idRecurso": idRecurso,
+		        	"numDocumentoSolicitante": inputValue
+		    };
+			
+			$.ajax({
+                url :  $variableUtil.root + "movimientoPrestamo",
+                type : 'POST',
+                data : JSON.stringify(prestamo),
+                beforeSend : function(xhr) {
+    				xhr.setRequestHeader('Content-Type', 'application/json');
+    				xhr.setRequestHeader("X-CSRF-TOKEN", $variableUtil.csrf);
+    			},
+    			statusCode : {
+    				400 : function(response) {
+    					swal(response.responseJSON);
+    				}
+    			},
+    			success : function(response) {
+    				swal("Peticion realizada con exito", "Usted esta prestando el recurso "+numRecurso, "success");
+    				location.reload();
+    			},
+    			error : function(response) {
+    				swal("Error", "Ha ocurrido un problema con el servidor", "warning"); 
+    			},
+    			complete : function(response) {
+    				
+    			}
+
+			}, function (dismiss) {
+			  // dismiss can be 'cancel', 'overlay',
+			  // 'close', and 'timer'
+			  
+			}
+
+			)
+      })
+})
 
 })

@@ -55,48 +55,41 @@
 								<div class="tab-content">
 									<div class="tab-pane active" id="esquema" role="tabpanel">
 										<div class="p-20">
-										
-										
-										  <!-- Button to Open the Modal -->
-										  <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal"> </button>
 
 											<p>Seleccione su recurso disponible</p>
 											<div class="row" id="for-each">
-
-												<div th:each="prestamo : ${prestamos}" class="recurso">
+											
+											<th:block th:each="prestamo : ${prestamos}">
+											
+												<div class="recurso">
 													<img
-														th:if="(${prestamo.estado} == 'DISPONIBLE') and (${areaAdministrativo.nombreAreaEstudio} == 'BIBLIOTECA')"
+														th:if="(${prestamo.estado} == 'DISPONIBLE') and (${prestamo.tipoRecurso} == 'CUBICULO')"
 														th:src="@{/resources/images/cubo_verde.png}" width="40" height="40"> 
 													<img
-														th:if="(${prestamo.estado} == 'OCUPADO') and (${areaAdministrativo.nombreAreaEstudio} == 'BIBLIOTECA')"
+														th:if="(${prestamo.estado} == 'OCUPADO') and (${prestamo.tipoRecurso} == 'CUBICULO')"
 														th:src="@{/resources/images/cubo_rojo.png}" width="40" height="40"> 
 													<img
-														th:if="(${prestamo.estado} == 'LIBERABLE') and (${areaAdministrativo.nombreAreaEstudio} == 'BIBLIOTECA')"
+														th:if="(${prestamo.estado} == 'LIBERABLE') and (${prestamo.tipoRecurso} == 'CUBICULO')"
 														th:src="@{/resources/images/cubo_amarillo.png}" width="40" height="40">
 														
 													<img
-														th:if="${areaAdministrativo.nombreAreaEstudio} == 'VIDEOTECA'"
+														th:if="${prestamo.tipoRecurso} == 'CABINA'"
 														th:src="@{/resources/images/pantalla.png}" width="40" height="40">
 														
 													<img
-														th:if="${areaAdministrativo.nombreAreaEstudio} == 'SALA GRUPAL'"
+														th:if="${prestamo.tipoRecurso} == 'MESA'"
 														th:src="@{/resources/images/mesa.png}" width="100" height="100">
 														
 													<p th:text="${prestamo.numero}"></p>
-													<p
-														th:if="${prestamo.estado} == 'DISPONIBLE'"
-														th:text="DISPONIBLE" class="disponible"></p>
-													<p th:if="${prestamo.estado} == 'OCUPADO'"
-														th:text="OCUPADO" class="ocupado"></p>
-													<p th:if="${prestamo.estado} == 'LIBERABLE'"
-														th:text="LIBERABLE" class="liberable"></p>
-														
+													<p th:if="${prestamo.estado} == 'DISPONIBLE'" th:text="DISPONIBLE" class="disponible"></p>
+													<p th:if="${prestamo.estado} == 'OCUPADO'" th:text="OCUPADO" class="ocupado"></p>
+													<p th:if="${prestamo.estado} == 'LIBERABLE'" th:text="LIBERABLE" class="liberable"></p>
 													<p th:if="${areaAdministrativo.nombreAreaEstudio} == 'SALA GRUPAL'" th:text="'Capacidad 0/' + ${prestamo.maxCapacidad}"></p>
 													
-													<button th:id="${prestamo.numero}" th:key="${prestamo.idRecurso}" th:grupal="${areaAdministrativo.nombreAreaEstudio} == 'BIBLIOTECA' ? 'no' : 'si' "
-														th:class="${prestamo.estado} == 'DISPONIBLE' ? 'btn btn-info solicitar' : 'invisible' ">SOLICITAR</button>
+													<button th:id="${prestamo.numero}" th:key="${prestamo.idRecurso}" th:class="${prestamo.estado} == 'DISPONIBLE' ? 'btn btn-info solicitar' : 'invisible' ">SOLICITAR</button>
 												</div>
-
+											
+											</th:block>
 
 											</div>
 
@@ -108,7 +101,6 @@
 
 										<div class="table-responsive m-t-40">
 											<h3>Estado del aula</h3>
-											
 											<table id="myTable"
 												class="table table-bordered table-striped">
 												<thead>
@@ -151,33 +143,8 @@
 
 
 		</div>
-		
-		
-				<!-- The Modal -->
-		  <div class="modal fade" id="myModal">
-		    <div class="modal-dialog">
-		      <div class="modal-content">
-		      
-		        <!-- Modal Header -->
-		        <div class="modal-header">
-		          <h4 class="modal-title">Modal Heading</h4>
-		          <button type="button" class="close" data-dismiss="modal">×</button>
-		        </div>
-		        
-		        <!-- Modal body -->
-		        <div class="modal-body">
-		          Modal body..
-		        </div>
-		        
-		        <!-- Modal footer -->
-		        <div class="modal-footer">
-		          <button type="button" class="btn btn-danger" data-dismiss="modal" id="cerrarModal">Close</button>
-		        </div>
-		        
-		      </div>
-		    </div>
-		  </div>
-		
+
+
 
 
 		<!-- All Jquery -->
@@ -223,7 +190,7 @@
 			th:src="@{/resources/js/guiuser/lib/owl-carousel/owl.carousel-init.js}"></script>
 		<script th:src="@{/resources/js/guiuser/scripts.js}"></script>
 		<!-- scripit init-->
-<!-- 		<script th:src="@{/resources/js/guiuser/inicio.js}"></script> -->
+		<script th:src="@{/resources/js/guiuser/inicio.js}"></script>
 		<script th:src="@{/resources/js/guiuser/custom.min.js}"></script>
 		<script th:src="@{/resources/js/guiuser/sweetalert.min.js}"></script>
 		<script th:src="@{/resources/js/util/util.js}"></script>

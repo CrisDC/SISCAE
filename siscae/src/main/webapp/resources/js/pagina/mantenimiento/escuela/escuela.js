@@ -110,21 +110,21 @@ $(document).ready(function() {
 				xhr.setRequestHeader("X-CSRF-TOKEN", $variableUtil.csrf);
 			},
 			statusCode : {
-				400 : function(response) {
+				400 : function(escuelaResponse) {
 					$funcionUtil.limpiarMensajesDeError($formMantenimiento);
-					$funcionUtil.mostrarMensajeDeError(response.responseJSON, $formMantenimiento);
+					$funcionUtil.mostrarMensajeDeError(escuelaResponse.escuelaResponseJSON, $formMantenimiento);
 				}
 			},
-			success : function(response) {
-				$funcionUtil.notificarException(response, "fa-check", "Aviso", "success");
+			success : function(escuelaResponse) {
+				$funcionUtil.notificarException(escuelaResponse, "fa-check", "Aviso", "success");
 				var row = $local.tablaMantenimiento.row.add(escuela).draw();
 				row.show().draw(false);
 				$(row.node()).animateHighlight();
 				$local.$modalMantenimiento.PopupWindow("close");
 			},
-			error : function(response) {
+			error : function(escuelaResponse) {
 			},
-			complete : function(response) {
+			complete : function(escuelaResponse) {
 				$local.$registrarMantenimiento.attr("disabled", false).find("i").addClass("fa-floppy-o").removeClass("fa-spinner fa-pulse fa-fw");
 			}
 		});
@@ -158,22 +158,22 @@ $(document).ready(function() {
 				xhr.setRequestHeader("X-CSRF-TOKEN", $variableUtil.csrf);
 			},
 			statusCode : {
-				400 : function(response) {
+				400 : function(escuelaResponse) {
 					$funcionUtil.limpiarMensajesDeError($formMantenimiento);
-					$funcionUtil.mostrarMensajeDeError(response.responseJSON, $formMantenimiento);
+					$funcionUtil.mostrarMensajeDeError(escuelaResponse.escuelaResponseJSON, $formMantenimiento);
 				}
 			},
-			success : function(response) {
-				$funcionUtil.notificarException(response, "fa-check", "Aviso", "success");
+			success : function(escuelaResponse) {
+				$funcionUtil.notificarException(escuelaResponse, "fa-check", "Aviso", "success");
 				$local.tablaMantenimiento.row($local.$filaSeleccionada).remove().draw(false);
 				var row = $local.tablaMantenimiento.row.add(escuela).draw();
 				row.show().draw(false);
 				$(row.node()).animateHighlight();
 				$local.$modalMantenimiento.PopupWindow("close");
 			},
-			error : function(response) {
+			error : function(escuelaResponse) {
 			},
-			complete : function(response) {
+			complete : function(escuelaResponse) {
 				$local.$actualizarMantenimiento.attr("disabled", false).find("i").addClass("fa-pencil-square").removeClass("fa-spinner fa-pulse fa-fw");
 			}
 		});
@@ -203,18 +203,18 @@ $(document).ready(function() {
 										xhr.setRequestHeader('Content-Type', 'application/json');
 										xhr.setRequestHeader("X-CSRF-TOKEN", $variableUtil.csrf);
 									}
-								}).done(function(response) {
-									$funcionUtil.notificarException(response, "fa-check", "Aviso", "success");
+								}).done(function(escuelaResponse) {
+									$funcionUtil.notificarException(escuelaResponse, "fa-check", "Aviso", "success");
 									$local.tablaMantenimiento.row($local.$filaSeleccionada).remove().draw(false);
 									confirmar.close();
 								}).fail(function(xhr) {
 									confirmar.close();
 									switch (xhr.status) {
 									case 400:
-										$funcionUtil.notificarException($funcionUtil.obtenerMensajeErrorEnCadena(xhr.responseJSON), "fa-warning", "Aviso", "warning");
+										$funcionUtil.notificarException($funcionUtil.obtenerMensajeErrorEnCadena(xhr.escuelaResponseJSON), "fa-warning", "Aviso", "warning");
 										break;
 									case 409:
-										var mensaje = $funcionUtil.obtenerMensajeError("La escuela <b>" + escuela.idEscuela + " - " + escuela.nombre + "</b>", xhr.responseJSON, $variableUtil.accionEliminado);
+										var mensaje = $funcionUtil.obtenerMensajeError("La escuela <b>" + escuela.idEscuela + " - " + escuela.nombre + "</b>", xhr.escuelaResponseJSON, $variableUtil.accionEliminado);
 										$funcionUtil.notificarException(mensaje, "fa-warning", "Aviso", "warning");
 										break;
 									}

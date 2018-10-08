@@ -14,43 +14,36 @@ import org.springframework.web.bind.annotation.RestController;
 import pe.edu.unmsm.fisi.siscae.aspecto.anotacion.Audit;
 import pe.edu.unmsm.fisi.siscae.aspecto.enumeracion.Accion;
 import pe.edu.unmsm.fisi.siscae.aspecto.enumeracion.Comentario;
-import pe.edu.unmsm.fisi.siscae.aspecto.enumeracion.Dato;
-import pe.edu.unmsm.fisi.siscae.aspecto.enumeracion.Tipo;
 import pe.edu.unmsm.fisi.siscae.configuracion.security.SecurityContextFacade;
-import pe.edu.unmsm.fisi.siscae.model.mantenimiento.AreaAdministrativo;
-import pe.edu.unmsm.fisi.siscae.model.mantenimiento.MovimientoPrestamo;
-import pe.edu.unmsm.fisi.siscae.service.IAreaAdministrativoService;
-import pe.edu.unmsm.fisi.siscae.service.IMovimientoPrestamoService;
+import pe.edu.unmsm.fisi.siscae.model.mantenimiento.MovimientoFinPrestamo;
+import pe.edu.unmsm.fisi.siscae.service.IMovimientoFinPrestamoService;
 import pe.edu.unmsm.fisi.siscae.service.excepcion.BadRequestException;
 import pe.edu.unmsm.fisi.siscae.utilitario.ConstantesGenerales;
 import pe.edu.unmsm.fisi.siscae.utilitario.ValidatorUtil;
 import pe.edu.unmsm.fisi.siscae.validacion.grupo.accion.IRegistro;
 
-@RequestMapping("/movimientoPrestamo")
-public @RestController class MovimientoPrestamoController {
+@RequestMapping("/movimientoFinPrestamo")
+public @RestController class MovimientoFinPrestamoController {
 	
-	private @Autowired IMovimientoPrestamoService movimientoPrestamoService;
+	private @Autowired IMovimientoFinPrestamoService movimientoFinPrestamoService;
 	
 	@Audit(accion = Accion.REGISTRO, comentario = Comentario.Registro)
 	@PostMapping
 	public ResponseEntity<?> registrarAreaAdministrativo(
-			@Validated({ Default.class, IRegistro.class }) @RequestBody MovimientoPrestamo movimientoPrestamo,
+			@Validated({ Default.class, IRegistro.class }) @RequestBody MovimientoFinPrestamo movimientoFinPrestamo,
 			Errors error) {
 		if (error.hasErrors()) {
 			throw new BadRequestException(ValidatorUtil.obtenerMensajeValidacionError(error));
 		}
-		movimientoPrestamo.setNombreUsuario(SecurityContextFacade.obtenerNombreUsuario()); 
+		movimientoFinPrestamo.setNombreUsuario(SecurityContextFacade.obtenerNombreUsuario()); 
 		
-		System.out.println(movimientoPrestamo);
-		
-		SecurityContextFacade.obtenerNombreUsuario();
-		movimientoPrestamo.setNumDocumentoSolicitante(movimientoPrestamo.getNumDocumentoSolicitante().trim());
-		System.out.println("Atributo 'numDocumentoSolicitante': "+movimientoPrestamo.getNumDocumentoSolicitante());
-		System.out.println("Atributo 'nombreUsuario': "+movimientoPrestamo.getNombreUsuario());
-		System.out.println("Atributo 'idRecurso': "+movimientoPrestamo.getIdRecurso());
+		System.out.println(movimientoFinPrestamo);
+		System.out.println("Atributo 'numDocumentoSolicitante': "+movimientoFinPrestamo.getNumDocumentoSolicitante());
+		System.out.println("Atributo 'nombreUsuario': "+movimientoFinPrestamo.getNombreUsuario());
 		
 		
-		movimientoPrestamoService.registrarMovimientoPrestamo(movimientoPrestamo);
+		movimientoFinPrestamoService.registrarMovimientoFinPrestamo(movimientoFinPrestamo);
 		return ResponseEntity.ok(ConstantesGenerales.REGISTRO_EXITOSO);
 	}
 }
+

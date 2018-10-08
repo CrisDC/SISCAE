@@ -32,8 +32,6 @@ public @Controller class MantenimientoController
     
     private @Autowired IAreaEstudioService areaEstudioService;
     private @Autowired ITipoRecursoService tipoRecursoService;
-    private @Autowired IAdministrativoService administrativoService;
-    private @Autowired IConsultaPrestamosService consultaPrestamosService;
     private @Autowired IFacultadService facultadService;
     
 
@@ -184,9 +182,5 @@ public @Controller class MantenimientoController
         model.addAttribute("mantenimiento", mantenimiento);
         return "seguras/mantenimiento/mantenimiento";
     }
-   
-   
-    
-    
     
 }

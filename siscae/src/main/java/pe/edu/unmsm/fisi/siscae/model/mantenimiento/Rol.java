@@ -24,9 +24,8 @@ public class Rol {
 	
 	private Integer idRol;
 	
-	@NotNull(message = "{NotNull.Rol.nombre}")
-    @NotBlank(message = "{NotBlank.Rol.nombre}")
-    @Length(min = 3, max = 45, message = "{Length.CodigoProcesoSwitch.nombre}")
+	
+    @Length(min =1, max = 45, message = "{Length.CodigoProcesoSwitch.nombre}")
 	private String nombre;
 
 }

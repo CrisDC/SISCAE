@@ -22,6 +22,7 @@ public interface IRecursoMapper extends IMantenibleMapper<Recurso> {
 			+ "#{objeto.idAreaEstudio, jdbcType = INTEGER, mode = IN},"
 			+ "#{objeto.idUbicacion, jdbcType = INTEGER, mode = IN},"
 			+ "#{objeto.idRecursoPadre, jdbcType = INTEGER, mode = IN},"
+			+ "#{objeto.observacion, jdbcType = VARCHAR, mode = IN},"
 			+ "#{userAudit, jdbcType = VARCHAR, mode = IN})}" })
 	@Options(statementType = StatementType.CALLABLE)
 	public List<Recurso> mantener(Parametro parametro);

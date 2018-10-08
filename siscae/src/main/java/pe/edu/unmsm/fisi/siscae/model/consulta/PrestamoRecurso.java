@@ -27,5 +27,6 @@ public class PrestamoRecurso
 	String appPaterno;
 	String appMaterno;
 	String codigoAlumno;
+	String numDocumento;
 	String areaEstudio;
 }

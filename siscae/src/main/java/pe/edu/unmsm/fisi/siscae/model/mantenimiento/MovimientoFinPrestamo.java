@@ -3,8 +3,7 @@ package pe.edu.unmsm.fisi.siscae.model.mantenimiento;
 import lombok.Data;
 
 @Data
-public class MovimientoPrestamo {
+public class MovimientoFinPrestamo {
 	String numDocumentoSolicitante;
     String nombreUsuario;
-    Integer idRecurso;
 }
