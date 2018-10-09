@@ -1,4 +1,3 @@
-
 <!DOCTYPE>
 <html xmlns:th="http://www.thymeleaf.org"
 	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
@@ -30,7 +29,7 @@
 					<div class="col-12">
 						<div class="card">
 							<div class="card-body">
-								
+
 								<!-- Nav tabs -->
 								<ul class="nav nav-tabs customtab2" role="tablist">
 									<li class="nav-item"><a class="nav-link active"
@@ -38,19 +37,18 @@
 											class="hidden-sm-up"> <i class="ti-home"></i></span> <span
 											class="hidden-xs-down">Nuevo</span>
 									</a></li>
-									<li class="nav-item">
-										<a class="nav-link" data-toggle="tab" href="#tabla" role="tab"> 
-											<span class="hidden-sm-up"><i class="ti-user"></i></span> 
-											<span class="hidden-xs-down">Ver todos</span>
-										</a>
-									</li>
+									<li class="nav-item"><a class="nav-link" data-toggle="tab"
+										href="#tabla" role="tab"> <span class="hidden-sm-up"><i
+												class="ti-user"></i></span> <span class="hidden-xs-down">Ver
+												todos</span>
+									</a></li>
 								</ul>
-								
+
 								<!-- Tab panes -->
 								<div class="tab-content">
-								
-								
-								
+
+
+
 									<div class="tab-pane  p-20" id="tabla" role="tabpanel">
 
 										<div class="table-responsive m-t-30">
@@ -60,18 +58,19 @@
 												<thead>
 													<tr>
 														<th>Codigo</th>
-														<th>Ap. Paterno</th>
-														<th>Ap. Materno</th>
+														<th>A Paterno</th>
+														<th>A Materno</th>
 														<th>Nombres</th>
-														<th>Numero Documento</th>
+														<th>Num Documento</th>
 														<th>Escuela</th>
 														<th>Solicitante</th>
 													</tr>
 												</thead>
 												<tbody>
 
-													<tr th:each="solicitante : ${solicitantes}" th:class="fila-personalizada">
-														<td th:text="${solicitante.codigo}"></td>														
+													<tr th:each="solicitante : ${solicitantes}"
+														th:class="fila-personalizada">
+														<td th:text="${solicitante.codigo}"></td>
 														<td th:text="${solicitante.appPaterno}"></td>
 														<td th:text="${solicitante.appMaterno}"></td>
 														<td th:text="${solicitante.nombre}"></td>
@@ -83,119 +82,200 @@
 											</table>
 										</div>
 									</div>
-								
+
 									<div class="tab-pane active" id="nuevo" role="tabpanel">
 										<div class="p-20">
-										<h4 class="card-title">Registro de solicitantes nuevos</h4>
-										<p>Ingrese los datos nuevos del solicitante</p>
-										<form class="form p-t-20">
-											<div class="form-group">
-												<label>Tipo de documento</label>
-												<div class="input-group">
-													<select class="form-control js-example-basic-single" id="tipoDocumento" name="tipoDocumento">
-														<option value="" selected="selected" disabled="disabled">Ingrese el tipo de documento</option>
-														<option th:each="tipoDocumento : ${tipoDocumentos}" 
-																th:value="${tipoDocumento.idItem}" th:text="${tipoDocumento.descripcion}"></option>
-													</select>
-												</div>
-											</div>
-											<div class="form-group">
-												<label>Numero de documento</label>
-												<div class="input-group">
-													<input type="number" class="form-control" id="numDocumento" name="numDocumento" placeholder="Ingrese su numero de documento">
-												</div>
-											</div>
-											<div class="form-group">
-												<label>Apellido Paterno</label>
-												<div class="input-group">
-													<input type="text" class="form-control" id="appPaterno" name="appPaterno"
-														placeholder="Ingrese su apellido paterno">
-												</div>
-											</div>
-											<div class="form-group">
-												<label>Apellido Materno</label>
-												<div class="input-group">
-													<input type="text" class="form-control" id="appMaterno" name="appMaterno"
-														placeholder="Ingrese su apellido materno">
-												</div>
-											</div>
-											<div class="form-group">
-												<label>Nombres</label>
-												<div class="input-group">
-													<input type="text" class="form-control" id="nombre" name="nombre"
-														placeholder="Ingrese sus nombres">
-												</div>
-											</div>
-											<div class="form-group">
-												<label>Sexo</label>
-												<div class="input-group">
-													<select class="form-control js-example-basic-single" id="sexo" name="sexo">
-														<option th:value="-1" selected="selected" disabled="disabled">Ingrese el sexo</option>
-														<option th:value="'M'">Masculino</option>
-														<option th:value="'F'">Femenino</option>
-													</select>
-												</div>
-											</div>
-											<div class="form-group">
-												<label>Fecha de nacimiento</label> 
-												<input id="fechaNac" name="fechaNac" type="date" class="form-control" placeholder="dd/mm/yyyy">
-											</div>
-											<div class="form-group">
-												<label>Telefono</label> 
-												<input id="telefono" name="telefono" type="number" class="form-control" placeholder="Ingrese su telefono">
-											</div>
-		
-											<div class="form-group" name="formulario-ocupacion" id="formulario-ocupacion">
-												<label>Ocupacion</label>
-												<div class="input-group">
-													<select class="form-control js-example-basic-single" id="ocupacion" name="ocupacion">
-														<option>Ingrese la ocupacion</option>
-														<option value="ALUMNO">ALUMNO</option>
-														<option value="DOCENTE">DOCENTE</option>
-														<option value="EXTERNO">OTRO</option>
-													</select>
-												</div>
-											</div>
-		
-											<div class="form-group" id="formulario-tipo-academico" name="formulario-tipo-academico">
-												<label>Tipo Academico</label>
-												<div class="input-group">
-													<select class="form-control js-example-basic-single">
-														<option value="" selected="selected" disabled="disabled">Seleccione el tipo academico</option>
-														<option th:each="tipoAcademico : ${tipoAcademicos}" 
-																th:value="${tipoAcademico.idItem}" th:text="${tipoAcademico.descripcion}"></option>
-													</select>
-												</div>
-											</div>
+											<h4 class="card-title">Registro de solicitantes nuevos</h4>
+											<p>Datos nuevos del solicitante</p>
 											
-											<div class="form-group" id="formulario-codigo" name="formulario-codigo">
-												<label>Codigo de alumno</label> 
-												<input id="codigo" name="codigo" type="number" class="form-control" placeholder="Ingrese su codigo de alumno">
-											</div>
-		
-											<div class="form-group" id="formulario-escuela" name="formulario-escuela">
-												<label>Escuela</label>
-												<div class="input-group">
-													<select class="form-control js-example-basic-single">
-														<option value="" selected="selected" disabled="disabled">Ingrese su escuela</option>
-														<option th:each="escuela : ${escuelas}" 
-																th:value="${escuela.idEscuela}" th:text="${escuela.nombre}"></option>
-													</select>
+
+												<div class="row">
+													<div class="col-md-6">
+														<div class="form-group">
+															<label>Tipo de documento</label>
+															<div class="input-group">
+																<select class="form-control js-example-basic-single"
+																	id="tipoDocumento" name="tipoDocumento" required>
+																	<option value="" selected="selected"
+																		disabled="disabled">Ingrese el tipo de
+																		documento</option>
+																	<option th:each="tipoDocumento : ${tipoDocumentos}"
+																		th:value="${tipoDocumento.idItem}"
+																		th:text="${tipoDocumento.descripcion}"></option>
+																		
+																</select>
+																 </div>
+															</div>
+														</div>
+
+													<div class="col-md-6">
+														<div class="form-group">
+															<label>Numero de documento</label>
+															<div class="input-group">
+																<input type="number" class="form-control" required
+																	id="numDocumento" name="numDocumento"
+																	placeholder="Ingrese su numero de documento">
+																	 
+															</div>
+																	
+															</div>
+														</div>
+													</div>
+													
+													
+												<div class="row">
+													<div class="col-md-6">
+														<div class="form-group">
+															<label>Apellido Paterno</label>
+															<div class="input-group">
+																<input type="text" class="form-control" id="appPaterno" required
+																	name="appPaterno"
+																	placeholder="Ingrese su apellido paterno">
+																	 </div>
+																	
+															</div>
+														</div>
+													<div class="col-md-6">
+														<div class="form-group">
+															<label>Apellido Materno</label>
+															<div class="input-group">
+																<input type="text" class="form-control" id="appMaterno" required
+																	name="appMaterno"
+																	placeholder="Ingrese su apellido materno">
+																	 </div>
+																	
+															</div>
+														</div>
+
+													</div>
+
+												<div class="row">
+													<div class="col-md-6">
+														<div class="form-group">
+															<label>Nombres</label>
+															<div class="input-group">
+																<input type="text" class="form-control" id="nombre" required
+																	name="nombre" placeholder="Ingrese sus nombres">
+																	 </div>
+																	
+															</div>
+														</div>
+
+													<div class="col-md-6">
+
+														<div class="form-group">
+															<label>Sexo</label>
+															<div class="input-group">
+																<select class="form-control js-example-basic-single" required
+																	id="sexo" name="sexo">
+																	<option th:value="-1" selected="selected"
+																		disabled="disabled">Ingrese el sexo</option>
+																	<option th:value="'MASCULINO'">Masculino</option>
+																	<option th:value="'FEMENINO'">Femenino</option>
+																</select>
+																 </div>
+																
+															</div>
+														</div>
+													</div>
+
+												<div class="row">
+													<div class="col-md-6">
+														<div class="form-group">
+															<label>Fecha de nacimiento</label> <input id="fechaNac" required
+																name="fechaNac" type="date" class="form-control"
+																placeholder="dd/mm/yyyy">
+														</div>
+													</div>
+
+													<div class="col-md-6">
+														<div class="form-group">
+															<label>Telefono</label> <input id="telefono"
+																name="telefono" type="number" class="form-control" required
+																placeholder="Ingrese su telefono">
+														</div>
+													</div>
 												</div>
-											</div>
-		
-											<div class="form-group text-center">
-												<button type="submit"
-													class="btn btn-info waves-effect waves-light m-r-10">REGISTRAR</button>
-		
-											</div>
-										</form>
-										
+
+												<div class="row">
+													<div class="col-md-6">
+
+														<div class="form-group" name="formulario-ocupacion" 
+															id="formulario-ocupacion">
+															<label>Ocupacion</label>
+															<div class="input-group">
+																<select class="form-control js-example-basic-single" required
+																	id="ocupacion" name="ocupacion">
+																	<option>Ingrese la ocupacion</option>
+																	<option value="ALUMNO">ALUMNO</option>
+																	<option value="DOCENTE">DOCENTE</option>
+																	<option value="EXTERNO">OTRO</option>
+																</select>
+															</div>
+														</div>
+													</div>
+
+													<div class="col-md-6">
+
+														<div class="form-group" id="formulario-codigo"
+															name="formulario-codigo">
+															<label>Codigo de alumno</label> <input id="codigo"
+																name="codigo" type="number" class="form-control"
+																placeholder="Ingrese su codigo de alumno">
+														</div>
+
+													</div>
+												</div>
+
+
+												
+
+
+												<div class="row">
+													<div class="col-md-6">
+														<div class="form-group" id="formulario-escuela"
+															name="formulario-escuela">
+															<label>Escuela</label>
+															<div class="input-group">
+																<select class="form-control js-example-basic-single" id="escuela" name="escuela">
+																	<option value="" selected="selected"
+																		disabled="disabled">Ingrese su escuela</option>
+																	<option th:each="escuela : ${escuelas}"
+																		th:value="${escuela.idEscuela}"
+																		th:text="${escuela.nombre}"></option>
+																</select>
+															</div>
+														</div>
+													</div>
+														<div class="col-md-6">
+														
+														<div class="form-group" id="formulario-tipo-academico"
+													name="formulario-tipo-academico">
+													<label>Tipo Academico</label>
+													<div class="input-group">
+														<select class="form-control js-example-basic-single" id="tipoAcademico" name="tipoAcademic">
+															<option value="" selected="selected" disabled="disabled">Seleccione
+																el tipo academico</option>
+															<option th:each="tipoAcademico : ${tipoAcademicos}"
+																th:value="${tipoAcademico.idItem}"
+																th:text="${tipoAcademico.descripcion}"></option>
+														</select>
+													</div>
+												</div>
+												</div>
+												</div>
+
+												<div class="form-group text-center">
+													<button type="button" id="enviar"
+														class="btn btn-info waves-effect waves-light m-r-10">REGISTRAR</button>
+
+												</div>
+
 										</div>
 
 
-										</div>
 									</div>
+								</div>
 							</div>
 						</div>
 					</div>
@@ -206,7 +286,7 @@
 
 		</div>
 		<!-- End Page wrapper  -->
-		
+
 		<!-- All Jquery -->
 		<script th:src="@{/resources/js/guiuser/lib/jquery/jquery.min.js}"></script>
 		<!-- Bootstrap tether Core JavaScript -->
@@ -222,34 +302,43 @@
 		<script
 			th:src="@{/resources/js/guiuser/lib/sticky-kit-master/dist/sticky-kit.min.js}"></script>
 		<!--Custom JavaScript -->
-		
+
 		<script th:src="@{/resources/js/guiuser/scripts.js}"></script>
 		<!-- scripit init-->
 		<script th:src="@{/resources/js/guiuser/custom.min.js}"></script>
 		<script th:src="@{/resources/js/guiuser/sweetalert.min.js}"></script>
 		<script th:src="@{/resources/js/util/util.js}"></script>
 		<script th:src="@{/resources/js/util/formularioUtil.js}"></script>
-		
+
 		<!-- select2-->
 		<script th:src="@{/resources/js/guiuser/select2.min.js}"></script>
-		
+
 		<!-- JS de datatables -->
-		<script th:src="@{/resources/js/guiuser/lib/datatables/datatables.min.js}"></script>
-	    <script th:src="@{/resources/js/guiuser/lib/datatables/cdn.datatables.net/buttons/1.2.2/js/dataTables.buttons.min.js}"></script>
-	    <script th:src="@{/resources/js/guiuser/lib/datatables/cdn.datatables.net/buttons/1.2.2/js/buttons.flash.min.js}"></script>
-	    <script th:src="@{/resources/js/guiuser/lib/datatables/cdnjs.cloudflare.com/ajax/libs/jszip/2.5.0/jszip.min.js}"></script>
-	    <script th:src="@{/resources/js/guiuser/lib/datatables/cdn.rawgit.com/bpampuch/pdfmake/0.1.18/build/pdfmake.min.js}"></script>
-	    <script th:src="@{/resources/js/guiuser/lib/datatables/cdn.rawgit.com/bpampuch/pdfmake/0.1.18/build/vfs_fonts.js}"></script>
-	    <script th:src="@{/resources/js/guiuser/lib/datatables/cdn.datatables.net/buttons/1.2.2/js/buttons.html5.min.js}"></script>
-	    <script th:src="@{/resources/js/guiuser/lib/datatables/cdn.datatables.net/buttons/1.2.2/js/buttons.print.min.js}"></script>
-	    <script th:src="@{/resources/js/guiuser/lib/datatables/datatables-init.js}"></script>
-	    
-	    
-	    <!-- Conexion con servidor -->
-		<script th:src="@{/resources/js/pagina/consulta/movimientos/solicitantes/solicitantes.js}"></script>
-		
+		<script
+			th:src="@{/resources/js/guiuser/lib/datatables/datatables.min.js}"></script>
+		<script
+			th:src="@{/resources/js/guiuser/lib/datatables/cdn.datatables.net/buttons/1.2.2/js/dataTables.buttons.min.js}"></script>
+		<script
+			th:src="@{/resources/js/guiuser/lib/datatables/cdn.datatables.net/buttons/1.2.2/js/buttons.flash.min.js}"></script>
+		<script
+			th:src="@{/resources/js/guiuser/lib/datatables/cdnjs.cloudflare.com/ajax/libs/jszip/2.5.0/jszip.min.js}"></script>
+		<script
+			th:src="@{/resources/js/guiuser/lib/datatables/cdn.rawgit.com/bpampuch/pdfmake/0.1.18/build/pdfmake.min.js}"></script>
+		<script
+			th:src="@{/resources/js/guiuser/lib/datatables/cdn.rawgit.com/bpampuch/pdfmake/0.1.18/build/vfs_fonts.js}"></script>
+		<script
+			th:src="@{/resources/js/guiuser/lib/datatables/cdn.datatables.net/buttons/1.2.2/js/buttons.html5.min.js}"></script>
+		<script
+			th:src="@{/resources/js/guiuser/lib/datatables/cdn.datatables.net/buttons/1.2.2/js/buttons.print.min.js}"></script>
+		<script
+			th:src="@{/resources/js/guiuser/lib/datatables/datatables-init.js}"></script>
+
+
+		<!-- Conexion con servidor -->
+		<script
+			th:src="@{/resources/js/pagina/consulta/movimientos/solicitantes/solicitantes.js}"></script>
+
 	</div>
 
 </body>
 </html>
-

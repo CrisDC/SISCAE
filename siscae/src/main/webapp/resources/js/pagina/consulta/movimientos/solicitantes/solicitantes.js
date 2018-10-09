@@ -71,7 +71,7 @@ $(document).ready(function() {
 			},
 			success : function(response) {
 				swal("Registro de solicitante", "Realizado con exito", "success");
-				//location.reload();
+				location.reload();
 			},
 			error : function(response) {
 				swal("Error", "Ha ocurrido un problema con el servidor", "warning"); 
