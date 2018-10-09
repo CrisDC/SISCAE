@@ -35,7 +35,7 @@ public @Controller class HomeController
 	public String irPaginaInicio(Model model, Principal principal) {
 		//model.addAttribute("nDias", iSecUsuarioService.numCaducidadContrasenia(principal.getName()));
 		model.addAttribute("usuario",principal.getName());
-		return "seguras/inicio";
+		return "redirect:/movimiento/estadoArea";
 	}
     
    
