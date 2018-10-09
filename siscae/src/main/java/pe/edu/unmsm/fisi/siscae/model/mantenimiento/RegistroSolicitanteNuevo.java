@@ -1,6 +1,8 @@
+
 package pe.edu.unmsm.fisi.siscae.model.mantenimiento;
 
-import com.sun.star.bridge.oleautomation.Date;
+
+import java.sql.Date;
 
 import lombok.Data;
 
