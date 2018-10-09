@@ -51,7 +51,9 @@ public enum Tipo
     CON_MOV_SOLICITANTES("Solicitantes"), 
     CON_MOV_REGISTRAR("Realizar prestamo de recurso"), 
     CON_MOV_INFRACCIONES("Consulta de Infracciones"),
-	CON_MOV_ESTADISTICAS("Consulta de Estadisticas");
+	CON_MOV_ESTADISTICAS("Consulta de Estadisticas"), 
+	
+	REP_EST_PRESTAMOS ("Reporte Estadistico de Prestamos");
 	
 
     private final String nombre;

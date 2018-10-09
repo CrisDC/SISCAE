@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head>
+</head>
+<body>
+	<div id="criterioBusquedaReporte" th:fragment="estadistica" th:with="tipo=${tipo}">
+			<form id="formCriterioBusquedaAutorizacion" class="form-horizontal" role="form">
+				<th:block
+					th:replace="~{template/fragments/reporte/criterioBusquedaReporteEstadistica :: ${tipo}}?:~{}">
+				</th:block>
+				<div class="form-group">
+					<div class="col-lg-12 text-center">
+						<button id="buscar" type="button" class="btn btn-primary">
+							<i class="fa fa-search"></i> Buscar
+						</button>
+					</div>
+				</div>
+			</form>
+	</div>
+
+	<th:block th:fragment="prestamos">
+		<div class="form-row">
+			<div class="form-group col-md-6">
+				<label for="inputEmail4">Email</label> 
+				<select id="empresas" name="idEmpresa" class="form-control select2">
+						<option th:each="empresa : ${empresas}" th:value="${empresa.idEmpresa}"
+							th:text="|${empresa.idEmpresa} - ${empresa.descripcion}|"></option>
+							<option > Escuela 1 </option>
+							<option > Escuela 2 </option>
+					</select>
+			</div>
+			<div class="form-group col-md-6">
+				<label for="inputPassword4">Código Alumno</label> <input type="password"
+					class="form-control" id="inputPassword4" placeholder="Password">
+			</div>
+		</div>
+
+	</th:block>
+
+	<th:block th:fragment="infracciones">
+		<div class="form-group">
+			<div class="group">
+				<label class="control-label col-lg-1 col-md-1">Empresas</label>
+				<div class="col-lg-3 col-md-3">
+					<select id="empresas" name="idEmpresa" class="form-control select2">
+						<option th:each="empresa : ${empresas}" th:value="${empresa.idEmpresa}"
+							th:text="|${empresa.idEmpresa} - ${empresa.descripcion}|"></option>
+					</select>
+				</div>
+			</div>
+			<div class="group">
+				<label class="control-label col-lg-1 col-md-1">Fecha de Proceso</label>
+				<div class="col-lg-3 col-md-3 input-group">
+					<span class="input-group-addon"><i class="fa fa-calendar"></i></span>
+					<input id="rangoFechaBusqueda" type="text" class="form-control" readonly="readonly"
+						name="fechas" />
+				</div>
+			</div>
+		</div>
+	</th:block>
+
+
+</body>
+</html>

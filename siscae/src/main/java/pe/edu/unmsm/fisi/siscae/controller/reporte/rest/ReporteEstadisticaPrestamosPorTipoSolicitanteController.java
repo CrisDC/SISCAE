@@ -13,6 +13,7 @@ import pe.edu.unmsm.fisi.siscae.service.IReporteEstadisticaPrestamosPorTipoSolic
 
 @RequestMapping("/reporteEstadisticoPrestamoPorTipoSolicitante")
 public @RestController class ReporteEstadisticaPrestamosPorTipoSolicitanteController {
+	
 	private @Autowired IReporteEstadisticaPrestamosPorTipoSolicitanteService reporteEstadisticaPrestamosPorTipoSolicitanteService;
 	@GetMapping(params = "accion=buscarTodos")
 	public List<ReporteEstadisticaPrestamosPorTipoSolicitante> buscarTodos() {
