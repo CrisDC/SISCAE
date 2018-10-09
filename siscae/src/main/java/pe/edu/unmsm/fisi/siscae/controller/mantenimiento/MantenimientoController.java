@@ -100,6 +100,7 @@ public @Controller class MantenimientoController
     public String irPaginaMantenimientoExterno(@PathVariable String mantenimiento, ModelMap model)
     {
         model.addAttribute("mantenimiento", mantenimiento);
+        model.addAttribute("estados",this.estadoTablaService.buscarporTablaOrigen("MAE_EXTERNO"));
         return "seguras/mantenimiento/mantenimiento";
     }
     
@@ -117,6 +118,7 @@ public @Controller class MantenimientoController
     public String irPaginaMantenimientoDocente(@PathVariable String mantenimiento, ModelMap model)
     {
         model.addAttribute("mantenimiento", mantenimiento);
+        model.addAttribute("estados",this.estadoTablaService.buscarporTablaOrigen("MAE_DOCENTE"));
         return "seguras/mantenimiento/mantenimiento";
     }
     
