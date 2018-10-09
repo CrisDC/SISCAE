@@ -145,19 +145,19 @@
 												<input id="telefono" name="telefono" type="number" class="form-control" placeholder="Ingrese su telefono">
 											</div>
 		
-											<div class="form-group">
+											<div class="form-group" name="formulario-ocupacion" id="formulario-ocupacion">
 												<label>Ocupacion</label>
 												<div class="input-group">
-													<select class="form-control js-example-basic-single">
+													<select class="form-control js-example-basic-single" id="ocupacion" name="ocupacion">
 														<option>Ingrese la ocupacion</option>
-														<option value="alumno" id="selectalumno">ALUMNO</option>
-														<option value="docente">DOCENTE</option>
-														<option value="externo">OTRO</option>
+														<option value="ALUMNO">ALUMNO</option>
+														<option value="DOCENTE">DOCENTE</option>
+														<option value="EXTERNO">OTRO</option>
 													</select>
 												</div>
 											</div>
 		
-											<div class="form-group" id="tipoacademico">
+											<div class="form-group" id="formulario-tipo-academico" name="formulario-tipo-academico">
 												<label>Tipo Academico</label>
 												<div class="input-group">
 													<select class="form-control js-example-basic-single">
@@ -167,8 +167,13 @@
 													</select>
 												</div>
 											</div>
+											
+											<div class="form-group" id="formulario-codigo" name="formulario-codigo">
+												<label>Codigo de alumno</label> 
+												<input id="codigo" name="codigo" type="number" class="form-control" placeholder="Ingrese su codigo de alumno">
+											</div>
 		
-											<div class="form-group">
+											<div class="form-group" id="formulario-escuela" name="formulario-escuela">
 												<label>Escuela</label>
 												<div class="input-group">
 													<select class="form-control js-example-basic-single">
