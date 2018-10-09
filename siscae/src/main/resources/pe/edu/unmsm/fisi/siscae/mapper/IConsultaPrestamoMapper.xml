@@ -15,6 +15,7 @@
 			    app_paterno,
 			    app_materno,
 		        codigo_alumno,
+		        num_documento,
 		        area_estudio
 		  FROM WV_ESTADO_AULAS 
 	</sql>

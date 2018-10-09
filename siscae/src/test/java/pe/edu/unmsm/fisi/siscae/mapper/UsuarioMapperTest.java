@@ -25,7 +25,7 @@ public class UsuarioMapperTest {
 		
 		Usuario usuarioTest = new Usuario();
 		usuarioTest.setIdUsuario(1);
-		usuarioTest.setUsername("angel");
+		usuarioTest.setNombre("angel");
 		usuarioTest.setPass("a");
 		usuarioTest.setIdRol(1);
 		usuarioTest.setIdEstadoTabla(1);

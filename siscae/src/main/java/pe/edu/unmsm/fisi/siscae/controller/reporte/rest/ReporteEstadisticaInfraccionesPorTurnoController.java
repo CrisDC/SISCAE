@@ -11,7 +11,7 @@ import pe.edu.unmsm.fisi.siscae.model.criterio.ReporteEstadisticaInfraccionesCri
 import pe.edu.unmsm.fisi.siscae.model.reporte.ReporteEstadisticaInfraccionesPorTurno;
 import pe.edu.unmsm.fisi.siscae.service.IReporteEstadisticaInfraccionesPorTurnoService;
 
-@RequestMapping("/reporteEstadisticoInfraccionesPorTurno")
+@RequestMapping("/reporteEstadisticaInfraccionesPorTurno")
 public @RestController class ReporteEstadisticaInfraccionesPorTurnoController {
 	private @Autowired IReporteEstadisticaInfraccionesPorTurnoService reporteEstadisticaInfraccionesPorTurnoService;
 	@GetMapping(params = "accion=buscarTodos")

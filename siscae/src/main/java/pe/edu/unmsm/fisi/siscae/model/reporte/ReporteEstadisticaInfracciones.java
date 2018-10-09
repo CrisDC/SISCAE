@@ -14,11 +14,13 @@ import pe.edu.unmsm.fisi.siscae.model.reporte.ReporteEstadisticaPrestamos.Report
 @NoArgsConstructor
 @AllArgsConstructor
 public class ReporteEstadisticaInfracciones {
-
+	
 	String numeroDocumento;
 	String tipoDocumento;
 	String nombreTipo;
-	String nombreCompleto;
+	String appPaterno;
+	String appMaterno;
+	String nombre;
 	int idEscuelaPrograma;
 	String escuelaPrograma;
 	int codigoInfraccion;
@@ -30,4 +32,5 @@ public class ReporteEstadisticaInfracciones {
 	String turno;
 	int idAreaEstudio;
 	String areaEstudio;
+	
 }

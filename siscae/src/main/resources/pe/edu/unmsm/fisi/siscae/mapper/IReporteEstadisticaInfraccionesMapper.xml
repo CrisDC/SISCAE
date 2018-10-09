@@ -3,11 +3,12 @@
 <mapper namespace="pe.edu.unmsm.fisi.siscae.mapper.IReporteEstadisticaInfraccionesMapper">
 
 	<sql id="fragmentoSelectBuscarReporteEstadisticaInfracciones">
-		SELECT  
-		        numero_documento,
+		SELECT  numero_documento,
 				tipo_documento,
 			    nombre_tipo,
-			    nombre_completo, 
+			    app_paterno, 
+			    app_materno,
+			    nombre, 
 			    id_escuela_programa,
 			    escuela_programa,
 			    codigo_infraccion,
@@ -19,7 +20,7 @@
 			    turno,
 			    id_area_estudio,
 			    area_estudio
-		  FROM wv_reporte_estadistica_infracciones 
+		  FROM reporte_estadistica_infracciones 
 	</sql>
 
 	<select id="buscarTodos" resultType="ReporteEstadisticaInfracciones">
@@ -30,10 +31,10 @@
 		<include refid="fragmentoSelectBuscarReporteEstadisticaInfracciones" />
 		<where>
 			<if test="tipoDocumentoIdentidad != null and tipoDocumentoIdentidad != ''">
-				wv_reporte_estadistica_infracciones  .cod_tip_doc_ide = #{tipoDocumentoIdentidad}
+				reporte_estadistica_infracciones  .cod_tip_doc_ide = #{tipoDocumentoIdentidad}
 			</if>
 			<if test="numeroDocumentoIdentidad != null and numeroDocumentoIdentidad != ''">
-				AND wv_reporte_estadistica_infracciones  .num_doc_ide = #{numeroDocumentoIdentidad}
+				AND reporte_estadistica_infracciones  .num_doc_ide = #{numeroDocumentoIdentidad}
 			</if>
 		</where>
 	</select>
@@ -42,7 +43,7 @@
 		<include refid="fragmentoSelectBuscarReporteEstadisticaInfracciones" />
 		<where>
 			<if test="areaEstudio != null and areaEstudio != '-1'">
-				wv_reporte_estadistica_infracciones .area_estudio = #{areaEstudio}
+				reporte_estadistica_infracciones .area_estudio = #{areaEstudio}
 			</if>
 		</where>
 	</select>

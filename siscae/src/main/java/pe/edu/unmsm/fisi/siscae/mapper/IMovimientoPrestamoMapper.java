@@ -12,7 +12,7 @@ import pe.edu.unmsm.fisi.siscae.model.parametro.Parametro;
 
 public interface IMovimientoPrestamoMapper extends IMantenibleMapper<MovimientoPrestamo> {
 
-	@Select(value = { "{call SP_REGISTRAR_INICIO_PRESTAMO ( "
+	@Select(value = { "{call SP_REGISTRAR_INICIO_PRESTAMO ("
             + "#{objeto.numDocumentoSolicitante, jdbcType = VARCHAR, mode = IN},"
             + "#{objeto.nombreUsuario, jdbcType = VARCHAR, mode = IN},"
 			+ "#{objeto.idRecurso, jdbcType = INTEGER, mode = IN})}" })
