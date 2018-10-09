@@ -17,6 +17,7 @@ public interface IEscuelaMapper  extends  IMantenibleMapper<Escuela>{
             + "#{objeto.idEscuela, jdbcType = INTEGER, mode = IN},"
             + "#{objeto.nombre, jdbcType = VARCHAR, mode = IN},"
             + "#{objeto.idFacultad, jdbcType = INTEGER, mode = IN},"
+            + "#{objeto.codigo, jdbcType = VARCHAR, mode = IN},"
             + "#{userAudit, jdbcType = VARCHAR, mode = IN})}" })//POR CONSULTAR 
     @Options(statementType = StatementType.CALLABLE)
     public List<Escuela> mantener(Parametro parametro);
