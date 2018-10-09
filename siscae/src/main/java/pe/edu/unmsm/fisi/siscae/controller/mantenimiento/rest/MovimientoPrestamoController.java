@@ -37,7 +37,6 @@ public @RestController class MovimientoPrestamoController {
 			@Validated({ Default.class, IRegistro.class }) @RequestBody MovimientoPrestamo movimientoPrestamo,
 			Errors error) {
 		if (error.hasErrors()) {
-			System.out.println("ERROR DESDE AQUI \n\n\n"+ValidatorUtil.obtenerMensajeValidacionError(error)+"\n\n\nHASTA AQuI");
 			throw new BadRequestException(ValidatorUtil.obtenerMensajeValidacionError(error));
 		}
 		movimientoPrestamo.setNombreUsuario(SecurityContextFacade.obtenerNombreUsuario()); 
@@ -46,9 +45,6 @@ public @RestController class MovimientoPrestamoController {
 		
 		SecurityContextFacade.obtenerNombreUsuario();
 		movimientoPrestamo.setNumDocumentoSolicitante(movimientoPrestamo.getNumDocumentoSolicitante().trim());
-		System.out.println("Atributo 'numDocumentoSolicitante': "+movimientoPrestamo.getNumDocumentoSolicitante());
-		System.out.println("Atributo 'nombreUsuario': "+movimientoPrestamo.getNombreUsuario());
-		System.out.println("Atributo 'idRecurso': "+movimientoPrestamo.getIdRecurso());
 		
 		
 		movimientoPrestamoService.registrarMovimientoPrestamo(movimientoPrestamo);

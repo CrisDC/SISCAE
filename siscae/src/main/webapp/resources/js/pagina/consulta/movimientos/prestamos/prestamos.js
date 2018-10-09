@@ -86,13 +86,22 @@ $(document).ready(function(){
 	        			statusCode : {
 	        				400 : function(response) {
 	        					swal(response.responseJSON);
+	        				},
+	        				500 : function(response) {
+	        					console.log(response.responseJSON);
 	        				}
 	        			},
 	        			success : function(response) {
 	        				swal("Peticion realizada con exito", "Usted esta prestando el recurso "+numRecurso, "success");
 	        				location.reload();
 	        			},
-	        			
+	        			error : function(response) {
+	        				swal("Error", "Ha ocurrido un problema con el servidor "+response, "warning");
+	        				
+	        			},
+	        			complete : function(response) {
+	        				
+	        			}
 
 	    			}, function (dismiss) {
 	    			  // dismiss can be 'cancel', 'overlay',
@@ -100,37 +109,7 @@ $(document).ready(function(){
 	    			  
 	    			}
 
-	    			).fail( function( jqXHR, textStatus, errorThrown ) {
-	    				if (jqXHR.status === 0) {
-
-	    				    alert('Not connect: Verify Network.');
-
-	    				  } else if (jqXHR.status == 404) {
-
-	    				    alert('Requested page not found [404]');
-
-	    				  } else if (jqXHR.status == 500) {
-
-	    				    alert('Internal Server Error [500].  '+textStatus+'   '+errorThrown);
-
-	    				  } else if (textStatus === 'parsererror') {
-
-	    				    alert('Requested JSON parse failed.');
-
-	    				  } else if (textStatus === 'timeout') {
-
-	    				    alert('Time out error.');
-
-	    				  } else if (textStatus === 'abort') {
-
-	    				    alert('Ajax request aborted.');
-
-	    				  } else {
-
-	    				    alert('Uncaught Error: ' + jqXHR.responseText);
-
-	    				  }
-	    			});
+	    			)
 	          })
 	        
 	        }else{
