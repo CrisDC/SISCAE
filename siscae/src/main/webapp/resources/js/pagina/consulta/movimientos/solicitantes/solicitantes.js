@@ -1,7 +1,7 @@
 $(document).ready(function() {
     $('.js-example-basic-single').select2();
     
-    $('#fformulario-tipo-academico').css('display', 'none');
+    $('#formulario-tipo-academico').css('display', 'none');
 
     $('#formulario-codigo').css('display', 'none');
 
@@ -12,12 +12,16 @@ $(document).ready(function() {
 $(document).on('change', '#formulario-ocupacion', function(event) {
     let valor = $("#formulario-ocupacion option:selected").text();
     if(valor=='ALUMNO'){
-    		$('#fformulario-tipo-academico').css('display', 'block');
+    		$('#formulario-tipo-academico').css('display', 'block');
 
     	    $('#formulario-codigo').css('display', 'block');
 
     	    $('#formulario-escuela').css('display', 'block');
     }else{
-        $("#codigo").css("display", "none");
+    	$('#formulario-tipo-academico').css('display', 'none');
+
+	    $('#formulario-codigo').css('display', 'none');
+
+	    $('#formulario-escuela').css('display', 'none');
     }
 });
