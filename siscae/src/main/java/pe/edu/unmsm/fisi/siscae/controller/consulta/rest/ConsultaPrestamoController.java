@@ -15,16 +15,22 @@ import pe.edu.unmsm.fisi.siscae.service.IConsultaPrestamosService;
 public @RestController class ConsultaPrestamoController {
 
 	private @Autowired IConsultaPrestamosService consultaPrestamosService;
-	
 
 	@GetMapping(params = "accion=buscarTodos")
 	public List<PrestamoRecurso> buscarTodos() {
 		return consultaPrestamosService.buscarTodos();
 	}
-	
-	//Agrege esto para hacer la consulta segun las aulas de estudio
+
+	// Agrege esto para hacer la consulta segun las aulas de estudio
 	@GetMapping(params = "accion=buscarPorCriterio")
 	public List<PrestamoRecurso> buscarPorCriterio(ConsultaPrestamosCriterioBusqueda criterioBusqueda) {
+		return consultaPrestamosService.buscarPorCriterio(criterioBusqueda);
+	}
+
+	// Agrege esto para hacer la consulta segun las aulas de estudio
+	@GetMapping(params = "accion=buscarPorCriterio2")
+	public List<PrestamoRecurso> buscarPorCriterio2(ConsultaPrestamosCriterioBusqueda criterioBusqueda,
+			ConsultaPrestamosCriterioBusqueda criterioBusqueda2) {
 		return consultaPrestamosService.buscarPorCriterio(criterioBusqueda);
 	}
 }

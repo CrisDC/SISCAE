@@ -13,5 +13,6 @@ import pe.edu.unmsm.fisi.siscae.model.mantenimiento.Docente;
 public interface IConsultaPrestamosService {
 	public List<PrestamoRecurso> buscarTodos();
 	public List<PrestamoRecurso> buscarPorCriterio(ConsultaPrestamosCriterioBusqueda criterioBusqueda);
+	public List<PrestamoRecurso> buscarPorCriterio2(ConsultaPrestamosCriterioBusqueda criterioBusqueda);
 	public List<PrestamoRecurso> buscarPorNumeroDocumentoIdentidad(NumeroDocumentoIdentidadCriterioBusqueda criterioBusqueda);
 }

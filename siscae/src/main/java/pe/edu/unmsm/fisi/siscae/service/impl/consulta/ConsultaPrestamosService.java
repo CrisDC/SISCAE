@@ -32,6 +32,13 @@ public class ConsultaPrestamosService implements IConsultaPrestamosService{
 			NumeroDocumentoIdentidadCriterioBusqueda criterioBusqueda) {
 		return consultaPrestamosMapper.buscarPorNumeroDocumentoIdentidad(criterioBusqueda);
 	}
+
+	@Override
+	public List<PrestamoRecurso> buscarPorCriterio2(ConsultaPrestamosCriterioBusqueda criterioBusqueda) {
+		return consultaPrestamosMapper.buscarPorCriterio(criterioBusqueda);
+	}
+
+	
 	
 	
 }

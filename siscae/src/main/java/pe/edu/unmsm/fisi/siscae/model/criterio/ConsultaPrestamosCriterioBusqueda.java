@@ -7,4 +7,5 @@ public class ConsultaPrestamosCriterioBusqueda {
 
 	//private String idRecurso;
 	private String areaEstudio;
+	private int maxCapacidad;
 }
