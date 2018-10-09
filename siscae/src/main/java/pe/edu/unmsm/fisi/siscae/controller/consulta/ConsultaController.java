@@ -75,7 +75,7 @@ public @Controller class ConsultaController {
 		}
 
 		ConsultaPrestamosCriterioBusqueda criterioBusqueda = new ConsultaPrestamosCriterioBusqueda();
-		criterioBusqueda.setAreaEstudio(areaAdministrativo.getNombreAreaEstudio());
+		//criterioBusqueda.setAreaEstudio(areaAdministrativo.getNombreAreaEstudio());
 		criterioBusqueda.setMaxCapacidad(1);
 
 		model.addAttribute("prestamos", consultaPrestamosService.buscarPorCriterio2(criterioBusqueda));

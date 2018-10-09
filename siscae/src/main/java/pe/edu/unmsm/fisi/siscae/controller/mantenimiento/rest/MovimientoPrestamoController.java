@@ -37,6 +37,7 @@ public @RestController class MovimientoPrestamoController {
 			@Validated({ Default.class, IRegistro.class }) @RequestBody MovimientoPrestamo movimientoPrestamo,
 			Errors error) {
 		if (error.hasErrors()) {
+			System.out.println("ERROR DESDE AQUI \n\n\n"+ValidatorUtil.obtenerMensajeValidacionError(error)+"\n\n\nHASTA AQuI");
 			throw new BadRequestException(ValidatorUtil.obtenerMensajeValidacionError(error));
 		}
 		movimientoPrestamo.setNombreUsuario(SecurityContextFacade.obtenerNombreUsuario()); 
