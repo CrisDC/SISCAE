@@ -1205,7 +1205,7 @@
 					name="idEstadoTabla">
 					<option value="" selected="selected" disabled="disabled">Seleccione  el estado</option>
 					<option th:each="estado : ${estado}" th:value="${estado.idEstadoTabla}"
-						th:text="|${estado.idEstadoTabla} - ${estado.descripcion}|"></option>
+						th:text="|${estado.descripcion}|"></option>
 				</select>
 			</div>
 		</div>
@@ -1245,7 +1245,7 @@
 					name="idEstadoTabla">
 					<option value="" selected="selected" disabled="disabled">Seleccione  el estado</option>
 					<option th:each="estado : ${estado}" th:value="${estado.idEstadoTabla}"
-						th:text="|${estado.idEstadoTabla} - ${estado.descripcion}|"></option>
+						th:text="|${estado.descripcion}|"></option>
 				</select>
 			</div>
 		</div>
@@ -1543,7 +1543,7 @@
 		</div>
 	</th:block>
 	
-	<!-- Tabla RecursoS-->
+	<!-- Tabla Recurso-->
 	<th:block th:fragment="recurso">
 		<div class="form-group">
 			<label class="col-lg-2 control-label">Numero de Serie</label>

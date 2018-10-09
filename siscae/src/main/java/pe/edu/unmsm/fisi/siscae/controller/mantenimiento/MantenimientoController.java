@@ -100,7 +100,8 @@ public @Controller class MantenimientoController
     public String irPaginaMantenimientoExterno(@PathVariable String mantenimiento, ModelMap model)
     {
         model.addAttribute("mantenimiento", mantenimiento);
-        model.addAttribute("estados",this.estadoTablaService.buscarporTablaOrigen("MAE_EXTERNO"));
+        model.addAttribute("tipoDocumento", this.multiTabDetService.buscarPorIdTabla(1));
+        model.addAttribute("estado",this.estadoTablaService.buscarporTablaOrigen("MAE_EXTERNO"));
         return "seguras/mantenimiento/mantenimiento";
     }
     
@@ -118,7 +119,8 @@ public @Controller class MantenimientoController
     public String irPaginaMantenimientoDocente(@PathVariable String mantenimiento, ModelMap model)
     {
         model.addAttribute("mantenimiento", mantenimiento);
-        model.addAttribute("estados",this.estadoTablaService.buscarporTablaOrigen("MAE_DOCENTE"));
+        model.addAttribute("estado",this.estadoTablaService.buscarporTablaOrigen("MAE_DOCENTE"));
+        model.addAttribute("tipoDocumento", this.multiTabDetService.buscarPorIdTabla(1));
         return "seguras/mantenimiento/mantenimiento";
     }
     
@@ -128,6 +130,7 @@ public @Controller class MantenimientoController
     {
         model.addAttribute("mantenimiento", mantenimiento);
         model.addAttribute("estados", this.estadoTablaService.buscarporTablaOrigen("MAE_ALUMNO"));
+        model.addAttribute("tipoDocumento", this.multiTabDetService.buscarPorIdTabla(1));
         model.addAttribute("tiposAcademico", this.multiTabDetService.buscarPorIdTabla(3));
         model.addAttribute("escuelas", this.escuelaService.buscarTodos());
         return "seguras/mantenimiento/mantenimiento";
@@ -138,6 +141,7 @@ public @Controller class MantenimientoController
     public String irPaginaMantenimientoAdministrativo(@PathVariable String mantenimiento, ModelMap model)
     {
         model.addAttribute("mantenimiento", mantenimiento);
+        model.addAttribute("tipoDocumento", this.multiTabDetService.buscarPorIdTabla(1));
         return "seguras/mantenimiento/mantenimiento";
     }
 
