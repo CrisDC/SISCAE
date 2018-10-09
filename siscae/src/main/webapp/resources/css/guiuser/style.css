@@ -4846,11 +4846,11 @@ footer p {
   margin-bottom: 20px;
 }
 .form-control {
-  height: 42px;
-  border-radius: 0;
+  height: 30px;
+  border-radius: 5px;
   box-shadow: none;
-  border-color: #e7e7e7;
-  font-family: 'Poppins', sans-serif;
+  border-color: #AAAAAA;
+  font-family: 'Open Sans', sans-serif;
 }
 .form-control:hover {
   box-shadow: none;
