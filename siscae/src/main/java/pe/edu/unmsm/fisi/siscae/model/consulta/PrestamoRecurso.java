@@ -20,7 +20,7 @@ public class PrestamoRecurso
 	String tipoRecurso;
 	int maxCapacidad;
 	Date fechaPrestamo;
-	Time horaEntrada; // este tipo de datos si funciona
+	String horaEntrada; // este tipo de datos si funciona
 	Time horaSalida; // este tipo de datos si funciona
 	String estado;
 	String nombre;
