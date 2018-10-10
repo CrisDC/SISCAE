@@ -27,16 +27,19 @@ $(document).ready(function(){
     					swal(response.responseJSON);
     				}
     			},
+    			statusCode : {
+    				400 : function(response) {
+    					swal(response.responseJSON);
+    				},
+    				500 : function(response) {
+    					swal("Error", response.responseText, "warning");
+    				}
+    			},
     			success : function(response) {
     				swal("Registro de salida", "Usted marco su salida con exito", "success");
     				location.reload();
-    			},
-    			error : function(response) {
-    				swal("Error", "Ha ocurrido un problema con el servidor", "warning");
-    			},
-    			complete : function(response) {
-    				
     			}
+
 
 			}, function (dismiss) {
 			  // dismiss can be 'cancel', 'overlay',
@@ -88,19 +91,12 @@ $(document).ready(function(){
 	        					swal(response.responseJSON);
 	        				},
 	        				500 : function(response) {
-	        					console.log(response.responseJSON);
+	        					swal("Error", response.responseText, "warning");
 	        				}
 	        			},
 	        			success : function(response) {
-	        				swal("Peticion realizada con exito", "Usted esta prestando el recurso "+numRecurso, "success");
+	        				swal("Peticion realizada con exito", "Usted esta prestando el recurso ", "success");
 	        				location.reload();
-	        			},
-	        			error : function(response) {
-	        				swal("Error", "Ha ocurrido un problema con el servidor "+response, "warning");
-	        				
-	        			},
-	        			complete : function(response) {
-	        				
 	        			}
 
 	    			}, function (dismiss) {

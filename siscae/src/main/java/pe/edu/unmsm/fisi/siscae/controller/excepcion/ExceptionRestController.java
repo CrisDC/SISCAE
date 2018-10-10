@@ -117,6 +117,8 @@ public class ExceptionRestController
     public String capturarOtrasExcepcion(Exception ex)
     {
         logger.error(ex.getMessage(), ex);
-        return ConstantesExcepciones.ERROR_DESCONOCIDO;
+        System.out.println(ex.getMessage());
+        String mensaje = ex.getCause().toString();
+        return mensaje.substring(22, mensaje.length());
     }
 }

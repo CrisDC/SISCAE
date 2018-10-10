@@ -67,17 +67,14 @@ $(document).ready(function() {
 			statusCode : {
 				400 : function(response) {
 					swal(response.responseJSON);
+				},
+				500 : function(response) {
+					swal("Error", response.responseText, "warning");
 				}
 			},
 			success : function(response) {
 				swal("Registro de solicitante", "Realizado con exito", "success");
 				location.reload();
-			},
-			error : function(response) {
-				swal("Error", "Ha ocurrido un problema con el servidor", "warning"); 
-			},
-			complete : function(response) {
-				
 			}
 
 		}, function (dismiss) {

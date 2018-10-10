@@ -54,6 +54,11 @@ $(document).ready(function() {
     			}
 			});
 			
+			
+		})
+		
+		$('#btnClose').on('click', function (event){
+			location.reload()
 		})
 		
 	})
