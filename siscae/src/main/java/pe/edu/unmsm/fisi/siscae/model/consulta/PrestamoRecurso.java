@@ -29,4 +29,5 @@ public class PrestamoRecurso
 	String codigoAlumno;
 	String numDocumento;
 	String areaEstudio;
+	String observacion;
 }
