@@ -6,7 +6,7 @@
 </head> 
 <body>
 	<!-- Left Sidebar  -->
-        <div  th:fragment="sidebar" class="left-sidebar">
+        <div  th:if="(${areaAdministrativo.cargo} != 'SOLICITANTE')" th:fragment="sidebar" class="left-sidebar">
             <!-- Sidebar scroll-->
             <div class="scroll-sidebar">
                 <!-- Sidebar navigation-->
@@ -27,13 +27,13 @@
                             </a>
                         </li>
 						
-                        <li th:if="(${areaAdministrativo.cargo} != 'SOLICITANTE')">
+                        <li >
                             <a th:href="@{/movimiento/infracciones}" aria-expanded="false">
                                 <i class="fa fa-book"></i>
                                 <span class="hide-menu">Infracciones</span>
                             </a>
                         </li>
-                        <li th:if="(${areaAdministrativo.cargo} != 'SOLICITANTE')">
+                        <li th:if="(${areaAdministrativo.cargo} != 'TECNICO ADMINISTRATIVO')">
                             <a th:href="@{/movimiento/estadisticas}" aria-expanded="false" class="has-arrow">
                                 <i class="fa fa-bar-chart"></i>
                                 <span class="hide-menu">Reportes</span>
