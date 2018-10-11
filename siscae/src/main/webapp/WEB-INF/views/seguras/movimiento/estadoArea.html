@@ -48,17 +48,26 @@
 											class="hidden-sm-up"> <i class="ti-home"></i></span> <span
 											class="hidden-xs-down">Solicitar</span>
 									</a></li>
-
-									<li class="nav-item"><a class="nav-link" data-toggle="tab"
-										href="#tabla" role="tab"> <span class="hidden-sm-up"><i
-												class="ti-user"></i></span> <span class="hidden-xs-down">Detalles</span>
-									</a></li>
-
+									
 									<li class="nav-item"><a class="nav-link" data-toggle="tab"
 										id="salida" role="tab"> <span class="hidden-sm-up"><i
 												class="ti-user"></i> </span> <span class="hidden-xs-down">Marcar
 												Salida</span>
 									</a></li>
+									<li class="nav-item"><a class="nav-link" data-toggle="tab"
+										href="#tabla" role="tab"> <span class="hidden-sm-up"><i
+												class="ti-user"></i></span> <span class="hidden-xs-down">Detalles de prestamos</span>
+									</a></li>
+									<li th:if="(${areaAdministrativo.cargo} == 'SOLICITANTE')" class="nav-item"><a class="nav-link" data-toggle="tab"
+										href="#tablaRecursos" role="tab"> <span class="hidden-sm-up"><i
+												class="ti-user"></i></span> <span class="hidden-xs-down">Detalles de recursos</span>
+									</a></li>
+									<li th:if="(${areaAdministrativo.cargo} == 'SOLICITANTE')" class="nav-item"><a class="nav-link" data-toggle="tab"
+										href="#tablaSancionados" role="tab"> <span class="hidden-sm-up"><i
+												class="ti-user"></i></span> <span class="hidden-xs-down">Solicitantes sancionados</span>
+									</a></li>
+
+									
 
 								</ul>
 
@@ -187,6 +196,60 @@
 
 
 
+													</tr>
+												</tbody>
+											</table>
+										</div>
+									</div>
+									<div class="tab-pane p-20" id="tablaRecursos" role="tabpanel">
+
+
+										<div class="table-responsive m-t-40">
+											<h3>Detalles de recursos</h3>
+
+
+
+											<table id="myTable"
+												class="table table-bordered table-striped">
+												<thead>
+													<tr>
+														<th>Recurso</th>
+														<th>Estado</th>
+														<th>Observacion</th>				
+													</tr>
+												</thead>
+												<tbody>
+													<tr >
+														<td >CUBICULO 01</td>
+														<td ><span class="badge badge-primary">DISPONIBLE</span></td>
+														<td >UBICADO CERCA A UN ENCHUFE</td>
+													</tr>
+												</tbody>
+											</table>
+										</div>
+									</div>
+									<div class="tab-pane p-20" id="tablaSancionados" role="tabpanel">
+
+
+										<div class="table-responsive m-t-40">
+											<h3>Solicitantes sancionados</h3>
+
+											<table id="myTable"
+												class="table table-bordered table-striped">
+												<thead>
+													<tr>
+														<th>Codigo</th>
+														<th>Nombre</th>
+														<th>Apellidos</th>
+														<th>Fin de suspension</th>				
+													</tr>
+												</thead>
+												<tbody>
+													<tr >
+														<th>16200116</th>
+														<th>MARIO ALBERTO</th>
+														<th>CORTEZ ESCARATE</th>
+														<th>15/10/2018</th>
 													</tr>
 												</tbody>
 											</table>
