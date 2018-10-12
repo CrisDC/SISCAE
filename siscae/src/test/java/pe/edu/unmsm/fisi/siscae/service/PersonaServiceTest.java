@@ -11,6 +11,7 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import pe.edu.unmsm.fisi.siscae.configuracion.PersistenceConfiguration;
 import pe.edu.unmsm.fisi.siscae.configuracion.ServiceConfiguration;
+import pe.edu.unmsm.fisi.siscae.model.criterio.NumeroDocumentoIdentidadCriterioBusqueda;
 import pe.edu.unmsm.fisi.siscae.model.mantenimiento.Persona;
 import pe.edu.unmsm.fisi.siscae.service.IPersonaService;
 
@@ -32,7 +33,7 @@ public class PersonaServiceTest {
 		personaTest.setSexo("MASCULINO");
 		personaTest.setFechaNac(new Date(1995, 07, 04));
 		personaTest.setNumTelef("985990330");
-		personaTest.setIdTipoDocumento(1);
+		personaTest.setIdTipoDocumento("1");
 
 		List<Persona> personas = personaService.buscarTodos();
 		personas.forEach(System.out::println);
@@ -46,6 +47,11 @@ public class PersonaServiceTest {
 		personaService.actualizarPersona(personaTest);
 
 		personaService.eliminarPersona(personaTest);
+		NumeroDocumentoIdentidadCriterioBusqueda criterioBusqueda = new NumeroDocumentoIdentidadCriterioBusqueda();
+		criterioBusqueda.setNumeroDocumento("1");
+		criterioBusqueda.setTipoDocumento("08070167");
+		
+		personaService.buscarPorNumeroDocumentoIdentidad(criterioBusqueda);
 	}
 
 }

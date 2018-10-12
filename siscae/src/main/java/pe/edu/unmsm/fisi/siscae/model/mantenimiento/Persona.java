@@ -70,7 +70,7 @@ public class Persona {
 
 	//@NotNull(message = "{NotNull.Persona.idTipoDocumento}")
 	//@NotBlank(message = "{NotBlank.Persona.idTipoDocumento}")
-	private Integer idTipoDocumento;
+	private String idTipoDocumento;
 
 	
 

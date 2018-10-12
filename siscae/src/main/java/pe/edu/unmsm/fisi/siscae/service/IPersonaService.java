@@ -2,6 +2,7 @@ package pe.edu.unmsm.fisi.siscae.service;
 
 import java.util.List;
 
+import pe.edu.unmsm.fisi.siscae.model.criterio.NumeroDocumentoIdentidadCriterioBusqueda;
 import pe.edu.unmsm.fisi.siscae.model.mantenimiento.Persona;
 
 public interface IPersonaService extends IMantenibleService<Persona> {
@@ -18,6 +19,6 @@ public interface IPersonaService extends IMantenibleService<Persona> {
 
 	public void eliminarPersona(Persona persona);
 	
-	public Persona buscarPorNumeroDocumentoIdentidad(String numeroDocumento);
+	public Persona buscarPorNumeroDocumentoIdentidad(NumeroDocumentoIdentidadCriterioBusqueda criterioBusqueda);
 
 }

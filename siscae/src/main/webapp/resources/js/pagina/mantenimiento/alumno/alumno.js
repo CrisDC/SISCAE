@@ -7,7 +7,11 @@ $(document).ready(function() {
 		$registrarMantenimiento : $("#registrarMantenimiento"),
 		$filaSeleccionada : "",
 		$actualizarMantenimiento : $("#actualizarMantenimiento"),
-		idAlumnoSeleccionado : ""
+		idAlumnoSeleccionado : "",
+			
+		$btnBuscar : $("#buscar")
+		
+		
 	}
 	$formMantenimiento = $("#formMantenimiento");
 
@@ -257,7 +261,46 @@ $(document).ready(function() {
 			});
 		});
 		
-		
+		$local.$btnBuscar.on("click", function() {
+			if (!$formMantenimiento.valid()) {
+				return;
+			}
+			var alumno = $formMantenimiento.serializeJSON();
+			var criterio;
+			criterio.tipoDocumentoIdentidad = alumno.tipoDocumentoIdentidad;
+			criterio.tipoDocumentoIdentidad = alumno.numeroDocumentoIdentidad; 
+			
+			$.ajax({
+				type : "GET",
+				url : $variableUtil.root + "persona",
+				data : JSON.stringify(criterio),
+				beforeSend : function(xhr) {
+					$local.$registrarMantenimiento.attr("disabled", true).find("i").removeClass("fa-floppy-o").addClass("fa-spinner fa-pulse fa-fw");
+					xhr.setRequestHeader('Content-Type', 'application/json');
+					xhr.setRequestHeader("X-CSRF-TOKEN", $variableUtil.csrf);
+				},
+				statusCode : {
+					400 : function(response) {
+						$funcionUtil.limpiarMensajesDeError($formMantenimiento);
+						$funcionUtil.mostrarMensajeDeError(response.responseJSON, $formMantenimiento);
+					}
+				},
+				success : function(response) {
+					$funcionUtil.notificarException(response, "fa-check", "Aviso", "success");
+					/*var row = $local.tablaMantenimiento.row.add(alumno).draw();
+					row.show().draw(false);
+					$(row.node()).animateHighlight();
+					$local.$modalMantenimiento.PopupWindow("close");*/
+					
+				},
+				error : function(response) {
+				},
+				complete : function(response) {
+					$local.$registrarMantenimiento.attr("disabled", false).find("i").addClass("fa-floppy-o").removeClass("fa-spinner fa-pulse fa-fw");
+				}
+			});	
+			
+		});
 		
 	});
 });

@@ -20,6 +20,7 @@ public enum Operacion
         PRIMARY_KEY,
         ID_TABLA,
         ID_ITEM,
+        TIPO_NUM_DOCUMENTO,
         TABLA_ORIGEN
     }
     

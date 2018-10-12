@@ -9,8 +9,10 @@ import org.springframework.transaction.annotation.Transactional;
 
 import pe.edu.unmsm.fisi.siscae.mapper.IPersonaMapper;
 import pe.edu.unmsm.fisi.siscae.mapper.base.IMantenibleMapper;
+import pe.edu.unmsm.fisi.siscae.model.criterio.NumeroDocumentoIdentidadCriterioBusqueda;
 import pe.edu.unmsm.fisi.siscae.model.mantenimiento.Persona;
 import pe.edu.unmsm.fisi.siscae.service.IPersonaService;
+import pe.edu.unmsm.fisi.siscae.service.excepcion.ValorNoEncontradoException;
 import pe.edu.unmsm.fisi.siscae.service.impl.MantenibleService;
 import pe.edu.unmsm.fisi.siscae.utilitario.Operacion;
 import pe.edu.unmsm.fisi.siscae.utilitario.Operacion.OperacionParam;
@@ -65,9 +67,22 @@ public class PersonaService extends MantenibleService<Persona> implements IPerso
 
 	@Override
 	@Transactional(propagation = Propagation.REQUIRED)
-	public Persona buscarPorNumeroDocumentoIdentidad(String numeroDocumento) {
-		// TODO Auto-generated method stub
-		return null;
+	public Persona buscarPorNumeroDocumentoIdentidad(NumeroDocumentoIdentidadCriterioBusqueda criterioBusqueda) {
+		
+		Persona persona =  Persona.builder().numDocumento(criterioBusqueda.getNumeroDocumento())
+				.idTipoDocumento(criterioBusqueda.getTipoDocumento()).build();
+		
+		List<Persona> listaRetornada =super.buscar(persona,OperacionParam.TIPO_NUM_DOCUMENTO);
+		
+		if (!listaRetornada.isEmpty()){
+			return listaRetornada.get(0);
+		}else{
+			throw new ValorNoEncontradoException("No se encontró la persona");
+		}
+		
+		
 	}
+
+
 
 }
