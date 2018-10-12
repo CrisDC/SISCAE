@@ -33,7 +33,7 @@ public class PersonaMapperTest {
 		personaTest.setSexo("MASCULINO");
 		personaTest.setFechaNac(new Date(1995, 07, 04));
 		personaTest.setNumTelef("985990330");
-		personaTest.setIdTipoDocumento(1);
+		personaTest.setIdTipoDocumento("1");
 
 		Parametro<Persona> operacion = new Parametro<Persona>(Operacion.SELECT, personaTest, "TEST USER");
 
