@@ -1050,7 +1050,7 @@
 		<div class="form-group">
 			<label class="col-lg-2 control-label">Número de Documento</label>
 			<div class="col-lg-10">
-				<input class="form-control numbersOnly elemento-desactivable" name="numDocumento"
+				<input class="form-control numbersOnly elemento-modificable" name="numDocumento"
 					autofocus="autofocus" />
 			</div>
 		</div>
@@ -1075,7 +1075,7 @@
 		<div class="form-group">
 			<label class="col-lg-2 control-label">Sexo</label>
 			<div class="col-lg-10">
-				<select id="sexo" class="form-control select2 elemento-desactivable"
+				<select id="sexo" class="form-control select2 elemento-modificable"
 					name="sexo">
 					<option value="" selected="selected" disabled="disabled">Seleccione el sexo</option>
 					<option  selected="selected" th:value="MASCULINO" th:text="MASCULINO">Masculino</option>
@@ -1092,7 +1092,7 @@
 		<div class="form-group">
 			<label class="col-lg-2 control-label">Fecha de nacimiento</label>
 			<div class="col-lg-10">
-				<input type="date" class="date" name="fechaNac">
+				<input type="date" class="form-control" name="fechaNac">
 			</div>
 		</div>
 		
@@ -1105,15 +1105,15 @@
                 <div class="input-group-btn search-panel">
                     
 						<select id="idTipoDocumento" class="btn btn-default dropdown-toggle select2 elemento-desactivable"
-						name="idTipoDocumento" data-toggle="dropdown">
+						name="idTipoDocumentoIdentidad" data-toggle="dropdown">
 						<option value="" selected="selected">Tipo de documento</option>
 						<option th:each="tipoDocumento : ${tipoDocumento}" th:value="${tipoDocumento.idItem}"
 						th:text="|${tipoDocumento.descripcionCorta}|"></option>
 						</select>
 					
                 </div>
-                <input type="hidden" name="search_param" value="all" id="search_param">         
-                <input type="text" class="form-control" name="x" placeholder="Número de Documento">
+                <input type="hidden" name="idPersona" value="all" id="idPersona">         
+                <input type="text" class="form-control" name="numeroDocumentoIdentidad" placeholder="Número de Documento">
                 <span class="input-group-btn">
                     <button class="btn btn-default" type="button" id="buscar"><span class="glyphicon glyphicon-search"></span></button>
                 </span>
@@ -1379,7 +1379,7 @@
 		<div class="form-group">
 			<label class="col-lg-2 control-label">Nombre de la Facultad</label>
 			<div class="col-lg-10">
-				<input class="form-control upperCase elemento-desactivable" name="nombre"
+				<input class="form-control upperCase elemento-modificable" name="nombre"
 					autofocus="autofocus" />
 			</div>
 		</div>
@@ -1510,19 +1510,19 @@
 		<div class="form-group">
 			<label class="col-lg-2 control-label">Pabellon</label>
 			<div class="col-lg-10">
-				<input class="form-control upperCase elemento-desactivable" type="text" name="pabellon" autofocus="autofocus" />
+				<input class="form-control upperCase elemento-modificable" type="text" name="pabellon" autofocus="autofocus" />
 			</div>
 		</div>
 		<div class="form-group">
 			<label class="col-lg-2 control-label">Nivel</label>
 			<div class="col-lg-10">
-				<input class="form-control upperCase elemento-desactivable" type="text" name="nivel" autofocus="autofocus" />
+				<input class="form-control upperCase elemento-modificable" type="text" name="nivel" autofocus="autofocus" />
 			</div>
 		</div>
 		<div class="form-group">
 			<label class="col-lg-2 control-label">Aforo</label>
 			<div class="col-lg-10">
-				<input class="form-control upperCase elemento-desactivable" type="text" name="aforo" autofocus="autofocus" />
+				<input class="form-control upperCase elemento-modificable" type="text" name="aforo" autofocus="autofocus" />
 			</div>
 		</div>
 	</th:block>
@@ -1532,13 +1532,13 @@
 		<div class="form-group">
 			<label class="col-lg-2 control-label">Nombre</label>
 			<div class="col-lg-10">
-				<input class="form-control upperCase elemento-desactivable" type="text" name="nombreMaterial" autofocus="autofocus" />
+				<input class="form-control upperCase elemento-modificable" type="text" name="nombreMaterial" autofocus="autofocus" />
 			</div>
 		</div>
 		<div class="form-group">
 			<label class="col-lg-2 control-label">Id. Tipo de Material</label>
 			<div class="col-lg-10">
-				<input class="form-control upperCase elemento-desactivable" type="number" name="idTipoMaterial" autofocus="autofocus" />
+				<input class="form-control upperCase elemento-modificable" type="number" name="idTipoMaterial" autofocus="autofocus" />
 			</div>
 		</div>
 	</th:block>
@@ -1548,7 +1548,7 @@
 		<div class="form-group">
 			<label class="col-lg-2 control-label">Numero de Serie</label>
 			<div class="col-lg-10">
-				<input class="form-control numbersOnly elemento-desactivable" type="text" name="numeroSerie" autofocus="autofocus" />
+				<input class="form-control  elemento-modificable" type="text" name="numeroSerie" autofocus="autofocus" />
 			</div>
 		</div>
 		<div class="form-group">
@@ -1579,7 +1579,7 @@
 		<div class="form-group">
 			<label class="col-lg-2 control-label">Tipo de Recurso</label>
 			<div class="col-lg-10">
-				<select id="idTipoRecurso" class="form-control select2 elemento-desactivable"
+				<select id="idTipoRecurso" class="form-control select2 elemento-modificable"
 					name="idTipoRecurso">
 					<option value="" selected="selected">Seleccione el tipo de recurso</option>
 					<option th:each="tipoRecursos : ${tipoRecursos}" th:value="${tipoRecursos.idTipoRecurso}"

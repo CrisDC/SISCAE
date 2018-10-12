@@ -28,8 +28,8 @@ public class Recurso {
 	//@IdRecurso(existe = false, message = "{Existe.Recurso.idRecurso}", groups = IRegistro.class)
 	private Integer idRecurso;
 
-	@NotNull(message = "{NotNull.Recurso.numeroSerie}")
-	@NotBlank(message = "{NotBlank.Recurso.numeroSerie}")
+	//@NotNull(message = "{NotNull.Recurso.numeroSerie}")
+	//NotBlank(message = "{NotBlank.Recurso.numeroSerie}")
 	@Length(min = 2, max = 20, message = "{Length.Recurso.numeroSerie}", groups = IBasico.class)
 	//@Pattern(regexp = Regex.ALFANUMERICO, message = "{Pattern.Recurso.numeroSerie}")
 	private String numeroSerie;
