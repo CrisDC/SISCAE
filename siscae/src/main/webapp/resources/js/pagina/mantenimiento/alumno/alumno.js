@@ -274,9 +274,12 @@ $(document).ready(function() {
 		criterio.tipoDocumentoIdentidad = alumno.idTipoDocumentoIdentidad;
 		criterio.numeroDocumentoIdentidad = alumno.numeroDocumentoIdentidad; 
 		console.log("funcion");
+		
+		//formar url 
+		
 		$.ajax({
 			type : "GET",
-			url : $variableUtil.root + "persona",
+			url : $variableUtil.root + "persona?accion=buscarIdPersona",
 			data : JSON.stringify(criterio),
 			beforeSend : function(xhr) {
 				$local.$registrarMantenimiento.attr("disabled", true).find("i").removeClass("fa-floppy-o").addClass("fa-spinner fa-pulse fa-fw");
@@ -290,6 +293,8 @@ $(document).ready(function() {
 				}
 			},
 			success : function(response) {
+				console.log(response)
+				
 				$funcionUtil.notificarException(response, "fa-check", "Aviso", "success");
 				/*var row = $local.tablaMantenimiento.row.add(alumno).draw();
 				row.show().draw(false);

@@ -21,6 +21,7 @@ import pe.edu.unmsm.fisi.siscae.aspecto.enumeracion.Accion;
 import pe.edu.unmsm.fisi.siscae.aspecto.enumeracion.Comentario;
 import pe.edu.unmsm.fisi.siscae.aspecto.enumeracion.Dato;
 import pe.edu.unmsm.fisi.siscae.aspecto.enumeracion.Tipo;
+import pe.edu.unmsm.fisi.siscae.model.criterio.NumeroDocumentoIdentidadCriterioBusqueda;
 import pe.edu.unmsm.fisi.siscae.model.mantenimiento.Persona;
 import pe.edu.unmsm.fisi.siscae.service.IPersonaService;
 import pe.edu.unmsm.fisi.siscae.service.excepcion.BadRequestException;
@@ -77,5 +78,18 @@ public @RestController class PersonaController {
 		personaService.eliminarPersona(persona);
 		return ResponseEntity.ok(ConstantesGenerales.ELIMINACION_EXITOSA);
 	}
+	
+	
+	
+	@Audit(accion = Accion.CONSULTA, comentario = Comentario.ConsultaTodos)
+	@GetMapping(params = "accion=buscarIdPersona")
+	public Persona buscarIdPersona(NumeroDocumentoIdentidadCriterioBusqueda criterioBusqueda) {
+		
+		System.out.println("angel was here");
+		System.out.println(criterioBusqueda.getNumeroDocumento());
+		System.out.println(criterioBusqueda.getTipoDocumento());
+		return personaService.buscarPorNumeroDocumentoIdentidad(criterioBusqueda);
+	}
+	
 
 }
