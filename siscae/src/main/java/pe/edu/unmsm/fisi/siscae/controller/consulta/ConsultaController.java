@@ -84,7 +84,6 @@ public @Controller class ConsultaController {
 		
 		for(int i=0;i<listaRecursos.size();i++){
 			if(listaRecursos.get(i).getMaxCapacidad()==1){
-				System.out.println("EL RECURSO: "+listaRecursos.get(i).getTipoRecurso());
 				listaRecursosIndividuales.add(listaRecursos.get(i));			
 			}else{
 				listaRecursosGrupales.add(listaRecursos.get(i));

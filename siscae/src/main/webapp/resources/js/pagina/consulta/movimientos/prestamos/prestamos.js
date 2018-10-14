@@ -10,6 +10,7 @@ $(document).ready(function(){
 			icon: "/siscae/resources/images/lectora.gif",
 		}).then(function (inputValue) {
 			
+			
 			var finPrestamo ={
 		        	"numDocumentoSolicitante": inputValue
 		    };
@@ -37,7 +38,7 @@ $(document).ready(function(){
     			},
     			success : function(response) {
     				swal("Registro de salida", "Usted marco su salida con exito", "success");
-    				location.reload();
+    				setTimeout(location.reload(),2000);
     			}
 
 
@@ -96,7 +97,7 @@ $(document).ready(function(){
 	        			},
 	        			success : function(response) {
 	        				swal("Peticion realizada con exito", "Usted esta prestando el recurso ", "success");
-	        				location.reload();
+	        				setTimeout(location.reload(),2000);
 	        			}
 
 	    			}, function (dismiss) {
@@ -120,9 +121,73 @@ $(document).ready(function(){
         
       })
 
+      
+      
+      $("#desocupar").click(function(){
+    		swal({
+    			  title: "¿Estas segur@?",
+    			  text: "Desocupara todo el area de estudio automaticamente",
+    			  icon: "warning",
+    			  buttons: true,
+    			  dangerMode: true,
+    			})
+    			.then((willDelete) => {
+    			  if (willDelete) {
+    				  
+    				  var desocupar ={
+  	    		        	"username": ""
+  	    		    };
+    				  
+    				  $.ajax({
+  	                    url :  $variableUtil.root + "movimientoDesalojarArea",
+  	                    type : 'POST',
+  	                    data : JSON.stringify(desocupar),
+  	                    beforeSend : function(xhr) {
+  	        				xhr.setRequestHeader('Content-Type', 'application/json');
+  	        				xhr.setRequestHeader("X-CSRF-TOKEN", $variableUtil.csrf);
+  	        			},
+  	        			statusCode : {
+  	        				400 : function(response) {
+  	        					swal(response.responseJSON);
+  	        				},
+  	        				500 : function(response) {
+  	        					swal("Error", response.responseText, "warning");
+  	        				}
+  	        			},
+  	        			success : function(response) {
+  	        				swal("Desocupacion de recursos con exito", {
+  	        			      icon: "success",
+  	        			    });
+  	        				setTimeout(location.reload(),2000);
+  	        			}
+  	        			
+    				  }, function (dismiss) {
+    	    			  // dismiss can be 'cancel', 'overlay',
+    	    			  // 'close', and 'timer'
+    	    			  
+    				  })
+    				  
+    			    
+    			  } else {
+    			    // nada
+    			  }
+    		
+    			
+    			});
+    	});
+      
 })
 
 
 $("#cerrarModal").click(function(){
 	$("#cerrarModal .close").click();
 });
+
+
+
+
+
+
+
+
+

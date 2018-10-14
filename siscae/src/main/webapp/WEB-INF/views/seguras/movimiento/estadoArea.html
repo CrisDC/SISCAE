@@ -22,8 +22,7 @@
 				</div>
 				<div class="col-md-7 align-self-center">
 					<ol class="breadcrumb">
-						<li class="breadcrumb-item"><a href="javascript:void(0)">Estado
-								del area</a></li>
+						<li class="breadcrumb-item"><a href="javascript:void(0)">Estado del area</a></li>
 					</ol>
 				</div>
 			</div>
@@ -51,6 +50,14 @@
 										href="#tabla" role="tab"> <span class="hidden-sm-up"><i
 												class="ti-user"></i></span> <span class="hidden-xs-down">Detalles</span>
 									</a></li>
+									
+									<li th:if="(${areaAdministrativo.cargo} != 'SOLICITANTE')"
+										class="nav-item"><a class="nav-link" data-toggle="tab"
+										href="" id="desocupar" role="tab"> <span class="hidden-sm-up"><i
+												class="ti-user"></i></span> <span class="hidden-xs-down">Desocupar Area</span>
+									</a></li>
+									
+									
 									<li th:if="(${areaAdministrativo.cargo} == 'SOLICITANTE')"
 										class="nav-item"><a class="nav-link" data-toggle="tab"
 										href="#tablaSancionados" role="tab"> <span

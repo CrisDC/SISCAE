@@ -23,7 +23,7 @@ import pe.edu.unmsm.fisi.siscae.service.excepcion.BadRequestException;
 import pe.edu.unmsm.fisi.siscae.utilitario.ConstantesGenerales;
 import pe.edu.unmsm.fisi.siscae.utilitario.ValidatorUtil;
 import pe.edu.unmsm.fisi.siscae.validacion.grupo.accion.IRegistro;
-@RequestMapping("/MovimientoDesalojarArea")
+@RequestMapping("/movimientoDesalojarArea")
 public @RestController class MovimientoDesalojarAreaController {
 	
 	private @Autowired IMovimientoDesalojarAreaService MovimientoDesalojarAreaService;
@@ -36,10 +36,8 @@ public @RestController class MovimientoDesalojarAreaController {
 		if (error.hasErrors()) {
 			throw new BadRequestException(ValidatorUtil.obtenerMensajeValidacionError(error));
 		}
-		MovimientoDesalojarArea.setUsername(SecurityContextFacade.obtenerNombreUsuario()); 
 		
-		System.out.println(MovimientoDesalojarArea);
-		System.out.println("Atributo 'nombreUsuario': "+MovimientoDesalojarArea.getUsername());
+		MovimientoDesalojarArea.setUsername(SecurityContextFacade.obtenerNombreUsuario()); 
 		
 		
 		MovimientoDesalojarAreaService.registrarMovimientoDesalojarArea(MovimientoDesalojarArea);
