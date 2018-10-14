@@ -14,7 +14,7 @@
 			th:class="${areaAdministrativo.cargo} == 'SOLICITANTE' ? 'page-wrapper m-l-0' : 'page-wrapper'">
 
 			<!-- Bread crumb -->
-			<div class="row page-titles">
+			<div th:if="(${areaAdministrativo.cargo} != 'SOLICITANTE')" class="row page-titles">
 				<div class="col-md-5 align-self-center">
 					<h3
 						th:text="'Estado de la ' + ${areaAdministrativo.nombreAreaEstudio.toLowerCase()}"
