@@ -1039,7 +1039,7 @@
 		<div class="form-group">
 			<label class="col-lg-2 control-label">Tipo de documento</label>
 			<div class="col-lg-10">
-				<select id="idTipoDocumento" class="form-control select2 elemento-desactivable"
+				<select id="idTipoDocumento" class="form-control select2 elemento-modificable"
 					name="idTipoDocumento">
 					<option value="" selected="selected">Seleccione  el tipo de documento</option>
 					<option th:each="tipoDocumento : ${tipoDocumento}" th:value="${tipoDocumento.idItem}"
@@ -1123,14 +1123,14 @@
 		<div class="form-group">
 			<label class="col-lg-2 control-label">Nombre</label>
 			<div class="col-lg-10">
-				<input class="form-control upperCase elemento-desactivable" name="nombres" >
+				<input class="form-control upperCase elemento-modificable" name="nombres" >
 			</div>
 		</div>
 		
 		<div class="form-group">
 			<label class="col-lg-2 control-label">Código de Alumno</label>
 			<div class="col-lg-10">
-				<input class="form-control upperCase elemento-desactivable" name="codigoAlumno">
+				<input class="form-control upperCase elemento-modificable" name="codigoAlumno">
 			</div>
 		</div>
 		
@@ -1201,7 +1201,7 @@
 		<div class="form-group">
 			<label class="col-lg-2 control-label">Estado del Externo </label>
 			<div class="col-lg-10">
-				<select id="idEstadoTabla" class="form-control select2 elemento-desactivable"
+				<select id="idEstadoTabla" class="form-control select2 elemento-modificable"
 					name="idEstadoTabla">
 					<option value="" selected="selected" disabled="disabled">Seleccione  el estado</option>
 					<option th:each="estado : ${estado}" th:value="${estado.idEstadoTabla}"
@@ -1241,7 +1241,7 @@
 		<div class="form-group">
 			<label class="col-lg-2 control-label">Estado del Docente </label>
 			<div class="col-lg-10">
-				<select id="idEstadoTabla" class="form-control select2 elemento-desactivable"
+				<select id="idEstadoTabla" class="form-control select2 elemento-modificable"
 					name="idEstadoTabla">
 					<option value="" selected="selected" disabled="disabled">Seleccione  el estado</option>
 					<option th:each="estado : ${estado}" th:value="${estado.idEstadoTabla}"
@@ -1283,7 +1283,7 @@
 		<div class="form-group">
 			<label class="col-lg-2 control-label">Estado del Horario </label>
 			<div class="col-lg-10">
-				<select id="idEstadoTabla" class="form-control select2 elemento-desactivable"
+				<select id="idEstadoTabla" class="form-control select2 elemento-modificable"
 					name="idEstadoTabla">
 					<option value="" selected="selected" disabled="disabled">Seleccione  el estado</option>
 					<option th:each="estado : ${estado}" th:value="${estado.idEstadoTabla}"
@@ -1294,7 +1294,7 @@
 		<div class="form-group">
 			<label class="col-lg-2 control-label">Turno </label>
 			<div class="col-lg-10">
-				<select id="idTurno" class="form-control select2 elemento-desactivable"
+				<select id="idTurno" class="form-control select2 elemento-modificable"
 					name="idTurno">
 					<option value="" selected="selected" disabled="disabled">Seleccione el turno</option>
 					<option th:each="turno : ${turno}" th:value="${turno.idItem}"
@@ -1305,7 +1305,7 @@
 		<div class="form-group">
 			<label class="col-lg-2 control-label">Día </label>
 			<div class="col-lg-10">
-				<select id="idDia" class="form-control select2 elemento-desactivable"
+				<select id="idDia" class="form-control select2 elemento-modificable"
 					name="idDia">
 					<option value="" selected="selected" disabled="disabled">Seleccione el día</option>
 					<option th:each="dia : ${dia}" th:value="${dia.idItem}"
@@ -1316,7 +1316,7 @@
 		<div class="form-group">
 			<label class="col-lg-2 control-label">Tipo de Horario </label>
 			<div class="col-lg-10">
-				<select id="idTipoHorario" class="form-control select2 elemento-desactivable"
+				<select id="idTipoHorario" class="form-control select2 elemento-modificable"
 					name="idTipoHorario">
 					<option value="" selected="selected" disabled="disabled">Seleccione el tipo de Horario</option>
 					<option th:each="tipoHorario : ${tipoHorario}" th:value="${tipoHorario.idItem}"
@@ -1327,7 +1327,7 @@
 		<div class="form-group">
 			<label class="col-lg-2 control-label">Área de estudio </label>
 			<div class="col-lg-10">
-				<select id="idAreaEstudio" class="form-control select2 elemento-desactivable"
+				<select id="idAreaEstudio" class="form-control select2 elemento-modificable"
 					name="idAreaEstudio">
 					<option value="" selected="selected">Seleccione el area de estudio</option>
 					<option th:each="areaEstudio : ${areaEstudio}" th:value="${areaEstudio.idAreaEstudio}"
@@ -1392,7 +1392,7 @@
 		<div class="form-group">
 			<label class="col-lg-2 control-label">Facultad a la que pertenece</label>
 			<div class="col-lg-10">
-				<select id="idFacultad" class="form-control select2 elemento-desactivable"
+				<select id="idFacultad" class="form-control select2 elemento-modificable"
 					name="idFacultad">
 					<option value="" selected="selected" >Seleccione una Facultad</option>
 					<option th:each="facultad : ${facultad}" th:value="${facultad.idFacultad}"
@@ -1403,7 +1403,7 @@
 		<div class="form-group">
 			<label class="col-lg-2 control-label">Codigo de Escuela</label>
 			<div class="col-lg-10">
-				<input class="form-control numbersOnly elemento-desactivable" name="codigo"
+				<input class="form-control numbersOnly elemento-modificable" name="codigo"
 					autofocus="autofocus" />
 			</div>
 		</div>
@@ -1448,7 +1448,7 @@
 		<div class="form-group">
 			<label class="col-lg-2 control-label">Código de Administrativo</label>
 			<div class="col-lg-10">
-				<input class="form-control upperCase elemento-desactivable" name="codigoAlumno">
+				<input class="form-control upperCase elemento-modificable" name="codigoAlumno">
 			</div>
 		</div>
 		
@@ -1470,7 +1470,7 @@
 		<div class="form-group">
 			<label class="col-lg-2 control-label">Administrativo</label>
 			<div class="col-lg-10">
-				<select id="idAdministrativo" class="form-control select2 upperCase elemento-desactivable"
+				<select id="idAdministrativo" class="form-control select2 upperCase elemento-modificable"
 					name="idAdministrativo">
 					<option value="" selected="selected">Seleccione un Administrativo</option>
 					<option th:each="administrativo : ${administrativos}" th:value="${administrativo.idAdministrativo}"
@@ -1481,13 +1481,13 @@
 		<div class="form-group">
 			<label class="col-lg-2 control-label">Fecha de inicio</label>
 			<div class="col-lg-10">
-				<input class="form-control upperCase elemento-desactivable" type="date" name="fechaInicio" autofocus="autofocus" />
+				<input class="form-control upperCase elemento-modificable" type="date" name="fechaInicio" autofocus="autofocus" />
 			</div>
 		</div>
 		<div class="form-group">
 			<label class="col-lg-2 control-label">Fecha de Fin</label>
 			<div class="col-lg-10">
-				<input class="form-control upperCase elemento-desactivable" type="date" name="fechaFin" autofocus="autofocus" />
+				<input class="form-control upperCase elemento-modificable" type="date" name="fechaFin" autofocus="autofocus" />
 			</div>
 		</div>
 		<div class="form-group">
@@ -1619,25 +1619,25 @@
 		<div class="form-group">
 			<label class="col-lg-2 control-label">Nombre</label>
 			<div class="col-lg-10">
-				<input class="form-control upperCase upperCase elemento-desactivable" type="text" name="nombre" autofocus="autofocus" />
+				<input class="form-control upperCase upperCase elemento-modificable" type="text" name="nombre" autofocus="autofocus" />
 			</div>
 		</div>
 		<div class="form-group">
 			<label class="col-lg-2 control-label">Descripcion</label>
 			<div class="col-lg-10">
-				<input class="form-control upperCase upperCase elemento-desactivable" type="text" name="descripcion" autofocus="autofocus" />
+				<input class="form-control upperCase upperCase elemento-modificable" type="text" name="descripcion" autofocus="autofocus" />
 			</div>
 		</div>
 		<div class="form-group">
 			<label class="col-lg-2 control-label">Uso</label>
 			<div class="col-lg-10">
-				<input class="form-control upperCase upperCase elemento-desactivable" type="text" name="uso" autofocus="autofocus" />
+				<input class="form-control upperCase upperCase elemento-modificable" type="text" name="uso" autofocus="autofocus" />
 			</div>
 		</div>
 		<div class="form-group">
 			<label class="col-lg-2 control-label">Maxima capacidad</label>
 			<div class="col-lg-10">
-				<input class="form-control upperCase elemento-desactivable" type="number" name="maxCapacidad" autofocus="autofocus" />
+				<input class="form-control upperCase elemento-modificable" type="number" name="maxCapacidad" autofocus="autofocus" />
 			</div>
 		</div>
 				
