@@ -76,9 +76,23 @@ public @Controller class ConsultaController {
 
 		ConsultaPrestamosCriterioBusqueda criterioBusqueda = new ConsultaPrestamosCriterioBusqueda();
 		criterioBusqueda.setAreaEstudio(areaAdministrativo.getNombreAreaEstudio());
-		//criterioBusqueda.setMaxCapacidad(1);
-
-		model.addAttribute("prestamos", consultaPrestamosService.buscarPorCriterio(criterioBusqueda));
+		
+		List<PrestamoRecurso> listaRecursos = consultaPrestamosService.buscarPorCriterio(criterioBusqueda);
+		
+		List<PrestamoRecurso> listaRecursosIndividuales = new ArrayList<>();
+		List<PrestamoRecurso> listaRecursosGrupales = new ArrayList<>();
+		
+		for(int i=0;i<listaRecursos.size();i++){
+			if(listaRecursos.get(i).getMaxCapacidad()==1){
+				System.out.println("EL RECURSO: "+listaRecursos.get(i).getTipoRecurso());
+				listaRecursosIndividuales.add(listaRecursos.get(i));			
+			}else{
+				listaRecursosGrupales.add(listaRecursos.get(i));
+			}
+		}
+		
+		model.addAttribute("recursosIndividuales", listaRecursosIndividuales);
+		model.addAttribute("recursosGrupales", listaRecursosGrupales);
 		model.addAttribute("consulta", consulta);
 		model.addAttribute("areaAdministrativo", areaAdministrativo);
 		return CONSULTA_ESTADO_AREA;

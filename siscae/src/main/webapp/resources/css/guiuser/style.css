@@ -6939,21 +6939,21 @@ tbody tr td:last-child {
 .ocupado{
   color: #df003a;
   text-transform: uppercase;
-  width: 90px;
+  width: 95px;
 
 }
 
 .disponible{
   color: #18A15F;
   text-transform: uppercase;
-  width: 90px;
+  width: 95px;
 }
 
 
 .liberable{
   color: #DADF51;
   text-transform: uppercase;
-  width: 90px;
+  width: 95px;
 }
 
 /*
@@ -7009,3 +7009,8 @@ tbody tr td:last-child {
 /*
 
 */
+
+.marcar-salida{
+	background: #D90022 !important;
+	color: #fff !important;
+}

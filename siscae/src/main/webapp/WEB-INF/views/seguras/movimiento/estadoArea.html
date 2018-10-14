@@ -37,36 +37,34 @@
 					<div class="col-12">
 						<div class="card">
 
-
-
-
 							<div class="card-body p-b-0">
 								<!-- Nav tabs -->
-								<ul class="nav nav-tabs customtab2" role="tablist">
+								<ul class="nav nav-tabs customtab2 justify-content-end" role="tablist">
 									<li class="nav-item"><a class="nav-link active"
 										data-toggle="tab" href="#esquema" role="tab"> <span
 											class="hidden-sm-up"> <i class="ti-home"></i></span> <span
 											class="hidden-xs-down">Solicitar</span>
 									</a></li>
-									
-									<li class="nav-item"><a class="nav-link" data-toggle="tab"
-										id="salida" role="tab"> <span class="hidden-sm-up"><i
-												class="ti-user"></i> </span> <span class="hidden-xs-down">Marcar Salida</span>
-									</a></li>
-									<li class="nav-item"><a class="nav-link" data-toggle="tab"
+
+									<li th:if="(${areaAdministrativo.cargo} != 'SOLICITANTE')"
+										class="nav-item"><a class="nav-link" data-toggle="tab"
 										href="#tabla" role="tab"> <span class="hidden-sm-up"><i
-												class="ti-user"></i></span> <span class="hidden-xs-down">Detalles de prestamos</span>
+												class="ti-user"></i></span> <span class="hidden-xs-down">Detalles</span>
 									</a></li>
-									<li th:if="(${areaAdministrativo.cargo} == 'SOLICITANTE')" class="nav-item"><a class="nav-link" data-toggle="tab"
-										href="#tablaRecursos" role="tab"> <span class="hidden-sm-up"><i
-												class="ti-user"></i></span> <span class="hidden-xs-down">Detalles de recursos</span>
-									</a></li>
-									<li th:if="(${areaAdministrativo.cargo} == 'SOLICITANTE')" class="nav-item"><a class="nav-link" data-toggle="tab"
-										href="#tablaSancionados" role="tab"> <span class="hidden-sm-up"><i
-												class="ti-user"></i></span> <span class="hidden-xs-down">Solicitantes sancionados</span>
+									<li th:if="(${areaAdministrativo.cargo} == 'SOLICITANTE')"
+										class="nav-item"><a class="nav-link" data-toggle="tab"
+										href="#tablaSancionados" role="tab"> <span
+											class="hidden-sm-up"><i class="ti-user"></i></span> <span
+											class="hidden-xs-down">Sancionados</span>
 									</a></li>
 
-									
+									<li class="nav-item"><a class="nav-link marcar-salida" data-toggle="tab"
+										id="salida" role="tab"> <span class="hidden-sm-up"><i
+												class="ti-user"></i> </span> <span class="hidden-xs-down">Marcar
+												Salida</span>
+									</a></li>
+
+
 
 								</ul>
 
@@ -78,58 +76,37 @@
 									<div class="tab-pane active" id="esquema" role="tabpanel">
 										<div class="p-20">
 
-											
+
 											<h3>Solicitud de recurso</h3>
-											<p>Recursos individuales</p>
-											
-											
+											<label>Recursos individuales</label>
+
 											<div class="row">
-												
+												<div></div>
 											</div>
 											<div class="row" id="for-each">
 
-												<th:block th:each="prestamo : ${prestamos}">
+												<th:block th:each="prestamo : ${recursosIndividuales}">
 
 													<div class="recurso">
 														<img
-															th:if="(${prestamo.estado} == 'DISPONIBLE') and (${prestamo.tipoRecurso} == 'CUBICULO') and (${prestamo.observacion} == 'UBICADO CERCA A UN ENCHUFE') " 
-															th:src="@{/resources/images/cubiculo_con_corriente_verde.png}" width="40"
-															height="40">
-															
-														<img
-															th:if="(${prestamo.estado} == 'DISPONIBLE') and (${prestamo.tipoRecurso} == 'CUBICULO') and (${prestamo.observacion} != 'UBICADO CERCA A UN ENCHUFE') " 
+															th:if="(${prestamo.estado} == 'DISPONIBLE') and (${prestamo.tipoRecurso} == 'CUBICULO') and (${prestamo.observacion} == 'UBICADO CERCA A UN ENCHUFE') "
+															th:src="@{/resources/images/cubiculo_con_corriente_verde.png}"
+															width="40" height="40"> <img
+															th:if="(${prestamo.estado} == 'DISPONIBLE') and (${prestamo.tipoRecurso} == 'CUBICULO') and (${prestamo.observacion} != 'UBICADO CERCA A UN ENCHUFE') "
 															th:src="@{/resources/images/cubo_verde.png}" width="40"
-															height="40"> 
-															
-														<img
-															th:if="(${prestamo.estado} == 'OCUPADO') and (${prestamo.tipoRecurso} == 'CUBICULO') and (${prestamo.observacion} == 'UBICADO CERCA A UN ENCHUFE') " 
-															th:src="@{/resources/images/cubiculo_con_corriente_rojo.png}" width="40"
-															height="40">
-														
-														<img
+															height="40"> <img
+															th:if="(${prestamo.estado} == 'OCUPADO') and (${prestamo.tipoRecurso} == 'CUBICULO') and (${prestamo.observacion} == 'UBICADO CERCA A UN ENCHUFE') "
+															th:src="@{/resources/images/cubiculo_con_corriente_rojo.png}"
+															width="40" height="40"> <img
 															th:if="(${prestamo.estado} == 'OCUPADO') and (${prestamo.tipoRecurso} == 'CUBICULO') and (${prestamo.observacion} != 'UBICADO CERCA A UN ENCHUFE') "
 															th:src="@{/resources/images/cubo_rojo.png}" width="40"
-															height="40"> 
-														
-														<img
-															th:if="(${prestamo.estado} == 'LIBERABLE') and (${prestamo.tipoRecurso} == 'CUBICULO') and (${prestamo.observacion} == 'UBICADO CERCA A UN ENCHUFE') " 
-															th:src="@{/resources/images/cubiculo_con_corriente_amarillo.png}" width="40"
-															height="40">
-															
-														<img
+															height="40"> <img
+															th:if="(${prestamo.estado} == 'LIBERABLE') and (${prestamo.tipoRecurso} == 'CUBICULO') and (${prestamo.observacion} == 'UBICADO CERCA A UN ENCHUFE') "
+															th:src="@{/resources/images/cubiculo_con_corriente_amarillo.png}"
+															width="40" height="40"> <img
 															th:if="(${prestamo.estado} == 'LIBERABLE') and (${prestamo.tipoRecurso} == 'CUBICULO') and (${prestamo.observacion} != 'UBICADO CERCA A UN ENCHUFE') "
 															th:src="@{/resources/images/cubo_amarillo.png}"
-															width="40" height="40"> 
-														
-														<img
-															th:if="${prestamo.tipoRecurso} == 'CABINA'"
-															th:src="@{/resources/images/pantalla.png}" width="40"
-															height="40"> 
-															
-														<img
-															th:if="${prestamo.tipoRecurso} == 'MESA'"
-															th:src="@{/resources/images/mesa.png}" width="100"
-															height="100">
+															width="40" height="40">
 
 														<p th:text="${prestamo.numero}"></p>
 														<p th:if="${prestamo.estado} == 'DISPONIBLE'"
@@ -138,20 +115,12 @@
 															th:text="OCUPADO" class="ocupado"></p>
 														<p th:if="${prestamo.estado} == 'LIBERABLE'"
 															th:text="LIBERABLE" class="liberable"></p>
-														<p
-															th:if="${areaAdministrativo.nombreAreaEstudio} == 'SALA GRUPAL'"
-															th:text="'Capacidad 0/' + ${prestamo.maxCapacidad}"></p>
 
-														<button
-															th:if="${areaAdministrativo.nombreAreaEstudio} == 'BIBLIOTECA'"
-															th:id="${prestamo.numero}" th:grupal="no"
+
+														<button th:id="${prestamo.numero}" th:grupal="no"
 															th:key="${prestamo.idRecurso}"
 															th:class="${prestamo.estado} == 'DISPONIBLE' ? 'btn btn-info solicitar' : 'invisible' ">SOLICITAR</button>
-														<button
-															th:if="(${areaAdministrativo.nombreAreaEstudio} == 'SALA GRUPAL') or (${areaAdministrativo.nombreAreaEstudio} == 'VIDEOTECA')"
-															th:grupal="si" th:id="${prestamo.numero}"
-															th:key="${prestamo.idRecurso}" type="button"
-															th:class="${prestamo.estado} == 'DISPONIBLE' ? 'btn btn-info solicitar' : 'invisible' ">SOLICITAR</button>
+
 
 
 													</div>
@@ -159,9 +128,38 @@
 												</th:block>
 
 
+
 											</div>
-											
-											
+
+											<label class="m-t-10">Recursos grupales</label>
+
+											<div class="row" id="for-each-grupales">
+
+												<th:block th:each="recursoGrupal : ${recursosGrupales}">
+													<div class="recurso">
+
+														<img th:if="${recursoGrupal.tipoRecurso} == 'CABINA'"
+															th:src="@{/resources/images/pantalla.png}" width="40"
+															height="40"> <img
+															th:if="${recursoGrupal.tipoRecurso} == 'MESA'"
+															th:src="@{/resources/images/mesa.png}" width="100"
+															height="100">
+
+														<p th:text="${recursoGrupal.numero}"></p>
+														<p th:if="${recursoGrupal.estado} == 'DISPONIBLE'"
+															th:text="DISPONIBLE" class="disponible"></p>
+														<p th:if="${recursoGrupal.estado} == 'OCUPADO'"
+															th:text="OCUPADO" class="ocupado"></p>
+														<p th:if="${recursoGrupal.estado} == 'LIBERABLE'"></p>
+														<button th:grupal="si" th:id="${recursoGrupal.numero}"
+															th:key="${recursoGrupal.idRecurso}" type="button"
+															th:class="${recursoGrupal.estado} == 'DISPONIBLE' ? 'btn btn-info solicitar' : 'invisible' ">SOLICITAR</button>
+
+													</div>
+
+												</th:block>
+
+											</div>
 
 
 										</div>
@@ -244,20 +242,21 @@
 													<tr>
 														<th>Recurso</th>
 														<th>Estado</th>
-														<th>Observacion</th>				
+														<th>Observacion</th>
 													</tr>
 												</thead>
 												<tbody>
-													<tr >
-														<td >CUBICULO 01</td>
-														<td ><span class="badge badge-primary">DISPONIBLE</span></td>
-														<td >UBICADO CERCA A UN ENCHUFE</td>
+													<tr>
+														<td>CUBICULO 01</td>
+														<td><span class="badge badge-primary">DISPONIBLE</span></td>
+														<td>UBICADO CERCA A UN ENCHUFE</td>
 													</tr>
 												</tbody>
 											</table>
 										</div>
 									</div>
-									<div class="tab-pane p-20" id="tablaSancionados" role="tabpanel">
+									<div class="tab-pane p-20" id="tablaSancionados"
+										role="tabpanel">
 
 
 										<div class="table-responsive m-t-40">
@@ -270,11 +269,11 @@
 														<th>Codigo</th>
 														<th>Nombre</th>
 														<th>Apellidos</th>
-														<th>Fin de suspension</th>				
+														<th>Fin de suspension</th>
 													</tr>
 												</thead>
 												<tbody>
-													<tr >
+													<tr>
 														<th>16200116</th>
 														<th>MARIO ALBERTO</th>
 														<th>CORTEZ ESCARATE</th>
@@ -364,7 +363,7 @@
 		<!-- END MODAL -->
 
 
-		
+
 		<!-- All Jquery -->
 		<script th:src="@{/resources/js/guiuser/lib/jquery/jquery.min.js}"></script>
 		<!-- Bootstrap tether Core JavaScript -->
@@ -380,31 +379,40 @@
 		<script
 			th:src="@{/resources/js/guiuser/lib/sticky-kit-master/dist/sticky-kit.min.js}"></script>
 		<!--Custom JavaScript -->
-		
+
 		<script th:src="@{/resources/js/guiuser/scripts.js}"></script>
 		<!-- scripit init-->
 		<script th:src="@{/resources/js/guiuser/custom.min.js}"></script>
 		<script th:src="@{/resources/js/guiuser/sweetalert.min.js}"></script>
 		<script th:src="@{/resources/js/util/util.js}"></script>
 		<script th:src="@{/resources/js/util/formularioUtil.js}"></script>
-		
+
 		<!-- JS de datatables -->
-		<script th:src="@{/resources/js/guiuser/lib/datatables/datatables.min.js}"></script>
-	    <script th:src="@{/resources/js/guiuser/lib/datatables/cdn.datatables.net/buttons/1.2.2/js/dataTables.buttons.min.js}"></script>
-	    <script th:src="@{/resources/js/guiuser/lib/datatables/cdn.datatables.net/buttons/1.2.2/js/buttons.flash.min.js}"></script>
-	    <script th:src="@{/resources/js/guiuser/lib/datatables/cdnjs.cloudflare.com/ajax/libs/jszip/2.5.0/jszip.min.js}"></script>
-	    <script th:src="@{/resources/js/guiuser/lib/datatables/cdn.rawgit.com/bpampuch/pdfmake/0.1.18/build/pdfmake.min.js}"></script>
-	    <script th:src="@{/resources/js/guiuser/lib/datatables/cdn.rawgit.com/bpampuch/pdfmake/0.1.18/build/vfs_fonts.js}"></script>
-	    <script th:src="@{/resources/js/guiuser/lib/datatables/cdn.datatables.net/buttons/1.2.2/js/buttons.html5.min.js}"></script>
-	    <script th:src="@{/resources/js/guiuser/lib/datatables/cdn.datatables.net/buttons/1.2.2/js/buttons.print.min.js}"></script>
-	    <script th:src="@{/resources/js/guiuser/lib/datatables/datatables-init.js}"></script>
-		
+		<script
+			th:src="@{/resources/js/guiuser/lib/datatables/datatables.min.js}"></script>
+		<script
+			th:src="@{/resources/js/guiuser/lib/datatables/cdn.datatables.net/buttons/1.2.2/js/dataTables.buttons.min.js}"></script>
+		<script
+			th:src="@{/resources/js/guiuser/lib/datatables/cdn.datatables.net/buttons/1.2.2/js/buttons.flash.min.js}"></script>
+		<script
+			th:src="@{/resources/js/guiuser/lib/datatables/cdnjs.cloudflare.com/ajax/libs/jszip/2.5.0/jszip.min.js}"></script>
+		<script
+			th:src="@{/resources/js/guiuser/lib/datatables/cdn.rawgit.com/bpampuch/pdfmake/0.1.18/build/pdfmake.min.js}"></script>
+		<script
+			th:src="@{/resources/js/guiuser/lib/datatables/cdn.rawgit.com/bpampuch/pdfmake/0.1.18/build/vfs_fonts.js}"></script>
+		<script
+			th:src="@{/resources/js/guiuser/lib/datatables/cdn.datatables.net/buttons/1.2.2/js/buttons.html5.min.js}"></script>
+		<script
+			th:src="@{/resources/js/guiuser/lib/datatables/cdn.datatables.net/buttons/1.2.2/js/buttons.print.min.js}"></script>
+		<script
+			th:src="@{/resources/js/guiuser/lib/datatables/datatables-init.js}"></script>
+
 		<!-- JS de envio de peticion -->
 		<script
 			th:src="@{/resources/js/pagina/consulta/movimientos/prestamos/prestamos.js}"></script>
 		<script
 			th:src="@{/resources/js/pagina/consulta/movimientos/prestamos/prestamosFormulario.js}"></script>
-		
+
 
 
 
