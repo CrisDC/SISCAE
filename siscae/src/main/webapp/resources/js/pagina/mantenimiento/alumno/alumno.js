@@ -205,7 +205,7 @@ $(document).ready(function() {
 		
 		$local.$tablaMantenimiento.children("tbody").on("click", ".eliminar", function() {
 		$local.$filaSeleccionada = $(this).parents("tr");
-		var empresa = $local.tablaMantenimiento.row($local.$filaSeleccionada).data();
+		var alumno = $local.tablaMantenimiento.row($local.$filaSeleccionada).data();
 		$.confirm({
 			icon : "fa fa-info-circle",
 			title : "Aviso",
@@ -270,17 +270,16 @@ $(document).ready(function() {
 //			return;
 //		}
 		var alumno = $formMantenimiento.serializeJSON();
-		var criterio;
-		criterio.tipoDocumentoIdentidad = alumno.idTipoDocumentoIdentidad;
-		criterio.numeroDocumentoIdentidad = alumno.numeroDocumentoIdentidad; 
+		var criterio = {idTipoDocumento   :  alumno.idTipoDocumento,
+						numeroDocumento :   alumno.numeroDocumento};
+		
+		//criterio.numeroDocumentoIdentidad = alumno.numeroDocumentoIdentidad; 
 		console.log("funcion");
-		
-		//formar url 
-		
+						
 		$.ajax({
 			type : "GET",
 			url : $variableUtil.root + "persona?accion=buscarIdPersona",
-			data : JSON.stringify(criterio),
+			data : criterio,//*
 			beforeSend : function(xhr) {
 				$local.$registrarMantenimiento.attr("disabled", true).find("i").removeClass("fa-floppy-o").addClass("fa-spinner fa-pulse fa-fw");
 				xhr.setRequestHeader('Content-Type', 'application/json');
@@ -295,17 +294,18 @@ $(document).ready(function() {
 			success : function(response) {
 				console.log(response)
 				
-				$funcionUtil.notificarException(response, "fa-check", "Aviso", "success");
-				/*var row = $local.tablaMantenimiento.row.add(alumno).draw();
-				row.show().draw(false);
-				$(row.node()).animateHighlight();
-				$local.$modalMantenimiento.PopupWindow("close");*/
+				//$funcionUtil.notificarException(response, "fa-check", "Aviso", "success");
+				
+				$("#nombreCompleto").val(response.appPaterno + " " + response.appMaterno + ", " + response.nombre );
+				alumno.idAlumno = response.idPersona;
 				
 			},
 			error : function(response) {
 			},
 			complete : function(response) {
 				$local.$registrarMantenimiento.attr("disabled", false).find("i").addClass("fa-floppy-o").removeClass("fa-spinner fa-pulse fa-fw");
+				
+				
 			}
 		});	
 		

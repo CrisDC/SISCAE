@@ -49,7 +49,7 @@ public class PersonaServiceTest {
 		personaService.eliminarPersona(personaTest);
 		NumeroDocumentoIdentidadCriterioBusqueda criterioBusqueda = new NumeroDocumentoIdentidadCriterioBusqueda();
 		criterioBusqueda.setNumeroDocumento("1");
-		criterioBusqueda.setTipoDocumento("08070167");
+		criterioBusqueda.setIdTipoDocumento("70099798");
 		
 		personaService.buscarPorNumeroDocumentoIdentidad(criterioBusqueda);
 	}

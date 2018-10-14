@@ -18,7 +18,7 @@ public class NumeroDocumentoIdentidadCriterioBusqueda
 {
    // @Pattern(regexp = Regex.SOLO_DIGITOS, message = "{Pattern.CriterioBusquedaTipoDocumento.tipoDocumento}")
    // @MultitabDet(idTabla = MultiTablaUtil.TABLA_TIPO_DOCUMENTO, existe = true, campoIdItem = "tipoDocumento", message = "{NoExiste.CriterioBusquedaTipoDocumento.tipoDocumento}")
-    private String tipoDocumento;
+    private String idTipoDocumento;
 
     @Length(min = 1, max = 20, message = "{Length.CriterioBusquedaTipoDocumento.numeroDocumento}")
     private String numeroDocumento;

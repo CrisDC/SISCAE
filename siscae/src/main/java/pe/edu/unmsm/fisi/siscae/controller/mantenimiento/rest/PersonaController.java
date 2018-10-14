@@ -87,7 +87,7 @@ public @RestController class PersonaController {
 		
 		System.out.println("angel was here");
 		System.out.println(criterioBusqueda.getNumeroDocumento());
-		System.out.println(criterioBusqueda.getTipoDocumento());
+		System.out.println(criterioBusqueda.getIdTipoDocumento());
 		return personaService.buscarPorNumeroDocumentoIdentidad(criterioBusqueda);
 	}
 	

@@ -1105,7 +1105,7 @@
                 <div class="input-group-btn search-panel">
                     
 						<select id="idTipoDocumento" class="btn btn-default dropdown-toggle select2 elemento-desactivable"
-						name="idTipoDocumentoIdentidad" data-toggle="dropdown">
+						name="idTipoDocumento" data-toggle="dropdown">
 						<option value="" selected="selected">Tipo de documento</option>
 						<option th:each="tipoDocumento : ${tipoDocumento}" th:value="${tipoDocumento.idItem}"
 						th:text="|${tipoDocumento.descripcionCorta}|"></option>
@@ -1113,7 +1113,7 @@
 					
                 </div>
                 <input type="hidden" name="idPersona" value="all" id="idPersona">         
-                <input type="text" class="form-control" name="numeroDocumentoIdentidad" placeholder="Número de Documento">
+                <input type="text" class="form-control" name="numeroDocumento" placeholder="Número de Documento">
                 <span class="input-group-btn">
                     <button class="btn btn-default" type="button" id="buscar"><span class="glyphicon glyphicon-search"></span></button>
                 </span>
@@ -1123,7 +1123,7 @@
 		<div class="form-group">
 			<label class="col-lg-2 control-label">Nombre</label>
 			<div class="col-lg-10">
-				<input class="form-control upperCase elemento-modificable" name="nombres" >
+				<input id="nombreCompleto"class="form-control upperCase elemento-modificable" name="nombres" >
 			</div>
 		</div>
 		
