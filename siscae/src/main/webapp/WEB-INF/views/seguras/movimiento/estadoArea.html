@@ -88,18 +88,41 @@
 
 													<div class="recurso">
 														<img
-															th:if="(${prestamo.estado} == 'DISPONIBLE') and (${prestamo.tipoRecurso} == 'CUBICULO')"
+															th:if="(${prestamo.estado} == 'DISPONIBLE') and (${prestamo.tipoRecurso} == 'CUBICULO') and (${prestamo.observacion} == 'UBICADO CERCA A UN ENCHUFE') " 
+															th:src="@{/resources/images/cubiculo_con_corriente_verde.png}" width="40"
+															height="40">
+															
+														<img
+															th:if="(${prestamo.estado} == 'DISPONIBLE') and (${prestamo.tipoRecurso} == 'CUBICULO') and (${prestamo.observacion} != 'UBICADO CERCA A UN ENCHUFE') " 
 															th:src="@{/resources/images/cubo_verde.png}" width="40"
-															height="40"> <img
-															th:if="(${prestamo.estado} == 'OCUPADO') and (${prestamo.tipoRecurso} == 'CUBICULO')"
+															height="40"> 
+															
+														<img
+															th:if="(${prestamo.estado} == 'OCUPADO') and (${prestamo.tipoRecurso} == 'CUBICULO') and (${prestamo.observacion} == 'UBICADO CERCA A UN ENCHUFE') " 
+															th:src="@{/resources/images/cubiculo_con_corriente_rojo.png}" width="40"
+															height="40">
+														
+														<img
+															th:if="(${prestamo.estado} == 'OCUPADO') and (${prestamo.tipoRecurso} == 'CUBICULO') and (${prestamo.observacion} != 'UBICADO CERCA A UN ENCHUFE') "
 															th:src="@{/resources/images/cubo_rojo.png}" width="40"
-															height="40"> <img
-															th:if="(${prestamo.estado} == 'LIBERABLE') and (${prestamo.tipoRecurso} == 'CUBICULO')"
+															height="40"> 
+														
+														<img
+															th:if="(${prestamo.estado} == 'LIBERABLE') and (${prestamo.tipoRecurso} == 'CUBICULO') and (${prestamo.observacion} == 'UBICADO CERCA A UN ENCHUFE') " 
+															th:src="@{/resources/images/cubiculo_con_corriente_amarillo.png}" width="40"
+															height="40">
+															
+														<img
+															th:if="(${prestamo.estado} == 'LIBERABLE') and (${prestamo.tipoRecurso} == 'CUBICULO') and (${prestamo.observacion} != 'UBICADO CERCA A UN ENCHUFE') "
 															th:src="@{/resources/images/cubo_amarillo.png}"
-															width="40" height="40"> <img
+															width="40" height="40"> 
+														
+														<img
 															th:if="${prestamo.tipoRecurso} == 'CABINA'"
 															th:src="@{/resources/images/pantalla.png}" width="40"
-															height="40"> <img
+															height="40"> 
+															
+														<img
 															th:if="${prestamo.tipoRecurso} == 'MESA'"
 															th:src="@{/resources/images/mesa.png}" width="100"
 															height="100">
