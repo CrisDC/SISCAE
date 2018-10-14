@@ -30,4 +30,5 @@ public class PrestamoRecurso
 	String numDocumento;
 	String areaEstudio;
 	String observacion;
+	int cantidadPrestamos;
 }

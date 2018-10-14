@@ -17,7 +17,8 @@
 		        codigo_alumno,
 		        num_documento,
 		        area_estudio,
-		        observacion
+		        observacion,
+		        cantidad_prestamos
 		  FROM WV_ESTADO_AULAS 
 	</sql>
 
