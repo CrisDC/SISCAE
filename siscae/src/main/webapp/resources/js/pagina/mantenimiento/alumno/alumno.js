@@ -8,7 +8,7 @@ $(document).ready(function() {
 		$filaSeleccionada : "",
 		$actualizarMantenimiento : $("#actualizarMantenimiento"),
 		idAlumnoSeleccionado : "",
-			
+		personaActual : null,	
 		$btnBuscar : $("#buscar")
 		
 		
@@ -125,6 +125,14 @@ $(document).ready(function() {
 			return;
 		}
 		var alumno = $formMantenimiento.serializeJSON();
+		
+		alumno.persona = {};
+		
+		alumno.persona.idPersona = $local.personaActual.idPersona;
+		
+		
+		console.log(alumno);
+		
 		$.ajax({
 			type : "POST",
 			url : $variableUtil.root + "alumno",
@@ -203,7 +211,10 @@ $(document).ready(function() {
 			}
 		});
 		
-		$local.$tablaMantenimiento.children("tbody").on("click", ".eliminar", function() {
+		
+	});
+	
+	$local.$tablaMantenimiento.children("tbody").on("click", ".eliminar", function() {
 		$local.$filaSeleccionada = $(this).parents("tr");
 		var alumno = $local.tablaMantenimiento.row($local.$filaSeleccionada).data();
 		$.confirm({
@@ -261,9 +272,6 @@ $(document).ready(function() {
 			}
 			});
 		});
-	});
-	
-	
 	
 	$local.$btnBuscar.on("click", function() {
 //		if (!$formMantenimiento.valid()) {
@@ -296,8 +304,11 @@ $(document).ready(function() {
 				
 				//$funcionUtil.notificarException(response, "fa-check", "Aviso", "success");
 				
-				$("#nombreCompleto").val(response.appPaterno + " " + response.appMaterno + ", " + response.nombre );
-				alumno.idAlumno = response.idPersona;
+				$("#nombreCompleto").val(response.appPaterno + " " + response.appMaterno + ", " + response.nombre);
+				
+				$local.personaActual = response;
+				
+				
 				
 			},
 			error : function(response) {
