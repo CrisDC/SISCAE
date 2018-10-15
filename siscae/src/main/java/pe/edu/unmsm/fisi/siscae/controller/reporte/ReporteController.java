@@ -34,7 +34,70 @@ public @Controller class ReporteController
     
     @Audit(tipo = Tipo.REP_EST_PRESTAMOS)
    	@GetMapping("/estadisticas/{reporte:prestamos}/{criterio:escuela}")
-   	public String irPaginaConsultaEstadisticas(@PathVariable String reporte, @PathVariable String criterio, ModelMap model) {
+   	public String irPaginaConsultaEstadisticasEscuela(@PathVariable String reporte, @PathVariable String criterio, ModelMap model) {
+   		System.out.println(SecurityContextFacade.getAuthenticatedUser());
+   		int idAdministrativo = 3;
+   		AreaAdministrativo areaAdministrativo = null;
+
+   		ArrayList<AreaAdministrativo> listaAreaAdministrativo = (ArrayList) areaAdministrativoService.buscarTodos();
+   		for (int i = 0; i < listaAreaAdministrativo.size(); i++) {
+   			if (listaAreaAdministrativo.get(i).getIdAdministrativo() == idAdministrativo) {
+   				areaAdministrativo = listaAreaAdministrativo.get(i);
+   			}
+   		}
+   		ConsultaPrestamosCriterioBusqueda criterioBusqueda = new ConsultaPrestamosCriterioBusqueda();
+   		criterioBusqueda.setAreaEstudio(areaAdministrativo.getNombreAreaEstudio());
+   		model.addAttribute("reporte", reporte);
+   		model.addAttribute("criterio", criterio);
+   		model.addAttribute("areaAdministrativo", areaAdministrativo);
+   		return REPORTE_ESTADISTICAS;
+   	}
+    
+    @Audit(tipo = Tipo.REP_EST_PRESTAMOS)
+   	@GetMapping("/estadisticas/{reporte:prestamos}/{criterio:areaEstudio}")
+   	public String irPaginaConsultaEstadisticasAreaEstudio(@PathVariable String reporte, @PathVariable String criterio, ModelMap model) {
+   		System.out.println(SecurityContextFacade.getAuthenticatedUser());
+   		int idAdministrativo = 3;
+   		AreaAdministrativo areaAdministrativo = null;
+
+   		ArrayList<AreaAdministrativo> listaAreaAdministrativo = (ArrayList) areaAdministrativoService.buscarTodos();
+   		for (int i = 0; i < listaAreaAdministrativo.size(); i++) {
+   			if (listaAreaAdministrativo.get(i).getIdAdministrativo() == idAdministrativo) {
+   				areaAdministrativo = listaAreaAdministrativo.get(i);
+   			}
+   		}
+   		ConsultaPrestamosCriterioBusqueda criterioBusqueda = new ConsultaPrestamosCriterioBusqueda();
+   		criterioBusqueda.setAreaEstudio(areaAdministrativo.getNombreAreaEstudio());
+   		model.addAttribute("reporte", reporte);
+   		model.addAttribute("criterio", criterio);
+   		model.addAttribute("areaAdministrativo", areaAdministrativo);
+   		return REPORTE_ESTADISTICAS;
+   	}
+    
+    @Audit(tipo = Tipo.REP_EST_PRESTAMOS)
+   	@GetMapping("/estadisticas/{reporte:prestamos}/{criterio:tipoSolicitante}")
+   	public String irPaginaConsultaEstadisticasTipoSolicinate(@PathVariable String reporte, @PathVariable String criterio, ModelMap model) {
+   		System.out.println(SecurityContextFacade.getAuthenticatedUser());
+   		int idAdministrativo = 3;
+   		AreaAdministrativo areaAdministrativo = null;
+
+   		ArrayList<AreaAdministrativo> listaAreaAdministrativo = (ArrayList) areaAdministrativoService.buscarTodos();
+   		for (int i = 0; i < listaAreaAdministrativo.size(); i++) {
+   			if (listaAreaAdministrativo.get(i).getIdAdministrativo() == idAdministrativo) {
+   				areaAdministrativo = listaAreaAdministrativo.get(i);
+   			}
+   		}
+   		ConsultaPrestamosCriterioBusqueda criterioBusqueda = new ConsultaPrestamosCriterioBusqueda();
+   		criterioBusqueda.setAreaEstudio(areaAdministrativo.getNombreAreaEstudio());
+   		model.addAttribute("reporte", reporte);
+   		model.addAttribute("criterio", criterio);
+   		model.addAttribute("areaAdministrativo", areaAdministrativo);
+   		return REPORTE_ESTADISTICAS;
+   	}
+    
+    @Audit(tipo = Tipo.REP_EST_PRESTAMOS)
+   	@GetMapping("/estadisticas/{reporte:prestamos}/{criterio:turno}")
+   	public String irPaginaConsultaEstadisticasTurno(@PathVariable String reporte, @PathVariable String criterio, ModelMap model) {
    		System.out.println(SecurityContextFacade.getAuthenticatedUser());
    		int idAdministrativo = 3;
    		AreaAdministrativo areaAdministrativo = null;

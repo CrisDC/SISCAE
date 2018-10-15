@@ -1,13 +1,17 @@
 
 <!DOCTYPE html>
-<html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
+
 	
 <head th:fragment="head">
+	<title>FISI | SISCAE</title>
 	<meta charset="utf-8"></meta>
 	<meta http-equiv="X-UA-Compatible" content="IE=edge"></meta>
 	<meta name="viewport" content="width=device-width, initial-scale=1"></meta>
-	<title>FISI | SISCAE</title>
-	
+	<meta th:name="${_csrf.parameterName}" th:content="${_csrf.token}"></meta>
+	<meta name="root" th:content="@{/}"/>
     <link th:href="@{/resources/css/guiuser/lib/calendar2/semantic.ui.min.css}" rel="stylesheet">
     <link th:href="@{/resources/css/guiuser/lib/calendar2/pignose.calendar.min.css}" rel="stylesheet">
     <link th:href="@{/resources/css/guiuser/lib/owl.carousel.min.css}" rel="stylesheet" />
@@ -36,12 +40,15 @@
     <link th:href="@{/resources/css/guiuser/lib/owl.theme.default.min.css}" rel="stylesheet"/>
     <link th:href="@{/resources/css/guiuser/helper.css}" rel="stylesheet}}">
     <link th:href="@{/resources/css/guiuser/style.css}" rel="stylesheet">
-    
+	
+	<link th:href="@{/resources/css/guiuser/lib/data-table/dataTables.bootstrap.min.css}" rel="stylesheet" type="text/css"/>
+	<link th:href="@{/resources/css/guiuser/lib/data-table/buttons.dataTables.min.css}" rel="stylesheet" type="text/css"/>
+	<link th:href="@{/resources/css/guiuser/lib/data-table/buttons.bootstrap.min.css}" rel="stylesheet" type="text/css"/>
+	
+	<link th:href="@{//cdn.datatables.net/plug-ins/1.10.19/integration/font-awesome/dataTables.fontAwesome.css}" rel="stylesheet" type="text/css"/>
+	
      <!-- Select2 -->
 	<link th:href="@{/resources/css/guiuser/select2.min.css}" rel="stylesheet">
 	
 </head>
-<body>
-
-</body>
 </html>

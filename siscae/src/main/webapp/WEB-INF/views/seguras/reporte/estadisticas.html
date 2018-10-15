@@ -1,7 +1,8 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org"
+
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org"
 	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
-	layout:decorate="~{layout_user}">
+	xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4" layout:decorate="~{layout_user}">
 
 <head>
 </head>
@@ -13,7 +14,7 @@
 			<div class="row page-titles">
 				<div class="col-md-5 align-self-center">
 					<h3
-						th:text="|EstadÌsticas de ${reporte} por #{__|estadisticas.${reporte}.${criterio}|__}|"
+						th:text="|Estad√≠sticas de ${reporte} por #{__|estadisticas.${reporte}.${criterio}|__}|"
 						class="text-primary"></h3>
 				</div>
 				<!-- 				<div class="col-md-7 align-self-center"> -->
@@ -59,7 +60,7 @@
 									<li class="nav-item">
 										<a class="nav-link" data-toggle="tab" href="#tabReporteGraficoCriterio" role="tab"> 
 											<span class="hidden-sm-up"><i class="ti-user"></i></span> 
-											<span class="hidden-xs-down">Gr·fico por Criterio</span>
+											<span class="hidden-xs-down">Gr√°fico por Criterio</span>
 										</a>
 									</li>
 									
@@ -73,7 +74,7 @@
 									<li class="nav-item">
 										<a class="nav-link" data-toggle="tab" href="#tabReporteGraficoFecha" role="tab"> 
 											<span class="hidden-sm-up"><i class="ti-user"></i></span> 
-											<span class="hidden-xs-down">Gr·fico por Fecha</span>
+											<span class="hidden-xs-down">Gr√°fico por Fecha</span>
 										</a>
 									</li>
 								</ul>
@@ -81,23 +82,30 @@
 								<!-- Tab panes -->
 								<div class="tab-content">
 									<div class="tab-pane active m-t-40" id="tabReporteDetalle" role="tabpanel">
-										<h3>Reporte de Prestamos</h3>
-										<br></br>
-<!-- 										<table id="tblReporteDetalle" class="display nowrap table table-hover table-striped table-bordered" cellspacing="0" width="100%"> -->
-										<table id="tblReporteDetalle" class="table table-bordered table-condensed nowrap display table-hover">
+										    <table id="tblReporteDetalle" class="table table-bordered table-condensed nowrap display table-hover">
 										</table>
 									</div>
 									
-									<div class="tab-pane" id="tabReporteResumen" role="tabpanel">
+									<div class="tab-pane" id="tabReporteResumenCriterio" role="tabpanel">
 										<div class="p-20">
 											<table id="tblReporteResumen" class="display nowrap table table-hover table-striped table-bordered" cellspacing="0" width="100%">
 											</table>
 										</div>
 									</div>
-									<div class="tab-pane" id="tabReporteGrafico" role="tabpanel">
+									<div class="tab-pane" id="tabReporteGraficoCriterio" role="tabpanel">
 										<div class="p-20"></div>
 									</div>
-
+									
+									<div class="tab-pane" id="tabReporteResumenFecha" role="tabpanel">
+										<div class="p-20">
+											<table id="tblReporteResumen" class="display nowrap table table-hover table-striped table-bordered" cellspacing="0" width="100%">
+											</table>
+										</div>
+									</div>
+									<div class="tab-pane" id="tabReporteGraficoFecha" role="tabpanel">
+										<div class="p-20"></div>
+									</div>
+									
 								</div>
 							
 							</div>
