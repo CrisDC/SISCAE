@@ -33,6 +33,7 @@ public @Controller class MantenimientoController
     private @Autowired IAreaEstudioService areaEstudioService;
     private @Autowired ITipoRecursoService tipoRecursoService;
     private @Autowired IFacultadService facultadService;
+    private @Autowired IAdministrativoService administrativoService;
     
 
 /*   */
@@ -58,7 +59,7 @@ public @Controller class MantenimientoController
         model.addAttribute("mantenimiento", mantenimiento);
         
         model.addAttribute("areaEstudio", this.areaEstudioService.buscarTodos());
-       
+        model.addAttribute("administrativo", this.administrativoService.buscarTodos());
         return "seguras/mantenimiento/mantenimiento";
     }
     
