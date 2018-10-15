@@ -1477,8 +1477,8 @@
 				<select id="idAdministrativo" class="form-control select2 upperCase elemento-modificable"
 					name="idAdministrativo">
 					<option value="" selected="selected">Seleccione un Administrativo</option>
-					<option th:each="administrativo : ${administrativo}" th:value="${administrativo.persona.idPersona}"
-						th:text="|${administrativo.codigoAdm}|"></option>
+					<option th:each="administrativo : ${administrativo}" th:value="${administrativo.idAdministrativo}"
+						th:text="|${administrativo.nombre}|"></option>
 				</select>
 			</div>
 		</div>

@@ -26,10 +26,11 @@ public class AdministrativoServiceTest {
 	    {
 		 
 		 List<Administrativo> administrativos = administrativoService.buscarTodos();
-		 administrativos.stream().forEach(administrativo -> {
-            System.out.println(administrativo.toString());
-            });
+		 administrativos.forEach(System.out::println);
 		 
+		 
+		 Administrativo administrativo = administrativoService.buscarPorId(1);
+		 System.out.println(administrativo);
 		 
 	    }
 

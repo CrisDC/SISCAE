@@ -21,4 +21,5 @@ public interface IAdministrativoService extends IMantenibleService<Administrativ
 
     public void eliminarAdministrativo(Administrativo administrativo);
 	
+    public List<Administrativo> buscarConNombre();
 }

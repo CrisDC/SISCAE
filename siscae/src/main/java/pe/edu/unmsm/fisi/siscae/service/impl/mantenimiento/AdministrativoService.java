@@ -72,4 +72,10 @@ public class AdministrativoService extends MantenibleService<Administrativo> imp
 
 	}
 
+	@Override
+	public List<Administrativo> buscarConNombre() {
+		Administrativo administrativo = Administrativo.builder().build();
+		return super.buscar(administrativo, OperacionParam.ADMI_NOMBRES);
+	}
+
 }

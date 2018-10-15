@@ -33,7 +33,7 @@ public class Administrativo {
     @Length(min = 3, max = 20, message = "{Length.CodigoProcesoSwitch.codigoAdm}")
 	private String codigoAdm;
 	
-	
+	private Integer idAdministrativo;
 	
 	private String nombre;
 

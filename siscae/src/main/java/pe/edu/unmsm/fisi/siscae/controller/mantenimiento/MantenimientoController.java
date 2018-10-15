@@ -59,7 +59,7 @@ public @Controller class MantenimientoController
         model.addAttribute("mantenimiento", mantenimiento);
         
         model.addAttribute("areaEstudio", this.areaEstudioService.buscarTodos());
-        model.addAttribute("administrativo", this.administrativoService.buscarTodos());
+        model.addAttribute("administrativo", this.administrativoService.buscarConNombre());
         return "seguras/mantenimiento/mantenimiento";
     }
     

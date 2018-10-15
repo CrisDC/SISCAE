@@ -26,21 +26,21 @@ import com.fasterxml.jackson.annotation.JsonFormat;
 public class AreaAdministrativo {
 	private Integer idAreaAdministrativo;
 	
-	@Min(1)
-	@Max(Integer.MAX_VALUE/2)
-	@Pattern(regexp = Regex.SOLO_DIGITOS, message = "{Pattern.AreaAdministrativo.id_Area_Estudio}")
+	//@Min(1)
+	//@Max(Integer.MAX_VALUE/2)
+	//@Pattern(regexp = Regex.SOLO_DIGITOS, message = "{Pattern.AreaAdministrativo.id_Area_Estudio}")
 	private Integer idAreaEstudio;
 	
-	@Min(1)
-	@Max(Integer.MAX_VALUE/2)
-	@Pattern(regexp = Regex.SOLO_DIGITOS, message = "{Pattern.AreaAdministrativo.id_Administrativo}")
+	//@Min(1)
+	//@Max(Integer.MAX_VALUE/2)
+	//@Pattern(regexp = Regex.SOLO_DIGITOS, message = "{Pattern.AreaAdministrativo.id_Administrativo}")
 	private Integer idAdministrativo;
 	
-	@NotNull(message = "{NotNull.AreaAdministrativo.fecha_inicio}")
+	//@NotNull(message = "{NotNull.AreaAdministrativo.fecha_inicio}")
 	private Date fechaInicio;
 	
-	@NotNull(message = "{NotNull.AreaAdministrativo.fecha_fin}")
-	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd", timezone = "EST")
+	//@NotNull(message = "{NotNull.AreaAdministrativo.fecha_fin}")
+	//@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd", timezone = "EST")
 	private Date fechaFin;
 	
 	@Size(min=3,max=30)
