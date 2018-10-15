@@ -1,6 +1,6 @@
 $(document).ready(function() {
 	
-	var $localEscuela = {
+	var $localTurno = {
 			$tblReporteResumen : $("#tblReporteResumen"),
 			$tblReporteResumenPorDia : $("#tblReporteResumenPorDia"),
 			
@@ -8,6 +8,7 @@ $(document).ready(function() {
 			tblReporteResumenPorDia : "",
 			
 			$btnBuscarPorCriterio : $("#btnBuscarPorCriterio"),
+	
 			$modalMantenimiento : $("#modalMantenimiento"),
 			$aniadirMantenimento : $("#aniadirMantenimiento"),
 			$registrarMantenimiento : $("#registrarMantenimiento"),
@@ -33,22 +34,22 @@ $(document).ready(function() {
 			$numeroDias : $("#numeroDias")
 		};
 
-	console.log($localEscuela.$tblReporteResumen);
+	console.log($localTurno.$tblReporteResumen);
 
-	$localEscuela.$tipoBusquedaCriterio.on("change", function() {
+	$localTurno.$tipoBusquedaCriterio.on("change", function() {
 		var tipoBusqueda = $(this).val();
 		switch (tipoBusqueda) {
 		case "numeroDias":
-			$localEscuela.$numeroDias.removeClass("hidden");
-			$localEscuela.$fechaCorteCriterio.addClass("hidden");
-			$funcionUtil.limpiarCamposFormulario($localEscuela.$formTipoBusquedaNumeroDias);
+			$localTurno.$numeroDias.removeClass("hidden");
+			$localTurno.$fechaCorteCriterio.addClass("hidden");
+			$funcionUtil.limpiarCamposFormulario($localTurno.$formTipoBusquedaNumeroDias);
 			
 			break;
 		case "fechaCorte":
-			$localEscuela.$fechaCorteCriterio.removeClass("hidden");
-			$localEscuela.$numeroDias.addClass("hidden");
-			$localEscuela.$numeroDias.addClass("hidden");
-			$funcionUtil.limpiarCamposFormulario($localEscuela.$formTipoBusquedaFechaCorte);
+			$localTurno.$fechaCorteCriterio.removeClass("hidden");
+			$localTurno.$numeroDias.addClass("hidden");
+			$localTurno.$numeroDias.addClass("hidden");
+			$funcionUtil.limpiarCamposFormulario($localTurno.$formTipoBusquedaFechaCorte);
 			break;
 		default:
 			$funcionUtil.notificarException("Seleccione un Tipo de Búsqueda válido", "fa-warning", "Aviso", "warning");
@@ -58,15 +59,15 @@ $(document).ready(function() {
 //	$.fn.dataTable.ext.errMode = 'none';
 //	$.fn.dataTable.moment('DD/MM/YYYY');
 	
-	$localEscuela.$tblReporteResumen.on('xhr.dt', function(e, settings, json, xhr) {
+	$localTurno.$tblReporteResumen.on('xhr.dt', function(e, settings, json, xhr) {
 		switch (xhr.status) {
 		case 500:
-			$localEscuela.tblReporteResumen.clear().draw();
+			$localTurno.tblReporteResumen.clear().draw();
 			break;
 		}
 	});
 
-	$localEscuela.tblReporteResumen = $localEscuela.$tblReporteResumen.DataTable({
+	$localTurno.tblReporteResumen = $localTurno.$tblReporteResumen.DataTable({
 		"ajax" : {
 			"url" : $variableUtil.root + "reporteEstadisticaPrestamosPorEscuela?accion=buscarTodos",
 			"dataSrc" : ""
@@ -76,8 +77,8 @@ $(document).ready(function() {
 		},
 		"initComplete" : function() {
 			console.log("sera");
-			$localEscuela.$tblReporteResumen.wrap("<div class='table-responsive'></div>");
-			//$tablaFuncion.aniadirFiltroDeBusquedaEnEncabezado(this, $localEscuela.$tblReporteResumen, $localEscuela.filtrosSeleccionables);
+			$localTurno.$tblReporteResumen.wrap("<div class='table-responsive'></div>");
+			//$tablaFuncion.aniadirFiltroDeBusquedaEnEncabezado(this, $localTurno.$tblReporteResumen, $localTurno.filtrosSeleccionables);
 		},
 		"columnDefs" : [ {
 			"targets" : [ 0, 1, 2],
@@ -85,8 +86,8 @@ $(document).ready(function() {
 		}],
 		"columns" : [ 
 		   {
-			"data" : 'escuela',
-			"title" : "Escuela Profesional"
+			"data" : 'turno',
+			"title" : "Turno"
 		}, {
 			"data" : 'numeroPrestamo',
 			"title" : "Numero Prestamos"
@@ -98,22 +99,22 @@ $(document).ready(function() {
 			[0, "desc"]
 		]
 	});
-	$localEscuela.$tblReporteResumen.find("thead").on('keyup', 'input.filtrable', function() {
-		$localEscuela.tblReporteResumen.column($(this).parent().index() + ':visible').search(this.value).draw();
+	$localTurno.$tblReporteResumen.find("thead").on('keyup', 'input.filtrable', function() {
+		$localTurno.tblReporteResumen.column($(this).parent().index() + ':visible').search(this.value).draw();
 	});
 
-	$localEscuela.$tblReporteResumen.find("thead").on('change', 'select', function() {
+	$localTurno.$tblReporteResumen.find("thead").on('change', 'select', function() {
 		var val = $.fn.dataTable.util.escapeRegex($(this).val());
-		$localEscuela.tblReporteResumen.column($(this).parent().index() + ':visible').search(val ? '^' + val + '$' : '', true, false).draw();
+		$localTurno.tblReporteResumen.column($(this).parent().index() + ':visible').search(val ? '^' + val + '$' : '', true, false).draw();
 	});
 
-	$localEscuela.tblReporteResumenPorDia = $localEscuela.$tblReporteResumenPorDia.DataTable({
+	$localTurno.tblReporteResumenPorDia = $localTurno.$tblReporteResumenPorDia.DataTable({
 		"language" : {
 			"url": "//cdn.datatables.net/plug-ins/1.10.16/i18n/Spanish.json"
 		},
 		"initComplete" : function() {
-			$localEscuela.$tblReporteResumenPorDia.wrap("<div class='table-responsive'></div>");
-			$tablaFuncion.aniadirFiltroDeBusquedaEnEncabezado(this, $localEscuela.$tblReporteResumenPorDia, $localEscuela.filtrosSeleccionables);
+			$localTurno.$tblReporteResumenPorDia.wrap("<div class='table-responsive'></div>");
+			$tablaFuncion.aniadirFiltroDeBusquedaEnEncabezado(this, $localTurno.$tblReporteResumenPorDia, $localTurno.filtrosSeleccionables);
 		},
 		"columnDefs" : [ {
 			"targets" : [ 0, 1, 2, 3 ],
@@ -124,8 +125,8 @@ $(document).ready(function() {
 				"data" : 'fecha',
 				"title" : "Fecha"
 			}, {
-				"data" : 'escuela',
-				"title" : "Escuela Profesional"
+				"data" : 'turno',
+				"title" : "Turno"
 			}, {
 				"data" : 'numeroPrestamo',
 				"title" : "Numero Prestamos"
@@ -138,17 +139,17 @@ $(document).ready(function() {
 		]
 	});
 
-	$localEscuela.$tblReporteResumenPorDia.find("thead").on('keyup', 'input.filtrable', function() {
-		$localEscuela.tblReporteResumenPorDia.column($(this).parent().index() + ':visible').search(this.value).draw();
+	$localTurno.$tblReporteResumenPorDia.find("thead").on('keyup', 'input.filtrable', function() {
+		$localTurno.tblReporteResumenPorDia.column($(this).parent().index() + ':visible').search(this.value).draw();
 	});
 
-	$localEscuela.$tblReporteResumen.find("thead").on('change', 'select', function() {
+	$localTurno.$tblReporteResumen.find("thead").on('change', 'select', function() {
 		var val = $.fn.dataTable.util.escapeRegex($(this).val());
-		$localEscuela.tblReporteResumenPorDia.column($(this).parent().index() + ':visible').search(val ? '^' + val + '$' : '', true, false).draw();
+		$localTurno.tblReporteResumenPorDia.column($(this).parent().index() + ':visible').search(val ? '^' + val + '$' : '', true, false).draw();
 	});
 
-	$localEscuela.$buscarCriteriosFechaCorte.on("click", function() {
-		var data = $localEscuela.$formTipoBusquedaFechaCorte.serialize();
+	$localTurno.$buscarCriteriosFechaCorte.on("click", function() {
+		var data = $localTurno.$formTipoBusquedaFechaCorte.serialize();
 		$.ajax({
 			type : "GET",
 			url : $variableUtil.root + "logautorizaciones?accion=buscarPorCriterios",
@@ -156,8 +157,8 @@ $(document).ready(function() {
 			dataType : "json",
 			data : data,
 			beforeSend : function() {
-				$localEscuela.tblReporteResumen.clear().draw();
-				$localEscuela.$buscarCriteriosFechaCorte.attr("disabled", true).find("i").removeClass("fa-search").addClass("fa-spinner fa-pulse fa-fw");
+				$localTurno.tblReporteResumen.clear().draw();
+				$localTurno.$buscarCriteriosFechaCorte.attr("disabled", true).find("i").removeClass("fa-search").addClass("fa-spinner fa-pulse fa-fw");
 			},
 			success : function(response) {
 				console.log(response);
@@ -165,13 +166,13 @@ $(document).ready(function() {
 					$funcionUtil.notificarException($variableUtil.busquedaSinResultados, "fa-exclamation-circle", "Información", "info");
 					return;
 				}
-				$localEscuela.tblReporteResumen.rows.add(response).draw();
+				$localTurno.tblReporteResumen.rows.add(response).draw();
 			},
 			error : function(response) {
 
 			},
 			complete : function() {
-				$localEscuela.$buscarCriteriosFechaCorte.attr("disabled", false).find("i").addClass("fa-search").removeClass("fa-spinner fa-pulse fa-fw");
+				$localTurno.$buscarCriteriosFechaCorte.attr("disabled", false).find("i").addClass("fa-search").removeClass("fa-spinner fa-pulse fa-fw");
 			}
 		});
 		
@@ -182,8 +183,8 @@ $(document).ready(function() {
 			dataType : "json",
 			data : data,
 			beforeSend : function() {
-				$localEscuela.tblReporteResumenPorDia.clear().draw();
-				$localEscuela.$buscarCriteriosFechaCorte.attr("disabled", true).find("i").removeClass("fa-search").addClass("fa-spinner fa-pulse fa-fw");
+				$localTurno.tblReporteResumenPorDia.clear().draw();
+				$localTurno.$buscarCriteriosFechaCorte.attr("disabled", true).find("i").removeClass("fa-search").addClass("fa-spinner fa-pulse fa-fw");
 			},
 			success : function(transaccionesPorDia) {
 				if (transaccionesPorDia.length == 0) {
@@ -192,19 +193,19 @@ $(document).ready(function() {
 				}
 				transaccionesNoConciliadasPorFechasChart.dataProvider = transaccionesPorDia;
 				transaccionesNoConciliadasPorFechasChart.validateData();
-				$localEscuela.tblReporteResumenPorDia.rows.add(transaccionesPorDia).draw();
+				$localTurno.tblReporteResumenPorDia.rows.add(transaccionesPorDia).draw();
 			},
 			error : function(response) {
 
 			},
 			complete : function() {
-				$localEscuela.$buscarCriteriosFechaCorte.attr("disabled", false).find("i").addClass("fa-search").removeClass("fa-spinner fa-pulse fa-fw");
+				$localTurno.$buscarCriteriosFechaCorte.attr("disabled", false).find("i").addClass("fa-search").removeClass("fa-spinner fa-pulse fa-fw");
 			}
 		});
 	});
 		
-	$localEscuela.$buscarCriteriosNumeroDias.on("click", function() {
-		var data = $localEscuela.$formTipoBusquedaNumeroDias.serialize();
+	$localTurno.$buscarCriteriosNumeroDias.on("click", function() {
+		var data = $localTurno.$formTipoBusquedaNumeroDias.serialize();
 		$.ajax({
 			type : "GET",
 			url : $variableUtil.root + "logautorizaciones?accion=buscarPorCriterios",
@@ -212,21 +213,21 @@ $(document).ready(function() {
 			dataType : "json",
 			data : data,
 			beforeSend : function() {
-				$localEscuela.tblReporteResumen.clear().draw();
-				$localEscuela.$buscarCriteriosNumeroDias.attr("disabled", true).find("i").removeClass("fa-search").addClass("fa-spinner fa-pulse fa-fw");
+				$localTurno.tblReporteResumen.clear().draw();
+				$localTurno.$buscarCriteriosNumeroDias.attr("disabled", true).find("i").removeClass("fa-search").addClass("fa-spinner fa-pulse fa-fw");
 			},
 			success : function(response) {
 				if (response.length == 0) {
 					$funcionUtil.notificarException($variableUtil.busquedaSinResultados, "fa-exclamation-circle", "Información", "info");
 					return;
 				}
-				$localEscuela.tblReporteResumen.rows.add(response).draw();
+				$localTurno.tblReporteResumen.rows.add(response).draw();
 			},
 			error : function(response) {
 
 			},
 			complete : function() {
-				$localEscuela.$buscarCriteriosNumeroDias.attr("disabled", false).find("i").addClass("fa-search").removeClass("fa-spinner fa-pulse fa-fw");
+				$localTurno.$buscarCriteriosNumeroDias.attr("disabled", false).find("i").addClass("fa-search").removeClass("fa-spinner fa-pulse fa-fw");
 			}
 		});
 		
@@ -237,8 +238,8 @@ $(document).ready(function() {
 			dataType : "json",
 			data : data,
 			beforeSend : function() {
-				$localEscuela.tblReporteResumenPorDia.clear().draw();
-				$localEscuela.$buscarCriteriosNumeroDias.attr("disabled", true).find("i").removeClass("fa-search").addClass("fa-spinner fa-pulse fa-fw");
+				$localTurno.tblReporteResumenPorDia.clear().draw();
+				$localTurno.$buscarCriteriosNumeroDias.attr("disabled", true).find("i").removeClass("fa-search").addClass("fa-spinner fa-pulse fa-fw");
 			},
 			success : function(transaccionesPorDia) {
 				if (transaccionesPorDia.length == 0) {
@@ -247,44 +248,44 @@ $(document).ready(function() {
 				}
 				transaccionesNoConciliadasPorFechasChart.dataProvider = transaccionesPorDia;
 				transaccionesNoConciliadasPorFechasChart.validateData();
-				$localEscuela.tblReporteResumenPorDia.rows.add(transaccionesPorDia).draw();
+				$localTurno.tblReporteResumenPorDia.rows.add(transaccionesPorDia).draw();
 			},
 			error : function(response) {
 
 			},
 			complete : function() {
-				$localEscuela.$buscarCriteriosNumeroDias.attr("disabled", false).find("i").addClass("fa-search").removeClass("fa-spinner fa-pulse fa-fw");
+				$localTurno.$buscarCriteriosNumeroDias.attr("disabled", false).find("i").addClass("fa-search").removeClass("fa-spinner fa-pulse fa-fw");
 			}
 		});
 	});
 	
-	$localEscuela.$formTipoBusquedaNumeroDias.find("input").keypress(function(event) {
+	$localTurno.$formTipoBusquedaNumeroDias.find("input").keypress(function(event) {
 		if (event.which == 13) {
-			$localEscuela.$buscarCriteriosNumeroDias.trigger("click");
+			$localTurno.$buscarCriteriosNumeroDias.trigger("click");
 			return false;
 		}
 	});
 	
-	$localEscuela.$formTipoBusquedaFechaCorte.find("input").keypress(function(event) {
+	$localTurno.$formTipoBusquedaFechaCorte.find("input").keypress(function(event) {
 		if (event.which == 13) {
-			$localEscuela.$formTipoBusquedaFechaCorte.trigger("click");
+			$localTurno.$formTipoBusquedaFechaCorte.trigger("click");
 			return false;
 		}
 	});
 	
 	/* Exportación de la Información */
 	
-	$localEscuela.$exportarCriterioFechaCorte.on("click", function(){
-		var data = $localEscuela.$formTipoBusquedaFechaCorte.serializeJSON();
-		data.descripcionTipoBusqueda = $localEscuela.$formTipoBusquedaFechaCorte.find("input[name='tipoBusqueda']:checked").parent().text().trim();
-		data.descripcionFechaCorte = data.fechaCorte || $localEscuela.$fechaCorte.val();
+	$localTurno.$exportarCriterioFechaCorte.on("click", function(){
+		var data = $localTurno.$formTipoBusquedaFechaCorte.serializeJSON();
+		data.descripcionTipoBusqueda = $localTurno.$formTipoBusquedaFechaCorte.find("input[name='tipoBusqueda']:checked").parent().text().trim();
+		data.descripcionFechaCorte = data.fechaCorte || $localTurno.$fechaCorte.val();
 		var paramCriterioBusqueda = $.param(data);
 		window.location.href = $variableUtil.root + "reporte/estadistica/prestamos?accion=buscarPorCriterios&" + paramCriterioBusqueda;
 	});
 	
-	$localEscuela.$exportarCriterioNumeroDias.on("click", function(){
-		var data = $localEscuela.$formTipoBusquedaNumeroDias.serializeJSON();
-		data.descripcionTipoBusqueda = $localEscuela.$formTipoBusquedaNumeroDias.find("input[name='tipoBusqueda']:checked").parent().text().trim();
+	$localTurno.$exportarCriterioNumeroDias.on("click", function(){
+		var data = $localTurno.$formTipoBusquedaNumeroDias.serializeJSON();
+		data.descripcionTipoBusqueda = $localTurno.$formTipoBusquedaNumeroDias.find("input[name='tipoBusqueda']:checked").parent().text().trim();
 		var paramCriterioBusqueda = $.param(data);
 		window.location.href = $variableUtil.root + "reporte/estadistica/prestamos?accion=buscarPorCriterios&" + paramCriterioBusqueda;
 	});
