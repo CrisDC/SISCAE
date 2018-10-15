@@ -68,15 +68,15 @@
 												</thead>
 												<tbody>
 
-													<tr th:each="solicitante : ${solicitantes}"
+													<tr th:each="solicitante : ${solicitantes}" style="background-color: #fff"
 														th:class="fila-personalizada">
-														<td th:text="${solicitante.codigo}"></td>
-														<td th:text="${solicitante.appPaterno}"></td>
-														<td th:text="${solicitante.appMaterno}"></td>
-														<td th:text="${solicitante.nombre}"></td>
-														<td th:text="${solicitante.numDocumento}"></td>
-														<td th:text="${solicitante.escuela}"></td>
-														<td th:text="${solicitante.solicitante}"></td>
+														<td th:text="${solicitante.codigo}" style="color: #67757C;"></td>
+														<td th:text="${solicitante.appPaterno}" style="color: #67757C;"></td>
+														<td th:text="${solicitante.appMaterno}" style="color: #67757C;"></td>
+														<td th:text="${solicitante.nombre}" style="color: #67757C;"></td>
+														<td th:text="${solicitante.numDocumento}" style="color: #67757C;"></td>
+														<td th:text="${solicitante.escuela}" style="color: #67757C;"></td>
+														<td th:text="${solicitante.solicitante}" style="color: #67757C;"></td>
 													</tr>
 												</tbody>
 											</table>

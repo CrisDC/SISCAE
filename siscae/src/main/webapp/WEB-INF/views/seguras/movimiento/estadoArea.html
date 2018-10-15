@@ -177,7 +177,7 @@
 									<div class="tab-pane p-20" id="tabla" role="tabpanel">
 
 
-										<div class="table-responsive m-t-40">
+										<div class="table-responsive m-t-5">
 											<h3>Estado del aula</h3>
 
 
@@ -186,29 +186,21 @@
 												class="table table-bordered table-striped">
 												<thead>
 													<tr>
-
-
-
 														<th>Recurso</th>
 														<th>Estado</th>
-
-
 														<th>Codigo</th>
 														<th>Nombre</th>
 														<th>Apellidos</th>
 														<th>Hora de entrada</th>
 														<th>Tiempo restante</th>
-
-
-
 													</tr>
 												</thead>
 												<tbody>
 
 
 
-													<tr th:each="prestamo : ${prestamos}">
-														<td th:text="${prestamo.numero}"></td>
+													<tr th:each="prestamo : ${recursosIndividuales}" style="background-color: #fff;">
+														<td th:text="${prestamo.numero}" style="color: #67757C;"></td>
 
 														<td th:if="${prestamo.estado} == 'DISPONIBLE'"><span
 															class="badge badge-primary">DISPONIBLE</span></td>
@@ -218,15 +210,15 @@
 															class="badge badge-warning">LIBERABLE</span></td>
 
 														<td
-															th:text="${prestamo.estado} == 'DISPONIBLE' ? '-' : ${prestamo.codigoAlumno}"></td>
+															th:text="${prestamo.estado} == 'DISPONIBLE' ? '-' : ${prestamo.codigoAlumno}" style="color: #67757C;"></td>
 														<td
-															th:text="${prestamo.estado} == 'DISPONIBLE' ? '-' : ${prestamo.nombre}"></td>
+															th:text="${prestamo.estado} == 'DISPONIBLE' ? '-' : ${prestamo.nombre}" style="color:#67757C;" ></td>
 														<td
-															th:text="${prestamo.estado} == 'DISPONIBLE' ? '-' : ${prestamo.appPaterno} + ' ' + ${prestamo.appMaterno}"></td>
+															th:text="${prestamo.estado} == 'DISPONIBLE' ? '-' : ${prestamo.appPaterno} + ' ' + ${prestamo.appMaterno}" style="color:#67757C;" ></td>
 														<td
-															th:text="${prestamo.estado} == 'DISPONIBLE' ? '-' : ${prestamo.horaEntrada}"></td>
+															th:text="${prestamo.estado} == 'DISPONIBLE' ? '-' : ${prestamo.horaEntrada}" style="color: #67757C;" ></td>
 														<td
-															th:text="${prestamo.estado} == 'DISPONIBLE' ? '-' : ${#dates.format(#dates.createNow(),'YYYY/MM/dd HH:mm')}"></td>
+															th:text="${prestamo.estado} == 'DISPONIBLE' ? '-' : ${#dates.format(#dates.createNow(),'YYYY/MM/dd HH:mm')}" style="color: #67757C;" ></td>
 
 
 
