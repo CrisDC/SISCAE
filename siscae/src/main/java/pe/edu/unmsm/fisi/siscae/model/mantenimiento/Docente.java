@@ -24,8 +24,13 @@ public class Docente {
 	@NotNull(message = "{NotNull.Docente.persona}")
 	private Persona persona;
 	
-	@NotNull(message = "{NotNull.Docente.estadoDocente}")
+	//@NotNull(message = "{NotNull.Docente.estadoDocente}")
 	private Integer idEstadoTabla;
-	
+	private String descripcionCorta;
+	private Integer numDocumento;
+	private String nombre;
+	private String appPaterno;
+	private String appMaterno;
+	private String estado; 
 
 }

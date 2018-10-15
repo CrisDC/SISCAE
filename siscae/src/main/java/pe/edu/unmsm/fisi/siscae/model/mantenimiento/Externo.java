@@ -22,7 +22,7 @@ public class Externo {
 	
 	private Persona persona;
 	
-	@NotNull(message = "{NotNull.Externo.estadoExterno}")
+	//@NotNull(message = "{NotNull.Externo.estadoExterno}")
 	private Integer idEstadoTabla;
 	
 	private Integer idExterno;

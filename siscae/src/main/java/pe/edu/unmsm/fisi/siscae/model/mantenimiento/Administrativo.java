@@ -28,12 +28,12 @@ public class Administrativo {
 
 	private Persona persona;
 	
-	@NotNull(message = "{NotNull.Administrativo.codigoAdm}")
-    @NotBlank(message = "{NotBlank.Administrativo.codigoAdm}")
+	//@NotNull(message = "{NotNull.Administrativo.codigoAdm}")
+    //@NotBlank(message = "{NotBlank.Administrativo.codigoAdm}")
     @Length(min = 3, max = 20, message = "{Length.CodigoProcesoSwitch.codigoAdm}")
 	private String codigoAdm;
 	
-	
+	private Integer idAdministrativo;
 	
 	private String nombre;
 

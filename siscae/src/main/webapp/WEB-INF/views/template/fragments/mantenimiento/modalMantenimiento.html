@@ -1172,7 +1172,7 @@
 	
 	<!-- Tabla Docente -->
 	<th:block th:fragment="docente">
-		<div class="form-group">
+	<div class="form-group">
 			<div class="input-group">
                 <div class="input-group-btn search-panel">
                     
@@ -1184,22 +1184,23 @@
 						</select>
 					
                 </div>
-                <input type="hidden" name="search_param" value="all" id="search_param">         
-                <input type="text" class="form-control" name="x" placeholder="Número de Documento">
+                <input type="hidden" name="idPersona" value="all" id="idPersona">         
+                <input type="text" class="form-control" name="numeroDocumento" placeholder="Número de Documento">
                 <span class="input-group-btn">
                     <button class="btn btn-default" type="button" id="buscar"><span class="glyphicon glyphicon-search"></span></button>
                 </span>
             </div>
 		</div>
+				
 		<div class="form-group">
 			<label class="col-lg-2 control-label">Nombre</label>
 			<div class="col-lg-10">
-				<input class="form-control" name="nombre">
+				<input id="nombreCompleto"class="form-control upperCase elemento-modificable" name="nombres" >
 			</div>
 		</div>
 		 
 		<div class="form-group">
-			<label class="col-lg-2 control-label">Estado del Externo </label>
+			<label class="col-lg-2 control-label">Estado del Docente </label>
 			<div class="col-lg-10">
 				<select id="idEstadoTabla" class="form-control select2 elemento-modificable"
 					name="idEstadoTabla">
@@ -1224,17 +1225,18 @@
 						</select>
 					
                 </div>
-                <input type="hidden" name="search_param" value="all" id="search_param">         
-                <input type="text" class="form-control" name="x" placeholder="Número de Documento">
+                <input type="hidden" name="idPersona" value="all" id="idPersona">         
+                <input type="text" class="form-control" name="numeroDocumento" placeholder="Número de Documento">
                 <span class="input-group-btn">
                     <button class="btn btn-default" type="button" id="buscar"><span class="glyphicon glyphicon-search"></span></button>
                 </span>
             </div>
 		</div>
+				
 		<div class="form-group">
 			<label class="col-lg-2 control-label">Nombre</label>
 			<div class="col-lg-10">
-				<input class="form-control" name="nombre">
+				<input id="nombreCompleto"class="form-control upperCase elemento-modificable" name="nombres" >
 			</div>
 		</div>
 		 
@@ -1418,6 +1420,7 @@
 	</th:block>
 	
 		<!-- Tabla Administrativo -->
+		
 	<th:block th:fragment="administrativo">
 		<div class="form-group">
 			<div class="input-group">
@@ -1431,24 +1434,25 @@
 						</select>
 					
                 </div>
-                <input type="hidden" name="search_param" value="all" id="search_param">         
-                <input type="text" class="form-control" name="x" placeholder="Número de Documento">
+                <input type="hidden" name="idPersona" value="all" id="idPersona">         
+                <input type="text" class="form-control" name="numeroDocumento" placeholder="Número de Documento">
                 <span class="input-group-btn">
                     <button class="btn btn-default" type="button" id="buscar"><span class="glyphicon glyphicon-search"></span></button>
                 </span>
             </div>
 		</div>
+				
 		<div class="form-group">
 			<label class="col-lg-2 control-label">Nombre</label>
 			<div class="col-lg-10">
-				<input class="form-control" name="nombre">
+				<input id="nombreCompleto"class="form-control upperCase elemento-modificable" name="nombres" >
 			</div>
 		</div>
 		
 		<div class="form-group">
 			<label class="col-lg-2 control-label">Código de Administrativo</label>
 			<div class="col-lg-10">
-				<input class="form-control upperCase elemento-modificable" name="codigoAlumno">
+				<input class="form-control upperCase elemento-modificable" name="codigoAdm">
 			</div>
 		</div>
 		
@@ -1473,8 +1477,8 @@
 				<select id="idAdministrativo" class="form-control select2 upperCase elemento-modificable"
 					name="idAdministrativo">
 					<option value="" selected="selected">Seleccione un Administrativo</option>
-					<option th:each="administrativo : ${administrativos}" th:value="${administrativo.idAdministrativo}"
-						th:text="|${administrativo.persona.nombre}|"></option>
+					<option th:each="administrativo : ${administrativo}" th:value="${administrativo.idAdministrativo}"
+						th:text="|${administrativo.nombre}|"></option>
 				</select>
 			</div>
 		</div>

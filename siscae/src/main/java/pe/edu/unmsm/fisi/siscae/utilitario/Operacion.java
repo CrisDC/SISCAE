@@ -21,7 +21,8 @@ public enum Operacion
         ID_TABLA,
         ID_ITEM,
         TIPO_NUM_DOCUMENTO,
-        TABLA_ORIGEN
+        TABLA_ORIGEN,
+        ADMI_NOMBRES
     }
     
     private OperacionParam parametro;

@@ -7,7 +7,9 @@ $(document).ready(function() {
 		$registrarMantenimiento : $("#registrarMantenimiento"),
 		$filaSeleccionada : "",
 		$actualizarMantenimiento : $("#actualizarMantenimiento"),
-		idDocenteSeleccionado : ""
+		idDocenteSeleccionado : "",
+		personaActual : null,	
+		$btnBuscar : $("#buscar")
 	}
 	$formMantenimiento = $("#formMantenimiento");
 
@@ -33,19 +35,25 @@ $(document).ready(function() {
 			$tablaFuncion.aniadirFiltroDeBusquedaEnEncabezado(this, $local.$tablaMantenimiento);
 		},
 		"columnDefs" : [ {
-			"targets" : [ 0, , 1 ],
+			"targets" : [ 0, 1, 2, 3],
 			"className" : "all filtrable",
-		},{
-			"targets" : 2,
+		}, {
+			"targets" : 4,
 			"className" : "all dt-center",
 			"defaultContent" : $variableUtil.botonActualizar + " " + $variableUtil.botonEliminar
 		} ],
 		"columns" : [ {
-			"data" : 'idDocente',
-			"title" : "Id"
-		},{
-			"data" : 'idEstadoTabla',
+			"data" : 'estado',
 			"title" : "Estado"
+		},{
+			"data" : 'nombre',
+			"title" : "Nombre"
+		},{
+			"data" : 'appPaterno',
+			"title" : "Apellido Paterno"
+		},{
+			"data" : 'appMaterno',
+			"title" : "Apellido Materno"
 		},{
 			"data" : null,
 			"title" : 'Acción'
@@ -100,6 +108,9 @@ $(document).ready(function() {
 			return;
 		}
 		var docente = $formMantenimiento.serializeJSON();
+		docente.persona = {};
+		
+		docente.persona.idPersona = $local.personaActual.idPersona;
 		$.ajax({
 			type : "POST",
 			url : $variableUtil.root + "docente",
@@ -174,7 +185,10 @@ $(document).ready(function() {
 				$local.$actualizarMantenimiento.attr("disabled", false).find("i").addClass("fa-pencil-square").removeClass("fa-spinner fa-pulse fa-fw");
 			}
 		});
-		$local.$tablaMantenimiento.children("tbody").on("click", ".eliminar", function() {
+		
+	});
+	
+	$local.$tablaMantenimiento.children("tbody").on("click", ".eliminar", function() {
 		$local.$filaSeleccionada = $(this).parents("tr");
 		var empresa = $local.tablaMantenimiento.row($local.$filaSeleccionada).data();
 		$.confirm({
@@ -232,5 +246,55 @@ $(document).ready(function() {
 			}
 			});
 		});
+	
+	
+	$local.$btnBuscar.on("click", function() {
+//		if (!$formMantenimiento.valid()) {
+//			return;
+//		}
+		var alumno = $formMantenimiento.serializeJSON();
+		var criterio = {idTipoDocumento   :  alumno.idTipoDocumento,
+						numeroDocumento :   alumno.numeroDocumento};
+		
+		//criterio.numeroDocumentoIdentidad = alumno.numeroDocumentoIdentidad; 
+		console.log("funcion");
+						
+		$.ajax({
+			type : "GET",
+			url : $variableUtil.root + "persona?accion=buscarIdPersona",
+			data : criterio,//*
+			beforeSend : function(xhr) {
+				$local.$registrarMantenimiento.attr("disabled", true).find("i").removeClass("fa-floppy-o").addClass("fa-spinner fa-pulse fa-fw");
+				xhr.setRequestHeader('Content-Type', 'application/json');
+				xhr.setRequestHeader("X-CSRF-TOKEN", $variableUtil.csrf);
+			},
+			statusCode : {
+				400 : function(response) {
+					$funcionUtil.limpiarMensajesDeError($formMantenimiento);
+					$funcionUtil.mostrarMensajeDeError(response.responseJSON, $formMantenimiento);
+				}
+			},
+			success : function(response) {
+				console.log(response)
+				
+				//$funcionUtil.notificarException(response, "fa-check", "Aviso", "success");
+				
+				$("#nombreCompleto").val(response.appPaterno + " " + response.appMaterno + ", " + response.nombre);
+				
+				$local.personaActual = response;
+				
+				
+				
+			},
+			error : function(response) {
+			},
+			complete : function(response) {
+				$local.$registrarMantenimiento.attr("disabled", false).find("i").addClass("fa-floppy-o").removeClass("fa-spinner fa-pulse fa-fw");
+				
+				
+			}
+		});	
+		
 	});
+	
 });
