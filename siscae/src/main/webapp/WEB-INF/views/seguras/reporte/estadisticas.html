@@ -93,7 +93,10 @@
 										</div>
 									</div>
 									<div class="tab-pane" id="tabReporteGraficoCriterio" role="tabpanel">
-										<div class="p-20"></div>
+										<div class="p-20">
+										<canvas id="grafico"></canvas>
+										<div id="chartjs-legend" class="noselect"></div>
+										</div>
 									</div>
 									
 									<div class="tab-pane" id="tabReporteResumenFecha" role="tabpanel">
@@ -128,6 +131,8 @@
 		<script th:src="@{/resources/js/guiuser/lib/sticky-kit-master/dist/sticky-kit.min.js}"></script>
 		
 		<!--Custom JavaScript -->
+		<script th:src="@{/resources/js/guiuser/Chart.bundle.js}"></script>
+		<script th:src="@{/resources/js/guiuser//utils.js}"></script>
 		<!-- Amchart -->
 		<script th:src="@{/resources/js/guiuser/lib/morris-chart/raphael-min.js}"></script>
 		<script th:src="@{/resources/js/guiuser/lib/morris-chart/morris.js}"></script>
@@ -165,6 +170,338 @@
 		<script th:src="@{/resources/js/pagina/reporte/estadistica/{reporte}/{reporte}.js(reporte = ${reporte})}"></script>
 		<script th:src="@{/resources/js/pagina/reporte/estadistica/{reporte}/{reporte}Formulario.js(reporte = ${reporte})}"></script>
 		<script th:src="@{/resources/js/pagina/reporte/estadistica/{reporte}/criterio/{criterio}.js(reporte = ${reporte}, criterio = ${criterio} )}"></script>
+		<script>
+			var canvas = document.getElementById('grafico');
+			var ctx = canvas.getContext('2d');
+			var color = Chart.helpers.color;
+			var Color = [
+				window.chartColors.red, 
+				window.chartColors.orange, 
+				window.chartColors.green,
+				'#4dc9f6',
+				'#f53794',
+				'#537bc4',
+				'#acc236',
+				'#00a950',
+				'#58595b',
+				'#8549ba'
+			];
+			var graficoData = {
+					labels: [],
+					datasets: [{
+						backgroundColor: [],
+						borderColor: [],
+						borderWidth: 1,
+						data: [
+						]
+					}]
+				};
+
+			reiniciar();
+
+			var graficoChart = new Chart(ctx, {
+				type: 'bar',
+				data: graficoData,
+				options: {
+					responsive: true,
+					  legendCallback: function(chart) {
+					    var text = [];
+					    text.push('<ul class="' + chart.id + '-legend">');
+					    for (var i = 0; i < chart.data.datasets[0].data.length; i++) {
+					      text.push('<li><span style="background-color:' + chart.data.datasets[0].backgroundColor[i] + '">');
+					      if (chart.data.labels[i]) {
+					        text.push(chart.data.labels[i]);
+					      }
+					      text.push('</span></li>');
+					    }
+					    text.push('</ul>');
+					    return text.join("");
+					  },
+					legend:false,/* {
+					   labels: {
+					      generateLabels: function(chart) {
+					      	if(graficoChart!=null && graficoChart.config.type.localeCompare('line')!=0){
+						         var labels = chart.data.labels;
+						         var dataset = chart.data.datasets[0];
+						         var legend = labels.map(function(label, index) {
+						            return {
+						               datasetIndex: 0,
+						               fillStyle: dataset.backgroundColor && dataset.backgroundColor[index],
+						               strokeStyle: dataset.borderColor && dataset.borderColor[index],
+						               lineWidth: dataset.borderWidth,
+						               text: label
+						            }
+						         });
+						         return legend;
+					      	}else{
+					      		return chart.data.datasets.map(function(dataset, index) {
+						            return {
+						               fillStyle: dataset.backgroundColor,
+						               strokeStyle: 'rgb(255, 255, 255)',
+						               lineWidth: dataset.borderWidth,
+						               text: dataset.label
+						            }
+						         });
+					      	}
+					      }
+					   },
+					   position: 'right',
+					   display: false
+				    }*/
+					title: {
+						display: true,
+						text: 'Seleccione la gráfica que desee'
+					},
+					tooltips: {
+						mode: 'index',
+						intersect: false,
+						position: 'nearest',
+						backgroundColor: 'rgb(40, 40, 40)',
+
+			            callbacks: {
+			                label: function(tooltipItem, data) {
+			                    var label = data.datasets[tooltipItem.datasetIndex].label || '';
+			                    if (label) {
+			                        label += ': ';
+			                    }
+
+			                    label += data.datasets[tooltipItem.datasetIndex].data[tooltipItem.index];
+			                    return label;
+			                }
+	            }
+					},
+					/*
+					var nombresGrandes = false;
+                    nombresGrandes = nombresGrandes || value.length()>6;
+                    if(nombresGrandes){
+                    	return '$' + (index+1);
+                    }else{
+                    	return '$' + value;
+                    }
+					*/
+					scales: {
+						xAxes: [{
+							display: true,
+
+							ticks: {
+				                userCallback: function(label, index, labels) {
+				                	var nombreGrande = false;
+				                    //nombreGrande = nombreGrande || label.length>16;
+				                    if(nombreGrande){
+				                    	return (index+1);
+				                    }else{
+				                    	return label;
+				                    }
+				                }
+				             }
+					 
+						}],
+						yAxes: [{
+							display: true,
+							ticks:{
+								beginAtZero: true
+							}
+						}]
+					}
+				}
+			})
+
+			function reiniciar(){
+				graficoData.labels=[];
+				graficoData.datasets = [{
+						backgroundColor: [],
+						borderColor: [],
+						borderWidth: 1,
+						data: []
+					}];
+				if(graficoChart!=null){
+					graficoChart.options.scales.xAxes[0].display = true;
+					graficoChart.options.scales.yAxes[0].display = true;
+					graficoChart.options.legend.display = false;
+				}	
+			}
+		    myChart.update();
+			$("#chartjs-legend").html(graficoChart.generateLegend());
+			$("#chartjs-legend").on('click', "li", function() {
+				graficoChart.data.datasets[0].data[$(this).index()] += 50;
+				graficoChart.update();
+			  console.log('legend: ' + data.datasets[0].data[$(this).index()]);
+			});
+		</script>
+		
+		<script>
+
+		function graficarBarras(data, titulo, dc) {
+			graficoChart.config.type = 'bar';
+			reiniciar();
+			graficoChart.options.title.text=titulo;
+			var columna = data[0];
+			var periodos = data[1];
+			var columnaXperiodo = data[2];
+			var n = columna.length;
+			for(var i=0; i<n; i++){
+				var tipocolumnaNuevo = columna[i];
+				var colorNuevo = Color[(i+dc) % Color.length];
+				var numAux = 0;
+				columnaXperiodo[i].forEach(function(elemento) {
+					numAux += elemento;
+				});
+				graficoData.labels.push(tipocolumnaNuevo);	
+				graficoData.datasets[0].data.push(numAux);
+				graficoData.datasets[0].backgroundColor.push(color(colorNuevo).alpha(0.9).rgbString());
+				graficoData.datasets[0].borderColor.push(colorNuevo);
+				graficoChart.update();
+			}
+			
+		};
+
+		function graficarPie(data, titulo, dc) {
+			var columna = data[0];
+			var periodos = data[1];
+			var columnasXperiodo = data[2];
+			graficoChart.config.type= 'pie';
+			reiniciar();
+			graficoChart.options.title.text=titulo;
+			graficoChart.options.scales.xAxes[0].display = false;
+			graficoChart.options.scales.yAxes[0].display = false;
+			graficoChart.options.legend.display = true;
+			graficoData.datasets[0].borderWidth = 3;
+			var n = columna.length;
+			for(var i=0; i<n; i++){
+				var escuelaNueva = columna[i];
+				var colorNuevo = Color[(i + dc)% Color.length];
+				var numAux = 0;
+				columnasXperiodo[i].forEach(function(elemento) {
+					numAux += elemento;
+				});
+				graficoData.labels.push(escuelaNueva);	
+				graficoData.datasets[0].data.push(numAux);
+				graficoData.datasets[0].backgroundColor.push(color(colorNuevo).alpha(0.9).rgbString());
+				graficoData.datasets[0].borderColor.push('rgb(255, 255, 255)');
+				graficoChart.update();
+			}
+		};
+
+
+		function graficarLineaTemporal(data, titulo, dc, radio, scroll) {
+			radio.checked=true;
+			var columna = data[0];
+			var periodos = data[1];
+			var columnasXperiodo = data[2];
+			var n = columna.length;
+			if(columna.length==0){
+				return;
+			}
+
+			graficoChart.config.type= 'line';
+			reiniciar();
+			graficoChart.options.title.text=titulo;
+			graficoChart.options.legend.display = true;
+
+			graficoChart.options.elements.line.tension = parseFloat(document.getElementById(scroll).value);	//este es el cambio a linea 
+
+			primerColor = Color[(dc) % Color.length];
+			graficoData.datasets[0].fill=false;
+			graficoData.datasets[0].borderColor = primerColor;
+			graficoData.datasets[0].backgroundColor = color(primerColor).alpha(0.9).rgbString();
+			graficoData.datasets[0].label = columna[0];
+			graficoData.datasets[0].borderWidth = 3;
+
+			for(var i = 1; i<n; i++){
+				var colorNuevo = Color[(i+dc) % Color.length];
+				var newDataset = {
+					label: columna[i],
+					backgroundColor: color(colorNuevo).alpha(0.9).rgbString(),
+					borderColor: colorNuevo,
+					borderWidth: 3,
+					data: []
+				};
+				graficoData.datasets.push(newDataset);
+				graficoData.datasets[i].fill=false;
+			}
+
+			for(var i=0; i<periodos.length; i++){
+				var nuevoMes = periodos[i];
+				graficoData.labels.push(periodos[i]);
+				for (var j=0; j<n; j++){
+					graficoData.datasets[j].data.push(columnasXperiodo[j][i]);
+					graficoChart.update();
+				}
+			}
+		}
+		//Sin variable Suma - datos unicos 
+		function graficarBarras2(data, titulo, dc) {
+			graficoChart.config.type = 'bar';
+			reiniciar();
+			graficoChart.options.title.text=titulo;
+			var columnas = data[0];
+			var valor = data[1];
+			var n = columnas.length;
+			for(var i=0; i<n; i++){
+				var columna = columnas[i];
+				var colorNuevo = Color[(i+dc) % Color.length];
+				graficoData.labels.push(columna);	
+				graficoData.datasets[0].data.push(valor[i]);
+				graficoData.datasets[0].backgroundColor.push(color(colorNuevo).alpha(0.9).rgbString());
+				graficoData.datasets[0].borderColor.push(colorNuevo);
+				graficoChart.update();
+			}
+			
+		};
+
+		function graficarPie2(data, titulo, dc) {
+			var columnas = data[0];
+			var valor = data[1];
+			graficoChart.config.type= 'pie';
+			reiniciar();
+			graficoChart.options.title.text=titulo;
+			graficoChart.options.scales.xAxes[0].display = false;
+			graficoChart.options.scales.yAxes[0].display = false;
+			graficoChart.options.legend.display = true;
+			graficoData.datasets[0].borderWidth = 3;
+			var n = columnas.length;
+			for(var i=0; i<n; i++){
+				var colorNuevo = Color[(i + dc)% Color.length];
+				graficoData.labels.push(columnas[i]);	
+				graficoData.datasets[0].data.push(parseInt(valor[i]));
+				graficoData.datasets[0].backgroundColor.push(color(colorNuevo).alpha(0.9).rgbString());
+				graficoData.datasets[0].borderColor.push('rgb(255, 255, 255)');
+				graficoChart.update();
+			}
+		};
+		</script>
+		<script>
+			var dataServer;
+			function setDataServer(obj){
+				dataServer = obj;
+				var columnas = [], valores = [];
+				alert(dataServer);
+				for(i in dataServer){
+					columnas.push(dataServer[i].escuela);
+					valores.push(parseInt(dataServer[i].numeroPrestamo));
+				}
+				graficarPie2([columnas,valores], "Este es el titulo", 0);
+			}
+			
+			function ajax(){
+				$.ajax({
+		              url : "../../../reporteEstadisticaPrestamosPorEscuela",
+		              type : 'GET',
+		              data : "accion=buscarTodos",
+	            	  success : function(response) {
+            			setDataServer(response);
+	 	     		  }
+	             });
+			}
+            
+			ajax();
+			/*for(var i in dataServer){
+				alert(i);
+			}*/
+		
+			
+			
+		</script>
 	</div>
 </body>
 
