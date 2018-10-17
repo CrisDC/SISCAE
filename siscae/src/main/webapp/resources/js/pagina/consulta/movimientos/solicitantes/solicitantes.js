@@ -15,9 +15,6 @@ $(document).ready(function() {
     	let appPaterno = $("#appPaterno").val();
     	let appMaterno = $("#appMaterno").val();
     	let nombre = $("#nombre").val();
-    	let sexo = $("#sexo").val();
-    	let fechaNac =  $("#fechaNac").val();
-    	let telefono = $("#telefono").val();
     	let tipoAcademico = $('#tipoAcademico').val();
     	let ocupacion = $('#ocupacion').val();
     	let codigoAlumno = $('#codigo').val();
@@ -29,17 +26,12 @@ $(document).ready(function() {
 	        	"appPaterno": appPaterno,
 	        	"appMaterno": appMaterno,
 	        	"nombre": nombre,
-	        	"sexo": sexo,
-	        	"fechaNac": fechaNac,
-	        	"telefono": telefono,
 	        	"tipoAcademico": tipoAcademico,
 	        	"ocupacion": ocupacion,
 	        	"codigoAlumno": codigoAlumno,
 	        	"idEscuela": idEscuela
 	    };
-    	
-    	
-    	
+ 
     	
     	$.ajax({
             url :  $variableUtil.root + "registroSolicitanteNuevo",

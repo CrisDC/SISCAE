@@ -76,11 +76,6 @@ $(document).ready(function() {
 				notOnlySpace : "El Apellido Materno no puede contener solo espacios en blanco.",
 				rangelength : "El Apellido Materno debe contener entre 2 y 45 carácteres."
 			},
-			telefono : {
-				required : "Ingrese un número telefónico.",
-				notOnlySpace : "El número telefónico no puede contener solo espacios en blanco.",
-				rangelength : "El número telefónico debe contener entre 7 y 20 carácteres."
-			},
 			
 			codigo : {
 				required : "Ingrese un Código de alumno",
@@ -88,13 +83,6 @@ $(document).ready(function() {
 				rangelength : "El Código de alumno debe contener 8 digitos"
 			},
 			
-			fechaNac : {
-				required : "Ingrese una fecha de nacimiento",
-			},
-			sexo : {
-				required : "Ingrese un sexo",
-				notOnlySpace : "El sexo no puede contener solo espacios en blanco."
-			},
 			escuela : {
 				required : "Ingrese una escuela",
 				notOnlySpace : "La escuela no puede contener solo espacios en blanco."

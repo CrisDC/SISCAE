@@ -47,8 +47,6 @@
 								<!-- Tab panes -->
 								<div class="tab-content">
 
-
-
 									<div class="tab-pane  p-20" id="tabla" role="tabpanel">
 
 										<div class="table-responsive m-t-30">
@@ -88,8 +86,73 @@
 											<h4 class="card-title">Registro de solicitantes</h4>
 												<form class="p-t-10" id="solicitantesFormulario">
 												
+												
 												<div class="row">
-													<div class="col-md-6">
+													<div class="col-md-12">
+
+														<div class="form-group" name="formulario-ocupacion" 
+															id="formulario-ocupacion">
+															<label>Ocupacion</label>
+															<div class="input-group">
+																<select class="form-control js-example-basic-single" required
+																	id="ocupacion" name="ocupacion">
+																	<option value="-1">Ingrese la ocupacion</option>
+																	<option value="ALUMNO">ALUMNO</option>
+																	<option value="DOCENTE">DOCENTE</option>
+																	<option value="EXTERNO">OTRO</option>
+																</select>
+															</div>
+														</div>
+													</div>
+
+													<div class="col-md-12">
+
+														<div class="form-group" id="formulario-codigo"
+															name="formulario-codigo">
+															<label>Codigo de alumno</label> <input id="codigo"
+																name="codigo" type="number" class="form-control">
+														</div>
+
+													</div>
+												</div>
+
+
+												<div class="row">
+													<div class="col-md-12">
+														<div class="form-group" id="formulario-escuela"
+															name="formulario-escuela">
+															<label>Escuela</label>
+															<div class="input-group">
+																<select class="form-control js-example-basic-single" id="escuela" name="escuela">
+																	<option value="-1" selected="selected"
+																		disabled="disabled">Ingrese su escuela</option>
+																	<option th:each="escuela : ${escuelas}"
+																		th:value="${escuela.idEscuela}"
+																		th:text="${escuela.nombre}"></option>
+																</select>
+															</div>
+														</div>
+													</div>
+														<div class="col-md-12">
+														
+														<div class="form-group" id="formulario-tipo-academico"
+													name="formulario-tipo-academico">
+													<label>Tipo Academico</label>
+													<div class="input-group">
+														<select class="form-control js-example-basic-single" id="tipoAcademico" name="tipoAcademic">
+															<option value="-1" selected="selected" disabled="disabled">Ingrese
+																el tipo academico</option>
+															<option th:each="tipoAcademico : ${tipoAcademicos}"
+																th:value="${tipoAcademico.idItem}"
+																th:text="${tipoAcademico.descripcion}"></option>
+														</select>
+													</div>
+												</div>
+												</div>
+												</div>
+												
+												<div class="row">
+													<div class="col-md-12">
 														<div class="form-group">
 															<label>Tipo de documento</label>
 															<div class="input-group">
@@ -107,7 +170,7 @@
 															</div>
 														</div>
 
-													<div class="col-md-6">
+													<div class="col-md-12">
 														<div class="form-group">
 															<label>Numero de documento</label>
 															<div class="input-group">
@@ -122,7 +185,7 @@
 													
 													
 												<div class="row">
-													<div class="col-md-6">
+													<div class="col-md-12">
 														<div class="form-group">
 															<label>Apellido Paterno</label>
 															<div class="input-group">
@@ -132,7 +195,7 @@
 																	
 															</div>
 														</div>
-													<div class="col-md-6">
+													<div class="col-md-12">
 														<div class="form-group">
 															<label>Apellido Materno</label>
 															<div class="input-group">
@@ -146,7 +209,7 @@
 													</div>
 
 												<div class="row">
-													<div class="col-md-6">
+													<div class="col-md-12">
 														<div class="form-group">
 															<label>Nombres</label>
 															<div class="input-group">
@@ -156,106 +219,7 @@
 																	
 															</div>
 														</div>
-
-													<div class="col-md-6">
-
-														<div class="form-group">
-															<label>Sexo</label>
-															<div class="input-group">
-																<select class="form-control js-example-basic-single" required
-																	id="sexo" name="sexo">
-																	<option th:value="-1" selected="selected"
-																		disabled="disabled">Ingrese el sexo</option>
-																	<option th:value="'MASCULINO'">Masculino</option>
-																	<option th:value="'FEMENINO'">Femenino</option>
-																</select>
-																 </div>
-																
-															</div>
-														</div>
-													</div>
-
-												<div class="row">
-													<div class="col-md-6">
-														<div class="form-group">
-															<label>Fecha de nacimiento</label> <input id="fechaNac" required
-																name="fechaNac" type="date" class="form-control">
-														</div>
-													</div>
-
-													<div class="col-md-6">
-														<div class="form-group">
-															<label>Telefono</label> <input id="telefono"
-																name="telefono" type="number" class="form-control" required>
-														</div>
-													</div>
-												</div>
-
-												<div class="row">
-													<div class="col-md-6">
-
-														<div class="form-group" name="formulario-ocupacion" 
-															id="formulario-ocupacion">
-															<label>Ocupacion</label>
-															<div class="input-group">
-																<select class="form-control js-example-basic-single" required
-																	id="ocupacion" name="ocupacion">
-																	<option value="-1">Ingrese la ocupacion</option>
-																	<option value="ALUMNO">ALUMNO</option>
-																	<option value="DOCENTE">DOCENTE</option>
-																	<option value="EXTERNO">OTRO</option>
-																</select>
-															</div>
-														</div>
-													</div>
-
-													<div class="col-md-6">
-
-														<div class="form-group" id="formulario-codigo"
-															name="formulario-codigo">
-															<label>Codigo de alumno</label> <input id="codigo"
-																name="codigo" type="number" class="form-control">
-														</div>
-
-													</div>
-												</div>
-
-
-												
-
-
-												<div class="row">
-													<div class="col-md-6">
-														<div class="form-group" id="formulario-escuela"
-															name="formulario-escuela">
-															<label>Escuela</label>
-															<div class="input-group">
-																<select class="form-control js-example-basic-single" id="escuela" name="escuela">
-																	<option value="-1" selected="selected"
-																		disabled="disabled">Ingrese su escuela</option>
-																	<option th:each="escuela : ${escuelas}"
-																		th:value="${escuela.idEscuela}"
-																		th:text="${escuela.nombre}"></option>
-																</select>
-															</div>
-														</div>
-													</div>
-														<div class="col-md-6">
 														
-														<div class="form-group" id="formulario-tipo-academico"
-													name="formulario-tipo-academico">
-													<label>Tipo Academico</label>
-													<div class="input-group">
-														<select class="form-control js-example-basic-single" id="tipoAcademico" name="tipoAcademic">
-															<option value="-1" selected="selected" disabled="disabled">Ingrese
-																el tipo academico</option>
-															<option th:each="tipoAcademico : ${tipoAcademicos}"
-																th:value="${tipoAcademico.idItem}"
-																th:text="${tipoAcademico.descripcion}"></option>
-														</select>
-													</div>
-												</div>
-												</div>
 												</div>
 
 												<div class="form-group text-center">
