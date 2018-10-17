@@ -85,10 +85,9 @@
 
 									<div class="tab-pane active" id="nuevo" role="tabpanel">
 										<div class="p-20">
-											<h4 class="card-title">Registro de solicitantes nuevos</h4>
-											<p>Datos nuevos del solicitante</p>
-											
-
+											<h4 class="card-title">Registro de solicitantes</h4>
+												<form class="p-t-10" id="solicitantesFormulario">
+												
 												<div class="row">
 													<div class="col-md-6">
 														<div class="form-group">
@@ -96,7 +95,7 @@
 															<div class="input-group">
 																<select class="form-control js-example-basic-single"
 																	id="tipoDocumento" name="tipoDocumento" required>
-																	<option value="" selected="selected"
+																	<option value="-1" selected="selected"
 																		disabled="disabled">Ingrese el tipo de
 																		documento</option>
 																	<option th:each="tipoDocumento : ${tipoDocumentos}"
@@ -113,8 +112,7 @@
 															<label>Numero de documento</label>
 															<div class="input-group">
 																<input type="number" class="form-control" required
-																	id="numDocumento" name="numDocumento"
-																	placeholder="Ingrese su numero de documento">
+																	id="numDocumento" name="numDocumento">
 																	 
 															</div>
 																	
@@ -129,8 +127,7 @@
 															<label>Apellido Paterno</label>
 															<div class="input-group">
 																<input type="text" class="form-control" id="appPaterno" required
-																	name="appPaterno"
-																	placeholder="Ingrese su apellido paterno">
+																	name="appPaterno">
 																	 </div>
 																	
 															</div>
@@ -140,8 +137,7 @@
 															<label>Apellido Materno</label>
 															<div class="input-group">
 																<input type="text" class="form-control" id="appMaterno" required
-																	name="appMaterno"
-																	placeholder="Ingrese su apellido materno">
+																	name="appMaterno">
 																	 </div>
 																	
 															</div>
@@ -155,7 +151,7 @@
 															<label>Nombres</label>
 															<div class="input-group">
 																<input type="text" class="form-control" id="nombre" required
-																	name="nombre" placeholder="Ingrese sus nombres">
+																	name="nombre">
 																	 </div>
 																	
 															</div>
@@ -183,16 +179,14 @@
 													<div class="col-md-6">
 														<div class="form-group">
 															<label>Fecha de nacimiento</label> <input id="fechaNac" required
-																name="fechaNac" type="date" class="form-control"
-																placeholder="dd/mm/yyyy">
+																name="fechaNac" type="date" class="form-control">
 														</div>
 													</div>
 
 													<div class="col-md-6">
 														<div class="form-group">
 															<label>Telefono</label> <input id="telefono"
-																name="telefono" type="number" class="form-control" required
-																placeholder="Ingrese su telefono">
+																name="telefono" type="number" class="form-control" required>
 														</div>
 													</div>
 												</div>
@@ -206,7 +200,7 @@
 															<div class="input-group">
 																<select class="form-control js-example-basic-single" required
 																	id="ocupacion" name="ocupacion">
-																	<option>Ingrese la ocupacion</option>
+																	<option value="-1">Ingrese la ocupacion</option>
 																	<option value="ALUMNO">ALUMNO</option>
 																	<option value="DOCENTE">DOCENTE</option>
 																	<option value="EXTERNO">OTRO</option>
@@ -220,8 +214,7 @@
 														<div class="form-group" id="formulario-codigo"
 															name="formulario-codigo">
 															<label>Codigo de alumno</label> <input id="codigo"
-																name="codigo" type="number" class="form-control"
-																placeholder="Ingrese su codigo de alumno">
+																name="codigo" type="number" class="form-control">
 														</div>
 
 													</div>
@@ -238,7 +231,7 @@
 															<label>Escuela</label>
 															<div class="input-group">
 																<select class="form-control js-example-basic-single" id="escuela" name="escuela">
-																	<option value="" selected="selected"
+																	<option value="-1" selected="selected"
 																		disabled="disabled">Ingrese su escuela</option>
 																	<option th:each="escuela : ${escuelas}"
 																		th:value="${escuela.idEscuela}"
@@ -254,7 +247,7 @@
 													<label>Tipo Academico</label>
 													<div class="input-group">
 														<select class="form-control js-example-basic-single" id="tipoAcademico" name="tipoAcademic">
-															<option value="" selected="selected" disabled="disabled">Seleccione
+															<option value="-1" selected="selected" disabled="disabled">Ingrese
 																el tipo academico</option>
 															<option th:each="tipoAcademico : ${tipoAcademicos}"
 																th:value="${tipoAcademico.idItem}"
@@ -266,11 +259,12 @@
 												</div>
 
 												<div class="form-group text-center">
-													<button type="button" id="enviar"
+													<button type="submit" id="enviar"
 														class="btn btn-info waves-effect waves-light m-r-10">REGISTRAR</button>
 
 												</div>
-
+											</form>
+											
 										</div>
 
 
@@ -332,11 +326,15 @@
 			th:src="@{/resources/js/guiuser/lib/datatables/cdn.datatables.net/buttons/1.2.2/js/buttons.print.min.js}"></script>
 		<script
 			th:src="@{/resources/js/guiuser/lib/datatables/datatables-init.js}"></script>
-
+		
+		<!-- Jquery validation  -->
+		<script th:src="@{/resources/js/jquery/jquery.validate.min.js}"></script>
 
 		<!-- Conexion con servidor -->
-		<script
-			th:src="@{/resources/js/pagina/consulta/movimientos/solicitantes/solicitantes.js}"></script>
+		<script th:src="@{/resources/js/pagina/consulta/movimientos/solicitantes/solicitantes.js}"></script>
+		
+		<script th:src="@{/resources/js/pagina/consulta/movimientos/solicitantes/solicitantesFormulario.js}"></script>
+		
 
 	</div>
 

@@ -7015,3 +7015,7 @@ tbody tr td:last-child {
 	background: #D90022 !important;
 	color: #fff !important;
 }
+
+.help-block{
+	color: red;
+}

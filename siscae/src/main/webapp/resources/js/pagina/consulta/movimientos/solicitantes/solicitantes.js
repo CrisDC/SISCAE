@@ -23,21 +23,6 @@ $(document).ready(function() {
     	let codigoAlumno = $('#codigo').val();
     	let idEscuela = $('#escuela').val();
     	
-    	console.log(idTipoDocumentoSolicitante);
-    	console.log(numDocumentoSolicitante);
-    	console.log(appPaterno);
-    	console.log(appMaterno);
-    	
-    	console.log(nombre);
-    	console.log(sexo);
-    	console.log(fechaNac);
-    	console.log(telefono);
-    	
-    	console.log(tipoAcademico);
-    	console.log(ocupacion);
-    	console.log(codigoAlumno);
-    	console.log(idEscuela);
-    	
     	var registroSolicitanteNuevo ={
 	        	"idTipoDocumentoSolicitante": idTipoDocumentoSolicitante,
 	        	"numDocumentoSolicitante": numDocumentoSolicitante,
