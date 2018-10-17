@@ -1,5 +1,14 @@
 
 $(document).ready(function() {
+	
+	 $("input").on("keypress", function () {
+		  $input=$(this);
+		  setTimeout(function () {
+		   $input.val($input.val().toUpperCase());
+		  },50);
+		 })
+	
+	
     $('.js-example-basic-single').select2();
     
     $('#formulario-tipo-academico').css('display', 'none');
@@ -86,3 +95,4 @@ $(document).on('change', '#formulario-ocupacion', function(event) {
 	    $('#formulario-escuela').css('display', 'none');
     }
 });
+
