@@ -1,6 +1,7 @@
 package pe.edu.unmsm.fisi.siscae.controller.consulta;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,6 +18,7 @@ import pe.edu.unmsm.fisi.siscae.aspecto.enumeracion.Tipo;
 import pe.edu.unmsm.fisi.siscae.configuracion.security.SecurityContextFacade;
 import pe.edu.unmsm.fisi.siscae.controller.excepcion.anotacion.Vista;
 import pe.edu.unmsm.fisi.siscae.model.consulta.PrestamoRecurso;
+import pe.edu.unmsm.fisi.siscae.model.consulta.PrestamoRecursoTabla;
 import pe.edu.unmsm.fisi.siscae.model.consulta.SolicitantesDetalles;
 import pe.edu.unmsm.fisi.siscae.model.criterio.ConsultaPrestamosCriterioBusqueda;
 import pe.edu.unmsm.fisi.siscae.model.mantenimiento.AreaAdministrativo;
@@ -26,6 +28,7 @@ import pe.edu.unmsm.fisi.siscae.model.mantenimiento.MultiTabDet;
 import pe.edu.unmsm.fisi.siscae.model.mantenimiento.Usuario;
 import pe.edu.unmsm.fisi.siscae.service.IAreaAdministrativoService;
 import pe.edu.unmsm.fisi.siscae.service.IConsultaPrestamosService;
+import pe.edu.unmsm.fisi.siscae.service.IConsultaPrestamosTablaService;
 import pe.edu.unmsm.fisi.siscae.service.IEscuelaService;
 import pe.edu.unmsm.fisi.siscae.service.IMultiTabCabService;
 import pe.edu.unmsm.fisi.siscae.service.IMultiTabDetService;
@@ -45,6 +48,7 @@ public @Controller class ConsultaController {
 	private static final Integer ID_TABLA_INFRACCION = 2;
 
 	private @Autowired IConsultaPrestamosService consultaPrestamosService;
+	private @Autowired IConsultaPrestamosTablaService consultaPrestamosTablaService;
 	private @Autowired IUsuarioService usuarioService;
 	private @Autowired IAreaAdministrativoService areaAdministrativoService;
 	private @Autowired IMultiTabDetService multiTabDetService;
@@ -78,9 +82,12 @@ public @Controller class ConsultaController {
 		criterioBusqueda.setAreaEstudio(areaAdministrativo.getNombreAreaEstudio());
 		
 		List<PrestamoRecurso> listaRecursos = consultaPrestamosService.buscarPorCriterio(criterioBusqueda);
+		List<PrestamoRecursoTabla> listaRecursosTabla = consultaPrestamosTablaService.buscarPorCriterio(criterioBusqueda);
 		
 		List<PrestamoRecurso> listaRecursosIndividuales = new ArrayList<>();
 		List<PrestamoRecurso> listaRecursosGrupales = new ArrayList<>();
+		int existenGrupales=0;
+		int existenIndividuales=0;
 		
 		for(int i=0;i<listaRecursos.size();i++){
 			if(listaRecursos.get(i).getMaxCapacidad()==1){
@@ -89,11 +96,21 @@ public @Controller class ConsultaController {
 				listaRecursosGrupales.add(listaRecursos.get(i));
 			}
 		}
-		
+		Collections.sort(listaRecursosIndividuales);
+		Collections.sort(listaRecursosGrupales); 
+		if(listaRecursosIndividuales.size()!=0){
+			existenIndividuales=1;
+		}
+		if(listaRecursosGrupales.size()!=0){
+			existenGrupales=1;
+		}
 		model.addAttribute("recursosIndividuales", listaRecursosIndividuales);
 		model.addAttribute("recursosGrupales", listaRecursosGrupales);
+		model.addAttribute("recursosTabla", listaRecursosTabla);
 		model.addAttribute("consulta", consulta);
 		model.addAttribute("areaAdministrativo", areaAdministrativo);
+		model.addAttribute("existenGrupales", existenGrupales);
+		model.addAttribute("existenIndividuales", existenIndividuales);
 		return CONSULTA_ESTADO_AREA;
 	}
 

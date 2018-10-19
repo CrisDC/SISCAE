@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="pe.edu.unmsm.fisi.siscae.mapper.IConsultaPrestamosMapper">
+
+	<sql id="fragmentoSelectBuscarPrestamos">
+		SELECT  id_recurso,
+			    numero,
+		        tipo_recurso,
+		        max_capacidad,
+			    estado, 
+		        area_estudio,
+		        observacion,
+		        cantidad_prestamos
+		  FROM WV_ESTADO_AULAS 
+	</sql>
+
+	<select id="buscarTodos" resultType="PrestamoRecurso">
+		<include refid="fragmentoSelectBuscarPrestamos" />
+	</select>
+	
+	<select id="buscarPorNumeroDocumentoIdentidad" resultType="PrestamoRecurso">
+		<include refid="fragmentoSelectBuscarPrestamos" />
+		<where>
+			<if test="tipoDocumentoIdentidad != null and tipoDocumentoIdentidad != ''">
+				WV_ESTADO_AULAS .cod_tip_doc_ide = #{tipoDocumentoIdentidad}
+			</if>
+			<if test="numeroDocumentoIdentidad != null and numeroDocumentoIdentidad != ''">
+				AND WV_ESTADO_AULAS .num_doc_ide = #{numeroDocumentoIdentidad}
+			</if>
+		</where>
+	</select>
+
+	<select id="buscarPorCriterio" resultType="PrestamoRecurso">
+		<include refid="fragmentoSelectBuscarPrestamos" />
+		<where>
+			<if test="areaEstudio != null and areaEstudio != '-1'">
+				WV_ESTADO_AULAS.area_estudio = #{areaEstudio}
+			</if>
+		</where>
+	</select>
+
+
+</mapper>

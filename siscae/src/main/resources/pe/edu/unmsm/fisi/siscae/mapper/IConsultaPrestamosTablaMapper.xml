@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="pe.edu.unmsm.fisi.siscae.mapper.IConsultaPrestamoMapper">
+<mapper namespace="pe.edu.unmsm.fisi.siscae.mapper.IConsultaPrestamosTablaMapper">
 
-	<sql id="fragmentoSelectBuscarPrestamos">
+	<sql id="fragmentoSelectBuscarPrestamosTablas">
 		SELECT  id_recurso,
 			    numero,
 		        tipo_recurso,
@@ -19,40 +19,40 @@
 		        area_estudio,
 		        observacion,
 		        cantidad_prestamos
-		  FROM WV_ESTADO_AULAS 
+		  FROM WV_ESTADO_AULAS_TABLA 
 	</sql>
 
-	<select id="buscarTodos" resultType="PrestamoRecurso">
-		<include refid="fragmentoSelectBuscarPrestamos" />
+	<select id="buscarTodos" resultType="PrestamoRecursoTabla">
+		<include refid="fragmentoSelectBuscarPrestamosTablas" />
 	</select>
 	
-	<select id="buscarPorNumeroDocumentoIdentidad" resultType="PrestamoRecurso">
-		<include refid="fragmentoSelectBuscarPrestamos" />
+	<select id="buscarPorNumeroDocumentoIdentidad" resultType="PrestamoRecursoTabla">
+		<include refid="fragmentoSelectBuscarPrestamosTablas" />
 		<where>
 			<if test="tipoDocumentoIdentidad != null and tipoDocumentoIdentidad != ''">
-				WV_ESTADO_AULAS .cod_tip_doc_ide = #{tipoDocumentoIdentidad}
+				WV_ESTADO_AULAS_TABLA  .cod_tip_doc_ide = #{tipoDocumentoIdentidad}
 			</if>
 			<if test="numeroDocumentoIdentidad != null and numeroDocumentoIdentidad != ''">
-				AND WV_ESTADO_AULAS .num_doc_ide = #{numeroDocumentoIdentidad}
+				WV_ESTADO_AULAS_TABLA  .num_doc_ide = #{numeroDocumentoIdentidad}
 			</if>
 		</where>
 	</select>
 
-	<select id="buscarPorCriterio" resultType="PrestamoRecurso">
-		<include refid="fragmentoSelectBuscarPrestamos" />
+	<select id="buscarPorCriterio" resultType="PrestamoRecursoTabla">
+		<include refid="fragmentoSelectBuscarPrestamosTablas" />
 		<where>
 			<if test="areaEstudio != null and areaEstudio != '-1'">
-				WV_ESTADO_AULAS.area_estudio = #{areaEstudio}
+				WV_ESTADO_AULAS_TABLA .area_estudio = #{areaEstudio}
 			</if>
 		</where>
 	</select>
 	
 	
-	<select id="buscarPorCriterio2" resultType="PrestamoRecurso">
-		<include refid="fragmentoSelectBuscarPrestamos" />
+	<select id="buscarPorCriterio2" resultType="PrestamoRecursoTabla">
+		<include refid="fragmentoSelectBuscarPrestamosTablas" />
 		<where>
 			<if test="maxCapacidad != null and maxCapacidad != '-1'">
-				WV_ESTADO_AULAS.max_capacidad = #{maxCapacidad}
+				WV_ESTADO_AULAS_TABLA .max_capacidad = #{maxCapacidad}
 			</if>
 		</where>
 	</select>

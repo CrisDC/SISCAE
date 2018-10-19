@@ -5,7 +5,8 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import pe.edu.unmsm.fisi.siscae.mapper.IConsultaPrestamoMapper;
+import pe.edu.unmsm.fisi.siscae.mapper.IConsultaPrestamosMapper;
+import pe.edu.unmsm.fisi.siscae.mapper.IConsultaPrestamosTablaMapper;
 import pe.edu.unmsm.fisi.siscae.model.consulta.PrestamoRecurso;
 import pe.edu.unmsm.fisi.siscae.model.criterio.ConsultaPrestamosCriterioBusqueda;
 import pe.edu.unmsm.fisi.siscae.model.criterio.NumeroDocumentoIdentidadCriterioBusqueda;
@@ -15,7 +16,7 @@ import pe.edu.unmsm.fisi.siscae.service.IConsultaPrestamosService;
 @Service
 public class ConsultaPrestamosService implements IConsultaPrestamosService{
 
-	private @Autowired IConsultaPrestamoMapper consultaPrestamosMapper;
+	private @Autowired IConsultaPrestamosMapper consultaPrestamosMapper;
 	
 	@Override
 	public List<PrestamoRecurso> buscarTodos() {
