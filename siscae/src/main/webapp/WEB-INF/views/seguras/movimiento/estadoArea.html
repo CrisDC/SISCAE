@@ -213,15 +213,15 @@
 															class="badge badge-warning">LIBERABLE</span></td>
 
 														<td
-															th:text="${prestamo.estado} == 'DISPONIBLE' ? '-' : ${prestamo.codigoAlumno}" style="color: #67757C;"></td>
+															th:text="${prestamo.cantidadPrestamos}==0  ? '-' : ${prestamo.codigoAlumno}" style="color: #67757C;"></td>
 														<td
-															th:text="${prestamo.estado} == 'DISPONIBLE' ? '-' : ${prestamo.nombre}" style="color:#67757C;" ></td>
+															th:text="${prestamo.cantidadPrestamos}==0  ? '-' : ${prestamo.nombre}" style="color:#67757C;" ></td>
 														<td
-															th:text="${prestamo.estado} == 'DISPONIBLE' ? '-' : ${prestamo.appPaterno} + ' ' + ${prestamo.appMaterno}" style="color:#67757C;" ></td>
+															th:text="${prestamo.cantidadPrestamos}==0  ? '-' : ${prestamo.appPaterno} + ' ' + ${prestamo.appMaterno}" style="color:#67757C;" ></td>
 														<td
-															th:text="${prestamo.estado} == 'DISPONIBLE' ? '-' : ${prestamo.horaEntrada}" style="color: #67757C;" ></td>
+															th:text="${prestamo.cantidadPrestamos}==0 ? '-' : ${prestamo.horaEntrada}" style="color: #67757C;" ></td>
 														<td
-															th:text="${prestamo.estado} == 'DISPONIBLE' ? '-' : ${#dates.format(#dates.createNow(),'YYYY/MM/dd HH:mm')}" style="color: #67757C;" ></td>
+															th:text="${prestamo.cantidadPrestamos}==0  ? '-' : ${#dates.format(#dates.createNow(),'YYYY/MM/dd HH:mm')}" style="color: #67757C;" ></td>
 
 
 
