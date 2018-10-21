@@ -8,7 +8,7 @@
 				app_materno,
 				nombre,
 				escuela,
-				num_documento,
+				estado,
 				solicitante
 		  FROM vw_solicitantes 
 	</sql>
