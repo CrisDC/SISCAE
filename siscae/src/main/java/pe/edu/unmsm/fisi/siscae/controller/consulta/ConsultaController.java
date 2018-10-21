@@ -196,7 +196,7 @@ public @Controller class ConsultaController {
 		ConsultaPrestamosCriterioBusqueda criterioBusqueda = new ConsultaPrestamosCriterioBusqueda();
 		criterioBusqueda.setAreaEstudio(areaAdministrativo.getNombreAreaEstudio());
 		
-		List<PrestamoRecurso> prestamos = consultaPrestamosService.buscarPorCriterio(criterioBusqueda);
+		List<PrestamoRecursoTabla> prestamos = consultaPrestamosTablaService.buscarPorCriterio(criterioBusqueda);
 		
 		List<MultiTabDet> tiposInfracciones = multiTabDetService.buscarPorIdTabla(ID_TABLA_INFRACCION);
 		
