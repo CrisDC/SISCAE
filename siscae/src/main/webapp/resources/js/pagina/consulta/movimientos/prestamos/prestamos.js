@@ -1,8 +1,6 @@
+var espacioDisponible;
 
-// Capturar el id de un button en el div con id for-each
 $(document).ready(function(){
-	
-	var espacioDisponible;
 
 	$('#salida').click(function () {
 		swal("Registrar salida",{
@@ -176,11 +174,16 @@ $(document).ready(function(){
 	})
 	
 	
+	
+	
 	$('#agregarTablaGrupal').on('click', function (event){
 		
 		if(espacioDisponible!=0){
 			let numeroDocumento = $('#numeroDocumentoGrupal').val();
-			var fila='<tr class="fila-pers"><td class="celda-pers">' +numeroDocumento+'</td><td><button id="'+numeroDocumento+'" class="btn btn-danger">BORRAR</button></td></tr>'
+			
+			
+			
+			var fila='<tr class="fila-pers"><td class="celda-pers">' +numeroDocumento+'</td><td><button id="'+numeroDocumento+'" class="btn btn-danger borrar"><i class="fa fa-trash-o"></i></button></td></tr>'
 			$('#cuerpoTablaGrupal tr:last').after(fila);
 			espacioDisponible =  espacioDisponible - 1;
 			$('#espacioDisponibleLabel').text('Espacio disponible: '+espacioDisponible)
@@ -192,9 +195,23 @@ $(document).ready(function(){
 	
 	})
 	
+	
+	
+	$('#cerrarModal').on('click', function (event){
+		location.reload()
+	})
+	
       
 })
 
-$('#cerrarModal').on('click', function (event){
-	location.reload()
-})
+
+$(function () {
+    $(document).on('click', '.borrar', function (event) {
+        event.preventDefault();
+        $(this).closest('tr').remove();
+        espacioDisponible =  espacioDisponible + 1;
+        $('#espacioDisponibleLabel').text('Espacio disponible: '+espacioDisponible);
+    });
+});
+
+
