@@ -96,6 +96,17 @@ public @Controller class ConsultaController {
 				listaRecursosGrupales.add(listaRecursos.get(i));
 			}
 		}
+		
+		int cont;
+		for(int i=0;i<listaRecursosGrupales.size();i++){
+			cont=1;
+			for(int j=0;j<listaRecursosTabla.size();j++){
+				if(listaRecursosGrupales.get(i).getIdRecurso()==listaRecursosTabla.get(j).getIdRecurso()){
+					listaRecursosTabla.get(j).setOrden(cont);
+					cont++;
+				}
+			}
+		}
 		Collections.sort(listaRecursosIndividuales);
 		Collections.sort(listaRecursosGrupales); 
 		if(listaRecursosIndividuales.size()!=0){
@@ -104,6 +115,7 @@ public @Controller class ConsultaController {
 		if(listaRecursosGrupales.size()!=0){
 			existenGrupales=1;
 		}
+		
 		model.addAttribute("recursosIndividuales", listaRecursosIndividuales);
 		model.addAttribute("recursosGrupales", listaRecursosGrupales);
 		model.addAttribute("recursosTabla", listaRecursosTabla);

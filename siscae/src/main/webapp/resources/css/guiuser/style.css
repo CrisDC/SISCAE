@@ -7019,3 +7019,28 @@ tbody tr td:last-child {
 .help-block{
 	color: red;
 }
+
+.boton-confirmar{
+	color: #fff !important;
+	background: #28a745 !important;
+}
+
+.input-grupal{
+	border-radius: 4px !important;
+	height: 36px !important;
+}
+
+.cab{
+	color: #000 !important;
+	background-color: #fff !important;
+}
+
+.celda-pers{
+	color: #67757C !important;
+	background-color: #fff !important;
+}
+
+.fila-pers{
+	background-color: #fff !important;
+}
+

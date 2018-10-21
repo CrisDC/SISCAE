@@ -15,7 +15,8 @@ import pe.edu.unmsm.fisi.siscae.model.consulta.PrestamoRecurso.PrestamoRecursoBu
 @NoArgsConstructor
 @AllArgsConstructor
 public class PrestamoRecursoTabla 
-{
+{	
+	int orden; // agregado para ordenar la tabla solo visualmente, solo sirve para eso
 	int idRecurso;
 	String numero;
 	String tipoRecurso;

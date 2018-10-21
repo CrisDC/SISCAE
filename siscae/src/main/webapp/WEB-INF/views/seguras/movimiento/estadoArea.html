@@ -47,7 +47,7 @@
 
 									<li th:if="(${areaAdministrativo.cargo} != 'SOLICITANTE')"
 										class="nav-item"><a class="nav-link" data-toggle="tab"
-										href="#tabla" role="tab"> <span class="hidden-sm-up"><i
+										href="#tablaDetalle" role="tab"> <span class="hidden-sm-up"><i
 												class="ti-user"></i></span> <span class="hidden-xs-down">Detalles</span>
 									</a></li>
 									
@@ -77,116 +77,72 @@
 
 								<!-- Tab panes -->
 								<div class="tab-content">
-
-
-
+								
+									<!-- Panel Esquema -->
 									<div class="tab-pane active" id="esquema" role="tabpanel">
 										<div class="p-20">
-
-
 											<h3>Solicitud de recurso</h3>
-											<label th:if="${existenIndividuales} == 1" >Recursos individuales</label>
-
+											
 											<div class="row">
 												<div></div>
 											</div>
+											
+											<label th:if="${existenIndividuales} == 1" >Recursos individuales</label>
 											<div class="row" id="for-each">
-
 												<th:block th:each="prestamo : ${recursosIndividuales}">
-
 													<div class="recurso">
-														<img
-															th:if="(${prestamo.estado} == 'DISPONIBLE') and (${prestamo.tipoRecurso} == 'CUBICULO') and (${prestamo.observacion} == 'UBICADO CERCA A UN ENCHUFE') "
-															th:src="@{/resources/images/cubiculo_con_corriente_verde.png}"
-															width="40" height="40"> <img
-															th:if="(${prestamo.estado} == 'DISPONIBLE') and (${prestamo.tipoRecurso} == 'CUBICULO') and (${prestamo.observacion} != 'UBICADO CERCA A UN ENCHUFE') "
-															th:src="@{/resources/images/cubo_verde.png}" width="40"
-															height="40"> <img
-															th:if="(${prestamo.estado} == 'OCUPADO') and (${prestamo.tipoRecurso} == 'CUBICULO') and (${prestamo.observacion} == 'UBICADO CERCA A UN ENCHUFE') "
-															th:src="@{/resources/images/cubiculo_con_corriente_rojo.png}"
-															width="40" height="40"> <img
-															th:if="(${prestamo.estado} == 'OCUPADO') and (${prestamo.tipoRecurso} == 'CUBICULO') and (${prestamo.observacion} != 'UBICADO CERCA A UN ENCHUFE') "
-															th:src="@{/resources/images/cubo_rojo.png}" width="40"
-															height="40"> <img
-															th:if="(${prestamo.estado} == 'LIBERABLE') and (${prestamo.tipoRecurso} == 'CUBICULO') and (${prestamo.observacion} == 'UBICADO CERCA A UN ENCHUFE') "
-															th:src="@{/resources/images/cubiculo_con_corriente_amarillo.png}"
-															width="40" height="40"> <img
-															th:if="(${prestamo.estado} == 'LIBERABLE') and (${prestamo.tipoRecurso} == 'CUBICULO') and (${prestamo.observacion} != 'UBICADO CERCA A UN ENCHUFE') "
-															th:src="@{/resources/images/cubo_amarillo.png}"
-															width="40" height="40">
-
+														<img th:if="(${prestamo.estado} == 'DISPONIBLE') and (${prestamo.tipoRecurso} == 'CUBICULO') and (${prestamo.observacion} == 'UBICADO CERCA A UN ENCHUFE') " 
+														    th:src="@{/resources/images/cubiculo_con_corriente_verde.png}" width="40" height="40"> 
+														<img th:if="(${prestamo.estado} == 'DISPONIBLE') and (${prestamo.tipoRecurso} == 'CUBICULO') and (${prestamo.observacion} != 'UBICADO CERCA A UN ENCHUFE') "
+															th:src="@{/resources/images/cubo_verde.png}" width="40" height="40"> 
+														<img th:if="(${prestamo.estado} == 'OCUPADO') and (${prestamo.tipoRecurso} == 'CUBICULO') and (${prestamo.observacion} == 'UBICADO CERCA A UN ENCHUFE') "
+															th:src="@{/resources/images/cubiculo_con_corriente_rojo.png}" width="40" height="40"> 
+														<img th:if="(${prestamo.estado} == 'OCUPADO') and (${prestamo.tipoRecurso} == 'CUBICULO') and (${prestamo.observacion} != 'UBICADO CERCA A UN ENCHUFE') "
+															th:src="@{/resources/images/cubo_rojo.png}" width="40" height="40"> 
+														<img th:if="(${prestamo.estado} == 'LIBERABLE') and (${prestamo.tipoRecurso} == 'CUBICULO') and (${prestamo.observacion} == 'UBICADO CERCA A UN ENCHUFE') "
+															th:src="@{/resources/images/cubiculo_con_corriente_amarillo.png}" width="40" height="40"> 
+														<img th:if="(${prestamo.estado} == 'LIBERABLE') and (${prestamo.tipoRecurso} == 'CUBICULO') and (${prestamo.observacion} != 'UBICADO CERCA A UN ENCHUFE') "
+															th:src="@{/resources/images/cubo_amarillo.png}" width="40" height="40">
 														<p th:text="${prestamo.numero}"></p>
-														<p th:if="${prestamo.estado} == 'DISPONIBLE'"
-															th:text="DISPONIBLE" class="disponible"></p>
-														<p th:if="${prestamo.estado} == 'OCUPADO'"
-															th:text="OCUPADO" class="ocupado"></p>
-														<p th:if="${prestamo.estado} == 'LIBERABLE'"
-															th:text="LIBERABLE" class="liberable"></p>
-
-
-														<button th:id="${prestamo.numero}" th:grupal="no"
-															th:key="${prestamo.idRecurso}"
-															th:class="${prestamo.estado} == 'DISPONIBLE' ? 'btn btn-info solicitar' : 'invisible' ">SOLICITAR</button>
-
-
-
+														<p th:if="${prestamo.estado} == 'DISPONIBLE'" th:text="DISPONIBLE" class="disponible"></p>
+														<p th:if="${prestamo.estado} == 'OCUPADO'" th:text="OCUPADO" class="ocupado"></p>
+														<p th:if="${prestamo.estado} == 'LIBERABLE'" th:text="LIBERABLE" class="liberable"></p>
+														<button th:id="${prestamo.numero}" th:key="${prestamo.idRecurso}" th:class="${prestamo.estado} == 'DISPONIBLE' ? 'btn btn-info solicitar' : 'invisible' ">SOLICITAR</button>
 													</div>
-
 												</th:block>
-
-
-
 											</div>
 
 											<label th:if="${existenGrupales} == 1" class="m-t-10">Recursos grupales</label>
-
-											<div class="row" id="for-each-grupales">
-
+											<div th:if="${existenGrupales} == 1"  class="row" id="for-each-grupales">
 												<th:block th:each="recursoGrupal : ${recursosGrupales}">
 													<div class="recurso">
-
-														<img th:if="${recursoGrupal.tipoRecurso} == 'CABINA'"
-															th:src="@{/resources/images/pantalla.png}" width="40"
-															height="40"> <img
-															th:if="${recursoGrupal.tipoRecurso} == 'MESA'"
-															th:src="@{/resources/images/mesa.png}" width="100"
-															height="100">
-														
+														<img th:if="${recursoGrupal.tipoRecurso} == 'CABINA'" th:src="@{/resources/images/pantalla.png}" width="40" height="40">
+														<img th:if="${recursoGrupal.tipoRecurso} == 'MESA'" th:src="@{/resources/images/mesa.png}" width="100" height="100">
 														<p th:text="${recursoGrupal.numero}"></p>
-														<p ><span th:text="${recursoGrupal.cantidadPrestamos}"></span>/
-															<span th:text="${recursoGrupal.maxCapacidad}"></span></p>
-														<p th:if="${recursoGrupal.estado} == 'DISPONIBLE'"
-															th:text="DISPONIBLE" class="disponible"></p>
-														<p th:if="${recursoGrupal.estado} == 'OCUPADO'"
-															th:text="OCUPADO" class="ocupado"></p>
+														<p th:text="${recursoGrupal.cantidadPrestamos} + ' / ' + ${recursoGrupal.maxCapacidad}"></p>
+														<p th:if="${recursoGrupal.estado} == 'DISPONIBLE'" th:text="DISPONIBLE" class="disponible"></p>
+														<p th:if="${recursoGrupal.estado} == 'OCUPADO'" th:text="OCUPADO" class="ocupado"></p>
 														<p th:if="${recursoGrupal.estado} == 'LIBERABLE'"></p>
-														
-														<button th:grupal="si" th:id="${recursoGrupal.numero}"
-															th:key="${recursoGrupal.idRecurso}" type="button"
-															th:class="${recursoGrupal.estado} == 'DISPONIBLE' ? 'btn btn-info solicitar' : 'invisible' ">SOLICITAR</button>
-
+														<button th:id="${recursoGrupal.numero}" th:key="${recursoGrupal.idRecurso}" th:max="${recursoGrupal.maxCapacidad}" th:prestado="${recursoGrupal.cantidadPrestamos}" type="button" th:class="${recursoGrupal.estado} == 'DISPONIBLE' ? 'btn btn-info solicitar' : 'invisible' " 
+																data-toggle="modal" data-target="#grupalesModal">SOLICITAR</button>
+													
 													</div>
-
 												</th:block>
-
 											</div>
 
 
 										</div>
 									</div>
+									<!-- Fin Panel Esquema -->
 
-
-
-									<div class="tab-pane p-20" id="tabla" role="tabpanel">
-
-
+									<!-- Panel Detalle -->
+									<div class="tab-pane p-20" id="tablaDetalle" role="tabpanel">
 										<div class="table-responsive m-t-5">
 											<h3>Estado del aula</h3>
+											
+											<label>Detalle los recursos</label>
 
-
-
-											<table id="myTable"
-												class="table table-bordered table-striped">
+											<table id="myTable" class="table table-bordered table-striped">
 												<thead>
 													<tr>
 														<th>Recurso</th>
@@ -199,69 +155,48 @@
 													</tr>
 												</thead>
 												<tbody>
-
-
-
-													<tr th:each="prestamo : ${recursosTabla}" style="background-color: #fff;">
-														<td th:text="${prestamo.numero}" style="color: #67757C;"></td>
-
-														<td th:if="${prestamo.estado} == 'DISPONIBLE'"><span
-															class="badge badge-primary">DISPONIBLE</span></td>
-														<td th:if="${prestamo.estado} == 'OCUPADO'"><span
-															class="badge badge-danger">OCUPADO</span></td>
-														<td th:if="${prestamo.estado} == 'LIBERABLE'"><span
-															class="badge badge-warning">LIBERABLE</span></td>
-
-														<td
-															th:text="${prestamo.cantidadPrestamos}==0  ? '-' : ${prestamo.codigoAlumno}" style="color: #67757C;"></td>
-														<td
-															th:text="${prestamo.cantidadPrestamos}==0  ? '-' : ${prestamo.nombre}" style="color:#67757C;" ></td>
-														<td
-															th:text="${prestamo.cantidadPrestamos}==0  ? '-' : ${prestamo.appPaterno} + ' ' + ${prestamo.appMaterno}" style="color:#67757C;" ></td>
-														<td
-															th:text="${prestamo.cantidadPrestamos}==0 ? '-' : ${prestamo.horaEntrada}" style="color: #67757C;" ></td>
-														<td
-															th:text="${prestamo.cantidadPrestamos}==0  ? '-' : ${#dates.format(#dates.createNow(),'YYYY/MM/dd HH:mm')}" style="color: #67757C;" ></td>
-
-
-
-													</tr>
+													<!-- Iteracion para recursos individuales -->
+													<th:block th:each="prestamo : ${recursosTabla}">
+														<tr th:if="${prestamo.maxCapacidad} == 1" style="background-color: #fff;">
+															<td th:text="${prestamo.tipoRecurso}+' '+${prestamo.numero}" style="color: #67757C;"></td>
+															<td th:if="${prestamo.estado} == 'DISPONIBLE'"><span class="badge badge-primary">DISPONIBLE</span></td>
+															<td th:if="${prestamo.estado} == 'OCUPADO'"><span class="badge badge-danger">OCUPADO</span></td>
+															<td th:if="${prestamo.estado} == 'LIBERABLE'"><span class="badge badge-warning">LIBERABLE</span></td>
+															<td th:text="${prestamo.cantidadPrestamos}==0  ? '' : ${prestamo.codigoAlumno}" style="color: #67757C;"></td>
+															<td th:text="${prestamo.cantidadPrestamos}==0  ? '' : ${prestamo.nombre}" style="color:#67757C;" ></td>
+															<td th:text="${prestamo.cantidadPrestamos}==0  ? '' : ${prestamo.appPaterno} + ' ' + ${prestamo.appMaterno}" style="color:#67757C;" ></td>
+															<td th:text="${prestamo.cantidadPrestamos}==0 ? '' : ${prestamo.horaEntrada}" style="color: #67757C;" ></td>
+															<td th:text="${prestamo.cantidadPrestamos}==0  ? '' : ${#dates.format(#dates.createNow(),'YYYY/MM/dd HH:mm')}" style="color: #67757C;" ></td>
+														</tr>
+													 </th:block> 
+													<!-- Fin bucle individual  -->
 													
+													<!-- Iteracion para recursos grupales -->
+													<th:block th:each="detalle : ${recursosTabla}" >
+															<tr style="background-color: #fff;">
+																<td th:if="((${detalle.orden} == 1) or (${detalle.cantidadPrestamos} == 0))"  th:text="${detalle.tipoRecurso} +' '+ ${detalle.numero}" th:rowspan="${detalle.cantidadPrestamos}==0  ? '1' : ${detalle.cantidadPrestamos}" style="color: #67757C;"></td>
+																<td th:if="${detalle.estado} == 'DISPONIBLE'"><span class="badge badge-primary">DISPONIBLE</span></td>
+																<td th:if="${detalle.estado} == 'OCUPADO'"><span class="badge badge-danger">OCUPADO</span></td>
+																<td th:if="${detalle.estado} == 'LIBERABLE'"><span class="badge badge-warning">LIBERABLE</span></td>
+																<td th:text="${detalle.cantidadPrestamos}==0  ? '' : ${detalle.codigoAlumno}" style="color: #67757C;"></td>
+																<td th:text="${detalle.cantidadPrestamos}==0  ? '' : ${detalle.nombre}" style="color:#67757C;" ></td>
+																<td th:text="${detalle.cantidadPrestamos}==0  ? '' : ${detalle.appPaterno} + ' ' + ${detalle.appMaterno}" style="color:#67757C;" ></td>
+																<td th:text="${detalle.cantidadPrestamos}==0  ? '' : ${detalle.horaEntrada}" style="color: #67757C;" ></td>
+																<td th:text="${detalle.cantidadPrestamos}==0  ? '' : ${#dates.format(#dates.createNow(),'YYYY/MM/dd HH:mm')}" style="color: #67757C;" ></td>
+															</tr>
+													</th:block>
+													<!-- Fin bucle grupales -->
 												</tbody>
 											</table>
+											
+											
 										</div>
 									</div>
-									<div class="tab-pane p-20" id="tablaRecursos" role="tabpanel">
-
-
-										<div class="table-responsive m-t-40">
-											<h3>Detalles de recursos</h3>
-
-
-
-											<table id="myTable"
-												class="table table-bordered table-striped">
-												<thead>
-													<tr>
-														<th>Recurso</th>
-														<th>Estado</th>
-														<th>Observacion</th>
-													</tr>
-												</thead>
-												<tbody>
-													<tr>
-														<td>CUBICULO 01</td>
-														<td><span class="badge badge-primary">DISPONIBLE</span></td>
-														<td>UBICADO CERCA A UN ENCHUFE</td>
-													</tr>
-												</tbody>
-											</table>
-										</div>
-									</div>
-									<div class="tab-pane p-20" id="tablaSancionados"
-										role="tabpanel">
-
-
+									<!-- Fin Panel Detalle -->
+									
+									
+									<!-- Panel Sancionado -->
+									<div class="tab-pane p-20" id="tablaSancionados" role="tabpanel">
 										<div class="table-responsive m-t-40">
 											<h3>Solicitantes sancionados</h3>
 
@@ -286,9 +221,10 @@
 											</table>
 										</div>
 									</div>
-
+									<!-- Fin Panel Sancionado -->
 
 								</div>
+								<!-- End Tab panes -->
 							</div>
 						</div>
 
@@ -304,61 +240,51 @@
 
 
 		<!-- MODAL -->
-		<div class="modal fade" id="modalPrestamoRecurso" tabindex="-1"
-			role="dialog" aria-labelledby="exampleModalCenterTitle"
-			aria-hidden="true">
-			<div class="modal-dialog modal-dialog-centered" role="document">
-				<div class="modal-content">
-
-
-					<div class="modal-body">
-						<h3 id="infoRecurso">Solcititud de recurso</h3>
-						<p>Ingrese su carnet por el scanner</p>
-						<div class="form-group">
-							<div class="input-group justify-content-center">
-								<img th:src="@{/resources/images/lectora.gif}" width="350"
-									height="200">
+		<div class="modal fade" id="grupalesModal" tabindex="-1" role="dialog" aria-labelledby="gruaplesModalLabel" aria-hidden="true">
+			<div class="modal-dialog modal-lg" role="document">
+		    	<div class="modal-content " style="width: 50em;">
+					<div class="card-header modal-header">
+		      			<h3 class="modal-title" id="infoRecurso">Solicititud de recurso</h3>		       
+		      		</div>				
+					<div class="card-body modal-body">
+						<div class="row justify-content-center">
+							<div class="form-group col-5 m-t-20 m-r-20">
+								<h5><strong>Ingrese su carnet por el lector</strong></h5>
+								<div class="input-group justify-content-center">
+									<img th:src="@{/resources/images/lectora.gif}" width="300" height="180">
+								</div>
+								<div class="input-group justify-content-center">
+									<input type="text" class="form-control col-8 m-r-15 input-grupal" id="numeroDocumentoGrupal" name="numDocumento" autofocus placeholder="Numero de documento">
+									<button id="agregarTablaGrupal" class="col-3 btn btn-info">OK</button>
+								</div>
 							</div>
-							<div class="input-group">
-								<input type="text" class="form-control col-9 m-r-30"
-									id="numDocumento" name="numDocumento" autofocus
-									placeholder="Numero de documento">
-								<button class="form-control col-2 btn btn-info">OK</button>
-
-							</div>
-							<div class="table-responsive m-t-40">
-								<table id="tablaPrestamoGrupal"
-									class="table table-bordered table-striped">
-									<thead>
-										<tr>
-											<th>Recurso</th>
-											<th>Codigo</th>
-											<th>Accion</th>
-										</tr>
-									</thead>
-									<tbody>
-										<tr>
-											<td>3</td>
-											<td>16200116</td>
-											<td><button class="btn btn-danger">Borrar</button></td>
-										</tr>
-
-										<tr>
-											<td>3</td>
-											<td>16200117</td>
-											<td><button class="btn btn-danger">Borrar</button></td>
-										</tr>
-									</tbody>
-
-								</table>
+							<div class="form-group col-5 m-t-20 m-l-20">
+								<h5><strong>Solicitantes</strong></h5>
+								<label id="espacioDisponibleLabel">Espacio disponible: </label>
+								<div class="table-responsive">
+									<table id="tablaGrupal" class="table table-bordered table-striped">
+										<thead>
+											<tr class="fila-pers cab">
+												<th>Codigo</th>
+												<th>Accion</th>
+											</tr>
+										</thead>
+										<tbody id="cuerpoTablaGrupal">
+											<tr class="fila-pers">
+												<td class="celda-pers d-none"></td>
+												<td class="celda-pers d-none"></td>
+											</tr>
+										</tbody>
+	
+									</table>
+								</div>
 							</div>
 						</div>
 					</div>
 
 					<div class="modal-footer">
-						<button id="cerrarModal" type="button" class="btn btn-secondary"
-							data-dismiss="modal">Cerrar</button>
-						<button type="button" class="btn btn-succes">Confirmar</button>
+						<button id="cerrarModal" type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+						<button type="button" class="btn boton-confirmar">Confirmar</button>
 					</div>
 				</div>
 			</div>

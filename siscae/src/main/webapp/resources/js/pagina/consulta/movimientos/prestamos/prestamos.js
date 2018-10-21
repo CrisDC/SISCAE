@@ -1,7 +1,9 @@
+
 // Capturar el id de un button en el div con id for-each
 $(document).ready(function(){
-
 	
+	var espacioDisponible;
+
 	$('#salida').click(function () {
 		swal("Registrar salida",{
 			title: "Registrar salida",
@@ -50,21 +52,13 @@ $(document).ready(function(){
 
 			)
       })
-		
-		
-		
-		
-		
+
 		
 	})
 	
-      $('body #for-each').on('click', 'button', function(){
+     $('body #for-each').on('click', 'button', function(){
 	        let idRecurso = $(this).attr('key');
 	        let numRecurso = $(this).attr('id');
-	        let esGrupal = $(this).attr('grupal');
-	        
-	        
-	        if(esGrupal == 'no'){
 	        	
 	        	swal({
 	    			title: "Solicitud de recurso "+numRecurso,
@@ -108,17 +102,6 @@ $(document).ready(function(){
 
 	    			)
 	          })
-	        
-	        }else{
-	        	
-	        	$('#infoRecurso').text('Solcititud de recurso '+numRecurso);
-	        	// Forzar el abrir el modal
-	        	$('#modalPrestamoRecurso').modal('show'); 
-	        	$('#modalPrestamoRecurso').modal();
-	        	
-	        	
-	        }
-        
       })
 
       
@@ -175,19 +158,43 @@ $(document).ready(function(){
     			
     			});
     	});
+	
+	
+	
+	
+	$('body #for-each-grupales').on('click', 'button', function(){
+		
+		let idRecurso = $(this).attr('key');
+        let numRecurso = $(this).attr('id');
+        let cantidadPrestamos = $(this).attr('prestado');
+        let maxCapacidad = $(this).attr('max');
+        espacioDisponible =  parseInt(maxCapacidad) - parseInt(cantidadPrestamos);
+		$('#infoRecurso').text('Solicititud de recurso '+numRecurso)
+		$('#espacioDisponibleLabel').text('Espacio disponible: '+espacioDisponible)
+
+		
+	})
+	
+	
+	$('#agregarTablaGrupal').on('click', function (event){
+		
+		if(espacioDisponible!=0){
+			let numeroDocumento = $('#numeroDocumentoGrupal').val();
+			var fila='<tr class="fila-pers"><td class="celda-pers">' +numeroDocumento+'</td><td><button id="'+numeroDocumento+'" class="btn btn-danger">BORRAR</button></td></tr>'
+			$('#cuerpoTablaGrupal tr:last').after(fila);
+			espacioDisponible =  espacioDisponible - 1;
+			$('#espacioDisponibleLabel').text('Espacio disponible: '+espacioDisponible)
+		
+		}else{
+			swal('No hay mas espacios disponibles')
+		}
+	
+	
+	})
+	
       
 })
 
-
-$("#cerrarModal").click(function(){
-	$("#cerrarModal .close").click();
-});
-
-
-
-
-
-
-
-
-
+$('#cerrarModal').on('click', function (event){
+	location.reload()
+})
