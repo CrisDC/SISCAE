@@ -210,7 +210,7 @@ $(document).ready(function(){
         let cantidadPrestamos = $(this).attr('prestado');
         let maxCapacidad = $(this).attr('max');
         espacioDisponible =  parseInt(maxCapacidad) - parseInt(cantidadPrestamos);
-		$('#infoRecurso').text('Solicititud de recurso '+Recurso)
+		$('#infoRecurso').text('Solicititud de recurso '+numRecurso)
 		$('#espacioDisponibleLabel').text('Espacio disponible: '+espacioDisponible)
 
 		
@@ -292,6 +292,7 @@ function enviarDatosATabla(){
 	        			},
 	        			success : function(response) {
 	        			
+	        				console.log(response);
 	        				
 	        				//AJAX
 	        				$.ajax({
