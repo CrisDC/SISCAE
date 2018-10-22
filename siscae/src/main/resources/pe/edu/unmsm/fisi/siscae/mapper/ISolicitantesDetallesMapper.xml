@@ -8,7 +8,7 @@
 				app_materno,
 				nombre,
 				escuela,
-				estado,
+				num_documento,
 				solicitante
 		  FROM vw_solicitantes 
 	</sql>
@@ -20,11 +20,8 @@
 	<select id="buscarPorNumeroDocumentoIdentidad" resultType="SolicitantesDetalles">
 		<include refid="fragmentoSelectBuscarSolicitantesDetalles" />
 		<where>
-			<if test="tipoDocumentoIdentidad != null and tipoDocumentoIdentidad != ''">
-				vw_solicitantes .cod_tip_doc_ide = #{tipoDocumentoIdentidad}
-			</if>
-			<if test="numeroDocumentoIdentidad != null and numeroDocumentoIdentidad != ''">
-				AND vw_solicitantes .num_doc_ide = #{numeroDocumentoIdentidad}
+			<if test="numDocumento != null and numDocumento != ''">
+				vw_solicitantes .num_documento = #{numDocumento}
 			</if>
 		</where>
 	</select>

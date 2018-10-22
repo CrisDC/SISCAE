@@ -36,8 +36,6 @@ public @RestController class MovimientoConsultarEstadoSolicitanteController {
 			throw new BadRequestException(ValidatorUtil.obtenerMensajeValidacionError(error));
 		}
 		 
-		System.out.println("Atributo 'numDocumentoSolicitante': "+MovimientoConsultarEstadoSolicitante.getNumDocumentoSolicitante());
-		
 		MovimientoConsultarEstadoSolicitanteService.registrarMovimientoConsultarEstadoSolicitante(MovimientoConsultarEstadoSolicitante);
 		return ResponseEntity.ok(ConstantesGenerales.REGISTRO_EXITOSO);
 	}

@@ -187,6 +187,11 @@ $(document).ready(function(){
 		location.reload()
 	})
 	
+	$('#confirmarPrestamo').on('click', function (event){
+		
+		
+	})
+	
       
 })
 
@@ -207,28 +212,95 @@ function enviarDatosATabla(){
 		
 		if($('#'+numeroDocumento).length){
 			swal('Te encuentras solicitando el recurso');
+			refrescarInput();
 		}else{
 			if(numeroDocumento==''){
-				swal('El numero de documento no puede estar vacio');	
+				swal('El numero de documento no puede estar vacio');
+				refrescarInput();
 			}else{
+				
+				var num = {
+						"numDocumentoSolicitante": numeroDocumento
+	    		};
+				
 				//AJAX
+				$.ajax({
+	                    url :  $variableUtil.root + "movimientoConsultarEstadoSolicitante",
+	                    type : 'POST',
+	                    data : JSON.stringify(num),
+	                    beforeSend : function(xhr) {
+	        				xhr.setRequestHeader('Content-Type', 'application/json');
+	        				xhr.setRequestHeader("X-CSRF-TOKEN", $variableUtil.csrf);
+	        			},
+	        			statusCode : {
+	        				400 : function(response) {
+	        					swal(response.responseJSON);
+	        				},
+	        				500 : function(response) {
+	        					swal("Error", response.responseText, "warning");
+	        				}
+	        			},
+	        			success : function(response) {
+	        			
+	        				
+	        				//AJAX
+	        				$.ajax({
+	        	                    url :  $variableUtil.root + "solicitantesDetalles?accion=buscarPorCriterio&codigo="+numeroDocumento,
+	        	                    type : 'GET',
+	        	                    beforeSend : function(xhr) {
+	        	        				xhr.setRequestHeader('Content-Type', 'application/json');
+	        	        				xhr.setRequestHeader("X-CSRF-TOKEN", $variableUtil.csrf);
+	        	        			},
+	        	        			statusCode : {
+	        	        				400 : function(response) {
+	        	        					swal(response.responseJSON);
+	        	        				},
+	        	        				500 : function(response) {
+	        	        					swal("Error", response.responseText, "warning");
+	        	        				}
+	        	        			},
+	        	        			success : function(response) {
+	        	        				
+	        	        				let aPaterno = response[0].appPaterno;
+	        	        				let aMaterno = response[0].appMaterno;
+	        	        				
+	        	        				var fila='<tr class="fila-pers"><td class="celda-pers">' +numeroDocumento+'</td><td class="celda-pers">'+aPaterno+' '+aMaterno+'</td><td><button class="btn btn-danger borrar"><i class="fa fa-trash-o"></i></button></td></tr>'
+	        	        				$('#cuerpoTablaGrupal tr:last').after(fila);
+	        	        				espacioDisponible =  espacioDisponible - 1;
+	        	        				$('#espacioDisponibleLabel').text('Espacio disponible: '+espacioDisponible)
+	        	        				refrescarInput();
+	        	        			}
+	        	        			
+	        				  }, function (dismiss) {
+	        	    			  // dismiss can be 'cancel', 'overlay',
+	        	    			  // 'close', and 'timer'
+	        	    			  
+	        				  })
+	        				
+	        				
+	        				
+	        				
+	        			}
+	        			
+				  }, function (dismiss) {
+	    			  // dismiss can be 'cancel', 'overlay',
+	    			  // 'close', and 'timer'
+	    			  
+				  })
 				
-				//Si hay error mensaje...
-				
-				//Si fue correcto esto
-				var fila='<tr class="fila-pers"><td class="celda-pers">' +numeroDocumento+'</td><td><button id="'+numeroDocumento+'" class="btn btn-danger borrar"><i class="fa fa-trash-o"></i></button></td></tr>'
-				$('#cuerpoTablaGrupal tr:last').after(fila);
-				espacioDisponible =  espacioDisponible - 1;
-				$('#espacioDisponibleLabel').text('Espacio disponible: '+espacioDisponible)
-				
-				//Refresacar campos y hacer focus en 
-				$('#numeroDocumentoGrupal').val('');
-				$('#numeroDocumentoGrupal').focus();
 			}
 		}
 	}else{
 		swal('No hay mas espacios disponibles')
 	}
+	
+	
 }
 
 
+function refrescarInput() {
+	//Refrescar campos y hacer focus en 
+	$('#numeroDocumentoGrupal').val('');
+	$('#numeroDocumentoGrupal').focus();
+}
+	

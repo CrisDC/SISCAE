@@ -19,7 +19,7 @@ public class SolicitantesDetalles {
 	String appMaterno;
 	String nombre;
 	String escuela;
-	String estado;
+	String numDocumento;
 	String solicitante;
 	
 }
