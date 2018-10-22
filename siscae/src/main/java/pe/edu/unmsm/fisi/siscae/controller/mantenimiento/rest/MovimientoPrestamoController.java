@@ -43,7 +43,6 @@ public @RestController class MovimientoPrestamoController {
 		
 		System.out.println(movimientoPrestamo);
 		
-		SecurityContextFacade.obtenerNombreUsuario();
 		movimientoPrestamo.setNumDocumentoSolicitante(movimientoPrestamo.getNumDocumentoSolicitante().trim());
 		
 		

@@ -1,4 +1,5 @@
 var espacioDisponible;
+var recurso;
 
 $(document).ready(function(){
 
@@ -88,7 +89,7 @@ $(document).ready(function(){
 	        				}
 	        			},
 	        			success : function(response) {
-	        				swal("Peticion realizada con exito", "Usted esta prestando el recurso ", "success");
+	        				swal("Peticion realizada con exito", "Usted esta prestando el recurso "+numRecurso, "success");
 	        				setTimeout(location.reload(),2000);
 	        			}
 
@@ -96,9 +97,7 @@ $(document).ready(function(){
 	    			  // dismiss can be 'cancel', 'overlay',
 	    			  // 'close', and 'timer'
 	    			  
-	    			}
-
-	    			)
+	    			})
 	          })
       })
 
@@ -167,12 +166,12 @@ $(document).ready(function(){
 	
 	$('body #for-each-grupales').on('click', 'button', function(){
 		
-		let idRecurso = $(this).attr('key');
+		recurso = $(this).attr('key');
         let numRecurso = $(this).attr('id');
         let cantidadPrestamos = $(this).attr('prestado');
         let maxCapacidad = $(this).attr('max');
         espacioDisponible =  parseInt(maxCapacidad) - parseInt(cantidadPrestamos);
-		$('#infoRecurso').text('Solicititud de recurso '+numRecurso)
+		$('#infoRecurso').text('Solicititud de recurso '+Recurso)
 		$('#espacioDisponibleLabel').text('Espacio disponible: '+espacioDisponible)
 
 		
@@ -188,8 +187,14 @@ $(document).ready(function(){
 	})
 	
 	$('#confirmarPrestamo').on('click', function (event){
-		
-		
+		//Recorriendo todos los elementos del html de la clase .docum
+		$(".docum").each(function(){
+			let m = $(this).text();
+			realizarPrestamo(m);
+		});
+		swal("Peticion realizada con exito", "Usted esta prestando el recurso", "success");
+		setTimeout(location.reload(),3000);
+		location.reload();
 	})
 	
       
@@ -264,7 +269,7 @@ function enviarDatosATabla(){
 	        	        				let aPaterno = response[0].appPaterno;
 	        	        				let aMaterno = response[0].appMaterno;
 	        	        				
-	        	        				var fila='<tr class="fila-pers"><td class="celda-pers">' +numeroDocumento+'</td><td class="celda-pers">'+aPaterno+' '+aMaterno+'</td><td><button class="btn btn-danger borrar"><i class="fa fa-trash-o"></i></button></td></tr>'
+	        	        				var fila='<tr class="fila-pers"><td id="'+numeroDocumento+'" class="celda-pers docum">' +numeroDocumento+'</td><td class="celda-pers">'+aPaterno+' '+aMaterno+'</td><td><button class="btn btn-danger borrar"><i class="fa fa-trash-o"></i></button></td></tr>'
 	        	        				$('#cuerpoTablaGrupal tr:last').after(fila);
 	        	        				espacioDisponible =  espacioDisponible - 1;
 	        	        				$('#espacioDisponibleLabel').text('Espacio disponible: '+espacioDisponible)
@@ -303,4 +308,37 @@ function refrescarInput() {
 	$('#numeroDocumentoGrupal').val('');
 	$('#numeroDocumentoGrupal').focus();
 }
+
+function realizarPrestamo(persona){
 	
+	//AJAX
+	var prestamoGrupal ={
+        	"idRecurso": recurso,
+        	"numDocumentoSolicitante": persona
+    };
+	
+	$.ajax({
+        url :  $variableUtil.root + "movimientoPrestamo",
+        type : 'POST',
+        data : JSON.stringify(prestamoGrupal),
+        beforeSend : function(xhr) {
+			xhr.setRequestHeader('Content-Type', 'application/json');
+			xhr.setRequestHeader("X-CSRF-TOKEN", $variableUtil.csrf);
+		},
+		statusCode : {
+			400 : function(response) {
+				swal(response.responseJSON);
+			},
+			500 : function(response) {
+				swal("Error", response.responseText, "warning");
+			}
+		},
+		success : function(response) {
+		}
+
+	}, function (dismiss) {
+	  // dismiss can be 'cancel', 'overlay',
+	  // 'close', and 'timer'
+	  
+	})
+}
