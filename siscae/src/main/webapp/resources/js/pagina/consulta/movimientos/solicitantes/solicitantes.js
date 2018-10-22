@@ -59,8 +59,16 @@ $(document).ready(function() {
 				}
 			},
 			success : function(response) {
-				swal("Registro de solicitante", "Realizado con exito", "success");
-				location.reload();
+				
+				swal({
+					  title: "Registro de solicitante",
+					  text: "Realizado con exito",
+					  icon: "success",
+					  button: false,
+					  timer: 1000,
+					}).then((value) => {
+						location.reload();
+					});
 			}
 
 		}, function (dismiss) {

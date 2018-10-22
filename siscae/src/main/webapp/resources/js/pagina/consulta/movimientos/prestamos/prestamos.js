@@ -38,8 +38,16 @@ $(document).ready(function(){
     				}
     			},
     			success : function(response) {
-    				swal("Registro de salida", "Usted marco su salida con exito", "success");
-    				setTimeout(location.reload(),2000);
+    				
+    				swal({
+    					  title: "Registro de salida",
+    					  text: "Marco su salida con exito",
+    					  icon: "success",
+    					  button: false,
+    					  timer: 1000,
+    				}).then((value) => {
+    					location.reload();
+    				});
     			}
 
 
@@ -89,8 +97,16 @@ $(document).ready(function(){
 	        				}
 	        			},
 	        			success : function(response) {
-	        				swal("Peticion realizada con exito", "Usted esta prestando el recurso "+numRecurso, "success");
-	        				setTimeout(location.reload(),2000);
+	        				
+	        				swal({
+	      					  title: "Peticion realizada con exito",
+	      					  text: "Usted esta prestando el recurso "+numRecurso,
+	      					  icon: "success",
+	      					  button: false,
+	      					  timer: 1000,
+		      				}).then((value) => {
+		      					location.reload();
+		      				});
 	        			}
 
 	    			}, function (dismiss) {
@@ -135,10 +151,16 @@ $(document).ready(function(){
   	        				}
   	        			},
   	        			success : function(response) {
-  	        				swal("Desocupacion de recursos con exito", {
-  	        			      icon: "success",
-  	        			    });
-  	        				setTimeout(location.reload(),2000);
+  	        				
+  	        				swal({
+  	      					  title: "Desocupacion con exito",
+  	      					  text: "El aula ha quedado vacia",
+  	      					  icon: "success",
+  	      					  button: false,
+  	      					  timer: 1000,
+  		      				}).then((value) => {
+  		      					location.reload();
+  		      				});
   	        			}
   	        			
     				  }, function (dismiss) {
@@ -192,9 +214,16 @@ $(document).ready(function(){
 			let m = $(this).text();
 			realizarPrestamo(m);
 		});
-		swal("Peticion realizada con exito", "Usted esta prestando el recurso", "success");
-		setTimeout(location.reload(),3000);
-		location.reload();
+		
+				swal({
+				  title: "Peticion realizada con exito",
+				  text: "Ustedes estan prestando el recurso",
+				  icon: "success",
+				  button: false,
+				  timer: 1000,
+				}).then((value) => {
+					location.reload();
+				});
 	})
 	
       
