@@ -159,6 +159,11 @@ $(document).ready(function(){
 	
 	
 	
+	$('#grupalesModal').keyup(function(e) {
+	    if(e.keyCode == 13) {
+	    	enviarDatosATabla();
+	    }
+	});
 	
 	$('body #for-each-grupales').on('click', 'button', function(){
 		
@@ -173,42 +178,9 @@ $(document).ready(function(){
 		
 	})
 	
-	
-	
-	
 	$('#agregarTablaGrupal').on('click', function (event){
-		
-		if(espacioDisponible!=0){
-			let numeroDocumento = $('#numeroDocumentoGrupal').val();
-			
-			if($('#'+numeroDocumento).length){
-				swal('Te encuentras solicitando el recurso');
-			}else{
-				if(numeroDocumento==''){
-					swal('El numero de documento no puede estar vacio');	
-				}else{
-					//AJAX
-					
-					//Si hay error mensaje...
-					
-					//Si fue correcto esto
-					var fila='<tr class="fila-pers"><td class="celda-pers">' +numeroDocumento+'</td><td><button id="'+numeroDocumento+'" class="btn btn-danger borrar"><i class="fa fa-trash-o"></i></button></td></tr>'
-					$('#cuerpoTablaGrupal tr:last').after(fila);
-					espacioDisponible =  espacioDisponible - 1;
-					$('#espacioDisponibleLabel').text('Espacio disponible: '+espacioDisponible)
-					
-					//Refresacar campos y hacer focus en 
-					$('#numeroDocumentoGrupal').val('');
-					$('#numeroDocumentoGrupal').focus();
-				}
-			}
-		}else{
-			swal('No hay mas espacios disponibles')
-		}
-	
-	
+		enviarDatosATabla();
 	})
-	
 	
 	
 	$('#cerrarModal').on('click', function (event){
@@ -227,5 +199,36 @@ $(function () {
         $('#espacioDisponibleLabel').text('Espacio disponible: '+espacioDisponible);
     });
 });
+
+
+function enviarDatosATabla(){
+	if(espacioDisponible!=0){
+		let numeroDocumento = $('#numeroDocumentoGrupal').val();
+		
+		if($('#'+numeroDocumento).length){
+			swal('Te encuentras solicitando el recurso');
+		}else{
+			if(numeroDocumento==''){
+				swal('El numero de documento no puede estar vacio');	
+			}else{
+				//AJAX
+				
+				//Si hay error mensaje...
+				
+				//Si fue correcto esto
+				var fila='<tr class="fila-pers"><td class="celda-pers">' +numeroDocumento+'</td><td><button id="'+numeroDocumento+'" class="btn btn-danger borrar"><i class="fa fa-trash-o"></i></button></td></tr>'
+				$('#cuerpoTablaGrupal tr:last').after(fila);
+				espacioDisponible =  espacioDisponible - 1;
+				$('#espacioDisponibleLabel').text('Espacio disponible: '+espacioDisponible)
+				
+				//Refresacar campos y hacer focus en 
+				$('#numeroDocumentoGrupal').val('');
+				$('#numeroDocumentoGrupal').focus();
+			}
+		}
+	}else{
+		swal('No hay mas espacios disponibles')
+	}
+}
 
 
