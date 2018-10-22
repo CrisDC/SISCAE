@@ -21,7 +21,7 @@
 			    dia,
 			    estadia
 			    
-		  FROM wv_reporte_prestamos_fechas
+		  FROM vw_reporte_prestamos_fechas
 	</sql>
 
 	<select id="buscarTodos" resultType="ReporteEstadisticaPrestamosFechas">
@@ -32,10 +32,10 @@
 		<include refid="fragmentoSelectBuscarReporteEstadisticaPrestamosFechas" />
 		<where>
 			<if test="tipoDocumentoIdentidad != null and tipoDocumentoIdentidad != ''">
-				wv_reporte_prestamos_fechas .cod_tip_doc_ide = #{tipoDocumentoIdentidad}
+				vw_reporte_prestamos_fechas .cod_tip_doc_ide = #{tipoDocumentoIdentidad}
 			</if>
 			<if test="numeroDocumentoIdentidad != null and numeroDocumentoIdentidad != ''">
-				AND wv_reporte_prestamos_fechas .num_doc_ide = #{numeroDocumentoIdentidad}
+				AND vw_reporte_prestamos_fechas .num_doc_ide = #{numeroDocumentoIdentidad}
 			</if>
 		</where>
 	</select>
@@ -44,7 +44,7 @@
 		<include refid="fragmentoSelectBuscarReporteEstadisticaPrestamosFechas" />
 		<where>
 			<if test="areaEstudio != null and areaEstudio != '-1'">
-				wv_reporte_prestamos_fechas.area_estudio = #{areaEstudio}
+				vw_reporte_prestamos_fechas.area_estudio = #{areaEstudio}
 			</if>
 		</where>
 	</select>

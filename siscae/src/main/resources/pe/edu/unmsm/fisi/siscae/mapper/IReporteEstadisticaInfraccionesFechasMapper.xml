@@ -23,7 +23,7 @@
 			    dia,
 			    turno
 			    
-		  FROM reporte_estadistica_infracciones_fechas
+		  FROM vw_reporte_infracciones_fechas
 	</sql>
 
 	<select id="buscarTodos" resultType="ReporteEstadisticaInfraccionesFechas">
@@ -34,10 +34,10 @@
 		<include refid="fragmentoSelectBuscarReporteEstadisticaInfraccionesFechas" />
 		<where>
 			<if test="tipoDocumentoIdentidad != null and tipoDocumentoIdentidad != ''">
-				reporte_estadistica_infracciones_fechas .cod_tip_doc_ide = #{tipoDocumentoIdentidad}
+				vw_reporte_infracciones_fechas .cod_tip_doc_ide = #{tipoDocumentoIdentidad}
 			</if>
 			<if test="numeroDocumentoIdentidad != null and numeroDocumentoIdentidad != ''">
-				AND reporte_estadistica_infracciones_fechas .num_doc_ide = #{numeroDocumentoIdentidad}
+				AND vw_reporte_infracciones_fechas .num_doc_ide = #{numeroDocumentoIdentidad}
 			</if>
 		</where>
 	</select>
@@ -46,7 +46,7 @@
 		<include refid="fragmentoSelectBuscarReporteEstadisticaInfraccionesFechas" />
 		<where>
 			<if test="areaEstudio != null and areaEstudio != '-1'">
-				reporte_estadistica_infracciones_fechas.area_estudio = #{areaEstudio}
+				vw_reporte_infracciones_fechas.area_estudio = #{areaEstudio}
 			</if>
 		</where>
 	</select>

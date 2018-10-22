@@ -8,7 +8,7 @@
 		        area_estudio,
 		        numero_prestamo,
 			    promedio_tiempo
-		  FROM reporte_estadistica_prestamo_por_escuela 
+		  FROM VW_REPORTE_PRESTAMOS_POR_ESCUELA 
 	</sql>
 
 	<select id="buscarTodos" resultType="ReporteEstadisticaPrestamosPorEscuela">
@@ -19,10 +19,10 @@
 		<include refid="fragmentoSelectBuscarReporteEstadisticaPrestamosPorEscuela" />
 		<where>
 			<if test="tipoDocumentoIdentidad != null and tipoDocumentoIdentidad != ''">
-				reporte_estadistica_prestamo_por_escuela  .cod_tip_doc_ide = #{tipoDocumentoIdentidad}
+				VW_REPORTE_PRESTAMOS_POR_ESCUELA  .cod_tip_doc_ide = #{tipoDocumentoIdentidad}
 			</if>
 			<if test="numeroDocumentoIdentidad != null and numeroDocumentoIdentidad != ''">
-				AND reporte_estadistica_prestamo_por_escuela  .num_doc_ide = #{numeroDocumentoIdentidad}
+				AND VW_REPORTE_PRESTAMOS_POR_ESCUELA  .num_doc_ide = #{numeroDocumentoIdentidad}
 			</if>
 		</where>
 	</select>
@@ -31,7 +31,7 @@
 		<include refid="fragmentoSelectBuscarReporteEstadisticaPrestamosPorEscuela" />
 		<where>
 			<if test="areaEstudio != null and areaEstudio != '-1'">
-				reporte_estadistica_prestamo_por_escuela .area_estudio = #{areaEstudio}
+				VW_REPORTE_PRESTAMOS_POR_ESCUELA .area_estudio = #{areaEstudio}
 			</if>
 		</where>
 	</select>

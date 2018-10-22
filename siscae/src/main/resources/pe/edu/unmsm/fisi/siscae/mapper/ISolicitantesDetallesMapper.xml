@@ -8,8 +8,8 @@
 				app_materno,
 				nombre,
 				escuela,
-				num_documento,
-				solicitante
+				solicitante,
+				doc_documento
 		  FROM vw_solicitantes 
 	</sql>
 
