@@ -8,7 +8,7 @@
 		        nombre_tipo,
 		        numero_visitas,
 			    promedio_tiempo
-		  FROM reporte_estadistica_prestamo_por_tipo 
+		  FROM vw_reporte_prestamos_por_tipo_solicitante 
 	</sql>
 
 	<select id="buscarTodos" resultType="ReporteEstadisticaPrestamosPorTipoSolicitante">
@@ -19,10 +19,10 @@
 		<include refid="fragmentoSelectBuscarReporteEstadisticaPrestamosPorTipoSolicitante" />
 		<where>
 			<if test="tipoDocumentoIdentidad != null and tipoDocumentoIdentidad != ''">
-				reporte_estadistica_prestamo_por_tipo  .cod_tip_doc_ide = #{tipoDocumentoIdentidad}
+				vw_reporte_prestamos_por_tipo_solicitante  .cod_tip_doc_ide = #{tipoDocumentoIdentidad}
 			</if>
 			<if test="numeroDocumentoIdentidad != null and numeroDocumentoIdentidad != ''">
-				AND reporte_estadistica_prestamo_por_tipo  .num_doc_ide = #{numeroDocumentoIdentidad}
+				AND vw_reporte_prestamos_por_tipo_solicitante  .num_doc_ide = #{numeroDocumentoIdentidad}
 			</if>
 		</where>
 	</select>
@@ -31,7 +31,7 @@
 		<include refid="fragmentoSelectBuscarReporteEstadisticaPrestamosPorTipoSolicitante" />
 		<where>
 			<if test="areaEstudio != null and areaEstudio != '-1'">
-				reporte_estadistica_prestamo_por_tipo .area_estudio = #{areaEstudio}
+				vw_reporte_prestamos_por_tipo_solicitante .area_estudio = #{areaEstudio}
 			</if>
 		</where>
 	</select>

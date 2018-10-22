@@ -20,7 +20,7 @@
 			    turno,
 			    id_area_estudio,
 			    area_estudio
-		  FROM reporte_estadistica_infracciones 
+		  FROM VW_REPORTE_INFRACCIONES 
 	</sql>
 
 	<select id="buscarTodos" resultType="ReporteEstadisticaInfracciones">
@@ -31,10 +31,10 @@
 		<include refid="fragmentoSelectBuscarReporteEstadisticaInfracciones" />
 		<where>
 			<if test="tipoDocumentoIdentidad != null and tipoDocumentoIdentidad != ''">
-				reporte_estadistica_infracciones  .cod_tip_doc_ide = #{tipoDocumentoIdentidad}
+				VW_REPORTE_INFRACCIONES  .cod_tip_doc_ide = #{tipoDocumentoIdentidad}
 			</if>
 			<if test="numeroDocumentoIdentidad != null and numeroDocumentoIdentidad != ''">
-				AND reporte_estadistica_infracciones  .num_doc_ide = #{numeroDocumentoIdentidad}
+				AND VW_REPORTE_INFRACCIONES  .num_doc_ide = #{numeroDocumentoIdentidad}
 			</if>
 		</where>
 	</select>
@@ -43,7 +43,7 @@
 		<include refid="fragmentoSelectBuscarReporteEstadisticaInfracciones" />
 		<where>
 			<if test="areaEstudio != null and areaEstudio != '-1'">
-				reporte_estadistica_infracciones .area_estudio = #{areaEstudio}
+				VW_REPORTE_INFRACCIONES .area_estudio = #{areaEstudio}
 			</if>
 		</where>
 	</select>

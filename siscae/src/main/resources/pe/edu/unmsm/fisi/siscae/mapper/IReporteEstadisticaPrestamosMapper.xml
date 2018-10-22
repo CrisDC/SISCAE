@@ -17,7 +17,7 @@
 			    estadia,
 			    id_area_estudio, 
 			    area_estudio
-		  FROM WV_REPORTE_PRESTAMOS 
+		  FROM VW_REPORTE_PRESTAMOS
 	</sql>
 
 	<select id="buscarTodos" resultType="ReporteEstadisticaPrestamos">
@@ -28,10 +28,10 @@
 		<include refid="fragmentoSelectBuscarReporteEstadisticaPrestamos" />
 		<where>
 			<if test="tipoDocumentoIdentidad != null and tipoDocumentoIdentidad != ''">
-				WV_REPORTE_PRESTAMOS  .cod_tip_doc_ide = #{tipoDocumentoIdentidad}
+				VW_REPORTE_PRESTAMOS .cod_tip_doc_ide = #{tipoDocumentoIdentidad}
 			</if>
 			<if test="numeroDocumentoIdentidad != null and numeroDocumentoIdentidad != ''">
-				AND WV_REPORTE_PRESTAMOS  .num_doc_ide = #{numeroDocumentoIdentidad}
+				AND VW_REPORTE_PRESTAMOS .num_doc_ide = #{numeroDocumentoIdentidad}
 			</if>
 		</where>
 	</select>
@@ -40,7 +40,7 @@
 		<include refid="fragmentoSelectBuscarReporteEstadisticaPrestamos" />
 		<where>
 			<if test="areaEstudio != null and areaEstudio != '-1'">
-				WV_REPORTE_PRESTAMOS .area_estudio = #{areaEstudio}
+				VW_REPORTE_PRESTAMOS.area_estudio = #{areaEstudio}
 			</if>
 		</where>
 	</select>

@@ -10,7 +10,7 @@
 				app_materno,
 				nombre
 			    
-		  FROM reporte_estadistica_infracciones_usuario_mas_frecuente
+		  FROM vw_reporte_infracctores_mas_frecuente
 	</sql>
 
 	<select id="buscarTodos" resultType="ReporteEstadisticaInfraccionesUsuarioMasFrecuente">
@@ -21,10 +21,10 @@
 		<include refid="fragmentoSelectBuscarReporteEstadisticaInfraccionesUsuarioMasFrecuente" />
 		<where>
 			<if test="tipoDocumentoIdentidad != null and tipoDocumentoIdentidad != ''">
-				reporte_estadistica_infracciones_usuario_mas_frecuente .cod_tip_doc_ide = #{tipoDocumentoIdentidad}
+				vw_reporte_infracctores_mas_frecuente .cod_tip_doc_ide = #{tipoDocumentoIdentidad}
 			</if>
 			<if test="numeroDocumentoIdentidad != null and numeroDocumentoIdentidad != ''">
-				AND reporte_estadistica_infracciones_usuario_mas_frecuente .num_doc_ide = #{numeroDocumentoIdentidad}
+				AND vw_reporte_infracctores_mas_frecuente .num_doc_ide = #{numeroDocumentoIdentidad}
 			</if>
 		</where>
 	</select>
@@ -33,7 +33,7 @@
 		<include refid="fragmentoSelectBuscarReporteEstadisticaInfraccionesUsuarioMasFrecuente" />
 		<where>
 			<if test="areaEstudio != null and areaEstudio != '-1'">
-				reporte_estadistica_infracciones_usuario_mas_frecuente.area_estudio = #{areaEstudio}
+				vw_reporte_infracctores_mas_frecuente.area_estudio = #{areaEstudio}
 			</if>
 		</where>
 	</select>

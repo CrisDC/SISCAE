@@ -8,7 +8,7 @@
 		        id_escuela_programa,
 			    escuela_programa,
 		        numero_infracciones
-		  FROM reporte_estadistica_infracciones_por_escuela 
+		  FROM vw_reporte_infracciones_por_escuela 
 	</sql>
 
 	<select id="buscarTodos" resultType="ReporteEstadisticaInfraccionesPorEscuela">
@@ -19,10 +19,10 @@
 		<include refid="fragmentoSelectBuscarReporteEstadisticaInfraccionesPorEscuela" />
 		<where>
 			<if test="tipoDocumentoIdentidad != null and tipoDocumentoIdentidad != ''">
-				reporte_estadistica_infracciones_por_escuela  .cod_tip_doc_ide = #{tipoDocumentoIdentidad}
+				vw_reporte_infracciones_por_escuela  .cod_tip_doc_ide = #{tipoDocumentoIdentidad}
 			</if>
 			<if test="numeroDocumentoIdentidad != null and numeroDocumentoIdentidad != ''">
-				AND reporte_estadistica_infracciones_por_escuela  .num_doc_ide = #{numeroDocumentoIdentidad}
+				AND vw_reporte_infracciones_por_escuela  .num_doc_ide = #{numeroDocumentoIdentidad}
 			</if>
 		</where>
 	</select>
@@ -31,7 +31,7 @@
 		<include refid="fragmentoSelectBuscarReporteEstadisticaInfraccionesPorEscuela" />
 		<where>
 			<if test="areaEstudio != null and areaEstudio != '-1'">
-				reporte_estadistica_infracciones_por_escuela .area_estudio = #{areaEstudio}
+				vw_reporte_infracciones_por_escuela .area_estudio = #{areaEstudio}
 			</if>
 		</where>
 	</select>
