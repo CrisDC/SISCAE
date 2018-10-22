@@ -9,7 +9,7 @@
 				nombre,
 				escuela,
 				solicitante,
-				doc_documento
+				num_documento
 		  FROM vw_solicitantes 
 	</sql>
 

@@ -173,7 +173,7 @@
 													
 													<!-- Iteracion para recursos grupales -->
 													<th:block th:each="detalle : ${recursosTabla}" >
-															<tr style="background-color: #fff;">
+															<tr th:if="${detalle.maxCapacidad} != 1"style="background-color: #fff;">
 																<td th:if="((${detalle.orden} == 1) or (${detalle.cantidadPrestamos} == 0))"  th:text="${detalle.tipoRecurso} +' '+ ${detalle.numero}" th:rowspan="${detalle.cantidadPrestamos}==0  ? '1' : ${detalle.cantidadPrestamos}" style="color: #67757C;"></td>
 																<td th:if="${detalle.estado} == 'DISPONIBLE'"><span class="badge badge-primary">DISPONIBLE</span></td>
 																<td th:if="${detalle.estado} == 'OCUPADO'"><span class="badge badge-danger">OCUPADO</span></td>
