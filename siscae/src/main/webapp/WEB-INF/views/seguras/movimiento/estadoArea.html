@@ -59,16 +59,15 @@
 									
 									
 									<li th:if="(${areaAdministrativo.cargo} == 'SOLICITANTE')"
-										class="nav-item"><a class="nav-link" data-toggle="tab"
-										href="#tablaSancionados" role="tab"> <span
+										class="nav-item"><a class="nav-link"
+										data-toggle="modal" data-target="#consultaInfraccionesModal" role="tab"> <span
 											class="hidden-sm-up"><i class="ti-user"></i></span> <span
 											class="hidden-xs-down">Sancionados</span>
 									</a></li>
 
 									<li class="nav-item"><a class="nav-link marcar-salida" data-toggle="tab"
 										id="salida" role="tab"> <span class="hidden-sm-up"><i
-												class="ti-user"></i> </span> <span class="hidden-xs-down">Marcar
-												Salida</span>
+												class="ti-user"></i> </span> <span class="hidden-xs-down">Marcar Salida</span>
 									</a></li>
 
 
@@ -194,35 +193,6 @@
 									</div>
 									<!-- Fin Panel Detalle -->
 									
-									
-									<!-- Panel Sancionado -->
-									<div class="tab-pane p-20" id="tablaSancionados" role="tabpanel">
-										<div class="table-responsive m-t-40">
-											<h3>Solicitantes sancionados</h3>
-
-											<table id="myTable"
-												class="table table-bordered table-striped">
-												<thead>
-													<tr>
-														<th>Codigo</th>
-														<th>Nombre</th>
-														<th>Apellidos</th>
-														<th>Fin de suspension</th>
-													</tr>
-												</thead>
-												<tbody>
-													<tr>
-														<th>16200116</th>
-														<th>MARIO ALBERTO</th>
-														<th>CORTEZ ESCARATE</th>
-														<th>15/10/2018</th>
-													</tr>
-												</tbody>
-											</table>
-										</div>
-									</div>
-									<!-- Fin Panel Sancionado -->
-
 								</div>
 								<!-- End Tab panes -->
 							</div>
@@ -288,8 +258,113 @@
 			</div>
 		</div>
 		<!-- END MODAL -->
-
-
+		
+		
+		
+		
+		
+		
+		<!-- MODAL 2 -->
+		<div class="modal fade" id="consultaInfraccionesModal" tabindex="-1" role="dialog" aria-labelledby="infractoresModalLabel" aria-hidden="true">
+			<div class="modal-dialog" role="document">
+		    	<div class="modal-content" style="width: 600px">
+					<div class="card-header modal-header">
+		      			<h3 class="modal-title" id="infoRecurso">Consulta de infracciones</h3>		       
+		      		</div>				
+					<div class="card-body modal-body">
+					
+						<div class="form-group m-t-20">
+							<h5 class="m-t-15 m-l-15"><strong>Ingrese su DNI por el lector</strong></h5>
+							<div class="input-group justify-content-center">
+								<input type="text" class="form-control col-8 m-r-15 input-grupal" id="numDocumentoInfractor" autofocus placeholder="Numero de documento">
+								<button id="consultarInfracciones" class="col-3 btn btn-info">OK</button>
+							</div>
+						</div>
+						<div id="detalleInfracciones" class="row justify-content-center">
+							<div class="panel panel-danger">
+			        				<div class="panel-heading">
+			        					Datos del infractor
+			        				</div>
+						        	<ul class="list-group">
+						        		<li class="list-group-item">
+						        			<div class="row">
+						        				<div class="col-md-5">
+						        					<h5>Tipo. de doc</h5>
+						        				</div>
+						        				<div class="col-md-7" >
+						        					<label id="tipoDocumento"></label>
+						        				</div>
+						        			</div>
+						        		</li>
+						        		<li class="list-group-item">
+						        			<div class="row">
+						        				<div class="col-md-5">
+						        					<h5>Num. de doc</h5>
+						        				</div>
+						        				<div class="col-md-7" id="numeroDocumento">
+						        					<label id="numeroDocumentoInfractor"></label>
+						        				</div>
+						        			</div>
+						        		</li>
+						        		<li class="list-group-item">
+						        			<div class="row">
+						        				<div class="col-md-5">
+						        					<h5>Nombre</h5>
+						        				</div>
+						        				<div class="col-md-7" id="nombre">
+						        					<label id="nombre"></label>
+						        				</div>
+						        			</div>
+						        		</li>
+						        	</ul>
+						        	<div class="panel-heading">
+			        					Datos de la infraccion
+			        				</div>
+						        	<ul class="list-group">
+						        		<li class="list-group-item">
+						        			<div class="row">
+						        				<div class="col-md-5">
+						        					<h5>Infraccion</h5>
+						        				</div>
+						        				<div class="col-md-7">
+						        					<label id="infraccion"></label>
+						        				</div>
+						        			</div>
+						        		</li>
+						        		<li class="list-group-item">
+						        			<div class="row">
+						        				<div class="col-md-5">
+						        					<h5>Fecha Infraccion</h5>
+						        				</div>
+						        				<div class="col-md-7">
+						        					<label id="fechaInfraccion"></label>
+						        				</div>
+						        			</div>
+						        		</li>
+						        		<li class="list-group-item">
+						        			<div class="row">
+						        				<div class="col-md-5">
+						        					<h5>Estado</h5>
+						        				</div>
+						        				<div class="col-md-7">
+						        					<label id="estado"></label>
+						        				</div>
+						        			</div>
+						        		</li>
+						        	</ul>
+			        			</div>
+						</div>
+					</div>
+					<div class="modal-footer">
+						<button id="cerrarModalInfractores" type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+					</div>
+				</div>
+			</div>
+		</div>
+		<!-- END MODAL 2 -->
+		
+		
+		
 
 		<!-- All Jquery -->
 		<script th:src="@{/resources/js/guiuser/lib/jquery/jquery.min.js}"></script>

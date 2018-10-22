@@ -1,7 +1,7 @@
 package pe.edu.unmsm.fisi.siscae.model.reporte;
 
 import java.sql.Time;
-import java.util.Date;
+import java.sql.Date;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -21,6 +21,7 @@ public class ReporteEstadisticaInfracciones {
 	String appPaterno;
 	String appMaterno;
 	String nombre;
+	String estadoInfraccion;
 	int idEscuelaPrograma;
 	String escuelaPrograma;
 	int codigoInfraccion;

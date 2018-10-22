@@ -5,6 +5,6 @@ import lombok.Data;
 @Data
 public class ReporteEstadisticaInfraccionesCriterioBusqueda {
 	//private String idRecurso;
-		private String areaEstudio;
+		private String numeroDocumento;
 }
 

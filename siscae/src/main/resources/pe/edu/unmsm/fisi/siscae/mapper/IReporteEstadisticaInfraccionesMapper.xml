@@ -12,6 +12,7 @@
 			    id_escuela_programa,
 			    escuela_programa,
 			    codigo_infraccion,
+			    estado_infraccion,
 			    gravedad,
 		        tipo_infraccion,
 		        descripcion,
@@ -42,8 +43,8 @@
 	<select id="buscarPorCriterio" resultType="ReporteEstadisticaInfracciones">
 		<include refid="fragmentoSelectBuscarReporteEstadisticaInfracciones" />
 		<where>
-			<if test="areaEstudio != null and areaEstudio != '-1'">
-				VW_REPORTE_INFRACCIONES .area_estudio = #{areaEstudio}
+			<if test="numeroDocumento != null and numeroDocumento != '-1'">
+				VW_REPORTE_INFRACCIONES .numero_documento = #{numeroDocumento}
 			</if>
 		</where>
 	</select>

@@ -2,7 +2,9 @@ var espacioDisponible;
 var recurso;
 
 $(document).ready(function(){
-
+	
+	$('#detalleInfracciones').css('display', 'none');
+	
 	$('#salida').click(function () {
 		swal("Registrar salida",{
 			title: "Registrar salida",
@@ -186,6 +188,21 @@ $(document).ready(function(){
 	    }
 	});
 	
+	$('#agregarTablaGrupal').on('click', function (event){
+		enviarDatosATabla();
+	})
+	
+	$('#consultaInfraccionesModal').keyup(function(e) {
+	    if(e.keyCode == 13) {
+	    	consultarInfracciones();
+	    }
+	});
+	
+	$('#consultarInfracciones').on('click', function (event){
+		consultarInfracciones();
+	})
+	
+	
 	$('body #for-each-grupales').on('click', 'button', function(){
 		
 		recurso = $(this).attr('key');
@@ -199,14 +216,14 @@ $(document).ready(function(){
 		
 	})
 	
-	$('#agregarTablaGrupal').on('click', function (event){
-		enviarDatosATabla();
-	})
-	
-	
 	$('#cerrarModal').on('click', function (event){
 		location.reload()
 	})
+	
+	$('#cerrarModalInfractores').on('click', function (event){
+		location.reload()
+	})
+	
 	
 	$('#confirmarPrestamo').on('click', function (event){
 		//Recorriendo todos los elementos del html de la clase .docum
@@ -225,7 +242,6 @@ $(document).ready(function(){
 					location.reload();
 				});
 	})
-	
       
 })
 
@@ -370,4 +386,64 @@ function realizarPrestamo(persona){
 	  // 'close', and 'timer'
 	  
 	})
+}
+
+
+function consultarInfracciones(){
+	//AJAX
+	let numDoc = $('#numDocumentoInfractor').val();
+	
+	$.ajax({
+            url :  $variableUtil.root + "reporteEstadisticaInfracciones?accion=buscarPorCriterio&numeroDocumento="+numDoc,
+            type : 'GET',
+            beforeSend : function(xhr) {
+				xhr.setRequestHeader('Content-Type', 'application/json');
+				xhr.setRequestHeader("X-CSRF-TOKEN", $variableUtil.csrf);
+			},
+			statusCode : {
+				400 : function(response) {
+					swal(response.responseJSON);
+				},
+				500 : function(response) {
+					swal("Error", response.responseText, "warning");
+				}
+			},
+			success : function(response) {
+
+				console.log(response);
+				
+				if(response.length!=0){
+					
+					let nombre = response[0].nombre;
+    				let numeroDocumento = response[0].numeroDocumento;
+    				let tipoDocumento = response[0].tipoDocumento;
+    				let aPaterno = response[0].appPaterno;
+    				let aMaterno = response[0].appMaterno;
+    				let infraccion = response[0].descripcion;
+    				let fechaInfraccion = response[0].fechaInfraccion;
+    				let estado = response[0].estadoInfraccion;
+    				
+    				$('#tipoDocumento').text(tipoDocumento);
+    				$('#numeroDocumentoInfractor').text(numeroDocumento);
+    				$('#nombre').text(nombre+' '+aPaterno+' '+aMaterno);
+    				$('#infraccion').text(infraccion);
+    				$('#fechaInfraccion').text(fechaInfraccion);
+    				$('#estado').text(estado);
+    				
+    				$('#detalleInfracciones').css('display', 'flex');
+    				$('#numDocumentoInfractor').val('');
+    				$('#numDocumentoInfractor').focus();
+    				
+    				
+				}
+				
+				
+				
+			}
+			
+	  }, function (dismiss) {
+		  // dismiss can be 'cancel', 'overlay',
+		  // 'close', and 'timer'
+		  
+	  })
 }
