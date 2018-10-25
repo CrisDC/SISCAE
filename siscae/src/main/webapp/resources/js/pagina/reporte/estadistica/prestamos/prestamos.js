@@ -80,7 +80,7 @@ $(document).ready(function() {
 
 	$local.tblReporteDetalle = $local.$tblReporteDetalle.DataTable({
 		"ajax" : {
-			"url" : $variableUtil.root + "reporteEstadisticaPrestamos?accion=buscarTodos",
+			"url" : $variableUtil.root + "reporteEstadisticaPrestamos?accion=buscarPorCriterio",
 			"dataSrc" : ""
 		},
 		"language" : {

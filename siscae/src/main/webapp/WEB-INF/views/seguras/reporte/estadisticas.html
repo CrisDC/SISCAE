@@ -94,7 +94,19 @@
 									</div>
 									<div class="tab-pane" id="tabReporteGraficoCriterio" role="tabpanel">
 										<div class="p-20">
+										<dl><dd>Por Escuela:
+											<dl><dd>
+											  <input type="radio" id="prestamosEscuela" name="grafico" value="temporal"> Temporal <br>
+											  <input type="radio" id="prestamosEscuela" name="grafico" value="barras"> Barras<br>
+											  <input type="radio" id="prestamosEscuela" name="grafico" value="torta"> Torta<br>
+											  <input type="range" id="spEscuela" name="scroll" min=0.00001 max=0.60002 step=0.060001 value=0.00001><br>
+											</dd></dl>
+										</dd></dl>
+										<section class="container" id="container">
+											<canvas id="canvas"></canvas>
+										</section>
 										<canvas id="grafico"></canvas>
+										
 										<div id="chartjs-legend" class="noselect"></div>
 										</div>
 									</div>
@@ -171,166 +183,206 @@
 		<script th:src="@{/resources/js/pagina/reporte/estadistica/{reporte}/{reporte}Formulario.js(reporte = ${reporte})}"></script>
 		<script th:src="@{/resources/js/pagina/reporte/estadistica/{reporte}/criterio/{criterio}.js(reporte = ${reporte}, criterio = ${criterio} )}"></script>
 		<script>
-			var canvas = document.getElementById('grafico');
-			var ctx = canvas.getContext('2d');
-			var color = Chart.helpers.color;
-			var Color = [
-				window.chartColors.red, 
-				window.chartColors.orange, 
-				window.chartColors.green,
-				'#4dc9f6',
-				'#f53794',
-				'#537bc4',
-				'#acc236',
-				'#00a950',
-				'#58595b',
-				'#8549ba'
-			];
-			var graficoData = {
-					labels: [],
-					datasets: [{
-						backgroundColor: [],
-						borderColor: [],
-						borderWidth: 1,
-						data: [
-						]
-					}]
-				};
+		var canvas = document.getElementById('canvas');
+		var ctx = canvas.getContext('2d');
+		var color = Chart.helpers.color;
+		var Color = [
+			window.chartColors.red, 
+			window.chartColors.orange, 
+			window.chartColors.green,
+			'#4dc9f6',
+			'#f53794',
+			'#537bc4',
+			'#acc236',
+			'#00a950',
+			'#58595b',
+			'#8549ba'
+		];
 
-			reiniciar();
+		var graficoData = {
+				labels: [],
+				datasets: [{
+					backgroundColor: [],
+					borderColor: [],
+					borderWidth: 1,
+					data: [
+					]
+				}]
+			};
 
-			var graficoChart = new Chart(ctx, {
-				type: 'bar',
-				data: graficoData,
-				options: {
-					responsive: true,
-					  legendCallback: function(chart) {
-					    var text = [];
-					    text.push('<ul class="' + chart.id + '-legend">');
-					    for (var i = 0; i < chart.data.datasets[0].data.length; i++) {
-					      text.push('<li><span style="background-color:' + chart.data.datasets[0].backgroundColor[i] + '">');
-					      if (chart.data.labels[i]) {
-					        text.push(chart.data.labels[i]);
-					      }
-					      text.push('</span></li>');
-					    }
-					    text.push('</ul>');
-					    return text.join("");
-					  },
-					legend:false,/* {
-					   labels: {
-					      generateLabels: function(chart) {
-					      	if(graficoChart!=null && graficoChart.config.type.localeCompare('line')!=0){
-						         var labels = chart.data.labels;
-						         var dataset = chart.data.datasets[0];
-						         var legend = labels.map(function(label, index) {
-						            return {
-						               datasetIndex: 0,
-						               fillStyle: dataset.backgroundColor && dataset.backgroundColor[index],
-						               strokeStyle: dataset.borderColor && dataset.borderColor[index],
-						               lineWidth: dataset.borderWidth,
-						               text: label
-						            }
-						         });
-						         return legend;
-					      	}else{
-					      		return chart.data.datasets.map(function(dataset, index) {
-						            return {
-						               fillStyle: dataset.backgroundColor,
-						               strokeStyle: 'rgb(255, 255, 255)',
-						               lineWidth: dataset.borderWidth,
-						               text: dataset.label
-						            }
-						         });
-					      	}
-					      }
-					   },
-					   position: 'right',
-					   display: false
-				    }*/
-					title: {
+		reiniciar();
+
+		var graficoChart = new Chart(ctx, {
+			type: 'bar',
+			data: graficoData,
+			options: {
+				responsive: true,
+				legend: {
+				   labels: {
+				      generateLabels: function(chart) {
+				      	if(graficoChart!=null && graficoChart.config.type.localeCompare('line')!=0){
+					         var labels = chart.data.labels;
+					         var dataset = chart.data.datasets[0];
+					         var legend = labels.map(function(label, index) {
+					            return {
+					               datasetIndex: 0,
+					               fillStyle: dataset.backgroundColor && dataset.backgroundColor[index],
+					               strokeStyle: dataset.borderColor && dataset.borderColor[index],
+					               lineWidth: dataset.borderWidth,
+					               text: label
+					            }
+					         });
+					         return legend;
+				      	}else{
+				      		return chart.data.datasets.map(function(dataset, index) {
+					            return {
+					               fillStyle: dataset.backgroundColor,
+					               strokeStyle: 'rgb(255, 255, 255)',
+					               lineWidth: dataset.borderWidth,
+					               text: dataset.label
+					            }
+					         });
+				      	}
+				      }
+				   },
+				   position: 'right',
+				   display: false
+			    },
+				title: {
+					display: true,
+					text: 'Seleccione la gráfica que desee'
+				},
+				tooltips: {
+					mode: 'index',
+					intersect: false,
+					position: 'nearest',
+					backgroundColor: 'rgb(40, 40, 40)',
+
+		            callbacks: {
+		                label: function(tooltipItem, data) {
+		                    var label = data.datasets[tooltipItem.datasetIndex].label || '';
+		                    if (label) {
+		                        label += ': ';
+		                    }
+
+		                    label += data.datasets[tooltipItem.datasetIndex].data[tooltipItem.index];
+		                    return label;
+		                }
+            }
+				},
+				scales: {
+					xAxes: [{
 						display: true,
-						text: 'Seleccione la gráfica que desee'
-					},
-					tooltips: {
-						mode: 'index',
-						intersect: false,
-						position: 'nearest',
-						backgroundColor: 'rgb(40, 40, 40)',
-
-			            callbacks: {
-			                label: function(tooltipItem, data) {
-			                    var label = data.datasets[tooltipItem.datasetIndex].label || '';
-			                    if (label) {
-			                        label += ': ';
-			                    }
-
-			                    label += data.datasets[tooltipItem.datasetIndex].data[tooltipItem.index];
-			                    return label;
-			                }
-	            }
-					},
-					/*
-					var nombresGrandes = false;
-                    nombresGrandes = nombresGrandes || value.length()>6;
-                    if(nombresGrandes){
-                    	return '$' + (index+1);
-                    }else{
-                    	return '$' + value;
-                    }
-					*/
-					scales: {
-						xAxes: [{
-							display: true,
-
-							ticks: {
-				                userCallback: function(label, index, labels) {
-				                	var nombreGrande = false;
-				                    //nombreGrande = nombreGrande || label.length>16;
-				                    if(nombreGrande){
-				                    	return (index+1);
-				                    }else{
-				                    	return label;
-				                    }
-				                }
-				             }
-					 
-						}],
-						yAxes: [{
-							display: true,
-							ticks:{
-								beginAtZero: true
-							}
-						}]
-					}
+					}],
+					yAxes: [{
+						display: true,
+						ticks:{
+							beginAtZero: true
+						}
+					}]
 				}
-			})
-
-			function reiniciar(){
-				graficoData.labels=[];
-				graficoData.datasets = [{
-						backgroundColor: [],
-						borderColor: [],
-						borderWidth: 1,
-						data: []
-					}];
-				if(graficoChart!=null){
-					graficoChart.options.scales.xAxes[0].display = true;
-					graficoChart.options.scales.yAxes[0].display = true;
-					graficoChart.options.legend.display = false;
-				}	
 			}
-		    myChart.update();
-			$("#chartjs-legend").html(graficoChart.generateLegend());
-			$("#chartjs-legend").on('click', "li", function() {
-				graficoChart.data.datasets[0].data[$(this).index()] += 50;
-				graficoChart.update();
-			  console.log('legend: ' + data.datasets[0].data[$(this).index()]);
-			});
+		})
+
+		function reiniciar(){
+			graficoData.labels=[];
+			graficoData.datasets = [{
+					backgroundColor: [],
+					borderColor: [],
+					borderWidth: 1,
+					data: []
+				}];
+			if(graficoChart!=null){
+				graficoChart.options.scales.xAxes[0].display = true;
+				graficoChart.options.scales.yAxes[0].display = true;
+				graficoChart.options.legend.display = false;
+			}	
+		}
+		//PRUEBA FACTORIZAR
+			function graficar(elemento,data){
+				var datos=data, scroll, color;
+				var titulo = 'Numero de '
+				switch(elemento.id){
+					//PRESTAMOS ESCUELA
+					case 'prestamosEscuela':
+						color=0;
+						titulo+='Prestamos por Escuela';
+						scroll = 'spEscuela';
+						break;
+
+					//PRESTAMOS TIPO SOLICITANTES
+					case 'prestamosSoli':
+						color=6;
+						titulo+='Prestamos por Tipo de Solicitante';
+						scroll = 'spSoli';
+						break;
+
+					//PRESTAMOS TURNO
+					case 'prestamosTurno':
+						color=3;
+						titulo+='Prestamos por Turno';
+						scroll = 'spTurno';
+						break;
+
+					//PRESTAMOS AREA
+					case 'prestamosArea':
+						color=2;
+						titulo+='Prestamos por Area de Estudio';
+						scroll = 'spArea';
+						break;
+
+					//INFRACCIONES ESCUELA
+					case 'infEscuela':
+						color=0;
+						titulo+='Infracciones por Escuela';
+						scroll = 'siEscuela';
+						break;
+
+					//INFRACCIONES TIPO SOLICITANTES
+					case 'infSoli':
+						color=6;
+						titulo+='Infracciones por Tipo de Solicitante';
+						scroll = 'siSoli';
+						break;
+
+					//INFRACCIONES TURNO
+					case 'infTurno':
+						color=3;
+						titulo+='Infracciones por Turno';
+						scroll = 'siTurno';
+						break;
+
+					//INFRACCIONES AREA
+					case 'infArea':
+						color=2;
+						titulo+='Infracciones por Área de Estudio';
+						scroll = 'siArea';
+						break;
+
+					//INFRACCIONES TIPO INFRACCION
+					case 'infTipo':
+						color=8;
+						titulo+='Infracciones por Tipo';
+						scroll = 'siTtipo';
+						break;
+				}
+
+				switch(elemento.value){
+					case 'barras':
+						graficarBarras2(datos, titulo, 0);
+						break;
+					case 'torta':
+						graficarPie2(datos, titulo, 0);
+						break;
+					case 'temporal':
+						//graficarLineaTemporal(datos, titulo, color, elemento, scroll);
+						break;
+				}
+			}
 		</script>
 		
 		<script>
-
+		
 		function graficarBarras(data, titulo, dc) {
 			graficoChart.config.type = 'bar';
 			reiniciar();
@@ -472,7 +524,7 @@
 		</script>
 		<script>
 			var dataServer;
-			function setDataServer(obj){
+			function setDataServer(obj,tipo){
 				dataServer = obj;
 				var columnas = [], valores = [];
 				alert(dataServer);
@@ -480,14 +532,21 @@
 					columnas.push(dataServer[i].escuela);
 					valores.push(parseInt(dataServer[i].numeroPrestamo));
 				}
-				graficarPie2([columnas,valores], "Este es el titulo", 0);
+				Array.from(document.getElementsByName('grafico')).forEach(	//Agraga listener a todos los radio
+						function(elementoRadio) {
+							elementoRadio.addEventListener('change', function (){
+								graficar(this,[columnas,valores]);
+							});
+						}
+					);
+				
 			}
 			
 			function ajax(){
 				$.ajax({
 		              url : "../../../reporteEstadisticaPrestamosPorEscuela",
 		              type : 'GET',
-		              data : "accion=buscarTodos",
+		              data : "accion=buscarPorCriterio&AreaEstudio=BIBLIOTECA",
 	            	  success : function(response) {
             			setDataServer(response);
 	 	     		  }
