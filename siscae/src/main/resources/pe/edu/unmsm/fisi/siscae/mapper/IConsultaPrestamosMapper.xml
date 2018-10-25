@@ -11,7 +11,7 @@
 		        area_estudio,
 		        observacion,
 		        cantidad_prestamos
-		  FROM WV_ESTADO_AULAS 
+		  FROM VW_ESTADO_AULAS 
 	</sql>
 
 	<select id="buscarTodos" resultType="PrestamoRecurso">
@@ -22,10 +22,10 @@
 		<include refid="fragmentoSelectBuscarPrestamos" />
 		<where>
 			<if test="tipoDocumentoIdentidad != null and tipoDocumentoIdentidad != ''">
-				WV_ESTADO_AULAS .cod_tip_doc_ide = #{tipoDocumentoIdentidad}
+				VW_ESTADO_AULAS .cod_tip_doc_ide = #{tipoDocumentoIdentidad}
 			</if>
 			<if test="numeroDocumentoIdentidad != null and numeroDocumentoIdentidad != ''">
-				AND WV_ESTADO_AULAS .num_doc_ide = #{numeroDocumentoIdentidad}
+				AND VW_ESTADO_AULAS .num_doc_ide = #{numeroDocumentoIdentidad}
 			</if>
 		</where>
 	</select>
@@ -34,7 +34,7 @@
 		<include refid="fragmentoSelectBuscarPrestamos" />
 		<where>
 			<if test="areaEstudio != null and areaEstudio != '-1'">
-				WV_ESTADO_AULAS.area_estudio = #{areaEstudio}
+				VW_ESTADO_AULAS.area_estudio = #{areaEstudio}
 			</if>
 		</where>
 	</select>

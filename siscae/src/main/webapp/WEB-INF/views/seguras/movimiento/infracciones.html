@@ -7,95 +7,177 @@
 <body>
 
 	<div layout:fragment="content">
-		<div class="page-wrapper">
+		<div
+			th:class="${areaAdministrativo.cargo} == 'SOLICITANTE' ? 'page-wrapper m-l-0' : 'page-wrapper'">
+
 			<!-- Bread crumb -->
-			<div class="row page-titles">
+			<div th:if="(${areaAdministrativo.cargo} != 'SOLICITANTE')" class="row page-titles">
 				<div class="col-md-5 align-self-center">
-					<h3 class="text-primary">Registrar por modulo</h3>
+					<h3
+						th:text="'Infracciones y sanciones en la ' + ${areaAdministrativo.nombreAreaEstudio.toLowerCase()}"
+						class="text-primary"></h3>
 				</div>
 				<div class="col-md-7 align-self-center">
 					<ol class="breadcrumb">
-						<li class="breadcrumb-item"><a href="javascript:void(0)">Infracciones</a>
-						</li>
-						<li class="breadcrumb-item active">Registrar por modulo</li>
+						<li class="breadcrumb-item"><a href="javascript:void(0)">Infracciones y sanciones</a></li>
 					</ol>
 				</div>
 			</div>
 			<!-- End Bread crumb -->
+
 			<!-- Container fluid  -->
 			<div class="container-fluid">
 				<!-- Start Page Content -->
+
 				<div class="row">
 					<div class="col-12">
 						<div class="card">
-							<div class="card-body">
-								<h4 class="card-title">Registro de infraccion por modulo</h4>
-								<p>Imponga una infraccion al modulo correspondiente</p>
+
+							<div class="card-body p-b-0">
+								<!-- Nav tabs -->
+								<ul class="nav nav-tabs customtab2 justify-content-end" role="tablist">
+									<li class="nav-item"><a class="nav-link active"
+										data-toggle="tab" href="#infraccion" role="tab"> <span
+											class="hidden-sm-up"> <i class="ti-home"></i></span> <span
+											class="hidden-xs-down">Aplicar Infraccion</span>
+									</a></li>
+
+									<li th:if="(${areaAdministrativo.cargo} != 'SOLICITANTE')"
+										class="nav-item"><a class="nav-link" data-toggle="tab"
+										href="#tablaDetalle" role="tab"> <span class="hidden-sm-up"><i
+												class="ti-user"></i></span> <span class="hidden-xs-down">Detalles</span>
+									</a></li>
+									
+									<li th:if="(${areaAdministrativo.cargo} != 'SOLICITANTE')"
+										class="nav-item"><a class="nav-link" data-toggle="tab"
+										href="#sancionados" id="desocupar" role="tab"> <span class="hidden-sm-up"><i
+												class="ti-user"></i></span> <span class="hidden-xs-down">Ver Sancionados</span>
+									</a></li>
+								</ul>
+
+								<!-- Tab panes -->
+								<div class="tab-content">
 								
-								<div class="row" id="recursosOcupados">
-									
-									<th:block th:each="prestamo : ${prestamos}">
-									
-										<div th:if = "(${prestamo.estado} == 'OCUPADO') or (${prestamo.estado} == 'LIBERABLE')" 
-											 class = "recurso">
-											
-											<img
-												th:if="(${prestamo.estado} == 'OCUPADO') and (${areaAdministrativo.nombreAreaEstudio} == 'BIBLIOTECA')"
-												th:src="@{/resources/images/cubo_rojo.png}" width="40" height="40"> 
-											<img
-												th:if="(${prestamo.estado} == 'LIBERABLE') and (${areaAdministrativo.nombreAreaEstudio} == 'BIBLIOTECA')"
-												th:src="@{/resources/images/cubo_amarillo.png}" width="40" height="40">
+									<!-- Panel Infracciones -->
+									<div class="tab-pane active" id="infraccion" role="tabpanel">
+										<div class="p-20">
+											<div class="card-body">
+												<h3 >Registro de infraccion por modulo</h3>
+												<label>Selecciones el recurso en el que se encuentra el infractor</label>
+												<div class="row" id="recursosOcupados">
 													
-											<img
-												th:if="((${prestamo.estado} == 'OCUPADO') or (${prestamo.estado} == 'LIBERABLE')) and (${areaAdministrativo.nombreAreaEstudio} == 'VIDEOTECA')"
-												th:src="@{/resources/images/pantalla.png}" width="40" height="40">
+													<th:block th:each="prestamo : ${prestamos}">
 													
-											<img
-												th:if="((${prestamo.estado} == 'OCUPADO') or (${prestamo.estado} == 'LIBERABLE')) and (${areaAdministrativo.nombreAreaEstudio} == 'SALA GRUPAL')"
-												th:src="@{/resources/images/mesa.png}" width="100" height="100">
+														<div th:if = "(${prestamo.estado} == 'OCUPADO') or (${prestamo.estado} == 'LIBERABLE')" 
+															 class = "recurso">
 															
-											<p 	th:if = "(${prestamo.estado} == 'OCUPADO') or (${prestamo.estado} == 'LIBERABLE')"
-												th:text="${prestamo.numero}"></p>
-												
-											<p th:if="${prestamo.estado} == 'OCUPADO'"
-												th:text="OCUPADO" class="ocupado">
-											</p>
-										
-											<p th:if="${prestamo.estado} == 'LIBERABLE'"
-												th:text="LIBERABLE" class="liberable">
-											</p>
-															
-											<p 	th:if="((${prestamo.estado} == 'OCUPADO') or (${prestamo.estado} == 'LIBERABLE')) and (${areaAdministrativo.nombreAreaEstudio} == 'SALA GRUPAL')" 
-												th:text="'Capacidad 0/' + ${prestamo.maxCapacidad}">
-											</p>
+															<img
+																th:if="(${prestamo.estado} == 'OCUPADO') and (${areaAdministrativo.nombreAreaEstudio} == 'BIBLIOTECA')"
+																th:src="@{/resources/images/cubo_rojo.png}" width="40" height="40"> 
+															<img
+																th:if="(${prestamo.estado} == 'LIBERABLE') and (${areaAdministrativo.nombreAreaEstudio} == 'BIBLIOTECA')"
+																th:src="@{/resources/images/cubo_amarillo.png}" width="40" height="40">
+																	
+															<img
+																th:if="((${prestamo.estado} == 'OCUPADO') or (${prestamo.estado} == 'LIBERABLE')) and (${areaAdministrativo.nombreAreaEstudio} == 'VIDEOTECA')"
+																th:src="@{/resources/images/pantalla.png}" width="40" height="40">
+																	
+															<img
+																th:if="((${prestamo.estado} == 'OCUPADO') or (${prestamo.estado} == 'LIBERABLE')) and (${areaAdministrativo.nombreAreaEstudio} == 'SALA GRUPAL')"
+																th:src="@{/resources/images/mesa.png}" width="100" height="100">
+																			
+															<p 	th:if = "(${prestamo.estado} == 'OCUPADO') or (${prestamo.estado} == 'LIBERABLE')"
+																th:text="${prestamo.numero}"></p>
+																
+															<p th:if="${prestamo.estado} == 'OCUPADO'"
+																th:text="OCUPADO" class="ocupado">
+															</p>
 														
-											<button th:if = "(${prestamo.estado} == 'OCUPADO') or (${prestamo.estado} == 'LIBERABLE')" 
-												th:id="${prestamo.numero}" 
-												th:key="${prestamo.idRecurso}"
-												class="btn btn-danger"
-												data-toggle="modal"
-												data-target="#infraccionModal"
-												th:attr="data-doc=${prestamo.numDocumento},
-														 data-codigo=${prestamo.codigoAlumno},
-														 data-nombre=${prestamo.nombre},
-														 data-apellidos=${prestamo.appPaterno} + ' ' + ${prestamo.appMaterno}">APLICAR
-											</button>
+															<p th:if="${prestamo.estado} == 'LIBERABLE'"
+																th:text="LIBERABLE" class="liberable">
+															</p>
+																			
+															<p 	th:if="((${prestamo.estado} == 'OCUPADO') or (${prestamo.estado} == 'LIBERABLE')) and (${areaAdministrativo.nombreAreaEstudio} == 'SALA GRUPAL')" 
+																th:text="'Capacidad 0/' + ${prestamo.maxCapacidad}">
+															</p>
+																		
+															<button th:if = "(${prestamo.estado} == 'OCUPADO') or (${prestamo.estado} == 'LIBERABLE')" 
+																th:id="${prestamo.numero}" 
+																th:key="${prestamo.idRecurso}"
+																class="btn btn-danger"
+																data-toggle="modal"
+																data-target="#infraccionModal"
+																th:attr="data-doc=${prestamo.numDocumento},
+																		 data-codigo=${prestamo.codigoAlumno},
+																		 data-nombre=${prestamo.nombre},
+																		 data-apellidos=${prestamo.appPaterno} + ' ' + ${prestamo.appMaterno}">APLICAR
+															</button>
+															
+														</div>
+														
+													</th:block>
+													
+												</div>
+												
+											</div>
+										</div>
+									</div>
+									<!-- Fin Panel Esquema -->
+
+									<!-- Panel Detalle -->
+									<div class="tab-pane p-20" id="sancionados" role="tabpanel">
+										<div class="table-responsive m-t-5">
+											<h2>Sancionados</h2>
+											
+											<label>Lista de los solicitantes sancionados</label>
+
+											<table id="myTable" class="table table-bordered table-striped">
+												<thead>
+													<tr>
+														<th>Codigo</th>
+														<th>Nombre</th>
+														<th>Apellidos</th>
+														<th>Fecha de sancion</th>
+														<th>Tiempo restante</th>
+														<th>Tipo de solicitante</th>
+													</tr>
+												</thead>
+												<tbody>
+													<th:block th:each="sancionado : ${sancionados}">
+														<tr  style="background-color: #fff;">
+															<td th:text="${sancionado.docIdentificador}" style="color: #67757C;"></td>											
+															<td th:text="${sancionado.nombre}" style="color:#67757C;" ></td>
+															<td th:text="${sancionado.appPaterno} + ' ' + ${sancionado.appMaterno}" style="color:#67757C;" ></td>
+															<td th:text="${sancionado.fechaRegistro}" style="color: #67757C;" ></td>
+															<td th:text="${sancionado.tiempoRestante}" style="color: #67757C;" ></td>
+															<td th:text="${sancionado.tipoSolicitante}" style="color: #67757C;" ></td>
+														</tr>
+													 </th:block> 
+													<!-- Fin bucle individual  -->
+													
+												</tbody>
+											</table>
+											
 											
 										</div>
-										
-									</th:block>
+									</div>
+									<!-- Fin Panel Detalle -->
 									
 								</div>
-								
+								<!-- End Tab panes -->
 							</div>
 						</div>
+
 					</div>
 				</div>
 				<!-- End PAge Content -->
 			</div>
-			<!-- End Container fluid  -->
+
+
+
 
 		</div>
+		
 		<!-- End Page wrapper  -->
 		
 		<!-- Modal -->
@@ -226,7 +308,25 @@
 			th:src="@{/resources/js/pagina/consulta/movimientos/infracciones/infracciones.js}"></script>
 	<script
 			th:src="@{/resources/js/pagina/consulta/movimientos/infracciones/infraccionesFormulario.js}"></script>
-
+	<!-- JS de datatables -->
+		<script
+			th:src="@{/resources/js/guiuser/lib/datatables/datatables.min.js}"></script>
+		<script
+			th:src="@{/resources/js/guiuser/lib/datatables/cdn.datatables.net/buttons/1.2.2/js/dataTables.buttons.min.js}"></script>
+		<script
+			th:src="@{/resources/js/guiuser/lib/datatables/cdn.datatables.net/buttons/1.2.2/js/buttons.flash.min.js}"></script>
+		<script
+			th:src="@{/resources/js/guiuser/lib/datatables/cdnjs.cloudflare.com/ajax/libs/jszip/2.5.0/jszip.min.js}"></script>
+		<script
+			th:src="@{/resources/js/guiuser/lib/datatables/cdn.rawgit.com/bpampuch/pdfmake/0.1.18/build/pdfmake.min.js}"></script>
+		<script
+			th:src="@{/resources/js/guiuser/lib/datatables/cdn.rawgit.com/bpampuch/pdfmake/0.1.18/build/vfs_fonts.js}"></script>
+		<script
+			th:src="@{/resources/js/guiuser/lib/datatables/cdn.datatables.net/buttons/1.2.2/js/buttons.html5.min.js}"></script>
+		<script
+			th:src="@{/resources/js/guiuser/lib/datatables/cdn.datatables.net/buttons/1.2.2/js/buttons.print.min.js}"></script>
+		<script
+			th:src="@{/resources/js/guiuser/lib/datatables/datatables-init.js}"></script>
 	</div>
 
 

@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="pe.edu.unmsm.fisi.siscae.mapper.IConsultaSancionadosMapper">
+
+	<sql id="fragmentoSelectBuscarConsultaSancionados">
+		SELECT  id_persona,
+			    doc_identificador,
+		        nombre,
+		        app_paterno,
+			    app_materno, 
+		        fecha_registro,
+		        tiempo_restante,
+		        tipo_solicitante
+		  FROM vw_solicitantes_sancionados
+	</sql>
+
+	<select id="buscarTodos" resultType="ConsultaSancionados">
+		<include refid="fragmentoSelectBuscarConsultaSancionados" />
+	</select>
+	
+	<select id="buscarPorNumeroDocumentoIdentidad" resultType="ConsultaSancionados">
+		<include refid="fragmentoSelectBuscarConsultaSancionados" />
+		<where>
+			<if test="tipoDocumentoIdentidad != null and tipoDocumentoIdentidad != ''">
+				vw_solicitantes_sancionados.cod_tip_doc_ide = #{tipoDocumentoIdentidad}
+			</if>
+			<if test="numeroDocumentoIdentidad != null and numeroDocumentoIdentidad != ''">
+				AND vw_solicitantes_sancionados.num_doc_ide = #{numeroDocumentoIdentidad}
+			</if>
+		</where>
+	</select>
+
+	
+
+
+</mapper>

@@ -17,6 +17,7 @@ import pe.edu.unmsm.fisi.siscae.aspecto.enumeracion.Comentario;
 import pe.edu.unmsm.fisi.siscae.aspecto.enumeracion.Tipo;
 import pe.edu.unmsm.fisi.siscae.configuracion.security.SecurityContextFacade;
 import pe.edu.unmsm.fisi.siscae.controller.excepcion.anotacion.Vista;
+import pe.edu.unmsm.fisi.siscae.model.consulta.ConsultaSancionados;
 import pe.edu.unmsm.fisi.siscae.model.consulta.PrestamoRecurso;
 import pe.edu.unmsm.fisi.siscae.model.consulta.PrestamoRecursoTabla;
 import pe.edu.unmsm.fisi.siscae.model.consulta.SolicitantesDetalles;
@@ -29,6 +30,7 @@ import pe.edu.unmsm.fisi.siscae.model.mantenimiento.Usuario;
 import pe.edu.unmsm.fisi.siscae.service.IAreaAdministrativoService;
 import pe.edu.unmsm.fisi.siscae.service.IConsultaPrestamosService;
 import pe.edu.unmsm.fisi.siscae.service.IConsultaPrestamosTablaService;
+import pe.edu.unmsm.fisi.siscae.service.IConsultaSancionadosService;
 import pe.edu.unmsm.fisi.siscae.service.IEscuelaService;
 import pe.edu.unmsm.fisi.siscae.service.IMultiTabCabService;
 import pe.edu.unmsm.fisi.siscae.service.IMultiTabDetService;
@@ -48,6 +50,7 @@ public @Controller class ConsultaController {
 	private static final Integer ID_TABLA_INFRACCION = 2;
 
 	private @Autowired IConsultaPrestamosService consultaPrestamosService;
+	private @Autowired IConsultaSancionadosService consultaSancionadosService;
 	private @Autowired IConsultaPrestamosTablaService consultaPrestamosTablaService;
 	private @Autowired IUsuarioService usuarioService;
 	private @Autowired IAreaAdministrativoService areaAdministrativoService;
@@ -209,10 +212,11 @@ public @Controller class ConsultaController {
 		criterioBusqueda.setAreaEstudio(areaAdministrativo.getNombreAreaEstudio());
 		
 		List<PrestamoRecursoTabla> prestamos = consultaPrestamosTablaService.buscarPorCriterio(criterioBusqueda);
-		
+		List<ConsultaSancionados> sancionados =consultaSancionadosService.buscarTodos();
 		List<MultiTabDet> tiposInfracciones = multiTabDetService.buscarPorIdTabla(ID_TABLA_INFRACCION);
 		
 		model.addAttribute("prestamos", prestamos);
+		model.addAttribute("sancionados", sancionados);
 		model.addAttribute("areaAdministrativo", areaAdministrativo);
 		model.addAttribute("tipoInfracciones", tiposInfracciones);
 		model.addAttribute("consulta", consulta);
