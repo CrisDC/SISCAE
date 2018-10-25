@@ -18,6 +18,7 @@ import pe.edu.unmsm.fisi.siscae.aspecto.enumeracion.Tipo;
 import pe.edu.unmsm.fisi.siscae.configuracion.security.SecurityContextFacade;
 import pe.edu.unmsm.fisi.siscae.controller.excepcion.anotacion.Vista;
 import pe.edu.unmsm.fisi.siscae.model.consulta.ConsultaSancionados;
+import pe.edu.unmsm.fisi.siscae.model.consulta.InfraccionDetalle;
 import pe.edu.unmsm.fisi.siscae.model.consulta.PrestamoRecurso;
 import pe.edu.unmsm.fisi.siscae.model.consulta.PrestamoRecursoTabla;
 import pe.edu.unmsm.fisi.siscae.model.consulta.SolicitantesDetalles;
@@ -32,6 +33,7 @@ import pe.edu.unmsm.fisi.siscae.service.IConsultaPrestamosService;
 import pe.edu.unmsm.fisi.siscae.service.IConsultaPrestamosTablaService;
 import pe.edu.unmsm.fisi.siscae.service.IConsultaSancionadosService;
 import pe.edu.unmsm.fisi.siscae.service.IEscuelaService;
+import pe.edu.unmsm.fisi.siscae.service.IInfraccionDetalleService;
 import pe.edu.unmsm.fisi.siscae.service.IMultiTabCabService;
 import pe.edu.unmsm.fisi.siscae.service.IMultiTabDetService;
 import pe.edu.unmsm.fisi.siscae.service.ISolicitantesDetallesService;
@@ -49,6 +51,7 @@ public @Controller class ConsultaController {
 	
 	private static final Integer ID_TABLA_INFRACCION = 2;
 
+	private @Autowired IInfraccionDetalleService infraccionDetalleService;
 	private @Autowired IConsultaPrestamosService consultaPrestamosService;
 	private @Autowired IConsultaSancionadosService consultaSancionadosService;
 	private @Autowired IConsultaPrestamosTablaService consultaPrestamosTablaService;
@@ -244,11 +247,17 @@ public @Controller class ConsultaController {
 		if(listaRecursosGrupales.size()!=0){
 			existenGrupales=1;
 		}
+		
+		List<InfraccionDetalle> infraccionesDetalle = infraccionDetalleService.buscarTodos();
 		List<ConsultaSancionados> sancionados =consultaSancionadosService.buscarTodos();
 		List<MultiTabDet> tiposInfracciones = multiTabDetService.buscarPorIdTabla(ID_TABLA_INFRACCION);
+		infraccionesDetalle.forEach(infraccionDetalle ->{
+			System.out.println("Tipo persona: "+infraccionDetalle.getTipoPersona());
+		});
 		
 		model.addAttribute("prestamos", listaRecursosIndividuales);
 		model.addAttribute("recursosGrupales", listaRecursosGrupales);
+		model.addAttribute("infraccionesDetalle", infraccionesDetalle);
 		model.addAttribute("sancionados", sancionados);
 		model.addAttribute("areaAdministrativo", areaAdministrativo);
 		model.addAttribute("tipoInfracciones", tiposInfracciones);

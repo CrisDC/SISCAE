@@ -21,13 +21,13 @@ public @RestController class ConsultaSancionadosController {
 		return ConsultaSancionadosService.buscarTodos();
 	}
 
-	// Agrege esto para hacer la consulta segun las aulas de estudio
+	// Agregue esto para hacer la consulta segun las aulas de estudio
 	@GetMapping(params = "accion=buscarPorCriterio")
 	public List<ConsultaSancionados> buscarPorCriterio(ConsultaSancionadosCriterioBusqueda criterioBusqueda) {
 		return ConsultaSancionadosService.buscarPorCriterio(criterioBusqueda);
 	}
 
-	// Agrege esto para hacer la consulta segun las aulas de estudio
+	// Agregue esto para hacer la consulta segun las aulas de estudio
 	@GetMapping(params = "accion=buscarPorCriterio2")
 	public List<ConsultaSancionados> buscarPorCriterio2(ConsultaSancionadosCriterioBusqueda criterioBusqueda,
 			ConsultaSancionadosCriterioBusqueda criterioBusqueda2) {

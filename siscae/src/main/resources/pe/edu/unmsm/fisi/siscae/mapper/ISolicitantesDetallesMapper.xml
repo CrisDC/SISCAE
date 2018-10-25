@@ -21,7 +21,7 @@
 		<include refid="fragmentoSelectBuscarSolicitantesDetalles" />
 		<where>
 			<if test="numDocumento != null and numDocumento != ''">
-				vw_solicitantes .num_documento = #{numDocumento}
+				vw_solicitantes.num_documento = #{numDocumento}
 			</if>
 		</where>
 	</select>

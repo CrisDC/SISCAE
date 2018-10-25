@@ -19,7 +19,7 @@
 		        area_estudio,
 		        observacion,
 		        cantidad_prestamos
-		  FROM WV_ESTADO_AULAS_TABLA 
+		  FROM VW_ESTADO_AULAS_TABLA 
 	</sql>
 
 	<select id="buscarTodos" resultType="PrestamoRecursoTabla">
@@ -30,10 +30,10 @@
 		<include refid="fragmentoSelectBuscarPrestamosTablas" />
 		<where>
 			<if test="tipoDocumentoIdentidad != null and tipoDocumentoIdentidad != ''">
-				WV_ESTADO_AULAS_TABLA  .cod_tip_doc_ide = #{tipoDocumentoIdentidad}
+				VW_ESTADO_AULAS_TABLA  .cod_tip_doc_ide = #{tipoDocumentoIdentidad}
 			</if>
 			<if test="numeroDocumentoIdentidad != null and numeroDocumentoIdentidad != ''">
-				WV_ESTADO_AULAS_TABLA  .num_doc_ide = #{numeroDocumentoIdentidad}
+				VW_ESTADO_AULAS_TABLA  .num_doc_ide = #{numeroDocumentoIdentidad}
 			</if>
 		</where>
 	</select>
@@ -42,7 +42,7 @@
 		<include refid="fragmentoSelectBuscarPrestamosTablas" />
 		<where>
 			<if test="areaEstudio != null and areaEstudio != '-1'">
-				WV_ESTADO_AULAS_TABLA .area_estudio = #{areaEstudio}
+				VW_ESTADO_AULAS_TABLA .area_estudio = #{areaEstudio}
 			</if>
 		</where>
 	</select>
@@ -52,7 +52,7 @@
 		<include refid="fragmentoSelectBuscarPrestamosTablas" />
 		<where>
 			<if test="maxCapacidad != null and maxCapacidad != '-1'">
-				WV_ESTADO_AULAS_TABLA .max_capacidad = #{maxCapacidad}
+				VW_ESTADO_AULAS_TABLA .max_capacidad = #{maxCapacidad}
 			</if>
 		</where>
 	</select>

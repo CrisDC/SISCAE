@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="pe.edu.unmsm.fisi.siscae.mapper.IInfraccionDetalleMapper">
+
+	<sql id="fragmentoSelectBuscarInfraccionDetalle">
+		SELECT 
+			num_documento,
+		    app_paterno,
+		    app_materno,
+		    nombre,
+		    tipo_persona,
+		    infraccion,
+		    estado,
+		    fecha
+		FROM vw_infraccion_detalle
+	</sql>
+
+	<select id="buscarTodos" resultType="InfraccionDetalle">
+		<include refid="fragmentoSelectBuscarInfraccionDetalle" />
+	</select>
+	
+	<select id="buscarPorNumeroDocumentoIdentidad" resultType="InfraccionDetalle">
+		<include refid="fragmentoSelectBuscarInfraccionDetalle" />
+		<where>
+			<if test="numDocumento != null and numDocumento != ''">
+				vw_infraccion_detalle.num_documento = #{numDocumento}
+			</if>
+		</where>
+	</select>
+	
+	<select id="buscarPorCriterio" resultType="InfraccionDetalle">
+		<include refid="fragmentoSelectBuscarInfraccionDetalle" />
+		<where>
+			<if test="numDocumento != null and numDocumento != ''">
+				vw_infraccion_detalle.num_documento = #{numDocumento}
+			</if>
+		</where>
+	</select>
+
+
+</mapper>

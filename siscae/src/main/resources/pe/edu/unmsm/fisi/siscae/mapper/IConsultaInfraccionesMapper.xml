@@ -10,7 +10,7 @@
 		        tipo_infraccion,
 			    fecha_infraccion,
 			    area_estudio
-		  FROM WV_INFRACCIONES_AULAS 
+		  FROM VW_INFRACCIONES_AULAS 
 	</sql>
 
 	<select id="buscarTodos" resultType="Infracciones">
@@ -21,10 +21,10 @@
 		<include refid="fragmentoSelectBuscarInfracciones" />
 		<where>
 			<if test="tipoDocumentoIdentidad != null and tipoDocumentoIdentidad != ''">
-				WV_INFRACCIONES_AULAS .cod_tip_doc_ide = #{tipoDocumentoIdentidad}
+				VW_INFRACCIONES_AULAS .cod_tip_doc_ide = #{tipoDocumentoIdentidad}
 			</if>
 			<if test="numeroDocumentoIdentidad != null and numeroDocumentoIdentidad != ''">
-				AND WV_INFRACCIONES_AULAS .num_doc_ide = #{numeroDocumentoIdentidad}
+				AND VW_INFRACCIONES_AULAS .num_doc_ide = #{numeroDocumentoIdentidad}
 			</if>
 		</where>
 	</select>

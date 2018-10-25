@@ -44,7 +44,7 @@
 
 									<li th:if="(${areaAdministrativo.cargo} != 'SOLICITANTE')"
 										class="nav-item"><a class="nav-link" data-toggle="tab"
-										href="#tablaDetalle" role="tab"> <span class="hidden-sm-up"><i
+										href="#tablaInfraccionDetalle" role="tab"> <span class="hidden-sm-up"><i
 												class="ti-user"></i></span> <span class="hidden-xs-down">Detalles</span>
 									</a></li>
 									
@@ -162,7 +162,48 @@
 									</div>
 									<!-- Fin Panel Esquema -->
 
-									<!-- Panel Detalle -->
+									<!-- Tabla Infracccion Detalle -->
+									<div class="tab-pane p-20" id="tablaInfraccionDetalle" role="tabpanel">
+										<div class="table-responsive m-t-5">
+											<h2>Infracciones registradas por alumno</h2>
+											
+											<label>Lista de alumnos que registran infracciones</label>
+
+											<table id="myTable" class="table table-bordered table-striped">
+												<thead>
+													<tr>
+														<th>Numero de documento</th>
+														<th>Apellidos</th>
+														<th>Nombre</th>
+														<th>Tipo de solicitante</th>
+														<th>Detalle de infraccion</th>
+														<th>Estado de la infraccion</th>
+														<th>Fecha de registro de infraccion</th>
+													</tr>
+												</thead>
+												<tbody>
+													<th:block th:each="infraccionesDetalle : ${infraccionesDetalle}">
+														<tr  style="background-color: #fff;">
+															<td th:text="${infraccionesDetalle.numDocumento}" style="color: #67757C;"></td>											
+															<td th:text="${infraccionesDetalle.appPaterno} + ' ' + ${infraccionesDetalle.appMaterno}" style="color:#67757C;" ></td>
+															<td th:text="${infraccionesDetalle.nombre}" style="color:#67757C;" ></td>
+															<td th:text="${infraccionesDetalle.tipoPersona}" style="color: #67757C;" ></td>
+															<td th:text="${infraccionesDetalle.infraccion}" style="color: #67757C;" ></td>
+															<td th:text="${infraccionesDetalle.estado}" style="color: #67757C;" ></td>
+															<td th:text="${infraccionesDetalle.fecha}" style="color: #67757C;" ></td>
+														</tr>
+													 </th:block> 
+													<!-- Fin bucle individual  -->
+													
+												</tbody>
+											</table>
+											
+											
+										</div>
+									</div>
+									<!-- Fin Tabla Infraccion Detalle -->
+
+									<!-- Panel Detalle sancionados -->
 									<div class="tab-pane p-20" id="sancionados" role="tabpanel">
 										<div class="table-responsive m-t-5">
 											<h2>Sancionados</h2>
@@ -173,9 +214,9 @@
 												<thead>
 													<tr>
 														<th>Codigo</th>
-														<th>Nombre</th>
 														<th>Apellidos</th>
-														<th>Fecha de sancion</th>
+														<th>Nombre</th>
+														<th>Fecha de sanción</th>
 														<th>Tiempo restante</th>
 														<th>Tipo de solicitante</th>
 													</tr>
@@ -183,9 +224,9 @@
 												<tbody>
 													<th:block th:each="sancionado : ${sancionados}">
 														<tr  style="background-color: #fff;">
-															<td th:text="${sancionado.docIdentificador}" style="color: #67757C;"></td>											
+															<td th:text="${sancionado.docIdentificador}" style="color: #67757C;"></td>
+															<td th:text="${sancionado.appPaterno} + ' ' + ${sancionado.appMaterno}" style="color:#67757C;" ></td>											
 															<td th:text="${sancionado.nombre}" style="color:#67757C;" ></td>
-															<td th:text="${sancionado.appPaterno} + ' ' + ${sancionado.appMaterno}" style="color:#67757C;" ></td>
 															<td th:text="${sancionado.fechaRegistro}" style="color: #67757C;" ></td>
 															<td th:text="${sancionado.tiempoRestante}" style="color: #67757C;" ></td>
 															<td th:text="${sancionado.tipoSolicitante}" style="color: #67757C;" ></td>
