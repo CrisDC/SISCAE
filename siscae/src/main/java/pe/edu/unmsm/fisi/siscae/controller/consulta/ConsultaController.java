@@ -251,9 +251,6 @@ public @Controller class ConsultaController {
 		List<InfraccionDetalle> infraccionesDetalle = infraccionDetalleService.buscarTodos();
 		List<ConsultaSancionados> sancionados =consultaSancionadosService.buscarTodos();
 		List<MultiTabDet> tiposInfracciones = multiTabDetService.buscarPorIdTabla(ID_TABLA_INFRACCION);
-		infraccionesDetalle.forEach(infraccionDetalle ->{
-			System.out.println("Tipo persona: "+infraccionDetalle.getTipoPersona());
-		});
 		
 		model.addAttribute("prestamos", listaRecursosIndividuales);
 		model.addAttribute("recursosGrupales", listaRecursosGrupales);
