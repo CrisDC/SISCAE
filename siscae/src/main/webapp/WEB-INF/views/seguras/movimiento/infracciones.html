@@ -63,12 +63,13 @@
 										<div class="p-20">
 											<div class="card-body">
 												<h3 >Registro de infraccion por modulo</h3>
-												<label>Selecciones el recurso en el que se encuentra el infractor</label>
+												
+												<label th:if="${existenIndividuales} == 1" >Recursos individuales</label>
 												<div class="row" id="recursosOcupados">
 													
 													<th:block th:each="prestamo : ${prestamos}">
 													
-														<div th:if = "(${prestamo.estado} == 'OCUPADO') or (${prestamo.estado} == 'LIBERABLE')" 
+														<div th:if = "(${prestamo.cantidadPrestamos} == 1) or (${prestamo.estado} == 'LIBERABLE')" 
 															 class = "recurso">
 															
 															<img
@@ -102,6 +103,43 @@
 															</p>
 																		
 															<button th:if = "(${prestamo.estado} == 'OCUPADO') or (${prestamo.estado} == 'LIBERABLE')" 
+																th:id="${prestamo.numero}" 
+																th:key="${prestamo.idRecurso}"
+																class="btn btn-danger"
+																data-toggle="modal"
+																data-target="#infraccionModal"
+																th:attr="data-doc=${prestamo.numDocumento},
+																		 data-codigo=${prestamo.codigoAlumno},
+																		 data-nombre=${prestamo.nombre},
+																		 data-apellidos=${prestamo.appPaterno} + ' ' + ${prestamo.appMaterno}">APLICAR
+															</button>
+															
+														</div>
+														
+													</th:block>
+													
+												</div>
+												<label th:if="${existenGrupales} == 1" >Recursos Grupales</label>
+												<div class="row" id="recursosOcupadosGrupales">
+													
+													<th:block th:each="prestamo : ${recursosGrupales}">
+													
+														<div th:if = "(${prestamo.cantidadPrestamos} > 0) " 
+															 class = "recurso">
+															
+															<img
+																th:src="@{/resources/images/users/usuario.png}" width="40" height="40"> 
+											
+															<p 	th:if = "(${prestamo.estado} == 'OCUPADO') or (${prestamo.estado} == 'LIBERABLE') or (${prestamo.estado} == 'DISPONIBLE')"
+																th:text="${prestamo.tipoRecurso}+' '+${prestamo.numero}"></p>
+															<p 	th:if = "(${prestamo.estado} == 'OCUPADO') or (${prestamo.estado} == 'LIBERABLE') or (${prestamo.estado} == 'DISPONIBLE')"
+																th:text="${prestamo.codigoAlumno}!='NO TIENE' ? ${prestamo.codigoAlumno} : ${prestamo.num_documento}" th:class="${prestamo.estado} == 'OCUPADO'? ocupado : disponible"></p>
+													
+															<p th:if="${prestamo.estado} == 'LIBERABLE'"
+																th:text="LIBERABLE" class="liberable">
+															</p>
+																					
+															<button 
 																th:id="${prestamo.numero}" 
 																th:key="${prestamo.idRecurso}"
 																class="btn btn-danger"

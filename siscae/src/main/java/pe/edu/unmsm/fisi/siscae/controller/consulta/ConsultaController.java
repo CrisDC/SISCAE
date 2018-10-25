@@ -211,15 +211,50 @@ public @Controller class ConsultaController {
 		ConsultaPrestamosCriterioBusqueda criterioBusqueda = new ConsultaPrestamosCriterioBusqueda();
 		criterioBusqueda.setAreaEstudio(areaAdministrativo.getNombreAreaEstudio());
 		
-		List<PrestamoRecursoTabla> prestamos = consultaPrestamosTablaService.buscarPorCriterio(criterioBusqueda);
+		List<PrestamoRecursoTabla> listaRecursosTabla = consultaPrestamosTablaService.buscarPorCriterio(criterioBusqueda);
+		
+		List<PrestamoRecursoTabla> listaRecursosIndividuales = new ArrayList<>();
+		List<PrestamoRecursoTabla> listaRecursosGrupales = new ArrayList<>();
+		int existenGrupales=0;
+		int existenIndividuales=0;
+		
+		for(int i=0;i<listaRecursosTabla.size();i++){
+			if(listaRecursosTabla.get(i).getMaxCapacidad()==1){
+				listaRecursosIndividuales.add(listaRecursosTabla.get(i));			
+			}else{
+				listaRecursosGrupales.add(listaRecursosTabla.get(i));
+			}
+		}
+		
+		int cont;
+		for(int i=0;i<listaRecursosGrupales.size();i++){
+			cont=1;
+			for(int j=0;j<listaRecursosTabla.size();j++){
+				if(listaRecursosGrupales.get(i).getIdRecurso()==listaRecursosTabla.get(j).getIdRecurso()){
+					listaRecursosTabla.get(j).setOrden(cont);
+					cont++;
+				}
+			}
+		}
+		Collections.sort(listaRecursosIndividuales);
+		Collections.sort(listaRecursosGrupales); 
+		if(listaRecursosIndividuales.size()!=0){
+			existenIndividuales=1;
+		}
+		if(listaRecursosGrupales.size()!=0){
+			existenGrupales=1;
+		}
 		List<ConsultaSancionados> sancionados =consultaSancionadosService.buscarTodos();
 		List<MultiTabDet> tiposInfracciones = multiTabDetService.buscarPorIdTabla(ID_TABLA_INFRACCION);
 		
-		model.addAttribute("prestamos", prestamos);
+		model.addAttribute("prestamos", listaRecursosIndividuales);
+		model.addAttribute("recursosGrupales", listaRecursosGrupales);
 		model.addAttribute("sancionados", sancionados);
 		model.addAttribute("areaAdministrativo", areaAdministrativo);
 		model.addAttribute("tipoInfracciones", tiposInfracciones);
 		model.addAttribute("consulta", consulta);
+		model.addAttribute("existenGrupales", existenGrupales);
+		model.addAttribute("existenIndividuales", existenIndividuales);
 		return CONSULTA_INFRACCIONES;
 	}
 
