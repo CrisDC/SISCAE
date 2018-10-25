@@ -1,24 +1,17 @@
-
-$(document).ready(function() {
-	
+$(document).ready(function() {	
 	 $("input").on("keypress", function () {
 		  $input=$(this);
 		  setTimeout(function () {
 		   $input.val($input.val().toUpperCase());
 		  },50);
-		 })
-	
-	
-    $('.js-example-basic-single').select2();
+	})
     
+	$('.js-example-basic-single').select2();
     $('#formulario-tipo-academico').css('display', 'none');
-
     $('#formulario-codigo').css('display', 'none');
-
     $('#formulario-escuela').css('display', 'none');
     
     $('#enviar').click(function () {
-    	
     	let idTipoDocumentoSolicitante = $("#tipoDocumento").val();
     	let numDocumentoSolicitante = $("#numDocumento").val();
     	let appPaterno = $("#appPaterno").val();
@@ -28,7 +21,7 @@ $(document).ready(function() {
     	let ocupacion = $('#ocupacion').val();
     	let codigoAlumno = $('#codigo').val();
     	let idEscuela = $('#escuela').val();
-    	
+  
     	var registroSolicitanteNuevo ={
 	        	"idTipoDocumentoSolicitante": idTipoDocumentoSolicitante,
 	        	"numDocumentoSolicitante": numDocumentoSolicitante,
@@ -75,14 +68,7 @@ $(document).ready(function() {
 		  // dismiss can be 'cancel', 'overlay',
 		  // 'close', and 'timer'
 		  
-		}
-
-		)
-    	
-    	
-    	
-    	
-    	
+		});
     });
 });
 
@@ -90,16 +76,12 @@ $(document).ready(function() {
 $(document).on('change', '#formulario-ocupacion', function(event) {
     let valor = $("#formulario-ocupacion option:selected").text();
     if(valor=='ALUMNO'){
-    		$('#formulario-tipo-academico').css('display', 'block');
-
-    	    $('#formulario-codigo').css('display', 'block');
-
-    	    $('#formulario-escuela').css('display', 'block');
+    	$('#formulario-tipo-academico').css('display', 'block');
+    	$('#formulario-codigo').css('display', 'block');
+    	$('#formulario-escuela').css('display', 'block');
     }else{
     	$('#formulario-tipo-academico').css('display', 'none');
-
 	    $('#formulario-codigo').css('display', 'none');
-
 	    $('#formulario-escuela').css('display', 'none');
     }
 });
