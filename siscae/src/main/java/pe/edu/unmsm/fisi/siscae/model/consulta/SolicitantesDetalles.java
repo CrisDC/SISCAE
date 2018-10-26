@@ -14,9 +14,12 @@ import pe.edu.unmsm.fisi.siscae.model.consulta.PrestamoRecurso.PrestamoRecursoBu
 @NoArgsConstructor
 @AllArgsConstructor
 public class SolicitantesDetalles {
+	int idPersona;
 	String codigo;
 	String appPaterno;
 	String appMaterno;
+	String tipoAcademico;
+	String estado;
 	String nombre;
 	String escuela;
 	String solicitante;

@@ -25,6 +25,11 @@ public class SolicitantesDetallesService implements ISolicitantesDetallesService
 		return SolicitantesDetallesMapper.buscarPorCriterio(criterioBusqueda);
 	}
 
+	@Override
+	public List<SolicitantesDetalles> buscarPorCriterio2(SolicitantesDetallesCriterioBusqueda criterioBusqueda) {
+		return SolicitantesDetallesMapper.buscarPorCriterio2(criterioBusqueda);
+	}
+
 	
 	
 }

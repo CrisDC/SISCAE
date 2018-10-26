@@ -3,11 +3,14 @@
 <mapper namespace="pe.edu.unmsm.fisi.siscae.mapper.ISolicitantesDetallesMapper">
 
 	<sql id="fragmentoSelectBuscarSolicitantesDetalles">
-		SELECT  codigo,
+		SELECT  id_persona,
+				codigo,
 				app_paterno,
 				app_materno,
+				tipo_academico,
 				nombre,
 				escuela,
+				estado,
 				solicitante,
 				num_documento
 		  FROM vw_solicitantes 
@@ -34,6 +37,13 @@
 			</if>
 		</where>
 	</select>
-
-
+	
+	<select id="buscarPorCriterio2" resultType="SolicitantesDetalles">
+		<include refid="fragmentoSelectBuscarSolicitantesDetalles" />
+		<where>
+			<if test="numDocumento != null and numDocumento != '-1'">
+				vw_solicitantes.num_documento = #{numDocumento}
+			</if>
+		</where>
+	</select>
 </mapper>

@@ -1,5 +1,9 @@
 $(document).ready(function() {
 	
+	var operacion;
+	var idPersona;
+	var exito;
+	
 	$(".js-example-basic-single").select2({
 	    dropdownParent: $("#modalNuevoSolicitante")
 	 });
@@ -127,51 +131,102 @@ $(document).ready(function() {
     			
     			if(validar_formulario.form()){
     				
-    				var registroSolicitanteNuevo ={
-        		        	"idTipoDocumentoSolicitante": idTipoDocumentoSolicitante,
-        		        	"numDocumentoSolicitante": numDocumentoSolicitante,
-        		        	"appPaterno": appPaterno,
-        		        	"appMaterno": appMaterno,
-        		        	"nombre": nombre,
-        		        	"tipoAcademico": tipoAcademico,
-        		        	"ocupacion": ocupacion,
-        		        	"codigoAlumno": codigoAlumno,
-        		        	"idEscuela": idEscuela
-        		    };
-        	    	$.ajax({
-        	            url :  $variableUtil.root + "registroSolicitanteNuevo",
-        	            type : 'POST',
-        	            data : JSON.stringify(registroSolicitanteNuevo),
-        	            beforeSend : function(xhr) {
-        					xhr.setRequestHeader('Content-Type', 'application/json');
-        					xhr.setRequestHeader("X-CSRF-TOKEN", $variableUtil.csrf);
-        				},
-        				statusCode : {
-        					400 : function(response) {
-        						swal(response.responseJSON);
-        					},
-        					500 : function(response) {
-        						swal("Error", response.responseText, "warning");
-        					}
-        				},
-        				success : function(response) {
-        					
-        					swal({
-        						  title: "Registro de solicitante",
-        						  text: "Realizado con exito",
-        						  icon: "success",
-        						  button: false,
-        						  timer: 1000,
-        						}).then((value) => {
-        							location.reload();
-        						});
-        				}
+    				if(operacion=='INSERT'){
+    					
+    					var registroSolicitanteNuevo ={
+            		        	"idTipoDocumentoSolicitante": idTipoDocumentoSolicitante,
+            		        	"numDocumentoSolicitante": numDocumentoSolicitante,
+            		        	"appPaterno": appPaterno,
+            		        	"appMaterno": appMaterno,
+            		        	"nombre": nombre,
+            		        	"tipoAcademico": tipoAcademico,
+            		        	"ocupacion": ocupacion,
+            		        	"codigoAlumno": codigoAlumno,
+            		        	"idEscuela": idEscuela
+            		    };
+            	    	$.ajax({
+            	            url :  $variableUtil.root + "registroSolicitanteNuevo",
+            	            type : 'POST',
+            	            data : JSON.stringify(registroSolicitanteNuevo),
+            	            beforeSend : function(xhr) {
+            					xhr.setRequestHeader('Content-Type', 'application/json');
+            					xhr.setRequestHeader("X-CSRF-TOKEN", $variableUtil.csrf);
+            				},
+            				statusCode : {
+            					400 : function(response) {
+            						swal(response.responseJSON);
+            					},
+            					500 : function(response) {
+            						swal("Error", response.responseText, "warning");
+            					}
+            				},
+            				success : function(response) {
+            					
+            					swal({
+            						  title: "Registro de solicitante",
+            						  text: "Realizado con exito",
+            						  icon: "success",
+            						  button: false,
+            						  timer: 1000,
+            						}).then((value) => {
+            							location.reload();
+            						});
+            				}
 
-        			}, function (dismiss) {
-        			  // dismiss can be 'cancel', 'overlay',
-        			  // 'close', and 'timer'
-        			  
-        			});
+            			}, function (dismiss) {
+            			  // dismiss can be 'cancel', 'overlay',
+            			  // 'close', and 'timer'
+            			  
+            			});
+    					
+            	    	console.log(operacion);
+    					
+    				}else if(operacion=='UPDATE'){
+    					
+    					console.log(operacion);
+    					
+    					var actualizarSolicitante ={
+            		        	"idPersona" : idPersona,
+    							"idTipoDocumento": idTipoDocumentoSolicitante,
+            		        	"numDocumento": numDocumentoSolicitante,
+            		        	"appPaterno": appPaterno,
+            		        	"appMaterno": appMaterno,
+            		        	"nombre": nombre
+            		    };
+            	    	$.ajax({
+            	            url :  $variableUtil.root + "persona",
+            	            type : 'PUT',
+            	            data : JSON.stringify(actualizarSolicitante),
+            	            beforeSend : function(xhr) {
+            					xhr.setRequestHeader('Content-Type', 'application/json');
+            					xhr.setRequestHeader("X-CSRF-TOKEN", $variableUtil.csrf);
+            				},
+            				statusCode : {
+            					400 : function(response) {
+            						swal(response.responseJSON);
+            					},
+            					500 : function(response) {
+            						swal("Error", response.responseText, "warning");
+            					}
+            				},
+            				success : function(response) {
+            					exito=true;
+            				}
+
+            			}, function (dismiss) {
+            			  // dismiss can be 'cancel', 'overlay',
+            			  // 'close', and 'timer'
+            			  
+            			});
+            	    	
+            	    	if(ocupacion=="ALUMNO"){
+    						
+    					}
+    				
+    				}
+    					
+    				
+    				
     				
     			}else{
     				swal('Faltan llenar datos');
@@ -179,10 +234,111 @@ $(document).ready(function() {
     		}
     	}
 
+    }); 
+    $('#abrirModalNuevoSolicitante').click(function () {
+    	operacion="INSERT";
+    	$("#enviar").html('REGISTRAR');
+    	$('#tituloModalSolicitantes').text('Registro de solicitantes');
+    	$("#tipoDocumento").val(-1).trigger('change.select2');
+    	$("#numDocumento").val('');
+    	$("#appPaterno").val('');
+    	$("#appMaterno").val('');
+    	$("#nombre").val('');
+    	$('#tipoAcademico').val(-1).trigger('change.select2');
+    	$('#ocupacion').val(-1).trigger('change.select2');
+    	$('#codigo').val('');
+    	$('#escuela').val(-1);
+    	let valor = $("#formulario-ocupacion option:selected").text();
+        if(valor=='ALUMNO'){
+        	$('#formulario-tipo-academico').css('display', 'block');
+        	$('#formulario-codigo').css('display', 'block');
+        	$('#formulario-escuela').css('display', 'block');
+        }else{
+        	$('#formulario-tipo-academico').css('display', 'none');
+    	    $('#formulario-codigo').css('display', 'none');
+    	    $('#formulario-escuela').css('display', 'none');
+        }
+        $('#tituloModalSolicitantes').text('Modificacion de solicitante');
+    	$("#enviar").html('ACTUALIZAR');
     });
-    
-});
+    $(document).on('click', '.actualizar-soli', function (event) {
+        event.preventDefault();
+        let numDocumento = $(this).attr('person');
+        idPersona = $(this).attr('key');
+        $.ajax({
+            url :  $variableUtil.root + "solicitantesDetalles?accion=buscarPorCriterio2&numDocumento="+numDocumento,
+            type : 'GET',
+            beforeSend : function(xhr) {
+				xhr.setRequestHeader('Content-Type', 'application/json');
+				xhr.setRequestHeader("X-CSRF-TOKEN", $variableUtil.csrf);
+			},
+			statusCode : {
+				400 : function(response) {
+					swal(response.responseJSON);
+				},
+				500 : function(response) {
+					swal("Error", response.responseText, "warning");
+				}
+			},
+			success : function(response) {
+				
+				operacion="UPDATE";
+		    	$("#numDocumento").val(response[0].numDocumento);
+		    	$("#appPaterno").val(response[0].appPaterno);
+		    	$("#appMaterno").val(response[0].appMaterno);
+		    	$("#nombre").val(response[0].nombre);
+		    	$('#tipoAcademico').val(response[0].tipoAcademico).trigger('change.select2');
+		    	$('#ocupacion').val(response[0].solicitante).trigger('change.select2');
+		    	$('#tipoDocumento').val(1).trigger('change.select2');
+		    	$('#codigo').val(response[0].codigo);
+		    	$('#escuela').val(response[0].escuela).trigger('change.select2');
+		    	$("#enviar").html('ACTUALIZAR');
+		    	$('#modalNuevoSolicitante').modal('show');
+		    	let valor = $("#formulario-ocupacion option:selected").text();
+		        if(valor=='ALUMNO'){
+		        	$('#formulario-tipo-academico').css('display', 'block');
+		        	$('#formulario-codigo').css('display', 'block');
+		        	$('#formulario-escuela').css('display', 'block');
+		        }else{
+		        	$('#formulario-tipo-academico').css('display', 'none');
+		    	    $('#formulario-codigo').css('display', 'none');
+		    	    $('#formulario-escuela').css('display', 'none');
+		        }
+		        $('#tituloModalSolicitantes').text('Modificacion de solicitante');
+		        
+			}
 
+		}, function (dismiss) {
+		  // dismiss can be 'cancel', 'overlay',
+		  // 'close', and 'timer'
+		  
+		});        
+    });
+    $(document).on('click', '.eliminar-soli', function (event) {
+    	let numDocumento = $(this).attr('person');
+    	let ap = $(this).attr('ap');
+    	let am = $(this).attr('am');
+    	let nom = $(this).attr('nom');
+        idPersona = $(this).attr('key');
+        swal({
+			  title: "¿Deseas eliminar?",
+			  text: "Eliminará al solicitante "+numDocumento+" - "+ap+" "+" "+am+" "+nom,
+			  icon: "warning",
+			  buttons: true,
+			  dangerMode: true,
+			})
+			.then((willDelete) => {
+			  if (willDelete) {
+				  
+				  
+				  alert("jajaja bueno esto aun falta xD")
+			    
+			  }
+		
+			
+		});
+    });
+});
 
 $(document).on('change', '#formulario-ocupacion', function(event) {
     let valor = $("#formulario-ocupacion option:selected").text();

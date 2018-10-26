@@ -125,8 +125,8 @@ $(document).ready(function(){
       });      
       $("#desocupar").click(function(){
     		swal({
-    			  title: "¿Estas segur@?",
-    			  text: "Desocupara todo el area de estudio automaticamente",
+    			  title: "¿Deseas desocupar todo?",
+    			  text: "Desocupará todo el area de estudio automaticamente",
     			  icon: "warning",
     			  buttons: true,
     			  dangerMode: true,

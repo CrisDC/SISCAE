@@ -27,5 +27,10 @@ public @RestController class SolicitantesDetallesController {
 	public List<SolicitantesDetalles> buscarPorCriterio(SolicitantesDetallesCriterioBusqueda criterioBusqueda) {
 		return SolicitantesDetallesService.buscarPorCriterio(criterioBusqueda);
 	}
+	
+	@GetMapping(params = "accion=buscarPorCriterio2")
+	public List<SolicitantesDetalles> buscarPorCriterio2(SolicitantesDetallesCriterioBusqueda criterioBusqueda) {
+		return SolicitantesDetallesService.buscarPorCriterio2(criterioBusqueda);
+	}
 }
 

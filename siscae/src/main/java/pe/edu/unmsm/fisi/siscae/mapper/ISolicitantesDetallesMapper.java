@@ -8,6 +8,7 @@ import pe.edu.unmsm.fisi.siscae.model.criterio.SolicitantesDetallesCriterioBusqu
 public interface ISolicitantesDetallesMapper {
 	public List<SolicitantesDetalles> buscarTodos();
 	public List<SolicitantesDetalles> buscarPorCriterio(SolicitantesDetallesCriterioBusqueda criterioBusqueda);
+	public List<SolicitantesDetalles> buscarPorCriterio2(SolicitantesDetallesCriterioBusqueda criterioBusqueda);
 }
 
 
