@@ -13,58 +13,60 @@ $(document).ready(function(){
 			icon: "/siscae/resources/images/lectora.gif",
 		}).then(function (inputValue) {
 			
+			console.log(inputValue);
 			
-			var finPrestamo ={
-		        	"numDocumentoSolicitante": inputValue
-		    };
+			if(inputValue != null){
+				var finPrestamo ={
+			        	"numDocumentoSolicitante": inputValue
+			    };
 
-			$.ajax({
-                url :  $variableUtil.root + "movimientoFinPrestamo",
-                type : 'POST',
-                data : JSON.stringify(finPrestamo),
-                beforeSend : function(xhr) {
-    				xhr.setRequestHeader('Content-Type', 'application/json');
-    				xhr.setRequestHeader("X-CSRF-TOKEN", $variableUtil.csrf);
-    			},
-    			statusCode : {
-    				400 : function(response) {
-    					swal(response.responseJSON);
-    				}
-    			},
-    			statusCode : {
-    				400 : function(response) {
-    					swal(response.responseJSON);
-    				},
-    				500 : function(response) {
-    					swal("Error", response.responseText, "warning");
-    				}
-    			},
-    			success : function(response) {
-    				
-    				swal({
-    					  title: "Registro de salida",
-    					  text: "Marco su salida con exito",
-    					  icon: "success",
-    					  button: false,
-    					  timer: 1000,
-    				}).then((value) => {
-    					location.reload();
-    				});
-    			}
+				$.ajax({
+	                url :  $variableUtil.root + "movimientoFinPrestamo",
+	                type : 'POST',
+	                data : JSON.stringify(finPrestamo),
+	                beforeSend : function(xhr) {
+	    				xhr.setRequestHeader('Content-Type', 'application/json');
+	    				xhr.setRequestHeader("X-CSRF-TOKEN", $variableUtil.csrf);
+	    			},
+	    			statusCode : {
+	    				400 : function(response) {
+	    					swal(response.responseJSON);
+	    				}
+	    			},
+	    			statusCode : {
+	    				400 : function(response) {
+	    					swal(response.responseJSON);
+	    				},
+	    				500 : function(response) {
+	    					swal("Error", response.responseText, "warning");
+	    				}
+	    			},
+	    			success : function(response) {
+	    				
+	    				swal({
+	    					  title: "Registro de salida",
+	    					  text: "Marco su salida con exito",
+	    					  icon: "success",
+	    					  button: false,
+	    					  timer: 1000,
+	    				}).then((value) => {
+	    					location.reload();
+	    				});
+	    			}
 
 
-			}, function (dismiss) {
-			  // dismiss can be 'cancel', 'overlay',
-			  // 'close', and 'timer'
-			  
+				}, function (dismiss) {
+				  // dismiss can be 'cancel', 'overlay',
+				  // 'close', and 'timer'
+				  
+				
+
+				});
+				
 			}
-
-			)
-      })
-
-		
-	})
-	
+			
+      });
+	});
      $('body #for-each').on('click', 'button', function(){
 	        let idRecurso = $(this).attr('key');
 	        let numRecurso = $(this).attr('id');
@@ -76,51 +78,51 @@ $(document).ready(function(){
 	    			icon: "/siscae/resources/images/lectora.gif",
 	    		
 	    		}).then(function (inputValue) {
-	    			
-	    			var prestamo ={
-	    		        	"idRecurso": idRecurso,
-	    		        	"numDocumentoSolicitante": inputValue
-	    		    };
-	    			
-	    			$.ajax({
-	                    url :  $variableUtil.root + "movimientoPrestamo",
-	                    type : 'POST',
-	                    data : JSON.stringify(prestamo),
-	                    beforeSend : function(xhr) {
-	        				xhr.setRequestHeader('Content-Type', 'application/json');
-	        				xhr.setRequestHeader("X-CSRF-TOKEN", $variableUtil.csrf);
-	        			},
-	        			statusCode : {
-	        				400 : function(response) {
-	        					swal(response.responseJSON);
-	        				},
-	        				500 : function(response) {
-	        					swal("Error", response.responseText, "warning");
-	        				}
-	        			},
-	        			success : function(response) {
-	        				
-	        				swal({
-	      					  title: "Peticion realizada con exito",
-	      					  text: "Usted esta prestando el recurso "+numRecurso,
-	      					  icon: "success",
-	      					  button: false,
-	      					  timer: 1000,
-		      				}).then((value) => {
-		      					location.reload();
-		      				});
-	        			}
 
-	    			}, function (dismiss) {
-	    			  // dismiss can be 'cancel', 'overlay',
-	    			  // 'close', and 'timer'
-	    			  
-	    			})
-	          })
-      })
+	    			if(inputValue != null){
+	    				
+	    				var prestamo ={
+		    		        	"idRecurso": idRecurso,
+		    		        	"numDocumentoSolicitante": inputValue
+		    		    };
+	    				
+	    				$.ajax({
+		                    url :  $variableUtil.root + "movimientoPrestamo",
+		                    type : 'POST',
+		                    data : JSON.stringify(prestamo),
+		                    beforeSend : function(xhr) {
+		        				xhr.setRequestHeader('Content-Type', 'application/json');
+		        				xhr.setRequestHeader("X-CSRF-TOKEN", $variableUtil.csrf);
+		        			},
+		        			statusCode : {
+		        				400 : function(response) {
+		        					swal(response.responseJSON);
+		        				},
+		        				500 : function(response) {
+		        					swal("Error", response.responseText, "warning");
+		        				}
+		        			},
+		        			success : function(response) {
+		        				
+		        				swal({
+		      					  title: "Peticion realizada con exito",
+		      					  text: "Usted esta prestando el recurso "+numRecurso,
+		      					  icon: "success",
+		      					  button: false,
+		      					  timer: 1000,
+			      				}).then((value) => {
+			      					location.reload();
+			      				});
+		        			}
 
-      
-      
+		    			}, function (dismiss) {
+		    			  // dismiss can be 'cancel', 'overlay',
+		    			  // 'close', and 'timer'
+		    			  
+		    			});
+	    			}
+	          });
+      });      
       $("#desocupar").click(function(){
     		swal({
     			  title: "¿Estas segur@?",
@@ -178,20 +180,15 @@ $(document).ready(function(){
     		
     			
     			});
-    	});
-	
-	
-	
+    });
 	$('#grupalesModal').keyup(function(e) {
 	    if(e.keyCode == 13) {
 	    	enviarDatosATabla();
 	    }
-	});
-	
+	});	
 	$('#agregarTablaGrupal').on('click', function (event){
 		enviarDatosATabla();
-	})
-	
+	});
 	$('#consultaInfraccionesModal').keyup(function(e) {
 	    if(e.keyCode == 13) {
 	    	consultarInfracciones();
@@ -200,9 +197,7 @@ $(document).ready(function(){
 	
 	$('#consultarInfracciones').on('click', function (event){
 		consultarInfracciones();
-	})
-	
-	
+	});
 	$('body #for-each-grupales').on('click', 'button', function(){
 		
 		recurso = $(this).attr('key');
@@ -214,36 +209,24 @@ $(document).ready(function(){
 		$('#espacioDisponibleLabel').text('Espacio disponible: '+espacioDisponible)
 
 		
-	})
-	
-	$('#cerrarModal').on('click', function (event){
-		location.reload()
-	})
-	
-	$('#cerrarModalInfractores').on('click', function (event){
-		location.reload()
-	})
-	
-	
+	});	
 	$('#confirmarPrestamo').on('click', function (event){
 		//Recorriendo todos los elementos del html de la clase .docum
 		$(".docum").each(function(){
 			let m = $(this).text();
 			realizarPrestamo(m);
 		});
-		
-				swal({
-				  title: "Peticion realizada con exito",
-				  text: "Ustedes estan prestando el recurso",
-				  icon: "success",
-				  button: false,
-				  timer: 1000,
-				}).then((value) => {
-					location.reload();
-				});
-	})
-      
-})
+		swal({
+			title: "Peticion realizada con exito",
+			text: "Ustedes estan prestando el recurso",
+			icon: "success",
+			button: false,
+			timer: 1000,
+		}).then((value) => {
+			location.reload();
+		});
+	});   
+});
 
 
 $(function () {

@@ -29,197 +29,57 @@
 					<div class="col-12">
 						<div class="card">
 							<div class="card-body">
-								<div class="tab-content">
-									<div class="tab-pane p-20 active" id="tabla" role="tabpanel">
-
-										<div class="table-responsive">
-											<div class="d-flex">
-												<div class="col-6 p-l-0"><h3 class="pull-left">Solicitantes registrados</h3></div>
-												<div class="col-6 p-r-0"><button class="btn boton-confirmar pull-right"><i class="fa fa-plus p-r-5"></i>Nuevo</button></div>
+								<div class="p-20">
+									<div class="table-responsive">
+										<div class="d-flex">
+											<div class="col-6 p-l-0">
+												<h3 class="pull-left">Solicitantes registrados</h3>
 											</div>
-											<table id="myTable"
-												class="table table-bordered table-striped">
-												<thead>
-													<tr>
-														<th>Codigo</th>
-														<th>A Paterno</th>
-														<th>A Materno</th>
-														<th>Nombres</th>
-														<th>Documento</th>
-														<th>Escuela</th>
-														<th>Tipo</th>
-														<th></th>
-													</tr>
-												</thead>
-												<tbody>
-													<tr th:each="solicitante : ${solicitantes}" style="background-color: #fff"
-														th:class="fila-personalizada">
-														<td th:text="${solicitante.codigo}" style="color: #67757C;"></td>
-														<td th:text="${solicitante.appPaterno}" style="color: #67757C;"></td>
-														<td th:text="${solicitante.appMaterno}" style="color: #67757C;"></td>
-														<td th:text="${solicitante.nombre}" style="color: #67757C;"></td>
-														<td th:text="${solicitante.numDocumento}" style="color: #67757C;"></td>
-														<td th:text="${solicitante.escuela}" style="color: #67757C;"></td>
-														<td th:text="${solicitante.solicitante}" style="color: #67757C;"></td>
-														<td><button class="btn btn-success"><i class="fa fa-cog"></i></button>
-														<button class="btn btn-danger"><i class="fa fa-trash-o"></i></button></td>
-													</tr>
-												</tbody>
-											</table>
+											<div class="col-6 p-r-0">
+												<button class="btn boton-confirmar pull-right"
+													data-toggle="modal" data-target="#modalNuevoSolicitante">
+													<i class="fa fa-plus p-r-5"></i>Nuevo
+												</button>
+											</div>
 										</div>
-									</div>
-
-									<div class="tab-pane" id="nuevo" role="tabpanel">
-										<div class="p-20">
-											<h3>Registro de solicitantes</h3>
-												<form class="p-t-10" id="solicitantesFormulario">
-												
-												
-												<div class="row">
-													<div class="col-md-12">
-
-														<div class="form-group" name="formulario-ocupacion" 
-															id="formulario-ocupacion">
-															<label>Ocupacion</label>
-															<div class="input-group">
-																<select class="form-control js-example-basic-single" required
-																	id="ocupacion" name="ocupacion">
-																	<option value="-1">Ingrese la ocupacion</option>
-																	<option value="ALUMNO">ALUMNO</option>
-																	<option value="DOCENTE">DOCENTE</option>
-																	<option value="EXTERNO">OTRO</option>
-																</select>
-															</div>
-														</div>
-													</div>
-
-													<div class="col-md-12">
-
-														<div class="form-group" id="formulario-codigo"
-															name="formulario-codigo">
-															<label>Codigo de alumno</label> <input id="codigo"
-																name="codigo" type="number" class="form-control">
-														</div>
-
-													</div>
-												</div>
-
-
-												<div class="row">
-													<div class="col-md-12">
-														<div class="form-group" id="formulario-escuela"
-															name="formulario-escuela">
-															<label>Escuela</label>
-															<div class="input-group">
-																<select class="form-control js-example-basic-single" id="escuela" name="escuela">
-																	<option value="-1" selected="selected"
-																		disabled="disabled">Ingrese su escuela</option>
-																	<option th:each="escuela : ${escuelas}"
-																		th:value="${escuela.idEscuela}"
-																		th:text="${escuela.nombre}"></option>
-																</select>
-															</div>
-														</div>
-													</div>
-														<div class="col-md-12">
-														
-														<div class="form-group" id="formulario-tipo-academico"
-													name="formulario-tipo-academico">
-													<label>Tipo Academico</label>
-													<div class="input-group">
-														<select class="form-control js-example-basic-single" id="tipoAcademico" name="tipoAcademic">
-															<option value="-1" selected="selected" disabled="disabled">Ingrese
-																el tipo academico</option>
-															<option th:each="tipoAcademico : ${tipoAcademicos}"
-																th:value="${tipoAcademico.idItem}"
-																th:text="${tipoAcademico.descripcion}"></option>
-														</select>
-													</div>
-												</div>
-												</div>
-												</div>
-												
-												<div class="row">
-													<div class="col-md-12">
-														<div class="form-group">
-															<label>Tipo de documento</label>
-															<div class="input-group">
-																<select class="form-control js-example-basic-single"
-																	id="tipoDocumento" name="tipoDocumento" required>
-																	<option value="-1" selected="selected"
-																		disabled="disabled">Ingrese el tipo de
-																		documento</option>
-																	<option th:each="tipoDocumento : ${tipoDocumentos}"
-																		th:value="${tipoDocumento.idItem}"
-																		th:text="${tipoDocumento.descripcion}"></option>
-																		
-																</select>
-																 </div>
-															</div>
-														</div>
-
-													<div class="col-md-12">
-														<div class="form-group">
-															<label>Numero de documento</label>
-															<div class="input-group">
-																<input type="number" class="form-control" required
-																	id="numDocumento" name="numDocumento">
-																	 
-															</div>
-																	
-															</div>
-														</div>
-													</div>
-													
-													
-												<div class="row">
-													<div class="col-md-12">
-														<div class="form-group">
-															<label>Apellido Paterno</label>
-															<div class="input-group">
-																<input type="text" class="form-control" id="appPaterno" required
-																	name="appPaterno">
-																	 </div>
-																	
-															</div>
-														</div>
-													<div class="col-md-12">
-														<div class="form-group">
-															<label>Apellido Materno</label>
-															<div class="input-group">
-																<input type="text" class="form-control" id="appMaterno" required
-																	name="appMaterno">
-																	 </div>
-																	
-															</div>
-														</div>
-
-													</div>
-
-												<div class="row">
-													<div class="col-md-12">
-														<div class="form-group">
-															<label>Nombres</label>
-															<div class="input-group">
-																<input type="text" class="form-control" id="nombre" required
-																	name="nombre">
-																	 </div>
-																	
-															</div>
-														</div>
-														
-												</div>
-
-												<div class="form-group text-center">
-													<button type="submit" id="enviar"
-														class="btn btn-info waves-effect waves-light m-r-10">REGISTRAR</button>
-
-												</div>
-											</form>
-											
-										</div>
-
-
+										<table id="myTable" class="table table-bordered table-striped">
+											<thead>
+												<tr>
+													<th>Codigo</th>
+													<th>A Paterno</th>
+													<th>A Materno</th>
+													<th>Nombres</th>
+													<th>Documento</th>
+													<th>Escuela</th>
+													<th>Tipo</th>
+													<th></th>
+												</tr>
+											</thead>
+											<tbody>
+												<tr th:each="solicitante : ${solicitantes}"
+													style="background-color: #fff"
+													th:class="fila-personalizada">
+													<td th:text="${solicitante.codigo}" style="color: #67757C;"></td>
+													<td th:text="${solicitante.appPaterno}"
+														style="color: #67757C;"></td>
+													<td th:text="${solicitante.appMaterno}"
+														style="color: #67757C;"></td>
+													<td th:text="${solicitante.nombre}" style="color: #67757C;"></td>
+													<td th:text="${solicitante.numDocumento}"
+														style="color: #67757C;"></td>
+													<td th:text="${solicitante.escuela}"
+														style="color: #67757C;"></td>
+													<td th:text="${solicitante.solicitante}"
+														style="color: #67757C;"></td>
+													<td><button class="btn btn-success">
+															<i class="fa fa-cog"></i>
+														</button>
+														<button class="btn btn-danger">
+															<i class="fa fa-trash-o"></i>
+														</button></td>
+												</tr>
+											</tbody>
+										</table>
 									</div>
 								</div>
 							</div>
@@ -233,62 +93,172 @@
 		</div>
 		<!-- End Page wrapper  -->
 
-		<!-- All Jquery -->
-		<script th:src="@{/resources/js/guiuser/lib/jquery/jquery.min.js}"></script>
-		<!-- Bootstrap tether Core JavaScript -->
-		<script
-			th:src="@{/resources/js/guiuser/lib/bootstrap/js/popper.min.js}"></script>
-		<script
-			th:src="@{/resources/js/guiuser/lib/bootstrap/js/bootstrap.min.js}"></script>
-		<!-- slimscrollbar scrollbar JavaScript -->
-		<script th:src="@{/resources/js/guiuser/jquery.slimscroll.js}"></script>
-		<!--Menu sidebar -->
-		<script th:src="@{/resources/js/guiuser/sidebarmenu.js}"></script>
-		<!--stickey kit -->
-		<script
-			th:src="@{/resources/js/guiuser/lib/sticky-kit-master/dist/sticky-kit.min.js}"></script>
-		<!--Custom JavaScript -->
 
-		<script th:src="@{/resources/js/guiuser/scripts.js}"></script>
-		<!-- scripit init-->
-		<script th:src="@{/resources/js/guiuser/custom.min.js}"></script>
-		<script th:src="@{/resources/js/guiuser/sweetalert.min.js}"></script>
-		<script th:src="@{/resources/js/util/util.js}"></script>
-		<script th:src="@{/resources/js/util/formularioUtil.js}"></script>
+		<!-- Modal Registro -->
+		<div class="modal fade" id="modalNuevoSolicitante"
+			role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true">
+			<div class="modal-dialog" role="document">
+				<div class="modal-content">
+					<div class="modal-header">
+						<h5 class="modal-title" id="exampleModalLabel">Registro solicitantes</h5>
+					</div>
+					<div class="modal-body">
+						<form class="p-t-0 m-b-0" id="solicitantesFormulario">
+						<div class="form-group m-b-10" name="formulario-ocupacion"
+							id="formulario-ocupacion">
+							<label>Ocupacion</label>
+							<div class="input-group">
+								<select class="form-control js-example-basic-single" required
+									id="ocupacion" name="ocupacion" style="width: 100%">
+									<option value="-1"></option>
+									<option value="ALUMNO">ALUMNO</option>
+									<option value="DOCENTE">DOCENTE</option>
+									<option value="EXTERNO">OTRO</option>
+								</select>
+							</div>
+						</div>
+						<div class="form-group m-b-10" id="formulario-codigo"
+							name="formulario-codigo">
+							<label>Codigo de alumno</label> <input id="codigo" name="codigo"
+								type="number" class="form-control">
+						</div>
+						<div class="form-group m-b-10" id="formulario-escuela"
+							name="formulario-escuela">
+							<label>Escuela</label>
+							<div class="input-group">
+								<select class="form-control js-example-basic-single" style="width: 100%"
+									id="escuela" name="escuela">
+									<option value="-1" selected="selected" disabled="disabled"></option>
+									<option th:each="escuela : ${escuelas}"
+										th:value="${escuela.idEscuela}" th:text="${escuela.nombre}"></option>
+								</select>
+							</div>
+						</div>
+						<div class="form-group m-b-10" id="formulario-tipo-academico"
+							name="formulario-tipo-academico">
+							<label>Tipo Academico</label>
+							<div class="input-group">
+								<select class="form-control js-example-basic-single" style="width: 100%"
+									id="tipoAcademico" name="tipoAcademic">
+									<option value="-1" selected="selected" disabled="disabled"></option>
+									<option th:each="tipoAcademico : ${tipoAcademicos}"
+										th:value="${tipoAcademico.idItem}"
+										th:text="${tipoAcademico.descripcion}"></option>
+								</select>
+							</div>
+						</div>
+						<div class="form-group m-b-10">
+							<label>Tipo de documento</label>
+							<div class="input-group">
+								<select class="form-control js-example-basic-single" style="width: 100%"
+									id="tipoDocumento" name="tipoDocumento" required>
+									<option value="-1" selected="selected" disabled="disabled"></option>
+									<option th:each="tipoDocumento : ${tipoDocumentos}"
+										th:value="${tipoDocumento.idItem}"
+										th:text="${tipoDocumento.descripcion}"></option>
 
-		<!-- select2-->
-		<script th:src="@{/resources/js/guiuser/select2.min.js}"></script>
+								</select>
+							</div>
+						</div>
+						<div class="form-group m-b-10">
+							<label>Numero de documento</label>
+							<div class="input-group">
+								<input type="number" class="form-control" required
+									id="numDocumento" name="numDocumento">
 
-		<!-- JS de datatables -->
-		<script
-			th:src="@{/resources/js/guiuser/lib/datatables/datatables.min.js}"></script>
-		<script
-			th:src="@{/resources/js/guiuser/lib/datatables/cdn.datatables.net/buttons/1.2.2/js/dataTables.buttons.min.js}"></script>
-		<script
-			th:src="@{/resources/js/guiuser/lib/datatables/cdn.datatables.net/buttons/1.2.2/js/buttons.flash.min.js}"></script>
-		<script
-			th:src="@{/resources/js/guiuser/lib/datatables/cdnjs.cloudflare.com/ajax/libs/jszip/2.5.0/jszip.min.js}"></script>
-		<script
-			th:src="@{/resources/js/guiuser/lib/datatables/cdn.rawgit.com/bpampuch/pdfmake/0.1.18/build/pdfmake.min.js}"></script>
-		<script
-			th:src="@{/resources/js/guiuser/lib/datatables/cdn.rawgit.com/bpampuch/pdfmake/0.1.18/build/vfs_fonts.js}"></script>
-		<script
-			th:src="@{/resources/js/guiuser/lib/datatables/cdn.datatables.net/buttons/1.2.2/js/buttons.html5.min.js}"></script>
-		<script
-			th:src="@{/resources/js/guiuser/lib/datatables/cdn.datatables.net/buttons/1.2.2/js/buttons.print.min.js}"></script>
-		<script
-			th:src="@{/resources/js/guiuser/lib/datatables/datatables-init.js}"></script>
-		
-		<!-- Jquery validation  -->
-		<script th:src="@{/resources/js/jquery/jquery.validate.min.js}"></script>
+							</div>
 
-		<!-- Conexion con servidor -->
-		<script th:src="@{/resources/js/pagina/consulta/movimientos/solicitantes/solicitantes.js}"></script>
-		
-		<script th:src="@{/resources/js/pagina/consulta/movimientos/solicitantes/solicitantesFormulario.js}"></script>
-		
+						</div>
+						<div class="form-group m-b-10">
+							<label>Apellido Paterno</label>
+							<div class="input-group">
+								<input type="text" class="form-control" id="appPaterno" required
+									name="appPaterno">
+							</div>
 
-	</div>
+						</div>
+						<div class="form-group m-b-10">
+							<label>Apellido Materno</label>
+							<div class="input-group">
+								<input type="text" class="form-control" id="appMaterno" required
+									name="appMaterno">
+							</div>
 
+						</div>
+						<div class="form-group m-b-10">
+							<label>Nombres</label>
+							<div class="input-group">
+								<input type="text" class="form-control" id="nombre" required
+									name="nombre">
+							</div>
+						</div>
+						<div class="modal-footer">
+							<button id="cerrarModalNuevos" type="button" class="swal-button swal-button--cancel" data-dismiss="modal">CERRAR</button>
+							<button id="enviar" class="btn btn-info waves-effect waves-light m-r-10">REGISTRAR</button>
+						</div>
+						</form>
+					</div>
+				</div>
+			</div>
+			<!-- End Modal -->
+
+			<!-- All Jquery -->
+			<script th:src="@{/resources/js/guiuser/lib/jquery/jquery.min.js}"></script>
+			<!-- Bootstrap tether Core JavaScript -->
+			<script
+				th:src="@{/resources/js/guiuser/lib/bootstrap/js/popper.min.js}"></script>
+			<script
+				th:src="@{/resources/js/guiuser/lib/bootstrap/js/bootstrap.min.js}"></script>
+			<!-- slimscrollbar scrollbar JavaScript -->
+			<script th:src="@{/resources/js/guiuser/jquery.slimscroll.js}"></script>
+			<!--Menu sidebar 
+			<script th:src="@{/resources/js/guiuser/sidebarmenu.js}"></script>-->
+			<!--stickey kit -->
+			<script
+				th:src="@{/resources/js/guiuser/lib/sticky-kit-master/dist/sticky-kit.min.js}"></script>
+			<!--Custom JavaScript -->
+
+			<script th:src="@{/resources/js/guiuser/scripts.js}"></script>
+			<!-- scripit init-->
+			<script th:src="@{/resources/js/guiuser/custom.min.js}"></script>
+			<script th:src="@{/resources/js/guiuser/sweetalert.min.js}"></script>
+			<script th:src="@{/resources/js/util/util.js}"></script>
+			<script th:src="@{/resources/js/util/formularioUtil.js}"></script>
+
+			<!-- select2-->
+			<script th:src="@{/resources/js/guiuser/select2.min.js}"></script>
+
+			<!-- JS de datatables -->
+			<script
+				th:src="@{/resources/js/guiuser/lib/datatables/datatables.min.js}"></script>
+			<script
+				th:src="@{/resources/js/guiuser/lib/datatables/cdn.datatables.net/buttons/1.2.2/js/dataTables.buttons.min.js}"></script>
+			<script
+				th:src="@{/resources/js/guiuser/lib/datatables/cdn.datatables.net/buttons/1.2.2/js/buttons.flash.min.js}"></script>
+			<script
+				th:src="@{/resources/js/guiuser/lib/datatables/cdnjs.cloudflare.com/ajax/libs/jszip/2.5.0/jszip.min.js}"></script>
+			<script
+				th:src="@{/resources/js/guiuser/lib/datatables/cdn.rawgit.com/bpampuch/pdfmake/0.1.18/build/pdfmake.min.js}"></script>
+			<script
+				th:src="@{/resources/js/guiuser/lib/datatables/cdn.rawgit.com/bpampuch/pdfmake/0.1.18/build/vfs_fonts.js}"></script>
+			<script
+				th:src="@{/resources/js/guiuser/lib/datatables/cdn.datatables.net/buttons/1.2.2/js/buttons.html5.min.js}"></script>
+			<script
+				th:src="@{/resources/js/guiuser/lib/datatables/cdn.datatables.net/buttons/1.2.2/js/buttons.print.min.js}"></script>
+			<script
+				th:src="@{/resources/js/guiuser/lib/datatables/datatables-init.js}"></script>
+
+			<!-- Jquery validation  -->
+			<script th:src="@{/resources/js/jquery/jquery.validate.min.js}"></script>
+
+			<!-- Conexion con servidor -->
+			<script
+				th:src="@{/resources/js/pagina/consulta/movimientos/solicitantes/solicitantes.js}"></script>
+
+			<script
+				th:src="@{/resources/js/pagina/consulta/movimientos/solicitantes/solicitantesFormulario.js}"></script>
+
+
+		</div>
 </body>
 </html>
