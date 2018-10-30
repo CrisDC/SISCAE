@@ -249,11 +249,16 @@ public @Controller class ConsultaController {
 		}
 		
 		List<InfraccionDetalle> infraccionesDetalle = infraccionDetalleService.buscarTodos();
-		List<ConsultaSancionados> sancionados =consultaSancionadosService.buscarTodos();
+		List<ConsultaSancionados> sancionados =new ArrayList<ConsultaSancionados>();
+		sancionados=consultaSancionadosService.buscarTodos();
 		int existenSancionados=0;
-		System.out.print(sancionados);
-		if(sancionados==null){
-			existenSancionados=1;
+		try {
+			if(sancionados.get(0).getDocIdentificador()!=null && sancionados.size()>0){
+				existenSancionados=1;
+			}
+		}
+		catch(NullPointerException e){
+			existenSancionados=0;
 		}
 		List<MultiTabDet> tiposInfracciones = multiTabDetService.buscarPorIdTabla(ID_TABLA_INFRACCION);
 		
