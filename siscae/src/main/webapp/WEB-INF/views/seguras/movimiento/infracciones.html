@@ -222,7 +222,7 @@
 													</tr>
 												</thead>
 												<tbody>
-													<th:block th:each="sancionado : ${sancionados}">
+													<th:block th:if="${existenSancionados} == 1" th:each="sancionado : ${sancionados}">
 														<tr  style="background-color: #fff;">
 															<td th:text="${sancionado.docIdentificador}" style="color: #67757C;"></td>
 															<td th:text="${sancionado.appPaterno} + ' ' + ${sancionado.appMaterno}" style="color:#67757C;" ></td>											

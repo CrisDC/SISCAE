@@ -250,12 +250,18 @@ public @Controller class ConsultaController {
 		
 		List<InfraccionDetalle> infraccionesDetalle = infraccionDetalleService.buscarTodos();
 		List<ConsultaSancionados> sancionados =consultaSancionadosService.buscarTodos();
+		int existenSancionados=0;
+		System.out.print(sancionados);
+		if(sancionados==null){
+			existenSancionados=1;
+		}
 		List<MultiTabDet> tiposInfracciones = multiTabDetService.buscarPorIdTabla(ID_TABLA_INFRACCION);
 		
 		model.addAttribute("prestamos", listaRecursosIndividuales);
 		model.addAttribute("recursosGrupales", listaRecursosGrupales);
 		model.addAttribute("infraccionesDetalle", infraccionesDetalle);
 		model.addAttribute("sancionados", sancionados);
+		model.addAttribute("existenSancionados", existenSancionados);
 		model.addAttribute("areaAdministrativo", areaAdministrativo);
 		model.addAttribute("tipoInfracciones", tiposInfracciones);
 		model.addAttribute("consulta", consulta);
