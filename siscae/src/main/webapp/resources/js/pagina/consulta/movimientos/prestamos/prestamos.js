@@ -225,7 +225,25 @@ $(document).ready(function(){
 		}).then((value) => {
 			location.reload();
 		});
-	});   
+	});
+	//Cuando se abra el modal
+	$('#consultaInfraccionesModal').on('show.bs.modal', function (e) {
+		$('#numDocumentoInfractor').val('');
+		$('#detalleInfracciones').css('display', 'none');
+		$('#consultarInfraccionesPorDocumento').css('display', 'block');
+		$('#numDocumentoInfractor').focus();
+		  setTimeout(function (){
+		        $('#numDocumentoInfractor').focus();
+		   }, 500);
+		
+	});
+	//Cuando se cierre el modal
+	$('#consultaInfraccionesModal').on('hidden.bs.modal', function (e) {
+		$('#numDocumentoInfractor').val('');
+		$('#consultarInfraccionesPorDocumento').css('display', 'block');
+		$('#detalleInfracciones').css('display', 'none');
+	})
+	
 });
 
 
@@ -377,6 +395,9 @@ function consultarInfracciones(){
 	//AJAX
 	let numDoc = $('#numDocumentoInfractor').val();
 	
+	//Desaparecer la barra de busqueda
+	$('#consultarInfraccionesPorDocumento').css('display', 'none');
+	
 	$.ajax({
             url :  $variableUtil.root + "reporteEstadisticaInfracciones?accion=buscarPorCriterio&numeroDocumento="+numDoc,
             type : 'GET',
@@ -418,6 +439,10 @@ function consultarInfracciones(){
     				$('#numDocumentoInfractor').val('');
     				$('#numDocumentoInfractor').focus();
     				
+    				for(i=0;i<response.length;i++){
+    					let filaInfracciones='<div class="row"><div class="col-md-2"><label>'+response[i].fechaInfraccion+'</label></div><div class="col-md-6"><label>'+response[i].descripcion+'</label></div><div class="col-md-4"><label>'+response[i].estadoInfraccion+'</label></div></div>';
+    					$('#for-iteraciones span:last').after(filaInfracciones);
+    				}
     				
 				}
 				
