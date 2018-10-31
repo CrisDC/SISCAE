@@ -20,7 +20,8 @@
 			    fecha_infraccion,
 			    turno,
 			    id_area_estudio,
-			    area_estudio
+			    area_estudio,
+			    estado_solicitante
 		  FROM VW_REPORTE_INFRACCIONES 
 	</sql>
 

@@ -243,7 +243,9 @@ $(document).ready(function(){
 		$('#consultarInfraccionesPorDocumento').css('display', 'block');
 		$('#detalleInfracciones').css('display', 'none');
 	})
-	
+	$('#cerrarModalInfractores').on('click', function (event){
+		$('div').remove('.fila-temporal');
+	});
 });
 
 
@@ -427,6 +429,7 @@ function consultarInfracciones(){
     				let infraccion = response[0].descripcion;
     				let fechaInfraccion = response[0].fechaInfraccion;
     				let estado = response[0].estadoInfraccion;
+    				let estadoSolicitante = response[0].estadoSolicitante;
     				
     				$('#tipoDocumento').text(tipoDocumento);
     				$('#numeroDocumentoInfractor').text(numeroDocumento);
@@ -434,13 +437,14 @@ function consultarInfracciones(){
     				$('#infraccion').text(infraccion);
     				$('#fechaInfraccion').text(fechaInfraccion);
     				$('#estado').text(estado);
+    				$('#estadoSolicitante').text(estadoSolicitante);
     				
     				$('#detalleInfracciones').css('display', 'flex');
     				$('#numDocumentoInfractor').val('');
     				$('#numDocumentoInfractor').focus();
     				
     				for(i=0;i<response.length;i++){
-    					let filaInfracciones='<div class="row"><div class="col-md-2"><label>'+response[i].fechaInfraccion+'</label></div><div class="col-md-6"><label>'+response[i].descripcion+'</label></div><div class="col-md-4"><label>'+response[i].estadoInfraccion+'</label></div></div>';
+    					let filaInfracciones='<div class="row fila-temporal"><div class="col-md-2"><label>'+response[i].fechaInfraccion+'</label></div><div class="col-md-6"><label>'+response[i].descripcion+'</label></div><div class="col-md-4"><label>'+response[i].estadoInfraccion+'</label></div></div>';
     					$('#for-iteraciones span:last').after(filaInfracciones);
     				}
     				

@@ -168,35 +168,38 @@
 											<h2>Infracciones registradas por alumno</h2>
 											
 											<label>Lista de alumnos que registran infracciones</label>
-
-											<table id="myTable" class="table table-bordered table-striped">
-												<thead>
-													<tr>
-														<th>Numero de documento</th>
-														<th>Apellidos</th>
-														<th>Nombre</th>
-														<th>Tipo de solicitante</th>
-														<th>Detalle de infraccion</th>
-														<th>Estado de la infraccion</th>
-														<th>Fecha de registro de infraccion</th>
-													</tr>
-												</thead>
-												<tbody>
-													<th:block th:each="infraccionesDetalle : ${infraccionesDetalle}">
-														<tr  style="background-color: #fff;">
-															<td th:text="${infraccionesDetalle.numDocumento}" style="color: #67757C;"></td>											
-															<td th:text="${infraccionesDetalle.appPaterno} + ' ' + ${infraccionesDetalle.appMaterno}" style="color:#67757C;" ></td>
-															<td th:text="${infraccionesDetalle.nombre}" style="color:#67757C;" ></td>
-															<td th:text="${infraccionesDetalle.tipoPersona}" style="color: #67757C;" ></td>
-															<td th:text="${infraccionesDetalle.infraccion}" style="color: #67757C;" ></td>
-															<td th:text="${infraccionesDetalle.estado}" style="color: #67757C;" ></td>
-															<td th:text="${infraccionesDetalle.fecha}" style="color: #67757C;" ></td>
-														</tr>
-													 </th:block> 
+											<div class="p-20">
+												<table id="tblInfracciones" class="display nowrap table table-hover table-striped table-bordered" cellspacing="0" width="100%">
+												</table>
+											</div>
+<!-- 											<table id="tblInfracciones" class="table table-bordered table-striped"> -->
+<!-- 												<thead> -->
+<!-- 													<tr> -->
+<!-- 														<th>Numero de documento</th> -->
+<!-- 														<th>Apellidos</th> -->
+<!-- 														<th>Nombre</th> -->
+<!-- 														<th>Tipo de solicitante</th> -->
+<!-- 														<th>Detalle de infraccion</th> -->
+<!-- 														<th>Estado de la infraccion</th> -->
+<!-- 														<th>Fecha de registro de infraccion</th> -->
+<!-- 													</tr> -->
+<!-- 												</thead> -->
+<!-- 												<tbody> -->
+<!-- 													<th:block th:each="infraccionesDetalle : ${infraccionesDetalle}"> -->
+<!-- 														<tr  style="background-color: #fff;"> -->
+<!-- 															<td th:text="${infraccionesDetalle.numDocumento}" style="color: #67757C;"></td>											 -->
+<!-- 															<td th:text="${infraccionesDetalle.appPaterno} + ' ' + ${infraccionesDetalle.appMaterno}" style="color:#67757C;" ></td> -->
+<!-- 															<td th:text="${infraccionesDetalle.nombre}" style="color:#67757C;" ></td> -->
+<!-- 															<td th:text="${infraccionesDetalle.tipoPersona}" style="color: #67757C;" ></td> -->
+<!-- 															<td th:text="${infraccionesDetalle.infraccion}" style="color: #67757C;" ></td> -->
+<!-- 															<td th:text="${infraccionesDetalle.estado}" style="color: #67757C;" ></td> -->
+<!-- 															<td th:text="${infraccionesDetalle.fecha}" style="color: #67757C;" ></td> -->
+<!-- 														</tr> -->
+<!-- 													 </th:block>  -->
 													<!-- Fin bucle individual  -->
 													
-												</tbody>
-											</table>
+<!-- 												</tbody> -->
+<!-- 											</table> -->
 											
 											
 										</div>
@@ -210,7 +213,7 @@
 											
 											<label>Lista de los solicitantes sancionados</label>
 
-											<table id="myTable" class="table table-bordered table-striped">
+											<table id="tblSancionados" class="table table-bordered table-striped">
 												<thead>
 													<tr>
 														<th>Codigo</th>

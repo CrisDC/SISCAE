@@ -33,5 +33,6 @@ public class ReporteEstadisticaInfracciones {
 	String turno;
 	int idAreaEstudio;
 	String areaEstudio;
+	String estadoSolicitante;
 	
 }
