@@ -224,20 +224,23 @@ $(document).ready(function() {
     			
     			if(validar_formulario.form()){
     				
-    					var registroSolicitanteNuevo = {
-            		        	"operacion" : operacion,
-    							"idTipoDocumentoSolicitante": idTipoDocumentoSolicitante,
-            		        	"numDocumentoSolicitante": numDocumentoSolicitante,
-            		        	"appPaterno": appPaterno,
-            		        	"appMaterno": appMaterno,
-            		        	"nombre": nombre,
-            		        	"tipoAcademico": tipoAcademico,
-            		        	"ocupacion": ocupacion,
-            		        	"codigoAlumno": codigoAlumno,
-            		        	"idEscuela": idEscuela
-            		    };
+    				var registroSolicitanteNuevo = {
+        		        	"operacion" : operacion,
+							"idTipoDocumentoSolicitante": idTipoDocumentoSolicitante,
+        		        	"numDocumentoSolicitante": numDocumentoSolicitante,
+        		        	"appPaterno": appPaterno,
+        		        	"appMaterno": appMaterno,
+        		        	"nombre": nombre,
+        		        	"tipoAcademico": tipoAcademico,
+        		        	"ocupacion": ocupacion,
+        		        	"codigoAlumno": codigoAlumno,
+        		        	"idEscuela": idEscuela
+        		    };
+    				
+    				if(operacion=="INSERT"){
+    					    					
             	    	$.ajax({
-            	            url :  $variableUtil.root + "registroSolicitanteNuevo",
+            	            url :  $variableUtil.root + "solicitante",
             	            type : 'POST',
             	            data : JSON.stringify(registroSolicitanteNuevo),
             	            beforeSend : function(xhr) {
@@ -264,8 +267,45 @@ $(document).ready(function() {
             						location.reload();
             					});
             				}
-
             			});
+            	    	
+            	    	
+    				}else{
+    					if(operacion=="UPDATE"){
+    						
+    						$.ajax({
+                	            url :  $variableUtil.root + "solicitante",
+                	            type : 'PUT',
+                	            data : JSON.stringify(registroSolicitanteNuevo),
+                	            beforeSend : function(xhr) {
+                					xhr.setRequestHeader('Content-Type', 'application/json');
+                					xhr.setRequestHeader("X-CSRF-TOKEN", $variableUtil.csrf);
+                				},
+                				statusCode : {
+                					400 : function(response) {
+                						swal(response.responseJSON);
+                					},
+                					500 : function(response) {
+                						swal("Error", response.responseText, "warning");
+                					}
+                				},
+                				success : function(response) {
+                					
+                					swal({
+                						title: "Actualización de solicitante",
+                					  	text: "Realizado con éxito",
+                					  	icon: "success",
+                					  	button: false,
+                					  	timer: 1000,
+                					}).then((value) => {
+                						location.reload();
+                					});
+                				}
+                			});
+    					}
+    				}
+    				
+    					
     				
     				
     			}else{
@@ -399,7 +439,42 @@ $(document).ready(function() {
 			})
 			.then((willDelete) => {
 			  if (willDelete) {
-				  alert("jajaja bueno esto aun falta xD")
+				  
+				  var borrarSolicitante = {
+      		        	"numDocumentoSolicitante": tdNumDocumento
+      		      };
+				  
+				  $.ajax({
+      	            url :  $variableUtil.root + "solicitante",
+      	            type : 'DELETE',
+      	            data : JSON.stringify(borrarSolicitante),
+      	            beforeSend : function(xhr) {
+      					xhr.setRequestHeader('Content-Type', 'application/json');
+      					xhr.setRequestHeader("X-CSRF-TOKEN", $variableUtil.csrf);
+      				},
+      				statusCode : {
+      					400 : function(response) {
+      						swal(response.responseJSON);
+      					},
+      					500 : function(response) {
+      						swal("Error", response.responseText, "warning");
+      					}
+      				},
+      				success : function(response) {
+      					
+      					swal({
+      						title: "Eliminación de solicitante",
+      					  	text: "Realizado con éxito",
+      					  	icon: "success",
+      					  	button: false,
+      					  	timer: 1000,
+      					}).then((value) => {
+      						location.reload();
+      					});
+      				}
+      			});
+				  
+				  
 			  }
 		});
     });

@@ -32,7 +32,7 @@ import pe.edu.unmsm.fisi.siscae.utilitario.ValidatorUtil;
 import pe.edu.unmsm.fisi.siscae.validacion.grupo.accion.IActualizacion;
 import pe.edu.unmsm.fisi.siscae.validacion.grupo.accion.IRegistro;
 @Audit(tipo = Tipo.SOLICITANTE, datos = Dato.SOLICITANTE)
-@RequestMapping("/Solicitante")
+@RequestMapping("/solicitante")
 public @RestController class SolicitanteController {
 	private @Autowired ISolicitanteService SolicitanteService;
 
@@ -43,24 +43,8 @@ public @RestController class SolicitanteController {
 		if (error.hasErrors()) {
 			throw new BadRequestException(ValidatorUtil.obtenerMensajeValidacionError(error));
 		}
-		Solicitante.setUsuario(SecurityContextFacade.obtenerNombreUsuario()); 	
-		System.out.println(Solicitante);
-		
-		SecurityContextFacade.obtenerNombreUsuario();
+		Solicitante.setUsuario(SecurityContextFacade.obtenerNombreUsuario());
 		Solicitante.setNumDocumentoSolicitante(Solicitante.getNumDocumentoSolicitante().trim());
-		System.out.println("Atributo 'numDocumentoSolicitante': "+Solicitante.getNumDocumentoSolicitante());
-		System.out.println("Atributo 'usuario': "+Solicitante.getUsuario());
-		System.out.println("Atributo 'idTipoDocumentoSolicitante': "+Solicitante.getIdTipoDocumentoSolicitante());
-		System.out.println("Atributo 'appPaterno': "+Solicitante.getAppPaterno());
-		System.out.println("Atributo 'appMaterno': "+Solicitante.getAppMaterno());
-		System.out.println("Atributo 'nombre': "+Solicitante.getNombre());
-		System.out.println("Atributo 'sexo': "+Solicitante.getSexo());
-		System.out.println("Atributo 'fechaNac': "+Solicitante.getFechaNac());
-		System.out.println("Atributo 'telefono': "+Solicitante.getTelefono());
-		System.out.println("Atributo 'tipoAcademico': "+Solicitante.getTipoAcademico());
-		System.out.println("Atributo 'ocupacion': "+Solicitante.getOcupacion());
-		System.out.println("Atributo 'idEscuela': "+Solicitante.getIdEscuela());
-		System.out.println("Atributo 'codigoAlumno': "+Solicitante.getCodigoAlumno());
 		SolicitanteService.registrarSolicitante(Solicitante);
 		return ResponseEntity.ok(ConstantesGenerales.REGISTRO_EXITOSO);
 	}
