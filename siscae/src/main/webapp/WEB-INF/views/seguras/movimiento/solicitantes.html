@@ -42,43 +42,43 @@
 												</button>
 											</div>
 										</div>
-										<table id="myTable" class="table table-bordered table-striped">
-											<thead>
-												<tr>
-													<th>Codigo</th>
-													<th>A Paterno</th>
-													<th>A Materno</th>
-													<th>Nombres</th>
-													<th>Documento</th>
-													<th>Escuela</th>
-													<th>Tipo</th>
-													<th></th>
-												</tr>
-											</thead>
-											<tbody>
-												<tr th:each="solicitante : ${solicitantes}"
-													style="background-color: #fff"
-													th:class="fila-personalizada">
-													<td th:text="${solicitante.codigo}" style="color: #67757C;"></td>
-													<td th:text="${solicitante.appPaterno}"
-														style="color: #67757C;"></td>
-													<td th:text="${solicitante.appMaterno}"
-														style="color: #67757C;"></td>
-													<td th:text="${solicitante.nombre}" style="color: #67757C;"></td>
-													<td th:text="${solicitante.numDocumento}"
-														style="color: #67757C;"></td>
-													<td th:text="${solicitante.escuela}"
-														style="color: #67757C;"></td>
-													<td th:text="${solicitante.solicitante}"
-														style="color: #67757C;"></td>
-													<td><button th:person="${solicitante.numDocumento}" th:key="${solicitante.idPersona}" class="btn btn-success actualizar-soli">
-															<i class="fa fa-cog"></i>
-														</button>
-														<button th:person="${solicitante.numDocumento}" th:key="${solicitante.idPersona}" th:nom="${solicitante.nombre}"  th:am="${solicitante.appMaterno}" th:ap="${solicitante.appPaterno}" class="btn btn-danger eliminar-soli">
-															<i class="fa fa-trash-o"></i>
-														</button></td>
-												</tr>
-											</tbody>
+										<table id="tblSolicitantes" class="table table-bordered table-striped">
+<!-- 											<thead> -->
+<!-- 												<tr> -->
+<!-- 													<th>Codigo</th> -->
+<!-- 													<th>A Paterno</th> -->
+<!-- 													<th>A Materno</th> -->
+<!-- 													<th>Nombres</th> -->
+<!-- 													<th>Documento</th> -->
+<!-- 													<th>Escuela</th> -->
+<!-- 													<th>Tipo</th> -->
+<!-- 													<th></th> -->
+<!-- 												</tr> -->
+<!-- 											</thead> -->
+<!-- 											<tbody> -->
+<!-- 												<tr th:each="solicitante : ${solicitantes}" -->
+<!-- 													style="background-color: #fff" -->
+<!-- 													th:class="fila-personalizada"> -->
+<!-- 													<td th:text="${solicitante.codigo}" style="color: #67757C;"></td> -->
+<!-- 													<td th:text="${solicitante.appPaterno}" -->
+<!-- 														style="color: #67757C;"></td> -->
+<!-- 													<td th:text="${solicitante.appMaterno}" -->
+<!-- 														style="color: #67757C;"></td> -->
+<!-- 													<td th:text="${solicitante.nombre}" style="color: #67757C;"></td> -->
+<!-- 													<td th:text="${solicitante.numDocumento}" -->
+<!-- 														style="color: #67757C;"></td> -->
+<!-- 													<td th:text="${solicitante.escuela}" -->
+<!-- 														style="color: #67757C;"></td> -->
+<!-- 													<td th:text="${solicitante.solicitante}" -->
+<!-- 														style="color: #67757C;"></td> -->
+<!-- 													<td><button th:person="${solicitante.numDocumento}" th:key="${solicitante.idPersona}" class="btn btn-success actualizar-soli"> -->
+<!-- 															<i class="fa fa-cog"></i> -->
+<!-- 														</button> -->
+<!-- 														<button th:person="${solicitante.numDocumento}" th:key="${solicitante.idPersona}" th:nom="${solicitante.nombre}"  th:am="${solicitante.appMaterno}" th:ap="${solicitante.appPaterno}" class="btn btn-danger eliminar-soli"> -->
+<!-- 															<i class="fa fa-trash-o"></i> -->
+<!-- 														</button></td> -->
+<!-- 												</tr> -->
+<!-- 											</tbody> -->
 										</table>
 									</div>
 								</div>
