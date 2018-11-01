@@ -1,9 +1,11 @@
 var espacioDisponible;
 var recurso;
+var cantidadPrestamosRealizados;
 
 $(document).ready(function(){
 	
 	$('#detalleInfracciones').css('display', 'none');
+	$('#mensajeInfracciones').css('display', 'none');
 	
 	$('#salida').click(function () {
 		swal("Registrar salida",{
@@ -59,8 +61,6 @@ $(document).ready(function(){
 				  // dismiss can be 'cancel', 'overlay',
 				  // 'close', and 'timer'
 				  
-				
-
 				});
 				
 			}
@@ -69,7 +69,7 @@ $(document).ready(function(){
 	});
      $('body #for-each').on('click', 'button', function(){
 	        let idRecurso = $(this).attr('key');
-	        let numRecurso = $(this).attr('id');
+	        let numRecurso = $(this).attr('num');
 	        	
 	        	swal({
 	    			title: "Solicitud de recurso "+numRecurso,
@@ -79,7 +79,9 @@ $(document).ready(function(){
 	    		
 	    		}).then(function (inputValue) {
 
-	    			if(inputValue != null){
+	    			if(inputValue != null && inputValue.length != 0){
+	    				
+	    				console.log(inputValue.length);
 	    				
 	    				var prestamo ={
 		    		        	"idRecurso": idRecurso,
@@ -120,6 +122,11 @@ $(document).ready(function(){
 		    			  // 'close', and 'timer'
 		    			  
 		    			});
+	    				
+	    			}else{
+	    				if(inputValue.length == 0){
+	    					swal('El número de documento no puede estar vacío');
+	    				}
 	    			}
 	          });
       });      
@@ -130,13 +137,13 @@ $(document).ready(function(){
     			  icon: "warning",
     			  buttons: true,
     			  dangerMode: true,
-    			})
-    			.then((willDelete) => {
-    			  if (willDelete) {
+    			}).then((willDelete) => {
+    			  
+    				if (willDelete) {
     				  
     				  var desocupar ={
   	    		        	"username": ""
-  	    		    };
+  	    		      };
     				  
     				  $.ajax({
   	                    url :  $variableUtil.root + "movimientoDesalojarArea",
@@ -194,12 +201,10 @@ $(document).ready(function(){
 	    	consultarInfracciones();
 	    }
 	});
-	
 	$('#consultarInfracciones').on('click', function (event){
 		consultarInfracciones();
 	});
 	$('body #for-each-grupales').on('click', 'button', function(){
-		
 		recurso = $(this).attr('key');
         let numRecurso = $(this).attr('id');
         let cantidadPrestamos = $(this).attr('prestado');
@@ -207,24 +212,29 @@ $(document).ready(function(){
         espacioDisponible =  parseInt(maxCapacidad) - parseInt(cantidadPrestamos);
 		$('#infoRecurso').text('Solicititud de recurso '+numRecurso)
 		$('#espacioDisponibleLabel').text('Espacio disponible: '+espacioDisponible)
-
-		
 	});	
 	$('#confirmarPrestamo').on('click', function (event){
 		//Recorriendo todos los elementos del html de la clase .docum
+		cantidadPrestamosRealizados=0;
 		$(".docum").each(function(){
 			let m = $(this).text();
-			realizarPrestamo(m);
+			if(m.length!=0){
+				realizarPrestamo(m);
+			}
 		});
-		swal({
-			title: "Peticion realizada con exito",
-			text: "Ustedes estan prestando el recurso",
-			icon: "success",
-			button: false,
-			timer: 1000,
-		}).then((value) => {
-			location.reload();
-		});
+		if(cantidadPrestamosRealizados!=0){
+			swal({
+				title: "Peticion realizada con exito",
+				text: "Ustedes estan prestando el recurso",
+				icon: "success",
+				button: false,
+				timer: 1000,
+			}).then((value) => {
+				location.reload();
+			});
+		}else{
+			swal('Campos no pueden estar vacios');
+		}
 	});
 	//Cuando se abra el modal
 	$('#consultaInfraccionesModal').on('show.bs.modal', function (e) {
@@ -235,16 +245,30 @@ $(document).ready(function(){
 		  setTimeout(function (){
 		        $('#numDocumentoInfractor').focus();
 		   }, 500);
-		
 	});
 	//Cuando se cierre el modal
 	$('#consultaInfraccionesModal').on('hidden.bs.modal', function (e) {
 		$('#numDocumentoInfractor').val('');
 		$('#consultarInfraccionesPorDocumento').css('display', 'block');
 		$('#detalleInfracciones').css('display', 'none');
+		$('#mensajeInfracciones').css('display', 'none');
+		$('#contenidoInfracciones').css('width','500px');
 	})
 	$('#cerrarModalInfractores').on('click', function (event){
 		$('div').remove('.fila-temporal');
+		$('#bodyInfracciones').css('padding-left','0px');
+		$('#bodyInfracciones').css('padding-right','0px');
+		$('#mensajeInfracciones').css('display', 'none');
+		$('#contenidoInfracciones').css('width','500px');
+	});
+	$('#grupalesModal').on('show.bs.modal', function (e) {
+		$('#numeroDocumentoGrupal').focus();
+		  setTimeout(function (){
+		        $('#numeroDocumentoGrupal').focus();
+		   }, 500);
+	});
+	$('#cerrarModal').on('click', function (event){
+		$('#numeroDocumentoGrupal').val('');
 	});
 });
 
@@ -383,6 +407,7 @@ function realizarPrestamo(persona){
 			}
 		},
 		success : function(response) {
+			cantidadPrestamosRealizados = cantidadPrestamosRealizados + 1;
 		}
 
 	}, function (dismiss) {
@@ -417,8 +442,6 @@ function consultarInfracciones(){
 			},
 			success : function(response) {
 
-				console.log(response);
-				
 				if(response.length!=0){
 					
 					let nombre = response[0].nombre;
@@ -439,6 +462,7 @@ function consultarInfracciones(){
     				$('#estado').text(estado);
     				$('#estadoSolicitante').text(estadoSolicitante);
     				
+    				$('#mensajeInfracciones').css('display', 'none');
     				$('#detalleInfracciones').css('display', 'flex');
     				$('#numDocumentoInfractor').val('');
     				$('#numDocumentoInfractor').focus();
@@ -447,7 +471,13 @@ function consultarInfracciones(){
     					let filaInfracciones='<div class="row fila-temporal"><div class="col-md-2"><label>'+response[i].fechaInfraccion+'</label></div><div class="col-md-6"><label>'+response[i].descripcion+'</label></div><div class="col-md-4"><label>'+response[i].estadoInfraccion+'</label></div></div>';
     					$('#for-iteraciones span:last').after(filaInfracciones);
     				}
-    				
+    				$('#bodyInfracciones').css('padding-left','40px');
+    				$('#bodyInfracciones').css('padding-right','40px');
+					$('#contenidoInfracciones').css('width','850px');
+				
+				}else{
+					$('#mensajeInfracciones').css('display', 'block');
+					$('#contenidoInfracciones').css('width','500px');
 				}
 				
 				

@@ -107,7 +107,7 @@
 														<p th:if="${prestamo.estado} == 'DISPONIBLE'" th:text="DISPONIBLE" class="disponible"></p>
 														<p th:if="${prestamo.estado} == 'OCUPADO'" th:text="OCUPADO" class="ocupado"></p>
 														<p th:if="${prestamo.estado} == 'LIBERABLE'" th:text="LIBERABLE" class="liberable"></p>
-														<button th:id="${prestamo.numero}" th:key="${prestamo.idRecurso}" th:class="${prestamo.estado} == 'DISPONIBLE' ? 'btn btn-info solicitar sweet-ajax' : 'invisible' ">SOLICITAR</button>
+														<button th:num="${prestamo.numero}" th:key="${prestamo.idRecurso}" th:class="${prestamo.estado} == 'DISPONIBLE' ? 'btn btn-info solicitar sweet-ajax' : 'invisible' ">SOLICITAR</button>
 													</div>
 												</th:block>
 											</div>
@@ -267,14 +267,17 @@
 		
 		<!-- MODAL 2 -->
 		<div id="consultaInfraccionesModal" class="modal fade bd-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="infractoresModalLabel" aria-hidden="true">
-			<div class="modal-dialog modal-lg modal-dialog-centered" role="document" style="width: 850px !important;">
+			<div class="modal-dialog modal-lg modal-dialog-centered" id="contenidoInfracciones" role="document" style="width: 400px;">
 		    	<div class="modal-content">
 					<div class="card-header modal-header">
 		      			<h3 class="modal-title" id="infoRecurso">Consulta de infracciones</h3>		       
 		      		</div>				
-					<div class="card-body modal-body">
+					<div id="bodyInfracciones" class="card-body modal-body">
 						<div id="consultarInfraccionesPorDocumento" class="form-group m-t-20">
 							<h5 class="m-t-15 m-l-15"><strong>Ingrese su DNI por el lector</strong></h5>
+							<div class="row justify-content-center m-b-10">
+								<img th:src="@{/resources/images/dni.png}" width="251px" height="157px">
+							</div>
 							<div class="input-group justify-content-center">
 								<input type="text" class="form-control col-8 m-r-15 input-grupal" id="numDocumentoInfractor" autofocus placeholder="Numero de documento">
 								<button id="consultarInfracciones" class="col-3 btn btn-info"><i class="fa fa-search"></i></button>
@@ -283,7 +286,7 @@
 						<div id="detalleInfracciones" class="row justify-content-center">
 							<div class="panel panel-danger">
 			        				<div class="panel-heading descripcion-infraccion">
-			        					INFRACTOR
+			        					SOLICITANTE
 			        				</div>
 						        	<ul class="list-group">
 						        		<li class="list-group-item">
@@ -342,6 +345,11 @@
 						        	</ul>
 			        			</div>
 						</div>
+						<div id="mensajeInfracciones">
+			        		<div class="alert alert-danger m-l-20 m-r-20 m-t-20">
+                            	El solicitante no se encuentra registrado o no posee ninguna infraccion
+                            </div>
+			        	</div>
 					</div>
 					<div class="modal-footer">
 						<button id="cerrarModalInfractores" type="button" class="swal-button swal-button--cancel" data-dismiss="modal">Cerrar</button>
