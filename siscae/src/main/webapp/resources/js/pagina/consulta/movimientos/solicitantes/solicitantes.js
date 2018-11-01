@@ -441,7 +441,8 @@ $(document).ready(function() {
 			  if (willDelete) {
 				  
 				  var borrarSolicitante = {
-      		        	"numDocumentoSolicitante": tdNumDocumento
+      		        	"numDocumentoSolicitante": tdNumDocumento,
+      		        	"ocupacion" : tdTipo
       		      };
 				  
 				  $.ajax({
