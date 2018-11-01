@@ -459,6 +459,10 @@ $(document).ready(function() {
       					},
       					500 : function(response) {
       						swal("Error", response.responseText, "warning");
+      					},
+      					409 : function(response) {
+      						console.log(response);
+      						swal("Error", "No se puede eliminar al solicitante "+tdNombre+" "+" "+tdAppPaterno+" "+tdAppMaterno+" con documento "+tdNumDocumento+" debido a que ha realizado prestamos de recursos, si desea eliminarlo consulte con el administrador", "warning");
       					}
       				},
       				success : function(response) {
