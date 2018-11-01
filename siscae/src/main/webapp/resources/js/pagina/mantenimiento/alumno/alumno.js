@@ -10,8 +10,6 @@ $(document).ready(function() {
 		idAlumnoSeleccionado : "",
 		personaActual : null,	
 		$btnBuscar : $("#buscar")
-		
-		
 	}
 	$formMantenimiento = $("#formMantenimiento");
 

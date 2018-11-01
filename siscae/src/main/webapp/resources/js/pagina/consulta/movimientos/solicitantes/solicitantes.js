@@ -2,7 +2,8 @@ $(document).ready(function() {
 	
 	var $local = {
 			$tblConsulta : $("#tblSolicitantes"),
-			tblConsulta  : ""
+			tblConsulta  : "",
+			$filaSeleccionada : ""
 		}
 		/* ---------- Construcción de tabla ---------- */
 		$.fn.dataTable.ext.errMode = 'none';
@@ -68,6 +69,18 @@ $(document).ready(function() {
 	$local.$tblConsulta.find("thead").on('change', 'select', function() {
 		var val = $.fn.dataTable.util.escapeRegex($(this).val());
 		$local.tblConsulta.column($(this).parent().index() + ':visible').search(val ? '^' + val + '$' : '', true, false).draw();
+	});
+	
+	$local.$tblConsulta.children("tbody").on("click", ".actualizar", function() {
+		
+		$local.$filaSeleccionada = $(this).parents("tr");
+		console.log($local.$filaSeleccionada)
+//		var alumno = $local.tablaMantenimiento.row($local.$filaSeleccionada).data();
+//		$local.idAlumnoSeleccionado = alumno.idAlumno;
+//		$funcionUtil.llenarFormulario(alumno, $formMantenimiento);
+//		$local.$actualizarMantenimiento.removeClass("hidden");
+//		$local.$registrarMantenimiento.addClass("hidden");
+//		$local.$modalMantenimiento.PopupWindow("open");
 	});
 	/* ------ fin Construcción de tablas ------------ */ 
 	
