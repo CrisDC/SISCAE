@@ -7,7 +7,7 @@ import java.sql.Date;
 import lombok.Data;
 
 @Data
-public class RegistroSolicitanteNuevo {
+public class Solicitante {
 	int idTipoDocumentoSolicitante;
     String numDocumentoSolicitante;
     String appPaterno;

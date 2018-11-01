@@ -56,6 +56,7 @@ public enum Dato
     ALUMNO(""),
     FACULTAD(""),
     ESCUELA(""),
+    SOLICITANTE(""),
     MATERIAL(""),
     MULTI_TAB_CAB(""),
     MULTI_TAB_DET(""),

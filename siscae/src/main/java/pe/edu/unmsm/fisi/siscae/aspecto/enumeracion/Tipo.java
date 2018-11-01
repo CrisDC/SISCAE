@@ -23,6 +23,7 @@ public enum Tipo
     PRESTAMO("Prestamo"),
     PRESTAMO_DETALLE("Detalle de prestamo"),
     ESTADO_TABLA("Estado de tablas"),
+    SOLICITANTE("Solicitantes"),
     
     ROL("Rol"),
     

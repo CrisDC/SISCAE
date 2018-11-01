@@ -7,12 +7,13 @@ import org.apache.ibatis.annotations.Select;
 import org.apache.ibatis.mapping.StatementType;
 
 import pe.edu.unmsm.fisi.siscae.mapper.base.IMantenibleMapper;
-import pe.edu.unmsm.fisi.siscae.model.mantenimiento.RegistroSolicitanteNuevo;
+import pe.edu.unmsm.fisi.siscae.model.mantenimiento.Solicitante;
 import pe.edu.unmsm.fisi.siscae.model.parametro.Parametro;
 
-public interface IRegistroSolicitanteNuevoMapper extends IMantenibleMapper<RegistroSolicitanteNuevo> {
+public interface ISolicitanteMapper extends IMantenibleMapper<Solicitante> {
 
-	@Select(value = { "{call SP_REGISTRAR_SOLICITANTE ("
+	@Select(value = { "{call SP_MANT_SOLICITANTE ("
+			+ "#{operacion, jdbcType = VARCHAR, mode = IN},"
             + "#{objeto.idTipoDocumentoSolicitante, jdbcType = INTEGER, mode = IN},"
             + "#{objeto.numDocumentoSolicitante, jdbcType = VARCHAR, mode = IN},"
             + "#{objeto.appPaterno, jdbcType = VARCHAR, mode = IN},"
@@ -27,7 +28,7 @@ public interface IRegistroSolicitanteNuevoMapper extends IMantenibleMapper<Regis
             + "#{objeto.codigoAlumno, jdbcType = VARCHAR, mode = IN},"
 			+ "#{objeto.usuario, jdbcType = VARCHAR, mode = IN})}" })
     @Options(statementType = StatementType.CALLABLE)
-    public List<RegistroSolicitanteNuevo> mantener(Parametro parametro);
+    public List<Solicitante> mantener(Parametro parametro);
 }
 
 
