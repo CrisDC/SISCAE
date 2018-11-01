@@ -214,27 +214,27 @@
 											<label>Lista de los solicitantes sancionados</label>
 
 											<table id="tblSancionados" class="table table-bordered table-striped">
-												<thead>
-													<tr>
-														<th>Codigo</th>
-														<th>Apellidos</th>
-														<th>Nombre</th>
-														<th>Fecha de sanción</th>
-														<th>Tiempo restante</th>
-														<th>Tipo de solicitante</th>
-													</tr>
-												</thead>
-												<tbody>
-													<th:block th:if="${existenSancionados} == 1" th:each="sancionado : ${sancionados}">
-														<tr  style="background-color: #fff;">
-															<td th:text="${sancionado.docIdentificador}" style="color: #67757C;"></td>
-															<td th:text="${sancionado.appPaterno} + ' ' + ${sancionado.appMaterno}" style="color:#67757C;" ></td>											
-															<td th:text="${sancionado.nombre}" style="color:#67757C;" ></td>
-															<td th:text="${sancionado.fechaRegistro}" style="color: #67757C;" ></td>
-															<td th:text="${sancionado.tiempoRestante}" style="color: #67757C;" ></td>
-															<td th:text="${sancionado.tipoSolicitante}" style="color: #67757C;" ></td>
-														</tr>
-													 </th:block> 
+<!-- 												<thead> -->
+<!-- 													<tr> -->
+<!-- 														<th>Codigo</th> -->
+<!-- 														<th>Apellidos</th> -->
+<!-- 														<th>Nombre</th> -->
+<!-- 														<th>Fecha de sanción</th> -->
+<!-- 														<th>Tiempo restante</th> -->
+<!-- 														<th>Tipo de solicitante</th> -->
+<!-- 													</tr> -->
+<!-- 												</thead> -->
+<!-- 												<tbody> -->
+<!-- 													<th:block th:if="${existenSancionados} == 1" th:each="sancionado : ${sancionados}"> -->
+<!-- 														<tr  style="background-color: #fff;"> -->
+<!-- 															<td th:text="${sancionado.docIdentificador}" style="color: #67757C;"></td> -->
+<!-- 															<td th:text="${sancionado.appPaterno} + ' ' + ${sancionado.appMaterno}" style="color:#67757C;" ></td>											 -->
+<!-- 															<td th:text="${sancionado.nombre}" style="color:#67757C;" ></td> -->
+<!-- 															<td th:text="${sancionado.fechaRegistro}" style="color: #67757C;" ></td> -->
+<!-- 															<td th:text="${sancionado.tiempoRestante}" style="color: #67757C;" ></td> -->
+<!-- 															<td th:text="${sancionado.tipoSolicitante}" style="color: #67757C;" ></td> -->
+<!-- 														</tr> -->
+<!-- 													 </th:block>  -->
 													<!-- Fin bucle individual  -->
 													
 												</tbody>
