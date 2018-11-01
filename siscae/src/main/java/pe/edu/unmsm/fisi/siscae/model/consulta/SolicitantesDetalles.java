@@ -24,5 +24,5 @@ public class SolicitantesDetalles {
 	String escuela;
 	String solicitante;
 	String numDocumento;
-	
+	String tipoDocumento;
 }

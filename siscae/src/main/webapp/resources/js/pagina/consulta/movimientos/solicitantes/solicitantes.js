@@ -289,14 +289,19 @@ $(document).ready(function() {
     	$('#codigo').val('');
     	$('#escuela').val(-1);
     	let valor = $("#formulario-ocupacion option:selected").text();
-        if(valor=='ALUMNO'){
+    	if(valor=='ALUMNO'){
         	$('#formulario-tipo-academico').css('display', 'block');
         	$('#formulario-codigo').css('display', 'block');
         	$('#formulario-escuela').css('display', 'block');
+        	$('#ocupacion-estirado').removeClass("col-md-12");
+        	$('#ocupacion-estirado').addClass("col-md-6");
+        	
         }else{
         	$('#formulario-tipo-academico').css('display', 'none');
     	    $('#formulario-codigo').css('display', 'none');
     	    $('#formulario-escuela').css('display', 'none');
+    	    $('#ocupacion-estirado').removeClass("col-md-6");
+        	$('#ocupacion-estirado').addClass("col-md-12");
         }
     });
     $(document).on('click', '.actualizar-soli', function (event) {
@@ -327,11 +332,39 @@ $(document).ready(function() {
 		    	$('#ocupacion').val(response[0].solicitante).trigger('change.select2');
 		    	$('#tipoDocumento').val(1).trigger('change.select2');
 		    	$('#codigo').val(response[0].codigo);
-		    	$('#escuela').val(response[0].escuela).trigger('change.select2');
 		    	
-		    	$('#modalNuevoSolicitante').modal('show');
-		    	let valor = $("#formulario-ocupacion option:selected").text();
-		    	if(valor=='ALUMNO'){
+		    
+		        //Asignando a select2 la el valor que esta en la bd
+		        $("#escuela option").each(function() {
+		        	let num = $(this).val()
+		        	$('#escuela').val(num).trigger('change.select2');
+		        	let valor = $('#escuela :selected').text();
+		        	if(response[0].escuela==valor){
+		        		return false;
+		        	}
+		        });
+		        //Asignando a select2 la el valor que esta en la bd
+		        $("#tipoAcademico option").each(function() {
+		        	let num = $(this).val()
+		        	$('#tipoAcademico').val(num).trigger('change.select2');
+		        	let valor = $('#tipoAcademico :selected').text();
+		        	if(response[0].tipoAcademico==valor){
+		        		return false;
+		        	}
+		        });
+		        //Asignando a select2 la el valor que esta en la bd
+		        $("#tipoDocumento option").each(function() {
+		        	let num = $(this).val()
+		        	$('#tipoDocumento').val(num).trigger('change.select2');
+		        	let valor = $('#tipoDocumento :selected').text();
+		        	if(response[0].tipoDocumento==valor){
+		        		return false;
+		        	}
+		        });
+		        
+		        let valorSeleccionado = $("#formulario-ocupacion option:selected").text();
+		        
+		        if(valorSeleccionado=='ALUMNO'){
 		        	$('#formulario-tipo-academico').css('display', 'block');
 		        	$('#formulario-codigo').css('display', 'block');
 		        	$('#formulario-escuela').css('display', 'block');
@@ -344,9 +377,14 @@ $(document).ready(function() {
 		    	    $('#formulario-escuela').css('display', 'none');
 		    	    $('#ocupacion-estirado').removeClass("col-md-6");
 		        	$('#ocupacion-estirado').addClass("col-md-12");
+		        	$('#tipoAcademico').val(-1).trigger('change.select2');
+		        	$('#escuela').val(-1).trigger('change.select2');
 		        }
 		        $('#tituloModalSolicitantes').text('Modificacion de solicitante');
 		        $("#enviar").html('ACTUALIZAR');
+		        
+		        $('#modalNuevoSolicitante').modal('show');
+		    	
 			}
 
 		});        
@@ -354,7 +392,7 @@ $(document).ready(function() {
     $(document).on('click', '.eliminar-soli', function (event) {
         swal({
 			  title: "¿Deseas eliminar?",
-			  text: "Eliminará al solicitante "+tdNumDocumento+" - "+tdNombre+" "+" "+tdAppPaterno+" "+tdAppMaterno,
+			  text: "Eliminará al solicitante "+tdNombre+" "+" "+tdAppPaterno+" "+tdAppMaterno+" con documento "+tdNumDocumento,
 			  icon: "warning",
 			  buttons: true,
 			  dangerMode: true,

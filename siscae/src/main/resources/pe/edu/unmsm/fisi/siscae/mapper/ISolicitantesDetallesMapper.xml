@@ -12,7 +12,8 @@
 				escuela,
 				estado,
 				solicitante,
-				num_documento
+				num_documento,
+				tipo_documento
 		  FROM vw_solicitantes 
 	</sql>
 
