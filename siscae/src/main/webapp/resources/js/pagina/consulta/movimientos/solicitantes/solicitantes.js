@@ -1,12 +1,20 @@
 $(document).ready(function() {
 	
+	var tdCodigo
+	var tdAppPaterno
+	var tdAppMaterno
+	var tdNombre
+	var tdNumDocumento
+	var tdEscuela
+	var tdTipo
+	 
 	var $local = {
 			$tblConsulta : $("#tblSolicitantes"),
 			tblConsulta  : "",
 			$filaSeleccionada : ""
-		}
-		/* ---------- Construcción de tabla ---------- */
-		$.fn.dataTable.ext.errMode = 'none';
+	}
+	/* ---------- Construcción de tabla ---------- */
+	$.fn.dataTable.ext.errMode = 'none';
 
 	$local.$tblConsulta.on('xhr.dt', function(e, settings, json, xhr) {
 		switch (xhr.status) {
@@ -71,19 +79,20 @@ $(document).ready(function() {
 		$local.tblConsulta.column($(this).parent().index() + ':visible').search(val ? '^' + val + '$' : '', true, false).draw();
 	});
 	
-	$local.$tblConsulta.children("tbody").on("click", ".actualizar", function() {
-		
-		$local.$filaSeleccionada = $(this).parents("tr");
-		console.log($local.$filaSeleccionada)
-//		var alumno = $local.tablaMantenimiento.row($local.$filaSeleccionada).data();
-//		$local.idAlumnoSeleccionado = alumno.idAlumno;
-//		$funcionUtil.llenarFormulario(alumno, $formMantenimiento);
-//		$local.$actualizarMantenimiento.removeClass("hidden");
-//		$local.$registrarMantenimiento.addClass("hidden");
-//		$local.$modalMantenimiento.PopupWindow("open");
-	});
 	/* ------ fin Construcción de tablas ------------ */ 
-	
+	 $('#tblSolicitantes').on('click', 'button', function(){
+		 let padre = $(this).parents('td');
+		 let hermanos = $(padre[0]).siblings('td');
+		 tdCodigo = hermanos[0].textContent
+		 tdAppPaterno = hermanos[1].textContent
+		 tdAppMaterno = hermanos[2].textContent
+		 tdNombre = hermanos[3].textContent
+		 tdNumDocumento = hermanos[4].textContent
+		 tdEscuela = hermanos[5].textContent
+		 tdTipo = hermanos[6].textContent
+	 });
+	 
+	 
 	var operacion;
 	var idPersona;
 	var exito;
@@ -217,7 +226,7 @@ $(document).ready(function() {
     				
     				if(operacion=='INSERT'){
     					
-    					var registroSolicitanteNuevo ={
+    					var registroSolicitanteNuevo = {
             		        	"idTipoDocumentoSolicitante": idTipoDocumentoSolicitante,
             		        	"numDocumentoSolicitante": numDocumentoSolicitante,
             		        	"appPaterno": appPaterno,
@@ -340,15 +349,11 @@ $(document).ready(function() {
     	    $('#formulario-codigo').css('display', 'none');
     	    $('#formulario-escuela').css('display', 'none');
         }
-        $('#tituloModalSolicitantes').text('Modificacion de solicitante');
-    	$("#enviar").html('ACTUALIZAR');
     });
     $(document).on('click', '.actualizar-soli', function (event) {
         event.preventDefault();
-        let numDocumento = $(this).attr('person');
-        idPersona = $(this).attr('key');
         $.ajax({
-            url :  $variableUtil.root + "solicitantesDetalles?accion=buscarPorCriterio2&numDocumento="+numDocumento,
+            url :  $variableUtil.root + "solicitantesDetalles?accion=buscarPorCriterio2&numDocumento="+tdNumDocumento,
             type : 'GET',
             beforeSend : function(xhr) {
 				xhr.setRequestHeader('Content-Type', 'application/json');
@@ -374,7 +379,7 @@ $(document).ready(function() {
 		    	$('#tipoDocumento').val(1).trigger('change.select2');
 		    	$('#codigo').val(response[0].codigo);
 		    	$('#escuela').val(response[0].escuela).trigger('change.select2');
-		    	$("#enviar").html('ACTUALIZAR');
+		    	
 		    	$('#modalNuevoSolicitante').modal('show');
 		    	let valor = $("#formulario-ocupacion option:selected").text();
 		        if(valor=='ALUMNO'){
@@ -387,7 +392,7 @@ $(document).ready(function() {
 		    	    $('#formulario-escuela').css('display', 'none');
 		        }
 		        $('#tituloModalSolicitantes').text('Modificacion de solicitante');
-		        
+		        $("#enviar").html('ACTUALIZAR');
 			}
 
 		}, function (dismiss) {
@@ -397,27 +402,17 @@ $(document).ready(function() {
 		});        
     });
     $(document).on('click', '.eliminar-soli', function (event) {
-    	let numDocumento = $(this).attr('person');
-    	let ap = $(this).attr('ap');
-    	let am = $(this).attr('am');
-    	let nom = $(this).attr('nom');
-        idPersona = $(this).attr('key');
         swal({
 			  title: "¿Deseas eliminar?",
-			  text: "Eliminará al solicitante "+numDocumento+" - "+ap+" "+" "+am+" "+nom,
+			  text: "Eliminará al solicitante "+tdNumDocumento+" - "+tdNombre+" "+" "+tdAppPaterno+" "+tdAppMaterno,
 			  icon: "warning",
 			  buttons: true,
 			  dangerMode: true,
 			})
 			.then((willDelete) => {
 			  if (willDelete) {
-				  
-				  
 				  alert("jajaja bueno esto aun falta xD")
-			    
 			  }
-		
-			
 		});
     });
 });
