@@ -224,10 +224,9 @@ $(document).ready(function() {
     			
     			if(validar_formulario.form()){
     				
-    				if(operacion=='INSERT'){
-    					
     					var registroSolicitanteNuevo = {
-            		        	"idTipoDocumentoSolicitante": idTipoDocumentoSolicitante,
+            		        	"operacion" : operacion,
+    							"idTipoDocumentoSolicitante": idTipoDocumentoSolicitante,
             		        	"numDocumentoSolicitante": numDocumentoSolicitante,
             		        	"appPaterno": appPaterno,
             		        	"appMaterno": appMaterno,
@@ -256,67 +255,17 @@ $(document).ready(function() {
             				success : function(response) {
             					
             					swal({
-            						  title: "Registro de solicitante",
-            						  text: "Realizado con exito",
-            						  icon: "success",
-            						  button: false,
-            						  timer: 1000,
-            						}).then((value) => {
-            							location.reload();
-            						});
+            						title: "Registro de solicitante",
+            					  	text: "Realizado con exito",
+            					  	icon: "success",
+            					  	button: false,
+            					  	timer: 1000,
+            					}).then((value) => {
+            						location.reload();
+            					});
             				}
 
-            			}, function (dismiss) {
-            			  // dismiss can be 'cancel', 'overlay',
-            			  // 'close', and 'timer'
-            			  
             			});
-    					
-            	    	console.log(operacion);
-    					
-    				}else if(operacion=='UPDATE'){
-    					
-    					console.log(operacion);
-    					
-    					var actualizarSolicitante ={
-            		        	"idPersona" : idPersona,
-    							"idTipoDocumento": idTipoDocumentoSolicitante,
-            		        	"numDocumento": numDocumentoSolicitante,
-            		        	"appPaterno": appPaterno,
-            		        	"appMaterno": appMaterno,
-            		        	"nombre": nombre
-            		    };
-            	    	$.ajax({
-            	            url :  $variableUtil.root + "persona",
-            	            type : 'PUT',
-            	            data : JSON.stringify(actualizarSolicitante),
-            	            beforeSend : function(xhr) {
-            					xhr.setRequestHeader('Content-Type', 'application/json');
-            					xhr.setRequestHeader("X-CSRF-TOKEN", $variableUtil.csrf);
-            				},
-            				statusCode : {
-            					400 : function(response) {
-            						swal(response.responseJSON);
-            					},
-            					500 : function(response) {
-            						swal("Error", response.responseText, "warning");
-            					}
-            				},
-            				success : function(response) {
-            					exito=true;
-            				}
-
-            			}, function (dismiss) {
-            			  // dismiss can be 'cancel', 'overlay',
-            			  // 'close', and 'timer'
-            			  
-            			});
-            	    	
-            	    	if(ocupacion=="ALUMNO"){
-    						
-    					}
-    				
-    				}
     				
     				
     			}else{
@@ -382,23 +331,24 @@ $(document).ready(function() {
 		    	
 		    	$('#modalNuevoSolicitante').modal('show');
 		    	let valor = $("#formulario-ocupacion option:selected").text();
-		        if(valor=='ALUMNO'){
+		    	if(valor=='ALUMNO'){
 		        	$('#formulario-tipo-academico').css('display', 'block');
 		        	$('#formulario-codigo').css('display', 'block');
 		        	$('#formulario-escuela').css('display', 'block');
+		        	$('#ocupacion-estirado').removeClass("col-md-12");
+		        	$('#ocupacion-estirado').addClass("col-md-6");
+		        	
 		        }else{
 		        	$('#formulario-tipo-academico').css('display', 'none');
 		    	    $('#formulario-codigo').css('display', 'none');
 		    	    $('#formulario-escuela').css('display', 'none');
+		    	    $('#ocupacion-estirado').removeClass("col-md-6");
+		        	$('#ocupacion-estirado').addClass("col-md-12");
 		        }
 		        $('#tituloModalSolicitantes').text('Modificacion de solicitante');
 		        $("#enviar").html('ACTUALIZAR');
 			}
 
-		}, function (dismiss) {
-		  // dismiss can be 'cancel', 'overlay',
-		  // 'close', and 'timer'
-		  
 		});        
     });
     $(document).on('click', '.eliminar-soli', function (event) {
@@ -423,10 +373,15 @@ $(document).on('change', '#formulario-ocupacion', function(event) {
     	$('#formulario-tipo-academico').css('display', 'block');
     	$('#formulario-codigo').css('display', 'block');
     	$('#formulario-escuela').css('display', 'block');
+    	$('#ocupacion-estirado').removeClass("col-md-12");
+    	$('#ocupacion-estirado').addClass("col-md-6");
+    	
     }else{
     	$('#formulario-tipo-academico').css('display', 'none');
 	    $('#formulario-codigo').css('display', 'none');
 	    $('#formulario-escuela').css('display', 'none');
+	    $('#ocupacion-estirado').removeClass("col-md-6");
+    	$('#ocupacion-estirado').addClass("col-md-12");
     }
 });
 

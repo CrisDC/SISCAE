@@ -43,42 +43,6 @@
 											</div>
 										</div>
 										<table id="tblSolicitantes" class="table table-bordered table-striped">
-<!-- 											<thead> -->
-<!-- 												<tr> -->
-<!-- 													<th>Codigo</th> -->
-<!-- 													<th>A Paterno</th> -->
-<!-- 													<th>A Materno</th> -->
-<!-- 													<th>Nombres</th> -->
-<!-- 													<th>Documento</th> -->
-<!-- 													<th>Escuela</th> -->
-<!-- 													<th>Tipo</th> -->
-<!-- 													<th></th> -->
-<!-- 												</tr> -->
-<!-- 											</thead> -->
-<!-- 											<tbody> -->
-<!-- 												<tr th:each="solicitante : ${solicitantes}" -->
-<!-- 													style="background-color: #fff" -->
-<!-- 													th:class="fila-personalizada"> -->
-<!-- 													<td th:text="${solicitante.codigo}" style="color: #67757C;"></td> -->
-<!-- 													<td th:text="${solicitante.appPaterno}" -->
-<!-- 														style="color: #67757C;"></td> -->
-<!-- 													<td th:text="${solicitante.appMaterno}" -->
-<!-- 														style="color: #67757C;"></td> -->
-<!-- 													<td th:text="${solicitante.nombre}" style="color: #67757C;"></td> -->
-<!-- 													<td th:text="${solicitante.numDocumento}" -->
-<!-- 														style="color: #67757C;"></td> -->
-<!-- 													<td th:text="${solicitante.escuela}" -->
-<!-- 														style="color: #67757C;"></td> -->
-<!-- 													<td th:text="${solicitante.solicitante}" -->
-<!-- 														style="color: #67757C;"></td> -->
-<!-- 													<td><button th:person="${solicitante.numDocumento}" th:key="${solicitante.idPersona}" class="btn btn-success actualizar-soli"> -->
-<!-- 															<i class="fa fa-cog"></i> -->
-<!-- 														</button> -->
-<!-- 														<button th:person="${solicitante.numDocumento}" th:key="${solicitante.idPersona}" th:nom="${solicitante.nombre}"  th:am="${solicitante.appMaterno}" th:ap="${solicitante.appPaterno}" class="btn btn-danger eliminar-soli"> -->
-<!-- 															<i class="fa fa-trash-o"></i> -->
-<!-- 														</button></td> -->
-<!-- 												</tr> -->
-<!-- 											</tbody> -->
 										</table>
 									</div>
 								</div>
@@ -104,26 +68,31 @@
 					</div>
 					<div class="modal-body">
 						<form class="p-t-0 m-b-0" id="solicitantesFormulario">
-						<div class="form-group m-b-10" name="formulario-ocupacion"
-							id="formulario-ocupacion">
-							<label>Ocupacion</label>
-							<div class="input-group">
-								<select class="form-control js-example-basic-single" required
-									id="ocupacion" name="ocupacion" style="width: 100%">
-									<option value="-1"></option>
-									<option value="ALUMNO">ALUMNO</option>
-									<option value="DOCENTE">DOCENTE</option>
-									<option value="EXTERNO">OTRO</option>
-								</select>
+						<div class="row">
+							<div class="col-md-12" id="ocupacion-estirado">
+								<div class="form-group m-b-10" name="formulario-ocupacion" id="formulario-ocupacion">
+									<label>Ocupacion</label>
+									<div class="input-group">
+										<select class="form-control js-example-basic-single" required
+											id="ocupacion" name="ocupacion" style="width: 100%">
+											<option value="-1"></option>
+											<option value="ALUMNO">ALUMNO</option>
+											<option value="DOCENTE">DOCENTE</option>
+											<option value="EXTERNO">OTRO</option>
+										</select>
+									</div>
+								</div>
+							</div>
+							<div class="col-md-6">
+								<div class="form-group m-b-10" id="formulario-codigo" name="formulario-codigo">
+									<label>Codigo de alumno</label>
+									<div class="input-group">
+										 <input id="codigo" name="codigo" type="number" class="form-control">
+									</div>
+								</div>
 							</div>
 						</div>
-						<div class="form-group m-b-10" id="formulario-codigo"
-							name="formulario-codigo">
-							<label>Codigo de alumno</label> <input id="codigo" name="codigo"
-								type="number" class="form-control">
-						</div>
-						<div class="form-group m-b-10" id="formulario-escuela"
-							name="formulario-escuela">
+						<div class="form-group m-b-10" id="formulario-escuela" name="formulario-escuela">
 							<label>Escuela</label>
 							<div class="input-group">
 								<select class="form-control js-example-basic-single" style="width: 100%"
@@ -169,21 +138,26 @@
 							</div>
 
 						</div>
-						<div class="form-group m-b-10">
-							<label>Apellido Paterno</label>
-							<div class="input-group">
-								<input type="text" class="form-control" id="appPaterno" required
-									name="appPaterno">
+						<div class="row">
+							<div class="col-md-6">
+								<div class="form-group m-b-10">
+									<label>Apellido Paterno</label>
+									<div class="input-group">
+										<input type="text" class="form-control" id="appPaterno" required
+											name="appPaterno">
+									</div>
+		
+								</div>
 							</div>
-
-						</div>
-						<div class="form-group m-b-10">
-							<label>Apellido Materno</label>
-							<div class="input-group">
-								<input type="text" class="form-control" id="appMaterno" required
-									name="appMaterno">
+							<div class="col-md-6">
+								<div class="form-group m-b-10">
+									<label>Apellido Materno</label>
+									<div class="input-group">
+										<input type="text" class="form-control" id="appMaterno" required
+											name="appMaterno">
+									</div>
+								</div>
 							</div>
-
 						</div>
 						<div class="form-group m-b-10">
 							<label>Nombres</label>
