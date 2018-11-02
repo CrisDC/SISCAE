@@ -29,7 +29,14 @@
 		</where>
 	</select>
 
-	
+	<select id="buscarPorCriterio" resultType="ConsultaAdministrativo">
+		<include refid="fragmentoSelectBuscarConsultaAdministrativo" />
+		<where>
+			<if test="usuario != null and usuario != '-1'">
+				VW_CON_ADMINISTRATIVO_USUARIO.usuario = #{usuario}
+			</if>
+		</where>
+	</select>
 
 
 </mapper>
