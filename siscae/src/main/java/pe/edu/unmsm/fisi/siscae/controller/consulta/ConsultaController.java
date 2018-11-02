@@ -168,18 +168,12 @@ public @Controller class ConsultaController {
 				break;
 			}
 		}
-
-		AreaAdministrativo areaAdministrativo = null;
-		List<AreaAdministrativo> listaAreaAdministrativo = areaAdministrativoService.buscarTodos();
-		for (int i = 0; i < listaAreaAdministrativo.size(); i++) {
-			if (listaAreaAdministrativo.get(i).getIdAdministrativo() == usuario.getIdPersona()) {
-				areaAdministrativo = listaAreaAdministrativo.get(i);
-				break;
-			}
-		}
+		ConsultaAdministrativoCriterioBusqueda criterioBusqueda2 = new ConsultaAdministrativoCriterioBusqueda();
+		criterioBusqueda2.setUsuario(SecurityContextFacade.obtenerNombreUsuario());
+		List<ConsultaAdministrativo> listaAdministrativoUsuario = consultaAdministrativoService.buscarPorCriterio(criterioBusqueda2);
 		
 		ConsultaPrestamosCriterioBusqueda criterioBusqueda = new ConsultaPrestamosCriterioBusqueda();
-		criterioBusqueda.setAreaEstudio(areaAdministrativo.getNombreAreaEstudio());
+		criterioBusqueda.setAreaEstudio(listaAdministrativoUsuario.get(0).getAreaEstudio());
 		
 		List<PrestamoRecursoTabla> listaRecursosTabla = consultaPrestamosTablaService.buscarPorCriterio(criterioBusqueda);
 		
@@ -234,7 +228,7 @@ public @Controller class ConsultaController {
 		model.addAttribute("infraccionesDetalle", infraccionesDetalle);
 		model.addAttribute("sancionados", sancionados);
 		model.addAttribute("existenSancionados", existenSancionados);
-		model.addAttribute("areaAdministrativo", areaAdministrativo);
+		model.addAttribute("areaAdministrativo", listaAdministrativoUsuario.get(0));
 		model.addAttribute("tipoInfracciones", tiposInfracciones);
 		model.addAttribute("consulta", consulta);
 		model.addAttribute("existenGrupales", existenGrupales);

@@ -14,7 +14,7 @@
 			<div th:if="(${areaAdministrativo.cargo} != 'SOLICITANTE')" class="row page-titles">
 				<div class="col-md-5 align-self-center">
 					<h3
-						th:text="'Infracciones y sanciones en la ' + ${areaAdministrativo.nombreAreaEstudio.toLowerCase()}"
+						th:text="'Infracciones y sanciones en la ' + ${areaAdministrativo.areaEstudio.toLowerCase()}"
 						class="text-primary"></h3>
 				</div>
 				<div class="col-md-7 align-self-center">
@@ -62,7 +62,7 @@
 									<div class="tab-pane active" id="infraccion" role="tabpanel">
 										<div class="p-20">
 											<div class="card-body">
-												<h3 >Registro de infraccion por modulo</h3>
+												<h3 >Registro de infracciones</h3>
 												
 												<label th:if="${existenIndividuales} == 1" >Recursos individuales</label>
 												<div class="row" id="recursosOcupados">
@@ -73,18 +73,18 @@
 															 class = "recurso">
 															
 															<img
-																th:if="(${prestamo.estado} == 'OCUPADO') and (${areaAdministrativo.nombreAreaEstudio} == 'BIBLIOTECA')"
+																th:if="(${prestamo.estado} == 'OCUPADO') and (${areaAdministrativo.areaEstudio} == 'BIBLIOTECA')"
 																th:src="@{/resources/images/cubo_rojo.png}" width="40" height="40"> 
 															<img
-																th:if="(${prestamo.estado} == 'LIBERABLE') and (${areaAdministrativo.nombreAreaEstudio} == 'BIBLIOTECA')"
+																th:if="(${prestamo.estado} == 'LIBERABLE') and (${areaAdministrativo.areaEstudio} == 'BIBLIOTECA')"
 																th:src="@{/resources/images/cubo_amarillo.png}" width="40" height="40">
 																	
 															<img
-																th:if="((${prestamo.estado} == 'OCUPADO') or (${prestamo.estado} == 'LIBERABLE')) and (${areaAdministrativo.nombreAreaEstudio} == 'VIDEOTECA')"
+																th:if="((${prestamo.estado} == 'OCUPADO') or (${prestamo.estado} == 'LIBERABLE')) and (${areaAdministrativo.areaEstudio} == 'VIDEOTECA')"
 																th:src="@{/resources/images/pantalla.png}" width="40" height="40">
 																	
 															<img
-																th:if="((${prestamo.estado} == 'OCUPADO') or (${prestamo.estado} == 'LIBERABLE')) and (${areaAdministrativo.nombreAreaEstudio} == 'SALA GRUPAL')"
+																th:if="((${prestamo.estado} == 'OCUPADO') or (${prestamo.estado} == 'LIBERABLE')) and (${areaAdministrativo.areaEstudio} == 'SALA GRUPAL')"
 																th:src="@{/resources/images/mesa.png}" width="100" height="100">
 																			
 															<p 	th:if = "(${prestamo.estado} == 'OCUPADO') or (${prestamo.estado} == 'LIBERABLE')"
@@ -98,7 +98,7 @@
 																th:text="LIBERABLE" class="liberable">
 															</p>
 																			
-															<p 	th:if="((${prestamo.estado} == 'OCUPADO') or (${prestamo.estado} == 'LIBERABLE')) and (${areaAdministrativo.nombreAreaEstudio} == 'SALA GRUPAL')" 
+															<p 	th:if="((${prestamo.estado} == 'OCUPADO') or (${prestamo.estado} == 'LIBERABLE')) and (${areaAdministrativo.areaEstudio} == 'SALA GRUPAL')" 
 																th:text="'Capacidad 0/' + ${prestamo.maxCapacidad}">
 															</p>
 																		
