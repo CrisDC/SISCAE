@@ -56,6 +56,8 @@ public @RestController class SolicitanteController {
 		if (error.hasErrors()) {
 			throw new BadRequestException(ValidatorUtil.obtenerMensajeValidacionError(error));
 		}
+		Solicitante.setUsuario(SecurityContextFacade.obtenerNombreUsuario());
+		Solicitante.setNumDocumentoSolicitante(Solicitante.getNumDocumentoSolicitante().trim());
 		SolicitanteService.actualizarSolicitante(Solicitante);
 		return ResponseEntity.ok(ConstantesGenerales.ACTUALIZACION_EXITOSA);
 	}
@@ -67,6 +69,7 @@ public @RestController class SolicitanteController {
 		if (error.hasErrors()) {
 			throw new BadRequestException(ValidatorUtil.obtenerMensajeValidacionError(error));
 		}
+		Solicitante.setNumDocumentoSolicitante(Solicitante.getNumDocumentoSolicitante().trim());
 		SolicitanteService.eliminarSolicitante(Solicitante);
 		return ResponseEntity.ok(ConstantesGenerales.ELIMINACION_EXITOSA);
 	}
