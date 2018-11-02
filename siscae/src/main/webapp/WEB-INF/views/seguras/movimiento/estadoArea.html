@@ -17,7 +17,7 @@
 			<div th:if="(${areaAdministrativo.cargo} != 'SOLICITANTE')" class="row page-titles">
 				<div class="col-md-5 align-self-center">
 					<h3
-						th:text="'Estado de la ' + ${areaAdministrativo.nombreAreaEstudio.toLowerCase()}"
+						th:text="'Estado de la ' + ${areaAdministrativo.areaEstudio.toLowerCase()}"
 						class="text-primary"></h3>
 				</div>
 				<div class="col-md-7 align-self-center">
@@ -142,51 +142,7 @@
 											
 											<label>Detalle los recursos</label>
 
-											<table id="tblRecursos" class="table table-bordered table-striped">
-<!-- 												<thead> -->
-<!-- 													<tr> -->
-<!-- 														<th>Recurso</th> -->
-<!-- 														<th>Estado</th> -->
-<!-- 														<th>Codigo</th> -->
-<!-- 														<th>Nombre</th> -->
-<!-- 														<th>Apellidos</th> -->
-<!-- 														<th>Hora de entrada</th> -->
-<!-- 														<th>Tiempo restante</th> -->
-<!-- 													</tr> -->
-<!-- 												</thead> -->
-<!-- 												<tbody> -->
-<!-- 													Iteracion para recursos individuales -->
-<!-- 													<th:block th:each="prestamo : ${recursosTabla}"> -->
-<!-- 														<tr th:if="${prestamo.maxCapacidad} == 1" style="background-color: #fff;"> -->
-<!-- 															<td th:text="${prestamo.tipoRecurso}+' '+${prestamo.numero}" style="color: #67757C;"></td> -->
-<!-- 															<td th:if="${prestamo.estado} == 'DISPONIBLE'"><span class="badge badge-primary">DISPONIBLE</span></td> -->
-<!-- 															<td th:if="${prestamo.estado} == 'OCUPADO'"><span class="badge badge-danger">OCUPADO</span></td> -->
-<!-- 															<td th:if="${prestamo.estado} == 'LIBERABLE'"><span class="badge badge-warning">LIBERABLE</span></td> -->
-<!-- 															<td th:text="${prestamo.cantidadPrestamos}==0  ? '' : ${prestamo.codigoAlumno}" style="color: #67757C;"></td> -->
-<!-- 															<td th:text="${prestamo.cantidadPrestamos}==0  ? '' : ${prestamo.nombre}" style="color:#67757C;" ></td> -->
-<!-- 															<td th:text="${prestamo.cantidadPrestamos}==0  ? '' : ${prestamo.appPaterno} + ' ' + ${prestamo.appMaterno}" style="color:#67757C;" ></td> -->
-<!-- 															<td th:text="${prestamo.cantidadPrestamos}==0 ? '' : ${prestamo.horaEntrada}" style="color: #67757C;" ></td> -->
-<!-- 															<td th:text="${prestamo.cantidadPrestamos}==0  ? '' : ${#dates.format(#dates.createNow(),'YYYY/MM/dd HH:mm')}" style="color: #67757C;" ></td> -->
-<!-- 														</tr> -->
-<!-- 													 </th:block>  -->
-<!-- 													Fin bucle individual  -->
-													
-<!-- 													Iteracion para recursos grupales -->
-<!-- 													<th:block th:each="detalle : ${recursosTabla}" > -->
-<!-- 															<tr th:if="${detalle.maxCapacidad} != 1"style="background-color: #fff;"> -->
-<!-- 																<td th:if="((${detalle.orden} == 1) or (${detalle.cantidadPrestamos} == 0))"  th:text="${detalle.tipoRecurso} +' '+ ${detalle.numero}" th:rowspan="${detalle.cantidadPrestamos}==0  ? '1' : ${detalle.cantidadPrestamos}" style="color: #67757C;"></td> -->
-<!-- 																<td th:if="${detalle.estado} == 'DISPONIBLE'"><span class="badge badge-primary">DISPONIBLE</span></td> -->
-<!-- 																<td th:if="${detalle.estado} == 'OCUPADO'"><span class="badge badge-danger">OCUPADO</span></td> -->
-<!-- 																<td th:if="${detalle.estado} == 'LIBERABLE'"><span class="badge badge-warning">LIBERABLE</span></td> -->
-<!-- 																<td th:text="${detalle.cantidadPrestamos}==0  ? '' : ${detalle.codigoAlumno}" style="color: #67757C;"></td> -->
-<!-- 																<td th:text="${detalle.cantidadPrestamos}==0  ? '' : ${detalle.nombre}" style="color:#67757C;" ></td> -->
-<!-- 																<td th:text="${detalle.cantidadPrestamos}==0  ? '' : ${detalle.appPaterno} + ' ' + ${detalle.appMaterno}" style="color:#67757C;" ></td> -->
-<!-- 																<td th:text="${detalle.cantidadPrestamos}==0  ? '' : ${detalle.horaEntrada}" style="color: #67757C;" ></td> -->
-<!-- 																<td th:text="${detalle.cantidadPrestamos}==0  ? '' : ${#dates.format(#dates.createNow(),'YYYY/MM/dd HH:mm')}" style="color: #67757C;" ></td> -->
-<!-- 															</tr> -->
-<!-- 													</th:block> -->
-<!-- 													Fin bucle grupales -->
-<!-- 												</tbody> -->
+											<table id="tblRecursos" class="table-striped table-bordered" cellspacing="0" width="100%">												
 											</table>
 											
 											
@@ -389,8 +345,9 @@
 		<script th:src="@{/resources/js/datatables/jquery.dataTables.min.js}"></script>
 		<script th:src="@{/resources/js/datatables/dataTables.responsive.min.js}"></script>
 		<script th:src="@{/resources/js/datatables/dataTables.show.rows.js}"></script>
+		<script th:src="@{/resources/js/datatables/dataTables.rowsGroup.js}"></script>
 
-
+		
 		<!-- JS de envio de peticion -->
 		<script
 			th:src="@{/resources/js/pagina/consulta/movimientos/prestamos/prestamos.js}"></script>

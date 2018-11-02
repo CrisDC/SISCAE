@@ -17,11 +17,13 @@ import pe.edu.unmsm.fisi.siscae.aspecto.enumeracion.Comentario;
 import pe.edu.unmsm.fisi.siscae.aspecto.enumeracion.Tipo;
 import pe.edu.unmsm.fisi.siscae.configuracion.security.SecurityContextFacade;
 import pe.edu.unmsm.fisi.siscae.controller.excepcion.anotacion.Vista;
+import pe.edu.unmsm.fisi.siscae.model.consulta.ConsultaAdministrativo;
 import pe.edu.unmsm.fisi.siscae.model.consulta.ConsultaSancionados;
 import pe.edu.unmsm.fisi.siscae.model.consulta.InfraccionDetalle;
 import pe.edu.unmsm.fisi.siscae.model.consulta.PrestamoRecurso;
 import pe.edu.unmsm.fisi.siscae.model.consulta.PrestamoRecursoTabla;
 import pe.edu.unmsm.fisi.siscae.model.consulta.SolicitantesDetalles;
+import pe.edu.unmsm.fisi.siscae.model.criterio.ConsultaAdministrativoCriterioBusqueda;
 import pe.edu.unmsm.fisi.siscae.model.criterio.ConsultaPrestamosCriterioBusqueda;
 import pe.edu.unmsm.fisi.siscae.model.mantenimiento.AreaAdministrativo;
 import pe.edu.unmsm.fisi.siscae.model.mantenimiento.Escuela;
@@ -29,6 +31,7 @@ import pe.edu.unmsm.fisi.siscae.model.mantenimiento.MultiTabCab;
 import pe.edu.unmsm.fisi.siscae.model.mantenimiento.MultiTabDet;
 import pe.edu.unmsm.fisi.siscae.model.mantenimiento.Usuario;
 import pe.edu.unmsm.fisi.siscae.service.IAreaAdministrativoService;
+import pe.edu.unmsm.fisi.siscae.service.IConsultaAdministrativoService;
 import pe.edu.unmsm.fisi.siscae.service.IConsultaPrestamosService;
 import pe.edu.unmsm.fisi.siscae.service.IConsultaPrestamosTablaService;
 import pe.edu.unmsm.fisi.siscae.service.IConsultaSancionadosService;
@@ -60,38 +63,29 @@ public @Controller class ConsultaController {
 	private @Autowired IMultiTabDetService multiTabDetService;
 	private @Autowired IMultiTabCabService multiTabCabService;
 	private @Autowired ISolicitantesDetallesService solicitantesDetallesService;
+	private @Autowired IConsultaAdministrativoService consultaAdministrativoService; 
 	
 	private @Autowired IEscuelaService escuelaService;
 
 	@Audit(tipo = Tipo.CON_MOV_ESTADO_AREA)
 	@GetMapping("/{consulta:estadoArea}")
 	public String irPaginaConsultaPrestamosEstadoArea(@PathVariable String consulta, ModelMap model) {
-
-		List<Usuario> listaUsuario = usuarioService.buscarTodos();
-
-		Usuario usuario = null;
-		for (int i = 0; i < listaUsuario.size(); i++) {
-			if (listaUsuario.get(i).getIdUsuario() == SecurityContextFacade.getAuthenticatedUser().getIdUsuario()) {
-				usuario = listaUsuario.get(i);
-			}
-		}
 		
-		AreaAdministrativo areaAdministrativo = null;
-		List<AreaAdministrativo> listaAreaAdministrativo = areaAdministrativoService.buscarTodos();
-		for (int i = 0; i < listaAreaAdministrativo.size(); i++) {
-			if (listaAreaAdministrativo.get(i).getIdAdministrativo().equals(usuario.getIdPersona())) {
-				areaAdministrativo = listaAreaAdministrativo.get(i);
-			}
-		}
-
+		
+		ConsultaAdministrativoCriterioBusqueda criterioBusqueda2 = new ConsultaAdministrativoCriterioBusqueda();
+		criterioBusqueda2.setUsuario(SecurityContextFacade.obtenerNombreUsuario());
+		
+		List<ConsultaAdministrativo> listaAdministrativoUsuario = consultaAdministrativoService.buscarPorCriterio(criterioBusqueda2);
+		
 		ConsultaPrestamosCriterioBusqueda criterioBusqueda = new ConsultaPrestamosCriterioBusqueda();
-		criterioBusqueda.setAreaEstudio(areaAdministrativo.getNombreAreaEstudio());
+		criterioBusqueda.setAreaEstudio(listaAdministrativoUsuario.get(0).getAreaEstudio());
 		
 		List<PrestamoRecurso> listaRecursos = consultaPrestamosService.buscarPorCriterio(criterioBusqueda);
-		List<PrestamoRecursoTabla> listaRecursosTabla = consultaPrestamosTablaService.buscarPorCriterio(criterioBusqueda);
+		
 		
 		List<PrestamoRecurso> listaRecursosIndividuales = new ArrayList<>();
 		List<PrestamoRecurso> listaRecursosGrupales = new ArrayList<>();
+		
 		int existenGrupales=0;
 		int existenIndividuales=0;
 		
@@ -103,16 +97,6 @@ public @Controller class ConsultaController {
 			}
 		}
 		
-		int cont;
-		for(int i=0;i<listaRecursosGrupales.size();i++){
-			cont=1;
-			for(int j=0;j<listaRecursosTabla.size();j++){
-				if(listaRecursosGrupales.get(i).getIdRecurso()==listaRecursosTabla.get(j).getIdRecurso()){
-					listaRecursosTabla.get(j).setOrden(cont);
-					cont++;
-				}
-			}
-		}
 		Collections.sort(listaRecursosIndividuales);
 		Collections.sort(listaRecursosGrupales); 
 		if(listaRecursosIndividuales.size()!=0){
@@ -124,9 +108,7 @@ public @Controller class ConsultaController {
 		
 		model.addAttribute("recursosIndividuales", listaRecursosIndividuales);
 		model.addAttribute("recursosGrupales", listaRecursosGrupales);
-		model.addAttribute("recursosTabla", listaRecursosTabla);
-		model.addAttribute("consulta", consulta);
-		model.addAttribute("areaAdministrativo", areaAdministrativo);
+		model.addAttribute("areaAdministrativo", listaAdministrativoUsuario.get(0));
 		model.addAttribute("existenGrupales", existenGrupales);
 		model.addAttribute("existenIndividuales", existenIndividuales);
 		return CONSULTA_ESTADO_AREA;
@@ -136,23 +118,11 @@ public @Controller class ConsultaController {
 	@GetMapping("/{consulta:solicitantes}")
 	public String irPaginaConsultaNuevos(@PathVariable String consulta, ModelMap model) {
 		
-		//Busqueda del usuario - PROVISIONAL
-		ArrayList<Usuario> listaUsuario = (ArrayList) usuarioService.buscarTodos();
-		Usuario usuario = null;
-		for (int i = 0; i < listaUsuario.size(); i++) {
-			if (listaUsuario.get(i).getIdUsuario() == SecurityContextFacade.getAuthenticatedUser().getIdUsuario()) {
-				usuario = listaUsuario.get(i);
-			}
-		}
-
-		ArrayList<AreaAdministrativo> listaAreaAdministrativo = (ArrayList) areaAdministrativoService.buscarTodos();
-		AreaAdministrativo areaAdministrativo = null;	
-		for (int i = 0; i < listaAreaAdministrativo.size(); i++) {
-			if (listaAreaAdministrativo.get(i).getIdAdministrativo() == usuario.getIdPersona()) {
-				areaAdministrativo = listaAreaAdministrativo.get(i);
-			}
-		}
+		ConsultaAdministrativoCriterioBusqueda criterioBusqueda2 = new ConsultaAdministrativoCriterioBusqueda();
+		criterioBusqueda2.setUsuario(SecurityContextFacade.obtenerNombreUsuario());
 		
+		List<ConsultaAdministrativo> listaAdministrativoUsuario = consultaAdministrativoService.buscarPorCriterio(criterioBusqueda2);
+				
 		
 		//Cargando elementos a los combos
 		ArrayList<MultiTabCab> listaMultiCab = (ArrayList) multiTabCabService.buscarTodos();
@@ -181,8 +151,7 @@ public @Controller class ConsultaController {
 		model.addAttribute("tipoDocumentos", listaTipoDocumento);
 		model.addAttribute("tipoAcademicos", listaTipoAcademico);
 		model.addAttribute("escuelas", listaEscuelas);
-		model.addAttribute("consulta", consulta);
-		model.addAttribute("areaAdministrativo", areaAdministrativo);
+		model.addAttribute("areaAdministrativo", listaAdministrativoUsuario.get(0));
 		
 		return CONSULTA_SOLICITANTES;
 	}
