@@ -177,12 +177,10 @@ public @Controller class ConsultaController {
 		
 		ArrayList<Escuela> listaEscuelas = (ArrayList) escuelaService.buscarTodos();
 		
-		ArrayList<SolicitantesDetalles> listaSolicitantes = (ArrayList) solicitantesDetallesService.buscarTodos();
 		
 		model.addAttribute("tipoDocumentos", listaTipoDocumento);
 		model.addAttribute("tipoAcademicos", listaTipoAcademico);
 		model.addAttribute("escuelas", listaEscuelas);
-		model.addAttribute("solicitantes", listaSolicitantes);
 		model.addAttribute("consulta", consulta);
 		model.addAttribute("areaAdministrativo", areaAdministrativo);
 		

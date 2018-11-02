@@ -19,6 +19,7 @@ $(document).ready(function() {
 		posIzquierdo : "izquierdo",
 		posDerecho : "derecho",
 		rutaIconoSimp : this.root + "resources/css/icono-simp/",
+		botonDesalojar : "<button class='btn btn-danger desalojar-soli' title='Desalojar'><i class='fa fa-share-square'></i></button>",
 		botonEliminar : "<button class='btn btn-xs btn-danger eliminar' title='Eliminar' data-tooltip='tooltip'><i class='fa fa-trash'></i></button>",
 		botonActualizar : "<button class='btn btn-xs btn-primary actualizar' title='Actualizar' data-tooltip='tooltip'><i class='fa fa-pencil-square'></i></button>",
 		botonEliminarSolicitante : "<button class='btn btn-danger eliminar-soli eliminar' title='Eliminar'><i class='fa fa-trash-o'></i></button>",

@@ -7,13 +7,12 @@ $(document).ready(function() {
 	var tdNumDocumento
 	var tdEscuela
 	var tdTipo
-	 
+	/* ---------- Construcción de tabla ---------- */
 	var $local = {
 			$tblConsulta : $("#tblSolicitantes"),
-			tblConsulta  : "",
-			$filaSeleccionada : ""
+			tblConsulta  : ""
 	}
-	/* ---------- Construcción de tabla ---------- */
+	
 	$.fn.dataTable.ext.errMode = 'none';
 
 	$local.$tblConsulta.on('xhr.dt', function(e, settings, json, xhr) {
