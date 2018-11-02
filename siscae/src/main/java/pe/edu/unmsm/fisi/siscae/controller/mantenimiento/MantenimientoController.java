@@ -1,5 +1,9 @@
 package pe.edu.unmsm.fisi.siscae.controller.mantenimiento;
 
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
@@ -10,16 +14,24 @@ import pe.edu.unmsm.fisi.siscae.aspecto.anotacion.Audit;
 import pe.edu.unmsm.fisi.siscae.aspecto.enumeracion.Accion;
 import pe.edu.unmsm.fisi.siscae.aspecto.enumeracion.Comentario;
 import pe.edu.unmsm.fisi.siscae.aspecto.enumeracion.Tipo;
+import pe.edu.unmsm.fisi.siscae.configuracion.security.SecurityContextFacade;
 import pe.edu.unmsm.fisi.siscae.controller.excepcion.anotacion.Vista;
+import pe.edu.unmsm.fisi.siscae.model.consulta.PrestamoRecurso;
+import pe.edu.unmsm.fisi.siscae.model.consulta.PrestamoRecursoTabla;
 import pe.edu.unmsm.fisi.siscae.model.criterio.ConsultaPrestamosCriterioBusqueda;
+import pe.edu.unmsm.fisi.siscae.model.mantenimiento.AreaAdministrativo;
+import pe.edu.unmsm.fisi.siscae.model.mantenimiento.Usuario;
 import pe.edu.unmsm.fisi.siscae.service.IAdministrativoService;
+import pe.edu.unmsm.fisi.siscae.service.IAreaAdministrativoService;
 import pe.edu.unmsm.fisi.siscae.service.IAreaEstudioService;
 import pe.edu.unmsm.fisi.siscae.service.IConsultaPrestamosService;
+import pe.edu.unmsm.fisi.siscae.service.IConsultaPrestamosTablaService;
 import pe.edu.unmsm.fisi.siscae.service.IEscuelaService;
 import pe.edu.unmsm.fisi.siscae.service.IEstadoTablaService;
 import pe.edu.unmsm.fisi.siscae.service.IFacultadService;
 import pe.edu.unmsm.fisi.siscae.service.IMultiTabDetService;
 import pe.edu.unmsm.fisi.siscae.service.ITipoRecursoService;
+import pe.edu.unmsm.fisi.siscae.service.IUsuarioService;
 
 @Vista
 @Audit(accion = Accion.Visita, comentario = Comentario.Visita)
@@ -34,6 +46,10 @@ public @Controller class MantenimientoController
     private @Autowired ITipoRecursoService tipoRecursoService;
     private @Autowired IFacultadService facultadService;
     private @Autowired IAdministrativoService administrativoService;
+    private @Autowired IUsuarioService usuarioService;
+    private @Autowired IAreaAdministrativoService areaAdministrativoService;
+    private @Autowired IConsultaPrestamosService consultaPrestamosService;
+    private @Autowired IConsultaPrestamosTablaService consultaPrestamosTablaService;
     
 
 /*   */
@@ -69,6 +85,67 @@ public @Controller class MantenimientoController
     @GetMapping("/{mantenimiento:areaEstudio}")
     public String irPaginaMantenimientoAreaEstudio(@PathVariable String mantenimiento, ModelMap model)
     {
+    	List<Usuario> listaUsuario = usuarioService.buscarTodos();
+
+		Usuario usuario = null;
+		for (int i = 0; i < listaUsuario.size(); i++) {
+			if (listaUsuario.get(i).getIdUsuario() == SecurityContextFacade.getAuthenticatedUser().getIdUsuario()) {
+				usuario = listaUsuario.get(i);
+			}
+		}
+		
+		AreaAdministrativo areaAdministrativo = null;
+		List<AreaAdministrativo> listaAreaAdministrativo = areaAdministrativoService.buscarTodos();
+		for (int i = 0; i < listaAreaAdministrativo.size(); i++) {
+			if (listaAreaAdministrativo.get(i).getIdAdministrativo().equals(usuario.getIdPersona())) {
+				areaAdministrativo = listaAreaAdministrativo.get(i);
+			}
+		}
+
+		ConsultaPrestamosCriterioBusqueda criterioBusqueda = new ConsultaPrestamosCriterioBusqueda();
+		criterioBusqueda.setAreaEstudio(areaAdministrativo.getNombreAreaEstudio());
+		
+		List<PrestamoRecurso> listaRecursos = consultaPrestamosService.buscarPorCriterio(criterioBusqueda);
+		List<PrestamoRecursoTabla> listaRecursosTabla = consultaPrestamosTablaService.buscarPorCriterio(criterioBusqueda);
+		
+		List<PrestamoRecurso> listaRecursosIndividuales = new ArrayList<>();
+		List<PrestamoRecurso> listaRecursosGrupales = new ArrayList<>();
+		int existenGrupales=0;
+		int existenIndividuales=0;
+		
+		for(int i=0;i<listaRecursos.size();i++){
+			if(listaRecursos.get(i).getMaxCapacidad()==1){
+				listaRecursosIndividuales.add(listaRecursos.get(i));			
+			}else{
+				listaRecursosGrupales.add(listaRecursos.get(i));
+			}
+		}
+		
+		int cont;
+		for(int i=0;i<listaRecursosGrupales.size();i++){
+			cont=1;
+			for(int j=0;j<listaRecursosTabla.size();j++){
+				if(listaRecursosGrupales.get(i).getIdRecurso()==listaRecursosTabla.get(j).getIdRecurso()){
+					listaRecursosTabla.get(j).setOrden(cont);
+					cont++;
+				}
+			}
+		}
+		Collections.sort(listaRecursosIndividuales);
+		Collections.sort(listaRecursosGrupales); 
+		if(listaRecursosIndividuales.size()!=0){
+			existenIndividuales=1;
+		}
+		if(listaRecursosGrupales.size()!=0){
+			existenGrupales=1;
+		}
+		
+		model.addAttribute("recursosIndividuales", listaRecursosIndividuales);
+		model.addAttribute("recursosGrupales", listaRecursosGrupales);
+		model.addAttribute("recursosTabla", listaRecursosTabla);
+		model.addAttribute("areaAdministrativo", areaAdministrativo);
+		model.addAttribute("existenGrupales", existenGrupales);
+		model.addAttribute("existenIndividuales", existenIndividuales);
         model.addAttribute("mantenimiento", mantenimiento);
         return "seguras/mantenimiento/mantenimiento";
     }
