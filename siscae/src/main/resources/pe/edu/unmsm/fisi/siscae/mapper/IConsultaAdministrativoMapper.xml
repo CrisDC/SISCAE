@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="pe.edu.unmsm.fisi.siscae.mapper.IConsultaAdministrativoMapper">
+
+	<sql id="fragmentoSelectBuscarConsultaAdministrativo">
+		SELECT  
+		        nombre,
+		        app_paterno,
+			    app_materno, 
+			    usuario,
+			    cargo,
+			    area_estudio
+		  FROM VW_CON_ADMINISTRATIVO_USUARIO
+	</sql>
+
+	<select id="buscarTodos" resultType="ConsultaAdministrativo">
+		<include refid="fragmentoSelectBuscarConsultaAdministrativo" />
+	</select>
+	
+	<select id="buscarPorNumeroDocumentoIdentidad" resultType="ConsultaAdministrativo">
+		<include refid="fragmentoSelectBuscarConsultaAdministrativo" />
+		<where>
+			<if test="tipoDocumentoIdentidad != null and tipoDocumentoIdentidad != ''">
+				VW_CON_ADMINISTRATIVO_USUARIO.cod_tip_doc_ide = #{tipoDocumentoIdentidad}
+			</if>
+			<if test="numeroDocumentoIdentidad != null and numeroDocumentoIdentidad != ''">
+				AND VW_CON_ADMINISTRATIVO_USUARIO.num_doc_ide = #{numeroDocumentoIdentidad}
+			</if>
+		</where>
+	</select>
+
+	
+
+
+</mapper>
