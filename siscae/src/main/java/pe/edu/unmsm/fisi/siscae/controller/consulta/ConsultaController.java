@@ -103,16 +103,6 @@ public @Controller class ConsultaController {
 			}
 		}
 		
-		int cont;
-		for(int i=0;i<listaRecursosGrupales.size();i++){
-			cont=1;
-			for(int j=0;j<listaRecursosTabla.size();j++){
-				if(listaRecursosGrupales.get(i).getIdRecurso()==listaRecursosTabla.get(j).getIdRecurso()){
-					listaRecursosTabla.get(j).setOrden(cont);
-					cont++;
-				}
-			}
-		}
 		Collections.sort(listaRecursosIndividuales);
 		Collections.sort(listaRecursosGrupales); 
 		if(listaRecursosIndividuales.size()!=0){
@@ -124,7 +114,6 @@ public @Controller class ConsultaController {
 		
 		model.addAttribute("recursosIndividuales", listaRecursosIndividuales);
 		model.addAttribute("recursosGrupales", listaRecursosGrupales);
-		model.addAttribute("recursosTabla", listaRecursosTabla);
 		model.addAttribute("consulta", consulta);
 		model.addAttribute("areaAdministrativo", areaAdministrativo);
 		model.addAttribute("existenGrupales", existenGrupales);
