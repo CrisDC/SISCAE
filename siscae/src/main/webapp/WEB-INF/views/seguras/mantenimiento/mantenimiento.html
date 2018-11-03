@@ -5,14 +5,14 @@
 <head>
 <title th:text="|#{__${mantenimiento}__}|"></title>
 </head>
-<!-- <th:block layout:fragment="style"> -->
+<th:block layout:fragment="style">
 <!-- 	<link th:href="@{/resources/css/dataTables.bootstrap.min.css}" rel="stylesheet" /> -->
 <!-- 	<link th:href="@{/resources/css/responsive.bootstrap.min.css}" rel="stylesheet" /> -->
-<!-- 	<link th:href="@{/resources/css/popupwindow.css}" rel="stylesheet" /> -->
-<!-- 	<link th:href="@{/resources/css/jquery-confirm.min.css}" rel="stylesheet" /> -->
-<!-- 	<link th:href="@{/resources/css/select2.min.css}" rel="stylesheet" /> -->
-<!-- 	<link th:href="@{/resources/css/select2-bootstrap.min.css}" rel="stylesheet" /> -->
-<!-- </th:block> -->
+	<link th:href="@{/resources/css/popupwindow.css}" rel="stylesheet" />
+	<link th:href="@{/resources/css/jquery-confirm.min.css}" rel="stylesheet" />
+	<link th:href="@{/resources/css/select2.min.css}" rel="stylesheet" />
+	<link th:href="@{/resources/css/select2-bootstrap.min.css}" rel="stylesheet" />
+</th:block>
 <body>
 	<th:block layout:fragment="content"> 
 		<div class="page-wrapper">
@@ -53,13 +53,59 @@
 		<th:block
 			th:replace="~{template/fragments/mantenimiento/modalMantenimiento :: modalMantenimiento(tipo=${mantenimiento})}?:~{}">
 		</th:block>
-	</th:block>
+	
 
-	<th:block layout:fragment="script">
-		<script th:src="@{/resources/js/datatables/jquery.dataTables.min.js}"></script>
-		<script th:src="@{/resources/js/datatables/dataTables.bootstrap.min.js}"></script>
-		<script th:src="@{/resources/js/datatables/dataTables.responsive.min.js}"></script>
-		<script th:src="@{/resources/js/datatables/dataTables.show.rows.js}"></script>
+	
+		<!-- All Jquery -->
+		<script th:src="@{/resources/js/guiuser/lib/jquery/jquery.min.js}"></script>
+
+		<script th:src="@{/resources/js/guiuser/lib/bootstrap/js/popper.min.js}"></script>
+		<script th:src="@{/resources/js/guiuser/lib/bootstrap/js/bootstrap.min.js}"></script>
+
+		<script th:src="@{/resources/js/guiuser/jquery.slimscroll.js}"></script>
+		<script th:src="@{/resources/js/guiuser/sidebarmenu.js}"></script>
+		<script th:src="@{/resources/js/guiuser/lib/sticky-kit-master/dist/sticky-kit.min.js}"></script>
+		
+		<!--Custom JavaScript -->
+		<script th:src="@{/resources/js/guiuser/Chart.bundle.js}"></script>
+		<script th:src="@{/resources/js/guiuser//utils.js}"></script>
+		<!-- Amchart -->
+		<script th:src="@{/resources/js/guiuser/lib/morris-chart/raphael-min.js}"></script>
+		<script th:src="@{/resources/js/guiuser/lib/morris-chart/morris.js}"></script>
+		<script th:src="@{/resources/js/guiuser/lib/morris-chart/dashboard1-init.js}"></script>
+
+
+		<script th:src="@{/resources/js/guiuser/lib/calendar-2/moment.latest.min.js}"></script>
+		<script th:src="@{/resources/js/guiuser/lib/calendar-2/semantic.ui.min.js}"></script>
+		<script th:src="@{/resources/js/guiuser/lib/calendar-2/prism.min.js}"></script>
+		<script th:src="@{/resources/js/guiuser/lib/calendar-2/pignose.calendar.min.js}"></script>
+
+		<script th:src="@{/resources/js/guiuser/lib/calendar-2/pignose.init.js}"></script>
+		<script th:src="@{/resources/js/guiuser/lib/owl-carousel/owl.carousel.min.js}"></script>
+		<script th:src="@{/resources/js/guiuser/lib/owl-carousel/owl.carousel-init.js}"></script>
+		<script th:src="@{/resources/js/guiuser/scripts.js}"></script>
+		<!-- scripit init-->
+		<!-- <script th:src="@{/resources/js/guiuser/inicio.js}"></script> -->
+		<script th:src="@{/resources/js/guiuser/custom.min.js}"></script>
+		<script th:src="@{/resources/js/guiuser/sweetalert.min.js}"></script>
+		<script th:src="@{/resources/js/util/util.js}"></script>
+
+<!-- 		<script th:src="@{/resources/js/util/formularioUtil.js}"></script> -->
+		<!-- JS de datatables -->
+
+		<script th:src="@{/resources/js/guiuser/lib/datatables/datatables.min.js}"></script>
+		<script th:src="@{/resources/js/guiuser/lib/datatables/cdn.datatables.net/buttons/1.2.2/js/dataTables.buttons.min.js}"></script>
+		<script th:src="@{/resources/js/guiuser/lib/datatables/cdn.datatables.net/buttons/1.2.2/js/buttons.flash.min.js}"></script>
+		<script th:src="@{/resources/js/guiuser/lib/datatables/cdnjs.cloudflare.com/ajax/libs/jszip/2.5.0/jszip.min.js}"></script>
+		<script th:src="@{/resources/js/guiuser/lib/datatables/cdn.rawgit.com/bpampuch/pdfmake/0.1.18/build/pdfmake.min.js}"></script>
+		<script th:src="@{/resources/js/guiuser/lib/datatables/cdn.rawgit.com/bpampuch/pdfmake/0.1.18/build/vfs_fonts.js}"></script>
+		<script th:src="@{/resources/js/guiuser/lib/datatables/cdn.datatables.net/buttons/1.2.2/js/buttons.html5.min.js}"></script>
+		<script th:src="@{/resources/js/guiuser/lib/datatables/cdn.datatables.net/buttons/1.2.2/js/buttons.print.min.js}"></script>
+		<script th:src="@{/resources/js/guiuser/lib/datatables/datatables-init.js}"></script>
+<!-- 		<script th:src="@{/resources/js/datatables/jquery.dataTables.min.js}"></script> -->
+<!-- 		<script th:src="@{/resources/js/datatables/dataTables.bootstrap.min.js}"></script> -->
+<!-- 		<script th:src="@{/resources/js/datatables/dataTables.responsive.min.js}"></script> -->
+<!-- 		<script th:src="@{/resources/js/datatables/dataTables.show.rows.js}"></script> -->
 		<script th:src="@{/resources/js/bootstrap/bootstrap-notify.min.js}"></script>
 		<script th:src="@{/resources/js/jquery/popupwindow.min.js}"></script>
 		<script th:src="@{/resources/js/jquery/jquery.serializejson.min.js}"></script>
@@ -69,7 +115,7 @@
 		<script th:src="@{/resources/js/jquery/jquery.animate.min.js}"></script>
 		<script th:src="@{/resources/js/jquery/select2.full.min.js}"></script>
 		
-		<script th:src="@{/resources/js/util/formularioUtil.js}"></script>
+<!-- 		<script th:src="@{/resources/js/util/formularioUtil.js}"></script> -->
 		<script
 			th:src="@{/resources/js/pagina/mantenimiento/{mantenimiento}/{mantenimiento}.js(mantenimiento = ${mantenimiento})}"></script>
 		<script

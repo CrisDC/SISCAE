@@ -9,8 +9,8 @@ $(document).ready(function() {
 		$actualizarMantenimiento : $("#actualizarMantenimiento"),
 		idAreaEstudioSeleccionado : ""
 	}
+	
 	$formMantenimiento = $("#formMantenimiento");
-
 	$.fn.dataTable.ext.errMode = 'none';
 
 	$local.$tablaMantenimiento.on('xhr.dt', function(e, settings, json, xhr) {
@@ -20,13 +20,14 @@ $(document).ready(function() {
 			break;
 		}
 	});
+	
 	$local.tablaMantenimiento = $local.$tablaMantenimiento.DataTable({
 		"ajax" : {
 			"url" : $variableUtil.root + "areaEstudio?accion=buscarTodos",
 			"dataSrc" : ""
 		},
 		"language" : {
-			"emptyTable" : "No hay áreas de estudios registradas"
+			"url": "//cdn.datatables.net/plug-ins/1.10.16/i18n/Spanish.json"
 		},
 		"initComplete" : function() {
 			$local.$tablaMantenimiento.wrap("<div class='table-responsive'></div>");
@@ -45,7 +46,7 @@ $(document).ready(function() {
 			"title" : "Nombre"
 		}, {
 			"data" : 'pabellon',
-			"title" : "Pabellon"
+			"title" : "Pabellón"
 		}, {
 			"data" : 'nivel',
 			"title" : "Nivel"

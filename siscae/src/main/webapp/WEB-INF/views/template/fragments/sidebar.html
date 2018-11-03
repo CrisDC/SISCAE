@@ -6,13 +6,13 @@
 </head> 
 <body>
 	<!-- Left Sidebar  -->
-        <div  th:if="(${areaAdministrativo.cargo} != 'SOLICITANTE')" th:fragment="sidebar" class="left-sidebar">
+        <div  th:if="(${#httpSession.getAttribute('cargoAdministrativo')} != 'SOLICITANTE')" th:fragment="sidebar" class="left-sidebar">
             <!-- Sidebar scroll-->
             <div class="scroll-sidebar">
                 <!-- Sidebar navigation-->
                 <nav class="sidebar-nav">
                     <ul id="sidebarnav">
-                        <li class="nav-label"><a id="idNombreAreaEstudio" th:text="${areaAdministrativo.areaEstudio}"></a></li>
+                        <li class="nav-label"><a id="idNombreAreaEstudio" th:text="${#httpSession.getAttribute('areaEstudioAdministrativo')}"></a></li>
                         <li>
                             <a th:href="@{/movimiento/estadoArea}" aria-expanded="false">
                                 <i class="fa fa-th-large"></i>

@@ -1,5 +1,7 @@
 package pe.edu.unmsm.fisi.siscae.model.consulta;
 
+import java.io.Serializable;
+
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -10,13 +12,17 @@ import pe.edu.unmsm.fisi.siscae.model.consulta.ConsultaSancionados.ConsultaSanci
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class ConsultaAdministrativo {
+public class ConsultaAdministrativo implements Serializable {
 
-	String nombre;
-	String appPaterno;
-	String appMaterno;
-	String usuario;
-	String cargo;
-	String areaEstudio;
+	/**
+     * 
+     */
+    private static final long serialVersionUID = 1L;
+    private String nombre;
+	private String appPaterno;
+	private String appMaterno;
+	private String usuario;
+	private String cargo;
+	private String areaEstudio;
 
 }
