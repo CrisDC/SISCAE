@@ -1,6 +1,7 @@
 var espacioDisponible;
 var recurso;
 var cantidadPrestamosRealizados;
+var cantidadPrestamosTotales;
 
 $(document).ready(function(){
 	
@@ -15,7 +16,6 @@ $(document).ready(function(){
 			icon: "/siscae/resources/images/lectora.gif",
 		}).then(function (inputValue) {
 			
-			console.log(inputValue);
 			
 			if(inputValue != null){
 				var finPrestamo ={
@@ -57,10 +57,6 @@ $(document).ready(function(){
 	    			}
 
 
-				}, function (dismiss) {
-				  // dismiss can be 'cancel', 'overlay',
-				  // 'close', and 'timer'
-				  
 				});
 				
 			}
@@ -81,7 +77,6 @@ $(document).ready(function(){
 
 	    			if(inputValue != null && inputValue.length != 0){
 	    				
-	    				console.log(inputValue.length);
 	    				
 	    				var prestamo ={
 		    		        	"idRecurso": idRecurso,
@@ -117,10 +112,6 @@ $(document).ready(function(){
 			      				});
 		        			}
 
-		    			}, function (dismiss) {
-		    			  // dismiss can be 'cancel', 'overlay',
-		    			  // 'close', and 'timer'
-		    			  
 		    			});
 	    				
 	    			}else{
@@ -174,10 +165,6 @@ $(document).ready(function(){
   		      				});
   	        			}
   	        			
-    				  }, function (dismiss) {
-    	    			  // dismiss can be 'cancel', 'overlay',
-    	    			  // 'close', and 'timer'
-    	    			  
     				  })
     				  
     			    
@@ -216,6 +203,13 @@ $(document).ready(function(){
 	$('#confirmarPrestamo').on('click', function (event){
 		//Recorriendo todos los elementos del html de la clase .docum
 		cantidadPrestamosRealizados=0;
+		cantidadPrestamosTotales=0;
+		$(".docum").each(function(){
+			let m = $(this).text();
+			if(m.length!=0){
+				cantidadPrestamosTotales=cantidadPrestamosTotales+1;
+			}
+		});
 		$(".docum").each(function(){
 			let m = $(this).text();
 			if(m.length!=0){
@@ -225,15 +219,13 @@ $(document).ready(function(){
 		if(cantidadPrestamosRealizados!=0){
 			swal({
 				title: "Peticion realizada con exito",
-				text: "Ustedes estan prestando el recurso",
+				text: "Se hizo un prestamo grupal",
 				icon: "success",
 				button: false,
 				timer: 1000,
 			}).then((value) => {
 				location.reload();
 			});
-		}else{
-			swal('Campos no pueden estar vacios');
 		}
 	});
 	//Cuando se abra el modal
@@ -284,95 +276,125 @@ $(function () {
 
 
 function enviarDatosATabla(){
+	
+	let numeroDocumento = $('#numeroDocumentoGrupal').val();
+	var idPersona;
+	var aPaterno;
+	var aMaterno;
+	
 	if(espacioDisponible!=0){
-		let numeroDocumento = $('#numeroDocumentoGrupal').val();
-		
-		if($('#'+numeroDocumento).length){
-			swal('Te encuentras solicitando el recurso');
+		if(numeroDocumento=='' || numeroDocumento == null){
+			swal('El numero de documento no puede estar vacio');
 			refrescarInput();
 		}else{
-			if(numeroDocumento==''){
-				swal('El numero de documento no puede estar vacio');
+			if($('#persona'+idPersona).length){
+				swal('Te encuentras solicitando el recurso');
 				refrescarInput();
 			}else{
 				
 				var num = {
 						"numDocumentoSolicitante": numeroDocumento
-	    		};
-				
-				//AJAX
+				};
+				//Obteniendo datos de la persona
+				//Primero consultamos su estado, si no retorna nada entonces esta normal, si no marcaria un error
 				$.ajax({
-	                    url :  $variableUtil.root + "movimientoConsultarEstadoSolicitante",
-	                    type : 'POST',
-	                    data : JSON.stringify(num),
-	                    beforeSend : function(xhr) {
-	        				xhr.setRequestHeader('Content-Type', 'application/json');
-	        				xhr.setRequestHeader("X-CSRF-TOKEN", $variableUtil.csrf);
-	        			},
-	        			statusCode : {
-	        				400 : function(response) {
-	        					swal(response.responseJSON);
-	        				},
-	        				500 : function(response) {
-	        					swal("Error", response.responseText, "warning");
-	        				}
-	        			},
-	        			success : function(response) {
-	        			
-	        				console.log(response);
-	        				
-	        				//AJAX
-	        				$.ajax({
-	        	                    url :  $variableUtil.root + "solicitantesDetalles?accion=buscarPorCriterio&codigo="+numeroDocumento,
-	        	                    type : 'GET',
-	        	                    beforeSend : function(xhr) {
-	        	        				xhr.setRequestHeader('Content-Type', 'application/json');
-	        	        				xhr.setRequestHeader("X-CSRF-TOKEN", $variableUtil.csrf);
-	        	        			},
-	        	        			statusCode : {
-	        	        				400 : function(response) {
-	        	        					swal(response.responseJSON);
-	        	        				},
-	        	        				500 : function(response) {
-	        	        					swal("Error", response.responseText, "warning");
-	        	        				}
-	        	        			},
-	        	        			success : function(response) {
-	        	        				
-	        	        				let aPaterno = response[0].appPaterno;
-	        	        				let aMaterno = response[0].appMaterno;
-	        	        				
-	        	        				var fila='<tr class="fila-pers"><td id="'+numeroDocumento+'" class="celda-pers docum">' +numeroDocumento+'</td><td class="celda-pers">'+aPaterno+' '+aMaterno+'</td><td><button class="btn btn-danger borrar"><i class="fa fa-trash-o"></i></button></td></tr>'
-	        	        				$('#cuerpoTablaGrupal tr:last').after(fila);
-	        	        				espacioDisponible =  espacioDisponible - 1;
-	        	        				$('#espacioDisponibleLabel').text('Espacio disponible: '+espacioDisponible)
-	        	        				refrescarInput();
-	        	        			}
-	        	        			
-	        				  }, function (dismiss) {
-	        	    			  // dismiss can be 'cancel', 'overlay',
-	        	    			  // 'close', and 'timer'
-	        	    			  
-	        				  })
-	        				
-	        				
-	        				
-	        				
-	        			}
-	        			
-				  }, function (dismiss) {
-	    			  // dismiss can be 'cancel', 'overlay',
-	    			  // 'close', and 'timer'
-	    			  
-				  })
-				
+		                url :  $variableUtil.root + "movimientoConsultarEstadoSolicitante",
+		                type : 'POST',
+		                data : JSON.stringify(num),
+		                beforeSend : function(xhr) {
+		    				xhr.setRequestHeader('Content-Type', 'application/json');
+		    				xhr.setRequestHeader("X-CSRF-TOKEN", $variableUtil.csrf);
+		    			},
+		    			statusCode : {
+		    				400 : function(response) {
+		    					swal(response.responseJSON);
+		    				},
+		    				500 : function(response) {
+		    					swal("Error", response.responseText, "warning");
+		    				}
+		    			},
+		    			success : function(response) {
+		    				//AJAX
+		    				//Si fue correcto, entonces habrá que obtener sus datos para enviarlo a la tabla
+		    				//Primero consultamos por codigo de alumno (mas frecuente en digitar)
+		    				//Si la respuesta es nula, entonces debe ser un documento de indentidad
+		    				$.ajax({
+		    	                    url :  $variableUtil.root + "solicitantesDetalles?accion=buscarPorCriterio&codigo="+numeroDocumento,
+		    	                    type : 'GET',
+		    	                    beforeSend : function(xhr) {
+		    	        				xhr.setRequestHeader('Content-Type', 'application/json');
+		    	        				xhr.setRequestHeader("X-CSRF-TOKEN", $variableUtil.csrf);
+		    	        			},
+		    	        			statusCode : {
+		    	        				400 : function(response) {
+		    	        					swal(response.responseJSON);
+		    	        				},
+		    	        				500 : function(response) {
+		    	        					swal("Error", response.responseText, "warning");
+		    	        				}
+		    	        			},
+		    	        			success : function(response) {
+		    	        				
+		    	        				if(response.length==0){
+		    	        					//Significa que es un documento de identidad
+		    	        					$.ajax({
+		    	        	                    url :  $variableUtil.root + "solicitantesDetalles?accion=buscarPorCriterio2&numDocumento="+numeroDocumento,
+		    	        	                    type : 'GET',
+		    	        	                    beforeSend : function(xhr) {
+		    	        	        				xhr.setRequestHeader('Content-Type', 'application/json');
+		    	        	        				xhr.setRequestHeader("X-CSRF-TOKEN", $variableUtil.csrf);
+		    	        	        			},
+		    	        	        			statusCode : {
+		    	        	        				400 : function(response) {
+		    	        	        					swal(response.responseJSON);
+		    	        	        				},
+		    	        	        				500 : function(response) {
+		    	        	        					swal("Error", response.responseText, "warning");
+		    	        	        				}
+		    	        	        			},
+		    	        	        			success : function(response) {
+		    	        	        				idPersona = response[0].idPersona;
+		    	        	        				aPaterno = response[0].appPaterno;
+				        	        				aMaterno = response[0].appMaterno;
+				        	        				
+				        	        				if($('#persona'+idPersona).length){
+				        	        					swal('Te encuentras solicitando el recurso');
+				        	        					refrescarInput();
+				        	        				}else{
+				        	        					var fila='<tr class="fila-pers"><td id="persona'+idPersona+'" class="celda-pers docum">' +numeroDocumento+'</td><td class="celda-pers">'+aPaterno+' '+aMaterno+'</td><td><button class="btn btn-danger borrar"><i class="fa fa-trash-o"></i></button></td></tr>'
+			    	        		    				$('#cuerpoTablaGrupal tr:last').after(fila);
+			    	        		    				espacioDisponible =  espacioDisponible - 1;
+			    	        		    				$('#espacioDisponibleLabel').text('Espacio disponible: '+espacioDisponible)
+			    	        		    				refrescarInput();
+				        	        				}
+		    	        	        			}
+		    	        					});
+		    	        				}else{
+		    	        					//Fue un codigo de alumno
+		    	        					idPersona = response[0].idPersona;
+		    	        					aPaterno = response[0].appPaterno;
+		        	        				aMaterno = response[0].appMaterno;
+		        	        				if($('#persona'+idPersona).length){
+		        	        					swal('Te encuentras solicitando el recurso');
+		        	        					refrescarInput();
+		        	        				}else{
+		        	        					var fila='<tr class="fila-pers"><td id="persona'+idPersona+'" class="celda-pers docum">' +numeroDocumento+'</td><td class="celda-pers">'+aPaterno+' '+aMaterno+'</td><td><button class="btn btn-danger borrar"><i class="fa fa-trash-o"></i></button></td></tr>'
+	    	        		    				$('#cuerpoTablaGrupal tr:last').after(fila);
+	    	        		    				espacioDisponible =  espacioDisponible - 1;
+	    	        		    				$('#espacioDisponibleLabel').text('Espacio disponible: '+espacioDisponible)
+	    	        		    				refrescarInput();
+		        	        				}
+		    	        				}
+		    	        			}
+		    				  });
+		    			}
+		    			
+				});			
 			}
 		}
 	}else{
-		swal('No hay mas espacios disponibles')
+		swal('No hay mas espacios disponibles');
 	}
-	
-	
 }
 
 
@@ -408,13 +430,21 @@ function realizarPrestamo(persona){
 		},
 		success : function(response) {
 			cantidadPrestamosRealizados = cantidadPrestamosRealizados + 1;
+			if(cantidadPrestamosRealizados==cantidadPrestamosTotales){
+				swal({
+					title: "Peticion realizada con exito",
+					text: "Se hizo un prestamo grupal",
+					icon: "success",
+					button: false,
+					timer: 1000,
+				}).then((value) => {
+					location.reload();
+				});
+			}else{
+				swal("Ocurrio un problema", "Algunos de los solicitantes no pudieron realizar el prestamo", "warning");
+			}
 		}
-
-	}, function (dismiss) {
-	  // dismiss can be 'cancel', 'overlay',
-	  // 'close', and 'timer'
-	  
-	})
+	});
 }
 
 
@@ -443,7 +473,6 @@ function consultarInfracciones(){
 			success : function(response) {
 
 				if(response.length!=0){
-					
 					let nombre = response[0].nombre;
     				let numeroDocumento = response[0].numeroDocumento;
     				let tipoDocumento = response[0].tipoDocumento;
@@ -478,15 +507,7 @@ function consultarInfracciones(){
 				}else{
 					$('#mensajeInfracciones').css('display', 'block');
 					$('#contenidoInfracciones').css('width','500px');
-				}
-				
-				
-				
-			}
-			
-	  }, function (dismiss) {
-		  // dismiss can be 'cancel', 'overlay',
-		  // 'close', and 'timer'
-		  
-	  })
+				}	
+			}	
+	  });
 }
