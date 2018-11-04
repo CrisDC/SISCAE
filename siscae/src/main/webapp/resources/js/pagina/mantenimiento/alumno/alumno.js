@@ -28,11 +28,11 @@ $(document).ready(function() {
 			"dataSrc" : ""
 		},
 		"language" : {
-			"emptyTable" : "No hay alumnos registrados"
+			"url": "//cdn.datatables.net/plug-ins/1.10.16/i18n/Spanish.json"
 		},
 		"initComplete" : function() {
 			$local.$tablaMantenimiento.wrap("<div class='table-responsive'></div>");
-			$tablaFuncion.aniadirFiltroDeBusquedaEnEncabezado(this, $local.$tablaMantenimiento);
+			//$tablaFuncion.aniadirFiltroDeBusquedaEnEncabezado(this, $local.$tablaMantenimiento);
 		},
 		"columnDefs" : [ {
 			"targets" : [ 0, 1, 2 ],
