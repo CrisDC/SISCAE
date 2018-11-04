@@ -118,8 +118,9 @@
 													<div class="recurso">
 														<img th:if="${recursoGrupal.tipoRecurso} == 'CABINA'" th:src="@{/resources/images/pantalla.png}" width="40" height="40">
 														<img th:if="${recursoGrupal.tipoRecurso} == 'MESA'" th:src="@{/resources/images/mesa.png}" width="100" height="100">
-														<p th:text="${recursoGrupal.numero}"></p>
-														<p th:text="${recursoGrupal.cantidadPrestamos} + ' / ' + ${recursoGrupal.maxCapacidad}"></p>
+														<p style="color: #3C4043 !important;" th:text="${recursoGrupal.numero}"></p>
+														<p style="color: #6F7375 !important;" th:text=" ${recursoGrupal.cantidadPrestamos} + ' / ' + ${recursoGrupal.maxCapacidad}"></p>
+														<p style="color: #6F7375 !important;" th:text="'Libres: ' + (${recursoGrupal.maxCapacidad} - ${recursoGrupal.cantidadPrestamos})"></p>
 														<p th:if="${recursoGrupal.estado} == 'DISPONIBLE'" th:text="DISPONIBLE" class="disponible"></p>
 														<p th:if="${recursoGrupal.estado} == 'OCUPADO'" th:text="OCUPADO" class="ocupado"></p>
 														<p th:if="${recursoGrupal.estado} == 'LIBERABLE'"></p>
