@@ -16,6 +16,7 @@ $(document).ready(function(){
 			icon: "/siscae/resources/images/lectora.gif",
 		}).then(function (inputValue) {
 			
+			inputValue = limpiarSalidaScanner(inputValue);
 			
 			if(inputValue != null){
 				var finPrestamo ={
@@ -77,6 +78,7 @@ $(document).ready(function(){
 
 	    			if(inputValue != null && inputValue.length != 0){
 	    				
+	    				inputValue = limpiarSalidaScanner(inputValue);
 	    				
 	    				var prestamo ={
 		    		        	"idRecurso": idRecurso,
@@ -282,6 +284,8 @@ function enviarDatosATabla(){
 	var aPaterno;
 	var aMaterno;
 	
+	numeroDocumento = limpiarSalidaScanner(numeroDocumento);
+	
 	if(espacioDisponible!=0){
 		if(numeroDocumento=='' || numeroDocumento == null){
 			swal('El numero de documento no puede estar vacio');
@@ -406,6 +410,7 @@ function refrescarInput() {
 
 function realizarPrestamo(persona){
 	
+	
 	//AJAX
 	var prestamoGrupal ={
         	"idRecurso": recurso,
@@ -510,4 +515,21 @@ function consultarInfracciones(){
 				}	
 			}	
 	  });
+}
+
+function limpiarSalidaScanner(valor){
+	//logica: Si la longitud del codigo es igual a 10 es un carnet y comienza con 00
+	if(valor.length==10){
+		if(valor[0]=='0' && valor[1]=='0'){
+			let nuevoValor='';
+			for(i=2;i<10;i++){
+				nuevoValor = nuevoValor+valor[i];
+			}
+			return nuevoValor;
+		}else{
+			return valor;
+		}
+	}else{
+		return valor;
+	}
 }
