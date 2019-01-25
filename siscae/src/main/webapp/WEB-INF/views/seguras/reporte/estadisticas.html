@@ -29,20 +29,20 @@
 								<!-- Nav tabs -->
 								<ul class="nav justify-content-end customtab2" role="tablist">
 
-									<li class="nav-item"><a class="nav-link active"
-										data-toggle="tab" href="#tabReportePrestamos" role="tab">
+									<li class="nav-item"><a class="nav-link active" th:key="|P|"
+										data-toggle="tab" href="#tabReporteGeneral" role="tab">
 											<span class="hidden-sm-up"><i class="ti-user"></i></span> <span
 											class="hidden-xs-down">Prestamos</span>
 									</a></li>
 
-									<li class="nav-item"><a class="nav-link" data-toggle="tab"
-										href="#tabReporteInfracciones" role="tab"> <span
+									<li class="nav-item"><a class="nav-link" data-toggle="tab" th:key="|I|"
+										href="#tabReporteGeneral" role="tab"> <span
 											class="hidden-sm-up"><i class="ti-user"></i></span> <span
 											class="hidden-xs-down">Infracciones</span>
 									</a></li>
 
 									<li class="nav-item"><a class="nav-link" data-toggle="tab"
-										href="#tabReporteSolicitantesMasFrecuentes" role="tab"> <span
+										href="#tabReporteMasFrecuentes" role="tab"> <span
 											class="hidden-sm-up"><i class="ti-user"></i></span> <span
 											class="hidden-xs-down">Más Frecuentes</span>
 									</a></li>
@@ -50,8 +50,7 @@
 
 								<!-- Tab panes -->
 								<div class="tab-content">
-									<div class="tab-pane active m-t-40" id="tabReportePrestamos"
-										role="tabpanel">
+									<div class="tab-pane active m-t-40" id="tabReporteGeneral" role="tabpanel">
 
 										<div id="estadisticas" class="m-l-15 m-r-15">
 											<form id="formEstadisticas">
@@ -265,15 +264,13 @@
 												</div>
 											</form>
 										</div>
-										<!-- 										 <table id="tblReporteDetalle" class="table table-bordered table-condensed nowrap display table-hover"> -->
-										<!-- 										</table> -->
+										
 									</div>
 
-									<div class="tab-pane" id="tabReporteResumenCriterio" role="tabpanel">
-										<div class="p-20">
-											<table id="tblReporteResumen" class="display nowrap table table-hover table-striped table-bordered" cellspacing="0" width="100%">
-											</table>
-										</div>
+									<div class="tab-pane" id="tabReporteMasFrecuentes" role="tabpanel">
+<!-- 										<div class="p-20"> -->
+
+<!-- 										</div> -->
 									</div>
 
 								</div>
@@ -283,6 +280,37 @@
 					</div>
 				</div>
 				<!-- Tab panes -->
+				
+				<div class="row">
+					<div class="col-12">
+						<div class="card">
+							<div class="card-body p-b-0">
+								<!-- Nav tabs -->
+								<ul class="nav justify-content-end customtab2" role="tablist">
+									<li class="nav-item"><a class="nav-link active"
+										data-toggle="tab" href="#resultadoResumen" role="tab">
+											<span class="hidden-sm-up"><i class="ti-user"></i></span> <span
+											class="hidden-xs-down">Resumen</span>
+									</a></li>
+									<li class="nav-item"><a class="nav-link"
+										data-toggle="tab" href="#resultadoGrafico" role="tab">
+											<span class="hidden-sm-up"><i class="ti-user"></i></span> <span
+											class="hidden-xs-down">Gráfico</span>
+									</a></li>
+									
+								</ul>
+								<div class="tab-content">
+									<div class="tab-pane active m-t-40" id="resultadoResumen" role="tabpanel">
+											<table id="tblReporteResumen" class="display nowrap table table-hover table-striped table-bordered" cellspacing="0" width="100%">
+											</table>
+									</div>
+								</div>
+								
+							</div>
+						</div>
+					</div>
+				
+				</div>
 
 			</div>
 		</div>
