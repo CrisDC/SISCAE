@@ -135,6 +135,44 @@ $(document).ready(function() {
 		limpiarMensajesDeError : function(formulario) {
 			formulario.find(".form-group, .group").removeClass("has-error").find(".help-block").remove();
 		},
+		obtenerSemanaInputWeek :  function(input) {
+			let valor = input.val();
+			let semana=null;
+			if(valor!=null){
+				semana = valor.charAt(6)+valor.charAt(7);
+				if(semana.charAt(0)=='0'){
+					semana = semana.charAt(1);
+				}
+			}
+			return semana;
+		},
+		obtenerAnioInputWeek : function(input) {
+			let valor = input.val();
+			let anio=null;
+			if(valor!=null){
+				anio = valor.charAt(0)+valor.charAt(1)+valor.charAt(2)+valor.charAt(3);
+			}
+			return anio;
+		},
+		obtenerMesInputMonth : function(input) {
+			let valor = input.val();
+			let mes=null;
+			if(valor!=null){
+				mes = valor.charAt(5)+valor.charAt(6);
+				if(mes.charAt(0)=='0'){
+					mes = mes.charAt(1);
+				}
+			}
+			return mes;
+		},
+		obtenerAnioInputMonth : function(input) {
+			let valor = input.val();
+			let anio=null;
+			if(valor!=null){
+				anio = valor.charAt(0)+valor.charAt(1)+valor.charAt(2)+valor.charAt(3);
+			}
+			return anio;
+		},
 		mostrarMensajeDeError : function(mensajesDeError, formulario) {
 			var notificacionMensajeError = [];
 			$.each(mensajesDeError, function(i, mensaje) {
@@ -208,6 +246,27 @@ $(document).ready(function() {
 				return index === $.inArray(el, array);
 			});
 		},
+		crearMultipleSelect2 : function(select, textoPorDefecto) {
+			var propiedad = {
+				placeholder : textoPorDefecto,
+				language : {
+					noResults : function() {
+						return "No se encontró resultados";
+					}
+				},
+				"width" : "100%",
+				//"theme" : "bootstrap",
+				"dropdownAutoWidth" : true,
+				"dropdownParent" : select.parent()
+			};
+			if (textoPorDefecto != undefined && textoPorDefecto != null) {
+				propiedad.placeholder = textoPorDefecto;
+			}
+			if (select.hasClass("encabezado")) {
+				propiedad.containerCssClass = ":all:";
+			}
+			select.select2(propiedad);
+		},
 		crearSelect2 : function(select, textoPorDefecto) {
 			var propiedad = {
 				placeholder : textoPorDefecto,
@@ -217,7 +276,7 @@ $(document).ready(function() {
 					}
 				},
 				"width" : "100%",
-				"theme" : "bootstrap",
+				//"theme" : "bootstrap",
 				"dropdownAutoWidth" : true,
 				"dropdownParent" : select.parent()
 			};

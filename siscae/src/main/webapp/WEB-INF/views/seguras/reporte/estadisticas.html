@@ -1,8 +1,10 @@
 <!DOCTYPE html>
 
-<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org"
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org"
 	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
-	xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4" layout:decorate="~{layout_user}">
+	xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4"
+	layout:decorate="~{layout_user}">
 
 <head>
 </head>
@@ -13,15 +15,8 @@
 			<!-- Bread crumb -->
 			<div class="row page-titles">
 				<div class="col-md-5 align-self-center">
-					<h3
-						th:text="|Estadísticas de ${reporte} por #{__|estadisticas.${reporte}.${criterio}|__}|"
-						class="text-primary"></h3>
+					<h3 th:text="|Estadísticas|" class="text-primary"></h3>
 				</div>
-				<!-- 				<div class="col-md-7 align-self-center"> -->
-				<!-- 					<ol class="breadcrumb"> -->
-				<!-- 						<li class="breadcrumb-item"><a href="javascript:void(0)">Estadisticas</a></li> -->
-				<!-- 					</ol> -->
-				<!-- 				</div> -->
 			</div>
 			<!-- End Bread crumb -->
 			<!-- Container fluid  -->
@@ -30,99 +25,259 @@
 				<div class="row">
 					<div class="col-12">
 						<div class="card">
-							<div class="card-body">
-								<h5 class="card-title">Criterios</h5>
-								<p class="card-text">
-									<th:block
-										th:replace="~{template/fragments/reporte/criterioBusquedaReporteEstadistica :: estadistica(tipo=${reporte})} ?: ~{}">
-									</th:block>
-								</p>
-							</div>
-						</div>
-
-						<div class="card">
 							<div class="card-body p-b-0">
 								<!-- Nav tabs -->
-								<ul class="nav nav-tabs customtab2" role="tablist">
-									<li class="nav-item">
-										<a class="nav-link active" data-toggle="tab" href="#tabReporteDetalle" role="tab"> 
-											<span class="hidden-sm-up"> <i class="ti-home"></i></span> 
-											<span class="hidden-xs-down">Detalle</span>
-										</a>
-									</li> 
-									<li class="nav-item">
-										<a class="nav-link" data-toggle="tab" href="#tabReporteResumenCriterio" role="tab"> 
-											<span class="hidden-sm-up"><i class="ti-user"></i></span> 
-											<span class="hidden-xs-down">Resumen por Criterio</span>
-										</a>
-									</li>
-									
-									<li class="nav-item">
-										<a class="nav-link" data-toggle="tab" href="#tabReporteGraficoCriterio" role="tab"> 
-											<span class="hidden-sm-up"><i class="ti-user"></i></span> 
-											<span class="hidden-xs-down">Gráfico por Criterio</span>
-										</a>
-									</li>
-									
-									<li class="nav-item">
-										<a class="nav-link" data-toggle="tab" href="#tabReporteResumenFecha" role="tab"> 
-											<span class="hidden-sm-up"><i class="ti-user"></i></span> 
-											<span class="hidden-xs-down">Resumen por Fecha</span>
-										</a>
-									</li>
-									
-									<li class="nav-item">
-										<a class="nav-link" data-toggle="tab" href="#tabReporteGraficoFecha" role="tab"> 
-											<span class="hidden-sm-up"><i class="ti-user"></i></span> 
-											<span class="hidden-xs-down">Gráfico por Fecha</span>
-										</a>
-									</li>
+								<ul class="nav justify-content-end customtab2" role="tablist">
+
+									<li class="nav-item"><a class="nav-link active"
+										data-toggle="tab" href="#tabReportePrestamos" role="tab">
+											<span class="hidden-sm-up"><i class="ti-user"></i></span> <span
+											class="hidden-xs-down">Prestamos</span>
+									</a></li>
+
+									<li class="nav-item"><a class="nav-link" data-toggle="tab"
+										href="#tabReporteInfracciones" role="tab"> <span
+											class="hidden-sm-up"><i class="ti-user"></i></span> <span
+											class="hidden-xs-down">Infracciones</span>
+									</a></li>
+
+									<li class="nav-item"><a class="nav-link" data-toggle="tab"
+										href="#tabReporteSolicitantesMasFrecuentes" role="tab"> <span
+											class="hidden-sm-up"><i class="ti-user"></i></span> <span
+											class="hidden-xs-down">Más Frecuentes</span>
+									</a></li>
 								</ul>
 
 								<!-- Tab panes -->
 								<div class="tab-content">
-									<div class="tab-pane active m-t-40" id="tabReporteDetalle" role="tabpanel">
-										    <table id="tblReporteDetalle" class="table table-bordered table-condensed nowrap display table-hover">
-										</table>
+									<div class="tab-pane active m-t-40" id="tabReportePrestamos"
+										role="tabpanel">
+
+										<div id="estadisticas" class="m-l-15 m-r-15">
+											<form id="formEstadisticas">
+												<h3 style="font-size: 18px;">Gráfica</h3>
+												<div class="row" style="width: 100%;">
+													<div class="col-md-3" id="divGrafica">
+														<div class="form-group m-b-10">
+															<label class="m-r-15">Tipo</label>
+															<div class="input-group">
+																<select id="selectTipoGrafico" name="selectTipoGrafico" class="form-control js-example-basic-single" style="height 30px;">
+																	<option value="-1" disabled="disabled"
+																		selected="selected">Seleccione un gráfico</option>
+																	<option value="1">Barras</option>
+																	<option value="2">Lineal</option>
+																	<option value="3">Pie</option>
+																</select>
+															</div>
+														</div>
+													</div>
+													<div class="col-md-3">
+														<div class="form-group m-b-10">
+															<label class="m-r-15">Periodo</label>
+															<div class="input-group">
+																<select id="selectPeriodo" name="selectPeriodo" class="form-control js-example-basic-single" style="height 30px;">
+																	<option value="-1" disabled="disabled"
+																		selected="selected">Seleccione un periodo</option>
+																	<option value="1">Por día</option>
+																	<option value="2">Por semana</option>
+																	<option value="3">Por mes</option>
+																	<option value="4">Por año</option>
+																</select>
+															</div>
+														</div>
+													</div>
+
+													<div class="col-md-6 hidden" id="divPeriodoDia">
+														<div class="form-group m-b-10">
+															<label class="m-r-15">Intervalo Fechas</label>
+															<div class="input-group">
+																<span class="input-group-addon">
+																<i class="fa fa-calendar m-r-5 m-t-5 text-center"></i></span> <input
+																	id="fechaPrestamo" type="text"
+																	class="form-control filtro" readonly="readonly"
+																	name="fechaPrestamo">
+															</div>
+														</div>
+													</div>
+
+
+													<div class="col-md-3 hidden" id="divSemanaInicio">
+														<div class="form-group m-b-10">
+															<label class="m-r-10">Desde:</label>
+															<div class="input-group">
+																<input id="semanaInicio" name="semanaInicio" type="week"
+																	class="form-control">
+															</div>
+														</div>
+													</div>
+
+
+													<div class="col-md-3 hidden" id="divSemanaFin">
+														<div class="form-group m-b-10">
+															<label class="m-r-15">Hasta:</label>
+															<div class="input-group">
+																<input id="semanaFin" name="semanaFin" type="week"
+																	class="form-control">
+															</div>
+														</div>
+													</div>
+													
+													
+													<div class="col-md-3 hidden" id="divMesInicio">
+														<div class="form-group m-b-10">
+															<label class="m-r-10">Desde:</label>
+															<div class="input-group">
+																<input id="mesInicio" name="mesInicio" type="month"
+																	class="form-control">
+															</div>
+														</div>
+													</div>
+
+
+													<div class="col-md-3 hidden" id="divMesFin">
+														<div class="form-group m-b-10">
+															<label class="m-r-15">Hasta:</label>
+															<div class="input-group">
+																<input id="mesFin" name="mesFin" type="month"
+																	class="form-control">
+															</div>
+														</div>
+													</div>
+													
+													<div class="col-md-3 hidden" id="divAnioInicio">
+														<div class="form-group m-b-10">
+															<label class="m-r-10">Desde:</label>
+															<div class="input-group">
+																<input id="anioInicio" name="anioInicio" type="number"
+																	class="form-control">
+															</div>
+														</div>
+													</div>
+
+
+													<div class="col-md-3 hidden" id="divAnioFin">
+														<div class="form-group m-b-10">
+															<label class="m-r-15">Hasta:</label>
+															<div class="input-group">
+																<input id="anioFin" name="anioFin" type="number"
+																	class="form-control">
+															</div>
+														</div>
+													</div>
+
+													
+												</div>
+												<div class="row" style="width: 100%;">
+													<div class="col-md-3">
+														<div class="form-group m-b-10">
+															<label class="m-r-15">Eje X</label>
+															<div class="input-group">
+																<select id="selectEjeX" name="selectEjeX" class="form-control js-example-basic-single" style="height 30px;">
+																	<option value="-1" disabled="disabled"
+																		selected="selected">Seleccione un eje</option>
+																	<option value="1">Periodo</option>
+																	<option value="2">Escuela</option>
+																	<option value="3">Area Estudio</option>
+																</select>
+															</div>
+														</div>
+													</div>
+													<div class="col-md-3">
+														<div class="form-group m-b-10">
+															<label class="m-r-15">Segmentacion en Y</label>
+															<div class="input-group">
+																<select id="selectSegmY" name="selectSegmY" class="form-control js-example-basic-single" style="height 30px;">
+																	<option value="-1" selected="selected">Ninguna</option>
+																	<option value="1">Tipo Solicitante</option>
+																	<option value="2">Escuela</option>
+																	<option value="3">Año Ingreso</option>
+																	<option value="4">Edad</option>
+																	<option value="5">Area Estudios</option>
+																</select>
+															</div>
+														</div>
+													</div>		
+													<div class="col-md-3">
+														<div class="form-group m-b-10">
+															<label class="m-r-15">Presentación</label>
+															<div class="input-group">
+																<select id="selectPresentacion" name="selectPresentacion" class="form-control js-example-basic-single" style="height 30px;">
+																	<option value="-1" selected="selected" disabled="disabled">Seleccione una presentación</option>
+																	<option value="1">Barras apilado</option>
+																	<option value="2">Barras paralelo</option>
+																</select>
+															</div>
+														</div>
+													</div>												
+												</div>
+												<h3 style="font-size: 18px;">Contenido</h3>
+												<div class="row" style="width: 100%;">
+													
+													
+													<div class="col-md-3">
+														<div class="form-group m-b-10">
+															<label class="m-r-15">Areas Estudio</label>
+															<div class="input-group">
+																<select id="selectAreaEstudio" name="selectAreaEstudio" class="js-example-basic-multiple js-states form-control filtro" multiple="multiple" style="height 30px;">
+																<option th:each="a : ${areasEstudio}"
+																	th:value="${a.idAreaEstudio}"
+																	th:text="${a.nombre}"></option>
+																</select>
+															</div>
+														</div>
+													</div>		
+													<div class="col-md-3">
+														<div class="form-group m-b-10">
+															<label class="m-r-15">Escuela</label>
+															<div class="input-group">
+																<select id="selectEscuela" name="selectEscuela" class="js-example-basic-multiple js-states form-control filtro" multiple="multiple" style="height 30px;">
+																<option th:each="e : ${escuelas}"
+																	th:value="${e.idEscuela}"
+																	th:text="${e.nombre}"></option>
+																</select>
+															</div>
+														</div>
+													</div>
+													<div class="col-md-3">
+														<div class="form-group m-b-10">
+															<label class="m-r-15">Recurso</label>
+															<div class="input-group">
+																<select id="selectRecurso" name="selectRecurso" class="js-example-basic-multiple js-states form-control filtro" multiple="multiple" style="height 30px;">
+																<option th:each="t : ${tiposRecursos}"
+																	th:value="${t.idTipoRecurso}"
+																	th:text="${t.nombre}"></option>
+																</select>
+															</div>
+														</div>
+													</div>
+													<div class="col-md-3">
+														<div class="form-group m-b-10">
+															<label class="m-r-15">Solicitante</label>
+															<div class="input-group">
+																<select id="selectSolicitante" name="selectSolicitante" class="js-example-basic-multiple js-states form-control filtro" multiple="multiple" style="height 30px;">
+																	<option value="ALUMNO" th:text="|ALUMNO|"></option>
+																	<option value="DOCENTE" th:text="|DOCENTE|"></option>
+																	<option value="EXTERNO" th:text="|EXTERNO|"></option>
+																</select>
+															</div>
+														</div>
+													</div>									
+												</div>
+											</form>
+										</div>
+										<!-- 										 <table id="tblReporteDetalle" class="table table-bordered table-condensed nowrap display table-hover"> -->
+										<!-- 										</table> -->
 									</div>
-									
+
 									<div class="tab-pane" id="tabReporteResumenCriterio" role="tabpanel">
 										<div class="p-20">
 											<table id="tblReporteResumen" class="display nowrap table table-hover table-striped table-bordered" cellspacing="0" width="100%">
 											</table>
 										</div>
 									</div>
-									<div class="tab-pane" id="tabReporteGraficoCriterio" role="tabpanel">
-										<div class="p-20">
-										<dl><dd>Por Escuela:
-											<dl><dd>
-											  <input type="radio" id="prestamosEscuela" name="grafico" value="temporal"> Temporal <br>
-											  <input type="radio" id="prestamosEscuela" name="grafico" value="barras"> Barras<br>
-											  <input type="radio" id="prestamosEscuela" name="grafico" value="torta"> Torta<br>
-											  <input type="range" id="spEscuela" name="scroll" min=0.00001 max=0.60002 step=0.060001 value=0.00001><br>
-											</dd></dl>
-										</dd></dl>
-										<section class="container" id="container">
-											<canvas id="canvas"></canvas>
-										</section>
-										<canvas id="grafico"></canvas>
-										
-										<div id="chartjs-legend" class="noselect"></div>
-										</div>
-									</div>
-									
-									<div class="tab-pane" id="tabReporteResumenFecha" role="tabpanel">
-										<div class="p-20">
-											<table id="tblReporteResumen" class="display nowrap table table-hover table-striped table-bordered" cellspacing="0" width="100%">
-											</table>
-										</div>
-									</div>
-									<div class="tab-pane" id="tabReporteGraficoFecha" role="tabpanel">
-										<div class="p-20"></div>
-									</div>
-									
+
 								</div>
-							
+
 							</div>
 						</div>
 					</div>
@@ -135,432 +290,79 @@
 		<!-- All Jquery -->
 		<script th:src="@{/resources/js/guiuser/lib/jquery/jquery.min.js}"></script>
 
-		<script th:src="@{/resources/js/guiuser/lib/bootstrap/js/popper.min.js}"></script>
-		<script th:src="@{/resources/js/guiuser/lib/bootstrap/js/bootstrap.min.js}"></script>
+		<script
+			th:src="@{/resources/js/guiuser/lib/bootstrap/js/popper.min.js}"></script>
+		<script
+			th:src="@{/resources/js/guiuser/lib/bootstrap/js/bootstrap.min.js}"></script>
 
 		<script th:src="@{/resources/js/guiuser/jquery.slimscroll.js}"></script>
 		<script th:src="@{/resources/js/guiuser/sidebarmenu.js}"></script>
-		<script th:src="@{/resources/js/guiuser/lib/sticky-kit-master/dist/sticky-kit.min.js}"></script>
-		
+		<script
+			th:src="@{/resources/js/guiuser/lib/sticky-kit-master/dist/sticky-kit.min.js}"></script>
+
 		<!--Custom JavaScript -->
-		<script th:src="@{/resources/js/guiuser/Chart.bundle.js}"></script>
+<!-- 		<script th:src="@{/resources/js/guiuser/Chart.bundle.js}"></script> -->
 		<script th:src="@{/resources/js/guiuser//utils.js}"></script>
 		<!-- Amchart -->
-		<script th:src="@{/resources/js/guiuser/lib/morris-chart/raphael-min.js}"></script>
-		<script th:src="@{/resources/js/guiuser/lib/morris-chart/morris.js}"></script>
-		<script th:src="@{/resources/js/guiuser/lib/morris-chart/dashboard1-init.js}"></script>
+<!-- 		<script -->
+<!-- 			th:src="@{/resources/js/guiuser/lib/morris-chart/raphael-min.js}"></script> -->
+<!-- 		<script th:src="@{/resources/js/guiuser/lib/morris-chart/morris.js}"></script> -->
+<!-- 		<script -->
+<!-- 			th:src="@{/resources/js/guiuser/lib/morris-chart/dashboard1-init.js}"></script> -->
+		<script th:src="@{/resources/js/jquery/moment.min.js}"></script>
+		<script th:src="@{/resources/js/jquery/daterangepicker.js}"></script>
+<!-- 		<script -->
+<!-- 			th:src="@{/resources/js/guiuser/lib/calendar-2/moment.latest.min.js}"></script> -->
+<!-- 		<script -->
+<!-- 			th:src="@{/resources/js/guiuser/lib/calendar-2/semantic.ui.min.js}"></script> -->
+<!-- 		<script th:src="@{/resources/js/guiuser/lib/calendar-2/prism.min.js}"></script> -->
+<!-- 		<script -->
+<!-- 			th:src="@{/resources/js/guiuser/lib/calendar-2/pignose.calendar.min.js}"></script> -->
 
-
-		<script th:src="@{/resources/js/guiuser/lib/calendar-2/moment.latest.min.js}"></script>
-		<script th:src="@{/resources/js/guiuser/lib/calendar-2/semantic.ui.min.js}"></script>
-		<script th:src="@{/resources/js/guiuser/lib/calendar-2/prism.min.js}"></script>
-		<script th:src="@{/resources/js/guiuser/lib/calendar-2/pignose.calendar.min.js}"></script>
-
-		<script th:src="@{/resources/js/guiuser/lib/calendar-2/pignose.init.js}"></script>
-		<script th:src="@{/resources/js/guiuser/lib/owl-carousel/owl.carousel.min.js}"></script>
-		<script th:src="@{/resources/js/guiuser/lib/owl-carousel/owl.carousel-init.js}"></script>
+<!-- 		<script -->
+<!-- 			th:src="@{/resources/js/guiuser/lib/calendar-2/pignose.init.js}"></script> -->
+<!-- 		<script -->
+<!-- 			th:src="@{/resources/js/guiuser/lib/owl-carousel/owl.carousel.min.js}"></script> -->
+<!-- 		<script -->
+<!-- 			th:src="@{/resources/js/guiuser/lib/owl-carousel/owl.carousel-init.js}"></script> -->
 		<script th:src="@{/resources/js/guiuser/scripts.js}"></script>
 		<!-- scripit init-->
 		<!-- <script th:src="@{/resources/js/guiuser/inicio.js}"></script> -->
 		<script th:src="@{/resources/js/guiuser/custom.min.js}"></script>
 		<script th:src="@{/resources/js/guiuser/sweetalert.min.js}"></script>
+		<!-- select2-->
+		<script th:src="@{/resources/js/guiuser/select2.min.js}"></script>
 		<script th:src="@{/resources/js/util/util.js}"></script>
-
-<!-- 		<script th:src="@{/resources/js/util/formularioUtil.js}"></script> -->
+		
+		
+		<script th:src="@{/resources/js/util/formularioUtil.js}"></script>
+		<script th:src="@{/resources/js/amChart/amcharts.js}"></script>
+		<script th:src="@{/resources/js/amChart/serial.js}"></script>
+		<script th:src="@{/resources/js/amChart/export.min.js}"></script>
+		<script th:src="@{/resources/js/amChart/pie.js}"></script>
+		<script th:src="@{/resources/js/amChart/light.js}"></script>
 		<!-- JS de datatables -->
 
-		<script th:src="@{/resources/js/guiuser/lib/datatables/datatables.min.js}"></script>
-		<script th:src="@{/resources/js/guiuser/lib/datatables/cdn.datatables.net/buttons/1.2.2/js/dataTables.buttons.min.js}"></script>
-		<script th:src="@{/resources/js/guiuser/lib/datatables/cdn.datatables.net/buttons/1.2.2/js/buttons.flash.min.js}"></script>
-		<script th:src="@{/resources/js/guiuser/lib/datatables/cdnjs.cloudflare.com/ajax/libs/jszip/2.5.0/jszip.min.js}"></script>
-		<script th:src="@{/resources/js/guiuser/lib/datatables/cdn.rawgit.com/bpampuch/pdfmake/0.1.18/build/pdfmake.min.js}"></script>
-		<script th:src="@{/resources/js/guiuser/lib/datatables/cdn.rawgit.com/bpampuch/pdfmake/0.1.18/build/vfs_fonts.js}"></script>
-		<script th:src="@{/resources/js/guiuser/lib/datatables/cdn.datatables.net/buttons/1.2.2/js/buttons.html5.min.js}"></script>
-		<script th:src="@{/resources/js/guiuser/lib/datatables/cdn.datatables.net/buttons/1.2.2/js/buttons.print.min.js}"></script>
-		<script th:src="@{/resources/js/guiuser/lib/datatables/datatables-init.js}"></script>
+<!-- 		<script -->
+<!-- 			th:src="@{/resources/js/guiuser/lib/datatables/datatables.min.js}"></script> -->
+<!-- 		<script -->
+<!-- 			th:src="@{/resources/js/guiuser/lib/datatables/cdn.datatables.net/buttons/1.2.2/js/dataTables.buttons.min.js}"></script> -->
+<!-- 		<script -->
+<!-- 			th:src="@{/resources/js/guiuser/lib/datatables/cdn.datatables.net/buttons/1.2.2/js/buttons.flash.min.js}"></script> -->
+<!-- 		<script -->
+<!-- 			th:src="@{/resources/js/guiuser/lib/datatables/cdnjs.cloudflare.com/ajax/libs/jszip/2.5.0/jszip.min.js}"></script> -->
+<!-- 		<script -->
+<!-- 			th:src="@{/resources/js/guiuser/lib/datatables/cdn.rawgit.com/bpampuch/pdfmake/0.1.18/build/pdfmake.min.js}"></script> -->
+<!-- 		<script -->
+<!-- 			th:src="@{/resources/js/guiuser/lib/datatables/cdn.rawgit.com/bpampuch/pdfmake/0.1.18/build/vfs_fonts.js}"></script> -->
+<!-- 		<script -->
+<!-- 			th:src="@{/resources/js/guiuser/lib/datatables/cdn.datatables.net/buttons/1.2.2/js/buttons.html5.min.js}"></script> -->
+<!-- 		<script -->
+<!-- 			th:src="@{/resources/js/guiuser/lib/datatables/cdn.datatables.net/buttons/1.2.2/js/buttons.print.min.js}"></script> -->
+<!-- 		<script -->
+<!-- 			th:src="@{/resources/js/guiuser/lib/datatables/datatables-init.js}"></script> -->
+		<script th:src="@{/resources/js/pagina/reporte/estadisticas.js}"></script>
 
-		<script th:src="@{/resources/js/pagina/reporte/estadistica/{reporte}/{reporte}.js(reporte = ${reporte})}"></script>
-		<script th:src="@{/resources/js/pagina/reporte/estadistica/{reporte}/{reporte}Formulario.js(reporte = ${reporte})}"></script>
-		<script th:src="@{/resources/js/pagina/reporte/estadistica/{reporte}/criterio/{criterio}.js(reporte = ${reporte}, criterio = ${criterio} )}"></script>
-		<script>
-		var canvas = document.getElementById('canvas');
-		var ctx = canvas.getContext('2d');
-		var color = Chart.helpers.color;
-		var Color = [
-			window.chartColors.red, 
-			window.chartColors.orange, 
-			window.chartColors.green,
-			'#4dc9f6',
-			'#f53794',
-			'#537bc4',
-			'#acc236',
-			'#00a950',
-			'#58595b',
-			'#8549ba'
-		];
-
-		var graficoData = {
-				labels: [],
-				datasets: [{
-					backgroundColor: [],
-					borderColor: [],
-					borderWidth: 1,
-					data: [
-					]
-				}]
-			};
-
-		reiniciar();
-
-		var graficoChart = new Chart(ctx, {
-			type: 'bar',
-			data: graficoData,
-			options: {
-				responsive: true,
-				legend: {
-				   labels: {
-				      generateLabels: function(chart) {
-				      	if(graficoChart!=null && graficoChart.config.type.localeCompare('line')!=0){
-					         var labels = chart.data.labels;
-					         var dataset = chart.data.datasets[0];
-					         var legend = labels.map(function(label, index) {
-					            return {
-					               datasetIndex: 0,
-					               fillStyle: dataset.backgroundColor && dataset.backgroundColor[index],
-					               strokeStyle: dataset.borderColor && dataset.borderColor[index],
-					               lineWidth: dataset.borderWidth,
-					               text: label
-					            }
-					         });
-					         return legend;
-				      	}else{
-				      		return chart.data.datasets.map(function(dataset, index) {
-					            return {
-					               fillStyle: dataset.backgroundColor,
-					               strokeStyle: 'rgb(255, 255, 255)',
-					               lineWidth: dataset.borderWidth,
-					               text: dataset.label
-					            }
-					         });
-				      	}
-				      }
-				   },
-				   position: 'right',
-				   display: false
-			    },
-				title: {
-					display: true,
-					text: 'Seleccione la gráfica que desee'
-				},
-				tooltips: {
-					mode: 'index',
-					intersect: false,
-					position: 'nearest',
-					backgroundColor: 'rgb(40, 40, 40)',
-
-		            callbacks: {
-		                label: function(tooltipItem, data) {
-		                    var label = data.datasets[tooltipItem.datasetIndex].label || '';
-		                    if (label) {
-		                        label += ': ';
-		                    }
-
-		                    label += data.datasets[tooltipItem.datasetIndex].data[tooltipItem.index];
-		                    return label;
-		                }
-            }
-				},
-				scales: {
-					xAxes: [{
-						display: true,
-					}],
-					yAxes: [{
-						display: true,
-						ticks:{
-							beginAtZero: true
-						}
-					}]
-				}
-			}
-		})
-
-		function reiniciar(){
-			graficoData.labels=[];
-			graficoData.datasets = [{
-					backgroundColor: [],
-					borderColor: [],
-					borderWidth: 1,
-					data: []
-				}];
-			if(graficoChart!=null){
-				graficoChart.options.scales.xAxes[0].display = true;
-				graficoChart.options.scales.yAxes[0].display = true;
-				graficoChart.options.legend.display = false;
-			}	
-		}
-		//PRUEBA FACTORIZAR
-			function graficar(elemento,data){
-				var datos=data, scroll, color;
-				var titulo = 'Numero de '
-				switch(elemento.id){
-					//PRESTAMOS ESCUELA
-					case 'prestamosEscuela':
-						color=0;
-						titulo+='Prestamos por Escuela';
-						scroll = 'spEscuela';
-						break;
-
-					//PRESTAMOS TIPO SOLICITANTES
-					case 'prestamosSoli':
-						color=6;
-						titulo+='Prestamos por Tipo de Solicitante';
-						scroll = 'spSoli';
-						break;
-
-					//PRESTAMOS TURNO
-					case 'prestamosTurno':
-						color=3;
-						titulo+='Prestamos por Turno';
-						scroll = 'spTurno';
-						break;
-
-					//PRESTAMOS AREA
-					case 'prestamosArea':
-						color=2;
-						titulo+='Prestamos por Area de Estudio';
-						scroll = 'spArea';
-						break;
-
-					//INFRACCIONES ESCUELA
-					case 'infEscuela':
-						color=0;
-						titulo+='Infracciones por Escuela';
-						scroll = 'siEscuela';
-						break;
-
-					//INFRACCIONES TIPO SOLICITANTES
-					case 'infSoli':
-						color=6;
-						titulo+='Infracciones por Tipo de Solicitante';
-						scroll = 'siSoli';
-						break;
-
-					//INFRACCIONES TURNO
-					case 'infTurno':
-						color=3;
-						titulo+='Infracciones por Turno';
-						scroll = 'siTurno';
-						break;
-
-					//INFRACCIONES AREA
-					case 'infArea':
-						color=2;
-						titulo+='Infracciones por Área de Estudio';
-						scroll = 'siArea';
-						break;
-
-					//INFRACCIONES TIPO INFRACCION
-					case 'infTipo':
-						color=8;
-						titulo+='Infracciones por Tipo';
-						scroll = 'siTtipo';
-						break;
-				}
-
-				switch(elemento.value){
-					case 'barras':
-						graficarBarras2(datos, titulo, 0);
-						break;
-					case 'torta':
-						graficarPie2(datos, titulo, 0);
-						break;
-					case 'temporal':
-						//graficarLineaTemporal(datos, titulo, color, elemento, scroll);
-						break;
-				}
-			}
-		</script>
-		
-		<script>
-		
-		function graficarBarras(data, titulo, dc) {
-			graficoChart.config.type = 'bar';
-			reiniciar();
-			graficoChart.options.title.text=titulo;
-			var columna = data[0];
-			var periodos = data[1];
-			var columnaXperiodo = data[2];
-			var n = columna.length;
-			for(var i=0; i<n; i++){
-				var tipocolumnaNuevo = columna[i];
-				var colorNuevo = Color[(i+dc) % Color.length];
-				var numAux = 0;
-				columnaXperiodo[i].forEach(function(elemento) {
-					numAux += elemento;
-				});
-				graficoData.labels.push(tipocolumnaNuevo);	
-				graficoData.datasets[0].data.push(numAux);
-				graficoData.datasets[0].backgroundColor.push(color(colorNuevo).alpha(0.9).rgbString());
-				graficoData.datasets[0].borderColor.push(colorNuevo);
-				graficoChart.update();
-			}
-			
-		};
-
-		function graficarPie(data, titulo, dc) {
-			var columna = data[0];
-			var periodos = data[1];
-			var columnasXperiodo = data[2];
-			graficoChart.config.type= 'pie';
-			reiniciar();
-			graficoChart.options.title.text=titulo;
-			graficoChart.options.scales.xAxes[0].display = false;
-			graficoChart.options.scales.yAxes[0].display = false;
-			graficoChart.options.legend.display = true;
-			graficoData.datasets[0].borderWidth = 3;
-			var n = columna.length;
-			for(var i=0; i<n; i++){
-				var escuelaNueva = columna[i];
-				var colorNuevo = Color[(i + dc)% Color.length];
-				var numAux = 0;
-				columnasXperiodo[i].forEach(function(elemento) {
-					numAux += elemento;
-				});
-				graficoData.labels.push(escuelaNueva);	
-				graficoData.datasets[0].data.push(numAux);
-				graficoData.datasets[0].backgroundColor.push(color(colorNuevo).alpha(0.9).rgbString());
-				graficoData.datasets[0].borderColor.push('rgb(255, 255, 255)');
-				graficoChart.update();
-			}
-		};
-
-
-		function graficarLineaTemporal(data, titulo, dc, radio, scroll) {
-			radio.checked=true;
-			var columna = data[0];
-			var periodos = data[1];
-			var columnasXperiodo = data[2];
-			var n = columna.length;
-			if(columna.length==0){
-				return;
-			}
-
-			graficoChart.config.type= 'line';
-			reiniciar();
-			graficoChart.options.title.text=titulo;
-			graficoChart.options.legend.display = true;
-
-			graficoChart.options.elements.line.tension = parseFloat(document.getElementById(scroll).value);	//este es el cambio a linea 
-
-			primerColor = Color[(dc) % Color.length];
-			graficoData.datasets[0].fill=false;
-			graficoData.datasets[0].borderColor = primerColor;
-			graficoData.datasets[0].backgroundColor = color(primerColor).alpha(0.9).rgbString();
-			graficoData.datasets[0].label = columna[0];
-			graficoData.datasets[0].borderWidth = 3;
-
-			for(var i = 1; i<n; i++){
-				var colorNuevo = Color[(i+dc) % Color.length];
-				var newDataset = {
-					label: columna[i],
-					backgroundColor: color(colorNuevo).alpha(0.9).rgbString(),
-					borderColor: colorNuevo,
-					borderWidth: 3,
-					data: []
-				};
-				graficoData.datasets.push(newDataset);
-				graficoData.datasets[i].fill=false;
-			}
-
-			for(var i=0; i<periodos.length; i++){
-				var nuevoMes = periodos[i];
-				graficoData.labels.push(periodos[i]);
-				for (var j=0; j<n; j++){
-					graficoData.datasets[j].data.push(columnasXperiodo[j][i]);
-					graficoChart.update();
-				}
-			}
-		}
-		//Sin variable Suma - datos unicos 
-		function graficarBarras2(data, titulo, dc) {
-			graficoChart.config.type = 'bar';
-			reiniciar();
-			graficoChart.options.title.text=titulo;
-			var columnas = data[0];
-			var valor = data[1];
-			var n = columnas.length;
-			for(var i=0; i<n; i++){
-				var columna = columnas[i];
-				var colorNuevo = Color[(i+dc) % Color.length];
-				graficoData.labels.push(columna);	
-				graficoData.datasets[0].data.push(valor[i]);
-				graficoData.datasets[0].backgroundColor.push(color(colorNuevo).alpha(0.9).rgbString());
-				graficoData.datasets[0].borderColor.push(colorNuevo);
-				graficoChart.update();
-			}
-			
-		};
-
-		function graficarPie2(data, titulo, dc) {
-			var columnas = data[0];
-			var valor = data[1];
-			graficoChart.config.type= 'pie';
-			reiniciar();
-			graficoChart.options.title.text=titulo;
-			graficoChart.options.scales.xAxes[0].display = false;
-			graficoChart.options.scales.yAxes[0].display = false;
-			graficoChart.options.legend.display = true;
-			graficoData.datasets[0].borderWidth = 3;
-			var n = columnas.length;
-			for(var i=0; i<n; i++){
-				var colorNuevo = Color[(i + dc)% Color.length];
-				graficoData.labels.push(columnas[i]);	
-				graficoData.datasets[0].data.push(parseInt(valor[i]));
-				graficoData.datasets[0].backgroundColor.push(color(colorNuevo).alpha(0.9).rgbString());
-				graficoData.datasets[0].borderColor.push('rgb(255, 255, 255)');
-				graficoChart.update();
-			}
-		};
-		</script>
-		<script>
-			var dataServer;
-			function setDataServer(obj,tipo){
-				dataServer = obj;
-				var columnas = [], valores = [];
-				alert(dataServer);
-				for(i in dataServer){
-					columnas.push(dataServer[i].escuela);
-					valores.push(parseInt(dataServer[i].numeroPrestamo));
-				}
-				Array.from(document.getElementsByName('grafico')).forEach(	//Agraga listener a todos los radio
-						function(elementoRadio) {
-							elementoRadio.addEventListener('change', function (){
-								graficar(this,[columnas,valores]);
-							});
-						}
-					);
-				
-			}
-			
-			function ajax(){
-				$.ajax({
-		              url : "../../../reporteEstadisticaPrestamosPorEscuela",
-		              type : 'GET',
-		              data : "accion=buscarPorCriterio&AreaEstudio=BIBLIOTECA",
-	            	  success : function(response) {
-            			setDataServer(response);
-	 	     		  }
-	             });
-			}
-            
-			ajax();
-			/*for(var i in dataServer){
-				alert(i);
-			}*/
-		
-			
-			
-		</script>
 	</div>
 </body>
 
