@@ -11,6 +11,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 public class ReporteEstadisticaInfraccionesPorPeriodo {
 	Integer numeroInfracciones;
+	Integer numeroSancionados;
 	String periodoInfraccion;
-	String gradoDeIncidenciaPromedio;
+	Double numeroInfraccionesPromedioPorAlumno;
 }

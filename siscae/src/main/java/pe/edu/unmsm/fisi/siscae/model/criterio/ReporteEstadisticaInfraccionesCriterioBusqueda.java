@@ -21,6 +21,6 @@ public class ReporteEstadisticaInfraccionesCriterioBusqueda {
 	private List<Integer> areasEstudio;
 	private List<Integer> escuelas;
 	private List<String> solicitantes;
-	private List<Integer> tiposInfraccion;
+	//private List<Integer> tiposInfraccion;
 }
 

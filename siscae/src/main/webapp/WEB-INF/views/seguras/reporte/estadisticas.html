@@ -27,15 +27,15 @@
 						<div class="card">
 							<div class="card-body p-b-0">
 								<!-- Nav tabs -->
-								<ul class="nav justify-content-end customtab2" role="tablist">
+								<ul id="xd" class="nav justify-content-end customtab2" role="tablist">
 
-									<li class="nav-item"><a class="nav-link active" th:key="|P|"
+									<li class="nav-item"><a class="nav-link active comun" th:key="|P|"
 										data-toggle="tab" href="#tabReporteGeneral" role="tab">
 											<span class="hidden-sm-up"><i class="ti-user"></i></span> <span
 											class="hidden-xs-down">Prestamos</span>
 									</a></li>
 
-									<li class="nav-item"><a class="nav-link" data-toggle="tab" th:key="|I|"
+									<li class="nav-item"><a class="nav-link comun" data-toggle="tab" th:key="|I|"
 										href="#tabReporteGeneral" role="tab"> <span
 											class="hidden-sm-up"><i class="ti-user"></i></span> <span
 											class="hidden-xs-down">Infracciones</span>
@@ -51,7 +51,6 @@
 								<!-- Tab panes -->
 								<div class="tab-content">
 									<div class="tab-pane active m-t-40" id="tabReporteGeneral" role="tabpanel">
-
 										<div id="estadisticas" class="m-l-15 m-r-15">
 											<form id="formEstadisticas">
 												<h3 style="font-size: 18px;">Gráfica</h3>
@@ -270,6 +269,7 @@
 										
 									</div>
 
+									
 									<div class="tab-pane" id="tabReporteMasFrecuentes" role="tabpanel">
 <!-- 										<div class="p-20"> -->
 
@@ -304,7 +304,9 @@
 								</ul>
 								<div class="tab-content">
 									<div class="tab-pane active m-t-40" id="resultadoResumen" role="tabpanel">
-											<table id="tblReporteResumen" class="display nowrap table table-hover table-striped table-bordered" cellspacing="0" width="100%">
+											<table id="tblReporteResumenPrestamo" class="display nowrap table table-hover table-striped table-bordered" cellspacing="0" width="100%">
+											</table>
+											<table id="tblReporteResumenInfraccion" class="display nowrap table table-hover table-striped table-bordered hidden" cellspacing="0" width="100%">
 											</table>
 									</div>
 									

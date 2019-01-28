@@ -20,6 +20,7 @@ import pe.edu.unmsm.fisi.siscae.model.mantenimiento.AreaAdministrativo;
 import pe.edu.unmsm.fisi.siscae.service.IAreaAdministrativoService;
 import pe.edu.unmsm.fisi.siscae.service.IAreaEstudioService;
 import pe.edu.unmsm.fisi.siscae.service.IEscuelaService;
+import pe.edu.unmsm.fisi.siscae.service.IInfraccionService;
 import pe.edu.unmsm.fisi.siscae.service.IMultiTabDetService;
 import pe.edu.unmsm.fisi.siscae.service.ITipoRecursoService;
 

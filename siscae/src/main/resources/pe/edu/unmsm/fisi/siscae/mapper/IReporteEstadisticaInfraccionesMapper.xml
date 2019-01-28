@@ -5,8 +5,8 @@
 	<resultMap type="ReporteEstadisticaInfraccionesPorPeriodo" id="objetoResultadoSinSegmentar">
 		<id property="numeroInfracciones" column="numeroInfracciones"></id>
 		<id property="periodoInfraccion" column="periodoInfraccion"></id>
-		<id property="gradoDeIncidenciaPromedio" column="gradoDeIncidenciaPromedio"></id>
-		<id property="estadiaPromedio" column="estadiaPromedio"></id>
+		<id property="numeroInfraccionesPromedioPorAlumno" column="numeroInfraccionesPromedioPorAlumno"></id>
+		<id property="numeroSancionados" column="numeroSancionados"></id>
 	</resultMap>
 	
 	<!--    ¡¡ OBSERVACION !!              '&lt;'   significa   '<' -->
@@ -52,35 +52,66 @@
 					
 			)
 			SELECT
-				COUNT(reporte.estadia)										AS numeroPrestamos,
+				COUNT(reporte.nombre)										AS numeroInfracciones,
+				 SUM(CASE WHEN reporte.estado_solicitante='SANCIONADO'
+			         THEN 1 ELSE 0 END) 									AS numeroSancionados,
 			<if test="tipoPeriodo == 'DIA'">
-			    lista.fecha 												AS periodoPrestamo,
+			    lista.fecha 												AS periodoInfraccion,
+				(SELECT AVG(consulta.nInfracciones)
+			     FROM (SELECT 
+						DISTINCT(reporte.numero_documento),
+						F_CANTIDAD_INFRACCIONES(reporte.numero_documento, lista.fecha , lista.fecha ) AS nInfracciones
+						FROM vw_reporte_infracciones reporte
+						WHERE reporte.fecha_infraccion BETWEEN lista.fecha  AND lista.fecha 
+					  ) as consulta
+			    )															AS numeroInfraccionesPromedioPorAlumno
 			</if>
 			<if test="tipoPeriodo == 'SEMANA'">
-			    CONCAT(lista.anio,'-',lista.semana)							AS periodoPrestamo,
+			    CONCAT(lista.anio,'-',lista.semana)							AS periodoInfraccion,
+			    (SELECT AVG(consulta.nInfracciones)
+			     FROM (SELECT 
+						DISTINCT(reporte.numero_documento),
+						F_CANTIDAD_INFRACCIONES(reporte.numero_documento, F_GENERADOR_FECHAS('INI', 'SEMANA',lista.anio,null, null, lista.semana) , F_GENERADOR_FECHAS('FIN', 'SEMANA',lista.anio,null, null, lista.semana)  ) AS nInfracciones
+						FROM vw_reporte_infracciones reporte
+						WHERE reporte.fecha_infraccion BETWEEN F_GENERADOR_FECHAS('INI', 'SEMANA',lista.anio,null, null, lista.semana)   AND F_GENERADOR_FECHAS('FIN', 'SEMANA',lista.anio,null, null, lista.semana) 
+					  ) as consulta
+			    )															AS numeroInfraccionesPromedioPorAlumno
 			</if>
 			<if test="tipoPeriodo == 'MES'">
-			    CONCAT(lista.anio,'-',lista.mes)							AS periodoPrestamo,
+			    CONCAT(lista.anio,'-',lista.mes)							AS periodoInfraccion,
+			    (SELECT AVG(consulta.nInfracciones)
+			     FROM (SELECT 
+						DISTINCT(reporte.numero_documento),
+						F_CANTIDAD_INFRACCIONES(reporte.numero_documento, F_GENERADOR_FECHAS('INI', 'MES',lista.anio,lista.mes, null,null) , F_GENERADOR_FECHAS('FIN', 'SEMANA',lista.anio,lista.mes, null,null)  ) AS nInfracciones
+						FROM vw_reporte_infracciones reporte
+						WHERE reporte.fecha_infraccion BETWEEN F_GENERADOR_FECHAS('INI', 'SEMANA',lista.anio,lista.mes, null,null)   AND F_GENERADOR_FECHAS('FIN', 'SEMANA',lista.anio,lista.mes, null,null) 
+					  ) as consulta
+			    )												AS numeroInfraccionesPromedioPorAlumno
 			</if>
 			<if test="tipoPeriodo == 'ANIO'">
-			    lista.anio													AS periodoPrestamo,
+			    lista.anio													AS periodoInfraccion,
+			    (SELECT AVG(consulta.nInfracciones)
+			     FROM (SELECT 
+						DISTINCT(reporte.numero_documento),
+						F_CANTIDAD_INFRACCIONES(reporte.numero_documento, F_GENERADOR_FECHAS('INI', 'ANIO',lista.anio,null, null,null) , F_GENERADOR_FECHAS('FIN', 'ANIO',lista.anio,null, null,null)  ) AS nInfracciones
+						FROM vw_reporte_infracciones reporte
+						WHERE reporte.fecha_infraccion BETWEEN F_GENERADOR_FECHAS('INI', 'ANIO',lista.anio,null, null,null)   AND F_GENERADOR_FECHAS('FIN','ANIO',lista.anio,null, null,null) 
+					  ) as consulta
+			    )												AS numeroInfraccionesPromedioPorAlumno
 			</if>
-				IFNULL(SEC_TO_TIME2(SUM(TIME_TO_SEC(reporte.estadia))),0) 	AS estadiaTotal,
-			    IFNULL(SEC_TO_TIME(AVG(TIME_TO_SEC(reporte.estadia))),0)  	AS estadiaPromedio
 			
 			FROM ListaPeriodo lista
-			
 			<if test="tipoPeriodo == 'DIA'">
-			LEFT JOIN vw_reporte_prestamos reporte ON (reporte.fecha_registro = lista.fecha)
+			LEFT JOIN vw_reporte_infracciones reporte ON (reporte.fecha_infraccion = lista.fecha)
 			</if>
 			<if test="tipoPeriodo == 'SEMANA'">
-			LEFT JOIN vw_reporte_prestamos reporte ON (CONCAT(lista.anio,'-',lista.semana) = CONCAT(YEAR(reporte.fecha_registro),'-',WEEK(reporte.fecha_registro)))
+			LEFT JOIN vw_reporte_infracciones reporte ON (CONCAT(lista.anio,'-',lista.semana) = CONCAT(YEAR(reporte.fecha_infraccion),'-',WEEK(reporte.fecha_infraccion)))
 			</if>
 			<if test="tipoPeriodo == 'MES'">
-			LEFT JOIN vw_reporte_prestamos reporte ON (CONCAT(lista.anio,'-',lista.mes) = CONCAT(YEAR(reporte.fecha_registro),'-',MONTH(reporte.fecha_registro)))
+			LEFT JOIN vw_reporte_infracciones reporte ON (CONCAT(lista.anio,'-',lista.mes) = CONCAT(YEAR(reporte.fecha_infraccion),'-',MONTH(reporte.fecha_infraccion)))
 			</if>
 			 <if test="tipoPeriodo == 'ANIO'">
-			LEFT JOIN vw_reporte_prestamos reporte ON (lista.anio = YEAR(reporte.fecha_registro))
+			LEFT JOIN vw_reporte_infracciones reporte ON (lista.anio = YEAR(reporte.fecha_infraccion))
 			</if>
 			
 			GROUP BY

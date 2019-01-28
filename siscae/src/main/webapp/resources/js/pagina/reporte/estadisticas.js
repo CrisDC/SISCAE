@@ -32,10 +32,15 @@ $(document).ready(function() {
 			//Botones de la pagina
 			$buscar : $('#buscar'),
 			$exportar : $('#exportar'),
-			
+			//Tipo Reporte
+			$tipoReporte:'P',
 			//DataTable
-			$tablaResultados : $("#tblReporteResumen"),
-			tablaResultados : ""
+			$tablaResultadosPrestamo : $("#tblReporteResumenPrestamo"),
+			tablaResultadosPrestamo : "",
+			$tablaResultadosInfraccion : $("#tblReporteResumenInfraccion"),
+			tablaResultadosInfraccion : ""
+			
+			
 		};
 
 	$funcionUtil.crearDateRangePickerSimple($local.$fechaPrestamo, "YYYY-MM-DD");
@@ -146,49 +151,88 @@ $(document).ready(function() {
 		let ejeX = $local.$selectEjeX.val();
 		
 		console.log(criterioBusqueda);
-		if(tipoGrafico == "BARRAS" && segmentacionY == "NINGUNA" && ejeX == "PERIODO"){
-			
-			$.ajax({
-				type : "GET",
-				url : $variableUtil.root + "reporteEstadisticaPrestamos?accion=buscarPorPeriodoSinSegmentar",
-				contentType : "application/json",
-				data: criterioBusqueda,
-				dataType : "json",
-				beforeSend : function(xhr) {
-					xhr.setRequestHeader('Content-Type', 'application/json');
-					//Borrando tabla antes de hacer la consulta
-					$local.tablaResultados.clear().draw();
-					$local.$buscar.attr("disabled", true).find("i").removeClass("fa-search").addClass("fa-spinner fa-pulse fa-fw");
-				},
-				success : function(response) {
-					//Imprimiendo datos
-					console.log(response);
-					if (response.length === 0) {
-						$funcionUtil.notificarException($variableUtil.busquedaSinResultados, "fa-exclamation-circle", "Información", "info");
-						return;
+		if($local.$tipoReporte =="P"){
+			if(tipoGrafico == "BARRAS" && segmentacionY == "NINGUNA" && ejeX == "PERIODO"){
+				
+				$.ajax({
+					type : "GET",
+					url : $variableUtil.root + "reporteEstadisticaPrestamos?accion=buscarPorPeriodoSinSegmentar",
+					contentType : "application/json",
+					data: criterioBusqueda,
+					dataType : "json",
+					beforeSend : function(xhr) {
+						xhr.setRequestHeader('Content-Type', 'application/json');
+						//Borrando tabla antes de hacer la consulta
+						$local.tablaResultadosPrestamo.clear().draw();
+						$local.$buscar.attr("disabled", true).find("i").removeClass("fa-search").addClass("fa-spinner fa-pulse fa-fw");
+					},
+					success : function(response) {
+						//Imprimiendo datos
+						console.log(response);
+						if (response.length === 0) {
+							$funcionUtil.notificarException($variableUtil.busquedaSinResultados, "fa-exclamation-circle", "Información", "info");
+							return;
+						}
+						//Dibujando tabla
+						$local.tablaResultadosPrestamo.rows.add(response).draw();
+						//Dibujando grafico
+						var chart = AmCharts.makeChart('chartdiv',$funcionGraficoUtil.crearGraficoBarras(response,'periodoPrestamo','numeroPrestamos','Análisis de préstamos por periodo','Número de prestamos','<b>Periodo:</b> [[category]] </br> <b>Prestamos:</b> [[value]] </br> <b>Tiempo Total: </b> [[estadiaTotal]] </br> <b>Tiempo Prom: </b> [[estadiaPromedio]]'));
+					},
+					error : function(response) {
+					},
+					complete : function() {
+						$local.$buscar.attr("disabled", false).find("i").addClass("fa-search").removeClass("fa-spinner fa-pulse fa-fw");
 					}
-					//Dibujando tabla
-					$local.tablaResultados.rows.add(response).draw();
-					//Dibujando grafico
-					var chart = AmCharts.makeChart('chartdiv',$funcionGraficoUtil.crearGraficoBarras(response,'periodoPrestamo','numeroPrestamos','Análisis de préstamos por periodo','Número de prestamos','<b>Periodo:</b> [[category]] </br> <b>Prestamos:</b> [[value]] </br> <b>Tiempo Total: </b> [[estadiaTotal]] </br> <b>Tiempo Prom: </b> [[estadiaPromedio]]'));
-				},
-				error : function(response) {
-				},
-				complete : function() {
-					$local.$buscar.attr("disabled", false).find("i").addClass("fa-search").removeClass("fa-spinner fa-pulse fa-fw");
-				}
-			});
+				});
+			}
 		}
+		else if($local.$tipoReporte =="I"){
+if(tipoGrafico == "BARRAS" && segmentacionY == "NINGUNA" && ejeX == "PERIODO"){
+				
+				$.ajax({
+					type : "GET",
+					url : $variableUtil.root + "reporteEstadisticaInfracciones?accion=buscarPorPeriodoSinSegmentar",
+					contentType : "application/json",
+					data: criterioBusqueda,
+					dataType : "json",
+					beforeSend : function(xhr) {
+						xhr.setRequestHeader('Content-Type', 'application/json');
+						//Borrando tabla antes de hacer la consulta
+						$local.tablaResultadosInfraccion.clear().draw();
+						$local.$buscar.attr("disabled", true).find("i").removeClass("fa-search").addClass("fa-spinner fa-pulse fa-fw");
+					},
+					success : function(response) {
+						//Imprimiendo datos
+						console.log(response);
+						if (response.length === 0) {
+							$funcionUtil.notificarException($variableUtil.busquedaSinResultados, "fa-exclamation-circle", "Información", "info");
+							return;
+						}
+						//Dibujando tabla
+						$local.tablaResultadosInfraccion.rows.add(response).draw();
+						//Dibujando grafico
+						var chart = AmCharts.makeChart('chartdiv',$funcionGraficoUtil.crearGraficoBarras(response,'periodoInfraccion','numeroInfracciones','Análisis de Infracciones por periodo','Número de Infracciones','<b>Periodo:</b> [[category]] </br> <b>Infracciones:</b> [[value]] </br> <b>Número de sancionados: </b> [[numeroSancionados]] </br> <b>Num Infracc. Prom: </b> [[numeroInfraccionesPromedioPorAlumno]]'));
+					},
+					error : function(response) {
+					},
+					complete : function() {
+						$local.$buscar.attr("disabled", false).find("i").addClass("fa-search").removeClass("fa-spinner fa-pulse fa-fw");
+					}
+				});
+			}
+			
+		}
+		
 		
 	});
 	
-	$local.tablaResultados = $local.$tablaResultados.DataTable({
+	$local.tablaResultadosPrestamo = $local.$tablaResultadosPrestamo.DataTable({
 		"language" : {
 			"emptyTable" : "No hay registros encontrados."
 		},
 		"pageLength": 10,
 		"initComplete" : function() {
-			$local.$tablaResultados.wrap("<div class='table-responsive'></div>");
+			$local.$tablaResultadosPrestamo.wrap("<div class='table-responsive'></div>");
 		},
 		"columnDefs" : [ {
 			"targets" : [ 0],
@@ -212,6 +256,46 @@ $(document).ready(function() {
 		}]
 	});
 	
+	$local.tablaResultadosInfraccion = $local.$tablaResultadosInfraccion.DataTable({
+		"language" : {
+			"emptyTable" : "No hay registros encontrados."
+		},
+		"pageLength": 10,
+		"initComplete" : function() {
+			$local.$tablaResultadosInfraccion.wrap("<div class='table-responsive'></div>");
+		},
+		"columnDefs" : [ {
+			"targets" : [ 0],
+			"className" : "all dt-center fondo-blanco"
+		},{
+			"targets" : [ 1, 2, 3],
+			"className" : "all dt-right"
+		} ],
+		"columns" : [ {
+			"data" : "periodoInfraccion",
+			"title" : "Periodo"
+		}, {
+			"data" : "numeroInfracciones",
+			"title" : "Cantidad de Infracciones"
+		}, {
+			"data" : "numeroSancionados",
+			"title" : "Cantidad de Sancionados"
+		}, {
+			"data" : "numeroInfraccionesPromedioPorAlumno",
+			"title" : "Cantidad de infracciones promedio"
+		}]
+	});
 	
+	$("#xd").find(".comun").on("click", function(){
+		$local.$tipoReporte = $(this).attr("key");
+		if($local.$tipoReporte=="P"){
+			$local.$tablaResultadosPrestamo.removeClass("hidden");
+			$local.$tablaResultadosInfraccion.addClass("hidden");
+		}else{
+			$local.$tablaResultadosPrestamo.addClass("hidden");
+			$local.$tablaResultadosInfraccion.removeClass("hidden");
+		}
+		alert($local.$tipoReporte);
+	});
 
 });
