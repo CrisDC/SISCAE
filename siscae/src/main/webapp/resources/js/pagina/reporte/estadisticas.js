@@ -132,9 +132,9 @@ $(document).ready(function() {
 		}
 		if($local.$selectPeriodo.val() == 'MES'){
 			criterioBusqueda.mesInicio = $funcionUtil.obtenerMesInputMonth($local.$mesInicio);
-			criterioBusqueda.anioInicio = $funcionUtil.obtenerAnioInputMonth($local.$anioInicio);
+			criterioBusqueda.anioInicio = $funcionUtil.obtenerAnioInputMonth($local.$mesInicio);
 			criterioBusqueda.mesFin = $funcionUtil.obtenerMesInputMonth($local.$mesFin);
-			criterioBusqueda.anioFin = $funcionUtil.obtenerAnioInputMonth($local.$anioFin);
+			criterioBusqueda.anioFin = $funcionUtil.obtenerAnioInputMonth($local.$mesFin);
 		}
 		if($local.$selectPeriodo.val() == 'ANIO'){
 			criterioBusqueda.anioInicio = $local.$anioInicio.val();

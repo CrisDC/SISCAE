@@ -26,7 +26,7 @@
 					SELECT 	#{semanaInicio}                    	AS semana,
 							#{anioInicio}						AS anio
 					UNION ALL
-					SELECT IF(semana &lt; = 51,semana + 1,1) 			AS semana,
+					SELECT IF(semana &lt;= 51,semana + 1,1) 		AS semana,
 						   IF(semana = 52,anio + 1,anio)  			AS anio
 					FROM ListaPeriodo
 					WHERE (anio = #{anioFin} AND semana &lt; #{semanaFin}) OR (anio &lt; #{anioFin})
@@ -36,14 +36,14 @@
 					SELECT #{mesInicio} 						AS mes,
 						   #{anioInicio}						AS anio
 					UNION ALL
-					SELECT IF(mes &lt; = 11,mes + 1,1) 					AS mes,
-						   IF(mes = 12,anio + 1,anio)  				AS anio
+					SELECT IF(mes &lt;= 11,mes + 1,1) 			AS mes,
+						   IF(mes = 12,anio + 1,anio)  			AS anio
 					FROM ListaPeriodo
-					WHERE (anio = #{anioFin} AND mes &lt; #{mesFin) OR (anio &lt; #{anioFin)
+					WHERE (anio = #{anioFin} AND mes &lt; #{mesFin}) OR (anio &lt; #{anioFin})
 				</if>
 				
 				<if test="tipoPeriodo == 'ANIO'">
-					SELECT #{anioIncio} 						AS anio
+					SELECT #{anioInicio} 						AS anio
 					UNION ALL
 					SELECT (anio+1) 							AS anio
 					FROM ListaPeriodo
