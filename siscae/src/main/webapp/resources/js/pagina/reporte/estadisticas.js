@@ -27,6 +27,7 @@ $(document).ready(function() {
 			$divMesFin : $('#divMesFin'),
 			$divAnioInicio : $('#divAnioInicio'),
 			$divAnioFin : $('#divAnioFin'),
+			$divPresentacion : $('#divPresentacion'),
 			
 			//Botones de la pagina
 			$buscar : $('#buscar'),
@@ -90,6 +91,27 @@ $(document).ready(function() {
 			$local.$divAnioFin.removeClass("hidden");
 		}	
 	});
+	
+	//Evento que se dispara cuando el combo Segmentacion en Y cambie
+	$local.$selectSegmY.on("change", function(){
+		var val = $(this).val();
+		if(val != "NINGUNA" && $local.$selectTipoGrafico.val() == "BARRAS"){
+			$local.$divPresentacion.removeClass("hidden");
+		}else{
+			$local.$divPresentacion.addClass("hidden");
+		}
+	});
+	
+	//Evento que se dispara cuando el combo Segmentacion en Y cambie
+	$local.$selectTipoGrafico.on("change", function(){
+		var val = $(this).val(); 	
+		if(val == "BARRAS" && $local.$selectSegmY.val() != "NINGUNA"){
+			$local.$divPresentacion.removeClass("hidden");
+		}else{
+			$local.$divPresentacion.addClass("hidden");
+		}
+	});
+	
 	
 	$local.$buscar.on('click', function() {
 //		if (!$formEstadisticas.valid()) {
