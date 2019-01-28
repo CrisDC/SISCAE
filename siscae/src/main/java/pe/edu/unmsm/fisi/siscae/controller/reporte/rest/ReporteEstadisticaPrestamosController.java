@@ -5,21 +5,38 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import pe.edu.unmsm.fisi.siscae.model.criterio.ReporteEstadisticaPrestamosCriterioBusqueda;
 import pe.edu.unmsm.fisi.siscae.model.reporte.ReporteEstadisticaPrestamos;
+import pe.edu.unmsm.fisi.siscae.model.reporte.resumen.ReporteEstadisticaPrestamosPorPeriodo;
 import pe.edu.unmsm.fisi.siscae.service.IReporteEstadisticaPrestamosService;
  
 @RequestMapping("/reporteEstadisticaPrestamos")
 public @RestController class ReporteEstadisticaPrestamosController {
 	private @Autowired IReporteEstadisticaPrestamosService reporteEstadisticaPrestamosService;
-	@GetMapping(params = "accion=buscarTodos")
-	public List<ReporteEstadisticaPrestamos> buscarTodos() {
-		return reporteEstadisticaPrestamosService.buscarTodos();
-	}
-	@GetMapping(params = "accion=buscarPorCriterio")
-	public List<ReporteEstadisticaPrestamos> buscarPorCriterio(ReporteEstadisticaPrestamosCriterioBusqueda criterioBusqueda) {
-		return reporteEstadisticaPrestamosService.buscarPorCriterio(criterioBusqueda);
+	
+//	@GetMapping(params = "accion=buscarTodos")
+//	public List<ReporteEstadisticaPrestamos> buscarTodos() {
+//		return reporteEstadisticaPrestamosService.buscarTodos();
+//	}
+//	@GetMapping(params = "accion=buscarPorCriterio")
+//	public List<ReporteEstadisticaPrestamos> buscarPorCriterio(ReporteEstadisticaPrestamosCriterioBusqueda criterioBusqueda) {
+//		return reporteEstadisticaPrestamosService.buscarPorCriterio(criterioBusqueda);
+//	}
+	
+	@GetMapping(params = "accion=buscarPorPeriodoSinSegmentar")
+	public List<ReporteEstadisticaPrestamosPorPeriodo> buscarPorPeriodoSinSegmentar(ReporteEstadisticaPrestamosCriterioBusqueda criterioBusqueda/*,
+			@RequestParam("areasEstudio") List<Integer> areasEstudio,
+			@RequestParam("escuelas") List<Integer> escuelas,
+			@RequestParam("solicitantes") List<String> solicitantes,
+			@RequestParam("recursos") List<Integer> recursos*/) {
+		/*criterioBusqueda.setAreasEstudio(areasEstudio);
+		criterioBusqueda.setEscuelas(escuelas);
+		criterioBusqueda.setSolicitantes(solicitantes);
+		criterioBusqueda.setRecursos(recursos);*/
+		System.out.println(criterioBusqueda);		
+		return reporteEstadisticaPrestamosService.buscarPorPeriodoSinSegementar(criterioBusqueda);
 	}
 }

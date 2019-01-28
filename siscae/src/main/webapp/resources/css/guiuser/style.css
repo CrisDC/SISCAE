@@ -7048,3 +7048,7 @@ tbody tr td:last-child {
 	background-color: steelblue !important;
 	text-align: center;
 }
+
+.fondo-blanco{
+	background-color: #fff !important;
+}

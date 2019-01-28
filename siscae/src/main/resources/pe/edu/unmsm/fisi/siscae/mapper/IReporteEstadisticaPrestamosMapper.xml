@@ -2,47 +2,102 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="pe.edu.unmsm.fisi.siscae.mapper.IReporteEstadisticaPrestamosMapper">
 
-	<sql id="fragmentoSelectBuscarReporteEstadisticaPrestamos">
-		SELECT  recurso,
-				id_escuela,
-			    escuela,
-			    id_persona,
-			    nombre_tipo,
-		        codigo,
-		        nombre,
-			    app_paterno,
-			    app_materno,
-			    turno,
-			   	fecha_registro, 
-			    estadia,
-			    id_area_estudio, 
-			    area_estudio
-		  FROM VW_REPORTE_PRESTAMOS
-	</sql>
-
-	<select id="buscarTodos" resultType="ReporteEstadisticaPrestamos">
-		<include refid="fragmentoSelectBuscarReporteEstadisticaPrestamos" />
-	</select>
+	<resultMap type="ReporteEstadisticaPrestamosPorPeriodo" id="objetoResultadoSinSegmentar">
+		<id property="numeroPrestamos" column="numeroPrestamos"></id>
+		<id property="periodoPrestamo" column="periodoPrestamo"></id>
+		<id property="estadiaTotal" column="estadiaTotal"></id>
+		<id property="estadiaPromedio" column="estadiaPromedio"></id>
+	</resultMap>
 	
-	<select id="buscarPorNumeroDocumentoIdentidad" resultType="ReporteEstadisticaPrestamos">
-		<include refid="fragmentoSelectBuscarReporteEstadisticaPrestamos" />
-		<where>
-			<if test="tipoDocumentoIdentidad != null and tipoDocumentoIdentidad != ''">
-				VW_REPORTE_PRESTAMOS .cod_tip_doc_ide = #{tipoDocumentoIdentidad}
+	<!--    ¡¡ OBSERVACION !!              '&lt;'   significa   '<' -->
+	
+	<select id="buscarPorPeriodoSinSegementar" resultMap="objetoResultadoSinSegmentar">
+			WITH RECURSIVE ListaPeriodo  AS
+			(		
+				<if test="tipoPeriodo == 'DIA'">
+					SELECT #{fechaInicio}  						AS fecha					
+					UNION ALL
+					SELECT DATE_ADD(fecha,INTERVAL 1 DAY) 		AS fecha	
+					FROM ListaPeriodo
+					WHERE fecha &lt; #{fechaFin}
+				</if>
+				
+				<if test="tipoPeriodo == 'SEMANA'">
+					SELECT 	#{semanaInicio}                    	AS semana,
+							#{anioInicio}						AS anio
+					UNION ALL
+					SELECT IF(semana &lt; = 51,semana + 1,1) 			AS semana,
+						   IF(semana = 52,anio + 1,anio)  			AS anio
+					FROM ListaPeriodo
+					WHERE (anio = #{anioFin} AND semana &lt; #{semanaFin}) OR (anio &lt; #{anioFin})
+				</if>
+				
+				<if test="tipoPeriodo == 'MES'">
+					SELECT #{mesInicio} 						AS mes,
+						   #{anioInicio}						AS anio
+					UNION ALL
+					SELECT IF(mes &lt; = 11,mes + 1,1) 					AS mes,
+						   IF(mes = 12,anio + 1,anio)  				AS anio
+					FROM ListaPeriodo
+					WHERE (anio = #{anioFin} AND mes &lt; #{mesFin) OR (anio &lt; #{anioFin)
+				</if>
+				
+				<if test="tipoPeriodo == 'ANIO'">
+					SELECT #{anioIncio} 						AS anio
+					UNION ALL
+					SELECT (anio+1) 							AS anio
+					FROM ListaPeriodo
+					WHERE anio &lt; #{anioFin}
+				</if>
+					
+			)
+			SELECT
+				COUNT(reporte.estadia)										AS numeroPrestamos,
+			<if test="tipoPeriodo == 'DIA'">
+			    lista.fecha 												AS periodoPrestamo,
 			</if>
-			<if test="numeroDocumentoIdentidad != null and numeroDocumentoIdentidad != ''">
-				AND VW_REPORTE_PRESTAMOS .num_doc_ide = #{numeroDocumentoIdentidad}
+			<if test="tipoPeriodo == 'SEMANA'">
+			    CONCAT(lista.anio,'-',lista.semana)							AS periodoPrestamo,
 			</if>
-		</where>
-	</select>
-
-	<select id="buscarPorCriterio" resultType="ReporteEstadisticaPrestamos">
-		<include refid="fragmentoSelectBuscarReporteEstadisticaPrestamos" />
-		<where>
-			<if test="areaEstudio != null and areaEstudio != '-1'">
-				VW_REPORTE_PRESTAMOS.area_estudio = #{areaEstudio}
+			<if test="tipoPeriodo == 'MES'">
+			    CONCAT(lista.anio,'-',lista.mes)							AS periodoPrestamo,
 			</if>
-		</where>
+			<if test="tipoPeriodo == 'ANIO'">
+			    lista.anio													AS periodoPrestamo,
+			</if>
+				IFNULL(SEC_TO_TIME2(SUM(TIME_TO_SEC(reporte.estadia))),0) 	AS estadiaTotal,
+			    IFNULL(SEC_TO_TIME(AVG(TIME_TO_SEC(reporte.estadia))),0)  	AS estadiaPromedio
+			
+			FROM ListaPeriodo lista
+			
+			<if test="tipoPeriodo == 'DIA'">
+			LEFT JOIN vw_reporte_prestamos reporte ON (reporte.fecha_registro = lista.fecha)
+			</if>
+			<if test="tipoPeriodo == 'SEMANA'">
+			LEFT JOIN vw_reporte_prestamos reporte ON (CONCAT(lista.anio,'-',lista.semana) = CONCAT(YEAR(reporte.fecha_registro),'-',WEEK(reporte.fecha_registro)))
+			</if>
+			<if test="tipoPeriodo == 'MES'">
+			LEFT JOIN vw_reporte_prestamos reporte ON (CONCAT(lista.anio,'-',lista.mes) = CONCAT(YEAR(reporte.fecha_registro),'-',MONTH(reporte.fecha_registro)))
+			</if>
+			 <if test="tipoPeriodo == 'ANIO'">
+			LEFT JOIN vw_reporte_prestamos reporte ON (lista.anio = YEAR(reporte.fecha_registro))
+			</if>
+			
+			GROUP BY
+			<if test="tipoPeriodo == 'DIA'">
+			    lista.fecha
+			</if>
+			<if test="tipoPeriodo == 'SEMANA'">
+			    lista.anio,
+    			lista.semana
+			 </if>
+			 <if test="tipoPeriodo == 'MES'">
+				lista.anio,
+				lista.mes
+			 </if>
+			 <if test="tipoPeriodo == 'ANIO'">
+			    lista.anio
+			 </if>
 	</select>
 
 
