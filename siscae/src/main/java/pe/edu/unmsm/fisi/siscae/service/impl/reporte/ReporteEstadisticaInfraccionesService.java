@@ -7,14 +7,14 @@ import org.springframework.stereotype.Service;
 
 import pe.edu.unmsm.fisi.siscae.mapper.IReporteEstadisticaInfraccionesMapper;
 import pe.edu.unmsm.fisi.siscae.model.criterio.ReporteEstadisticaInfraccionesCriterioBusqueda;
-import pe.edu.unmsm.fisi.siscae.model.reporte.ReporteEstadisticaInfracciones;
+import pe.edu.unmsm.fisi.siscae.model.reporte.resumen.ReporteEstadisticaInfraccionesPorPeriodo;
 import pe.edu.unmsm.fisi.siscae.service.IReporteEstadisticaInfraccionesService;
 
 @Service
 public class ReporteEstadisticaInfraccionesService implements IReporteEstadisticaInfraccionesService {
 	
 	private @Autowired IReporteEstadisticaInfraccionesMapper reporteEstadisticaInfraccionesMapper; 
-	
+	/*
 	@Override
 	public List<ReporteEstadisticaInfracciones> buscarTodos() {
 		return reporteEstadisticaInfraccionesMapper.buscarTodos();
@@ -24,7 +24,16 @@ public class ReporteEstadisticaInfraccionesService implements IReporteEstadistic
 	public List<ReporteEstadisticaInfracciones> buscarPorCriterio(
 			ReporteEstadisticaInfraccionesCriterioBusqueda criterioBusqueda) {
 		return reporteEstadisticaInfraccionesMapper.buscarPorCriterio(criterioBusqueda);
+	}*/
+
+
+	@Override
+	public List<ReporteEstadisticaInfraccionesPorPeriodo> buscarPorPeriodoSinSegementar(
+			ReporteEstadisticaInfraccionesCriterioBusqueda criterioBusqueda) {
+		return reporteEstadisticaInfraccionesMapper.buscarPorPeriodoSinSegementar(criterioBusqueda);
 	}
+
+
 
 	
 
