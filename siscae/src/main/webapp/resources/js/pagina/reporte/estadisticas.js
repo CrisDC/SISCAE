@@ -201,38 +201,46 @@ $(document).ready(function() {
 						}
 					});
 			}
-			if(tipoGrafico == "BARRAS" && segmentacionY == "NINGUNA" && ejeX == "PERIODO"){
-				
-				$.ajax({
-					type : "GET",
-					url : $variableUtil.root + "reporteEstadisticaPrestamos?accion=buscarPorPeriodoSinSegmentar",
-					contentType : "application/json",
-					data: criterioBusqueda,
-					dataType : "json",
-					beforeSend : function(xhr) {
-						xhr.setRequestHeader('Content-Type', 'application/json');
-						//Borrando tabla antes de hacer la consulta
-						$local.tablaResultadosPrestamo.clear().draw();
-						$local.$buscar.attr("disabled", true).find("i").removeClass("fa-search").addClass("fa-spinner fa-pulse fa-fw");
-					},
-					success : function(response) {
-						//Imprimiendo datos
-						console.log(response);
-						if (response.length === 0) {
-							$funcionUtil.notificarException($variableUtil.busquedaSinResultados, "fa-exclamation-circle", "Información", "info");
-							return;
+			if(tipoGrafico == "BARRAS"){
+				if(ejeX=="PERIODO"){
+					if(segmentacioY=="NINGUNA"){
+						$.ajax({
+							type : "GET",
+							url : $variableUtil.root + "reporteEstadisticaPrestamos?accion=buscarPorPeriodoSinSegmentar",
+							contentType : "application/json",
+							data: criterioBusqueda,
+							dataType : "json",
+							beforeSend : function(xhr) {
+								xhr.setRequestHeader('Content-Type', 'application/json');
+								//Borrando tabla antes de hacer la consulta
+								$local.tablaResultadosPrestamo.clear().draw();
+								$local.$buscar.attr("disabled", true).find("i").removeClass("fa-search").addClass("fa-spinner fa-pulse fa-fw");
+							},
+							success : function(response) {
+								//Imprimiendo datos
+								console.log(response);
+								if (response.length === 0) {
+									$funcionUtil.notificarException($variableUtil.busquedaSinResultados, "fa-exclamation-circle", "Información", "info");
+									return;
+								}
+								//Dibujando tabla
+								$local.tablaResultadosPrestamo.rows.add(response).draw();
+								//Dibujando grafico
+								var chart = AmCharts.makeChart('chartdiv',$funcionGraficoUtil.crearGraficoBarras(response,'periodoPrestamo','numeroPrestamos','Análisis de préstamos por periodo','Número de prestamos','<b>Periodo:</b> [[category]] </br> <b>Prestamos:</b> [[value]] </br> <b>Tiempo Total: </b> [[estadiaTotal]] </br> <b>Tiempo Prom: </b> [[estadiaPromedio]]'));
+							},
+							error : function(response) {
+							},
+							complete : function() {
+								$local.$buscar.attr("disabled", false).find("i").addClass("fa-search").removeClass("fa-spinner fa-pulse fa-fw");
+							}
+						});
+					}else{
+						if(segmentacioY=="NINGUNA"){
+							
 						}
-						//Dibujando tabla
-						$local.tablaResultadosPrestamo.rows.add(response).draw();
-						//Dibujando grafico
-						var chart = AmCharts.makeChart('chartdiv',$funcionGraficoUtil.crearGraficoBarras(response,'periodoPrestamo','numeroPrestamos','Análisis de préstamos por periodo','Número de prestamos','<b>Periodo:</b> [[category]] </br> <b>Prestamos:</b> [[value]] </br> <b>Tiempo Total: </b> [[estadiaTotal]] </br> <b>Tiempo Prom: </b> [[estadiaPromedio]]'));
-					},
-					error : function(response) {
-					},
-					complete : function() {
-						$local.$buscar.attr("disabled", false).find("i").addClass("fa-search").removeClass("fa-spinner fa-pulse fa-fw");
 					}
-				});
+				}
+				
 			}
 		}
 		else if($local.$tipoReporte =="I"){

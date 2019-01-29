@@ -118,7 +118,7 @@
 		FROM vw_reporte_prestamos
 		WHERE 
 			<if test="tipoPeriodo == 'DIA'">
-				    fecha_registro BETWEEN {fechaInicio}  AND {fechaFin} 
+				    fecha_registro BETWEEN #{fechaInicio}  AND #{fechaFin}
 			</if>
 			<if test="tipoPeriodo == 'SEMANA'">
 				   fecha_registro BETWEEN F_GENERADOR_FECHAS('INI', 'SEMANA',#{anioInicio} ,null, null, #{semanaInicio} )
