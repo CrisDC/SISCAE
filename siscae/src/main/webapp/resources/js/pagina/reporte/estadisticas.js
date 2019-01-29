@@ -139,7 +139,7 @@ $(document).ready(function() {
 //		}
 		var criterioBusqueda = $formEstadisticas.serializeJSON();
 		criterioBusqueda.serie=$local.$selectSeries.val();
-		crterioBusqueda.criterioSegmentacion=$local.$selectSegmY.val();
+		criterioBusqueda.criterioSegmentacion=$local.$selectSegmY.val();
 		//Obtener datos del periodo
 		if($local.$selectPeriodo.val() == 'DIA'){
 			var rangoFechaBusqueda = $funcionUtil.obtenerFechasDateRangePicker($local.$fechaPrestamo);
@@ -204,7 +204,7 @@ $(document).ready(function() {
 			}
 			if(tipoGrafico == "BARRAS"){
 				if(ejeX=="PERIODO"){
-					if(segmentacioY=="NINGUNA"){
+					if(segmentacionY=="NINGUNA"){
 						$.ajax({
 							type : "GET",
 							url : $variableUtil.root + "reporteEstadisticaPrestamos?accion=buscarPorPeriodoSinSegmentar",
