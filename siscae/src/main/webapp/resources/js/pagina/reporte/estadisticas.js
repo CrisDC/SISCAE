@@ -255,7 +255,7 @@ $(document).ready(function() {
 									$funcionUtil.notificarException($variableUtil.busquedaSinResultados, "fa-exclamation-circle", "Información", "info");
 									return;
 								}
-								//Dando formato a respuesta del 
+								//Dando formato a respuesta del servidor
 								var data = new Object();
 								for (i=0;i<response.length;i++){
 									data['ejeX'] = response[i].ejeX;
