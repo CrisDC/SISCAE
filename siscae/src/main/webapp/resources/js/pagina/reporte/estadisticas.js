@@ -236,9 +236,45 @@ $(document).ready(function() {
 							}
 						});
 					}else{
-						if(segmentacioY=="NINGUNA"){
-							
-						}
+						$.ajax({
+							type : "GET",
+							url : $variableUtil.root + "reporteEstadisticaPrestamos?accion=buscarPorPeriodoSegmentado",
+							contentType : "application/json",
+							data: criterioBusqueda,
+							dataType : "json",
+							beforeSend : function(xhr) {
+								xhr.setRequestHeader('Content-Type', 'application/json');
+								//Borrando tabla antes de hacer la consulta
+								$local.tablaResultadosPrestamo.clear().draw();
+								$local.$buscar.attr("disabled", true).find("i").removeClass("fa-search").addClass("fa-spinner fa-pulse fa-fw");
+							},
+							success : function(response) {
+								//Imprimiendo datos
+								console.log(response);
+								if (response.length === 0) {
+									$funcionUtil.notificarException($variableUtil.busquedaSinResultados, "fa-exclamation-circle", "Información", "info");
+									return;
+								}
+								//Dando formato a respuesta del 
+								var data = new Object();
+								for (i=0;i<response.length;i++){
+									data['ejeX'] = response[i].ejeX;
+									for (j=0;j<response[i].detalle.length;j++){
+										data[  response[i].detalle[j].segmento  ] = response[i].detalle[j].numeroPrestamos;
+									}
+								}
+								console.log(data);
+								//Dibujando tabla
+								$local.tablaResultadosPrestamo.rows.add(response).draw();
+								//Dibujando grafico
+								var chart = AmCharts.makeChart('chartdiv',$funcionGraficoUtil.crearGraficoBarras(response,'periodoPrestamo','numeroPrestamos','Análisis de préstamos por periodo','Número de prestamos','<b>Periodo:</b> [[category]] </br> <b>Prestamos:</b> [[value]] </br> <b>Tiempo Total: </b> [[estadiaTotal]] </br> <b>Tiempo Prom: </b> [[estadiaPromedio]]'));
+							},
+							error : function(response) {
+							},
+							complete : function() {
+								$local.$buscar.attr("disabled", false).find("i").addClass("fa-search").removeClass("fa-spinner fa-pulse fa-fw");
+							}
+						});
 					}
 				}
 				
