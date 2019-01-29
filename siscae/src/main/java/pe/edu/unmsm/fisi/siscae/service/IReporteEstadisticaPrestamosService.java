@@ -10,5 +10,5 @@ public interface IReporteEstadisticaPrestamosService {
 //	public List<ReporteEstadisticaPrestamos> buscarPorCriterio(ReporteEstadisticaPrestamosCriterioBusqueda criterioBusqueda);
 	//Nuevo - pd: los de arriba los borre del Mapper XML
 	public List<ReporteEstadisticaPrestamosPorPeriodo> buscarPorPeriodoSinSegementar(ReporteEstadisticaPrestamosCriterioBusqueda criterioBusqueda);
-	
+	public List<ReporteEstadisticaPrestamosPorPeriodo> buscarPorCriterio(ReporteEstadisticaPrestamosCriterioBusqueda criterioBusqueda);
 }

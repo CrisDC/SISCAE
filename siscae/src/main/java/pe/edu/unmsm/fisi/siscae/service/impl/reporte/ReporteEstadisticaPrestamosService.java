@@ -33,6 +33,14 @@ public class ReporteEstadisticaPrestamosService implements IReporteEstadisticaPr
 	public List<ReporteEstadisticaPrestamosPorPeriodo> buscarPorPeriodoSinSegementar(
 			ReporteEstadisticaPrestamosCriterioBusqueda criterioBusqueda) {
 		return reporteEstadisticaPrestamosMapper.buscarPorPeriodoSinSegementar(criterioBusqueda);
+	}
+
+
+
+	@Override
+	public List<ReporteEstadisticaPrestamosPorPeriodo> buscarPorCriterio(
+			ReporteEstadisticaPrestamosCriterioBusqueda criterioBusqueda) {
+		return reporteEstadisticaPrestamosMapper.buscarPorCriterio(criterioBusqueda);
 	} 
 
 }

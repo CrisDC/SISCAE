@@ -99,6 +99,50 @@
 			    lista.anio
 			 </if>
 	</select>
+	
+	<select id="buscarPorCriterio" resultMap="objetoResultadoSinSegmentar">
+		SELECT 
+			COUNT(recurso) as numeroPrestamos,
+			<if test="serie == 'ESCUELA'">
+				escuela			as segmento,
+			</if>
+			<if test="serie == 'AREAESTUDIO'">
+				area_estudio		as segmento,
+			</if>
+			<if test="serie == 'SOLICITANTE'">
+				nombre_tipo		as segmento,
+			</if>
+			IFNULL(SEC_TO_TIME2(SUM(TIME_TO_SEC(estadia))),0) 	AS estadiaTotal,
+    		IFNULL(SEC_TO_TIME(AVG(TIME_TO_SEC(estadia))),0)  	AS estadiaPromedio
+		    
+		FROM vw_reporte_prestamos
+		WHERE 
+			<if test="tipoPeriodo == 'DIA'">
+				    fecha_registro BETWEEN {fechaInicio}  AND {fechaFin} 
+			</if>
+			<if test="tipoPeriodo == 'SEMANA'">
+				   fecha_registro BETWEEN F_GENERADOR_FECHAS('INI', 'SEMANA',#{anioInicio} ,null, null, #{semanaInicio} )
+				   AND F_GENERADOR_FECHAS('FIN', 'SEMANA',#{anioInicio} ,null, null, #{semanaInicio} )
+			</if>
+			<if test="tipoPeriodo == 'MES'">
+				   fecha_registro BETWEEN F_GENERADOR_FECHAS('INI', 'MES',#{anioInicio} ,#{mesInicio}, null, null )
+				   AND F_GENERADOR_FECHAS('FIN', 'MES',#{anioInicio} ,#{mesInicio}, null, null )
+			</if>
+			<if test="tipoPeriodo == 'ANIO'">
+				    fecha_registro BETWEEN F_GENERADOR_FECHAS('INI', 'ANIO',#{anioInicio} ,null, null, null )
+				   AND F_GENERADOR_FECHAS('FIN', 'ANIO',#{anioInicio} ,null, null, null )
+			</if>
+		<if test="serie == 'ESCUELA'">
+				GROUP BY escuela
+		</if>
+		<if test="serie == 'AREAESTUDIO'">
+				GROUP BY area_estudio
+		</if>
+		<if test="serie == 'SOLICITANTE'">
+				GROUP BY nombre_tipo
+		</if>
+		
+	</select>
 
 
 </mapper>

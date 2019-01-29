@@ -14,4 +14,8 @@ public class ReporteEstadisticaPrestamosPorPeriodo {
 	String periodoPrestamo;
 	String estadiaTotal;
 	String estadiaPromedio;
+	
+	//criterios
+	String segmento;
+
 }

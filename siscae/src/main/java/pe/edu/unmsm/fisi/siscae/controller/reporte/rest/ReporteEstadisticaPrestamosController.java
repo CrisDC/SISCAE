@@ -39,4 +39,18 @@ public @RestController class ReporteEstadisticaPrestamosController {
 		System.out.println(criterioBusqueda);		
 		return reporteEstadisticaPrestamosService.buscarPorPeriodoSinSegementar(criterioBusqueda);
 	}
+	
+	@GetMapping(params = "accion=buscarPorCriterio")
+	public List<ReporteEstadisticaPrestamosPorPeriodo> buscarPorCriterio(ReporteEstadisticaPrestamosCriterioBusqueda criterioBusqueda/*,
+			@RequestParam("areasEstudio") List<Integer> areasEstudio,
+			@RequestParam("escuelas") List<Integer> escuelas,
+			@RequestParam("solicitantes") List<String> solicitantes,
+			@RequestParam("recursos") List<Integer> recursos*/) {
+		/*criterioBusqueda.setAreasEstudio(areasEstudio);
+		criterioBusqueda.setEscuelas(escuelas);
+		criterioBusqueda.setSolicitantes(solicitantes);
+		criterioBusqueda.setRecursos(recursos);*/
+		System.out.println(criterioBusqueda);		
+		return reporteEstadisticaPrestamosService.buscarPorCriterio(criterioBusqueda);
+	}
 }

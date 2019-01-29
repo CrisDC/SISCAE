@@ -166,10 +166,24 @@
 												</div>
 												<div class="row" style="width: 100%;">
 													<div class="col-md-3">
-														<div class="form-group m-b-10">
+														<div class="form-group m-b-10" id="ComboSerie" >
+															<label class="m-r-15">Series</label>
+															<div class="input-group">
+																<select id="selectSeries" class="form-control js-example-basic-single " style="height 30px;">
+																	<option value="" disabled="disabled"
+																		selected="selected">Seleccione una Serie</option>
+																	<option value="ESCUELA">Escuela</option>
+																	<option value="AREAESTUDIO">Area Estudio</option>
+																	<option value="SOLICITANTE">Solicitante</option>
+																</select>
+															</div>
+														</div>
+													</div>
+													<div class="col-md-3">
+														<div class="form-group m-b-10 hidden" id="ComboEjeX" >
 															<label class="m-r-15">Eje X</label>
 															<div class="input-group">
-																<select id="selectEjeX" class="form-control js-example-basic-single" style="height 30px;">
+																<select id="selectEjeX" class="form-control js-example-basic-single " style="height 30px;">
 																	<option value="" disabled="disabled"
 																		selected="selected">Seleccione un eje</option>
 																	<option value="PERIODO">Periodo</option>
@@ -180,7 +194,7 @@
 														</div>
 													</div>
 													<div class="col-md-3">
-														<div class="form-group m-b-10">
+														<div class="form-group m-b-10 hidden" id="ComboSegmY" >
 															<label class="m-r-15">Segmentacion en Y</label>
 															<div class="input-group">
 																<select id="selectSegmY" class="form-control js-example-basic-single" style="height 30px;">
@@ -304,10 +318,10 @@
 								</ul>
 								<div class="tab-content">
 									<div class="tab-pane active m-t-40" id="resultadoResumen" role="tabpanel">
-											<table id="tblReporteResumenPrestamo" class="display nowrap table table-hover table-striped table-bordered" cellspacing="0" width="100%">
-											</table>
+											<table id="tblReporteResumenPrestamo" class="display nowrap table table-hover table-striped table-bordered " cellspacing="0" width="100%">
+											</table>									
 											<table id="tblReporteResumenInfraccion" class="display nowrap table table-hover table-striped table-bordered hidden" cellspacing="0" width="100%">
-											</table>
+											</table>									
 									</div>
 									
 									<div class="tab-pane active m-t-40" id="resultadoGrafico" role="tabpanel">
