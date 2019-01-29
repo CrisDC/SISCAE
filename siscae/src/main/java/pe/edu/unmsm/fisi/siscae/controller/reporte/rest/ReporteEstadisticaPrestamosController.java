@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RestController;
 import pe.edu.unmsm.fisi.siscae.model.criterio.ReporteEstadisticaPrestamosCriterioBusqueda;
 import pe.edu.unmsm.fisi.siscae.model.reporte.ReporteEstadisticaPrestamos;
 import pe.edu.unmsm.fisi.siscae.model.reporte.resumen.ReporteEstadisticaPrestamosPorPeriodo;
+import pe.edu.unmsm.fisi.siscae.model.reporte.resumen.ReportePrestamosPorPeriodoSegmentado;
 import pe.edu.unmsm.fisi.siscae.service.IReporteEstadisticaPrestamosService;
  
 @RequestMapping("/reporteEstadisticaPrestamos")
@@ -52,5 +53,19 @@ public @RestController class ReporteEstadisticaPrestamosController {
 		criterioBusqueda.setRecursos(recursos);*/
 		System.out.println(criterioBusqueda);		
 		return reporteEstadisticaPrestamosService.buscarPorCriterio(criterioBusqueda);
+	}
+	
+	@GetMapping(params = "accion=buscarPorPeriodoSegmentado")
+	public List<ReportePrestamosPorPeriodoSegmentado> buscarPorPeriodoSegmentado(ReporteEstadisticaPrestamosCriterioBusqueda criterioBusqueda/*,
+			@RequestParam("areasEstudio") List<Integer> areasEstudio,
+			@RequestParam("escuelas") List<Integer> escuelas,
+			@RequestParam("solicitantes") List<String> solicitantes,
+			@RequestParam("recursos") List<Integer> recursos*/) {
+		/*criterioBusqueda.setAreasEstudio(areasEstudio);
+		criterioBusqueda.setEscuelas(escuelas);
+		criterioBusqueda.setSolicitantes(solicitantes);
+		criterioBusqueda.setRecursos(recursos);*/
+		System.out.println(criterioBusqueda);		
+		return reporteEstadisticaPrestamosService.buscarPorPeriodoSegmentado(criterioBusqueda);
 	}
 }

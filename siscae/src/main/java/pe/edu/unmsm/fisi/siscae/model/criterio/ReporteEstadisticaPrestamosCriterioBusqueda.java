@@ -17,6 +17,7 @@ public class ReporteEstadisticaPrestamosCriterioBusqueda {
 	//Criterios del periodo
 	private String tipoPeriodo;
 	private String serie;
+	private String criterioSegmentacion;
 	private String fechaInicio;
 	private String fechaFin;
 	private Integer mesInicio;

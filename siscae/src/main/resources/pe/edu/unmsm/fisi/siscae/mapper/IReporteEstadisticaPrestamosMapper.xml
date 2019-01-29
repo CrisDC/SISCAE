@@ -143,6 +143,91 @@
 		</if>
 		
 	</select>
+	
+	<select id="buscarPorPeriodoSegmentado" resultMap="mapReporteResumen">
+			WITH RECURSIVE ListaPeriodo  AS
+			(		
+				<if test="tipoPeriodo == 'DIA'">
+					SELECT #{fechaInicio}  						AS fecha					
+					UNION ALL
+					SELECT DATE_ADD(fecha,INTERVAL 1 DAY) 		AS fecha	
+					FROM ListaPeriodo
+					WHERE fecha &lt; #{fechaFin}
+				</if>
+				
+				<if test="tipoPeriodo == 'SEMANA'">
+					SELECT 	#{semanaInicio}                    	AS semana,
+							#{anioInicio}						AS anio
+					UNION ALL
+					SELECT IF(semana &lt;= 51,semana + 1,1) 		AS semana,
+						   IF(semana = 52,anio + 1,anio)  			AS anio
+					FROM ListaPeriodo
+					WHERE (anio = #{anioFin} AND semana &lt; #{semanaFin}) OR (anio &lt; #{anioFin})
+				</if>
+				
+				<if test="tipoPeriodo == 'MES'">
+					SELECT #{mesInicio} 						AS mes,
+						   #{anioInicio}						AS anio
+					UNION ALL
+					SELECT IF(mes &lt;= 11,mes + 1,1) 			AS mes,
+						   IF(mes = 12,anio + 1,anio)  			AS anio
+					FROM ListaPeriodo
+					WHERE (anio = #{anioFin} AND mes &lt; #{mesFin}) OR (anio &lt; #{anioFin})
+				</if>
+				
+				<if test="tipoPeriodo == 'ANIO'">
+					SELECT #{anioInicio} 						AS anio
+					UNION ALL
+					SELECT (anio+1) 							AS anio
+					FROM ListaPeriodo
+					WHERE anio &lt; #{anioFin}
+				</if>
+					
+			)
+			SELECT
+			      cr.v_nombre 												AS criterioSegmentacion,
+				<if test="tipoPeriodo == 'DIA'">
+					lista.fecha 											AS periodoPrestamo,
+				    F_CANTIDAD_PRESTAMOS_BETWEEN(#{criterioSegmentacion}, cr.v_nombre,lista.fecha,
+					adddate(lista.fecha, INTERVAL 1 DAY))  					AS numeroPrestamos
+				</if>
+				<if test="tipoPeriodo == 'SEMANA'">
+				    CONCAT(lista.anio,'-',lista.semana)							AS periodoPrestamo,
+				    F_CANTIDAD_PRESTAMOS_BETWEEN(#{criterioSegmentacion}, cr.v_nombre,
+				    F_GENERADOR_FECHAS('INI', 'SEMANA',lista.anio,null, null,lista.semana),
+				    F_GENERADOR_FECHAS('FIN', 'SEMANA',lista.anio,null, null,lista.semana))  	AS numeroPrestamos
+				</if>
+				<if test="tipoPeriodo == 'MES'">
+				    CONCAT(lista.anio,'-',lista.mes)							AS periodoPrestamo,
+				    F_CANTIDAD_PRESTAMOS_BETWEEN(#{criterioSegmentacion}, cr.v_nombre,
+				    F_GENERADOR_FECHAS('INI', 'MES',lista.anio,lista.mes, null,null),
+				    F_GENERADOR_FECHAS('FIN', 'MES',lista.anio,lista.mes, null,null))  	AS numeroPrestamos
+				</if>
+				<if test="tipoPeriodo == 'ANIO'">
+				    lista.anio													AS periodoPrestamo,
+				    F_CANTIDAD_PRESTAMOS_BETWEEN(#{criterioSegmentacion}, cr.v_nombre,
+				    F_GENERADOR_FECHAS('INI', 'MES',lista.anio,null, null,null),
+				    F_GENERADOR_FECHAS('FIN', 'MES',lista.anio,null, null,null))  	AS numeroPrestamos
+				</if>
+
+			FROM 
+			<if test="criterioSegmentacion == 'AREAESTUDIO'">
+				mae_area_estudio  cr,
+			</if>
+			<if test="criterioSegmentacion == 'ESCUELA'">
+				mae_escuela  cr,
+			</if>
+			ListaPeriodo lista 
+	</select>
+	
+	<resultMap type="ReportePrestamosPorPeriodoSegmentado" id="mapReporteResumen">
+			<id property="ejeX" column="periodoPrestamo"></id>
+			<collection property="detalle" javaType="List" ofType="ReportePrestamosPorPeriodoSegmentadoDetalle">
+					<result property="segmento" column="criterioSegmentacion"></result>
+					<result property="numeroPrestamos" column="numeroPrestamos"></result>
+			</collection>
+	</resultMap>
+
 
 
 </mapper>

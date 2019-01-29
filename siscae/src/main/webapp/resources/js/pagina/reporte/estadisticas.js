@@ -139,6 +139,7 @@ $(document).ready(function() {
 //		}
 		var criterioBusqueda = $formEstadisticas.serializeJSON();
 		criterioBusqueda.serie=$local.$selectSeries.val();
+		crterioBusqueda.criterioSegmentacion=$local.$selectSegmY.val();
 		//Obtener datos del periodo
 		if($local.$selectPeriodo.val() == 'DIA'){
 			var rangoFechaBusqueda = $funcionUtil.obtenerFechasDateRangePicker($local.$fechaPrestamo);
