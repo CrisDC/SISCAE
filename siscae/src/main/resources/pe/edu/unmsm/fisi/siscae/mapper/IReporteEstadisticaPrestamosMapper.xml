@@ -206,8 +206,8 @@
 				<if test="tipoPeriodo == 'ANIO'">
 				    lista.anio													AS periodoPrestamo,
 				    F_CANTIDAD_PRESTAMOS_BETWEEN(#{criterioSegmentacion}, cr.v_nombre,
-				    F_GENERADOR_FECHAS('INI', 'MES',lista.anio,null, null,null),
-				    F_GENERADOR_FECHAS('FIN', 'MES',lista.anio,null, null,null))  	AS numeroPrestamos
+				    F_GENERADOR_FECHAS('INI', 'ANIO',lista.anio,null, null,null),
+				    F_GENERADOR_FECHAS('FIN', 'ANIO',lista.anio,null, null,null))  	AS numeroPrestamos
 				</if>
 
 			FROM 

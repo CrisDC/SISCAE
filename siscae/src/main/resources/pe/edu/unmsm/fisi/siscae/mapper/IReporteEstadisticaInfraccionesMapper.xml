@@ -82,9 +82,9 @@
 			    (SELECT AVG(consulta.nInfracciones)
 			     FROM (SELECT 
 						DISTINCT(reporte.numero_documento),
-						F_CANTIDAD_INFRACCIONES(reporte.numero_documento, F_GENERADOR_FECHAS('INI', 'MES',lista.anio,lista.mes, null,null) , F_GENERADOR_FECHAS('FIN', 'SEMANA',lista.anio,lista.mes, null,null)  ) AS nInfracciones
+						F_CANTIDAD_INFRACCIONES(reporte.numero_documento, F_GENERADOR_FECHAS('INI', 'MES',lista.anio,lista.mes, null,null) , F_GENERADOR_FECHAS('FIN', 'MES',lista.anio,lista.mes, null,null)  ) AS nInfracciones
 						FROM vw_reporte_infracciones reporte
-						WHERE reporte.fecha_infraccion BETWEEN F_GENERADOR_FECHAS('INI', 'SEMANA',lista.anio,lista.mes, null,null)   AND F_GENERADOR_FECHAS('FIN', 'SEMANA',lista.anio,lista.mes, null,null) 
+						WHERE reporte.fecha_infraccion BETWEEN F_GENERADOR_FECHAS('INI', 'MES',lista.anio,lista.mes, null,null)   AND F_GENERADOR_FECHAS('FIN', 'MES',lista.anio,lista.mes, null,null) 
 					  ) as consulta
 			    )												AS numeroInfraccionesPromedioPorAlumno
 			</if>
