@@ -33,7 +33,7 @@ public class TipoRecurso {
     @Length(min = 3, max  = 20, message = "{Length.CodigoProcesoSwitch.uso}")
 	private String uso;
 	
-
+    private String usable;
 
 	private int maxCapacidad;
 }
