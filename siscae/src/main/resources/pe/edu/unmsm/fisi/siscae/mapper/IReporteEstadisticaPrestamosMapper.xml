@@ -217,6 +217,11 @@
 			<if test="criterioSegmentacion == 'ESCUELA'">
 				mae_escuela  cr,
 			</if>
+			<if test="criterioSegmentacion == 'TIPOSOLICITANTE'">
+				(SELECT 
+					DISTINCT(F_GET_TIPO_SOLICITANTE(n_id_persona)) AS v_nombre
+	  			FROM mae_persona) AS cr,
+			</if>
 			ListaPeriodo lista 
 	</select>
 	

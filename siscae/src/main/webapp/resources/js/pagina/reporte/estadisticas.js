@@ -256,18 +256,48 @@ $(document).ready(function() {
 									return;
 								}
 								//Dando formato a respuesta del servidor
-								var data = new Object();
+								var data = [];
+								var aux;
 								for (i=0;i<response.length;i++){
-									data['ejeX'] = response[i].ejeX;
+									aux= new Object();
+									aux['ejeX'] = response[i].ejeX;
 									for (j=0;j<response[i].detalle.length;j++){
-										data[  response[i].detalle[j].segmento  ] = response[i].detalle[j].numeroPrestamos;
+										
+										aux[  response[i].detalle[j].segmento  ] = response[i].detalle[j].numeroPrestamos;
 									}
+									data.push(aux);
 								}
 								console.log(data);
+								//Generando Leyenda
+								var resultGraph = [];
+								var arrayJSONX = response[0].detalle;
+								arrayJSONX.sort();								
+								for(i=0;i<arrayJSONX.length;i++){
+									var g = new Object();
+									g['balloonText'] = "<b style='font-size:12px'>[[title]]</b><br><span><b>Periodo : </b></span> [[category]]<br><span><b>Número Préstamos: </b> [[value]]";
+									g['fillAlphas'] = 0.8;
+									g['labelText'] = "[[value]]";
+									g['labelPosition'] = "middle";
+									g['lineAlpha'] = 0.3;
+									g['title'] = arrayJSONX[i].segmento;
+									g['type'] = "column";
+									g['valueField'] = arrayJSONX[i].segmento;
+									resultGraph.push(g);
+								}
+								
+								console.log(resultGraph);
+								//obteniendo presentacion
+								var presentacion ='';
+								if($local.$selectPresentacion.val()=="APILADO"){
+									presentacion='regular';
+								}
+								else if ($local.$selectPresentacion.val()=="PARALELO"){
+									presentacion='none';
+								}
 								//Dibujando tabla
-								$local.tablaResultadosPrestamo.rows.add(response).draw();
+								//$local.tablaResultadosPrestamo.rows.add(response).draw();
 								//Dibujando grafico
-								var chart = AmCharts.makeChart('chartdiv',$funcionGraficoUtil.crearGraficoBarras(response,'periodoPrestamo','numeroPrestamos','Análisis de préstamos por periodo','Número de prestamos','<b>Periodo:</b> [[category]] </br> <b>Prestamos:</b> [[value]] </br> <b>Tiempo Total: </b> [[estadiaTotal]] </br> <b>Tiempo Prom: </b> [[estadiaPromedio]]'));
+								var chart = AmCharts.makeChart('chartdiv',$funcionGraficoUtil.crearGraficoBarrasSegmentado(data,resultGraph,'ejeX','Cantidad de Préstamos',presentacion,'Prestamos por criterio'));
 							},
 							error : function(response) {
 							},
