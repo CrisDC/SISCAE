@@ -53,7 +53,7 @@
 			)
 			SELECT
 				COUNT(reporte.nombre)										AS numeroInfracciones,
-				 SUM(CASE WHEN reporte.estado_solicitante='SANCIONADO'
+				SUM(CASE WHEN reporte.estado_solicitante='SANCIONADO'
 			         THEN 1 ELSE 0 END) 									AS numeroSancionados,
 			<if test="tipoPeriodo == 'DIA'">
 			    lista.fecha 												AS periodoInfraccion,
@@ -130,6 +130,90 @@
 			    lista.anio
 			 </if>
 	</select>
-
+	
+	<select id="buscarPorCriterio" resultMap="objetoResultadoSinSegmentar">
+		SELECT 
+			COUNT(fecha_infraccion) as numeroInfracciones,
+			<if test="serie == 'ESCUELA'">
+				r.escuela_programa			as segmento,
+			</if>
+			<if test="serie == 'AREAESTUDIO'">
+				r.area_estudio		as segmento,
+			</if>
+			<if test="serie == 'SOLICITANTE'">
+				r.nombre_tipo		as segmento,
+			</if>
+			SUM(CASE WHEN F_ESTADO_SOLICITANTE(pe.n_id_persona)='SANCIONADO'
+			         THEN 1 ELSE 0 END) 									AS numeroSancionados,
+			<if test="tipoPeriodo == 'DIA'">
+				(SELECT AVG(consulta.nInfracciones)
+			     FROM (SELECT 
+						DISTINCT(reporte.numero_documento),
+						F_CANTIDAD_INFRACCIONES(reporte.numero_documento, #{fechaInicio} , #{fechaFin} ) AS nInfracciones
+						FROM vw_reporte_infracciones reporte
+						WHERE reporte.fecha_infraccion BETWEEN #{fechaInicio}  AND #{fechaFin}
+					  ) as consulta
+			    )															AS numeroInfraccionesPromedioPorAlumno
+			</if>
+			<if test="tipoPeriodo == 'SEMANA'">
+			    (SELECT AVG(consulta.nInfracciones)
+			     FROM (SELECT 
+						DISTINCT(reporte.numero_documento),
+						F_CANTIDAD_INFRACCIONES(reporte.numero_documento, F_GENERADOR_FECHAS('INI', 'SEMANA',lista.anio,null, null, lista.semana) , F_GENERADOR_FECHAS('FIN', 'SEMANA',lista.anio,null, null, lista.semana)  ) AS nInfracciones
+						FROM vw_reporte_infracciones reporte
+						WHERE reporte.fecha_infraccion BETWEEN F_GENERADOR_FECHAS('INI', 'SEMANA',lista.anio,null, null, lista.semana)   AND F_GENERADOR_FECHAS('FIN', 'SEMANA',lista.anio,null, null, lista.semana) 
+					  ) as consulta
+			    )															AS numeroInfraccionesPromedioPorAlumno
+			</if>
+			<if test="tipoPeriodo == 'MES'">
+			    (SELECT AVG(consulta.nInfracciones)
+			     FROM (SELECT 
+						DISTINCT(reporte.numero_documento),
+						F_CANTIDAD_INFRACCIONES(reporte.numero_documento, F_GENERADOR_FECHAS('INI', 'MES',lista.anio,lista.mes, null,null) , F_GENERADOR_FECHAS('FIN', 'SEMANA',lista.anio,lista.mes, null,null)  ) AS nInfracciones
+						FROM vw_reporte_infracciones reporte
+						WHERE reporte.fecha_infraccion BETWEEN F_GENERADOR_FECHAS('INI', 'SEMANA',lista.anio,lista.mes, null,null)   AND F_GENERADOR_FECHAS('FIN', 'SEMANA',lista.anio,lista.mes, null,null) 
+					  ) as consulta
+			    )												AS numeroInfraccionesPromedioPorAlumno
+			</if>
+			<if test="tipoPeriodo == 'ANIO'">
+			    (SELECT AVG(consulta.nInfracciones)
+			     FROM (SELECT 
+						DISTINCT(reporte.numero_documento),
+						F_CANTIDAD_INFRACCIONES(reporte.numero_documento, F_GENERADOR_FECHAS('INI', 'ANIO',lista.anio,null, null,null) , F_GENERADOR_FECHAS('FIN', 'ANIO',lista.anio,null, null,null)  ) AS nInfracciones
+						FROM vw_reporte_infracciones reporte
+						WHERE reporte.fecha_infraccion BETWEEN F_GENERADOR_FECHAS('INI', 'ANIO',lista.anio,null, null,null)   AND F_GENERADOR_FECHAS('FIN','ANIO',lista.anio,null, null,null) 
+					  ) as consulta
+			    )												AS numeroInfraccionesPromedioPorAlumno
+			</if>
+		    
+		FROM vw_reporte_infracciones r
+		LEFT JOIN mae_persona pe ON (pe.v_num_documento=r.numero_documento)
+		WHERE 
+			<if test="tipoPeriodo == 'DIA'">
+				    fecha_infraccion BETWEEN #{fechaInicio}  AND #{fechaFin}
+			</if>
+			<if test="tipoPeriodo == 'SEMANA'">
+				   fecha_infraccion BETWEEN F_GENERADOR_FECHAS('INI', 'SEMANA',#{anioInicio} ,null, null, #{semanaInicio} )
+				   AND F_GENERADOR_FECHAS('FIN', 'SEMANA',#{anioInicio} ,null, null, #{semanaInicio} )
+			</if>
+			<if test="tipoPeriodo == 'MES'">
+				   fecha_infraccion BETWEEN F_GENERADOR_FECHAS('INI', 'MES',#{anioInicio} ,#{mesInicio}, null, null )
+				   AND F_GENERADOR_FECHAS('FIN', 'MES',#{anioInicio} ,#{mesInicio}, null, null )
+			</if>
+			<if test="tipoPeriodo == 'ANIO'">
+				    fecha_infraccion BETWEEN F_GENERADOR_FECHAS('INI', 'ANIO',#{anioInicio} ,null, null, null )
+				   AND F_GENERADOR_FECHAS('FIN', 'ANIO',#{anioInicio} ,null, null, null )
+			</if>
+		<if test="serie == 'ESCUELA'">
+				GROUP BY r.escuela_programa
+		</if>
+		<if test="serie == 'AREAESTUDIO'">
+				GROUP BY r.area_estudio
+		</if>
+		<if test="serie == 'SOLICITANTE'">
+				GROUP BY r.nombre_tipo
+		</if>
+		
+	</select>
 
 </mapper>

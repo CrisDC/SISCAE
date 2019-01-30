@@ -358,37 +358,76 @@ $(document).ready(function() {
 			}
 		}
 		else if($local.$tipoReporte =="I"){
-				if(tipoGrafico == "BARRAS" && segmentacionY == "NINGUNA" && ejeX == "PERIODO"){
-								
-								$.ajax({
-									type : "GET",
-									url : $variableUtil.root + "reporteEstadisticaInfracciones?accion=buscarPorPeriodoSinSegmentar",
-									contentType : "application/json",
-									data: criterioBusqueda,
-									dataType : "json",
-									beforeSend : function(xhr) {
-										xhr.setRequestHeader('Content-Type', 'application/json');
-										//Borrando tabla antes de hacer la consulta
-										$local.tablaResultadosInfraccion.clear().draw();
-										$local.$buscar.attr("disabled", true).find("i").removeClass("fa-search").addClass("fa-spinner fa-pulse fa-fw");
-									},
-									success : function(response) {
-										if (response.length === 0) {
-											$funcionUtil.notificarException($variableUtil.busquedaSinResultados, "fa-exclamation-circle", "Información", "info");
-											return;
-										}
-										//Dibujando tabla
-										$local.tablaResultadosInfraccion.rows.add(response).draw();
-										//Dibujando grafico
-										var chart = AmCharts.makeChart('chartdiv',$funcionGraficoUtil.crearGraficoBarras(response,'periodoInfraccion','numeroInfracciones','Análisis de Infracciones por periodo','Número de Infracciones','<b>Periodo:</b> [[category]] </br> <b>Infracciones:</b> [[value]] </br> <b>Número de sancionados: </b> [[numeroSancionados]] </br> <b>Num Infracc. Prom: </b> [[numeroInfraccionesPromedioPorAlumno]]'));
-									},
-									error : function(response) {
-									},
-									complete : function() {
-										$local.$buscar.attr("disabled", false).find("i").addClass("fa-search").removeClass("fa-spinner fa-pulse fa-fw");
-									}
-								});
+			if(tipoGrafico == "PIE"){
+				$.ajax({
+					type : "GET",
+					url : $variableUtil.root + "reporteEstadisticaInfracciones?accion=buscarPorCriterio",
+					contentType : "application/json",
+					data: criterioBusqueda,
+					dataType : "json",
+					beforeSend : function(xhr) {
+						xhr.setRequestHeader('Content-Type', 'application/json');
+						//Borrando tabla antes de hacer la consulta
+						$local.tablaResultadosPrestamo.clear().draw();
+						$local.$buscar.attr("disabled", true).find("i").removeClass("fa-search").addClass("fa-spinner fa-pulse fa-fw");
+					},
+					success : function(response) {
+						if (response.length === 0) {
+							$funcionUtil.notificarException($variableUtil.busquedaSinResultados, "fa-exclamation-circle", "Información", "info");
+							return;
+						}
+						//Dibujando tabla
+						$local.tablaResultadosPrestamo.rows.add(response).draw();
+						//Dibujando grafico
+						var chart = AmCharts.makeChart('chartdiv',$funcionGraficoUtil.crearGraficoPie(response,'segmento','numeroInfracciones','Análisis de Infracciones','Número de Infracciones', "<b style='font-size:12px'>[[title]]</b> ([[percents]]%)<b>Periodo:</b> [[category]] </br>  <b>Infracciones:</b> [[value]] </br> <b>Sancionados: </b> [[numeroSancionados]] <br> <b>Infracciones Prom: </b> [[numeroInfraccionesPromedioPorAlumno]]"));
+					},
+					error : function(response) {
+					},
+					complete : function() {
+						$local.$buscar.attr("disabled", false).find("i").addClass("fa-search").removeClass("fa-spinner fa-pulse fa-fw");
+					}
+				});
+		}
+		if(tipoGrafico == "BARRAS"){
+			if(ejeX=="PERIODO"){
+				if(segmentacionY=="NINGUNA"){
+					$.ajax({
+						type : "GET",
+						url : $variableUtil.root + "reporteEstadisticaInfracciones?accion=buscarPorPeriodoSinSegmentar",
+						contentType : "application/json",
+						data: criterioBusqueda,
+						dataType : "json",
+						beforeSend : function(xhr) {
+							xhr.setRequestHeader('Content-Type', 'application/json');
+							//Borrando tabla antes de hacer la consulta
+							$local.tablaResultadosInfraccion.clear().draw();
+							$local.$buscar.attr("disabled", true).find("i").removeClass("fa-search").addClass("fa-spinner fa-pulse fa-fw");
+						},
+						success : function(response) {
+							if (response.length === 0) {
+								$funcionUtil.notificarException($variableUtil.busquedaSinResultados, "fa-exclamation-circle", "Información", "info");
+								return;
 							}
+							//Dibujando tabla
+							$local.tablaResultadosInfraccion.rows.add(response).draw();
+							//Dibujando grafico
+							var chart = AmCharts.makeChart('chartdiv',$funcionGraficoUtil.crearGraficoBarras(response,'periodoInfraccion','numeroInfracciones','Análisis de Infracciones por periodo','Número de Infracciones','<b>Periodo:</b> [[category]] </br> <b>Infracciones:</b> [[value]] </br> <b>Número de sancionados: </b> [[numeroSancionados]] </br> <b>Num Infracc. Prom: </b> [[numeroInfraccionesPromedioPorAlumno]]'));
+						},
+						error : function(response) {
+						},
+						complete : function() {
+							$local.$buscar.attr("disabled", false).find("i").addClass("fa-search").removeClass("fa-spinner fa-pulse fa-fw");
+						}
+					});
+				}else{
+					
+				}
+			}
+			
+		}if(tipoGrafico == "LINEAL"){
+			
+		}
+
 			
 		}
 		

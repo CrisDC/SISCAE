@@ -8,6 +8,8 @@ import lombok.Data;
 public class ReporteEstadisticaInfraccionesCriterioBusqueda {
 	//Criterios del periodo
 	private String tipoPeriodo;
+	private String serie;
+	private String criterioSegmentacion;
 	private String fechaInicio;
 	private String fechaFin;
 	private Integer mesInicio;
