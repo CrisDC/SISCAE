@@ -347,7 +347,7 @@ $(document).ready(function() {
 						//Dibujando tabla
 						//$local.tablaResultadosPrestamo.rows.add(response).draw();
 						//Dibujando grafico
-						var chart = AmCharts.makeChart('chartdiv',$funcionGraficoUtil.crearGraficoLineal(response,'periodoPrestamo','numeroPrestamos',"<span style='font-size:18px;'>[[value]]</span>"));
+						var chart = AmCharts.makeChart('chartdiv',$funcionGraficoUtil.crearGraficoLineal(response,'periodoPrestamo','numeroPrestamos',"<b>Periodo:</b> [[category]] </br> <b>Prestamos:</b> [[value]] </br> <b>Tiempo Total: </b> [[estadiaTotal]] </br> <b>Tiempo Prom: </b> [[estadiaPromedio]]"));
 					},
 					error : function(response) {
 					},
