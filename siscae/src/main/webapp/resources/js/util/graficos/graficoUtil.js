@@ -48,7 +48,7 @@ $(document).ready(function() {
 				return amChartPropiedadesGraficoBarras;
 				
 			},
-			crearGraficoLineal : function(tipoGrafico, datos, valorJSONEjeX, valorJSONEjeY, tituloGrafico, tituloEjeY, ballonText){
+			crearGraficoLineal : function(datos, valorJSONEjeX, valorJSONEjeY, ballonText){
 				amChartPropiedadesGraficoLineas = {
 						"type": "serial",
 						  "theme": "light",
@@ -70,7 +70,7 @@ $(document).ready(function() {
 						    "lineThickness": 2,
 						    "title": "red line",
 						    "useLineColorForBulletBorder": true,
-						    "valueField": valorJSONEjeX,
+						    "valueField": valorJSONEjeY,
 						    "balloonText": ballonText
 						  }],
 						  "chartScrollbar": {
@@ -102,7 +102,7 @@ $(document).ready(function() {
 						    "offset": 50,
 						    "scrollbarHeight": 10
 						  },
-						  "categoryField": valorJSONEjeY,
+						  "categoryField": valorJSONEjeX,
 						  "categoryAxis": {
 						    "parseDates": true,
 						    "dashLength": 1,
