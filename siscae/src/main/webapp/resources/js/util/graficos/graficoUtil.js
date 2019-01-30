@@ -161,7 +161,7 @@ $(document).ready(function() {
 				return amChartPropiedadesGraficoBarrasSegmentado;
 				
 			},
-			crearGraficoPie : function(datos, valorJSONEjeX, valorJSONEjeY, tituloGrafico, tituloEjeY){
+			crearGraficoPie : function(datos, valorJSONEjeX, valorJSONEjeY, tituloGrafico, tituloEjeY, balloonText ){
 				amChartPropiedadesGraficoPie = {
 						"type": "pie",
 						  "addClassNames": true,
@@ -177,7 +177,7 @@ $(document).ready(function() {
 						  "dataProvider": datos,
 						  "valueField": valorJSONEjeY,
 						  "titleField": valorJSONEjeX,
-						  "balloonText": "<b style='font-size:12px'>[[title]]</b> ([[percents]]%) <br> <span><b>Número Txn: </b>[[value]]</span> <br> <span><b>Monto: </b>[[montoAcumulado]]</span>",
+						  "balloonText": balloonText,
 						  "titles": [{
 								"text": tituloGrafico,
 								"size": 14
