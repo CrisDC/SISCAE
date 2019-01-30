@@ -29,9 +29,9 @@ $(document).ready(function() {
 			$divAnioInicio : $('#divAnioInicio'),
 			$divAnioFin : $('#divAnioFin'),
 			$divPresentacion : $('#divPresentacion'),
-			$ComboSerie :$('#ComboSerie'),
-			$ComboEjeX:$('#ComboEjeX'),
-			$ComboSegmY :$('#ComboSegmY'),
+			$divSerie : $('#divSerie'),
+			$divEjeX : $('#divEjeX'),
+			$divSegmY : $('#divSegmY'),
 			
 			//Botones de la pagina
 			$buscar : $('#buscar'),
@@ -115,20 +115,27 @@ $(document).ready(function() {
 	//Evento que se dispara cuando el combo Segmentacion en Y cambie
 	$local.$selectTipoGrafico.on("change", function(){
 		var val = $(this).val(); 	
-		if(val == "BARRAS" && $local.$selectSegmY.val() != "NINGUNA"){
-			$local.$divPresentacion.removeClass("hidden");
-		}else{
-			$local.$divPresentacion.addClass("hidden");
+		if(val == "BARRAS"){
+			$local.$divSegmY.removeClass("hidden");
+			$local.$divSerie.addClass("hidden");
+			$local.$divEjeX.removeClass("hidden");
+			if($local.$selectSegmY.val() != "NINGUNA"){
+				$local.$divPresentacion.removeClass("hidden");
+			}else{
+				$local.$divPresentacion.addClass("hidden");
+			}
 		}
-		if(val== "PIE" ){
-			$local.$ComboSerie.removeClass("hidden");
-			$local.$ComboEjeX.addClass("hidden");
-			$local.$ComboSegmY.addClass("hidden");
-			
-		}else{
-			$local.$ComboSerie.addClass("hidden");
-			$local.$ComboEjeX.removeClass("hidden");
-			$local.$ComboSegmY.removeClass("hidden");
+		if(val == "PIE"){
+			$local.$divSerie.removeClass("hidden");
+			$local.$divEjeX.addClass("hidden");
+			$local.$divSegmY.addClass("hidden");
+			$local.$divPresentacion.addClass("hidden");
+		}		
+		if(val == "LINEAL"){
+			$local.$divSerie.addClass("hidden");
+			$local.$divEjeX.addClass("hidden");
+			$local.$divSegmY.addClass("hidden");
+			$local.$divPresentacion.addClass("hidden");
 		}
 	});
 	
@@ -249,8 +256,6 @@ $(document).ready(function() {
 								$local.$buscar.attr("disabled", true).find("i").removeClass("fa-search").addClass("fa-spinner fa-pulse fa-fw");
 							},
 							success : function(response) {
-								//Imprimiendo datos
-								console.log(response);
 								if (response.length === 0) {
 									$funcionUtil.notificarException($variableUtil.busquedaSinResultados, "fa-exclamation-circle", "Información", "info");
 									return;
@@ -262,12 +267,10 @@ $(document).ready(function() {
 									aux= new Object();
 									aux['ejeX'] = response[i].ejeX;
 									for (j=0;j<response[i].detalle.length;j++){
-										
-										aux[  response[i].detalle[j].segmento  ] = response[i].detalle[j].numeroPrestamos;
+										aux[response[i].detalle[j].segmento] = response[i].detalle[j].numeroPrestamos;
 									}
 									data.push(aux);
 								}
-								console.log(data);
 								//Generando Leyenda
 								var resultGraph = [];
 								var arrayJSONX = response[0].detalle;
@@ -284,10 +287,9 @@ $(document).ready(function() {
 									g['valueField'] = arrayJSONX[i].segmento;
 									resultGraph.push(g);
 								}
-								
-								console.log(resultGraph);
 								//obteniendo presentacion
 								var presentacion ='';
+								console.log(arrayJSONX);
 								if($local.$selectPresentacion.val()=="APILADO"){
 									presentacion='regular';
 								}
@@ -298,6 +300,9 @@ $(document).ready(function() {
 								//$local.tablaResultadosPrestamo.rows.add(response).draw();
 								//Dibujando grafico
 								var chart = AmCharts.makeChart('chartdiv',$funcionGraficoUtil.crearGraficoBarrasSegmentado(data,resultGraph,'ejeX','Cantidad de Préstamos',presentacion,'Prestamos por criterio'));
+								data = [];
+								resultGraph = [];
+								arrayJSONX = [];
 							},
 							error : function(response) {
 							},
@@ -418,7 +423,6 @@ $(document).ready(function() {
 			$local.$tablaResultadosPrestamo.addClass("hidden");
 			$local.$tablaResultadosInfraccion.removeClass("hidden");
 		}
-		alert($local.$tipoReporte);
 	});
 
 });
