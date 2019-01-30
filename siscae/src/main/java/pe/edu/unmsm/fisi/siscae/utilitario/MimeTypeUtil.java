@@ -11,6 +11,11 @@ public class MimeTypeUtil
     public final static String JPEG = "image/jpeg";
     public final static String XLSX = "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet";
 
+    public static final String EXTENSION_PDF = ".pdf";
+    public static final String EXTENSION_PNG = ".png";
+    public static final String EXTENSION_JPEG = ".jpeg";
+    public static final String EXTENSION_XLSX = ".xlsx";
+    
     public static Map<String, String> extension = Collections
             .unmodifiableMap(new LinkedHashMap<String, String>()
             {

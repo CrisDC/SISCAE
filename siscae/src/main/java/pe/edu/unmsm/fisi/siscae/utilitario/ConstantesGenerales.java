@@ -31,4 +31,7 @@ public class ConstantesGenerales
 	public static final int TIPO_DOCUMENTO_PASAPORTE = 2;
 	public static final int TIPO_DOCUMENTO_CARNET_EXTRANJERIA = 3;
 	public static final int TIPO_DOCUMENTO_AUTOGENERADO = 4;
+
+	
+    public static final String RUTA_REPORTE_XLSX = "xlsx/";
 }

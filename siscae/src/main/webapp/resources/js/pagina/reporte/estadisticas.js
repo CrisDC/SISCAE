@@ -147,11 +147,7 @@ $(document).ready(function() {
 		}
 	});
 	
-	
-	$local.$buscar.on('click', function() {
-//		if (!$formEstadisticas.valid()) {
-//			return;
-//		}
+	var obtenerCriteriosDeBusqueda = function () {
 		var criterioBusqueda = $formEstadisticas.serializeJSON();
 		criterioBusqueda.serie=$local.$selectSeries.val();
 		criterioBusqueda.criterioSegmentacion=$local.$selectSegmY.val();
@@ -177,6 +173,14 @@ $(document).ready(function() {
 			criterioBusqueda.anioInicio = $local.$anioInicio.val();
 			criterioBusqueda.anioFin = $local.$anioFin.val();
 		}
+		return criterioBusqueda;
+	}
+	
+	$local.$buscar.on('click', function() {
+//		if (!$formEstadisticas.valid()) {
+//			return;
+//		}
+		var criterioBusqueda = obtenerCriteriosDeBusqueda();
 		//Obteniendo parametros de la grafica
 		let tipoGrafico = $local.$selectTipoGrafico.val();
 		let segmentacionY = $local.$selectSegmY.val();
@@ -428,6 +432,13 @@ $(document).ready(function() {
 		if($local.$tipoReporte=="I"){
 			$local.$divTablaResumenPrestamo.addClass("hidden");
 			$local.$divTablaResumenInfraccion.removeClass("hidden");
+		}
+	});
+
+	$local.$exportar.on('click', function(){
+		criterioBusqueda = obtenerCriteriosDeBusqueda();
+		if($local.$tipoReporte =="P"){
+			window.location.href = $variableUtil.root + "reporteEstadisticaPrestamos?accion=exportar&" + $.param(criterioBusqueda);	
 		}
 	});
 

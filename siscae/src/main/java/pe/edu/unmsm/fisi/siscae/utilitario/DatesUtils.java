@@ -11,6 +11,7 @@ public class DatesUtils
 {
     public static final String FORMATO_YYYYMMDD = "YYYY-MM-DD";
     public static final String FORMATO_HHMMSS = "HH:mm:ss";
+    public static final String FORMATO_FECHA_REPORTES = "dd/MM/yyy HH:mm:ss";
     
     public static Date obtenerFechaDeMilisegundos(long tiempoMilisegundos)
     {
