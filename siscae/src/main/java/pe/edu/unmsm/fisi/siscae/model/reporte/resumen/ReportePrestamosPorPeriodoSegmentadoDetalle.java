@@ -12,4 +12,5 @@ import lombok.NoArgsConstructor;
 public class ReportePrestamosPorPeriodoSegmentadoDetalle {
 	String segmento;
 	Integer numeroPrestamos;
+	String periodoPrestamo;
 }

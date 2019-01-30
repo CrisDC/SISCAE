@@ -184,7 +184,35 @@ $(document).ready(function() {
 						  }]
 				}
 				return amChartPropiedadesGraficoPie;
-			}			
+			},
+			obtenerLeyendaGraficoBarrasSegementado : function(data,resultGraph, valueJSONX, tooltip){
+				data.sort();								
+				for(i=0;i<data.length;i++){
+					var g = new Object();
+					g['balloonText'] = tooltip;
+					g['fillAlphas'] = 0.8;
+					g['labelText'] = "[[value]]";
+					g['labelPosition'] = "middle";
+					g['lineAlpha'] = 0.3;
+					g['title'] = valueJSONX;
+					g['type'] = "column";
+					g['valueField'] = valueJSONX;
+					resultGraph.push(g);
+				}
+				return resultGraph;
+			},
+			obtenerJSONGraficoBarrasSegementado : function(response,atributoEjeX){
+				var aux;
+				for (i=0;i<response.length;i++){
+					aux= new Object();
+					aux[atributoEjeX] = response[i].ejeX;
+					for (j=0;j<response[i].detalle.length;j++){
+						aux[response[i].detalle[j].segmento] = response[i].detalle[j].numeroPrestamos;
+					}
+					data.push(aux);
+				}
+				return data;
+			}
 	}
 	
 });

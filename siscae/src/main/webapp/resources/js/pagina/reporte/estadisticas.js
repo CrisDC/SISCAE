@@ -33,16 +33,24 @@ $(document).ready(function() {
 			$divEjeX : $('#divEjeX'),
 			$divSegmY : $('#divSegmY'),
 			
+			$divTablaResumenPrestamo : $('#divTablaResumenPrestamo'),
+			$divTablaResumenInfraccion : $('#divTablaResumenInfraccion'),
+			$divTablaResumenPrestamoSegmentado : $('#divTablaResumenPrestamoSegmentado'),
+			
 			//Botones de la pagina
 			$buscar : $('#buscar'),
 			$exportar : $('#exportar'),
 			//Tipo Reporte
 			$tipoReporte:'P',
+			
 			//DataTable
 			$tablaResultadosPrestamo : $("#tblReporteResumenPrestamo"),
 			tablaResultadosPrestamo : "",
 			$tablaResultadosInfraccion : $("#tblReporteResumenInfraccion"),
-			tablaResultadosInfraccion : ""
+			tablaResultadosInfraccion : "",
+				
+			$tablaResultadosPrestamoSegementado : $("#tblReporteResumenPrestamoSegmentado"),
+			tablaResultadosPrestamoSegementado : ""
 			
 			
 		};
@@ -175,7 +183,6 @@ $(document).ready(function() {
 		let ejeX = $local.$selectEjeX.val();
 		let serie= $local.$selectSeries.val();
 		
-		console.log(criterioBusqueda);
 		if($local.$tipoReporte =="P"){
 			if(tipoGrafico == "PIE"){
 					$.ajax({
@@ -191,8 +198,6 @@ $(document).ready(function() {
 							$local.$buscar.attr("disabled", true).find("i").removeClass("fa-search").addClass("fa-spinner fa-pulse fa-fw");
 						},
 						success : function(response) {
-							//Imprimiendo datos
-							console.log(response);
 							if (response.length === 0) {
 								$funcionUtil.notificarException($variableUtil.busquedaSinResultados, "fa-exclamation-circle", "Información", "info");
 								return;
@@ -225,8 +230,6 @@ $(document).ready(function() {
 								$local.$buscar.attr("disabled", true).find("i").removeClass("fa-search").addClass("fa-spinner fa-pulse fa-fw");
 							},
 							success : function(response) {
-								//Imprimiendo datos
-								console.log(response);
 								if (response.length === 0) {
 									$funcionUtil.notificarException($variableUtil.busquedaSinResultados, "fa-exclamation-circle", "Información", "info");
 									return;
@@ -260,6 +263,7 @@ $(document).ready(function() {
 									$funcionUtil.notificarException($variableUtil.busquedaSinResultados, "fa-exclamation-circle", "Información", "info");
 									return;
 								}
+								console.log(response);
 								//Dando formato a respuesta del servidor
 								var data = [];
 								var aux;
@@ -289,7 +293,6 @@ $(document).ready(function() {
 								}
 								//obteniendo presentacion
 								var presentacion ='';
-								console.log(arrayJSONX);
 								if($local.$selectPresentacion.val()=="APILADO"){
 									presentacion='regular';
 								}
@@ -331,8 +334,6 @@ $(document).ready(function() {
 										$local.$buscar.attr("disabled", true).find("i").removeClass("fa-search").addClass("fa-spinner fa-pulse fa-fw");
 									},
 									success : function(response) {
-										//Imprimiendo datos
-										console.log(response);
 										if (response.length === 0) {
 											$funcionUtil.notificarException($variableUtil.busquedaSinResultados, "fa-exclamation-circle", "Información", "info");
 											return;
@@ -384,6 +385,7 @@ $(document).ready(function() {
 			"title" : "Tiempo Medio Estadia"
 		}]
 	});
+	
 	$local.tablaResultadosInfraccion = $local.$tablaResultadosInfraccion.DataTable({
 		"language" : {
 			"emptyTable" : "No hay registros encontrados."
@@ -404,24 +406,28 @@ $(document).ready(function() {
 			"title" : "Periodo"
 		}, {
 			"data" : "numeroInfracciones",
-			"title" : "Cantidad de Infracciones"
+			"title" : "Cantidad Infracciones"
 		}, {
 			"data" : "numeroSancionados",
-			"title" : "Cantidad de Sancionados"
+			"title" : "Cantidad Sancionados"
 		}, {
 			"data" : "numeroInfraccionesPromedioPorAlumno",
-			"title" : "Cantidad de infracciones promedio"
+			"title" : "Infracciones promedio"
 		}]
 	});
+	
+	$local.$divTablaResumenPrestamo.removeClass("hidden"); // por defecto
+	$local.$divTablaResumenInfraccion.addClass("hidden"); // por defecto
 	
 	$("#xd").find(".comun").on("click", function(){
 		$local.$tipoReporte = $(this).attr("key");
 		if($local.$tipoReporte=="P"){
-			$local.$tablaResultadosPrestamo.removeClass("hidden");
-			$local.$tablaResultadosInfraccion.addClass("hidden");
-		}else{
-			$local.$tablaResultadosPrestamo.addClass("hidden");
-			$local.$tablaResultadosInfraccion.removeClass("hidden");
+			$local.$divTablaResumenPrestamo.removeClass("hidden");
+			$local.$divTablaResumenInfraccion.addClass("hidden");
+		}
+		if($local.$tipoReporte=="I"){
+			$local.$divTablaResumenPrestamo.addClass("hidden");
+			$local.$divTablaResumenInfraccion.removeClass("hidden");
 		}
 	});
 
