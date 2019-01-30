@@ -211,18 +211,23 @@
 				</if>
 
 			FROM 
+			ListaPeriodo lista ,
 			<if test="criterioSegmentacion == 'AREAESTUDIO'">
-				mae_area_estudio  cr,
+				mae_area_estudio  cr
 			</if>
 			<if test="criterioSegmentacion == 'ESCUELA'">
-				mae_escuela  cr,
+				mae_escuela  cr
 			</if>
 			<if test="criterioSegmentacion == 'TIPOSOLICITANTE'">
 				(SELECT 
 					DISTINCT(F_GET_TIPO_SOLICITANTE(n_id_persona)) AS v_nombre
-	  			FROM mae_persona) AS cr,
+	  			FROM mae_persona) AS cr
 			</if>
-			ListaPeriodo lista 
+			<if test="criterioSegmentacion == 'RECURSO'">
+				mae_tipo_recurso AS  cr
+				WHERE cr.v_usable='SI'
+			</if>
+			
 	</select>
 	
 	<resultMap type="ReportePrestamosPorPeriodoSegmentado" id="mapReporteResumen">
