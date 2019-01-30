@@ -228,6 +228,7 @@
 	<resultMap type="ReportePrestamosPorPeriodoSegmentado" id="mapReporteResumen">
 			<id property="ejeX" column="periodoPrestamo"></id>
 			<collection property="detalle" javaType="List" ofType="ReportePrestamosPorPeriodoSegmentadoDetalle">
+					<result property="periodoPrestamo" column="periodoPrestamo"></result>
 					<result property="segmento" column="criterioSegmentacion"></result>
 					<result property="numeroPrestamos" column="numeroPrestamos"></result>
 			</collection>
