@@ -177,9 +177,14 @@ $(document).ready(function() {
 	}
 	
 	$local.$buscar.on('click', function() {
-//		if (!$formEstadisticas.valid()) {
-//			return;
-//		}
+		if (!$formEstadisticas.valid()) {
+			return;
+		}
+		
+		if (!$funcionUtil.validarInputsPeriodo($local.$semanaInicio,$local.$semanaFin,$local.$mesInicio,$local.$mesFin,$local.$anioInicio,$local.$anioFin, $local.$selectPeriodo.val())) {
+			$funcionUtil.notificarException("Rango de periodo incorrecto", "fa-exclamation-circle", "Información", "info");
+			return;
+		}
 		var criterioBusqueda = obtenerCriteriosDeBusqueda();
 		//Obteniendo parametros de la grafica
 		let tipoGrafico = $local.$selectTipoGrafico.val();

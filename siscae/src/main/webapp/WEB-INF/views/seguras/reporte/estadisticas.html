@@ -59,7 +59,7 @@
 														<div class="form-group m-b-10">
 															<label class="m-r-15">Tipo</label>
 															<div class="input-group">
-																<select id="selectTipoGrafico" class="form-control js-example-basic-single" style="height 30px;">
+																<select id="selectTipoGrafico" name="tipoGrafica" class="form-control js-example-basic-single" style="height 30px;">
 																	<option value="-1" disabled="disabled"
 																		selected="selected">Seleccione un gráfico</option>
 																	<option value="BARRAS">Barras</option>
@@ -91,7 +91,7 @@
 															<div class="input-group">
 																<span class="input-group-addon">
 																<i class="fa fa-calendar m-r-5 m-t-5 text-center"></i></span> <input
-																	id="fechaPrestamo" type="text"
+																	id="fechaPrestamo" type="text" name="fechaPrestamo"
 																	class="form-control filtro" readonly="readonly">
 															</div>
 														</div>
@@ -102,7 +102,7 @@
 														<div class="form-group m-b-10">
 															<label class="m-r-10">Desde:</label>
 															<div class="input-group">
-																<input id="semanaInicio" type="week"
+																<input id="semanaInicio" type="week" name="valSemanaIncio"
 																	class="form-control">
 															</div>
 														</div>
@@ -113,7 +113,7 @@
 														<div class="form-group m-b-10">
 															<label class="m-r-15">Hasta:</label>
 															<div class="input-group">
-																<input id="semanaFin" type="week"
+																<input id="semanaFin" type="week" name="valSemanaFin"
 																	class="form-control">
 															</div>
 														</div>
@@ -124,7 +124,7 @@
 														<div class="form-group m-b-10">
 															<label class="m-r-10">Desde:</label>
 															<div class="input-group">
-																<input id="mesInicio" type="month"
+																<input id="mesInicio" type="month" name="valMesIncio"
 																	class="form-control">
 															</div>
 														</div>
@@ -135,7 +135,7 @@
 														<div class="form-group m-b-10">
 															<label class="m-r-15">Hasta:</label>
 															<div class="input-group">
-																<input id="mesFin" type="month"
+																<input id="mesFin" type="month" name="valMesFin"
 																	class="form-control">
 															</div>
 														</div>
@@ -145,7 +145,7 @@
 														<div class="form-group m-b-10">
 															<label class="m-r-10">Desde:</label>
 															<div class="input-group">
-																<input id="anioInicio" type="number"
+																<input id="anioInicio" type="number" name="valAnioInicio"
 																	class="form-control">
 															</div>
 														</div>
@@ -156,7 +156,7 @@
 														<div class="form-group m-b-10">
 															<label class="m-r-15">Hasta:</label>
 															<div class="input-group">
-																<input id="anioFin" type="number"
+																<input id="anioFin" type="number" name="valAnioFin"
 																	class="form-control">
 															</div>
 														</div>
@@ -169,7 +169,7 @@
 														<div class="form-group m-b-10">
 															<label class="m-r-15">Series</label>
 															<div class="input-group">
-																<select id="selectSeries" class="form-control js-example-basic-single " style="height 30px;">
+																<select id="selectSeries" name="valSeries" class="form-control js-example-basic-single " style="height 30px;">
 																	<option value="" disabled="disabled"
 																		selected="selected">Seleccione una Serie</option>
 																	<option value="ESCUELA">Escuela</option>
@@ -183,7 +183,7 @@
 														<div class="form-group m-b-10">
 															<label class="m-r-15">Eje X</label>
 															<div class="input-group">
-																<select id="selectEjeX" class="form-control js-example-basic-single " style="height 30px;">
+																<select id="selectEjeX" name="valEjeX" class="form-control js-example-basic-single " style="height 30px;">
 																	<option value="" disabled="disabled"
 																		selected="selected">Seleccione un eje</option>
 																	<option value="PERIODO">Periodo</option>
@@ -197,7 +197,7 @@
 														<div class="form-group m-b-10 ">
 															<label class="m-r-15">Segmentacion en Y</label>
 															<div class="input-group">
-																<select id="selectSegmY" class="form-control js-example-basic-single" style="height 30px;">
+																<select id="selectSegmY" name="valSegY" class="form-control js-example-basic-single" style="height 30px;">
 																	<option value="NINGUNA" selected="selected">Ninguna</option>
 																	<option value="TIPOSOLICITANTE">Tipo Solicitante</option>
 																	<option value="ESCUELA">Escuela</option>
@@ -211,7 +211,7 @@
 														<div class="form-group m-b-10">
 															<label class="m-r-15">Presentación</label>
 															<div class="input-group">
-																<select id="selectPresentacion" class="form-control js-example-basic-single" style="height 30px;">
+																<select id="selectPresentacion" name="valSegY" class="form-control js-example-basic-single" style="height 30px;">
 																	<option value="-1" selected="selected" disabled="disabled">Seleccione una presentación</option>
 																	<option value="APILADO">Barras apilado</option>
 																	<option value="PARALELO">Barras paralelo</option>
@@ -394,6 +394,7 @@
 		<script th:src="@{/resources/js/guiuser/custom.min.js}"></script>
 		<script th:src="@{/resources/js/guiuser/sweetalert.min.js}"></script>
 		<!-- select2-->
+		<script th:src="@{/resources/js/bootstrap/bootstrap-notify.min.js}"></script>
 		<script th:src="@{/resources/js/guiuser/select2.min.js}"></script>
 		<script th:src="@{/resources/js/util/util.js}"></script>
 		
@@ -405,26 +406,9 @@
 		<script th:src="@{/resources/js/amChart/pie.js}"></script>
 		<script th:src="@{/resources/js/amChart/light.js}"></script>
 		<script th:src="@{/resources/js/util/graficos/graficoUtil.js}"></script>
-		<!-- JS de datatables -->
-
-<!-- 		<script -->
-<!-- 			th:src="@{/resources/js/guiuser/lib/datatables/datatables.min.js}"></script> -->
-<!-- 		<script -->
-<!-- 			th:src="@{/resources/js/guiuser/lib/datatables/cdn.datatables.net/buttons/1.2.2/js/dataTables.buttons.min.js}"></script> -->
-<!-- 		<script -->
-<!-- 			th:src="@{/resources/js/guiuser/lib/datatables/cdn.datatables.net/buttons/1.2.2/js/buttons.flash.min.js}"></script> -->
-<!-- 		<script -->
-<!-- 			th:src="@{/resources/js/guiuser/lib/datatables/cdnjs.cloudflare.com/ajax/libs/jszip/2.5.0/jszip.min.js}"></script> -->
-<!-- 		<script -->
-<!-- 			th:src="@{/resources/js/guiuser/lib/datatables/cdn.rawgit.com/bpampuch/pdfmake/0.1.18/build/pdfmake.min.js}"></script> -->
-<!-- 		<script -->
-<!-- 			th:src="@{/resources/js/guiuser/lib/datatables/cdn.rawgit.com/bpampuch/pdfmake/0.1.18/build/vfs_fonts.js}"></script> -->
-<!-- 		<script -->
-<!-- 			th:src="@{/resources/js/guiuser/lib/datatables/cdn.datatables.net/buttons/1.2.2/js/buttons.html5.min.js}"></script> -->
-<!-- 		<script -->
-<!-- 			th:src="@{/resources/js/guiuser/lib/datatables/cdn.datatables.net/buttons/1.2.2/js/buttons.print.min.js}"></script> -->
-<!-- 		<script -->
-<!-- 			th:src="@{/resources/js/guiuser/lib/datatables/datatables-init.js}"></script> -->
+		<!-- Jquery validation  -->
+			<script th:src="@{/resources/js/jquery/jquery.validate.min.js}"></script>
+		
 		<script th:src="@{/resources/js/pagina/reporte/estadisticas.js}"></script>
 		<script th:src="@{/resources/js/pagina/reporte/estadisticasFormulario.js}"></script>
 	</div>

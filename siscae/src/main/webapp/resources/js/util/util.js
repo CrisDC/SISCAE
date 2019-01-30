@@ -416,6 +416,52 @@ $(document).ready(function() {
 			rangoFecha.fechaFin = input.data("daterangepicker").endDate.format('YYYY-MM-DD');
 			return rangoFecha;
 		},
+		validarInputsPeriodo : function($inicioSemana, $finSemana, $inicioMes, $finMes, $inicioAnio, $finAnio, valor){
+			if (valor == "SEMANA"){
+				let semanaInicioWeek = $funcionUtil.obtenerSemanaInputWeek($inicioSemana);
+				let anioInicioWeek = $funcionUtil.obtenerAnioInputWeek($inicioSemana);
+				let semanaFinWeek = $funcionUtil.obtenerSemanaInputWeek($finSemana);
+				let anioFinWeek = $funcionUtil.obtenerAnioInputWeek($finSemana);
+				if(anioInicioWeek > anioFinWeek){
+					return false;
+				}else if(anioInicioWeek == anioFinWeek){
+					if(semanaInicioWeek <= semanaFinWeek){
+						return true;
+					}else if(semanaInicioWeek > semanaFinWeek){
+						return false;
+					}
+				}else if(anioInicioWeek < anioFinWeek){
+					return true;
+				}
+			}
+			if (valor == "MES"){
+				let mesInicioMonth = $funcionUtil.obtenerMesInputMonth($inicioMes);
+				let anioInicioMonth = $funcionUtil.obtenerAnioInputMonth($inicioMes);
+				let mesFinMonth = $funcionUtil.obtenerMesInputMonth($finMes);
+				let anioFinMonth = $funcionUtil.obtenerAnioInputMonth($finMes);
+				if(anioInicioMonth > anioFinMonth){
+					return false;
+				}else if(anioInicioMonth == anioFinMonth){
+					if(mesInicioMonth <= mesFinMonth){
+						return true;
+					}else if(mesInicioMonth > mesFinMonth){
+						return false;
+					}
+				}else if(anioInicioMonth < anioFinMonth){
+					return true;
+				}
+			}
+			if (valor == "ANIO"){
+				let anioInicio = $inicioAnio.val();
+				let anioFin = $finAnio.val();
+				if(anioInicio <= anioFin){
+					return true;
+				}else{
+					return false;
+				}
+			}
+		return true;
+	},
 		convertirDeFormatoAFormato : function(fecha, formatoOrigen, formatoFinal) {
 			return moment(fecha, formatoOrigen).format(formatoFinal);
 		},
