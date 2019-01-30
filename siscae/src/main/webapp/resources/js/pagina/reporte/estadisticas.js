@@ -159,7 +159,7 @@ $(document).ready(function() {
 		}
 		if($local.$selectPeriodo.val() == 'SEMANA'){
 			criterioBusqueda.semanaInicio = $funcionUtil.obtenerSemanaInputWeek($local.$semanaInicio);
-			criterioBusqueda.anioInicio = $funcionUtil.obtenerAnioInputWeek($local.$semanaFin);
+			criterioBusqueda.anioInicio = $funcionUtil.obtenerAnioInputWeek($local.$semanaInicio);
 			criterioBusqueda.semanaFin = $funcionUtil.obtenerSemanaInputWeek($local.$semanaFin);
 			criterioBusqueda.anioFin = $funcionUtil.obtenerAnioInputWeek($local.$semanaFin);
 		}
