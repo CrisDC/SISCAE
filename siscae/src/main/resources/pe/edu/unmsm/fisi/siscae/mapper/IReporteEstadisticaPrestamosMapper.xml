@@ -221,10 +221,10 @@
 			<if test="criterioSegmentacion == 'TIPOSOLICITANTE'">
 				(SELECT 
 					DISTINCT(F_GET_TIPO_SOLICITANTE(n_id_persona)) AS v_nombre
-	  			FROM mae_persona) AS cr
+	  			FROM mae_persona) cr
 			</if>
 			<if test="criterioSegmentacion == 'RECURSO'">
-				mae_tipo_recurso AS  cr
+				mae_tipo_recurso cr
 				WHERE cr.v_usable='SI'
 			</if>
 			
