@@ -295,9 +295,11 @@
 					DISTINCT(F_GET_TIPO_SOLICITANTE(n_id_persona)) AS v_nombre
 	  			FROM mae_persona) cr
 			</if>
-			<if test="criterioSegmentacion == 'RECURSO'">
-				mae_tipo_recurso cr
-				WHERE cr.v_usable='SI'
+			<if test="criterioSegmentacion == 'TIPOINFRACCION'">
+				(SELECT mtd.v_descripcion as v_nombre 
+	             FROM mae_multi_tab_det mtd
+	             LEFT JOIN  mae_multi_tab_cab mtc ON (mtd.n_id_tabla=mtc.n_id_tabla)
+	             WHERE mtc.v_nombre='TIPO INFRACCION')  cr
 			</if>
 			
 	</select>

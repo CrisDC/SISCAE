@@ -570,10 +570,20 @@ $(document).ready(function() {
 		if($local.$tipoReporte=="P"){
 			$local.$divTablaResumenPrestamo.removeClass("hidden");
 			$local.$divTablaResumenInfraccion.addClass("hidden");
+			$('#selectSegmY').append($('<option>', {
+			    value: 'RECURSO',
+			    text: 'Tipo de Recurso'
+			}));
+			$('#selectSegmY').find("option[value='TIPOINFRACCION']").remove();
 		}
 		if($local.$tipoReporte=="I"){
 			$local.$divTablaResumenPrestamo.addClass("hidden");
-			$local.$divTablaResumenInfraccion.removeClass("hidden");
+			$local.$divTablaResumenInfraccion.removeClass("hidden"); 
+			$('#selectSegmY').append($('<option>', {
+			    value: 'TIPOINFRACCION',
+			    text: 'Tipo de Infraccion'
+			}));
+			$('#selectSegmY').find("option[value='RECURSO']").remove();  
 		}
 	});
 
