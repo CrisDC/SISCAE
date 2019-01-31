@@ -28,11 +28,12 @@ $(document).ready(function() {
 			"dataSrc" : ""
 		},
 		"language" : {
-			"url": "//cdn.datatables.net/plug-ins/1.10.16/i18n/Spanish.json"
+			"url": "//cdn.datatables.net/plug-ins/1.10.16/i18n/Spanish.json",
+			//"emptyTable" : "No hay registros encontrados." // Nuevo
 		},
 		"initComplete" : function() {
 			$local.$tablaMantenimiento.wrap("<div class='table-responsive'></div>");
-			$tablaFuncion.aniadirFiltroDeBusquedaEnEncabezado(this, $local.$tablaMantenimiento);
+			//$tablaFuncion.aniadirFiltroDeBusquedaEnEncabezado(this, $local.$tablaMantenimiento);
 		},
 		"columnDefs" : [ {
 			"targets" : [ 0, 1, 2, 3, 4, 5 ],
@@ -74,19 +75,19 @@ $(document).ready(function() {
 		$local.tablaMantenimiento.column($(this).parent().index() + ':visible').search(val ? '^' + val + '$' : '', true, false).draw();
 	});
 
-	$local.$modalMantenimiento.PopupWindow({
-		title : "Mantenimiento de Administrativo",
-		autoOpen : false,
-		modal : false,
-		height : 400,
-		width : 626,
-	});
+//	$local.$modalMantenimiento.PopupWindow({
+//		title : "Mantenimiento de Administrativo",
+//		autoOpen : false,
+//		modal : false,
+//		height : 400,
+//		width : 626,
+//	});
 
 	$local.$aniadirMantenimento.on("click", function() {
 		$funcionUtil.prepararFormularioRegistro($formMantenimiento);
 		$local.$actualizarMantenimiento.addClass("hidden");
 		$local.$registrarMantenimiento.removeClass("hidden");
-		$local.$modalMantenimiento.PopupWindow("open");
+		//$local.$modalMantenimiento.PopupWindow("open");
 	});
 
 	$local.$modalMantenimiento.on("open.popupwindow", function() {
@@ -138,8 +139,8 @@ $(document).ready(function() {
 				$funcionUtil.notificarException(response, "fa-check", "Aviso", "success");
 				var row = $local.tablaMantenimiento.row.add(administrativo).draw();
 				row.show().draw(false);
-				$(row.node()).animateHighlight();
-				$local.$modalMantenimiento.PopupWindow("close");
+				//$(row.node()).animateHighlight();
+				//$local.$modalMantenimiento.PopupWindow("close");
 			},
 			error : function(response) {
 			},
@@ -150,16 +151,7 @@ $(document).ready(function() {
 		
 	});
 	
-	$local.$tablaMantenimiento.children("tbody").on("click", ".actualizar", function() {
-		$funcionUtil.prepararFormularioActualizacion($formMantenimiento);
-		$local.$filaSeleccionada = $(this).parents("tr");
-		var administrativo = $local.tablaMantenimiento.row($local.$filaSeleccionada).data();
-		$local.idAdministrativoSeleccionado = administrativo.idAdministrativo;
-		$funcionUtil.llenarFormulario(administrativo, $formMantenimiento);
-		$local.$actualizarMantenimiento.removeClass("hidden");
-		$local.$registrarMantenimiento.addClass("hidden");
-		$local.$modalMantenimiento.PopupWindow("open");
-	});
+	
 	
 	$local.$actualizarMantenimiento.on("click", function() {
 		if (!$formMantenimiento.valid()) {
@@ -187,8 +179,8 @@ $(document).ready(function() {
 				$local.tablaMantenimiento.row($local.$filaSeleccionada).remove().draw(false);
 				var row = $local.tablaMantenimiento.row.add(administrativo).draw();
 				row.show().draw(false);
-				$(row.node()).animateHighlight();
-				$local.$modalMantenimiento.PopupWindow("close");
+				//$(row.node()).animateHighlight();
+				//$local.$modalMantenimiento.PopupWindow("close");
 			},
 			error : function(response) {
 			},
@@ -258,53 +250,16 @@ $(document).ready(function() {
 		
 	});
 				
-		$local.$btnBuscar.on("click", function() {
-//			if (!$formMantenimiento.valid()) {
-//				return;
-//			}
-			var alumno = $formMantenimiento.serializeJSON();
-			var criterio = {idTipoDocumento   :  alumno.idTipoDocumento,
-							numeroDocumento :   alumno.numeroDocumento};
-			
-			//criterio.numeroDocumentoIdentidad = alumno.numeroDocumentoIdentidad; 
-			console.log("funcion");
-							
-			$.ajax({
-				type : "GET",
-				url : $variableUtil.root + "persona?accion=buscarIdPersona",
-				data : criterio,//*
-				beforeSend : function(xhr) {
-					$local.$registrarMantenimiento.attr("disabled", true).find("i").removeClass("fa-floppy-o").addClass("fa-spinner fa-pulse fa-fw");
-					xhr.setRequestHeader('Content-Type', 'application/json');
-					xhr.setRequestHeader("X-CSRF-TOKEN", $variableUtil.csrf);
-				},
-				statusCode : {
-					400 : function(response) {
-						$funcionUtil.limpiarMensajesDeError($formMantenimiento);
-						$funcionUtil.mostrarMensajeDeError(response.responseJSON, $formMantenimiento);
-					}
-				},
-				success : function(response) {
-					console.log(response)
-					
-					//$funcionUtil.notificarException(response, "fa-check", "Aviso", "success");
-					
-					$("#nombreCompleto").val(response.appPaterno + " " + response.appMaterno + ", " + response.nombre);
-					
-					$local.personaActual = response;
-					
-					
-					
-				},
-				error : function(response) {
-				},
-				complete : function(response) {
-					$local.$registrarMantenimiento.attr("disabled", false).find("i").addClass("fa-floppy-o").removeClass("fa-spinner fa-pulse fa-fw");
-					
-					
-				}
-			});	
-			
+		
+		$local.$tablaMantenimiento.children("tbody").on("click", ".actualizar", function() {
+			$funcionUtil.prepararFormularioActualizacion($formMantenimiento);
+			$local.$filaSeleccionada = $(this).parents("tr");
+			var administrativo = $local.tablaMantenimiento.row($local.$filaSeleccionada).data();
+			$local.idAdministrativoSeleccionado = administrativo.idAdministrativo;
+			$funcionUtil.llenarFormulario(administrativo, $formMantenimiento);
+			$local.$actualizarMantenimiento.removeClass("hidden");
+			$local.$registrarMantenimiento.addClass("hidden");
+			//$local.$modalMantenimiento.PopupWindow("open");
 		});
 		
 		
