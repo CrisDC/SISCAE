@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import pe.edu.unmsm.fisi.siscae.model.criterio.ReporteEstadisticaPrestamosCriterioBusqueda;
 import pe.edu.unmsm.fisi.siscae.model.reporte.ReporteEstadisticaPrestamos;
+import pe.edu.unmsm.fisi.siscae.model.reporte.resumen.ReporteEstadisticaPrestamosPorEjeX;
 import pe.edu.unmsm.fisi.siscae.model.reporte.resumen.ReporteEstadisticaPrestamosPorPeriodo;
 import pe.edu.unmsm.fisi.siscae.model.reporte.resumen.ReportePrestamosPorPeriodoSegmentado;
 import pe.edu.unmsm.fisi.siscae.service.IReporteEstadisticaPrestamosService;
@@ -70,7 +71,7 @@ public @RestController class ReporteEstadisticaPrestamosController {
 	}
 	
 	@GetMapping(params = "accion=buscarPorEjeXSinSegmentar")
-	public List<ReporteEstadisticaPrestamosPorPeriodo> buscarPorEjeXSinSegmentar(ReporteEstadisticaPrestamosCriterioBusqueda criterioBusqueda/*,
+	public List<ReporteEstadisticaPrestamosPorEjeX> buscarPorEjeXSinSegmentar(ReporteEstadisticaPrestamosCriterioBusqueda criterioBusqueda/*,
 			@RequestParam("areasEstudio") List<Integer> areasEstudio,
 			@RequestParam("escuelas") List<Integer> escuelas,
 			@RequestParam("solicitantes") List<String> solicitantes,

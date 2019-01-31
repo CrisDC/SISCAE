@@ -10,7 +10,7 @@ import lombok.NoArgsConstructor;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class ReporteEstadisicaPrestamosPorEjeX {
+public class ReporteEstadisticaPrestamosPorEjeX {
 	Integer numeroPrestamos;
 	String ejeX;
 	String estadiaTotal;

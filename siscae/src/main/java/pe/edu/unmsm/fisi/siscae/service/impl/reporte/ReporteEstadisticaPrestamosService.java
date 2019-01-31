@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 import pe.edu.unmsm.fisi.siscae.mapper.IReporteEstadisticaPrestamosMapper;
 import pe.edu.unmsm.fisi.siscae.model.criterio.ReporteEstadisticaPrestamosCriterioBusqueda;
 import pe.edu.unmsm.fisi.siscae.model.reporte.ReporteEstadisticaPrestamos;
+import pe.edu.unmsm.fisi.siscae.model.reporte.resumen.ReporteEstadisticaPrestamosPorEjeX;
 import pe.edu.unmsm.fisi.siscae.model.reporte.resumen.ReporteEstadisticaPrestamosPorPeriodo;
 import pe.edu.unmsm.fisi.siscae.model.reporte.resumen.ReportePrestamosPorPeriodoSegmentado;
 import pe.edu.unmsm.fisi.siscae.service.IReporteEstadisticaPrestamosService;
@@ -55,7 +56,7 @@ public class ReporteEstadisticaPrestamosService implements IReporteEstadisticaPr
 
 
 	@Override
-	public List<ReporteEstadisticaPrestamosPorPeriodo> buscarPorEjeXSinSegementar(
+	public List<ReporteEstadisticaPrestamosPorEjeX> buscarPorEjeXSinSegementar(
 			ReporteEstadisticaPrestamosCriterioBusqueda criterioBusqueda) {
 		return reporteEstadisticaPrestamosMapper.buscarPorEjeXSinSegementar(criterioBusqueda);
 	} 
