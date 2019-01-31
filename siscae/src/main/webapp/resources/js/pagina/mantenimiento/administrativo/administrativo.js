@@ -41,7 +41,7 @@ $(document).ready(function() {
 		}, {
 			"targets" : 6,
 			"className" : "all dt-center",
-			"defaultContent" : $variableUtil.botonActualizar + " " + $variableUtil.botonEliminar
+			"defaultContent" : $variableUtil.botonActualizarNuevo + " " + $variableUtil.botonEliminarNuevo
 		} ],
 		"columns" : [  {
 			"data" : 'codigoAdm',
