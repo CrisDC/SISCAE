@@ -143,6 +143,9 @@
 			<if test="serie == 'SOLICITANTE'">
 				r.nombre_tipo		as segmento,
 			</if>
+			<if test="serie == 'TIPOINFRACCION'">
+				r.tipo_infraccion		as segmento,
+			</if>
 			SUM(CASE WHEN F_ESTADO_SOLICITANTE(pe.n_id_persona)='SANCIONADO'
 			         THEN 1 ELSE 0 END) 									AS numeroSancionados,
 			<if test="tipoPeriodo == 'DIA'">
@@ -212,6 +215,9 @@
 		</if>
 		<if test="serie == 'SOLICITANTE'">
 				GROUP BY r.nombre_tipo
+		</if>
+		<if test="serie == 'TIPOINFRACCION'">
+				GROUP BY r.tipo_infraccion
 		</if>
 		
 	</select>
