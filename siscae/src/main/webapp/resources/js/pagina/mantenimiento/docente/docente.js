@@ -28,7 +28,8 @@ $(document).ready(function() {
 			"dataSrc" : ""
 		},
 		"language" : {
-			"url": "//cdn.datatables.net/plug-ins/1.10.16/i18n/Spanish.json"
+			"url": "//cdn.datatables.net/plug-ins/1.10.16/i18n/Spanish.json",
+			"emptyTable" : "No hay registros encontrados." // Nuevo
 		},
 		"initComplete" : function() {
 			$local.$tablaMantenimiento.wrap("<div class='table-responsive'></div>");
@@ -40,7 +41,7 @@ $(document).ready(function() {
 		}, {
 			"targets" : 4,
 			"className" : "all dt-center",
-			"defaultContent" : $variableUtil.botonActualizar + " " + $variableUtil.botonEliminar
+			"defaultContent" : $variableUtil.botonActualizarNuevo + " " + $variableUtil.botonEliminarNuevo
 		} ],
 		"columns" : [ {
 			"data" : 'estado',
@@ -68,19 +69,19 @@ $(document).ready(function() {
 		$local.tablaMantenimiento.column($(this).parent().index() + ':visible').search(val ? '^' + val + '$' : '', true, false).draw();
 	});
 
-	$local.$modalMantenimiento.PopupWindow({
-		title : "Mantenimiento de Docente",
-		autoOpen : false,
-		modal : false,
-		height : 400,
-		width : 626,
-	});
+//	$local.$modalMantenimiento.PopupWindow({
+//		title : "Mantenimiento de Docente",
+//		autoOpen : false,
+//		modal : false,
+//		height : 400,
+//		width : 626,
+//	});
 
 	$local.$aniadirMantenimento.on("click", function() {
 		$funcionUtil.prepararFormularioRegistro($formMantenimiento);
 		$local.$actualizarMantenimiento.addClass("hidden");
 		$local.$registrarMantenimiento.removeClass("hidden");
-		$local.$modalMantenimiento.PopupWindow("open");
+		//$local.$modalMantenimiento.PopupWindow("open");
 	});
 
 	$local.$modalMantenimiento.on("open.popupwindow", function() {
@@ -130,8 +131,8 @@ $(document).ready(function() {
 				$funcionUtil.notificarException(response, "fa-check", "Aviso", "success");
 				var row = $local.tablaMantenimiento.row.add(docente).draw();
 				row.show().draw(false);
-				$(row.node()).animateHighlight();
-				$local.$modalMantenimiento.PopupWindow("close");
+				//$(row.node()).animateHighlight();
+				//$local.$modalMantenimiento.PopupWindow("close");
 			},
 			error : function(response) {
 			},
@@ -139,16 +140,7 @@ $(document).ready(function() {
 				$local.$registrarMantenimiento.attr("disabled", false).find("i").addClass("fa-floppy-o").removeClass("fa-spinner fa-pulse fa-fw");
 			}
 		});
-		$local.$tablaMantenimiento.children("tbody").on("click", ".actualizar", function() {
-		$funcionUtil.prepararFormularioActualizacion($formMantenimiento);
-		$local.$filaSeleccionada = $(this).parents("tr");
-		var docente = $local.tablaMantenimiento.row($local.$filaSeleccionada).data();
-		$local.idDocenteSeleccionado = docente.idDocente;
-		$funcionUtil.llenarFormulario(docente, $formMantenimiento);
-		$local.$actualizarMantenimiento.removeClass("hidden");
-		$local.$registrarMantenimiento.addClass("hidden");
-		$local.$modalMantenimiento.PopupWindow("open");
-		});
+		
 	});
 	$local.$actualizarMantenimiento.on("click", function() {
 		if (!$formMantenimiento.valid()) {
@@ -176,8 +168,8 @@ $(document).ready(function() {
 				$local.tablaMantenimiento.row($local.$filaSeleccionada).remove().draw(false);
 				var row = $local.tablaMantenimiento.row.add(docente).draw();
 				row.show().draw(false);
-				$(row.node()).animateHighlight();
-				$local.$modalMantenimiento.PopupWindow("close");
+				//$(row.node()).animateHighlight();
+				//$local.$modalMantenimiento.PopupWindow("close");
 			},
 			error : function(response) {
 			},
@@ -247,6 +239,16 @@ $(document).ready(function() {
 			});
 		});
 	
+	$local.$tablaMantenimiento.children("tbody").on("click", ".actualizar", function() {
+		$funcionUtil.prepararFormularioActualizacion($formMantenimiento);
+		$local.$filaSeleccionada = $(this).parents("tr");
+		var docente = $local.tablaMantenimiento.row($local.$filaSeleccionada).data();
+		$local.idDocenteSeleccionado = docente.idDocente;
+		$funcionUtil.llenarFormulario(docente, $formMantenimiento);
+		$local.$actualizarMantenimiento.removeClass("hidden");
+		$local.$registrarMantenimiento.addClass("hidden");
+		//$local.$modalMantenimiento.PopupWindow("open");
+		});
 	
 	$local.$btnBuscar.on("click", function() {
 //		if (!$formMantenimiento.valid()) {
