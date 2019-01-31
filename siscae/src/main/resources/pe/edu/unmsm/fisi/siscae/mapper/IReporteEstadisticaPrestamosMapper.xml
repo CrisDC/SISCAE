@@ -188,26 +188,29 @@
 			      cr.v_nombre 												AS criterioSegmentacion,
 				<if test="tipoPeriodo == 'DIA'">
 					lista.fecha 											AS periodoPrestamo,
-				    F_CANTIDAD_PRESTAMOS_BETWEEN(#{criterioSegmentacion}, cr.v_nombre,lista.fecha,
-					adddate(lista.fecha, INTERVAL 1 DAY))  					AS numeroPrestamos
+				    F_OBTENER_ESTADISTICO_PRESTAMOS_BETWEEN(#{criterioSegmentacion}, cr.v_nombre,lista.fecha,
+					adddate(lista.fecha, INTERVAL 1 DAY),"CANTIDAD_PRESTAMOS")  	AS numeroPrestamos
 				</if>
 				<if test="tipoPeriodo == 'SEMANA'">
 				    CONCAT(lista.anio,'-',lista.semana)							AS periodoPrestamo,
-				    F_CANTIDAD_PRESTAMOS_BETWEEN(#{criterioSegmentacion}, cr.v_nombre,
+				    F_OBTENER_ESTADISTICO_PRESTAMOS_BETWEEN(#{criterioSegmentacion}, cr.v_nombre,
 				    F_GENERADOR_FECHAS('INI', 'SEMANA',lista.anio,null, null,lista.semana),
-				    F_GENERADOR_FECHAS('FIN', 'SEMANA',lista.anio,null, null,lista.semana))  	AS numeroPrestamos
+				    F_GENERADOR_FECHAS('FIN', 'SEMANA',lista.anio,null, null,lista.semana),
+				    "CANTIDAD_PRESTAMOS")  									AS numeroPrestamos
 				</if>
 				<if test="tipoPeriodo == 'MES'">
 				    CONCAT(lista.anio,'-',lista.mes)							AS periodoPrestamo,
-				    F_CANTIDAD_PRESTAMOS_BETWEEN(#{criterioSegmentacion}, cr.v_nombre,
+				    F_OBTENER_ESTADISTICO_PRESTAMOS_BETWEEN(#{criterioSegmentacion}, cr.v_nombre,
 				    F_GENERADOR_FECHAS('INI', 'MES',lista.anio,lista.mes, null,null),
-				    F_GENERADOR_FECHAS('FIN', 'MES',lista.anio,lista.mes, null,null))  	AS numeroPrestamos
+				    F_GENERADOR_FECHAS('FIN', 'MES',lista.anio,lista.mes, null,null),
+				    "CANTIDAD_PRESTAMOS")  										AS numeroPrestamos
 				</if>
 				<if test="tipoPeriodo == 'ANIO'">
 				    lista.anio													AS periodoPrestamo,
-				    F_CANTIDAD_PRESTAMOS_BETWEEN(#{criterioSegmentacion}, cr.v_nombre,
+				    F_OBTENER_ESTADISTICO_PRESTAMOS_BETWEEN(#{criterioSegmentacion}, cr.v_nombre,
 				    F_GENERADOR_FECHAS('INI', 'ANIO',lista.anio,null, null,null),
-				    F_GENERADOR_FECHAS('FIN', 'ANIO',lista.anio,null, null,null))  	AS numeroPrestamos
+				    F_GENERADOR_FECHAS('FIN', 'ANIO',lista.anio,null, null,null),
+				    "CANTIDAD_PRESTAMOS")  										AS numeroPrestamos
 				</if>
 
 			FROM 
@@ -238,7 +241,88 @@
 					<result property="numeroPrestamos" column="numeroPrestamos"></result>
 			</collection>
 	</resultMap>
+	
+	<select id="buscarPorEjeXSinSegmentar" resultMap="objetoSinSegmentar">
+			SELECT
+			      lista.v_nombre												AS ejeX,
+				<if test="tipoPeriodo == 'DIA'">
+					F_OBTENER_ESTADISTICO_PRESTAMOS_BETWEEN(#{ejeX}, lista.v_nombre,#{fechaInicio},
+					 #{fechaFin},'CANTIDAD_PRESTAMOS')							AS numeroPrestamos,
+					IFNULL(SEC_TO_TIME2(
+					F_OBTENER_ESTADISTICO_PRESTAMOS_BETWEEN(#{ejeX}, lista.v_nombre, #{fechaInicio},
+					#{fechaFin},'ESTADIA_TOTAL')),0) 							AS estadiaTotal,
+					IFNULL(SEC_TO_TIME(
+					F_OBTENER_ESTADISTICO_PRESTAMOS_BETWEEN(#{ejeX}, lista.v_nombre, #{fechaInicio},
+					#{fechaFin},'ESTADIA_PROMEDIO')),0)  						AS estadiaPromedio
+				</if>
+				<if test="tipoPeriodo == 'SEMANA'">
+					F_OBTENER_ESTADISTICO_PRESTAMOS_BETWEEN(#{ejeX}, lista.v_nombre,
+					F_GENERADOR_FECHAS('INI', 'SEMANA',#{anioInicio},null, null,#{semanaInicio}),
+				    F_GENERADOR_FECHAS('FIN', 'SEMANA',#{anioFin},null, null,#{semanaFin}),
+				    'CANTIDAD_PRESTAMOS')							AS numeroPrestamos,
+					IFNULL(SEC_TO_TIME2(
+					F_OBTENER_ESTADISTICO_PRESTAMOS_BETWEEN(#{ejeX}, lista.v_nombre,
+					F_GENERADOR_FECHAS('INI', 'SEMANA',#{anioInicio},null, null,#{semanaInicio}),
+				    F_GENERADOR_FECHAS('FIN', 'SEMANA',#{anioFin},null, null,#{semanaFin}),
+				    'ESTADIA_TOTAL')),0) 							AS estadiaTotal,
+					IFNULL(SEC_TO_TIME(
+					F_OBTENER_ESTADISTICO_PRESTAMOS_BETWEEN(#{ejeX}, lista.v_nombre,
+					F_GENERADOR_FECHAS('INI', 'SEMANA',#{anioInicio},null, null,#{semanaInicio}),
+				    F_GENERADOR_FECHAS('FIN', 'SEMANA',#{anioFin},null, null,#{semanaFin}),
+				    'ESTADIA_PROMEDIO')),0)  						AS estadiaPromedio
+				</if>
+				<if test="tipoPeriodo == 'MES'">
+				    F_OBTENER_ESTADISTICO_PRESTAMOS_BETWEEN(#{ejeX}, lista.v_nombre,
+					F_GENERADOR_FECHAS('INI', 'SEMANA',#{anioInicio},#{mesInicio}, null,null),
+				    F_GENERADOR_FECHAS('FIN', 'SEMANA',#{anioFin},#{mesFin}, null,null),
+				    'CANTIDAD_PRESTAMOS')							AS numeroPrestamos,
+					IFNULL(SEC_TO_TIME2(
+					F_OBTENER_ESTADISTICO_PRESTAMOS_BETWEEN(#{ejeX}, lista.v_nombre,
+					F_GENERADOR_FECHAS('INI', 'SEMANA',#{anioInicio},#{mesInicio}, null,null),
+				    F_GENERADOR_FECHAS('FIN', 'SEMANA',#{anioFin},#{mesFin}, null,null),
+				    'ESTADIA_TOTAL')),0) 							AS estadiaTotal,
+					IFNULL(SEC_TO_TIME(
+					F_OBTENER_ESTADISTICO_PRESTAMOS_BETWEEN(#{ejeX}, lista.v_nombre,
+					F_GENERADOR_FECHAS('INI', 'SEMANA',#{anioInicio},#{mesInicio}, null,null),
+				    F_GENERADOR_FECHAS('FIN', 'SEMANA',#{anioFin},#{mesFin}, null,null),
+				    'ESTADIA_PROMEDIO')),0)  						AS estadiaPromedio
+				</if>
+				<if test="tipoPeriodo == 'ANIO'">
+				    F_OBTENER_ESTADISTICO_PRESTAMOS_BETWEEN(#{ejeX}, lista.v_nombre,
+					F_GENERADOR_FECHAS('INI', 'SEMANA',#{anioInicio},#{mesInicio}, null,null),
+				    F_GENERADOR_FECHAS('FIN', 'SEMANA',#{anioFin},#{mesFin}, null,null),
+				    'CANTIDAD_PRESTAMOS')							AS numeroPrestamos,
+					IFNULL(SEC_TO_TIME2(
+					F_OBTENER_ESTADISTICO_PRESTAMOS_BETWEEN(#{ejeX}, lista.v_nombre,
+					F_GENERADOR_FECHAS('INI', 'SEMANA',#{anioInicio},#{mesInicio}, null,null),
+				    F_GENERADOR_FECHAS('FIN', 'SEMANA',#{anioFin},#{mesFin}, null,null),
+				    'ESTADIA_TOTAL')),0) 							AS estadiaTotal,
+					IFNULL(SEC_TO_TIME(
+					F_OBTENER_ESTADISTICO_PRESTAMOS_BETWEEN(#{ejeX}, lista.v_nombre,
+					F_GENERADOR_FECHAS('INI', 'SEMANA',#{anioInicio},#{mesInicio}, null,null),
+				    F_GENERADOR_FECHAS('FIN', 'SEMANA',#{anioFin},#{mesFin}, null,null),
+				    'ESTADIA_PROMEDIO')),0)  						AS estadiaPromedio
+				</if>
 
+			FROM 
+			<if test="ejeX == 'AREAESTUDIO'">
+				(SELECT v_nombre
+	  			FROM mae_escuela) lista
+			</if>
+			<if test="ejeX == 'ESCUELA'">
+				(SELECT v_nombre
+	  			FROM mae_escuela) lista
+			</if>
+			GROUP BY 
+				lista.v_nombre		
+	</select>
+	
+	<resultMap type="ReporteEstadisticaPrestamosPorEjeX" id="objetoSinSegmentar">
+		<id property="numeroPrestamos" column="numeroPrestamos"></id>
+		<id property="ejeX" column="ejeX"></id>
+		<id property="estadiaTotal" column="estadiaTotal"></id>
+		<id property="estadiaPromedio" column="estadiaPromedio"></id>
+	</resultMap>
 
 
 </mapper>
