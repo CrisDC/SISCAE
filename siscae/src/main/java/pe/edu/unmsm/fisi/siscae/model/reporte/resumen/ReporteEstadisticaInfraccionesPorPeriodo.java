@@ -14,4 +14,7 @@ public class ReporteEstadisticaInfraccionesPorPeriodo {
 	Integer numeroSancionados;
 	String periodoInfraccion;
 	Double numeroInfraccionesPromedioPorAlumno;
+	//criterios
+		String segmento;
+
 }
