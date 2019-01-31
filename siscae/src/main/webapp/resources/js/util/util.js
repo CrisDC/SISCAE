@@ -22,8 +22,11 @@ $(document).ready(function() {
 		botonDesalojar : "<button class='btn btn-danger desocupar-soli' title='Desocupar'><i class='fa fa-share-square'></i></button>",
 		botonEliminar : "<button class='btn btn-xs btn-danger eliminar' title='Eliminar' data-tooltip='tooltip'><i class='fa fa-trash'></i></button>",
 		botonActualizar : "<button class='btn btn-xs btn-primary actualizar' title='Actualizar' data-tooltip='tooltip'><i class='fa fa-pencil-square'></i></button>",
-		botonEliminarSolicitante : "<button class='btn btn-danger eliminar-soli eliminar' title='Eliminar'><i class='fa fa-trash-o'></i></button>",
-		botonActualizarSolicitante : "<button class='btn btn-success actualizar-soli actualizar' title='Actualizar'><i class='fa fa-cog'></i></button>",
+		botonActualizarNuevo : "<button type='button' class='btn btn-xs btn-info actualizar' data-tooltip='Actualizar' data-toggle='modal' data-target='#modalMantenimiento'><i class='fa fa-pencil-square'></i></button>",
+		botonEliminarNuevo : "<button type='button' class='btn btn-xs btn-danger eliminar' data-tooltip='Eliminar'><i class='fa fa-trash'></i></button>",
+		
+		botonEliminarSolicitante : "<button class='btn btn-danger eliminar-soli eliminar' data-tooltip='Eliminar'><i class='fa fa-trash-o'></i></button>",
+		botonActualizarSolicitante : "<button class='btn btn-info actualizar-soli actualizar' data-tooltip='Actualizar'><i class='fa fa-cog'></i></button>",
 		botonAniadirDetalle : "<button class='btn btn-xs btn-success aniadir-detalle' title='Añadir' data-tooltip='tooltip'><i class='fa fa-plus'></i></button>",
 		botonVerDetalle : "<button class='btn btn-xs btn-primary descargar' title='Descargar' data-tooltip='tooltip'><i class='fa fa-eye'></i></button>",
 		botonVerComision : "<button class='btn btn-xs btn-success ver-comisiones' title='Ver Comisiones' data-tooltip='tooltip'><i class='fa fa-money'></i></button>",

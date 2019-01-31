@@ -1,40 +1,55 @@
 <!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org">
 <head>
 </head>
 <body>
-	<div id="modalMantenimiento" class="row" th:fragment="modalMantenimiento" th:with="tipo=${tipo}">
-		
-			
-			<form id="formMantenimiento" class="form-horizontal" role="form">
-				<th:block th:replace="~{template/fragments/mantenimiento/modalMantenimiento :: ${tipo}}?:~{}">
-				</th:block>
-				<div id="botonesForm" class="form-group">
-					<div class="col-lg-12 text-center">
-						<button id="registrarMantenimiento" type="button" class="btn btn-success">
-							<i class="fa fa-floppy-o"></i> Registrar
-						</button>
-						<button id="actualizarMantenimiento" type="button" class="btn btn-primary hidden">
-							<i class="fa fa-pencil-square"></i> Actualizar
-						</button>
-					</div>
+	<div id="modalMantenimiento" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true" th:fragment="modalMantenimiento" th:with="tipo=${tipo}">
+		<div class="modal-dialog modal-dialog-centered" role="document">
+			<div class="modal-content">
+				<div class="modal-header">
+						<h5 class="modal-title">Mantenimiento de datos</h5>
 				</div>
-			</form>
-	
-		<th:block
-			th:replace="~{template/fragments/mantenimiento/formularioAdicionalMantenimiento :: ${tipo}}?:~{}">
-		</th:block>
+				<div class="modal-body">
+					<form id="formMantenimiento" class="form-horizontal" role="form">
+						<th:block
+							th:replace="~{template/fragments/mantenimiento/modalMantenimiento :: ${tipo}}?:~{}">
+						</th:block>
+						<div id="botonesForm" class="form-group">
+							<div class="col-lg-12 text-center">
+								<button id="registrarMantenimiento" type="button"
+									class="btn btn-success">
+									<i class="fa fa-floppy-o"></i> Registrar
+								</button>
+								<button id="actualizarMantenimiento" type="button"
+									class="btn btn-info hidden">
+									<i class="fa fa-pencil-square"></i> Actualizar
+								</button>
+								
+								<button type="button" class="swal-button swal-button--cancel" data-dismiss="modal">Cerrar</button>
+							</div>
+						</div>
+					</form>
+				</div>
+				<th:block
+					th:replace="~{template/fragments/mantenimiento/formularioAdicionalMantenimiento :: ${tipo}}?:~{}">
+				</th:block>
+			</div>
+		</div>
 	</div>
-	
+
 	<!-- TABLA Persona -->
 	<th:block th:fragment="persona">
 		<div class="form-group">
 			<label class="col-lg-2 control-label">Tipo de documento</label>
 			<div class="col-lg-10">
-				<select id="idTipoDocumento" class="form-control select2 elemento-modificable"
+				<select id="idTipoDocumento"
+					class="form-control select2 elemento-modificable"
 					name="idTipoDocumento">
-					<option value="" selected="selected">Seleccione  el tipo de documento</option>
-					<option th:each="tipoDocumento : ${tipoDocumento}" th:value="${tipoDocumento.idItem}"
+					<option value="" selected="selected">Seleccione el tipo de
+						documento</option>
+					<option th:each="tipoDocumento : ${tipoDocumento}"
+						th:value="${tipoDocumento.idItem}"
 						th:text="|${tipoDocumento.descripcion}|"></option>
 				</select>
 			</div>
@@ -42,8 +57,8 @@
 		<div class="form-group">
 			<label class="col-lg-2 control-label">Número de Documento</label>
 			<div class="col-lg-10">
-				<input class="form-control numbersOnly elemento-modificable" name="numDocumento"
-					autofocus="autofocus" />
+				<input class="form-control numbersOnly elemento-modificable"
+					name="numDocumento" autofocus="autofocus" />
 			</div>
 		</div>
 		<div class="form-group">
@@ -69,9 +84,11 @@
 			<div class="col-lg-10">
 				<select id="sexo" class="form-control select2 elemento-modificable"
 					name="sexo">
-					<option value="" selected="selected" disabled="disabled">Seleccione el sexo</option>
-					<option  selected="selected" th:value="MASCULINO" th:text="MASCULINO">Masculino</option>
-					<option  selected="selected" th:value="FEMENINO" th:text="FEMENINO" >Femenino</option>
+					<option value="" selected="selected" disabled="disabled">Seleccione
+						el sexo</option>
+					<option selected="selected" th:value="MASCULINO"
+						th:text="MASCULINO">Masculino</option>
+					<option selected="selected" th:value="FEMENINO" th:text="FEMENINO">Femenino</option>
 				</select>
 			</div>
 		</div>
@@ -87,53 +104,61 @@
 				<input type="date" class="form-control" name="fechaNac">
 			</div>
 		</div>
-		
+
 	</th:block>
 	<!-- Tabla Alumno -->
 	<th:block th:fragment="alumno">
-				
+
 		<div class="form-group">
 			<div class="input-group">
-                <div class="input-group-btn search-panel">
-                    
-						<select id="idTipoDocumento" class="btn btn-default dropdown-toggle select2 elemento-desactivable"
+				<div class="input-group-btn search-panel">
+
+					<select id="idTipoDocumento"
+						class="btn btn-default dropdown-toggle select2 elemento-desactivable"
 						name="idTipoDocumento" data-toggle="dropdown">
 						<option value="" selected="selected">Tipo de documento</option>
-						<option th:each="tipoDocumento : ${tipoDocumento}" th:value="${tipoDocumento.idItem}"
-						th:text="|${tipoDocumento.descripcionCorta}|"></option>
-						</select>
-					
-                </div>
-                <input type="hidden" name="idPersona" value="all" id="idPersona">         
-                <input type="text" class="form-control" name="numeroDocumento" placeholder="Número de Documento">
-                <span class="input-group-btn">
-                    <button class="btn btn-default" type="button" id="buscar"><span class="glyphicon glyphicon-search"></span></button>
-                </span>
-            </div>
+						<option th:each="tipoDocumento : ${tipoDocumento}"
+							th:value="${tipoDocumento.idItem}"
+							th:text="|${tipoDocumento.descripcionCorta}|"></option>
+					</select>
+
+				</div>
+				<input type="hidden" name="idPersona" value="all" id="idPersona">
+				<input type="text" class="form-control" name="numeroDocumento"
+					placeholder="Número de Documento"> <span
+					class="input-group-btn">
+					<button class="btn btn-default" type="button" id="buscar">
+						<span class="glyphicon glyphicon-search"></span>
+					</button>
+				</span>
+			</div>
 		</div>
-				
+
 		<div class="form-group">
 			<label class="col-lg-2 control-label">Nombre</label>
 			<div class="col-lg-10">
-				<input id="nombreCompleto"class="form-control upperCase elemento-modificable" name="nombres" >
+				<input id="nombreCompleto"
+					class="form-control upperCase elemento-modificable" name="nombres">
 			</div>
 		</div>
-		
+
 		<div class="form-group">
 			<label class="col-lg-2 control-label">Código de Alumno</label>
 			<div class="col-lg-10">
-				<input class="form-control upperCase elemento-modificable" name="codigoAlumno">
+				<input class="form-control upperCase elemento-modificable"
+					name="codigoAlumno">
 			</div>
 		</div>
-		
-		
+
+
 		<div class="form-group">
 			<label class="col-lg-2 control-label">Estado del Alumno </label>
 			<div class="col-lg-10">
 				<select id="idEstadoTabla" class="form-control select2"
 					name="idEstadoTabla">
-					<option value="" selected="selected">Seleccione  el estado</option>
-					<option th:each="estados : ${estados}" th:value="${estados.idEstadoTabla}"
+					<option value="" selected="selected">Seleccione el estado</option>
+					<option th:each="estados : ${estados}"
+						th:value="${estados.idEstadoTabla}"
 						th:text="|${estados.descripcion}|"></option>
 				</select>
 			</div>
@@ -143,61 +168,73 @@
 			<div class="col-lg-10">
 				<select id="idTipoAcademico" class="form-control select2"
 					name="idTipoAcademico">
-					<option value="" selected="selected">Seleccione el tipo académico</option>
-					<option th:each="tiposAcademico : ${tiposAcademico}" th:value="${tiposAcademico.idItem}"
+					<option value="" selected="selected">Seleccione el tipo
+						académico</option>
+					<option th:each="tiposAcademico : ${tiposAcademico}"
+						th:value="${tiposAcademico.idItem}"
 						th:text="|${tiposAcademico.descripcionCorta}|"></option>
 				</select>
 			</div>
 		</div>
 		<div class="form-group">
-			<label class="col-lg-2 control-label">Escuela a la que pertenece</label>
+			<label class="col-lg-2 control-label">Escuela a la que
+				pertenece</label>
 			<div class="col-lg-10">
-				<select id="idEscuela" class="form-control select2"
-					name="idEscuela">
-					<option value="" selected="selected">Seleccione una Escuela</option>
-					<option th:each="escuelas : ${escuelas}" th:value="${escuelas.idEscuela}"
-						th:text="|${escuelas.nombre}|"></option>
+				<select id="idEscuela" class="form-control select2" name="idEscuela">
+					<option value="" selected="selected">Seleccione una
+						Escuela</option>
+					<option th:each="escuelas : ${escuelas}"
+						th:value="${escuelas.idEscuela}" th:text="|${escuelas.nombre}|"></option>
 				</select>
 			</div>
 		</div>
 	</th:block>
-	
+
 	<!-- Tabla Docente -->
 	<th:block th:fragment="docente">
-	<div class="form-group">
+		<div class="form-group">
 			<div class="input-group">
-                <div class="input-group-btn search-panel">
-                    
-						<select id="idTipoDocumento" class="btn btn-default dropdown-toggle select2 elemento-desactivable"
+				<div class="input-group-btn search-panel">
+
+					<select id="idTipoDocumento"
+						class="btn btn-default dropdown-toggle select2 elemento-desactivable"
 						name="idTipoDocumento" data-toggle="dropdown">
 						<option value="" selected="selected">Tipo de documento</option>
-						<option th:each="tipoDocumento : ${tipoDocumento}" th:value="${tipoDocumento.idItem}"
-						th:text="|${tipoDocumento.descripcionCorta}|"></option>
-						</select>
-					
-                </div>
-                <input type="hidden" name="idPersona" value="all" id="idPersona">         
-                <input type="text" class="form-control" name="numeroDocumento" placeholder="Número de Documento">
-                <span class="input-group-btn">
-                    <button class="btn btn-default" type="button" id="buscar"><span class="glyphicon glyphicon-search"></span></button>
-                </span>
-            </div>
+						<option th:each="tipoDocumento : ${tipoDocumento}"
+							th:value="${tipoDocumento.idItem}"
+							th:text="|${tipoDocumento.descripcionCorta}|"></option>
+					</select>
+
+				</div>
+				<input type="hidden" name="idPersona" value="all" id="idPersona">
+				<input type="text" class="form-control" name="numeroDocumento"
+					placeholder="Número de Documento"> <span
+					class="input-group-btn">
+					<button class="btn btn-default" type="button" id="buscar">
+						<span class="glyphicon glyphicon-search"></span>
+					</button>
+				</span>
+			</div>
 		</div>
-				
+
 		<div class="form-group">
 			<label class="col-lg-2 control-label">Nombre</label>
 			<div class="col-lg-10">
-				<input id="nombreCompleto"class="form-control upperCase elemento-modificable" name="nombres" >
+				<input id="nombreCompleto"
+					class="form-control upperCase elemento-modificable" name="nombres">
 			</div>
 		</div>
-		 
+
 		<div class="form-group">
 			<label class="col-lg-2 control-label">Estado del Docente </label>
 			<div class="col-lg-10">
-				<select id="idEstadoTabla" class="form-control select2 elemento-modificable"
+				<select id="idEstadoTabla"
+					class="form-control select2 elemento-modificable"
 					name="idEstadoTabla">
-					<option value="" selected="selected" disabled="disabled">Seleccione  el estado</option>
-					<option th:each="estado : ${estado}" th:value="${estado.idEstadoTabla}"
+					<option value="" selected="selected" disabled="disabled">Seleccione
+						el estado</option>
+					<option th:each="estado : ${estado}"
+						th:value="${estado.idEstadoTabla}"
 						th:text="|${estado.descripcion}|"></option>
 				</select>
 			</div>
@@ -207,49 +244,58 @@
 	<th:block th:fragment="externo">
 		<div class="form-group">
 			<div class="input-group">
-                <div class="input-group-btn search-panel">
-                    
-						<select id="idTipoDocumento" class="btn btn-default dropdown-toggle select2 elemento-desactivable"
+				<div class="input-group-btn search-panel">
+
+					<select id="idTipoDocumento"
+						class="btn btn-default dropdown-toggle select2 elemento-desactivable"
 						name="idTipoDocumento" data-toggle="dropdown">
 						<option value="" selected="selected">Tipo de documento</option>
-						<option th:each="tipoDocumento : ${tipoDocumento}" th:value="${tipoDocumento.idItem}"
-						th:text="|${tipoDocumento.descripcionCorta}|"></option>
-						</select>
-					
-                </div>
-                <input type="hidden" name="idPersona" value="all" id="idPersona">         
-                <input type="text" class="form-control" name="numeroDocumento" placeholder="Número de Documento">
-                <span class="input-group-btn">
-                    <button class="btn btn-default" type="button" id="buscar"><span class="glyphicon glyphicon-search"></span></button>
-                </span>
-            </div>
+						<option th:each="tipoDocumento : ${tipoDocumento}"
+							th:value="${tipoDocumento.idItem}"
+							th:text="|${tipoDocumento.descripcionCorta}|"></option>
+					</select>
+
+				</div>
+				<input type="hidden" name="idPersona" value="all" id="idPersona">
+				<input type="text" class="form-control" name="numeroDocumento"
+					placeholder="Número de Documento"> <span
+					class="input-group-btn">
+					<button class="btn btn-default" type="button" id="buscar">
+						<span class="glyphicon glyphicon-search"></span>
+					</button>
+				</span>
+			</div>
 		</div>
-				
+
 		<div class="form-group">
 			<label class="col-lg-2 control-label">Nombre</label>
 			<div class="col-lg-10">
-				<input id="nombreCompleto"class="form-control upperCase elemento-modificable" name="nombres" >
+				<input id="nombreCompleto"
+					class="form-control upperCase elemento-modificable" name="nombres">
 			</div>
 		</div>
-		 
+
 		<div class="form-group">
 			<label class="col-lg-2 control-label">Estado del Docente </label>
 			<div class="col-lg-10">
-				<select id="idEstadoTabla" class="form-control select2 elemento-modificable"
+				<select id="idEstadoTabla"
+					class="form-control select2 elemento-modificable"
 					name="idEstadoTabla">
-					<option value="" selected="selected" disabled="disabled">Seleccione  el estado</option>
-					<option th:each="estado : ${estado}" th:value="${estado.idEstadoTabla}"
+					<option value="" selected="selected" disabled="disabled">Seleccione
+						el estado</option>
+					<option th:each="estado : ${estado}"
+						th:value="${estado.idEstadoTabla}"
 						th:text="|${estado.descripcion}|"></option>
 				</select>
 			</div>
 		</div>
-		
+
 	</th:block>
-	
+
 	<!--TABLA HORARIO -->
-	
+
 	<th:block th:fragment="horario">
-		
+
 		<div class="form-group">
 			<label class="col-lg-2 control-label">Hora de inicio</label>
 			<div class="col-lg-10">
@@ -277,10 +323,13 @@
 		<div class="form-group">
 			<label class="col-lg-2 control-label">Estado del Horario </label>
 			<div class="col-lg-10">
-				<select id="idEstadoTabla" class="form-control select2 elemento-modificable"
+				<select id="idEstadoTabla"
+					class="form-control select2 elemento-modificable"
 					name="idEstadoTabla">
-					<option value="" selected="selected" disabled="disabled">Seleccione  el estado</option>
-					<option th:each="estado : ${estado}" th:value="${estado.idEstadoTabla}"
+					<option value="" selected="selected" disabled="disabled">Seleccione
+						el estado</option>
+					<option th:each="estado : ${estado}"
+						th:value="${estado.idEstadoTabla}"
 						th:text="|${estado.descripcion}|"></option>
 				</select>
 			</div>
@@ -288,9 +337,10 @@
 		<div class="form-group">
 			<label class="col-lg-2 control-label">Turno </label>
 			<div class="col-lg-10">
-				<select id="idTurno" class="form-control select2 elemento-modificable"
-					name="idTurno">
-					<option value="" selected="selected" disabled="disabled">Seleccione el turno</option>
+				<select id="idTurno"
+					class="form-control select2 elemento-modificable" name="idTurno">
+					<option value="" selected="selected" disabled="disabled">Seleccione
+						el turno</option>
 					<option th:each="turno : ${turno}" th:value="${turno.idItem}"
 						th:text="|${turno.descripcionCorta}|"></option>
 				</select>
@@ -301,7 +351,8 @@
 			<div class="col-lg-10">
 				<select id="idDia" class="form-control select2 elemento-modificable"
 					name="idDia">
-					<option value="" selected="selected" disabled="disabled">Seleccione el día</option>
+					<option value="" selected="selected" disabled="disabled">Seleccione
+						el día</option>
 					<option th:each="dia : ${dia}" th:value="${dia.idItem}"
 						th:text="|${dia.descripcion}|"></option>
 				</select>
@@ -310,10 +361,13 @@
 		<div class="form-group">
 			<label class="col-lg-2 control-label">Tipo de Horario </label>
 			<div class="col-lg-10">
-				<select id="idTipoHorario" class="form-control select2 elemento-modificable"
+				<select id="idTipoHorario"
+					class="form-control select2 elemento-modificable"
 					name="idTipoHorario">
-					<option value="" selected="selected" disabled="disabled">Seleccione el tipo de Horario</option>
-					<option th:each="tipoHorario : ${tipoHorario}" th:value="${tipoHorario.idItem}"
+					<option value="" selected="selected" disabled="disabled">Seleccione
+						el tipo de Horario</option>
+					<option th:each="tipoHorario : ${tipoHorario}"
+						th:value="${tipoHorario.idItem}"
 						th:text="|${tipoHorario.descripcion}|"></option>
 				</select>
 			</div>
@@ -321,22 +375,26 @@
 		<div class="form-group">
 			<label class="col-lg-2 control-label">Área de estudio </label>
 			<div class="col-lg-10">
-				<select id="idAreaEstudio" class="form-control select2 elemento-modificable"
+				<select id="idAreaEstudio"
+					class="form-control select2 elemento-modificable"
 					name="idAreaEstudio">
-					<option value="" selected="selected">Seleccione el area de estudio</option>
-					<option th:each="areaEstudio : ${areaEstudio}" th:value="${areaEstudio.idAreaEstudio}"
+					<option value="" selected="selected">Seleccione el area de
+						estudio</option>
+					<option th:each="areaEstudio : ${areaEstudio}"
+						th:value="${areaEstudio.idAreaEstudio}"
 						th:text="|${areaEstudio.nombre}|"></option>
 				</select>
 			</div>
 		</div>
 	</th:block>
 	<th:block th:fragment="infraccion">
-		
+
 		<div class="form-group">
-			<label class="col-lg-2 control-label">Número de Documento del Infractor</label>
+			<label class="col-lg-2 control-label">Número de Documento del
+				Infractor</label>
 			<div class="col-lg-10">
-				<input class="form-control upperCase elemento-desactivable" name="idPersona"
-					autofocus="autofocus" />
+				<input class="form-control upperCase elemento-desactivable"
+					name="idPersona" autofocus="autofocus" />
 			</div>
 		</div>
 		<div class="form-group">
@@ -348,48 +406,58 @@
 		<div class="form-group">
 			<label class="col-lg-2 control-label">Infracción </label>
 			<div class="col-lg-10">
-				<select id="idTipoInfraccion" class="form-control select2 elemento-desactivable"
+				<select id="idTipoInfraccion"
+					class="form-control select2 elemento-desactivable"
 					name="idTipoInfraccion">
-					<option value="" selected="selected" disabled="disabled">Seleccione la infracción</option>
-					<option th:each="tipoInfraccion : ${tipoInfraccion}" th:value="${tipoInfraccion.idTipoInfraccion}"
+					<option value="" selected="selected" disabled="disabled">Seleccione
+						la infracción</option>
+					<option th:each="tipoInfraccion : ${tipoInfraccion}"
+						th:value="${tipoInfraccion.idTipoInfraccion}"
 						th:text="|${tipoInfraccion.idTipoInfraccion} - ${tipoInfraccion.descripcion}|"></option>
 				</select>
 			</div>
 		</div>
 		<div class="form-group">
-			<label class="col-lg-2 control-label">Estado de la Infracción </label>
+			<label class="col-lg-2 control-label">Estado de la Infracción
+			</label>
 			<div class="col-lg-10">
-				<select id="idEstadoTabla" class="form-control select2 elemento-desactivable"
+				<select id="idEstadoTabla"
+					class="form-control select2 elemento-desactivable"
 					name="idEstadoTabla">
-					<option value="" selected="selected" disabled="disabled">Seleccione  el estado</option>
-					<option th:each="estado : ${estado}" th:value="${estado.idEstadoTabla}"
+					<option value="" selected="selected" disabled="disabled">Seleccione
+						el estado</option>
+					<option th:each="estado : ${estado}"
+						th:value="${estado.idEstadoTabla}"
 						th:text="|${estado.idEstadoTabla} - ${estado.descripcion}|"></option>
 				</select>
 			</div>
 		</div>
 	</th:block>
 	<!-- Tabla Facultad -->
-	<th:block th:fragment="facultad">	
+	<th:block th:fragment="facultad">
 		<div class="form-group">
 			<label class="col-lg-2 control-label">Nombre de la Facultad</label>
 			<div class="col-lg-10">
-				<input class="form-control upperCase elemento-modificable" name="nombre"
-					autofocus="autofocus" />
+				<input class="form-control upperCase elemento-modificable"
+					name="nombre" autofocus="autofocus" />
 			</div>
 		</div>
-	</th:block>	
+	</th:block>
 	<!-- Tabla Escuela -->
-	
-	
+
+
 	<th:block th:fragment="escuela">
-	
+
 		<div class="form-group">
-			<label class="col-lg-2 control-label">Facultad a la que pertenece</label>
+			<label class="col-lg-2 control-label">Facultad a la que
+				pertenece</label>
 			<div class="col-lg-10">
-				<select id="idFacultad" class="form-control select2 elemento-modificable"
-					name="idFacultad">
-					<option value="" selected="selected" >Seleccione una Facultad</option>
-					<option th:each="facultad : ${facultad}" th:value="${facultad.idFacultad}"
+				<select id="idFacultad"
+					class="form-control select2 elemento-modificable" name="idFacultad">
+					<option value="" selected="selected">Seleccione una
+						Facultad</option>
+					<option th:each="facultad : ${facultad}"
+						th:value="${facultad.idFacultad}"
 						th:text="|${facultad.idFacultad} - ${facultad.nombre}|"></option>
 				</select>
 			</div>
@@ -397,59 +465,67 @@
 		<div class="form-group">
 			<label class="col-lg-2 control-label">Codigo de Escuela</label>
 			<div class="col-lg-10">
-				<input class="form-control numbersOnly elemento-modificable" name="codigo"
-					autofocus="autofocus" />
+				<input class="form-control numbersOnly elemento-modificable"
+					name="codigo" autofocus="autofocus" />
 			</div>
 		</div>
 		<div class="form-group">
 			<label class="col-lg-2 control-label">Nombre de Escuela</label>
 			<div class="col-lg-10">
-				<input class="form-control upperCase elemento-modificable" name="nombre"
-					autofocus="autofocus" />
+				<input class="form-control upperCase elemento-modificable"
+					name="nombre" autofocus="autofocus" />
 			</div>
 		</div>
-		
+
 	</th:block>
-	
-		<!-- Tabla Administrativo -->
-		
+
+	<!-- Tabla Administrativo -->
+
 	<th:block th:fragment="administrativo">
 		<div class="form-group">
 			<div class="input-group">
-                <div class="input-group-btn search-panel">
-                    
-						<select id="idTipoDocumento" class="btn btn-default dropdown-toggle select2 elemento-desactivable"
+				<div class="input-group-btn search-panel">
+
+					<select id="idTipoDocumento"
+						class="btn btn-default dropdown-toggle select2 elemento-desactivable"
 						name="idTipoDocumento" data-toggle="dropdown">
 						<option value="" selected="selected">Tipo de documento</option>
-						<option th:each="tipoDocumento : ${tipoDocumento}" th:value="${tipoDocumento.idItem}"
-						th:text="|${tipoDocumento.descripcionCorta}|"></option>
-						</select>
-					
-                </div>
-                <input type="hidden" name="idPersona" value="all" id="idPersona">         
-                <input type="text" class="form-control" name="numeroDocumento" placeholder="Número de Documento">
-                <span class="input-group-btn">
-                    <button class="btn btn-default" type="button" id="buscar"><span class="glyphicon glyphicon-search"></span></button>
-                </span>
-            </div>
+						<option th:each="tipoDocumento : ${tipoDocumento}"
+							th:value="${tipoDocumento.idItem}"
+							th:text="|${tipoDocumento.descripcionCorta}|"></option>
+					</select>
+
+				</div>
+				<input type="hidden" name="idPersona" value="all" id="idPersona">
+				<input type="text" class="form-control" name="numeroDocumento"
+					placeholder="Número de Documento"> <span
+					class="input-group-btn">
+					<button class="btn btn-default" type="button" id="buscar">
+						<span class="glyphicon glyphicon-search"></span>
+					</button>
+				</span>
+			</div>
 		</div>
-				
+
 		<div class="form-group">
 			<label class="col-lg-2 control-label">Nombre</label>
 			<div class="col-lg-10">
-				<input id="nombreCompleto"class="form-control upperCase elemento-modificable" name="nombres" >
+				<input id="nombreCompleto"
+					class="form-control upperCase elemento-modificable" name="nombres">
 			</div>
 		</div>
-		
+
 		<div class="form-group">
-			<label class="col-lg-2 control-label">Código de Administrativo</label>
+			<label class="col-lg-2 control-label">Código de
+				Administrativo</label>
 			<div class="col-lg-10">
-				<input class="form-control upperCase elemento-modificable" name="codigoAdm">
+				<input class="form-control upperCase elemento-modificable"
+					name="codigoAdm">
 			</div>
 		</div>
-		
+
 	</th:block>
-	
+
 	<!-- Tabla Area-Administrativo -->
 	<th:block th:fragment="areaAdministrativo">
 		<div class="form-group">
@@ -457,8 +533,10 @@
 			<div class="col-lg-10">
 				<select id="idAreaEstudio" class="form-control select2"
 					name="idAreaEstudio">
-					<option value="" selected="selected">Seleccione el area de estudio</option>
-					<option th:each="areaEstudio : ${areaEstudio}" th:value="${areaEstudio.idAreaEstudio}"
+					<option value="" selected="selected">Seleccione el area de
+						estudio</option>
+					<option th:each="areaEstudio : ${areaEstudio}"
+						th:value="${areaEstudio.idAreaEstudio}"
 						th:text="|${areaEstudio.nombre}|"></option>
 				</select>
 			</div>
@@ -466,10 +544,13 @@
 		<div class="form-group">
 			<label class="col-lg-2 control-label">Administrativo</label>
 			<div class="col-lg-10">
-				<select id="idAdministrativo" class="form-control select2 upperCase elemento-modificable"
+				<select id="idAdministrativo"
+					class="form-control select2 upperCase elemento-modificable"
 					name="idAdministrativo">
-					<option value="" selected="selected">Seleccione un Administrativo</option>
-					<option th:each="administrativo : ${administrativo}" th:value="${administrativo.idAdministrativo}"
+					<option value="" selected="selected">Seleccione un
+						Administrativo</option>
+					<option th:each="administrativo : ${administrativo}"
+						th:value="${administrativo.idAdministrativo}"
 						th:text="|${administrativo.nombre}|"></option>
 				</select>
 			</div>
@@ -477,74 +558,84 @@
 		<div class="form-group">
 			<label class="col-lg-2 control-label">Fecha de inicio</label>
 			<div class="col-lg-10">
-				<input class="form-control upperCase elemento-modificable" type="date" name="fechaInicio" autofocus="autofocus" />
+				<input class="form-control upperCase elemento-modificable"
+					type="date" name="fechaInicio" autofocus="autofocus" />
 			</div>
 		</div>
 		<div class="form-group">
 			<label class="col-lg-2 control-label">Fecha de Fin</label>
 			<div class="col-lg-10">
-				<input class="form-control upperCase elemento-modificable" type="date" name="fechaFin" autofocus="autofocus" />
+				<input class="form-control upperCase elemento-modificable"
+					type="date" name="fechaFin" autofocus="autofocus" />
 			</div>
 		</div>
 		<div class="form-group">
 			<label class="col-lg-2 control-label">Cargo</label>
 			<div class="col-lg-10">
-				<input class="form-control " type="text" name="cargo" autofocus="autofocus" />
+				<input class="form-control " type="text" name="cargo"
+					autofocus="autofocus" />
 			</div>
 		</div>
 	</th:block>
-	
-	
+
+
 	<!-- Tabla Area Estudio-->
 	<th:block th:fragment="areaEstudio">
 		<div class="form-group">
 			<label class="col-lg-2 control-label">Nombre</label>
 			<div class="col-lg-10">
-				<input class="form-control upperCase elemento-modificable" type="text" name="nombre" autofocus="autofocus" />
+				<input class="form-control upperCase elemento-modificable"
+					type="text" name="nombre" autofocus="autofocus" />
 			</div>
 		</div>
 		<div class="form-group">
 			<label class="col-lg-2 control-label">Pabellon</label>
 			<div class="col-lg-10">
-				<input class="form-control upperCase elemento-modificable" type="text" name="pabellon" autofocus="autofocus" />
+				<input class="form-control upperCase elemento-modificable"
+					type="text" name="pabellon" autofocus="autofocus" />
 			</div>
 		</div>
 		<div class="form-group">
 			<label class="col-lg-2 control-label">Nivel</label>
 			<div class="col-lg-10">
-				<input class="form-control upperCase elemento-modificable" type="text" name="nivel" autofocus="autofocus" />
+				<input class="form-control upperCase elemento-modificable"
+					type="text" name="nivel" autofocus="autofocus" />
 			</div>
 		</div>
 		<div class="form-group">
 			<label class="col-lg-2 control-label">Aforo</label>
 			<div class="col-lg-10">
-				<input class="form-control upperCase elemento-modificable" type="text" name="aforo" autofocus="autofocus" />
+				<input class="form-control upperCase elemento-modificable"
+					type="text" name="aforo" autofocus="autofocus" />
 			</div>
 		</div>
 	</th:block>
-	
+
 	<!-- Tabla Material-->
 	<th:block th:fragment="material">
 		<div class="form-group">
 			<label class="col-lg-2 control-label">Nombre</label>
 			<div class="col-lg-10">
-				<input class="form-control upperCase elemento-modificable" type="text" name="nombreMaterial" autofocus="autofocus" />
+				<input class="form-control upperCase elemento-modificable"
+					type="text" name="nombreMaterial" autofocus="autofocus" />
 			</div>
 		</div>
 		<div class="form-group">
 			<label class="col-lg-2 control-label">Id. Tipo de Material</label>
 			<div class="col-lg-10">
-				<input class="form-control upperCase elemento-modificable" type="number" name="idTipoMaterial" autofocus="autofocus" />
+				<input class="form-control upperCase elemento-modificable"
+					type="number" name="idTipoMaterial" autofocus="autofocus" />
 			</div>
 		</div>
 	</th:block>
-	
+
 	<!-- Tabla Recurso-->
 	<th:block th:fragment="recurso">
 		<div class="form-group">
 			<label class="col-lg-2 control-label">Numero de Serie</label>
 			<div class="col-lg-10">
-				<input class="form-control  elemento-modificable" type="text" name="numeroSerie" autofocus="autofocus" />
+				<input class="form-control  elemento-modificable" type="text"
+					name="numeroSerie" autofocus="autofocus" />
 			</div>
 		</div>
 		<div class="form-group">
@@ -559,122 +650,141 @@
 				<input class="form-control" name="observacion" autofocus="autofocus" />
 			</div>
 		</div>
-		
+
 		<div class="form-group">
 			<label class="col-lg-2 control-label">Estado del Recurso</label>
 			<div class="col-lg-10">
 				<select id="idEstadoTabla" class="form-control select2"
 					name="idEstadoTabla">
-					<option value="" selected="selected">Seleccione  el estado</option>
-					<option th:each="estados : ${estados}" th:value="${estados.idEstadoTabla}"
+					<option value="" selected="selected">Seleccione el estado</option>
+					<option th:each="estados : ${estados}"
+						th:value="${estados.idEstadoTabla}"
 						th:text="|${estados.descripcion}|"></option>
 				</select>
 			</div>
 		</div>
-		
+
 		<div class="form-group">
 			<label class="col-lg-2 control-label">Tipo de Recurso</label>
 			<div class="col-lg-10">
-				<select id="idTipoRecurso" class="form-control select2 elemento-modificable"
+				<select id="idTipoRecurso"
+					class="form-control select2 elemento-modificable"
 					name="idTipoRecurso">
-					<option value="" selected="selected">Seleccione el tipo de recurso</option>
-					<option th:each="tipoRecursos : ${tipoRecursos}" th:value="${tipoRecursos.idTipoRecurso}"
+					<option value="" selected="selected">Seleccione el tipo de
+						recurso</option>
+					<option th:each="tipoRecursos : ${tipoRecursos}"
+						th:value="${tipoRecursos.idTipoRecurso}"
 						th:text="|${tipoRecursos.nombre}|"></option>
 				</select>
 			</div>
 		</div>
-		
+
 		<div class="form-group">
 			<label class="col-lg-2 control-label">Area de Estudio</label>
 			<div class="col-lg-10">
 				<select id="idAreaEstudio" class="form-control select2"
 					name="idAreaEstudio">
-					<option value="" selected="selected">Seleccione el area de estudio</option>
-					<option th:each="areaEstudio : ${areaEstudio}" th:value="${areaEstudio.idAreaEstudio}"
+					<option value="" selected="selected">Seleccione el area de
+						estudio</option>
+					<option th:each="areaEstudio : ${areaEstudio}"
+						th:value="${areaEstudio.idAreaEstudio}"
 						th:text="|${areaEstudio.nombre}|"></option>
 				</select>
 			</div>
 		</div>
-		
-		
+
+
 	</th:block>
-	
+
 	<!-- Tabla Rol -->
 	<th:block th:fragment="rol">
 		<div class="form-group">
 			<label class="col-lg-2 control-label">Nombre</label>
 			<div class="col-lg-10">
-				<input class="form-control upperCase elemento-modificable" type="text" name="nombre" autofocus="autofocus" />
+				<input class="form-control upperCase elemento-modificable"
+					type="text" name="nombre" autofocus="autofocus" />
 			</div>
 		</div>
 	</th:block>
-	
-	
+
+
 	<!-- Tabla Tipo Recurso -->
 	<th:block th:fragment="tipoRecurso">
 		<div class="form-group">
 			<label class="col-lg-2 control-label">Nombre</label>
 			<div class="col-lg-10">
-				<input class="form-control upperCase upperCase elemento-modificable" type="text" name="nombre" autofocus="autofocus" />
+				<input class="form-control upperCase upperCase elemento-modificable"
+					type="text" name="nombre" autofocus="autofocus" />
 			</div>
 		</div>
 		<div class="form-group">
 			<label class="col-lg-2 control-label">Descripcion</label>
 			<div class="col-lg-10">
-				<input class="form-control upperCase upperCase elemento-modificable" type="text" name="descripcion" autofocus="autofocus" />
+				<input class="form-control upperCase upperCase elemento-modificable"
+					type="text" name="descripcion" autofocus="autofocus" />
 			</div>
 		</div>
 		<div class="form-group">
 			<label class="col-lg-2 control-label">Uso</label>
 			<div class="col-lg-10">
-				<input class="form-control upperCase upperCase elemento-modificable" type="text" name="uso" autofocus="autofocus" />
+				<input class="form-control upperCase upperCase elemento-modificable"
+					type="text" name="uso" autofocus="autofocus" />
 			</div>
 		</div>
 		<div class="form-group">
 			<label class="col-lg-2 control-label">Maxima capacidad</label>
 			<div class="col-lg-10">
-				<input class="form-control upperCase elemento-modificable" type="number" name="maxCapacidad" autofocus="autofocus" />
+				<input class="form-control upperCase elemento-modificable"
+					type="number" name="maxCapacidad" autofocus="autofocus" />
 			</div>
 		</div>
-				
+
 	</th:block>
-	
+
 	<!-- Tabla Ubicacion -->
 	<th:block th:fragment="ubicacion">
 		<div class="form-group">
 			<label class="col-lg-2 control-label">Coordenada X</label>
 			<div class="col-lg-10">
-				<input class="form-control upperCase elemento-desactivable" name="coordenadaX" autofocus="autofocus" />
+				<input class="form-control upperCase elemento-desactivable"
+					name="coordenadaX" autofocus="autofocus" />
 			</div>
 		</div>
 		<div class="form-group">
 			<label class="col-lg-2 control-label">Coordenada Y</label>
 			<div class="col-lg-10">
-				<input class="form-control upperCase elemento-desactivable" name="coordenadaY" autofocus="autofocus" />
+				<input class="form-control upperCase elemento-desactivable"
+					name="coordenadaY" autofocus="autofocus" />
 			</div>
 		</div>
 	</th:block>
-	
+
 	<!-- Tabla Usuario -->
 	<th:block th:fragment="usuario">
 		<div class="form-group">
 			<label class="col-lg-2 control-label">Usuario</label>
 			<div class="col-lg-10">
-				<input class="form-control upperCase elemento-desactivable" type="text" name="username" autofocus="autofocus" />
+				<input class="form-control upperCase elemento-desactivable"
+					type="text" name="username" autofocus="autofocus" />
 			</div>
 		</div>
 		<div class="form-group">
 			<label class="col-lg-2 control-label">Contraseña</label>
 			<div class="col-lg-10">
-				<input class="form-control upperCase elemento-desactivable" type="password" name="pass" autofocus="autofocus" />
+				<input class="form-control upperCase elemento-desactivable"
+					type="password" name="pass" autofocus="autofocus" />
 			</div>
 		</div>
 		<div class="form-group">
 			<label class="col-lg-2 control-label">Estado del Usuario</label>
 			<div class="col-lg-10">
-				<select id="idEstadoTabla" class="form-control select2 elemento-desactivable" name="idEstadoTabla">
-					<option value="" selected="selected" disabled="disabled">Seleccione el estado</option>
-					<option th:each="estado : ${estados}" th:value="${estado.idEstadoTabla}"
+				<select id="idEstadoTabla"
+					class="form-control select2 elemento-desactivable"
+					name="idEstadoTabla">
+					<option value="" selected="selected" disabled="disabled">Seleccione
+						el estado</option>
+					<option th:each="estado : ${estados}"
+						th:value="${estado.idEstadoTabla}"
 						th:text="|${estado.idEstadoTabla} - ${estado.descripcion}|"></option>
 				</select>
 			</div>
@@ -682,8 +792,10 @@
 		<div class="form-group">
 			<label class="col-lg-2 control-label">Rol</label>
 			<div class="col-lg-10">
-				<select id="idRol" class="form-control select2 elemento-desactivable" name="idRol">
-					<option value="" selected="selected" disabled="disabled">Seleccione el rol</option>
+				<select id="idRol"
+					class="form-control select2 elemento-desactivable" name="idRol">
+					<option value="" selected="selected" disabled="disabled">Seleccione
+						el rol</option>
 					<option th:each="rol : ${roles}" th:value="${rol.idRol}"
 						th:text="|${rol.idRol} - ${rol.nombre}|"></option>
 				</select>
@@ -692,14 +804,17 @@
 		<div class="form-group">
 			<label class="col-lg-2 control-label">Persona</label>
 			<div class="col-lg-10">
-				<select id="idPersona" class="form-control select2 elemento-desactivable" name="idPersona">
-					<option value="" selected="selected" disabled="disabled">Seleccione la persona</option>
-					<option th:each="persona : ${personas}" th:value="${persona.idPersona}"
+				<select id="idPersona"
+					class="form-control select2 elemento-desactivable" name="idPersona">
+					<option value="" selected="selected" disabled="disabled">Seleccione
+						la persona</option>
+					<option th:each="persona : ${personas}"
+						th:value="${persona.idPersona}"
 						th:text="|${persona.idPersona} - ${persona.nombre}  ${persona.appPaterno} ${persona.appMaterno} |"></option>
 				</select>
 			</div>
 		</div>
 	</th:block>
-	
+
 </body>
 </html>

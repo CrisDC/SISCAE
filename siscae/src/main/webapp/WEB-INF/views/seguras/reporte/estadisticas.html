@@ -27,18 +27,19 @@
 						<div class="card">
 							<div class="card-body p-b-0">
 								<!-- Nav tabs -->
-								<ul id="xd" class="nav justify-content-end customtab2" role="tablist">
+								<ul id="xd" class="nav justify-content-end customtab2"
+									role="tablist">
 
-									<li class="nav-item"><a class="nav-link active comun" th:key="|P|"
-										data-toggle="tab" href="#tabReporteGeneral" role="tab">
-											<span class="hidden-sm-up"><i class="ti-user"></i></span> <span
-											class="hidden-xs-down">Prestamos</span>
+									<li class="nav-item"><a class="nav-link active comun"
+										th:key="|P|" data-toggle="tab" href="#tabReporteGeneral"
+										role="tab"> <span class="hidden-sm-up"><i
+												class="ti-user"></i></span> <span class="hidden-xs-down">Prestamos</span>
 									</a></li>
 
-									<li class="nav-item"><a class="nav-link comun" data-toggle="tab" th:key="|I|"
-										href="#tabReporteGeneral" role="tab"> <span
-											class="hidden-sm-up"><i class="ti-user"></i></span> <span
-											class="hidden-xs-down">Infracciones</span>
+									<li class="nav-item"><a class="nav-link comun"
+										data-toggle="tab" th:key="|I|" href="#tabReporteGeneral"
+										role="tab"> <span class="hidden-sm-up"><i
+												class="ti-user"></i></span> <span class="hidden-xs-down">Infracciones</span>
 									</a></li>
 
 									<li class="nav-item"><a class="nav-link" data-toggle="tab"
@@ -50,7 +51,8 @@
 
 								<!-- Tab panes -->
 								<div class="tab-content">
-									<div class="tab-pane active m-t-20" id="tabReporteGeneral" role="tabpanel">
+									<div class="tab-pane active m-t-20" id="tabReporteGeneral"
+										role="tabpanel">
 										<div id="estadisticas" class="m-l-15 m-r-15">
 											<form id="formEstadisticas">
 												<h3 style="font-size: 18px;">Gráfica</h3>
@@ -59,7 +61,8 @@
 														<div class="form-group m-b-10">
 															<label class="m-r-15">Tipo</label>
 															<div class="input-group">
-																<select id="selectTipoGrafico" name="tipoGrafica" class="form-control js-example-basic-single" style="height 30px;">
+																<select id="selectTipoGrafico" name="tipoGrafica"
+																	class="form-control js-example-basic-single" style="">
 																	<option value="-1" disabled="disabled"
 																		selected="selected">Seleccione un gráfico</option>
 																	<option value="BARRAS">Barras</option>
@@ -73,7 +76,8 @@
 														<div class="form-group m-b-10">
 															<label class="m-r-15">Periodo</label>
 															<div class="input-group">
-																<select id="selectPeriodo" name="tipoPeriodo" class="form-control js-example-basic-single" style="height 30px;">
+																<select id="selectPeriodo" name="tipoPeriodo"
+																	class="form-control js-example-basic-single" style="">
 																	<option value="-1" disabled="disabled"
 																		selected="selected">Seleccione un periodo</option>
 																	<option value="DIA">Por día</option>
@@ -89,8 +93,8 @@
 														<div class="form-group m-b-10">
 															<label class="m-r-15">Intervalo Fechas</label>
 															<div class="input-group">
-																<span class="input-group-addon">
-																<i class="fa fa-calendar m-r-5 m-t-5 text-center"></i></span> <input
+																<span class="input-group-addon"> <i
+																	class="fa fa-calendar m-r-5 m-t-5 text-center"></i></span> <input
 																	id="fechaPrestamo" type="text" name="fechaPrestamo"
 																	class="form-control filtro" readonly="readonly">
 															</div>
@@ -102,8 +106,8 @@
 														<div class="form-group m-b-10">
 															<label class="m-r-10">Desde:</label>
 															<div class="input-group">
-																<input id="semanaInicio" type="week" name="valSemanaIncio"
-																	class="form-control">
+																<input id="semanaInicio" type="week"
+																	name="valSemanaIncio" class="form-control">
 															</div>
 														</div>
 													</div>
@@ -118,8 +122,8 @@
 															</div>
 														</div>
 													</div>
-													
-													
+
+
 													<div class="col-md-3 hidden" id="divMesInicio">
 														<div class="form-group m-b-10">
 															<label class="m-r-10">Desde:</label>
@@ -140,13 +144,13 @@
 															</div>
 														</div>
 													</div>
-													
+
 													<div class="col-md-3 hidden" id="divAnioInicio">
 														<div class="form-group m-b-10">
 															<label class="m-r-10">Desde:</label>
 															<div class="input-group">
-																<input id="anioInicio" type="number" name="valAnioInicio"
-																	class="form-control">
+																<input id="anioInicio" type="number"
+																	name="valAnioInicio" class="form-control">
 															</div>
 														</div>
 													</div>
@@ -162,14 +166,15 @@
 														</div>
 													</div>
 
-													
+
 												</div>
 												<div class="row" style="width: 100%;">
 													<div class="col-md-3 hidden" id="divSerie">
 														<div class="form-group m-b-10">
 															<label class="m-r-15">Series</label>
 															<div class="input-group">
-																<select id="selectSeries" name="valSeries" class="form-control js-example-basic-single " style="height 30px;">
+																<select id="selectSeries" name="valSeries"
+																	class="form-control js-example-basic-single " style="">
 																	<option value="" disabled="disabled"
 																		selected="selected">Seleccione una Serie</option>
 																	<option value="ESCUELA">Escuela</option>
@@ -183,7 +188,8 @@
 														<div class="form-group m-b-10">
 															<label class="m-r-15">Eje X</label>
 															<div class="input-group">
-																<select id="selectEjeX" name="valEjeX" class="form-control js-example-basic-single " style="height 30px;">
+																<select id="selectEjeX" name="valEjeX"
+																	class="form-control js-example-basic-single " style="">
 																	<option value="" disabled="disabled"
 																		selected="selected">Seleccione un eje</option>
 																	<option value="PERIODO">Periodo</option>
@@ -197,53 +203,60 @@
 														<div class="form-group m-b-10 ">
 															<label class="m-r-15">Segmentacion en Y</label>
 															<div class="input-group">
-																<select id="selectSegmY" name="valSegY" class="form-control js-example-basic-single" style="height 30px;">
+																<select id="selectSegmY" name="valSegY"
+																	class="form-control js-example-basic-single" style="">
 																	<option value="NINGUNA" selected="selected">Ninguna</option>
-																	<option value="TIPOSOLICITANTE">Tipo Solicitante</option>
+																	<option value="TIPOSOLICITANTE">Tipo
+																		Solicitante</option>
 																	<option value="ESCUELA">Escuela</option>
 																	<option value="RECURSO">Tipo de Recurso</option>
 																	<option value="AREAESTUDIO">Area Estudios</option>
 																</select>
 															</div>
 														</div>
-													</div>		
+													</div>
 													<div class="col-md-3 hidden" id="divPresentacion">
 														<div class="form-group m-b-10">
 															<label class="m-r-15">Presentación</label>
 															<div class="input-group">
-																<select id="selectPresentacion" name="valPresentacion" class="form-control js-example-basic-single" style="height 30px;">
-																	<option value="-1" selected="selected" disabled="disabled">Seleccione una presentación</option>
+																<select id="selectPresentacion" name="valPresentacion"
+																	class="form-control js-example-basic-single" style="">
+																	<option value="-1" selected="selected"
+																		disabled="disabled">Seleccione una
+																		presentación</option>
 																	<option value="APILADO">Barras apilado</option>
 																	<option value="PARALELO">Barras paralelo</option>
 																</select>
 															</div>
 														</div>
-													</div>												
+													</div>
 												</div>
 												<h3 style="font-size: 18px;">Contenido</h3>
 												<div class="row" style="width: 100%;">
-													
-													
+
+
 													<div class="col-md-3">
 														<div class="form-group m-b-10">
 															<label class="m-r-15">Areas Estudio</label>
 															<div class="input-group">
-																<select id="selectAreaEstudio" name="areasEstudio[]" class="js-example-basic-multiple js-states form-control filtro" multiple="multiple" style="height 30px;">
-																<option th:each="a : ${areasEstudio}"
-																	th:value="${a.idAreaEstudio}"
-																	th:text="${a.nombre}"></option>
+																<select id="selectAreaEstudio" name="areasEstudio[]"
+																	class="js-example-basic-multiple js-states form-control filtro"
+																	multiple="multiple" style="">
+																	<option th:each="a : ${areasEstudio}"
+																		th:value="${a.idAreaEstudio}" th:text="${a.nombre}"></option>
 																</select>
 															</div>
 														</div>
-													</div>		
+													</div>
 													<div class="col-md-3">
 														<div class="form-group m-b-10">
 															<label class="m-r-15">Escuela</label>
 															<div class="input-group">
-																<select id="selectEscuela" name="escuelas[]" class="js-example-basic-multiple js-states form-control filtro" multiple="multiple" style="height 30px;">
-																<option th:each="e : ${escuelas}"
-																	th:value="${e.idEscuela}"
-																	th:text="${e.nombre}"></option>
+																<select id="selectEscuela" name="escuelas[]"
+																	class="js-example-basic-multiple js-states form-control filtro"
+																	multiple="multiple" style="">
+																	<option th:each="e : ${escuelas}"
+																		th:value="${e.idEscuela}" th:text="${e.nombre}"></option>
 																</select>
 															</div>
 														</div>
@@ -252,41 +265,52 @@
 														<div class="form-group m-b-10">
 															<label class="m-r-15">Solicitante</label>
 															<div class="input-group">
-																<select id="selectSolicitante" name="solicitantes[]" class="js-example-basic-multiple js-states form-control filtro" multiple="multiple" style="height 30px;">
+																<select id="selectSolicitante" name="solicitantes[]"
+																	class="js-example-basic-multiple js-states form-control filtro"
+																	multiple="multiple" style="">
 																	<option value="ALUMNO" th:text="|ALUMNO|"></option>
 																	<option value="DOCENTE" th:text="|DOCENTE|"></option>
 																	<option value="EXTERNO" th:text="|EXTERNO|"></option>
 																</select>
 															</div>
 														</div>
-													</div>	
+													</div>
 													<div class="col-md-3">
 														<div class="form-group m-b-10">
 															<label class="m-r-15">Recurso</label>
 															<div class="input-group">
-																<select id="selectRecurso" name="recursos[]" class="js-example-basic-multiple js-states form-control filtro" multiple="multiple" style="height 30px;">
-																<option th:each="t : ${tiposRecursos}"
-																	th:value="${t.idTipoRecurso}"
-																	th:text="${t.nombre}"></option>
+																<select id="selectRecurso" name="recursos[]"
+																	class="js-example-basic-multiple js-states form-control filtro"
+																	multiple="multiple" style="">
+																	<option th:each="t : ${tiposRecursos}"
+																		th:value="${t.idTipoRecurso}" th:text="${t.nombre}"></option>
 																</select>
 															</div>
 														</div>
-													</div>								
+													</div>
 												</div>
-												<div class="row text-center m-t-5" style="width: 100%; justify-content: center;">
-													<button id="buscar" class="btn btn-info m-r-3" type="button"><i class="fa fa-search"></i> Buscar</button>
-													<button id="exportar" class="btn btn-success m-l-3" type="button"><i class="fa fa-download"></i> Exportar</button>
+												<div class="row text-center m-t-5"
+													style="width: 100%; justify-content: center;">
+													<button id="buscar" class="btn btn-info m-r-3"
+														type="button">
+														<i class="fa fa-search"></i> Buscar
+													</button>
+													<button id="exportar" class="btn btn-success m-l-3"
+														type="button">
+														<i class="fa fa-download"></i> Exportar
+													</button>
 												</div>
 											</form>
 										</div>
-										
+
 									</div>
 
-									
-									<div class="tab-pane" id="tabReporteMasFrecuentes" role="tabpanel">
-<!-- 										<div class="p-20"> -->
 
-<!-- 										</div> -->
+									<div class="tab-pane" id="tabReporteMasFrecuentes"
+										role="tabpanel">
+										<!-- 										<div class="p-20"> -->
+
+										<!-- 										</div> -->
 									</div>
 
 								</div>
@@ -296,7 +320,7 @@
 					</div>
 				</div>
 				<!-- Tab panes -->
-				
+
 				<div class="row">
 					<div class="col-12">
 						<div class="card">
@@ -304,40 +328,45 @@
 								<!-- Nav tabs -->
 								<ul class="nav justify-content-end customtab2" role="tablist">
 									<li class="nav-item"><a class="nav-link active"
-										data-toggle="tab" href="#resultadoResumen" role="tab">
-											<span class="hidden-sm-up"><i class="ti-user"></i></span> <span
+										data-toggle="tab" href="#resultadoResumen" role="tab"> <span
+											class="hidden-sm-up"><i class="ti-user"></i></span> <span
 											class="hidden-xs-down">Resumen</span>
 									</a></li>
-									<li class="nav-item"><a class="nav-link"
-										data-toggle="tab" href="#resultadoGrafico" role="tab">
-											<span class="hidden-sm-up"><i class="ti-user"></i></span> <span
+									<li class="nav-item"><a class="nav-link" data-toggle="tab"
+										href="#resultadoGrafico" role="tab"> <span
+											class="hidden-sm-up"><i class="ti-user"></i></span> <span
 											class="hidden-xs-down">Gráfico</span>
 									</a></li>
-									
+
 								</ul>
 								<div class="tab-content">
-									<div class="tab-pane active m-t-40" id="resultadoResumen" role="tabpanel">
+									<div class="tab-pane active m-t-40" id="resultadoResumen"
+										role="tabpanel">
 										<div id="divTablaResumenPrestamo">
-											<table id="tblReporteResumenPrestamo" class="display nowrap table table-hover table-striped table-bordered " cellspacing="0" width="100%">
+											<table id="tblReporteResumenPrestamo"
+												class="display nowrap table table-hover table-striped table-bordered "
+												cellspacing="0" width="100%">
 											</table>
-										</div>	
+										</div>
 										<div id="divTablaResumenInfraccion">
-											<table id="tblReporteResumenInfraccion" class="display nowrap table table-hover table-striped table-bordered" cellspacing="0" width="100%">
-											</table>	
-										</div>								
+											<table id="tblReporteResumenInfraccion"
+												class="display nowrap table table-hover table-striped table-bordered"
+												cellspacing="0" width="100%">
+											</table>
+										</div>
 									</div>
-									
-									<div class="tab-pane m-t-40" id="resultadoGrafico" role="tabpanel">
-											<div id="chartdiv" style="width: 100%; height: 700px; font-size: 11px;">
 
-											</div>
+									<div class="tab-pane m-t-40" id="resultadoGrafico"
+										role="tabpanel">
+										<div id="chartdiv"
+											style="width: 100%; height: 700px; font-size: 11px;"></div>
 									</div>
 								</div>
-								
+
 							</div>
 						</div>
 					</div>
-				
+
 				</div>
 
 			</div>
@@ -351,8 +380,6 @@
 		<script
 			th:src="@{/resources/js/guiuser/lib/bootstrap/js/bootstrap.min.js}"></script>
 		<script th:src="@{/resources/js/datatables/jquery.dataTables.min.js}"></script>
-<!-- 		<script -->
-<!-- 			th:src="@{/resources/js/datatables/dataTables.bootstrap.min.js}"></script> -->
 		<script
 			th:src="@{/resources/js/datatables/dataTables.responsive.min.js}"></script>
 		<script
@@ -362,44 +389,18 @@
 		<script
 			th:src="@{/resources/js/guiuser/lib/sticky-kit-master/dist/sticky-kit.min.js}"></script>
 
-		<!--Custom JavaScript -->
-<!-- 		<script th:src="@{/resources/js/guiuser/Chart.bundle.js}"></script> -->
 		<script th:src="@{/resources/js/guiuser//utils.js}"></script>
-		<!-- Amchart -->
-<!-- 		<script -->
-<!-- 			th:src="@{/resources/js/guiuser/lib/morris-chart/raphael-min.js}"></script> -->
-<!-- 		<script th:src="@{/resources/js/guiuser/lib/morris-chart/morris.js}"></script> -->
-<!-- 		<script -->
-<!-- 			th:src="@{/resources/js/guiuser/lib/morris-chart/dashboard1-init.js}"></script> -->
 		<script th:src="@{/resources/js/jquery/moment.min.js}"></script>
 		<script th:src="@{/resources/js/jquery/daterangepicker.js}"></script>
 		<script th:src="@{/resources/js/jquery/jquery.serializejson.min.js}"></script>
-<!-- 		<script -->
-<!-- 			th:src="@{/resources/js/guiuser/lib/calendar-2/moment.latest.min.js}"></script> -->
-<!-- 		<script -->
-<!-- 			th:src="@{/resources/js/guiuser/lib/calendar-2/semantic.ui.min.js}"></script> -->
-<!-- 		<script th:src="@{/resources/js/guiuser/lib/calendar-2/prism.min.js}"></script> -->
-<!-- 		<script -->
-<!-- 			th:src="@{/resources/js/guiuser/lib/calendar-2/pignose.calendar.min.js}"></script> -->
-
-<!-- 		<script -->
-<!-- 			th:src="@{/resources/js/guiuser/lib/calendar-2/pignose.init.js}"></script> -->
-<!-- 		<script -->
-<!-- 			th:src="@{/resources/js/guiuser/lib/owl-carousel/owl.carousel.min.js}"></script> -->
-<!-- 		<script -->
-<!-- 			th:src="@{/resources/js/guiuser/lib/owl-carousel/owl.carousel-init.js}"></script> -->
 		<script th:src="@{/resources/js/guiuser/scripts.js}"></script>
-		<!-- scripit init-->
-		<!-- <script th:src="@{/resources/js/guiuser/inicio.js}"></script> -->
 		<script th:src="@{/resources/js/guiuser/custom.min.js}"></script>
 		<script th:src="@{/resources/js/guiuser/sweetalert.min.js}"></script>
 		<!-- select2-->
 		<script th:src="@{/resources/js/bootstrap/bootstrap-notify.min.js}"></script>
 		<script th:src="@{/resources/js/guiuser/select2.min.js}"></script>
 		<script th:src="@{/resources/js/util/util.js}"></script>
-		
-		
-<!-- 		<script th:src="@{/resources/js/util/formularioUtil.js}"></script> -->
+
 		<script th:src="@{/resources/js/amChart/amcharts.js}"></script>
 		<script th:src="@{/resources/js/amChart/serial.js}"></script>
 		<script th:src="@{/resources/js/amChart/export.min.js}"></script>
@@ -407,10 +408,11 @@
 		<script th:src="@{/resources/js/amChart/light.js}"></script>
 		<script th:src="@{/resources/js/util/graficos/graficoUtil.js}"></script>
 		<!-- Jquery validation  -->
-			<script th:src="@{/resources/js/jquery/jquery.validate.min.js}"></script>
-		
+		<script th:src="@{/resources/js/jquery/jquery.validate.min.js}"></script>
+
 		<script th:src="@{/resources/js/pagina/reporte/estadisticas.js}"></script>
-		<script th:src="@{/resources/js/pagina/reporte/estadisticasFormulario.js}"></script>
+		<script
+			th:src="@{/resources/js/pagina/reporte/estadisticasFormulario.js}"></script>
 	</div>
 </body>
 
