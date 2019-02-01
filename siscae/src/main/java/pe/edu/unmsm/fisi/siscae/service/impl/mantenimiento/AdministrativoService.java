@@ -32,7 +32,7 @@ public class AdministrativoService extends MantenibleService<Administrativo> imp
 	@Transactional(propagation = Propagation.REQUIRES_NEW)
 	public List<Administrativo> buscarTodos() {
 
-		return this.buscar(new Administrativo(), Operacion.SELECT);
+		return super.buscar(new Administrativo(), Operacion.SELECT);
 	}
 
 	@Override
