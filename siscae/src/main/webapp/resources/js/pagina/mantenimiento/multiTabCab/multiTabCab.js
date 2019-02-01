@@ -43,7 +43,7 @@ $(document).ready(function() {
 			"targets" : 2,
 			"className" : "all dt-center",
 			"width" : "10%",
-			"defaultContent" : $variableUtil.botonActualizarNuevo + " " + $variableUtil.botonEliminarNuevo + " " + $variableUtil.botonAniadirDetalle
+			"defaultContent" : $variableUtil.botonActualizarNuevo + " " + $variableUtil.botonEliminarNuevo + " " + $variableUtil.botonAniadirDetalleNuevo
 		} ],
 		"columns" : [ {
 
