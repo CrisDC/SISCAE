@@ -325,7 +325,7 @@
 	</resultMap>
 	
 	
-	<select id="buscarPorEjeXSegementado" resultMap="objetoSegmentado">
+	<select id="buscarPorEjeXSegmentado" resultMap="objetoSegmentado">
 			SELECT
 			      lista.v_nombre												AS ejeX,
 			      cr.v_nombre 												AS criterioSegmentacion,
@@ -384,7 +384,7 @@
                               <if test="ejeX == 'AREAESTUDIO'">
 								AND area_estudio=lista.v_nombre
 							  </if>
-							  <if test="ejeX == 'AREAESTUDIO'">
+							  <if test="ejeX == 'ESCUELA'">
 								AND escuela=lista.v_nombre
 							  </if>
                               <if test="criterioSegmentacion == 'TIPOSOLICITANTE'">
@@ -452,8 +452,8 @@
 	</select>
 
 	<resultMap type="ReportePrestamosPorEjeXSegmentado" id="objetoSegmentado">
-			<id property="ejeX" column="periodoPrestamo"></id>
-			<collection property="detalle" javaType="List" ofType="ReportePrestamosPorPeriodoSegmentadoDetalle">
+			<id property="ejeX" column="ejeX"></id>
+			<collection property="detalle" javaType="List" ofType="ReportePrestamosPorEjeXSegmentadoDetalle">
 					<result property="ejeX" column="ejeX"></result>
 					<result property="segmento" column="criterioSegmentacion"></result>
 					<result property="numeroPrestamos" column="numeroPrestamos"></result>
