@@ -10,6 +10,7 @@ import pe.edu.unmsm.fisi.siscae.model.criterio.ReporteEstadisticaPrestamosCriter
 import pe.edu.unmsm.fisi.siscae.model.reporte.ReporteEstadisticaPrestamos;
 import pe.edu.unmsm.fisi.siscae.model.reporte.resumen.ReporteEstadisticaPrestamosPorEjeX;
 import pe.edu.unmsm.fisi.siscae.model.reporte.resumen.ReporteEstadisticaPrestamosPorPeriodo;
+import pe.edu.unmsm.fisi.siscae.model.reporte.resumen.ReportePrestamosPorEjeXSegmentado;
 import pe.edu.unmsm.fisi.siscae.model.reporte.resumen.ReportePrestamosPorPeriodoSegmentado;
 import pe.edu.unmsm.fisi.siscae.service.IReporteEstadisticaPrestamosService;
 
@@ -59,6 +60,14 @@ public class ReporteEstadisticaPrestamosService implements IReporteEstadisticaPr
 	public List<ReporteEstadisticaPrestamosPorEjeX> buscarPorEjeXSinSegementar(
 			ReporteEstadisticaPrestamosCriterioBusqueda criterioBusqueda) {
 		return reporteEstadisticaPrestamosMapper.buscarPorEjeXSinSegementar(criterioBusqueda);
+	}
+
+
+
+	@Override
+	public List<ReportePrestamosPorEjeXSegmentado> buscarPorEjeXSegmentado(
+			ReporteEstadisticaPrestamosCriterioBusqueda criterioBusqueda) {
+		return reporteEstadisticaPrestamosMapper.buscarPorEjeXSegmentado(criterioBusqueda);
 	} 
 
 }

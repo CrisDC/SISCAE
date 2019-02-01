@@ -12,6 +12,7 @@ import pe.edu.unmsm.fisi.siscae.model.criterio.ReporteEstadisticaPrestamosCriter
 import pe.edu.unmsm.fisi.siscae.model.reporte.ReporteEstadisticaPrestamos;
 import pe.edu.unmsm.fisi.siscae.model.reporte.resumen.ReporteEstadisticaPrestamosPorEjeX;
 import pe.edu.unmsm.fisi.siscae.model.reporte.resumen.ReporteEstadisticaPrestamosPorPeriodo;
+import pe.edu.unmsm.fisi.siscae.model.reporte.resumen.ReportePrestamosPorEjeXSegmentado;
 import pe.edu.unmsm.fisi.siscae.model.reporte.resumen.ReportePrestamosPorPeriodoSegmentado;
 import pe.edu.unmsm.fisi.siscae.service.IReporteEstadisticaPrestamosService;
  
@@ -82,5 +83,19 @@ public @RestController class ReporteEstadisticaPrestamosController {
 		criterioBusqueda.setRecursos(recursos);*/
 		System.out.println(criterioBusqueda);		
 		return reporteEstadisticaPrestamosService.buscarPorEjeXSinSegementar(criterioBusqueda);
+	}
+	
+	@GetMapping(params = "accion=buscarPorEjeXSegmentado")
+	public List<ReportePrestamosPorEjeXSegmentado> buscarPorEjeXSegmentado(ReporteEstadisticaPrestamosCriterioBusqueda criterioBusqueda/*,
+			@RequestParam("areasEstudio") List<Integer> areasEstudio,
+			@RequestParam("escuelas") List<Integer> escuelas,
+			@RequestParam("solicitantes") List<String> solicitantes,
+			@RequestParam("recursos") List<Integer> recursos*/) {
+		/*criterioBusqueda.setAreasEstudio(areasEstudio);
+		criterioBusqueda.setEscuelas(escuelas);
+		criterioBusqueda.setSolicitantes(solicitantes);
+		criterioBusqueda.setRecursos(recursos);*/
+		System.out.println(criterioBusqueda);		
+		return reporteEstadisticaPrestamosService.buscarPorEjeXSegmentado(criterioBusqueda);
 	}
 }

@@ -307,7 +307,7 @@
 			FROM 
 			<if test="ejeX == 'AREAESTUDIO'">
 				(SELECT v_nombre
-	  			FROM mae_escuela) lista
+	  			FROM mae_area_estudio) lista
 			</if>
 			<if test="ejeX == 'ESCUELA'">
 				(SELECT v_nombre
@@ -323,6 +323,141 @@
 		<id property="estadiaTotal" column="estadiaTotal"></id>
 		<id property="estadiaPromedio" column="estadiaPromedio"></id>
 	</resultMap>
+	
+	
+	<select id="buscarPorEjeXSegementado" resultMap="objetoSegmentado">
+			SELECT
+			      lista.v_nombre												AS ejeX,
+			      cr.v_nombre 												AS criterioSegmentacion,
+				<if test="tipoPeriodo == 'DIA'">
+					(SELECT 
+						COUNT(fecha_registro)
+						FROM vw_reporte_prestamos
+						WHERE fecha_registro BETWEEN #{fechaInicio} AND  #{fechaFin}
+					         <if test="ejeX == 'AREAESTUDIO'">
+								AND area_estudio=lista.v_nombre
+							  </if>
+							  <if test="ejeX == 'AREAESTUDIO'">
+								AND escuela=lista.v_nombre
+							  </if>
+                              <if test="criterioSegmentacion == 'TIPOSOLICITANTE'">
+								AND nombre_tipo=cr.v_nombre
+							  </if>
+							  <if test="criterioSegmentacion == 'AREAESTUDIO'">
+								AND area_estudio=cr.v_nombre
+							  </if>
+							  <if test="criterioSegmentacion == 'ESCUELA'">
+								AND escuela=cr.v_nombre
+							  </if>
+                              )						AS numeroPrestamos
+				</if>
+				<if test="tipoPeriodo == 'SEMANA'">
+					(SELECT 
+						COUNT(fecha_registro)
+						FROM vw_reporte_prestamos
+						WHERE fecha_registro BETWEEN  F_GENERADOR_FECHAS('INI', 'SEMANA',#{anioInicio},null, null,#{semanaInicio})
+                              AND  F_GENERADOR_FECHAS('FIN', 'SEMANA',#{anioFin},null, null,#{semanaFin})
+                              <if test="ejeX == 'AREAESTUDIO'">
+								AND area_estudio=lista.v_nombre
+							  </if>
+							  <if test="ejeX == 'AREAESTUDIO'">
+								AND escuela=lista.v_nombre
+							  </if>
+                              <if test="criterioSegmentacion == 'TIPOSOLICITANTE'">
+								AND nombre_tipo=cr.v_nombre
+							  </if>
+							  <if test="criterioSegmentacion == 'AREAESTUDIO'">
+								AND area_estudio=cr.v_nombre
+							  </if>
+							  <if test="criterioSegmentacion == 'ESCUELA'">
+								AND escuela=cr.v_nombre
+							  </if>
+					          
+                              )						AS numeroPrestamos
+				</if>
+				<if test="tipoPeriodo == 'MES'">
+				   (SELECT 
+						COUNT(fecha_registro)
+						FROM vw_reporte_prestamos
+						WHERE fecha_registro BETWEEN  F_GENERADOR_FECHAS('INI', 'MES',#{anioInicio},#{mesInicio}, null,null)
+                              AND  F_GENERADOR_FECHAS('FIN', 'MES',#{anioFin},#{mesFin}, null,null)
+                              <if test="ejeX == 'AREAESTUDIO'">
+								AND area_estudio=lista.v_nombre
+							  </if>
+							  <if test="ejeX == 'AREAESTUDIO'">
+								AND escuela=lista.v_nombre
+							  </if>
+                              <if test="criterioSegmentacion == 'TIPOSOLICITANTE'">
+								AND nombre_tipo=cr.v_nombre
+							  </if>
+							  <if test="criterioSegmentacion == 'AREAESTUDIO'">
+								AND area_estudio=cr.v_nombre
+							  </if>
+							  <if test="criterioSegmentacion == 'ESCUELA'">
+								AND escuela=cr.v_nombre
+							  </if>
+					          
+                              )						AS numeroPrestamos
+				</if>
+				<if test="tipoPeriodo == 'ANIO'">
+				   (SELECT 
+						COUNT(fecha_registro)
+						FROM vw_reporte_prestamos
+						WHERE fecha_registro BETWEEN  F_GENERADOR_FECHAS('INI', 'ANIO',#{anioInicio},null, null,null)
+                              AND  F_GENERADOR_FECHAS('FIN', 'ANIO',#{anioFin},null, null,null)
+                              <if test="ejeX == 'AREAESTUDIO'">
+								AND area_estudio=lista.v_nombre
+							  </if>
+							  <if test="ejeX == 'AREAESTUDIO'">
+								AND escuela=lista.v_nombre
+							  </if>
+                              <if test="criterioSegmentacion == 'TIPOSOLICITANTE'">
+								AND nombre_tipo=cr.v_nombre
+							  </if>
+							  <if test="criterioSegmentacion == 'AREAESTUDIO'">
+								AND area_estudio=cr.v_nombre
+							  </if>
+							  <if test="criterioSegmentacion == 'ESCUELA'">
+								AND escuela=cr.v_nombre
+							  </if>
+					          
+                              )						AS numeroPrestamos
+				</if>
 
+			FROM 
+			<if test="ejeX == 'AREAESTUDIO'">
+				(SELECT v_nombre
+	  			FROM mae_area_estudio) lista,
+			</if>
+			<if test="ejeX == 'ESCUELA'">
+				(SELECT v_nombre
+	  			FROM mae_escuela) lista,
+			</if>
+			<if test="criterioSegmentacion == 'AREAESTUDIO'">
+				mae_area_estudio  cr
+			</if>
+			<if test="criterioSegmentacion == 'ESCUELA'">
+				mae_escuela  cr
+			</if>
+			<if test="criterioSegmentacion == 'TIPOSOLICITANTE'">
+				(SELECT 
+					DISTINCT(F_GET_TIPO_SOLICITANTE(n_id_persona)) AS v_nombre
+	  			FROM mae_persona) cr
+			</if>
+			<if test="criterioSegmentacion == 'RECURSO'">
+				mae_tipo_recurso cr
+				WHERE cr.v_usable='SI'
+			</if>
+	
+	</select>
+
+	<resultMap type="ReportePrestamosPorEjeXSegmentado" id="objetoSegmentado">
+			<id property="ejeX" column="periodoPrestamo"></id>
+			<collection property="detalle" javaType="List" ofType="ReportePrestamosPorPeriodoSegmentadoDetalle">
+					<result property="ejeX" column="ejeX"></result>
+					<result property="segmento" column="criterioSegmentacion"></result>
+					<result property="numeroPrestamos" column="numeroPrestamos"></result>
+			</collection>
+	</resultMap>
 
 </mapper>
