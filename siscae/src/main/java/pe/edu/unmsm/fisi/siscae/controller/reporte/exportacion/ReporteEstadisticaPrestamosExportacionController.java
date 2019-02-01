@@ -45,7 +45,6 @@ public @Controller class ReporteEstadisticaPrestamosExportacionController {
 
     	Map<String, Object> params = new HashMap<>();
         params.put("reporte", reporteEstadisticaPrestamosService.buscarPorPeriodoSinSegementar(criterio));
-        System.out.println("ESTO SALE DE LA BD: " + reporteEstadisticaPrestamosService.buscarPorPeriodoSinSegementar(criterio));
         params.put("criterioBusqueda", criterio);
         params.put("username", SecurityContextFacade.obtenerNombreUsuario());
         params.put("fecha", DatesUtils.obtenerFechaEnFormato(new Date(), DatesUtils.FORMATO_FECHA_REPORTES));

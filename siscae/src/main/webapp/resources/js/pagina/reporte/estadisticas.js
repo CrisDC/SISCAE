@@ -119,6 +119,31 @@ $(document).ready(function() {
 			$local.$divPresentacion.addClass("hidden");
 		}
 	});
+
+	//Evento que se dispara cuando el combo Eje X cambia
+	$local.$selectEjeX.on("change", function(){
+		let data;
+		let title;
+		switch($local.$selectEjeX.val()){
+			case "PERIODO":{
+				data = "periodoPrestamo",
+				title = "Periodo"
+				break;
+			}
+			case "ESCUELA":{
+				data = "ejeX",
+				title = "Escuela"
+				break;
+			}
+			case "AREA_ESTUDIO":{
+				data = "ejeX",
+				title = "Area Estudio"
+				break;
+			}
+		}
+		cambiarEjeXTabla(data, title);
+		
+	});
 	
 	//Evento que se dispara cuando el combo Segmentacion en Y cambie
 	$local.$selectTipoGrafico.on("change", function(){
@@ -152,6 +177,7 @@ $(document).ready(function() {
 		criterioBusqueda.ejeX=$local.$selectEjeX.val();
 		criterioBusqueda.serie=$local.$selectSeries.val();
 		criterioBusqueda.criterioSegmentacion=$local.$selectSegmY.val();
+		console.log(criterioBusqueda);
 		//Obtener datos del periodo
 		if($local.$selectPeriodo.val() == 'DIA'){
 			var rangoFechaBusqueda = $funcionUtil.obtenerFechasDateRangePicker($local.$fechaPrestamo);
@@ -176,8 +202,76 @@ $(document).ready(function() {
 		}
 		return criterioBusqueda;
 	}
+
+	var cambiarEjeXTabla = function (data, title){
+		$local.tablaResultadosPrestamo.destroy();
+		$local.tablaResultadosInfraccion.destroy();
+
+		$local.tablaResultadosPrestamo = $local.$tablaResultadosPrestamo.DataTable({
+			"language" : {
+				"emptyTable" : "No hay registros encontrados."
+			},
+			"pageLength": 10,
+			"initComplete" : function() {
+				$local.$tablaResultadosPrestamo.wrap("<div class='table-responsive'></div>");
+			},
+			"columnDefs" : [ {
+				"targets" : [ 0],
+				"className" : "all dt-center fondo-blanco"
+			},{
+				"targets" : [ 1, 2, 3],
+				"className" : "all dt-right"
+			} ],
+			"columns" : [ {
+				"data" : data,
+				"title" : title
+			}, {
+				"data" : "numeroPrestamos",
+				"title" : "Cantidad Prestamos"
+			}, {
+				"data" : "estadiaTotal",
+				"title" : "Tiempo Total Estadia"
+			}, {
+				"data" : "estadiaPromedio",
+				"title" : "Tiempo Medio Estadia"
+			}]
+		});
+	
+		
+		$local.tablaResultadosInfraccion = $local.$tablaResultadosInfraccion.DataTable({
+			"language" : {
+				"emptyTable" : "No hay registros encontrados."
+			},
+			"pageLength": 10,
+			"initComplete" : function() {
+				$local.$tablaResultadosInfraccion.wrap("<div class='table-responsive'></div>");
+			},
+			"columnDefs" : [ {
+				"targets" : [ 0],
+				"className" : "all dt-center fondo-blanco"
+			},{
+				"targets" : [ 1, 2, 3],
+				"className" : "all dt-right"
+			} ],
+			"columns" : [ {
+				"data" : data,
+				"title" : title
+			}, {
+				"data" : "numeroInfracciones",
+				"title" : "Cantidad Infracciones"
+			}, {
+				"data" : "numeroSancionados",
+				"title" : "Cantidad Sancionados"
+			}, {
+				"data" : "numeroInfraccionesPromedioPorAlumno",
+				"title" : "Infracciones promedio"
+			}]
+		});
+	}
 	
 	$local.$buscar.on('click', function() {
+		console.log("ESTO ES EL DATATBLE");
+		console.log($local.tablaResultadosPrestamo);
 		if (!$formEstadisticas.valid()) {
 			return;
 		}
@@ -343,6 +437,8 @@ $(document).ready(function() {
 									$funcionUtil.notificarException($variableUtil.busquedaSinResultados, "fa-exclamation-circle", "Información", "info");
 									return;
 								}
+								console.log("RESPONSE: ");
+								console.log(response);
 								//Dibujando tabla
 								$local.tablaResultadosPrestamo.rows.add(response).draw();
 								//Dibujando grafico
@@ -631,6 +727,7 @@ $(document).ready(function() {
 			"title" : "Tiempo Medio Estadia"
 		}]
 	});
+
 	
 	$local.tablaResultadosInfraccion = $local.$tablaResultadosInfraccion.DataTable({
 		"language" : {

@@ -106,7 +106,7 @@
 			<if test="serie == 'ESCUELA'">
 				escuela			as segmento,
 			</if>
-			<if test="serie == 'AREAESTUDIO'">
+			<if test="serie == 'AREA_ESTUDIO'">
 				area_estudio		as segmento,
 			</if>
 			<if test="serie == 'SOLICITANTE'">
@@ -135,7 +135,7 @@
 		<if test="serie == 'ESCUELA'">
 				GROUP BY escuela
 		</if>
-		<if test="serie == 'AREAESTUDIO'">
+		<if test="serie == 'AREA_ESTUDIO'">
 				GROUP BY area_estudio
 		</if>
 		<if test="serie == 'SOLICITANTE'">
@@ -215,7 +215,7 @@
 
 			FROM 
 			ListaPeriodo lista ,
-			<if test="criterioSegmentacion == 'AREAESTUDIO'">
+			<if test="criterioSegmentacion == 'AREA_ESTUDIO'">
 				mae_area_estudio  cr
 			</if>
 			<if test="criterioSegmentacion == 'ESCUELA'">
@@ -305,7 +305,7 @@
 				</if>
 
 			FROM 
-			<if test="ejeX == 'AREAESTUDIO'">
+			<if test="ejeX == 'AREA_ESTUDIO'">
 				(SELECT v_nombre
 	  			FROM mae_area_estudio) lista
 			</if>
@@ -338,7 +338,7 @@
                         	LEFT JOIN mae_tipo_recurso trec ON (rec.n_id_tipo_recurso=trec.n_id_tipo_recurso)
 						</if>
 						WHERE fecha_registro BETWEEN #{fechaInicio} AND  #{fechaFin}
-					         <if test="ejeX == 'AREAESTUDIO'">
+					         <if test="ejeX == 'AREA_ESTUDIO'">
 								AND rep.area_estudio=lista.v_nombre
 							  </if>
 							  <if test="ejeX == 'ESCUELA'">
@@ -347,7 +347,7 @@
                               <if test="criterioSegmentacion == 'TIPOSOLICITANTE'">
 								AND rep.nombre_tipo=cr.v_nombre
 							  </if>
-							  <if test="criterioSegmentacion == 'AREAESTUDIO'">
+							  <if test="criterioSegmentacion == 'AREA_ESTUDIO'">
 								AND rep.area_estudio=cr.v_nombre
 							  </if>
 							  <if test="criterioSegmentacion == 'ESCUELA'">
@@ -368,7 +368,7 @@
 						</if>
 						WHERE fecha_registro BETWEEN  F_GENERADOR_FECHAS('INI', 'SEMANA',#{anioInicio},null, null,#{semanaInicio})
                               AND  F_GENERADOR_FECHAS('FIN', 'SEMANA',#{anioFin},null, null,#{semanaFin})
-                              <if test="ejeX == 'AREAESTUDIO'">
+                              <if test="ejeX == 'AREA_ESTUDIO'">
 								AND rep.area_estudio=lista.v_nombre
 							  </if>
 							  <if test="ejeX == 'ESCUELA'">
@@ -377,7 +377,7 @@
                               <if test="criterioSegmentacion == 'TIPOSOLICITANTE'">
 								AND rep.nombre_tipo=cr.v_nombre
 							  </if>
-							  <if test="criterioSegmentacion == 'AREAESTUDIO'">
+							  <if test="criterioSegmentacion == 'AREA_ESTUDIO'">
 								AND rep.area_estudio=cr.v_nombre
 							  </if>
 							  <if test="criterioSegmentacion == 'ESCUELA'">
@@ -399,7 +399,7 @@
 						</if>
 						WHERE fecha_registro BETWEEN  F_GENERADOR_FECHAS('INI', 'MES',#{anioInicio},#{mesInicio}, null,null)
                               AND  F_GENERADOR_FECHAS('FIN', 'MES',#{anioFin},#{mesFin}, null,null)
-                              <if test="ejeX == 'AREAESTUDIO'">
+                              <if test="ejeX == 'AREA_ESTUDIO'">
 								AND rep.area_estudio=lista.v_nombre
 							  </if>
 							  <if test="ejeX == 'ESCUELA'">
@@ -408,7 +408,7 @@
                               <if test="criterioSegmentacion == 'TIPOSOLICITANTE'">
 								AND rep.nombre_tipo=cr.v_nombre
 							  </if>
-							  <if test="criterioSegmentacion == 'AREAESTUDIO'">
+							  <if test="criterioSegmentacion == 'AREA_ESTUDIO'">
 								AND rep.area_estudio=cr.v_nombre
 							  </if>
 							  <if test="criterioSegmentacion == 'ESCUELA'">
@@ -430,7 +430,7 @@
 						</if>
 						WHERE fecha_registro BETWEEN  F_GENERADOR_FECHAS('INI', 'ANIO',#{anioInicio},null, null,null)
                               AND  F_GENERADOR_FECHAS('FIN', 'ANIO',#{anioFin},null, null,null)
-                              <if test="ejeX == 'AREAESTUDIO'">
+                              <if test="ejeX == 'AREA_ESTUDIO'">
 								AND rep.area_estudio=lista.v_nombre
 							  </if>
 							  <if test="ejeX == 'ESCUELA'">
@@ -439,7 +439,7 @@
                               <if test="criterioSegmentacion == 'TIPOSOLICITANTE'">
 								AND rep.nombre_tipo=cr.v_nombre
 							  </if>
-							  <if test="criterioSegmentacion == 'AREAESTUDIO'">
+							  <if test="criterioSegmentacion == 'AREA_ESTUDIO'">
 								AND rep.area_estudio=cr.v_nombre
 							  </if>
 							  <if test="criterioSegmentacion == 'ESCUELA'">
@@ -453,7 +453,7 @@
 				</if>
 
 			FROM 
-			<if test="ejeX == 'AREAESTUDIO'">
+			<if test="ejeX == 'AREA_ESTUDIO'">
 				(SELECT v_nombre
 	  			FROM mae_area_estudio) lista,
 			</if>
@@ -461,7 +461,7 @@
 				(SELECT v_nombre
 	  			FROM mae_escuela) lista,
 			</if>
-			<if test="criterioSegmentacion == 'AREAESTUDIO'">
+			<if test="criterioSegmentacion == 'AREA_ESTUDIO'">
 				mae_area_estudio  cr
 			</if>
 			<if test="criterioSegmentacion == 'ESCUELA'">

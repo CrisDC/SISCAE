@@ -62,7 +62,7 @@
 															<label class="m-r-15">Tipo</label>
 															<div class="input-group">
 																<select id="selectTipoGrafico" name="tipoGrafica"
-																	class="form-control js-example-basic-single" style="">
+																	class="form-control js-example-basic-single">
 																	<option value="-1" disabled="disabled"
 																		selected="selected">Seleccione un gráfico</option>
 																	<option value="BARRAS">Barras</option>
@@ -77,7 +77,7 @@
 															<label class="m-r-15">Periodo</label>
 															<div class="input-group">
 																<select id="selectPeriodo" name="tipoPeriodo"
-																	class="form-control js-example-basic-single" style="">
+																	class="form-control js-example-basic-single" >
 																	<option value="-1" disabled="disabled"
 																		selected="selected">Seleccione un periodo</option>
 																	<option value="DIA">Por día</option>
@@ -174,13 +174,13 @@
 															<label class="m-r-15">Series</label>
 															<div class="input-group">
 																<select id="selectSeries" name="valSeries"
-																	class="form-control js-example-basic-single " style="">
+																	class="form-control js-example-basic-single " >
 																	<option value="" disabled="disabled"
 																		selected="selected">Seleccione una Serie</option>
 																	<option value="ESCUELA">Escuela</option>
-																	<option value="AREAESTUDIO">Area Estudio</option>
+																	<option value="AREA_ESTUDIO">Area Estudio</option>
 																	<option value="SOLICITANTE">Solicitante</option>
-																</select>
+															</select>
 															</div>
 														</div>
 													</div>
@@ -189,12 +189,12 @@
 															<label class="m-r-15">Eje X</label>
 															<div class="input-group">
 																<select id="selectEjeX" name="valEjeX"
-																	class="form-control js-example-basic-single " style="">
+																	class="form-control js-example-basic-single " >
 																	<option value="" disabled="disabled"
 																		selected="selected">Seleccione un eje</option>
 																	<option value="PERIODO">Periodo</option>
 																	<option value="ESCUELA">Escuela</option>
-																	<option value="AREAESTUDIO">Area Estudio</option>
+																	<option value="AREA_ESTUDIO">Area Estudio</option>
 																</select>
 															</div>
 														</div>
@@ -204,13 +204,13 @@
 															<label class="m-r-15">Segmentacion en Y</label>
 															<div class="input-group">
 																<select id="selectSegmY" name="valSegY"
-																	class="form-control js-example-basic-single" style="">
+																	class="form-control js-example-basic-single" >
 																	<option value="NINGUNA" selected="selected">Ninguna</option>
 																	<option value="TIPOSOLICITANTE">Tipo
 																		Solicitante</option>
 																	<option value="ESCUELA">Escuela</option>
 																	<option value="RECURSO">Tipo de Recurso</option>
-																	<option value="AREAESTUDIO">Area Estudios</option>
+																	<option value="AREA_ESTUDIO">Area Estudios</option>
 																</select>
 															</div>
 														</div>
@@ -220,7 +220,7 @@
 															<label class="m-r-15">Presentación</label>
 															<div class="input-group">
 																<select id="selectPresentacion" name="valPresentacion"
-																	class="form-control js-example-basic-single" style="">
+																	class="form-control js-example-basic-single" >
 																	<option value="-1" selected="selected"
 																		disabled="disabled">Seleccione una
 																		presentación</option>
@@ -241,7 +241,7 @@
 															<div class="input-group">
 																<select id="selectAreaEstudio" name="areasEstudio[]"
 																	class="js-example-basic-multiple js-states form-control filtro"
-																	multiple="multiple" style="">
+																	multiple="multiple" >
 																	<option th:each="a : ${areasEstudio}"
 																		th:value="${a.idAreaEstudio}" th:text="${a.nombre}"></option>
 																</select>
@@ -254,7 +254,7 @@
 															<div class="input-group">
 																<select id="selectEscuela" name="escuelas[]"
 																	class="js-example-basic-multiple js-states form-control filtro"
-																	multiple="multiple" style="">
+																	multiple="multiple" >
 																	<option th:each="e : ${escuelas}"
 																		th:value="${e.idEscuela}" th:text="${e.nombre}"></option>
 																</select>
@@ -267,7 +267,7 @@
 															<div class="input-group">
 																<select id="selectSolicitante" name="solicitantes[]"
 																	class="js-example-basic-multiple js-states form-control filtro"
-																	multiple="multiple" style="">
+																	multiple="multiple" >
 																	<option value="ALUMNO" th:text="|ALUMNO|"></option>
 																	<option value="DOCENTE" th:text="|DOCENTE|"></option>
 																	<option value="EXTERNO" th:text="|EXTERNO|"></option>
@@ -281,7 +281,7 @@
 															<div class="input-group">
 																<select id="selectRecurso" name="recursos[]"
 																	class="js-example-basic-multiple js-states form-control filtro"
-																	multiple="multiple" style="">
+																	multiple="multiple" >
 																	<option th:each="t : ${tiposRecursos}"
 																		th:value="${t.idTipoRecurso}" th:text="${t.nombre}"></option>
 																</select>
