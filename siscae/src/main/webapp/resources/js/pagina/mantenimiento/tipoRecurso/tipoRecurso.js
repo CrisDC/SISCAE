@@ -70,19 +70,19 @@ $(document).ready(function() {
 		$local.tablaMantenimiento.column($(this).parent().index() + ':visible').search(val ? '^' + val + '$' : '', true, false).draw();
 	});
 
-	$local.$modalMantenimiento.PopupWindow({
-		title : "Mantenimiento de Tipo Recurso",
-		autoOpen : false,
-		modal : false,
-		height : 400,
-		width : 626,
-	});
+//	$local.$modalMantenimiento.PopupWindow({
+//		title : "Mantenimiento de Tipo Recurso",
+//		autoOpen : false,
+//		modal : false,
+//		height : 400,
+//		width : 626,
+//	});
 
 	$local.$aniadirMantenimento.on("click", function() {
 		$funcionUtil.prepararFormularioRegistro($formMantenimiento);
 		$local.$actualizarMantenimiento.addClass("hidden");
 		$local.$registrarMantenimiento.removeClass("hidden");
-		$local.$modalMantenimiento.PopupWindow("open");
+		//$local.$modalMantenimiento.PopupWindow("open");
 	});
 
 	$local.$modalMantenimiento.on("open.popupwindow", function() {
@@ -129,8 +129,8 @@ $(document).ready(function() {
 				$funcionUtil.notificarException(response, "fa-check", "Aviso", "success");
 				var row = $local.tablaMantenimiento.row.add(tipoRecurso).draw();
 				row.show().draw(false);
-				$(row.node()).animateHighlight();
-				$local.$modalMantenimiento.PopupWindow("close");
+				//$(row.node()).animateHighlight();
+				//$local.$modalMantenimiento.PopupWindow("close");
 			},
 			error : function(response) {
 			},
@@ -149,7 +149,7 @@ $(document).ready(function() {
 		$funcionUtil.llenarFormulario(tipoRecurso, $formMantenimiento);
 		$local.$actualizarMantenimiento.removeClass("hidden");
 		$local.$registrarMantenimiento.addClass("hidden");
-		$local.$modalMantenimiento.PopupWindow("open");
+		//$local.$modalMantenimiento.PopupWindow("open");
 	});
 	
 	$local.$actualizarMantenimiento.on("click", function() {
@@ -178,8 +178,8 @@ $(document).ready(function() {
 				$local.tablaMantenimiento.row($local.$filaSeleccionada).remove().draw(false);
 				var row = $local.tablaMantenimiento.row.add(tipoRecurso).draw();
 				row.show().draw(false);
-				$(row.node()).animateHighlight();
-				$local.$modalMantenimiento.PopupWindow("close");
+				//$(row.node()).animateHighlight();
+				//$local.$modalMantenimiento.PopupWindow("close");
 			},
 			error : function(response) {
 			},
