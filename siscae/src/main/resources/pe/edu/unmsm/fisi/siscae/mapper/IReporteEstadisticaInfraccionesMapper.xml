@@ -266,26 +266,30 @@
 			      cr.v_nombre 												AS criterioSegmentacion,
 				<if test="tipoPeriodo == 'DIA'">
 					lista.fecha 											AS periodoInfraccion,
-				    F_CANTIDAD_INFRACCIONES_BETWEEN(#{criterioSegmentacion}, cr.v_nombre,lista.fecha,
-					adddate(lista.fecha, INTERVAL 1 DAY))  					AS numeroInfracciones
+				    F_OBTENER_ESTADISTICO_INFRACCIONES_BETWEEN(#{criterioSegmentacion}, cr.v_nombre,lista.fecha,
+					adddate(lista.fecha, INTERVAL 1 DAY),
+					'CANTIDAD_INFRACCIONES')  								AS numeroInfracciones
 				</if>
 				<if test="tipoPeriodo == 'SEMANA'">
 				    CONCAT(lista.anio,'-',lista.semana)							AS periodoInfraccion,
-				    F_CANTIDAD_INFRACCIONES_BETWEEN(#{criterioSegmentacion}, cr.v_nombre,
+				    F_OBTENER_ESTADISTICO_INFRACCIONES_BETWEEN(#{criterioSegmentacion}, cr.v_nombre,
 				    F_GENERADOR_FECHAS('INI', 'SEMANA',lista.anio,null, null,lista.semana),
-				    F_GENERADOR_FECHAS('FIN', 'SEMANA',lista.anio,null, null,lista.semana))  	AS numeroInfracciones
+				    F_GENERADOR_FECHAS('FIN', 'SEMANA',lista.anio,null, null,lista.semana),
+				    'CANTIDAD_INFRACCIONES')  									AS numeroInfracciones
 				</if>
 				<if test="tipoPeriodo == 'MES'">
 				    CONCAT(lista.anio,'-',lista.mes)							AS periodoInfraccion,
-				    F_CANTIDAD_INFRACCIONES_BETWEEN(#{criterioSegmentacion}, cr.v_nombre,
+				    F_OBTENER_ESTADISTICO_INFRACCIONES_BETWEEN(#{criterioSegmentacion}, cr.v_nombre,
 				    F_GENERADOR_FECHAS('INI', 'MES',lista.anio,lista.mes, null,null),
-				    F_GENERADOR_FECHAS('FIN', 'MES',lista.anio,lista.mes, null,null))  	AS numeroInfracciones
+				    F_GENERADOR_FECHAS('FIN', 'MES',lista.anio,lista.mes, null,null),
+				    'CANTIDAD_INFRACCIONES')  									AS numeroInfracciones
 				</if>
 				<if test="tipoPeriodo == 'ANIO'">
 				    lista.anio													AS periodoInfraccion,
-				    F_CANTIDAD_INFRACCIONES_BETWEEN(#{criterioSegmentacion}, cr.v_nombre,
+				    F_OBTENER_ESTADISTICO_INFRACCIONES_BETWEEN(#{criterioSegmentacion}, cr.v_nombre,
 				    F_GENERADOR_FECHAS('INI', 'ANIO',lista.anio,null, null,null),
-				    F_GENERADOR_FECHAS('FIN', 'ANIO',lista.anio,null, null,null))  	AS numeroInfracciones
+				    F_GENERADOR_FECHAS('FIN', 'ANIO',lista.anio,null, null,null),
+				    'CANTIDAD_INFRACCIONES')  									AS numeroInfracciones
 				</if>
 
 			FROM 
