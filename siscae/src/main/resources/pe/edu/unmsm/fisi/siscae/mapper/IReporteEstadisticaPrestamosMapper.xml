@@ -337,7 +337,7 @@
 					         <if test="ejeX == 'AREAESTUDIO'">
 								AND area_estudio=lista.v_nombre
 							  </if>
-							  <if test="ejeX == 'AREAESTUDIO'">
+							  <if test="ejeX == 'ESCUELA'">
 								AND escuela=lista.v_nombre
 							  </if>
                               <if test="criterioSegmentacion == 'TIPOSOLICITANTE'">
@@ -360,7 +360,7 @@
                               <if test="ejeX == 'AREAESTUDIO'">
 								AND area_estudio=lista.v_nombre
 							  </if>
-							  <if test="ejeX == 'AREAESTUDIO'">
+							  <if test="ejeX == 'ESCUELA'">
 								AND escuela=lista.v_nombre
 							  </if>
                               <if test="criterioSegmentacion == 'TIPOSOLICITANTE'">
@@ -408,7 +408,7 @@
                               <if test="ejeX == 'AREAESTUDIO'">
 								AND area_estudio=lista.v_nombre
 							  </if>
-							  <if test="ejeX == 'AREAESTUDIO'">
+							  <if test="ejeX == 'ESCUELA'">
 								AND escuela=lista.v_nombre
 							  </if>
                               <if test="criterioSegmentacion == 'TIPOSOLICITANTE'">
