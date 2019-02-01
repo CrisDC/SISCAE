@@ -26,11 +26,12 @@ $(document).ready(function() {
 			"dataSrc" : ""
 		},
 		"language" : {
-			"url": "//cdn.datatables.net/plug-ins/1.10.16/i18n/Spanish.json"
+			"url": "//cdn.datatables.net/plug-ins/1.10.16/i18n/Spanish.json",
+			"emptyTable" : "No hay registros encontrados." // Nuevo
 		},
 		"initComplete" : function() {
 			$local.$tablaMantenimiento.wrap("<div class='table-responsive'></div>");
-			$tablaFuncion.aniadirFiltroDeBusquedaEnEncabezado(this, $local.$tablaMantenimiento);
+			//$tablaFuncion.aniadirFiltroDeBusquedaEnEncabezado(this, $local.$tablaMantenimiento);
 		},
 		"columnDefs" : [ {
 			"targets" : [ 0, 1, 2, 3, 4, 5],
@@ -38,7 +39,7 @@ $(document).ready(function() {
 		}, {
 			"targets" : 6,
 			"className" : "all dt-center",
-			"defaultContent" : $variableUtil.botonActualizar + " " + $variableUtil.botonEliminar
+			"defaultContent" : $variableUtil.botonActualizarNuevo + " " + $variableUtil.botonEliminarNuevo
 		} ],
 		"columns" : [ {
 			"data" : 'numeroSerie',
