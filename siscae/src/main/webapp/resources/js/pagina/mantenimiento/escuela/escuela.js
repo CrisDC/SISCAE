@@ -239,7 +239,7 @@ $(document).ready(function() {
 		$funcionUtil.llenarFormulario(escuela, $formMantenimiento);
 		$local.$actualizarMantenimiento.removeClass("hidden");
 		$local.$registrarMantenimiento.addClass("hidden");
-		//$local.$modalMantenimiento.PopupWindow("open");
+		//$local.$modalMantenimiento.PopupWindow("open");//asdadasdasdsadas
 		});
 
 });
