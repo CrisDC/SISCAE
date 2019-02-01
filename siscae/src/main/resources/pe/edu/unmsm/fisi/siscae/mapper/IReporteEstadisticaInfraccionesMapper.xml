@@ -143,7 +143,7 @@
 			<if test="serie == 'SOLICITANTE'">
 				r.nombre_tipo		as segmento,
 			</if>
-			<if test="serie == 'TIPOINFRACCION'">
+			<if test="serie == 'TIPO_INFRACCION'">
 				r.tipo_infraccion		as segmento,
 			</if>
 			SUM(CASE WHEN F_ESTADO_SOLICITANTE(pe.n_id_persona)='SANCIONADO'
@@ -216,7 +216,7 @@
 		<if test="serie == 'SOLICITANTE'">
 				GROUP BY r.nombre_tipo
 		</if>
-		<if test="serie == 'TIPOINFRACCION'">
+		<if test="serie == 'TIPO_INFRACCION'">
 				GROUP BY r.tipo_infraccion
 		</if>
 		
@@ -296,12 +296,12 @@
 			<if test="criterioSegmentacion == 'ESCUELA'">
 				mae_escuela  cr
 			</if>
-			<if test="criterioSegmentacion == 'TIPOSOLICITANTE'">
+			<if test="criterioSegmentacion == 'TIPO_SOLICITANTE'">
 				(SELECT 
 					DISTINCT(F_GET_TIPO_SOLICITANTE(n_id_persona)) AS v_nombre
 	  			FROM mae_persona) cr
 			</if>
-			<if test="criterioSegmentacion == 'TIPOINFRACCION'">
+			<if test="criterioSegmentacion == 'TIPO_INFRACCION'">
 				(SELECT mtd.v_descripcion as v_nombre 
 	             FROM mae_multi_tab_det mtd
 	             LEFT JOIN  mae_multi_tab_cab mtc ON (mtd.n_id_tabla=mtc.n_id_tabla)
