@@ -29,11 +29,12 @@ $(document).ready(function() {
 			"dataSrc" : ""
 		},
 		"language" : {
-			"url": "//cdn.datatables.net/plug-ins/1.10.16/i18n/Spanish.json"
+			"url": "//cdn.datatables.net/plug-ins/1.10.16/i18n/Spanish.json",
+			"emptyTable" : "No hay registros encontrados." // Nuevo
 		},
 		"initComplete" : function() {
 			$local.$tablaMantenimiento.wrap("<div class='table-responsive'></div>");
-			$tablaFuncion.aniadirFiltroDeBusquedaEnEncabezado(this, $local.$tablaMantenimiento);
+			//$tablaFuncion.aniadirFiltroDeBusquedaEnEncabezado(this, $local.$tablaMantenimiento);
 		},
 		"columnDefs" : [ {
 			"targets" : [ 0, 1 ],
@@ -42,7 +43,7 @@ $(document).ready(function() {
 			"targets" : 2,
 			"className" : "all dt-center",
 			"width" : "10%",
-			"defaultContent" : $variableUtil.botonActualizar + " " + $variableUtil.botonEliminar + " " + $variableUtil.botonAniadirDetalle
+			"defaultContent" : $variableUtil.botonActualizarNuevo + " " + $variableUtil.botonEliminarNuevo + " " + $variableUtil.botonAniadirDetalle
 		} ],
 		"columns" : [ {
 
@@ -67,19 +68,19 @@ $(document).ready(function() {
 		$local.tablaMantenimiento.column($(this).parent().index() + ':visible').search(val ? '^' + val + '$' : '', true, false).draw();
 	});
 
-	$local.$modalMantenimiento.PopupWindow({
-		title : "Mantenimiento de Multitabla",
-		autoOpen : false,
-		modal : false,
-		height : 280,
-		width : 626,
-	});
+//	$local.$modalMantenimiento.PopupWindow({
+//		title : "Mantenimiento de Multitabla",
+//		autoOpen : false,
+//		modal : false,
+//		height : 280,
+//		width : 626,
+//	});
 
 	$local.$aniadirMantenimento.on("click", function() {
 		$funcionUtil.prepararFormularioRegistro($formMantenimiento);
 		$local.$actualizarMantenimiento.addClass("hidden");
 		$local.$registrarMantenimiento.removeClass("hidden");
-		$local.$modalMantenimiento.PopupWindow("open");
+		//$local.$modalMantenimiento.PopupWindow("open");
 	});
 
 	$local.$modalMantenimiento.on("open.popupwindow", function() {
@@ -131,8 +132,8 @@ $(document).ready(function() {
 					"descripcion" : multiTabCab.descripcion
 				}).draw();
 				row.show().draw(false);
-				$(row.node()).animateHighlight();
-				$local.$modalMantenimiento.PopupWindow("close");
+				//$(row.node()).animateHighlight();
+				//$local.$modalMantenimiento.PopupWindow("close");
 			},
 			error : function(response) {
 			},
@@ -142,16 +143,7 @@ $(document).ready(function() {
 		});
 	});
 
-	$local.$tablaMantenimiento.children("tbody").on("click", ".actualizar", function() {
-		$funcionUtil.prepararFormularioActualizacion($formMantenimiento);
-		$local.$filaSeleccionada = $(this).parents("tr");
-		var multiTabCab = $local.tablaMantenimiento.row($local.$filaSeleccionada).data();
-		$local.id_tablaSeleccionado = multiTabCab.idTabla;
-		$funcionUtil.llenarFormulario(multiTabCab, $formMantenimiento);
-		$local.$actualizarMantenimiento.removeClass("hidden");
-		$local.$registrarMantenimiento.addClass("hidden");
-		$local.$modalMantenimiento.PopupWindow("open");
-	});
+	
 	
 	$local.$tablaMantenimiento.children("tbody").on("click", ".aniadir-detalle", function() {
 		if ($local.permisoDetalle == "false") {
@@ -191,8 +183,8 @@ $(document).ready(function() {
 					"descripcion" : multiTabCab.descripcion
 				}).draw();
 				row.show().draw(false);
-				$(row.node()).animateHighlight();
-				$local.$modalMantenimiento.PopupWindow("close");
+				//$(row.node()).animateHighlight();
+				//$local.$modalMantenimiento.PopupWindow("close");
 			},
 			error : function(response) {
 			},
@@ -269,7 +261,7 @@ $(document).ready(function() {
 		$funcionUtil.llenarFormulario(recurso, $formMantenimiento);
 		$local.$actualizarMantenimiento.removeClass("hidden");
 		$local.$registrarMantenimiento.addClass("hidden");
-		$local.$modalMantenimiento.PopupWindow("open");
+		//$local.$modalMantenimiento.PopupWindow("open");
 	});
 });
 
