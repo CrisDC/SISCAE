@@ -221,7 +221,7 @@
 			<if test="criterioSegmentacion == 'ESCUELA'">
 				mae_escuela  cr
 			</if>
-			<if test="criterioSegmentacion == 'TIPOSOLICITANTE'">
+			<if test="criterioSegmentacion == 'TIPO_SOLICITANTE'">
 				(SELECT 
 					DISTINCT(F_GET_TIPO_SOLICITANTE(n_id_persona)) AS v_nombre
 	  			FROM mae_persona) cr
@@ -344,7 +344,7 @@
 							  <if test="ejeX == 'ESCUELA'">
 								AND rep.escuela=lista.v_nombre
 							  </if>
-                              <if test="criterioSegmentacion == 'TIPOSOLICITANTE'">
+                              <if test="criterioSegmentacion == 'TIPO_SOLICITANTE'">
 								AND rep.nombre_tipo=cr.v_nombre
 							  </if>
 							  <if test="criterioSegmentacion == 'AREA_ESTUDIO'">
@@ -374,7 +374,7 @@
 							  <if test="ejeX == 'ESCUELA'">
 								AND rep.escuela=lista.v_nombre
 							  </if>
-                              <if test="criterioSegmentacion == 'TIPOSOLICITANTE'">
+                              <if test="criterioSegmentacion == 'TIPO_SOLICITANTE'">
 								AND rep.nombre_tipo=cr.v_nombre
 							  </if>
 							  <if test="criterioSegmentacion == 'AREA_ESTUDIO'">
@@ -405,7 +405,7 @@
 							  <if test="ejeX == 'ESCUELA'">
 								AND rep.escuela=lista.v_nombre
 							  </if>
-                              <if test="criterioSegmentacion == 'TIPOSOLICITANTE'">
+                              <if test="criterioSegmentacion == 'TIPO_SOLICITANTE'">
 								AND rep.nombre_tipo=cr.v_nombre
 							  </if>
 							  <if test="criterioSegmentacion == 'AREA_ESTUDIO'">
@@ -436,7 +436,7 @@
 							  <if test="ejeX == 'ESCUELA'">
 								AND rep.escuela=lista.v_nombre
 							  </if>
-                              <if test="criterioSegmentacion == 'TIPOSOLICITANTE'">
+                              <if test="criterioSegmentacion == 'TIPO_SOLICITANTE'">
 								AND rep.nombre_tipo=cr.v_nombre
 							  </if>
 							  <if test="criterioSegmentacion == 'AREA_ESTUDIO'">
@@ -467,7 +467,7 @@
 			<if test="criterioSegmentacion == 'ESCUELA'">
 				mae_escuela  cr
 			</if>
-			<if test="criterioSegmentacion == 'TIPOSOLICITANTE'">
+			<if test="criterioSegmentacion == 'TIPO_SOLICITANTE'">
 				(SELECT 
 					DISTINCT(F_GET_TIPO_SOLICITANTE(n_id_persona)) AS v_nombre
 	  			FROM mae_persona) cr

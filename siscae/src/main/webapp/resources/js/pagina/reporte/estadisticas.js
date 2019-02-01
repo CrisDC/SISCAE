@@ -773,21 +773,21 @@ $(document).ready(function() {
 			    text: 'Tipo de Recurso'
 			}));
 			// quitar opcion Tipo infraccion al seleccionar reporte de PRESTAMO
-			$('#selectSegmY').find("option[value='TIPOINFRACCION']").remove();
+			$('#selectSegmY').find("option[value='TIPO_INFRACCION']").remove();
 			// quitar opcion Tipo infraccion al seleccionar reporte de PRESTAMO
-			$('#selectSeries').find("option[value='TIPOINFRACCION']").remove();
+			$('#selectSeries').find("option[value='TIPO_INFRACCION']").remove();
 		}
 		if($local.$tipoReporte=="I"){
 			$local.$divTablaResumenPrestamo.addClass("hidden");
 			$local.$divTablaResumenInfraccion.removeClass("hidden"); 
 			//agregar opcion Tipo de infraccion al seleccionar reporte de INFRACCION
 			$('#selectSegmY').append($('<option>', {
-			    value: 'TIPOINFRACCION',
+			    value: 'TIPO_INFRACCION',
 			    text: 'Tipo de Infraccion'
 			}));
 			//agregar opcion Tipo de infraccion al seleccionar reporte de INFRACCION
 			$('#selectSeries').append($('<option>', {
-			    value: 'TIPOINFRACCION',
+			    value: 'TIPO_INFRACCION',
 			    text: 'Tipo de Infraccion'
 			}));
 			// quitar opcion Recurso al seleccionar reporte de INFRACCION
