@@ -384,7 +384,6 @@ $(document).ready(function() {
 									}
 									data.push(aux);
 								}
-								console.log(data);
 								//Generando Leyenda
 								var resultGraph = [];
 								var arrayJSONX = response[0].detalle;
@@ -401,7 +400,6 @@ $(document).ready(function() {
 									g['valueField'] = arrayJSONX[i].segmento;
 									resultGraph.push(g);
 								}
-								console.log(resultGraph);
 								//obteniendo presentacion
 								var presentacion ='';
 								if($local.$selectPresentacion.val()=="APILADO"){
