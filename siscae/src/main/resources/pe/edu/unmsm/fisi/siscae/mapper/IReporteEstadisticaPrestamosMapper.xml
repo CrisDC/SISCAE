@@ -2,16 +2,11 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="pe.edu.unmsm.fisi.siscae.mapper.IReporteEstadisticaPrestamosMapper">
 
-	<resultMap type="ReporteEstadisticaPrestamosPorPeriodo" id="objetoResultadoSinSegmentar">
-		<id property="numeroPrestamos" column="numeroPrestamos"></id>
-		<id property="periodoPrestamo" column="periodoPrestamo"></id>
-		<id property="estadiaTotal" column="estadiaTotal"></id>
-		<id property="estadiaPromedio" column="estadiaPromedio"></id>
-	</resultMap>
+	
 	
 	<!--    ¡¡ OBSERVACION !!              '&lt;'   significa   '<' -->
 	
-	<select id="buscarPorPeriodoSinSegementar" resultMap="objetoResultadoSinSegmentar">
+	<select id="buscarPorPeriodoSinSegementar" resultMap="objetoSinSegmentar">
 			WITH RECURSIVE ListaPeriodo  AS
 			(		
 				<if test="tipoPeriodo == 'DIA'">
@@ -54,16 +49,16 @@
 			SELECT
 				COUNT(reporte.estadia)										AS numeroPrestamos,
 			<if test="tipoPeriodo == 'DIA'">
-			    lista.fecha 												AS periodoPrestamo,
+			    lista.fecha 												AS ejeX,
 			</if>
 			<if test="tipoPeriodo == 'SEMANA'">
-			    CONCAT(lista.anio,'-',lista.semana)							AS periodoPrestamo,
+			    CONCAT(lista.anio,'-',lista.semana)							AS ejeX,
 			</if>
 			<if test="tipoPeriodo == 'MES'">
-			    CONCAT(lista.anio,'-',lista.mes)							AS periodoPrestamo,
+			    CONCAT(lista.anio,'-',lista.mes)							AS ejeX,
 			</if>
 			<if test="tipoPeriodo == 'ANIO'">
-			    lista.anio													AS periodoPrestamo,
+			    lista.anio													AS ejeX,
 			</if>
 				IFNULL(SEC_TO_TIME2(SUM(TIME_TO_SEC(reporte.estadia))),0) 	AS estadiaTotal,
 			    IFNULL(SEC_TO_TIME(AVG(TIME_TO_SEC(reporte.estadia))),0)  	AS estadiaPromedio
@@ -100,7 +95,7 @@
 			 </if>
 	</select>
 	
-	<select id="buscarPorCriterio" resultMap="objetoResultadoSinSegmentar">
+	<select id="buscarPorCriterio" resultMap="objetoSinSegmentar">
 		SELECT 
 			COUNT(recurso) as numeroPrestamos,
 			<if test="serie == 'ESCUELA'">
@@ -144,7 +139,7 @@
 		
 	</select>
 	
-	<select id="buscarPorPeriodoSegmentado" resultMap="mapReporteResumen">
+	<select id="buscarPorPeriodoSegmentado" resultMap="objetoSegmentado">
 			WITH RECURSIVE ListaPeriodo  AS
 			(		
 				<if test="tipoPeriodo == 'DIA'">
@@ -187,26 +182,26 @@
 			SELECT
 			      cr.v_nombre 												AS criterioSegmentacion,
 				<if test="tipoPeriodo == 'DIA'">
-					lista.fecha 											AS periodoPrestamo,
+					lista.fecha 											AS ejeX,
 				    F_OBTENER_ESTADISTICO_PRESTAMOS_BETWEEN(#{criterioSegmentacion}, cr.v_nombre,lista.fecha,
 					adddate(lista.fecha, INTERVAL 1 DAY),"CANTIDAD_PRESTAMOS")  	AS numeroPrestamos
 				</if>
 				<if test="tipoPeriodo == 'SEMANA'">
-				    CONCAT(lista.anio,'-',lista.semana)							AS periodoPrestamo,
+				    CONCAT(lista.anio,'-',lista.semana)							AS ejeX,
 				    F_OBTENER_ESTADISTICO_PRESTAMOS_BETWEEN(#{criterioSegmentacion}, cr.v_nombre,
 				    F_GENERADOR_FECHAS('INI', 'SEMANA',lista.anio,null, null,lista.semana),
 				    F_GENERADOR_FECHAS('FIN', 'SEMANA',lista.anio,null, null,lista.semana),
 				    "CANTIDAD_PRESTAMOS")  									AS numeroPrestamos
 				</if>
 				<if test="tipoPeriodo == 'MES'">
-				    CONCAT(lista.anio,'-',lista.mes)							AS periodoPrestamo,
+				    CONCAT(lista.anio,'-',lista.mes)							AS ejeX,
 				    F_OBTENER_ESTADISTICO_PRESTAMOS_BETWEEN(#{criterioSegmentacion}, cr.v_nombre,
 				    F_GENERADOR_FECHAS('INI', 'MES',lista.anio,lista.mes, null,null),
 				    F_GENERADOR_FECHAS('FIN', 'MES',lista.anio,lista.mes, null,null),
 				    "CANTIDAD_PRESTAMOS")  										AS numeroPrestamos
 				</if>
 				<if test="tipoPeriodo == 'ANIO'">
-				    lista.anio													AS periodoPrestamo,
+				    lista.anio													AS ejeX,
 				    F_OBTENER_ESTADISTICO_PRESTAMOS_BETWEEN(#{criterioSegmentacion}, cr.v_nombre,
 				    F_GENERADOR_FECHAS('INI', 'ANIO',lista.anio,null, null,null),
 				    F_GENERADOR_FECHAS('FIN', 'ANIO',lista.anio,null, null,null),
@@ -232,15 +227,7 @@
 			</if>
 			
 	</select>
-	
-	<resultMap type="ReportePrestamosPorPeriodoSegmentado" id="mapReporteResumen">
-			<id property="ejeX" column="periodoPrestamo"></id>
-			<collection property="detalle" javaType="List" ofType="ReportePrestamosPorPeriodoSegmentadoDetalle">
-					<result property="periodoPrestamo" column="periodoPrestamo"></result>
-					<result property="segmento" column="criterioSegmentacion"></result>
-					<result property="numeroPrestamos" column="numeroPrestamos"></result>
-			</collection>
-	</resultMap>
+
 	
 	<select id="buscarPorEjeXSinSegementar" resultMap="objetoSinSegmentar">
 			SELECT
@@ -316,14 +303,7 @@
 			GROUP BY 
 				lista.v_nombre		
 	</select>
-	
-	<resultMap type="ReporteEstadisticaPrestamosPorEjeX" id="objetoSinSegmentar">
-		<id property="numeroPrestamos" column="numeroPrestamos"></id>
-		<id property="ejeX" column="ejeX"></id>
-		<id property="estadiaTotal" column="estadiaTotal"></id>
-		<id property="estadiaPromedio" column="estadiaPromedio"></id>
-	</resultMap>
-	
+		
 	
 	<select id="buscarPorEjeXSegmentado" resultMap="objetoSegmentado">
 			SELECT
@@ -488,5 +468,13 @@
 					<result property="numeroPrestamos" column="numeroPrestamos"></result>
 			</collection>
 	</resultMap>
+	
+	<resultMap type="ReporteEstadisticaPrestamosPorEjeX" id="objetoSinSegmentar">
+		<id property="numeroPrestamos" column="numeroPrestamos"></id>
+		<id property="ejeX" column="ejeX"></id>
+		<id property="estadiaTotal" column="estadiaTotal"></id>
+		<id property="estadiaPromedio" column="estadiaPromedio"></id>
+	</resultMap>
+	
 
 </mapper>

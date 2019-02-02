@@ -30,7 +30,7 @@ public @RestController class ReporteEstadisticaPrestamosController {
 //	}
 	
 	@GetMapping(params = "accion=buscarPorPeriodoSinSegmentar")
-	public List<ReporteEstadisticaPrestamosPorPeriodo> buscarPorPeriodoSinSegmentar(ReporteEstadisticaPrestamosCriterioBusqueda criterioBusqueda/*,
+	public List<ReporteEstadisticaPrestamosPorEjeX> buscarPorPeriodoSinSegmentar(ReporteEstadisticaPrestamosCriterioBusqueda criterioBusqueda/*,
 			@RequestParam("areasEstudio") List<Integer> areasEstudio,
 			@RequestParam("escuelas") List<Integer> escuelas,
 			@RequestParam("solicitantes") List<String> solicitantes,
@@ -44,7 +44,7 @@ public @RestController class ReporteEstadisticaPrestamosController {
 	}
 	
 	@GetMapping(params = "accion=buscarPorCriterio")
-	public List<ReporteEstadisticaPrestamosPorPeriodo> buscarPorCriterio(ReporteEstadisticaPrestamosCriterioBusqueda criterioBusqueda/*,
+	public List<ReporteEstadisticaPrestamosPorEjeX> buscarPorCriterio(ReporteEstadisticaPrestamosCriterioBusqueda criterioBusqueda/*,
 			@RequestParam("areasEstudio") List<Integer> areasEstudio,
 			@RequestParam("escuelas") List<Integer> escuelas,
 			@RequestParam("solicitantes") List<String> solicitantes,
@@ -58,7 +58,7 @@ public @RestController class ReporteEstadisticaPrestamosController {
 	}
 	
 	@GetMapping(params = "accion=buscarPorPeriodoSegmentado")
-	public List<ReportePrestamosPorPeriodoSegmentado> buscarPorPeriodoSegmentado(ReporteEstadisticaPrestamosCriterioBusqueda criterioBusqueda/*,
+	public List<ReportePrestamosPorEjeXSegmentado> buscarPorPeriodoSegmentado(ReporteEstadisticaPrestamosCriterioBusqueda criterioBusqueda/*,
 			@RequestParam("areasEstudio") List<Integer> areasEstudio,
 			@RequestParam("escuelas") List<Integer> escuelas,
 			@RequestParam("solicitantes") List<String> solicitantes,

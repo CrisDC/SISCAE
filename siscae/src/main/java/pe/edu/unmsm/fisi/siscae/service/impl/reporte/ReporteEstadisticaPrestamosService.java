@@ -33,7 +33,7 @@ public class ReporteEstadisticaPrestamosService implements IReporteEstadisticaPr
 //	}
 
 	@Override
-	public List<ReporteEstadisticaPrestamosPorPeriodo> buscarPorPeriodoSinSegementar(
+	public List<ReporteEstadisticaPrestamosPorEjeX> buscarPorPeriodoSinSegementar(
 			ReporteEstadisticaPrestamosCriterioBusqueda criterioBusqueda) {
 		return reporteEstadisticaPrestamosMapper.buscarPorPeriodoSinSegementar(criterioBusqueda);
 	}
@@ -41,7 +41,7 @@ public class ReporteEstadisticaPrestamosService implements IReporteEstadisticaPr
 
 
 	@Override
-	public List<ReporteEstadisticaPrestamosPorPeriodo> buscarPorCriterio(
+	public List<ReporteEstadisticaPrestamosPorEjeX> buscarPorCriterio(
 			ReporteEstadisticaPrestamosCriterioBusqueda criterioBusqueda) {
 		return reporteEstadisticaPrestamosMapper.buscarPorCriterio(criterioBusqueda);
 	}
@@ -49,7 +49,7 @@ public class ReporteEstadisticaPrestamosService implements IReporteEstadisticaPr
 
 
 	@Override
-	public List<ReportePrestamosPorPeriodoSegmentado> buscarPorPeriodoSegmentado(
+	public List<ReportePrestamosPorEjeXSegmentado> buscarPorPeriodoSegmentado(
 			ReporteEstadisticaPrestamosCriterioBusqueda criterioBusqueda) {
 		return reporteEstadisticaPrestamosMapper.buscarPorPeriodoSegmentado(criterioBusqueda);
 	}
