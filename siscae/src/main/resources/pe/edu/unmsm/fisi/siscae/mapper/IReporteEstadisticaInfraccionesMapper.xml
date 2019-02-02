@@ -309,7 +309,7 @@
 			
 	</select>
 	
-	<select id="buscarPorEjeXSinSegementar" resultMap="objetoSinSegmentar">
+	<select id="buscarPorEjeXSinSegmentar" resultMap="objetoSinSegmentar">
 			SELECT
 			      lista.v_nombre												AS ejeX,
 				<if test="tipoPeriodo == 'DIA'">

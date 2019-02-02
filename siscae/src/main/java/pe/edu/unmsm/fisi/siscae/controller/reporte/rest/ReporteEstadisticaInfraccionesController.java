@@ -66,7 +66,7 @@ public @RestController class ReporteEstadisticaInfraccionesController {
 	}
 	
 	@GetMapping(params = "accion=buscarPorEjeXSinSegmentar")
-	public List<ReporteEstadisticaInfraccionesPorEjeX> buscarPorEjeXSinSegementar(ReporteEstadisticaInfraccionesCriterioBusqueda criterioBusqueda/*,
+	public List<ReporteEstadisticaInfraccionesPorEjeX> buscarPorEjeXSinSegmentar(ReporteEstadisticaInfraccionesCriterioBusqueda criterioBusqueda/*,
 			@RequestParam("areasEstudio") List<Integer> areasEstudio,
 			@RequestParam("escuelas") List<Integer> escuelas,
 			@RequestParam("solicitantes") List<String> solicitantes,
@@ -76,7 +76,7 @@ public @RestController class ReporteEstadisticaInfraccionesController {
 		criterioBusqueda.setSolicitantes(solicitantes);
 		criterioBusqueda.setTiposInfraccion(tiposInfraccion);*/
 		System.out.println(criterioBusqueda);		
-		return reporteEstadisticaInfraccionesService.buscarPorEjeXSinSegementar(criterioBusqueda);
+		return reporteEstadisticaInfraccionesService.buscarPorEjeXSinSegmentar(criterioBusqueda);
 	}
 	
 	@GetMapping(params = "accion=buscarPorEjeXSegmentado")

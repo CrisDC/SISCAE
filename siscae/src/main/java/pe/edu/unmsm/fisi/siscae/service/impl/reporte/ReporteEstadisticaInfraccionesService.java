@@ -47,9 +47,9 @@ public class ReporteEstadisticaInfraccionesService implements IReporteEstadistic
 		return reporteEstadisticaInfraccionesMapper.buscarPorPeriodoSegmentado(criterioBusqueda);
 	}
 	@Override
-	public List<ReporteEstadisticaInfraccionesPorEjeX> buscarPorEjeXSinSegementar(
+	public List<ReporteEstadisticaInfraccionesPorEjeX> buscarPorEjeXSinSegmentar(
 			ReporteEstadisticaInfraccionesCriterioBusqueda criterioBusqueda) {
-		return reporteEstadisticaInfraccionesMapper.buscarPorEjeXSinSegementar(criterioBusqueda);
+		return reporteEstadisticaInfraccionesMapper.buscarPorEjeXSinSegmentar(criterioBusqueda);
 	}
 	@Override
 	public List<ReporteInfraccionesPorEjeXSegmentado> buscarPorEjeXSegmentado(

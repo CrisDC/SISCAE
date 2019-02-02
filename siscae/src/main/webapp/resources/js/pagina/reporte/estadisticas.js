@@ -270,8 +270,6 @@ $(document).ready(function() {
 	}
 	
 	$local.$buscar.on('click', function() {
-		console.log("ESTO ES EL DATATBLE");
-		console.log($local.tablaResultadosPrestamo);
 		if (!$formEstadisticas.valid()) {
 			return;
 		}
@@ -286,7 +284,7 @@ $(document).ready(function() {
 		let segmentacionY = $local.$selectSegmY.val();
 		let ejeX = $local.$selectEjeX.val();
 		let serie= $local.$selectSeries.val();
-		
+		console.log(criterioBusqueda);
 		if($local.$tipoReporte =="P"){
 			if(tipoGrafico == "PIE"){
 					$.ajax({
@@ -692,7 +690,7 @@ $(document).ready(function() {
 				if(segmentacionY=="NINGUNA"){
 					$.ajax({
 						type : "GET",
-						url : $variableUtil.root + "reporteEstadisticaInfracciones?accion=buscarPorEjeXSinSegementar",
+						url : $variableUtil.root + "reporteEstadisticaInfracciones?accion=buscarPorEjeXSinSegmentar",
 						contentType : "application/json",
 						data: criterioBusqueda,
 						dataType : "json",
