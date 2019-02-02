@@ -2,16 +2,11 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="pe.edu.unmsm.fisi.siscae.mapper.IReporteEstadisticaInfraccionesMapper">
 
-	<resultMap type="ReporteEstadisticaInfraccionesPorEjeX" id="objetoResultadoSinSegmentar">
-		<id property="numeroInfracciones" column="numeroInfracciones"></id>
-		<id property="ejeX" column="ejeX"></id>
-		<id property="numeroInfraccionesPromedioPorAlumno" column="numeroInfraccionesPromedioPorAlumno"></id>
-		<id property="numeroSancionados" column="numeroSancionados"></id>
-	</resultMap>
+	
 	
 	<!--    ¡¡ OBSERVACION !!              '&lt;'   significa   '<' -->
 	
-	<select id="buscarPorPeriodoSinSegementar" resultMap="objetoResultadoSinSegmentar">
+	<select id="buscarPorPeriodoSinSegementar" resultMap="objetoSinSegmentar">
 			WITH RECURSIVE ListaPeriodo  AS
 			(		
 				<if test="tipoPeriodo == 'DIA'">
@@ -131,7 +126,7 @@
 			 </if>
 	</select>
 	
-	<select id="buscarPorCriterio" resultMap="objetoResultadoSinSegmentar">
+	<select id="buscarPorCriterio" resultMap="objetoSinSegmentar">
 		SELECT 
 			COUNT(fecha_infraccion) as numeroInfracciones,
 			<if test="serie == 'ESCUELA'">
@@ -222,7 +217,7 @@
 		
 	</select>
 	
-	<select id="buscarPorPeriodoSegmentado" resultMap="mapReporteResumen">
+	<select id="buscarPorPeriodoSegmentado" resultMap="objetoSegmentado">
 			WITH RECURSIVE ListaPeriodo  AS
 			(		
 				<if test="tipoPeriodo == 'DIA'">
@@ -314,7 +309,82 @@
 			
 	</select>
 	
-	<resultMap type="ReporteInfraccionesPorEjeXSegmentado" id="mapReporteResumen">
+	<select id="buscarPorEjeXSinSegementar" resultMap="objetoSinSegmentar">
+			SELECT
+			      lista.v_nombre												AS ejeX,
+				<if test="tipoPeriodo == 'DIA'">
+					F_OBTENER_ESTADISTICO_INFRACCIONES_BETWEEN(#{ejeX}, lista.v_nombre,#{fechaInicio},
+					 #{fechaFin},'CANTIDAD_INFRACCIONES')							AS numeroInfracciones,
+					F_OBTENER_ESTADISTICO_INFRACCIONES_BETWEEN(#{ejeX}, lista.v_nombre, #{fechaInicio},
+					#{fechaFin},'CANTIDAD_SANCIONADOS')							AS numeroSancionados,
+					F_OBTENER_ESTADISTICO_INFRACCIONES_BETWEEN(#{ejeX}, lista.v_nombre, #{fechaInicio},
+					#{fechaFin},'CANTIDAD_INFRACCIONES_PROMEDIO') 						AS numeroInfraccionesPromedioPorAlumno
+				</if>
+				<if test="tipoPeriodo == 'SEMANA'">
+					F_OBTENER_ESTADISTICO_INFRACCIONES_BETWEEN(#{ejeX}, lista.v_nombre,
+					F_GENERADOR_FECHAS('INI', 'SEMANA',#{anioInicio},null, null,#{semanaInicio}),
+				    F_GENERADOR_FECHAS('FIN', 'SEMANA',#{anioFin},null, null,#{semanaFin}),
+				    'CANTIDAD_INFRACCIONES')							AS numeroInfracciones,
+					F_OBTENER_ESTADISTICO_INFRACCIONES_BETWEEN(#{ejeX}, lista.v_nombre,
+					F_GENERADOR_FECHAS('INI', 'SEMANA',#{anioInicio},null, null,#{semanaInicio}),
+				    F_GENERADOR_FECHAS('FIN', 'SEMANA',#{anioFin},null, null,#{semanaFin}),
+				    'CANTIDAD_SANCIONADOS') 							AS numeroSancionados,
+					F_OBTENER_ESTADISTICO_INFRACCIONES_BETWEEN(#{ejeX}, lista.v_nombre,
+					F_GENERADOR_FECHAS('INI', 'SEMANA',#{anioInicio},null, null,#{semanaInicio}),
+				    F_GENERADOR_FECHAS('FIN', 'SEMANA',#{anioFin},null, null,#{semanaFin}),
+				    'CANTIDAD_INFRACCIONES_PROMEDIO')  						AS numeroInfraccionesPromedioPorAlumno
+				</if>
+				<if test="tipoPeriodo == 'MES'">
+				    F_OBTENER_ESTADISTICO_INFRACCIONES_BETWEEN(#{ejeX}, lista.v_nombre,
+					F_GENERADOR_FECHAS('INI', 'MES',#{anioInicio},#{mesInicio}, null,null),
+				    F_GENERADOR_FECHAS('FIN', 'MES',#{anioFin},#{mesFin}, null,null),
+				    'CANTIDAD_INFRACCIONES')							AS numeroInfracciones,
+					F_OBTENER_ESTADISTICO_INFRACCIONES_BETWEEN(#{ejeX}, lista.v_nombre,
+					F_GENERADOR_FECHAS('INI', 'MES',#{anioInicio},#{mesInicio}, null,null),
+				    F_GENERADOR_FECHAS('FIN', 'MES',#{anioFin},#{mesFin}, null,null),
+				    'CANTIDAD_SANCIONADOS') 							AS numeroSancionados,
+					F_OBTENER_ESTADISTICO_INFRACCIONES_BETWEEN(#{ejeX}, lista.v_nombre,
+					F_GENERADOR_FECHAS('INI', 'MES',#{anioInicio},#{mesInicio}, null,null),
+				    F_GENERADOR_FECHAS('FIN', 'MES',#{anioFin},#{mesFin}, null,null),
+				    'CANTIDAD_INFRACCIONES_PROMEDIO')  						AS numeroInfraccionesPromedioPorAlumno
+				</if>
+				<if test="tipoPeriodo == 'ANIO'">
+				    F_OBTENER_ESTADISTICO_INFRACCIONES_BETWEEN(#{ejeX}, lista.v_nombre,
+					F_GENERADOR_FECHAS('INI', 'ANIO',#{anioInicio},null, null,null),
+				    F_GENERADOR_FECHAS('FIN', 'ANIO',#{anioFin},null, null,null),
+				    'CANTIDAD_INFRACCIONES')							AS numeroInfracciones,				
+					F_OBTENER_ESTADISTICO_INFRACCIONES_BETWEEN(#{ejeX}, lista.v_nombre,
+					F_GENERADOR_FECHAS('INI', 'ANIO',#{anioInicio},null, null,null),
+				    F_GENERADOR_FECHAS('FIN', 'ANIO',#{anioFin},null, null,null),
+				    'CANTIDAD_SANCIONADOS') 							AS numeroSancionados,
+					F_OBTENER_ESTADISTICO_INFRACCIONES_BETWEEN(#{ejeX}, lista.v_nombre,
+					F_GENERADOR_FECHAS('INI', 'ANIO',#{anioInicio},null, null,null),
+				    F_GENERADOR_FECHAS('FIN', 'ANIO',#{anioFin},null, null,null),
+				    'CANTIDAD_INFRACCIONES_PROMEDIO')  						AS numeroInfraccionesPromedioPorAlumno
+				</if>
+
+			FROM 
+			<if test="ejeX == 'AREA_ESTUDIO'">
+				(SELECT v_nombre
+	  			FROM mae_area_estudio) lista
+			</if>
+			<if test="ejeX == 'ESCUELA'">
+				(SELECT v_nombre
+	  			FROM mae_escuela) lista
+			</if>
+			GROUP BY 
+				lista.v_nombre		
+	</select>
+
+	
+	<resultMap type="ReporteEstadisticaInfraccionesPorEjeX" id="objetoSinSegmentar">
+		<id property="numeroInfracciones" column="numeroInfracciones"></id>
+		<id property="ejeX" column="ejeX"></id>
+		<id property="numeroInfraccionesPromedioPorAlumno" column="numeroInfraccionesPromedioPorAlumno"></id>
+		<id property="numeroSancionados" column="numeroSancionados"></id>
+	</resultMap>
+	
+	<resultMap type="ReporteInfraccionesPorEjeXSegmentado" id="objetoSegmentado">
 			<id property="ejeX" column="ejeX"></id>
 			<collection property="detalle" javaType="List" ofType="ReporteInfraccionesPorEjeXSegmentadoDetalle">
 					<result property="ejeX" column="ejeX"></result>

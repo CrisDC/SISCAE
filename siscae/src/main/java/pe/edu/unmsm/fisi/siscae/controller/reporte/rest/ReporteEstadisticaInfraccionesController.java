@@ -66,7 +66,7 @@ public @RestController class ReporteEstadisticaInfraccionesController {
 	}
 	
 	@GetMapping(params = "accion=buscarPorEjeXSinSegmentar")
-	public List<ReporteEstadisticaInfraccionesPorEjeX> buscarPorEjeXSinSegmentar(ReporteEstadisticaInfraccionesCriterioBusqueda criterioBusqueda/*,
+	public List<ReporteEstadisticaInfraccionesPorEjeX> buscarPorEjeXSinSegementar(ReporteEstadisticaInfraccionesCriterioBusqueda criterioBusqueda/*,
 			@RequestParam("areasEstudio") List<Integer> areasEstudio,
 			@RequestParam("escuelas") List<Integer> escuelas,
 			@RequestParam("solicitantes") List<String> solicitantes,

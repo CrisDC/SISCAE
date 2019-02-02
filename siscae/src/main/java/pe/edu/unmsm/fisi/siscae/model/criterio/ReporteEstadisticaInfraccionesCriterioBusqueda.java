@@ -18,7 +18,7 @@ public class ReporteEstadisticaInfraccionesCriterioBusqueda {
 	private Integer anioFin;
 	private Integer semanaInicio;
 	private Integer semanaFin;
-	
+	private String ejeX;
 	//Criterios de los select2 multiples
 	private List<Integer> areasEstudio;
 	private List<Integer> escuelas;

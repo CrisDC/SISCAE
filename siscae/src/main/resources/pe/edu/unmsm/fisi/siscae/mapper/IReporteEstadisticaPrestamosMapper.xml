@@ -260,34 +260,34 @@
 				</if>
 				<if test="tipoPeriodo == 'MES'">
 				    F_OBTENER_ESTADISTICO_PRESTAMOS_BETWEEN(#{ejeX}, lista.v_nombre,
-					F_GENERADOR_FECHAS('INI', 'SEMANA',#{anioInicio},#{mesInicio}, null,null),
-				    F_GENERADOR_FECHAS('FIN', 'SEMANA',#{anioFin},#{mesFin}, null,null),
+					F_GENERADOR_FECHAS('INI', 'MES',#{anioInicio},#{mesInicio}, null,null),
+				    F_GENERADOR_FECHAS('FIN', 'MES',#{anioFin},#{mesFin}, null,null),
 				    'CANTIDAD_PRESTAMOS')							AS numeroPrestamos,
 					IFNULL(SEC_TO_TIME2(
 					F_OBTENER_ESTADISTICO_PRESTAMOS_BETWEEN(#{ejeX}, lista.v_nombre,
-					F_GENERADOR_FECHAS('INI', 'SEMANA',#{anioInicio},#{mesInicio}, null,null),
-				    F_GENERADOR_FECHAS('FIN', 'SEMANA',#{anioFin},#{mesFin}, null,null),
+					F_GENERADOR_FECHAS('INI', 'MES',#{anioInicio},#{mesInicio}, null,null),
+				    F_GENERADOR_FECHAS('FIN', 'MES',#{anioFin},#{mesFin}, null,null),
 				    'ESTADIA_TOTAL')),0) 							AS estadiaTotal,
 					IFNULL(SEC_TO_TIME(
 					F_OBTENER_ESTADISTICO_PRESTAMOS_BETWEEN(#{ejeX}, lista.v_nombre,
-					F_GENERADOR_FECHAS('INI', 'SEMANA',#{anioInicio},#{mesInicio}, null,null),
-				    F_GENERADOR_FECHAS('FIN', 'SEMANA',#{anioFin},#{mesFin}, null,null),
+					F_GENERADOR_FECHAS('INI', 'MES',#{anioInicio},#{mesInicio}, null,null),
+				    F_GENERADOR_FECHAS('FIN', 'MES',#{anioFin},#{mesFin}, null,null),
 				    'ESTADIA_PROMEDIO')),0)  						AS estadiaPromedio
 				</if>
 				<if test="tipoPeriodo == 'ANIO'">
 				    F_OBTENER_ESTADISTICO_PRESTAMOS_BETWEEN(#{ejeX}, lista.v_nombre,
-					F_GENERADOR_FECHAS('INI', 'SEMANA',#{anioInicio},#{mesInicio}, null,null),
-				    F_GENERADOR_FECHAS('FIN', 'SEMANA',#{anioFin},#{mesFin}, null,null),
+					F_GENERADOR_FECHAS('INI', 'ANIO',#{anioInicio},null, null,null),
+				    F_GENERADOR_FECHAS('FIN', 'ANIO',#{anioFin},null, null,null),
 				    'CANTIDAD_PRESTAMOS')							AS numeroPrestamos,
 					IFNULL(SEC_TO_TIME2(
 					F_OBTENER_ESTADISTICO_PRESTAMOS_BETWEEN(#{ejeX}, lista.v_nombre,
-					F_GENERADOR_FECHAS('INI', 'SEMANA',#{anioInicio},#{mesInicio}, null,null),
-				    F_GENERADOR_FECHAS('FIN', 'SEMANA',#{anioFin},#{mesFin}, null,null),
+					F_GENERADOR_FECHAS('INI', 'ANIO',#{anioInicio},null, null,null),
+				    F_GENERADOR_FECHAS('FIN', 'ANIO',#{anioFin},null, null,null),
 				    'ESTADIA_TOTAL')),0) 							AS estadiaTotal,
 					IFNULL(SEC_TO_TIME(
 					F_OBTENER_ESTADISTICO_PRESTAMOS_BETWEEN(#{ejeX}, lista.v_nombre,
-					F_GENERADOR_FECHAS('INI', 'SEMANA',#{anioInicio},#{mesInicio}, null,null),
-				    F_GENERADOR_FECHAS('FIN', 'SEMANA',#{anioFin},#{mesFin}, null,null),
+					F_GENERADOR_FECHAS('INI', 'ANIO',#{anioInicio},null, null,null),
+				    F_GENERADOR_FECHAS('FIN', 'ANIO',#{anioFin},null, null,null),
 				    'ESTADIA_PROMEDIO')),0)  						AS estadiaPromedio
 				</if>
 
