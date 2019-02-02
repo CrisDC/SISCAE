@@ -34,11 +34,11 @@ $(document).ready(function() {
 			//$tablaFuncion.aniadirFiltroDeBusquedaEnEncabezado(this, $local.$tablaMantenimiento);
 		},
 		"columnDefs" : [ {
-			"targets" : [ 0, 1, 2, 3, 4, 5, 6],
+			"targets" : [ 0, 1, 2, 3, 4, 5, 6,7],
 			"className" : "all filtrable",
 		
 		}, {
-			"targets" : 7,
+			"targets" : 8,
 			"className" : "all dt-center",
 			"defaultContent" : $variableUtil.botonActualizarNuevo + " " + $variableUtil.botonEliminarNuevo
 		} ],
@@ -63,6 +63,9 @@ $(document).ready(function() {
 		},{
 			"data" : 'numTelef',
 			"title" : "Telefono"
+		},{
+			"data" : 'fechaNac',
+			"title" : "Fecha de Nacimiento"
 		},{
 			"data" : null,
 			"title" : 'Acción'
@@ -152,11 +155,13 @@ $(document).ready(function() {
 		$funcionUtil.prepararFormularioActualizacion($formMantenimiento);
 		$local.$filaSeleccionada = $(this).parents("tr");
 		var persona = $local.tablaMantenimiento.row($local.$filaSeleccionada).data();
-		$local.idpersonaSeleccionada = persona.idPersona;
+		$local.idPersonaSeleccionada = persona.idPersona;
 		$funcionUtil.llenarFormulario(persona, $formMantenimiento);
 		$local.$actualizarMantenimiento.removeClass("hidden");
 		$local.$registrarMantenimiento.addClass("hidden");
 		//$local.$modalMantenimiento.PopupWindow("open");
+		console.log($local.idPersonaSeleccionada);
+		console.log(persona);
 		});
 	
 	$local.$actualizarMantenimiento.on("click", function() {
@@ -165,6 +170,8 @@ $(document).ready(function() {
 		}
 		var persona = $formMantenimiento.serializeJSON();
 		persona.idPersona = $local.idPersonaSeleccionada;
+		console.log($local.idPersonaSeleccionada);
+		console.log(persona);
 		$.ajax({
 			type : "PUT",
 			url : $variableUtil.root + "persona",

@@ -35,10 +35,10 @@ public class Persona {
 	@Length(min = 5, max = 20, message = "{Length.Persona.numDocumento}", groups = IBasico.class)
 	private String numDocumento;
 
-	@NotNull(message = "{NotNull.Persona.nombre}")
-	@NotBlank(message = "{NotBlank.Persona.nombre}")
-	@Pattern(regexp = Regex.SOLO_LETRAS_A_a, message = "{Pattern.Persona.nombre}")
-	@Length(min = 3, max = 45, message = "{Length.Persona.nombre}", groups = IBasico.class)
+	//@NotNull(message = "{NotNull.Persona.nombre}")
+	//@NotBlank(message = "{NotBlank.Persona.nombre}")
+	//@Pattern(regexp = Regex.SOLO_LETRAS_A_a, message = "{Pattern.Persona.nombre}")
+	//@Length(min = 3, max = 45, message = "{Length.Persona.nombre}", groups = IBasico.class)
 	private String nombre;
 
 	@NotNull(message = "{NotNull.Persona.appPaterno}")
