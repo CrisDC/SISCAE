@@ -55,6 +55,8 @@ public class DocenteService extends MantenibleService<Docente> implements IDocen
 	@Override
 	@Transactional(propagation = Propagation.REQUIRES_NEW)
 	public void actualizarDocente(Docente docente) {
+		
+		System.out.println(docente);
 		super.actualizar(docente);
 
 	}

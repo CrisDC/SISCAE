@@ -21,11 +21,12 @@ import pe.edu.unmsm.fisi.siscae.validacion.grupo.IBasico;
 @AllArgsConstructor
 public class Docente {
 
-	@NotNull(message = "{NotNull.Docente.persona}")
+	//@NotNull(message = "{NotNull.Docente.persona}")
 	private Persona persona;
 	
 	//@NotNull(message = "{NotNull.Docente.estadoDocente}")
 	private Integer idEstadoTabla;
+	private Integer idDocente;
 	private String descripcionCorta;
 	private Integer numDocumento;
 	private String nombre;

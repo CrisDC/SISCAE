@@ -172,6 +172,8 @@ $(document).ready(function() {
 		$local.$actualizarMantenimiento.removeClass("hidden");
 		$local.$registrarMantenimiento.addClass("hidden");
 		//$local.$modalMantenimiento.PopupWindow("open");
+		console.log(alumno);
+		console.log($local.idAlumnoSeleccionado);
 	});
 	
 	$local.$actualizarMantenimiento.on("click", function() {
@@ -180,6 +182,8 @@ $(document).ready(function() {
 		}
 		var alumno = $formMantenimiento.serializeJSON();
 		alumno.idAlumno = $local.idAlumnoSeleccionado;
+		console.log(alumno);
+		
 		$.ajax({
 			type : "PUT",
 			url : $variableUtil.root + "alumno",

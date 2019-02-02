@@ -19,6 +19,7 @@ public class Alumno {
 	private Integer idEstadoTabla;
 	private Integer idTipoAcademico;
 	private Integer idEscuela;
+	private Integer idAlumno;
 	private String numeroDocumento;
 	private String nombres;
 	private String appPaterno;

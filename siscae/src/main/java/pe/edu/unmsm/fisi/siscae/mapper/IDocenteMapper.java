@@ -15,7 +15,7 @@ public interface IDocenteMapper extends IMantenibleMapper<Docente> {
 	@Select(value = {"{call SP_MANT_DOCENTE ("
 			+ "#{operacion, jdbcType = VARCHAR, mode = IN},"
 			+ "#{operacionParam, jdbcType = VARCHAR, mode = IN},"
-			+ "#{objeto.persona.idPersona, jdbcType = INTEGER, mode = IN},"
+			+ "#{objeto.idDocente, jdbcType = INTEGER, mode = IN},"
 			+ "#{objeto.idEstadoTabla, jdbcType = INTEGER, mode = IN},"
 			+ "#{userAudit, jdbcType = VARCHAR, mode = IN})}"})
 	@Options(statementType = StatementType.CALLABLE)

@@ -33,7 +33,7 @@ $(document).ready(function() {
 		},
 		"initComplete" : function() {
 			$local.$tablaMantenimiento.wrap("<div class='table-responsive'></div>");
-			$tablaFuncion.aniadirFiltroDeBusquedaEnEncabezado(this, $local.$tablaMantenimiento);
+			//$tablaFuncion.aniadirFiltroDeBusquedaEnEncabezado(this, $local.$tablaMantenimiento);
 		},
 		"columnDefs" : [ {
 			"targets" : [ 0, 1, 2, 3],
@@ -148,6 +148,7 @@ $(document).ready(function() {
 		}
 		var docente = $formMantenimiento.serializeJSON();
 		docente.idDocente = $local.idDocenteSeleccionado;
+		console.log(docente);
 		$.ajax({
 			type : "PUT",
 			url : $variableUtil.root + "docente",
@@ -248,6 +249,8 @@ $(document).ready(function() {
 		$local.$actualizarMantenimiento.removeClass("hidden");
 		$local.$registrarMantenimiento.addClass("hidden");
 		//$local.$modalMantenimiento.PopupWindow("open");
+		
+		console.log(docente);
 		});
 	
 	$local.$btnBuscar.on("click", function() {
