@@ -26,7 +26,7 @@ public class AdministrativoMapperTest {
 	public void mantenerTipoGetTest() {
 		
 		Persona personaTest = new Persona();
-		personaTest.setIdPersona(7);
+		personaTest.setIdPersona(597);
 		Administrativo administrativo = new Administrativo(); 
 		administrativo.setPersona(personaTest);
 		administrativo.setCodigoAdm("70099798");

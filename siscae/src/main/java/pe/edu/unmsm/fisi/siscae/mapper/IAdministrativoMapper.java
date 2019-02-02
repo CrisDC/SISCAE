@@ -16,7 +16,7 @@ public interface IAdministrativoMapper extends IMantenibleMapper<Administrativo>
 	@Select( value = {"{call SP_MANT_ADMINISTRATIVO("
 			+ "#{operacion, jdbcType = VARCHAR, mode = IN},"
 			+ "#{operacionParam, jdbcType = VARCHAR, mode = IN},"
-			+ "#{objeto.persona.idPersona, jdbcType = INTEGER, mode = IN},"
+			+ "#{objeto.idAdministrativo, jdbcType = INTEGER, mode = IN},"
 			+ "#{objeto.codigoAdm, jdbcType = VARCHAR, mode = IN},"
 			+ "#{userAudit, jdbcType = VARCHAR, mode = IN})}"} )
 	@Options(statementType = StatementType.CALLABLE)

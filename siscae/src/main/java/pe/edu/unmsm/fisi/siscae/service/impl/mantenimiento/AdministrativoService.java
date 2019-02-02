@@ -54,18 +54,23 @@ public class AdministrativoService extends MantenibleService<Administrativo> imp
 	}
 
 	@Override
+	@Transactional(propagation = Propagation.REQUIRES_NEW)
 	public void registrarAdministrativo(Administrativo administrativo) {
 
 		this.registrar(administrativo);
 	}
 
 	@Override
+	@Transactional(propagation = Propagation.REQUIRES_NEW)
 	public void actualizarAdministrativo(Administrativo administrativo) {
 
+		System.out.println(administrativo);
 		this.actualizar(administrativo);
+		
 	}
 
 	@Override
+	@Transactional(propagation = Propagation.REQUIRES_NEW)
 	public void eliminarAdministrativo(Administrativo administrativo) {
 
 		this.eliminar(administrativo);
@@ -73,6 +78,7 @@ public class AdministrativoService extends MantenibleService<Administrativo> imp
 	}
 
 	@Override
+	@Transactional(propagation = Propagation.REQUIRES_NEW)
 	public List<Administrativo> buscarConNombre() {
 		Administrativo administrativo = Administrativo.builder().build();
 		return super.buscar(administrativo, OperacionParam.ADMI_NOMBRES);

@@ -7,7 +7,7 @@ $(document).ready(function() {
 		$registrarMantenimiento : $("#registrarMantenimiento"),
 		$filaSeleccionada : "",
 		$actualizarMantenimiento : $("#actualizarMantenimiento"),
-		idAministrativoSeleccionado : "",
+		idAdministrativoSeleccionado : "",
 		personaActual : null,	
 		$btnBuscar : $("#buscar")
 	}
@@ -152,13 +152,31 @@ $(document).ready(function() {
 	});
 	
 	
+	$local.$tablaMantenimiento.children("tbody").on("click", ".actualizar", function() {
+		$funcionUtil.prepararFormularioActualizacion($formMantenimiento);
+		$local.$filaSeleccionada = $(this).parents("tr");
+		var administrativo = $local.tablaMantenimiento.row($local.$filaSeleccionada).data();
+		$local.idAdministrativoSeleccionado = administrativo.idAdministrativo;
+		$funcionUtil.llenarFormulario(administrativo, $formMantenimiento);
+		$local.$actualizarMantenimiento.removeClass("hidden");
+		$local.$registrarMantenimiento.addClass("hidden");
+		//$local.$modalMantenimiento.PopupWindow("open");
+		
+		console.log(administrativo);
+		console.log($local.idAdministrativoSeleccionado);
+		console.log(administrativo.idAdministrativo);
+	});
+	
 	
 	$local.$actualizarMantenimiento.on("click", function() {
 		if (!$formMantenimiento.valid()) {
 			return;
 		}
 		var administrativo = $formMantenimiento.serializeJSON();
-		administrativo.idAdministrativo = $local.idAministrativoSeleccionado;
+		administrativo.idAdministrativo = $local.idAdministrativoSeleccionado;
+		console.log(administrativo);
+		console.log($local.idAdministrativoSeleccionado);
+		
 		$.ajax({
 			type : "PUT",
 			url : $variableUtil.root + "administrativo",
@@ -181,6 +199,9 @@ $(document).ready(function() {
 				row.show().draw(false);
 				//$(row.node()).animateHighlight();
 				//$local.$modalMantenimiento.PopupWindow("close");
+				console.log(response);
+				
+				
 			},
 			error : function(response) {
 			},
@@ -251,16 +272,7 @@ $(document).ready(function() {
 	});
 				
 		
-		$local.$tablaMantenimiento.children("tbody").on("click", ".actualizar", function() {
-			$funcionUtil.prepararFormularioActualizacion($formMantenimiento);
-			$local.$filaSeleccionada = $(this).parents("tr");
-			var administrativo = $local.tablaMantenimiento.row($local.$filaSeleccionada).data();
-			$local.idAdministrativoSeleccionado = administrativo.idAdministrativo;
-			$funcionUtil.llenarFormulario(administrativo, $formMantenimiento);
-			$local.$actualizarMantenimiento.removeClass("hidden");
-			$local.$registrarMantenimiento.addClass("hidden");
-			//$local.$modalMantenimiento.PopupWindow("open");
-		});
+	
 		
 		
 		$local.$btnBuscar.on("click", function() {
