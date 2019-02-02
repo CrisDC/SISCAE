@@ -307,7 +307,7 @@ $(document).ready(function() {
 								return;
 							}
 							//Dibujando tabla
-							console.log(response);
+							
 							$local.tablaResultadosPrestamo.rows.add(response).draw();
 							//Dibujando grafico
 							var chart = AmCharts.makeChart('chartdiv',$funcionGraficoUtil.crearGraficoPie(response,'segmento','numeroPrestamos','Análisis de Préstamos','Número de prestamos', "<b style='font-size:12px'>[[title]]</b> ([[percents]]%) <br> <b>Prestamos:</b> [[value]] </br> <b>Tiempo Total: </b> [[estadiaTotal]] <br> <b>Tiempo Prom: </b> [[estadiaPromedio]]"));
@@ -340,6 +340,7 @@ $(document).ready(function() {
 									return;
 								}
 								//Dibujando tabla
+								console.log(response);
 								$local.tablaResultadosPrestamo.rows.add(response).draw();
 								//Dibujando grafico
 								var chart = AmCharts.makeChart('chartdiv',$funcionGraficoUtil.crearGraficoBarras(response,'ejeX','numeroPrestamos','Análisis de préstamos por periodo','Número de prestamos','<b>Periodo:</b> [[category]] </br> <b>Prestamos:</b> [[value]] </br> <b>Tiempo Total: </b> [[estadiaTotal]] </br> <b>Tiempo Prom: </b> [[estadiaPromedio]]'));
@@ -626,7 +627,7 @@ $(document).ready(function() {
 						beforeSend : function(xhr) {
 							xhr.setRequestHeader('Content-Type', 'application/json');
 							//Borrando tabla antes de hacer la consulta
-							$local.tablaResultadosPrestamo.clear().draw();
+							$local.tablaResultadosInfraccion.clear().draw();
 							$local.$buscar.attr("disabled", true).find("i").removeClass("fa-search").addClass("fa-spinner fa-pulse fa-fw");
 						},
 						success : function(response) {
@@ -672,7 +673,7 @@ $(document).ready(function() {
 								presentacion='none';
 							}
 							//Dibujando tabla
-							//$local.tablaResultadosPrestamo.rows.add(response).draw();
+							//$local.tablaResultadosInfraccion.rows.add(response).draw();
 							//Dibujando grafico
 							var chart = AmCharts.makeChart('chartdiv',$funcionGraficoUtil.crearGraficoBarrasSegmentado(data,resultGraph,'ejeX','Cantidad de Infracciones',presentacion,'Infracciones por criterio'));
 							data = [];
