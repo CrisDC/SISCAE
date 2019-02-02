@@ -141,6 +141,8 @@ $(document).ready(function() {
 		}
 		var escuela = $formMantenimiento.serializeJSON();
 		escuela.idEscuela = $local.idEscuelaSeleccionado;
+		
+		console.log(escuela);
 		$.ajax({
 			type : "PUT",
 			url : $variableUtil.root + "escuela",
@@ -240,6 +242,7 @@ $(document).ready(function() {
 		$local.$actualizarMantenimiento.removeClass("hidden");
 		$local.$registrarMantenimiento.addClass("hidden");
 		//$local.$modalMantenimiento.PopupWindow("open");//asdadasdasdsadas
+		console.log(escuela);
 		});
 
 });
