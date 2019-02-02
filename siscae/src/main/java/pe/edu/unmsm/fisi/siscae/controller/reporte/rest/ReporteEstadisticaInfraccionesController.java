@@ -8,11 +8,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import pe.edu.unmsm.fisi.siscae.model.criterio.ReporteEstadisticaInfraccionesCriterioBusqueda;
-import pe.edu.unmsm.fisi.siscae.model.criterio.ReporteEstadisticaInfraccionesCriterioBusqueda;
 import pe.edu.unmsm.fisi.siscae.model.reporte.ReporteEstadisticaInfracciones;
-import pe.edu.unmsm.fisi.siscae.model.reporte.resumen.ReporteEstadisticaInfraccionesPorPeriodo;
-import pe.edu.unmsm.fisi.siscae.model.reporte.resumen.ReporteEstadisticaInfraccionesPorPeriodo;
-import pe.edu.unmsm.fisi.siscae.model.reporte.resumen.ReporteInfraccionesPorPeriodoSegmentado;
+import pe.edu.unmsm.fisi.siscae.model.reporte.resumen.ReporteEstadisticaInfraccionesPorEjeX;
+import pe.edu.unmsm.fisi.siscae.model.reporte.resumen.ReporteInfraccionesPorEjeXSegmentado;
 import pe.edu.unmsm.fisi.siscae.service.IReporteEstadisticaInfraccionesService;
 
 @RequestMapping("/reporteEstadisticaInfracciones")
@@ -27,7 +25,7 @@ public @RestController class ReporteEstadisticaInfraccionesController {
 		return reporteEstadisticaInfraccionesService.buscarPorCriterio(criterioBusqueda);
 	}*/
 	@GetMapping(params = "accion=buscarPorPeriodoSinSegmentar")
-	public List<ReporteEstadisticaInfraccionesPorPeriodo> buscarPorPeriodoSinSegmentar(ReporteEstadisticaInfraccionesCriterioBusqueda criterioBusqueda/*,
+	public List<ReporteEstadisticaInfraccionesPorEjeX> buscarPorPeriodoSinSegmentar(ReporteEstadisticaInfraccionesCriterioBusqueda criterioBusqueda/*,
 			@RequestParam("areasEstudio") List<Integer> areasEstudio,
 			@RequestParam("escuelas") List<Integer> escuelas,
 			@RequestParam("solicitantes") List<String> solicitantes,
@@ -40,7 +38,7 @@ public @RestController class ReporteEstadisticaInfraccionesController {
 		return reporteEstadisticaInfraccionesService.buscarPorPeriodoSinSegementar(criterioBusqueda);
 	}
 	@GetMapping(params = "accion=buscarPorCriterio")
-	public List<ReporteEstadisticaInfraccionesPorPeriodo> buscarPorCriterio(ReporteEstadisticaInfraccionesCriterioBusqueda criterioBusqueda/*,
+	public List<ReporteEstadisticaInfraccionesPorEjeX> buscarPorCriterio(ReporteEstadisticaInfraccionesCriterioBusqueda criterioBusqueda/*,
 			@RequestParam("areasEstudio") List<Integer> areasEstudio,
 			@RequestParam("escuelas") List<Integer> escuelas,
 			@RequestParam("solicitantes") List<String> solicitantes,
@@ -54,7 +52,7 @@ public @RestController class ReporteEstadisticaInfraccionesController {
 	}
 	
 	@GetMapping(params = "accion=buscarPorPeriodoSegmentado")
-	public List<ReporteInfraccionesPorPeriodoSegmentado> buscarPorPeriodoSegmentado(ReporteEstadisticaInfraccionesCriterioBusqueda criterioBusqueda/*,
+	public List<ReporteInfraccionesPorEjeXSegmentado> buscarPorPeriodoSegmentado(ReporteEstadisticaInfraccionesCriterioBusqueda criterioBusqueda/*,
 			@RequestParam("areasEstudio") List<Integer> areasEstudio,
 			@RequestParam("escuelas") List<Integer> escuelas,
 			@RequestParam("solicitantes") List<String> solicitantes,
@@ -65,6 +63,34 @@ public @RestController class ReporteEstadisticaInfraccionesController {
 		criterioBusqueda.setRecursos(recursos);*/
 		System.out.println(criterioBusqueda);		
 		return reporteEstadisticaInfraccionesService.buscarPorPeriodoSegmentado(criterioBusqueda);
+	}
+	
+	@GetMapping(params = "accion=buscarPorEjeXSinSegmentar")
+	public List<ReporteEstadisticaInfraccionesPorEjeX> buscarPorEjeXSinSegmentar(ReporteEstadisticaInfraccionesCriterioBusqueda criterioBusqueda/*,
+			@RequestParam("areasEstudio") List<Integer> areasEstudio,
+			@RequestParam("escuelas") List<Integer> escuelas,
+			@RequestParam("solicitantes") List<String> solicitantes,
+			@RequestParam("tiposInfraccion") List<Integer> tiposInfraccion*/) {
+		/*criterioBusqueda.setAreasEstudio(areasEstudio);
+		criterioBusqueda.setEscuelas(escuelas);
+		criterioBusqueda.setSolicitantes(solicitantes);
+		criterioBusqueda.setTiposInfraccion(tiposInfraccion);*/
+		System.out.println(criterioBusqueda);		
+		return reporteEstadisticaInfraccionesService.buscarPorEjeXSinSegementar(criterioBusqueda);
+	}
+	
+	@GetMapping(params = "accion=buscarPorEjeXSegmentado")
+	public List<ReporteInfraccionesPorEjeXSegmentado> buscarPorEjeXSegmentado(ReporteEstadisticaInfraccionesCriterioBusqueda criterioBusqueda/*,
+			@RequestParam("areasEstudio") List<Integer> areasEstudio,
+			@RequestParam("escuelas") List<Integer> escuelas,
+			@RequestParam("solicitantes") List<String> solicitantes,
+			@RequestParam("recursos") List<Integer> recursos*/) {
+		/*criterioBusqueda.setAreasEstudio(areasEstudio);
+		criterioBusqueda.setEscuelas(escuelas);
+		criterioBusqueda.setSolicitantes(solicitantes);
+		criterioBusqueda.setRecursos(recursos);*/
+		System.out.println(criterioBusqueda);		
+		return reporteEstadisticaInfraccionesService.buscarPorEjeXSegmentado(criterioBusqueda);
 	}
 }
 

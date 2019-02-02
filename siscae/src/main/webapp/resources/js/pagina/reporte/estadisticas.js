@@ -747,7 +747,7 @@ $(document).ready(function() {
 			"className" : "all dt-right"
 		} ],
 		"columns" : [ {
-			"data" : "periodoInfraccion",
+			"data" : "ejeX",
 			"title" : "Periodo"
 		}, {
 			"data" : "numeroInfracciones",

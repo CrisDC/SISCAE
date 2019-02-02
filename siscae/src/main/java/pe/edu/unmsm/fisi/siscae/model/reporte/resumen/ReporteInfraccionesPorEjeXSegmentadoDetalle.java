@@ -9,8 +9,8 @@ import lombok.NoArgsConstructor;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class ReporteInfraccionesPorPeriodoSegmentadoDetalle {
+public class ReporteInfraccionesPorEjeXSegmentadoDetalle {
 	String segmento;
 	Integer numeroInfracciones;
-	String periodoInfraccion;
+	String ejeX;
 }

@@ -11,7 +11,7 @@ import lombok.NoArgsConstructor;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class ReporteInfraccionesPorPeriodoSegmentado {
+public class ReporteInfraccionesPorEjeXSegmentado {
 	private String ejeX;
-	private List<ReporteInfraccionesPorPeriodoSegmentadoDetalle> detalle;
+	private List<ReporteInfraccionesPorEjeXSegmentadoDetalle> detalle;
 }

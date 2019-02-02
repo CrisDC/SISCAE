@@ -2,9 +2,9 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="pe.edu.unmsm.fisi.siscae.mapper.IReporteEstadisticaInfraccionesMapper">
 
-	<resultMap type="ReporteEstadisticaInfraccionesPorPeriodo" id="objetoResultadoSinSegmentar">
+	<resultMap type="ReporteEstadisticaInfraccionesPorEjeX" id="objetoResultadoSinSegmentar">
 		<id property="numeroInfracciones" column="numeroInfracciones"></id>
-		<id property="periodoInfraccion" column="periodoInfraccion"></id>
+		<id property="ejeX" column="ejeX"></id>
 		<id property="numeroInfraccionesPromedioPorAlumno" column="numeroInfraccionesPromedioPorAlumno"></id>
 		<id property="numeroSancionados" column="numeroSancionados"></id>
 	</resultMap>
@@ -56,7 +56,7 @@
 				SUM(CASE WHEN reporte.estado_solicitante='SANCIONADO'
 			         THEN 1 ELSE 0 END) 									AS numeroSancionados,
 			<if test="tipoPeriodo == 'DIA'">
-			    lista.fecha 												AS periodoInfraccion,
+			    lista.fecha 												AS ejeX,
 				(SELECT AVG(consulta.nInfracciones)
 			     FROM (SELECT 
 						DISTINCT(reporte.numero_documento),
@@ -67,7 +67,7 @@
 			    )															AS numeroInfraccionesPromedioPorAlumno
 			</if>
 			<if test="tipoPeriodo == 'SEMANA'">
-			    CONCAT(lista.anio,'-',lista.semana)							AS periodoInfraccion,
+			    CONCAT(lista.anio,'-',lista.semana)							AS ejeX,
 			    (SELECT AVG(consulta.nInfracciones)
 			     FROM (SELECT 
 						DISTINCT(reporte.numero_documento),
@@ -78,7 +78,7 @@
 			    )															AS numeroInfraccionesPromedioPorAlumno
 			</if>
 			<if test="tipoPeriodo == 'MES'">
-			    CONCAT(lista.anio,'-',lista.mes)							AS periodoInfraccion,
+			    CONCAT(lista.anio,'-',lista.mes)							AS ejeX,
 			    (SELECT AVG(consulta.nInfracciones)
 			     FROM (SELECT 
 						DISTINCT(reporte.numero_documento),
@@ -89,7 +89,7 @@
 			    )												AS numeroInfraccionesPromedioPorAlumno
 			</if>
 			<if test="tipoPeriodo == 'ANIO'">
-			    lista.anio													AS periodoInfraccion,
+			    lista.anio													AS ejeX,
 			    (SELECT AVG(consulta.nInfracciones)
 			     FROM (SELECT 
 						DISTINCT(reporte.numero_documento),
@@ -265,27 +265,27 @@
 			SELECT
 			      cr.v_nombre 												AS criterioSegmentacion,
 				<if test="tipoPeriodo == 'DIA'">
-					lista.fecha 											AS periodoInfraccion,
+					lista.fecha 											AS ejeX,
 				    F_OBTENER_ESTADISTICO_INFRACCIONES_BETWEEN(#{criterioSegmentacion}, cr.v_nombre,lista.fecha,
 					adddate(lista.fecha, INTERVAL 1 DAY),
 					'CANTIDAD_INFRACCIONES')  								AS numeroInfracciones
 				</if>
 				<if test="tipoPeriodo == 'SEMANA'">
-				    CONCAT(lista.anio,'-',lista.semana)							AS periodoInfraccion,
+				    CONCAT(lista.anio,'-',lista.semana)							AS ejeX,
 				    F_OBTENER_ESTADISTICO_INFRACCIONES_BETWEEN(#{criterioSegmentacion}, cr.v_nombre,
 				    F_GENERADOR_FECHAS('INI', 'SEMANA',lista.anio,null, null,lista.semana),
 				    F_GENERADOR_FECHAS('FIN', 'SEMANA',lista.anio,null, null,lista.semana),
 				    'CANTIDAD_INFRACCIONES')  									AS numeroInfracciones
 				</if>
 				<if test="tipoPeriodo == 'MES'">
-				    CONCAT(lista.anio,'-',lista.mes)							AS periodoInfraccion,
+				    CONCAT(lista.anio,'-',lista.mes)							AS ejeX,
 				    F_OBTENER_ESTADISTICO_INFRACCIONES_BETWEEN(#{criterioSegmentacion}, cr.v_nombre,
 				    F_GENERADOR_FECHAS('INI', 'MES',lista.anio,lista.mes, null,null),
 				    F_GENERADOR_FECHAS('FIN', 'MES',lista.anio,lista.mes, null,null),
 				    'CANTIDAD_INFRACCIONES')  									AS numeroInfracciones
 				</if>
 				<if test="tipoPeriodo == 'ANIO'">
-				    lista.anio													AS periodoInfraccion,
+				    lista.anio													AS ejeX,
 				    F_OBTENER_ESTADISTICO_INFRACCIONES_BETWEEN(#{criterioSegmentacion}, cr.v_nombre,
 				    F_GENERADOR_FECHAS('INI', 'ANIO',lista.anio,null, null,null),
 				    F_GENERADOR_FECHAS('FIN', 'ANIO',lista.anio,null, null,null),
@@ -314,10 +314,10 @@
 			
 	</select>
 	
-	<resultMap type="ReporteInfraccionesPorPeriodoSegmentado" id="mapReporteResumen">
-			<id property="ejeX" column="periodoInfraccion"></id>
-			<collection property="detalle" javaType="List" ofType="ReporteInfraccionesPorPeriodoSegmentadoDetalle">
-					<result property="periodoInfraccion" column="periodoInfraccion"></result>
+	<resultMap type="ReporteInfraccionesPorEjeXSegmentado" id="mapReporteResumen">
+			<id property="ejeX" column="ejeX"></id>
+			<collection property="detalle" javaType="List" ofType="ReporteInfraccionesPorEjeXSegmentadoDetalle">
+					<result property="ejeX" column="ejeX"></result>
 					<result property="segmento" column="criterioSegmentacion"></result>
 					<result property="numeroInfracciones" column="numeroInfracciones"></result>
 			</collection>

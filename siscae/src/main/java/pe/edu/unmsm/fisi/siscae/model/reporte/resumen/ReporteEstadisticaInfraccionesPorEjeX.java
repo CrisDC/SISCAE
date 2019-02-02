@@ -9,12 +9,11 @@ import lombok.NoArgsConstructor;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class ReporteEstadisticaInfraccionesPorPeriodo {
+public class ReporteEstadisticaInfraccionesPorEjeX {
 	Integer numeroInfracciones;
 	Integer numeroSancionados;
-	String periodoInfraccion;
+	String ejeX;
 	Double numeroInfraccionesPromedioPorAlumno;
 	//criterios
 		String segmento;
-
 }

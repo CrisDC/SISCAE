@@ -7,8 +7,8 @@ import org.springframework.stereotype.Service;
 
 import pe.edu.unmsm.fisi.siscae.mapper.IReporteEstadisticaInfraccionesMapper;
 import pe.edu.unmsm.fisi.siscae.model.criterio.ReporteEstadisticaInfraccionesCriterioBusqueda;
-import pe.edu.unmsm.fisi.siscae.model.reporte.resumen.ReporteEstadisticaInfraccionesPorPeriodo;
-import pe.edu.unmsm.fisi.siscae.model.reporte.resumen.ReporteInfraccionesPorPeriodoSegmentado;
+import pe.edu.unmsm.fisi.siscae.model.reporte.resumen.ReporteEstadisticaInfraccionesPorEjeX;
+import pe.edu.unmsm.fisi.siscae.model.reporte.resumen.ReporteInfraccionesPorEjeXSegmentado;
 import pe.edu.unmsm.fisi.siscae.service.IReporteEstadisticaInfraccionesService;
 
 @Service
@@ -29,12 +29,12 @@ public class ReporteEstadisticaInfraccionesService implements IReporteEstadistic
 
 
 	@Override
-	public List<ReporteEstadisticaInfraccionesPorPeriodo> buscarPorPeriodoSinSegementar(
+	public List<ReporteEstadisticaInfraccionesPorEjeX> buscarPorPeriodoSinSegementar(
 			ReporteEstadisticaInfraccionesCriterioBusqueda criterioBusqueda) {
 		return reporteEstadisticaInfraccionesMapper.buscarPorPeriodoSinSegementar(criterioBusqueda);
 	}
 	@Override
-	public List<ReporteEstadisticaInfraccionesPorPeriodo> buscarPorCriterio(
+	public List<ReporteEstadisticaInfraccionesPorEjeX> buscarPorCriterio(
 			ReporteEstadisticaInfraccionesCriterioBusqueda criterioBusqueda) {
 		return reporteEstadisticaInfraccionesMapper.buscarPorCriterio(criterioBusqueda);
 	}
@@ -42,9 +42,19 @@ public class ReporteEstadisticaInfraccionesService implements IReporteEstadistic
 
 
 	@Override
-	public List<ReporteInfraccionesPorPeriodoSegmentado> buscarPorPeriodoSegmentado(
+	public List<ReporteInfraccionesPorEjeXSegmentado> buscarPorPeriodoSegmentado(
 			ReporteEstadisticaInfraccionesCriterioBusqueda criterioBusqueda) {
 		return reporteEstadisticaInfraccionesMapper.buscarPorPeriodoSegmentado(criterioBusqueda);
+	}
+	@Override
+	public List<ReporteEstadisticaInfraccionesPorEjeX> buscarPorEjeXSinSegementar(
+			ReporteEstadisticaInfraccionesCriterioBusqueda criterioBusqueda) {
+		return reporteEstadisticaInfraccionesMapper.buscarPorEjeXSinSegementar(criterioBusqueda);
+	}
+	@Override
+	public List<ReporteInfraccionesPorEjeXSegmentado> buscarPorEjeXSegmentado(
+			ReporteEstadisticaInfraccionesCriterioBusqueda criterioBusqueda) {
+		return reporteEstadisticaInfraccionesMapper.buscarPorEjeXSegmentado(criterioBusqueda);
 	} 
 
 
