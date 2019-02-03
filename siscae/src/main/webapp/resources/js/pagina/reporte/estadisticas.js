@@ -790,6 +790,35 @@ $(document).ready(function() {
 			}
 
 		}if(tipoGrafico == "LINEAL"){
+			$.ajax({
+				type : "GET",
+				url : $variableUtil.root + "reporteEstadisticaInfracciones?accion=buscarPorPeriodoSinSegmentar",
+				contentType : "application/json",
+				data: criterioBusqueda,
+				dataType : "json",
+				beforeSend : function(xhr) {
+					xhr.setRequestHeader('Content-Type', 'application/json');
+					//Borrando tabla antes de hacer la consulta
+					//$local.tablaResultadosPrestamo.clear().draw();
+					$local.$buscar.attr("disabled", true).find("i").removeClass("fa-search").addClass("fa-spinner fa-pulse fa-fw");
+				},
+				success : function(response) {
+					if (response.length === 0) {
+						$funcionUtil.notificarException($variableUtil.busquedaSinResultados, "fa-exclamation-circle", "Información", "info");
+						return;
+					}
+					console.log(response);
+					//Dibujando tabla
+					//$local.tablaResultadosPrestamo.rows.add(response).draw();
+					//Dibujando grafico
+					var chart = AmCharts.makeChart('chartdiv',$funcionGraficoUtil.crearGraficoLineal(response,'periodoInfraccion','numeroInfracciones',"<b>Periodo:</b> [[category]] </br> <b>Infracciones:</b> [[value]] </br> <b>Sancionados: </b> [[numeroSancionados]] </br> <b>Infracc. Prom: </b> [[numeroInfraccionesPromedioPorAlumno]]"));
+				},
+				error : function(response) {
+				},
+				complete : function() {
+					$local.$buscar.attr("disabled", false).find("i").addClass("fa-search").removeClass("fa-spinner fa-pulse fa-fw");
+				}
+			});
 			
 		}
 	}
