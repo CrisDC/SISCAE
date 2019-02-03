@@ -45,13 +45,13 @@ $(document).ready(function() {
 			"data" : 'descripcion',
 			"title" : "Descripcion"
 		}, {
-			"data" : 'horaInicio',
+			"data" : 'horaInicioAlt',
 			"title" : "Hora de inicio "
 		},{
-			"data" : 'horaFin',
+			"data" : 'horaFinAlt',
 			"title" : "Hora fin"
 		},{
-			"data" : 'tiempoMaximo',
+			"data" : 'tiempoMax',
 			"title" : "Tiempo máximo"
 		}, {
 			"data" : 'estado',
@@ -122,6 +122,8 @@ $(document).ready(function() {
 			return;
 		}
 		var horario = $formMantenimiento.serializeJSON();
+		
+		console.log(horario);
 		$.ajax({
 			type : "POST",
 			url : $variableUtil.root + "horario",
@@ -143,6 +145,7 @@ $(document).ready(function() {
 				row.show().draw(false);
 				//$(row.node()).animateHighlight();
 				//$local.$modalMantenimiento.PopupWindow("close");
+				console.log(response);
 			},
 			error : function(response) {
 			},
@@ -158,6 +161,8 @@ $(document).ready(function() {
 		}
 		var horario = $formMantenimiento.serializeJSON();
 		horario.idHorario = $local.idHorarioSeleccionado;
+		
+		console.log(horario);
 		$.ajax({
 			type : "PUT",
 			url : $variableUtil.root + "horario",
@@ -257,6 +262,7 @@ $(document).ready(function() {
 		$local.$actualizarMantenimiento.removeClass("hidden");
 		$local.$registrarMantenimiento.addClass("hidden");
 		//$local.$modalMantenimiento.PopupWindow("open");
+		console.log(horario);
 	});
 
 	

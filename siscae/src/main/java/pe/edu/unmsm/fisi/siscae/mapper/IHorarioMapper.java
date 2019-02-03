@@ -18,13 +18,15 @@ public interface IHorarioMapper extends IMantenibleMapper<Horario> {
             + "#{objeto.idHorario, jdbcType = INTEGER, mode = IN},"
             + "#{objeto.horaInicio, jdbcType = TIME, mode = IN},"
             + "#{objeto.horaFin, jdbcType = TIME, mode = IN},"
-            + "#{objeto.tiempoMax, jdbcType = DECIMAL, mode = IN}," 
+            + "#{objeto.tiempoMax, jdbcType = INTEGER, mode = IN}," 
             + "#{objeto.descripcion,jdbcType = VARCHAR, mode = IN},"
             + "#{objeto.idEstadoTabla,jdbcType = INTEGER, mode = IN},"
            	+ "#{objeto.idTurno, jdbcType = INTEGER, mode = IN},"
 		    + "#{objeto.idDia,jdbcType = INTEGER, mode = IN},"
 		    + "#{objeto.idTipoHorario,jdbcType = INTEGER, mode = IN},"
-            + "#{objeto.idAreaEstudio, jdbcType = INTEGER, mode = IN},"	
+            + "#{objeto.idAreaEstudio, jdbcType = INTEGER, mode = IN},"
+            + "#{objeto.horaInicioAlt,jdbcType = VARCHAR, mode = IN},"
+            + "#{objeto.horaFinAlt,jdbcType = VARCHAR, mode = IN},"
 		    + "#{userAudit, jdbcType = VARCHAR, mode = IN})}" }) 
     @Options(statementType = StatementType.CALLABLE)
     public List<Horario> mantener(Parametro parametro);

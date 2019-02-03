@@ -148,6 +148,8 @@ $(document).ready(function() {
 		}
 		var externo = $formMantenimiento.serializeJSON();
 		externo.idExterno = $local.idExternoSeleccionado;
+		
+		console.log(externo);
 		$.ajax({
 			type : "PUT",
 			url : $variableUtil.root + "externo",
@@ -299,6 +301,8 @@ $(document).ready(function() {
 			$local.$actualizarMantenimiento.removeClass("hidden");
 			$local.$registrarMantenimiento.addClass("hidden");
 			//$local.$modalMantenimiento.PopupWindow("open");
+			
+			console.log(externo);
 			});
 	
 });

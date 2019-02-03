@@ -299,19 +299,19 @@
 		<div class="form-group">
 			<label class="col-lg-2 control-label">Hora de inicio</label>
 			<div class="col-lg-10">
-				<input class="form-control" name="horaInicio">
+				<input  class="form-control" name="horaInicioAlt">
 			</div>
 		</div>
 		<div class="form-group">
 			<label class="col-lg-2 control-label">Hora de fin</label>
 			<div class="col-lg-10">
-				<input class="form-control" name="horaFin">
+				<input  class="form-control" name="horaFinAlt">
 			</div>
 		</div>
 		<div class="form-group">
 			<label class="col-lg-2 control-label">Tiempo máximo</label>
 			<div class="col-lg-10">
-				<input class="form-control" name="tiempoMaximo">
+				<input class="form-control" name="tiempoMax">
 			</div>
 		</div>
 		<div class="form-group">
@@ -342,7 +342,7 @@
 					<option value="" selected="selected" disabled="disabled">Seleccione
 						el turno</option>
 					<option th:each="turno : ${turno}" th:value="${turno.idItem}"
-						th:text="|${turno.descripcionCorta}|"></option>
+						th:text="|${turno.descripcion}|"></option>
 				</select>
 			</div>
 		</div>

@@ -30,14 +30,14 @@ public class Horario {
 	
 private  Integer idHorario;
 	
-	@NotNull(message = "{NotNull.Horario.hora_inicio}")
+	//@NotNull(message = "{NotNull.Horario.hora_inicio}")
 	private  LocalTime horaInicio;
 	
-	@NotNull(message = "{NotNull.Horario.hora_fin}")
+	//@NotNull(message = "{NotNull.Horario.hora_fin}")
 	private LocalTime horaFin;
 	
-	@Digits(integer=4, fraction=2)
-	private double tiempoMax;
+	//@Digits(integer=4, fraction=2)
+	private Integer tiempoMax;
 	
 	@Size(min=3, max=60)
 	@Length(min = 3, max = 60)
@@ -46,29 +46,29 @@ private  Integer idHorario;
 	private String descripcion;
 	
 	
-	@Min(1)
-	@Max(Integer.MAX_VALUE/2)
-	@Pattern(regexp = Regex.SOLO_DIGITOS, message = "{Pattern.Horario.id_estado_tabla}")
+	//@Min(1)
+	//@Max(Integer.MAX_VALUE/2)
+	//@Pattern(regexp = Regex.SOLO_DIGITOS, message = "{Pattern.Horario.id_estado_tabla}")
 	private Integer idEstadoTabla;
 	
-	@Min(1)
-	@Max(Integer.MAX_VALUE/2)
-	@Pattern(regexp = Regex.SOLO_DIGITOS, message = "{Pattern.Horario.id_turno}")
+	//@Min(1)
+	//@Max(Integer.MAX_VALUE/2)
+	//@Pattern(regexp = Regex.SOLO_DIGITOS, message = "{Pattern.Horario.id_turno}")
 	private Integer idTurno;
 	
-	@Min(1)
-	@Max(Integer.MAX_VALUE/2)
-	@Pattern(regexp = Regex.SOLO_DIGITOS, message = "{Pattern.Horario.id_dia}")
+	//@Min(1)
+	//@Max(Integer.MAX_VALUE/2)
+	//@Pattern(regexp = Regex.SOLO_DIGITOS, message = "{Pattern.Horario.id_dia}")
 	private Integer idDia;
 	
-	@Min(1)
-	@Max(Integer.MAX_VALUE/2)
-	@Pattern(regexp = Regex.SOLO_DIGITOS, message = "{Pattern.Horario.id_tipo_horario}")
+	//@Min(1)
+	//@Max(Integer.MAX_VALUE/2)
+	//@Pattern(regexp = Regex.SOLO_DIGITOS, message = "{Pattern.Horario.id_tipo_horario}")
 	private Integer idTipoHorario;
 	
-	@Min(1)
-	@Max(Integer.MAX_VALUE/2)
-	@Pattern(regexp = Regex.SOLO_DIGITOS, message = "{Pattern.Horario.id_area_estudio}")
+	///@Min(1)
+	//@Max(Integer.MAX_VALUE/2)
+	//@Pattern(regexp = Regex.SOLO_DIGITOS, message = "{Pattern.Horario.id_area_estudio}")
 	private Integer idAreaEstudio;
 	
 	private String nombreAreaEstudio;
@@ -76,4 +76,7 @@ private  Integer idHorario;
 	private String dia;
 	private String turno;
 	private String estado;
+	private String horaInicioAlt;
+	private String horaFinAlt;
+	private String tiempoMaxAlt;
 }
