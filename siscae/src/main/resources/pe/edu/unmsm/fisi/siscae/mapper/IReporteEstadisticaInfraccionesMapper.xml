@@ -47,68 +47,72 @@
 					
 			)
 			SELECT
-				COUNT(reporte.nombre)										AS numeroInfracciones,
-				SUM(CASE WHEN reporte.estado_solicitante='SANCIONADO'
-			         THEN 1 ELSE 0 END) 									AS numeroSancionados,
 			<if test="tipoPeriodo == 'DIA'">
-			    lista.fecha 												AS ejeX,
-				(SELECT AVG(consulta.nInfracciones)
-			     FROM (SELECT 
-						DISTINCT(reporte.numero_documento),
-						F_CANTIDAD_INFRACCIONES(reporte.numero_documento, lista.fecha , lista.fecha ) AS nInfracciones
-						FROM vw_reporte_infracciones reporte
-						WHERE reporte.fecha_infraccion BETWEEN lista.fecha  AND lista.fecha 
-					  ) as consulta
-			    )															AS numeroInfraccionesPromedioPorAlumno
+				lista.fecha 												AS ejeX,
+				F_OBTENER_ESTADISTICO_INFRACCIONES_BETWEEN('TODOS',null,lista.fecha,lista.fecha,         
+                'CANTIDAD_INFRACCIONES')	AS numeroInfracciones,
+                
+				F_OBTENER_ESTADISTICO_INFRACCIONES_BETWEEN('TODOS', null,lista.fecha,lista.fecha, 
+                'CANTIDAD_SANCIONADOS')	AS numeroSancionados,
+				 
+			    F_OBTENER_ESTADISTICO_INFRACCIONES_BETWEEN('TODOS', null,lista.fecha,lista.fecha, 
+                'CANTIDAD_INFRACCIONES_PROMEDIO')	AS numeroInfraccionesPromedioPorAlumno
 			</if>
 			<if test="tipoPeriodo == 'SEMANA'">
-			    CONCAT(lista.anio,'-',lista.semana)							AS ejeX,
-			    (SELECT AVG(consulta.nInfracciones)
-			     FROM (SELECT 
-						DISTINCT(reporte.numero_documento),
-						F_CANTIDAD_INFRACCIONES(reporte.numero_documento, F_GENERADOR_FECHAS('INI', 'SEMANA',lista.anio,null, null, lista.semana) , F_GENERADOR_FECHAS('FIN', 'SEMANA',lista.anio,null, null, lista.semana)  ) AS nInfracciones
-						FROM vw_reporte_infracciones reporte
-						WHERE reporte.fecha_infraccion BETWEEN F_GENERADOR_FECHAS('INI', 'SEMANA',lista.anio,null, null, lista.semana)   AND F_GENERADOR_FECHAS('FIN', 'SEMANA',lista.anio,null, null, lista.semana) 
-					  ) as consulta
-			    )															AS numeroInfraccionesPromedioPorAlumno
+				CONCAT(lista.anio,'-',lista.semana)							AS ejeX,
+				F_OBTENER_ESTADISTICO_INFRACCIONES_BETWEEN('TODOS',null, 
+                F_GENERADOR_FECHAS('INI', #{tipoPeriodo}, lista.anio, null,null,lista.semana ),
+                F_GENERADOR_FECHAS('FIN', #{tipoPeriodo}, lista.anio,null,null,lista.semana), 
+                'CANTIDAD_INFRACCIONES')	AS numeroInfracciones,
+                
+				F_OBTENER_ESTADISTICO_INFRACCIONES_BETWEEN('TODOS', null,
+                F_GENERADOR_FECHAS('INI', #{tipoPeriodo}, lista.anio, null,null,lista.semana ), 
+                F_GENERADOR_FECHAS('FIN', #{tipoPeriodo}, lista.anio,null,null,lista.semana ), 
+                'CANTIDAD_SANCIONADOS')	AS numeroSancionados,
+				 
+			    F_OBTENER_ESTADISTICO_INFRACCIONES_BETWEEN('TODOS', null,
+                F_GENERADOR_FECHAS('INI', #{tipoPeriodo}, lista.anio,null,null,lista.semana), 
+                F_GENERADOR_FECHAS('FIN', #{tipoPeriodo}, lista.anio,null,null,lista.semana ), 
+                'CANTIDAD_INFRACCIONES_PROMEDIO')	AS numeroInfraccionesPromedioPorAlumno
 			</if>
 			<if test="tipoPeriodo == 'MES'">
-			    CONCAT(lista.anio,'-',lista.mes)							AS ejeX,
-			    (SELECT AVG(consulta.nInfracciones)
-			     FROM (SELECT 
-						DISTINCT(reporte.numero_documento),
-						F_CANTIDAD_INFRACCIONES(reporte.numero_documento, F_GENERADOR_FECHAS('INI', 'MES',lista.anio,lista.mes, null,null) , F_GENERADOR_FECHAS('FIN', 'MES',lista.anio,lista.mes, null,null)  ) AS nInfracciones
-						FROM vw_reporte_infracciones reporte
-						WHERE reporte.fecha_infraccion BETWEEN F_GENERADOR_FECHAS('INI', 'MES',lista.anio,lista.mes, null,null)   AND F_GENERADOR_FECHAS('FIN', 'MES',lista.anio,lista.mes, null,null) 
-					  ) as consulta
-			    )												AS numeroInfraccionesPromedioPorAlumno
+				CONCAT(lista.anio,'-',lista.mes)							AS ejeX,
+				F_OBTENER_ESTADISTICO_INFRACCIONES_BETWEEN('TODOS',null, 
+                F_GENERADOR_FECHAS('INI', #{tipoPeriodo}, lista.anio,lista.mes,null,null ),
+                F_GENERADOR_FECHAS('FIN', #{tipoPeriodo}, lista.anio,lista.mes,null,null), 
+                'CANTIDAD_INFRACCIONES')	AS numeroInfracciones,
+                
+				F_OBTENER_ESTADISTICO_INFRACCIONES_BETWEEN('TODOS', null,
+                F_GENERADOR_FECHAS('INI', #{tipoPeriodo}, lista.anio,lista.mes,null,null ), 
+                F_GENERADOR_FECHAS('FIN', #{tipoPeriodo}, lista.anio,lista.mes,null,null ), 
+                'CANTIDAD_SANCIONADOS')	AS numeroSancionados,
+				 
+			    F_OBTENER_ESTADISTICO_INFRACCIONES_BETWEEN('TODOS', null,
+                F_GENERADOR_FECHAS('INI', #{tipoPeriodo}, lista.anio,lista.mes,null,null), 
+                F_GENERADOR_FECHAS('FIN', #{tipoPeriodo}, lista.anio,lista.mes,null,null), 
+                'CANTIDAD_INFRACCIONES_PROMEDIO')	AS numeroInfraccionesPromedioPorAlumno
+				
 			</if>
 			<if test="tipoPeriodo == 'ANIO'">
-			    lista.anio													AS ejeX,
-			    (SELECT AVG(consulta.nInfracciones)
-			     FROM (SELECT 
-						DISTINCT(reporte.numero_documento),
-						F_CANTIDAD_INFRACCIONES(reporte.numero_documento, F_GENERADOR_FECHAS('INI', 'ANIO',lista.anio,null, null,null) , F_GENERADOR_FECHAS('FIN', 'ANIO',lista.anio,null, null,null)  ) AS nInfracciones
-						FROM vw_reporte_infracciones reporte
-						WHERE reporte.fecha_infraccion BETWEEN F_GENERADOR_FECHAS('INI', 'ANIO',lista.anio,null, null,null)   AND F_GENERADOR_FECHAS('FIN','ANIO',lista.anio,null, null,null) 
-					  ) as consulta
-			    )												AS numeroInfraccionesPromedioPorAlumno
+				lista.anio													AS ejeX,
+				F_OBTENER_ESTADISTICO_INFRACCIONES_BETWEEN('TODOS',null, 
+                F_GENERADOR_FECHAS('INI', #{tipoPeriodo}, lista.anio,null,null,null ),
+                F_GENERADOR_FECHAS('FIN', #{tipoPeriodo}, lista.anio,null,null,null), 
+                'CANTIDAD_INFRACCIONES')	AS numeroInfracciones,
+                
+				F_OBTENER_ESTADISTICO_INFRACCIONES_BETWEEN('TODOS', null,
+                F_GENERADOR_FECHAS('INI', #{tipoPeriodo}, lista.anio,null,null,null), 
+                F_GENERADOR_FECHAS('FIN', #{tipoPeriodo}, lista.anio,null,null,null), 
+                'CANTIDAD_SANCIONADOS')	AS numeroSancionados,
+				 
+			    F_OBTENER_ESTADISTICO_INFRACCIONES_BETWEEN('TODOS', null,
+                F_GENERADOR_FECHAS('INI', #{tipoPeriodo}, lista.anio,null,null,null), 
+                F_GENERADOR_FECHAS('FIN', #{tipoPeriodo}, lista.anio,null,null,null), 
+                'CANTIDAD_INFRACCIONES_PROMEDIO')	AS numeroInfraccionesPromedioPorAlumno
 			</if>
 			
+				
 			FROM ListaPeriodo lista
-			<if test="tipoPeriodo == 'DIA'">
-			LEFT JOIN vw_reporte_infracciones reporte ON (reporte.fecha_infraccion = lista.fecha)
-			</if>
-			<if test="tipoPeriodo == 'SEMANA'">
-			LEFT JOIN vw_reporte_infracciones reporte ON (CONCAT(lista.anio,'-',lista.semana) = CONCAT(YEAR(reporte.fecha_infraccion),'-',WEEK(reporte.fecha_infraccion)))
-			</if>
-			<if test="tipoPeriodo == 'MES'">
-			LEFT JOIN vw_reporte_infracciones reporte ON (CONCAT(lista.anio,'-',lista.mes) = CONCAT(YEAR(reporte.fecha_infraccion),'-',MONTH(reporte.fecha_infraccion)))
-			</if>
-			 <if test="tipoPeriodo == 'ANIO'">
-			LEFT JOIN vw_reporte_infracciones reporte ON (lista.anio = YEAR(reporte.fecha_infraccion))
-			</if>
-			
 			GROUP BY
 			<if test="tipoPeriodo == 'DIA'">
 			    lista.fecha
