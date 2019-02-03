@@ -719,7 +719,73 @@ $(document).ready(function() {
 						}
 					});
 				}else{
-					
+					$.ajax({
+						type : "GET",
+						url : $variableUtil.root + "reporteEstadisticaInfracciones?accion=buscarPorEjeXSegmentado",
+						contentType : "application/json",
+						data: criterioBusqueda,
+						dataType : "json",
+						beforeSend : function(xhr) {
+							xhr.setRequestHeader('Content-Type', 'application/json');
+							//Borrando tabla antes de hacer la consulta
+							$local.tablaResultadosInfraccion.clear().draw();
+							$local.$buscar.attr("disabled", true).find("i").removeClass("fa-search").addClass("fa-spinner fa-pulse fa-fw");
+						},
+						success : function(response) {
+							if (response.length === 0) {
+								$funcionUtil.notificarException($variableUtil.busquedaSinResultados, "fa-exclamation-circle", "Información", "info");
+								return;
+							}
+							console.log(response);
+							//Dando formato a respuesta del servidor
+							var data = [];
+							var aux;
+							for (i=0;i<response.length;i++){
+								aux= new Object();
+								aux['ejeX'] = response[i].ejeX;
+								for (j=0;j<response[i].detalle.length;j++){
+									aux[response[i].detalle[j].segmento] = response[i].detalle[j].numeroInfracciones;
+								}
+								data.push(aux);
+							}
+							//Generando Leyenda
+							var resultGraph = [];
+							var arrayJSONX = response[0].detalle;
+							arrayJSONX.sort();								
+							for(i=0;i<arrayJSONX.length;i++){
+								var g = new Object();
+								g['balloonText'] = "<b style='font-size:12px'>[[title]]</b><br><span><b>"+ejeX+" : </b></span> [[category]]<br><span><b>Número Préstamos: </b> [[value]]";
+								g['fillAlphas'] = 0.8;
+								g['labelText'] = "[[value]]";
+								g['labelPosition'] = "middle";
+								g['lineAlpha'] = 0.3;
+								g['title'] = arrayJSONX[i].segmento;
+								g['type'] = "column";
+								g['valueField'] = arrayJSONX[i].segmento;
+								resultGraph.push(g);
+							}
+							//obteniendo presentacion
+							var presentacion ='';
+							if($local.$selectPresentacion.val()=="APILADO"){
+								presentacion='regular';
+							}
+							else if ($local.$selectPresentacion.val()=="PARALELO"){
+								presentacion='none';
+							}
+							//Dibujando tabla
+							//$local.tablaResultadosInfraccion.rows.add(response).draw();
+							//Dibujando grafico
+							var chart = AmCharts.makeChart('chartdiv',$funcionGraficoUtil.crearGraficoBarrasSegmentado(data,resultGraph,'ejeX','Cantidad de Infracciones',presentacion,'Infracciones por criterio'));
+							data = [];
+							resultGraph = [];
+							arrayJSONX = [];
+						},
+						error : function(response) {
+						},
+						complete : function() {
+							$local.$buscar.attr("disabled", false).find("i").addClass("fa-search").removeClass("fa-spinner fa-pulse fa-fw");
+						}
+					});
 				}
 			}
 
