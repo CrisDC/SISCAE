@@ -86,6 +86,7 @@ $(document).ready(function() {
 		$local.$actualizarMantenimiento.addClass("hidden");
 		$local.$registrarMantenimiento.removeClass("hidden");
 		//$local.$modalMantenimiento.PopupWindow("open");
+		
 	});
 
 	$local.$modalMantenimiento.on("open.popupwindow", function() {
@@ -153,6 +154,8 @@ $(document).ready(function() {
 		$local.$actualizarMantenimiento.removeClass("hidden");
 		$local.$registrarMantenimiento.addClass("hidden");
 		//$local.$modalMantenimiento.PopupWindow("open");
+		
+		console.log(recurso);
 	});
 	
 	
@@ -162,6 +165,8 @@ $(document).ready(function() {
 		}
 		var recurso = $formMantenimiento.serializeJSON();
 		recurso.idRecurso = $local.idRecursoSeleccionado;
+		
+		console.log(recurso);
 		$.ajax({
 			type : "PUT",
 			url : $variableUtil.root + "recurso",

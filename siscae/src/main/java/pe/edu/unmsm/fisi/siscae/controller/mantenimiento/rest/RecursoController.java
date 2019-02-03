@@ -61,7 +61,7 @@ public @RestController class RecursoController {
 		if (error.hasErrors()) {
 			throw new BadRequestException(ValidatorUtil.obtenerMensajeValidacionError(error));
 		}
-		recursoService.registrarRecurso(recurso);
+		recursoService.actualizarRecurso(recurso);
 		return ResponseEntity.ok(ConstantesGenerales.ACTUALIZACION_EXITOSA);
 	}
 
