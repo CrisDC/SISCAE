@@ -1,5 +1,4 @@
 $(document).ready(function() {
-
 	$formMantenimiento.validate({
 		rules : {
 			idPersona : {

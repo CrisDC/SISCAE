@@ -73,7 +73,7 @@ $(document).ready(function() {
 		$local.tablaMantenimiento.column($(this).parent().index() + ':visible').search(val ? '^' + val + '$' : '', true, false).draw();
 	});
 
-	$local.$modalMantenimiento.PopupWindow({
+//	$local.$modalMantenimiento.PopupWindow({
 //		title : "Mantenimiento de Recurso",
 //		autoOpen : false,
 //		modal : false,
