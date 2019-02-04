@@ -119,7 +119,8 @@ $(document).ready(function() {
 		administrativo.persona = {};
 		
 		administrativo.persona.idPersona = $local.personaActual.idPersona;
-		
+		administrativo.idAdministrativo = administrativo.persona.idPersona;
+		console.log(administrativo);
 		$.ajax({
 			type : "POST",
 			url : $variableUtil.root + "administrativo",
