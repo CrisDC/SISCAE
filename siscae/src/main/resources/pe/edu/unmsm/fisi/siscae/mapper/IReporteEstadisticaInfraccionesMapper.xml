@@ -145,45 +145,176 @@
 			<if test="serie == 'TIPO_INFRACCION'">
 				r.tipo_infraccion		as segmento,
 			</if>
-			SUM(CASE WHEN F_ESTADO_SOLICITANTE(pe.n_id_persona)='SANCIONADO'
-			         THEN 1 ELSE 0 END) 									AS numeroSancionados,
+			
 			<if test="tipoPeriodo == 'DIA'">
-				(SELECT AVG(consulta.nInfracciones)
+				(SELECT COUNT(consulta.est_inf)
+					FROM (SELECT 
+							DISTINCT(reporte.numero_documento) as num_doc,
+			                reporte.estado_infraccion		   as est_inf,
+			                reporte.fecha_infraccion		   as fec_inf
+							FROM vw_reporte_infracciones reporte
+							WHERE reporte.fecha_infraccion BETWEEN #{fechaInicio}  AND #{fechaFin}
+							<if test="serie == 'ESCUELA'">
+									AND reporte.escuela_programa=r.escuela_programa
+							</if>
+							<if test="serie == 'AREA_ESTUDIO'">
+								    AND reporte.area_estudio=r.area_estudio
+							</if>
+							<if test="serie == 'SOLICITANTE'">
+									AND reporte.nombre_tipo=r.nombre_tipo
+							</if>
+							<if test="serie == 'TIPO_INFRACCION'">
+									AND reporte.tipo_infraccion=r.tipo_infraccion
+							</if>
+					     ) as consulta
+			     WHERE consulta.est_inf='PENALIZADA')						AS numeroSancionados,
+						(SELECT AVG(consulta.nInfracciones)
 			     FROM (SELECT 
 						DISTINCT(reporte.numero_documento),
 						F_CANTIDAD_INFRACCIONES(reporte.numero_documento, #{fechaInicio} , #{fechaFin} ) AS nInfracciones
 						FROM vw_reporte_infracciones reporte
 						WHERE reporte.fecha_infraccion BETWEEN #{fechaInicio}  AND #{fechaFin}
+						<if test="serie == 'ESCUELA'">
+									AND reporte.escuela_programa=r.escuela_programa
+							</if>
+							<if test="serie == 'AREA_ESTUDIO'">
+								    AND reporte.area_estudio=r.area_estudio
+							</if>
+							<if test="serie == 'SOLICITANTE'">
+									AND reporte.nombre_tipo=r.nombre_tipo
+							</if>
+							<if test="serie == 'TIPO_INFRACCION'">
+									AND reporte.tipo_infraccion=r.tipo_infraccion
+							</if>
 					  ) as consulta
 			    )															AS numeroInfraccionesPromedioPorAlumno
 			</if>
 			<if test="tipoPeriodo == 'SEMANA'">
+				(SELECT COUNT(consulta.est_inf)
+					FROM (SELECT 
+							DISTINCT(reporte.numero_documento) as num_doc,
+			                reporte.estado_infraccion		   as est_inf,
+			                reporte.fecha_infraccion		   as fec_inf
+							FROM vw_reporte_infracciones reporte
+							WHERE reporte.fecha_infraccion BETWEEN F_GENERADOR_FECHAS('INI', 'SEMANA',#{anioInicio},null, null, #{semanaInicio})   AND F_GENERADOR_FECHAS('FIN', 'SEMANA',#{anioFin},null, null, #{semanaFin})
+					     	<if test="serie == 'ESCUELA'">
+									AND reporte.escuela_programa=r.escuela_programa
+							</if>
+							<if test="serie == 'AREA_ESTUDIO'">
+								    AND reporte.area_estudio=r.area_estudio
+							</if>
+							<if test="serie == 'SOLICITANTE'">
+									AND reporte.nombre_tipo=r.nombre_tipo
+							</if>
+							<if test="serie == 'TIPO_INFRACCION'">
+									AND reporte.tipo_infraccion=r.tipo_infraccion
+							</if>
+					     ) as consulta
+			     WHERE consulta.est_inf='PENALIZADA')						AS numeroSancionados,
 			    (SELECT AVG(consulta.nInfracciones)
 			     FROM (SELECT 
 						DISTINCT(reporte.numero_documento),
 						F_CANTIDAD_INFRACCIONES(reporte.numero_documento, F_GENERADOR_FECHAS('INI', 'SEMANA',#{anioInicio},null, null, #{semanaInicio}) , F_GENERADOR_FECHAS('FIN', 'SEMANA',#{anioFin},null, null, #{semanaFin})  ) AS nInfracciones
 						FROM vw_reporte_infracciones reporte
 						WHERE reporte.fecha_infraccion BETWEEN F_GENERADOR_FECHAS('INI', 'SEMANA',#{anioInicio},null, null, #{semanaInicio})   AND F_GENERADOR_FECHAS('FIN', 'SEMANA',#{anioFin},null, null, #{semanaFin}) 
+					  	<if test="serie == 'ESCUELA'">
+									AND reporte.escuela_programa=r.escuela_programa
+							</if>
+							<if test="serie == 'AREA_ESTUDIO'">
+								    AND reporte.area_estudio=r.area_estudio
+							</if>
+							<if test="serie == 'SOLICITANTE'">
+									AND reporte.nombre_tipo=r.nombre_tipo
+							</if>
+							<if test="serie == 'TIPO_INFRACCION'">
+									AND reporte.tipo_infraccion=r.tipo_infraccion
+							</if>
 					  ) as consulta
 			    )															AS numeroInfraccionesPromedioPorAlumno
 			</if>
 			<if test="tipoPeriodo == 'MES'">
+				(SELECT COUNT(consulta.est_inf)
+					FROM (SELECT 
+							DISTINCT(reporte.numero_documento) as num_doc,
+			                reporte.estado_infraccion		   as est_inf,
+			                reporte.fecha_infraccion		   as fec_inf
+							FROM vw_reporte_infracciones reporte
+							WHERE reporte.fecha_infraccion BETWEEN F_GENERADOR_FECHAS('INI', 'MES',#{anioInicio},#{mesInicio}, null,null)   AND F_GENERADOR_FECHAS('FIN', 'SEMANA',#{anioFin},#{mesFin}, null,null) 
+					     	<if test="serie == 'ESCUELA'">
+									AND reporte.escuela_programa=r.escuela_programa
+							</if>
+							<if test="serie == 'AREA_ESTUDIO'">
+								    AND reporte.area_estudio=r.area_estudio
+							</if>
+							<if test="serie == 'SOLICITANTE'">
+									AND reporte.nombre_tipo=r.nombre_tipo
+							</if>
+							<if test="serie == 'TIPO_INFRACCION'">
+									AND reporte.tipo_infraccion=r.tipo_infraccion
+							</if>
+					     ) as consulta
+			     WHERE consulta.est_inf='PENALIZADA')						AS numeroSancionados,
 			    (SELECT AVG(consulta.nInfracciones)
 			     FROM (SELECT 
 						DISTINCT(reporte.numero_documento),
 						F_CANTIDAD_INFRACCIONES(reporte.numero_documento, F_GENERADOR_FECHAS('INI', 'MES',#{anioInicio},#{mesInicio}, null,null) , F_GENERADOR_FECHAS('FIN', 'SEMANA',#{anioFin},#{mesFin}, null,null)  ) AS nInfracciones
 						FROM vw_reporte_infracciones reporte
 						WHERE reporte.fecha_infraccion BETWEEN F_GENERADOR_FECHAS('INI', 'MES',#{anioInicio},#{mesInicio}, null,null)   AND F_GENERADOR_FECHAS('FIN', 'SEMANA',#{anioFin},#{mesFin}, null,null) 
+					 	<if test="serie == 'ESCUELA'">
+									AND reporte.escuela_programa=r.escuela_programa
+							</if>
+							<if test="serie == 'AREA_ESTUDIO'">
+								    AND reporte.area_estudio=r.area_estudio
+							</if>
+							<if test="serie == 'SOLICITANTE'">
+									AND reporte.nombre_tipo=r.nombre_tipo
+							</if>
+							<if test="serie == 'TIPO_INFRACCION'">
+									AND reporte.tipo_infraccion=r.tipo_infraccion
+							</if>
 					  ) as consulta
 			    )												AS numeroInfraccionesPromedioPorAlumno
 			</if>
 			<if test="tipoPeriodo == 'ANIO'">
+			(SELECT COUNT(consulta.est_inf)
+					FROM (SELECT 
+							DISTINCT(reporte.numero_documento) as num_doc,
+			                reporte.estado_infraccion		   as est_inf,
+			                reporte.fecha_infraccion		   as fec_inf
+							FROM vw_reporte_infracciones reporte
+							WHERE reporte.fecha_infraccion BETWEEN F_GENERADOR_FECHAS('INI', 'ANIO',#{anioInicio},null, null,null)   AND F_GENERADOR_FECHAS('FIN','ANIO',#{anioFin},null, null,null) 
+					     	<if test="serie == 'ESCUELA'">
+									AND reporte.escuela_programa=r.escuela_programa
+							</if>
+							<if test="serie == 'AREA_ESTUDIO'">
+								    AND reporte.area_estudio=r.area_estudio
+							</if>
+							<if test="serie == 'SOLICITANTE'">
+									AND reporte.nombre_tipo=r.nombre_tipo
+							</if>
+							<if test="serie == 'TIPO_INFRACCION'">
+									AND reporte.tipo_infraccion=r.tipo_infraccion
+							</if>
+					     ) as consulta
+			     WHERE consulta.est_inf='PENALIZADA')						AS numeroSancionados,
 			    (SELECT AVG(consulta.nInfracciones)
 			     FROM (SELECT 
 						DISTINCT(reporte.numero_documento),
 						F_CANTIDAD_INFRACCIONES(reporte.numero_documento, F_GENERADOR_FECHAS('INI', 'ANIO',#{anioInicio},null, null,null) , F_GENERADOR_FECHAS('FIN', 'ANIO',#{anioFin},null, null,null)  ) AS nInfracciones
 						FROM vw_reporte_infracciones reporte
 						WHERE reporte.fecha_infraccion BETWEEN F_GENERADOR_FECHAS('INI', 'ANIO',#{anioInicio},null, null,null)   AND F_GENERADOR_FECHAS('FIN','ANIO',#{anioFin},null, null,null) 
+					  	<if test="serie == 'ESCUELA'">
+									AND reporte.escuela_programa=r.escuela_programa
+							</if>
+							<if test="serie == 'AREA_ESTUDIO'">
+								    AND reporte.area_estudio=r.area_estudio
+							</if>
+							<if test="serie == 'SOLICITANTE'">
+									AND reporte.nombre_tipo=r.nombre_tipo
+							</if>
+							<if test="serie == 'TIPO_INFRACCION'">
+									AND reporte.tipo_infraccion=r.tipo_infraccion
+							</if>
 					  ) as consulta
 			    )												AS numeroInfraccionesPromedioPorAlumno
 			</if>
