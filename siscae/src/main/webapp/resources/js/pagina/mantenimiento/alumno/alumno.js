@@ -128,7 +128,8 @@ $(document).ready(function() {
 		alumno.persona = {};
 		
 		alumno.persona.idPersona = $local.personaActual.idPersona;
-		
+		alumno.idAlumno = alumno.persona.idPersona;
+		console.log(alumno);
 		
 		console.log(alumno);
 		

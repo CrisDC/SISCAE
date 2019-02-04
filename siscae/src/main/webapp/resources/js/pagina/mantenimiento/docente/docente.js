@@ -1,3 +1,5 @@
+
+
 $(document).ready(function() {
 	var $local = {
 		$tablaMantenimiento : $("#tablaMantenimiento"),
@@ -112,6 +114,9 @@ $(document).ready(function() {
 		docente.persona = {};
 		
 		docente.persona.idPersona = $local.personaActual.idPersona;
+		
+		docente.idDocente = docente.persona.idPersona;
+		
 		$.ajax({
 			type : "POST",
 			url : $variableUtil.root + "docente",

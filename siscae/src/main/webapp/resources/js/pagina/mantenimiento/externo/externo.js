@@ -112,6 +112,8 @@ $(document).ready(function() {
 		externo.persona = {};
 		
 		externo.persona.idPersona = $local.personaActual.idPersona;
+		externo.idExterno = externo.persona.idPersona;
+		
 		$.ajax({
 			type : "POST",
 			url : $variableUtil.root + "externo",
