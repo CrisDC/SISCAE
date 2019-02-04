@@ -257,7 +257,7 @@ $(document).ready(function() {
 		$funcionUtil.prepararFormularioActualizacion($formMantenimiento);
 		$local.$filaSeleccionada = $(this).parents("tr");
 		var horario = $local.tablaMantenimiento.row($local.$filaSeleccionada).data();
-		$local.idHorarioSeleccionado = horario.idRecurso;
+		$local.idHorarioSeleccionado = horario.idHorario;
 		$funcionUtil.llenarFormulario(horario, $formMantenimiento);
 		$local.$actualizarMantenimiento.removeClass("hidden");
 		$local.$registrarMantenimiento.addClass("hidden");
