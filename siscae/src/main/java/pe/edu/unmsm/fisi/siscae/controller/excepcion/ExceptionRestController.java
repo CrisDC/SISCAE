@@ -92,10 +92,10 @@ public class ExceptionRestController
     {
         logger.error(ex.getClass().getName(), ex);
         String codigoErrorSqlServer = ex.getMessage();
-        //ConstantesExcepciones.EXCEPCION_SQL_SERVER.get(codigoErrorSqlServer)
-        /*return new MensajeError(codigoErrorSqlServer,
-                codigoErrorSqlServer);*/
-        return null;
+        int hola = Integer.parseInt(codigoErrorSqlServer);
+        ConstantesExcepciones.EXCEPCION_SQL_SERVER.get(hola);
+        return new MensajeError(hola, codigoErrorSqlServer);
+        
     }
     
     @ResponseStatus(code = HttpStatus.CONFLICT)
