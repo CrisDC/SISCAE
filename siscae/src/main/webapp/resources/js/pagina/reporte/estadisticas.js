@@ -274,10 +274,10 @@ $(document).ready(function() {
 			return;
 		}
 		
-		if (!$funcionUtil.validarInputsPeriodo($local.$semanaInicio,$local.$semanaFin,$local.$mesInicio,$local.$mesFin,$local.$anioInicio,$local.$anioFin, $local.$selectPeriodo.val())) {
-			$funcionUtil.notificarException("Rango de periodo incorrecto", "fa-exclamation-circle", "Información", "info");
-			return;
-		}
+//		if (!$funcionUtil.validarInputsPeriodo($local.$semanaInicio,$local.$semanaFin,$local.$mesInicio,$local.$mesFin,$local.$anioInicio,$local.$anioFin, $local.$selectPeriodo.val())) {
+//			$funcionUtil.notificarException("Rango de periodo incorrecto", "fa-exclamation-circle", "Información", "info");
+//			return;
+//		}
 		var criterioBusqueda = obtenerCriteriosDeBusqueda();
 		//Obteniendo parametros de la grafica
 		let tipoGrafico = $local.$selectTipoGrafico.val();
@@ -543,7 +543,7 @@ $(document).ready(function() {
 						//Dibujando tabla
 						//$local.tablaResultadosPrestamo.rows.add(response).draw();
 						//Dibujando grafico
-						var chart = AmCharts.makeChart('chartdiv',$funcionGraficoUtil.crearGraficoLineal(response,'periodoPrestamo','numeroPrestamos',"<b>Periodo:</b> [[category]] </br> <b>Prestamos:</b> [[value]] </br> <b>Tiempo Total: </b> [[estadiaTotal]] </br> <b>Tiempo Prom: </b> [[estadiaPromedio]]"));
+						var chart = AmCharts.makeChart('chartdiv',$funcionGraficoUtil.crearGraficoLineal(response,'ejeX','numeroPrestamos',"<b>Periodo:</b> [[category]] </br> <b>Prestamos:</b> [[value]] </br> <b>Tiempo Total: </b> [[estadiaTotal]] </br> <b>Tiempo Prom: </b> [[estadiaPromedio]]"));
 					},
 					error : function(response) {
 					},
@@ -811,7 +811,7 @@ $(document).ready(function() {
 					//Dibujando tabla
 					//$local.tablaResultadosPrestamo.rows.add(response).draw();
 					//Dibujando grafico
-					var chart = AmCharts.makeChart('chartdiv',$funcionGraficoUtil.crearGraficoLineal(response,'periodoInfraccion','numeroInfracciones',"<b>Periodo:</b> [[category]] </br> <b>Infracciones:</b> [[value]] </br> <b>Sancionados: </b> [[numeroSancionados]] </br> <b>Infracc. Prom: </b> [[numeroInfraccionesPromedioPorAlumno]]"));
+					var chart = AmCharts.makeChart('chartdiv',$funcionGraficoUtil.crearGraficoLineal(response,'ejeX','numeroInfracciones',"<b>Periodo:</b> [[category]] </br> <b>Infracciones:</b> [[value]] </br> <b>Sancionados: </b> [[numeroSancionados]] </br> <b>Infracc. Prom: </b> [[numeroInfraccionesPromedioPorAlumno]]"));
 				},
 				error : function(response) {
 				},

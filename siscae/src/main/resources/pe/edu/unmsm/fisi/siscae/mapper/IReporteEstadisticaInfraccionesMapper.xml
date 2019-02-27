@@ -239,7 +239,7 @@
 			                reporte.estado_infraccion		   as est_inf,
 			                reporte.fecha_infraccion		   as fec_inf
 							FROM vw_reporte_infracciones reporte
-							WHERE reporte.fecha_infraccion BETWEEN F_GENERADOR_FECHAS('INI', 'MES',#{anioInicio},#{mesInicio}, null,null)   AND F_GENERADOR_FECHAS('FIN', 'SEMANA',#{anioFin},#{mesFin}, null,null) 
+							WHERE reporte.fecha_infraccion BETWEEN F_GENERADOR_FECHAS('INI', 'MES',#{anioInicio},#{mesInicio}, null,null)   AND F_GENERADOR_FECHAS('FIN', 'MES',#{anioFin},#{mesFin}, null,null) 
 					     	<if test="serie == 'ESCUELA'">
 									AND reporte.escuela_programa=r.escuela_programa
 							</if>
@@ -257,9 +257,9 @@
 			    (SELECT AVG(consulta.nInfracciones)
 			     FROM (SELECT 
 						DISTINCT(reporte.numero_documento),
-						F_CANTIDAD_INFRACCIONES(reporte.numero_documento, F_GENERADOR_FECHAS('INI', 'MES',#{anioInicio},#{mesInicio}, null,null) , F_GENERADOR_FECHAS('FIN', 'SEMANA',#{anioFin},#{mesFin}, null,null)  ) AS nInfracciones
+						F_CANTIDAD_INFRACCIONES(reporte.numero_documento, F_GENERADOR_FECHAS('INI', 'MES',#{anioInicio},#{mesInicio}, null,null) , F_GENERADOR_FECHAS('FIN', 'MES',#{anioFin},#{mesFin}, null,null)  ) AS nInfracciones
 						FROM vw_reporte_infracciones reporte
-						WHERE reporte.fecha_infraccion BETWEEN F_GENERADOR_FECHAS('INI', 'MES',#{anioInicio},#{mesInicio}, null,null)   AND F_GENERADOR_FECHAS('FIN', 'SEMANA',#{anioFin},#{mesFin}, null,null) 
+						WHERE reporte.fecha_infraccion BETWEEN F_GENERADOR_FECHAS('INI', 'MES',#{anioInicio},#{mesInicio}, null,null)   AND F_GENERADOR_FECHAS('FIN', 'MES',#{anioFin},#{mesFin}, null,null) 
 					 	<if test="serie == 'ESCUELA'">
 									AND reporte.escuela_programa=r.escuela_programa
 							</if>
