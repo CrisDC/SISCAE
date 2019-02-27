@@ -213,7 +213,7 @@ $(document).ready(function() {
 	});
 		$local.$tablaMantenimiento.children("tbody").on("click", ".eliminar", function() {
 		$local.$filaSeleccionada = $(this).parents("tr");
-		var empresa = $local.tablaMantenimiento.row($local.$filaSeleccionada).data();
+		var administrativo = $local.tablaMantenimiento.row($local.$filaSeleccionada).data();
 		$.confirm({
 			icon : "fa fa-info-circle",
 			title : "Aviso",
@@ -284,6 +284,7 @@ $(document).ready(function() {
 			var criterio = {idTipoDocumento   :  alumno.idTipoDocumento,
 							numeroDocumento :   alumno.numeroDocumento};
 			
+			//$('#idTipoDocumento').removeAttr('disabled');
 			//criterio.numeroDocumentoIdentidad = alumno.numeroDocumentoIdentidad; 
 			console.log("funcion");
 							

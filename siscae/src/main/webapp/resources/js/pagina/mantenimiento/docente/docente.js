@@ -188,7 +188,7 @@ $(document).ready(function() {
 	
 	$local.$tablaMantenimiento.children("tbody").on("click", ".eliminar", function() {
 		$local.$filaSeleccionada = $(this).parents("tr");
-		var empresa = $local.tablaMantenimiento.row($local.$filaSeleccionada).data();
+		var docente = $local.tablaMantenimiento.row($local.$filaSeleccionada).data();
 		$.confirm({
 			icon : "fa fa-info-circle",
 			title : "Aviso",
