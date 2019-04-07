@@ -47,7 +47,7 @@ public class AreaAdministrativo {
     @Length(min = 3, max = 30)
 	@NotNull(message = "{NotNull.AreaAdministrativo.cargo}")
 	@NotBlank(message = "{NotBlank.AreaAdministrativo.cargo}")
-	@Pattern(regexp = Regex.ALFANUMERICO, message = "{Pattern.AreaAdministrativo.cargo}")
+	@Pattern(regexp = Regex.ALFANUMERICO_O_ESPACIO_BLANCO, message = "{Pattern.AreaAdministrativo.cargo}")
 	private String cargo;
 	
 
