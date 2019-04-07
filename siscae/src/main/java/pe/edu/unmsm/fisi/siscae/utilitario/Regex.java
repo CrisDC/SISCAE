@@ -10,10 +10,11 @@ public class Regex
 
     public static final String ALFANUMERICO = "^[A-Za-z0-9]+$";
     public static final String VACIO_O_ALFANUMERICO = "^$|^[A-Za-z0-9]+$";
+    public static final String ALFANUMERICO_O_ESPACIO_BLANCO = "^$|^[A-Za-z0-9\\s]+$";
     public static final String SEGURIDAD = "^(?=(?:.*\\d){1})(?=(?:.*[A-Z]){1})(?=(?:.*[a-z]){1})\\$";
 
     public static final String SOLO_1_o_0 = "0|1";
-    public static final String VACIO_O_NO_SOLO_ESPACIOS_EN_BLANCO = "^$|^(?=.*\\S).+$";
+    public static final String VACIO_O_NO_SOLO_ESPACIOS_EN_BLANCO = "^$|^(?=.*\\s).+$";
     public static final String NO_ESPACIOS_EN_BLANCO = "^\\S+$";
     public static final String ESPACIOS_EN_BLANCO = "\\s+";
     public static final String TIPO_COMPENSACION = ConstantesGenerales.COMPENSACION_FONDO + "|"
