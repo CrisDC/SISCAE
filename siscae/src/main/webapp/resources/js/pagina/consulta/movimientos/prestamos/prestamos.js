@@ -149,7 +149,7 @@ $(document).ready(function(){
      $('body #for-each').on('click', 'button', function(){
 	        let idRecurso = $(this).attr('key');
 	        let numRecurso = $(this).attr('num');
-	        	
+	        
 	        	swal({
 	    			title: "Solicitud de recurso "+numRecurso,
 	    			text: "Ingrese su carnet de biblioteca por el scanner",
@@ -192,7 +192,37 @@ $(document).ready(function(){
 		      					  button: false,
 		      					  timer: 1000,
 			      				}).then((value) => {
-			      					location.reload();
+			      					//location.reload();
+			      					
+			      					//Busca el div de recurso con numero : numRecurso
+			      					var recursoPedido;
+			      					
+			      					
+			      					
+			      					$('.recurso').each(function(){
+			      						console.log(numRecurso + "  : "+ $(this).find('.solicitar').attr('num'));
+			      						if(numRecurso == $(this).find('.solicitar').attr('num')){
+			      							recursoPedido = $(this);
+			      							return true;
+			      						}
+			      					});
+			      					
+			      					
+			      					if(recursoPedido != null){
+			      						var enchufe = recursoPedido.find('img').attr('data-enchufe');
+			      						//Segun tenga enchufe cambiamos la imagen a la correspondiente
+			      						if(enchufe == '1'){
+			      							recursoPedido.find('img').attr('src','/siscae/resources/images/cubiculo_con_corriente_rojo.png');
+			      						}else{
+			      							recursoPedido.find('img').attr('src','/siscae/resources/images/cubo_rojo.png');
+			      						}
+			      						recursoPedido.find('button').addClass('invisible');
+		      							$p = recursoPedido.find('.disponible');
+		      							$p.text('OCUPADO');
+		      							$p.removeClass('disponible');
+		      							$p.addClass('ocupado');
+			      					}
+			      					
 			      				});
 		        			}
 
