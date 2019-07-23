@@ -146,28 +146,40 @@ $(document).ready(function(){
 			
       });
 	});
-     $('body #for-each').on('click', 'button', function(){
-	        let idRecurso = $(this).attr('key');
-	        let numRecurso = $(this).attr('num');
-	        
-	        	swal({
-	    			title: "Solicitud de recurso "+numRecurso,
-	    			text: "Ingrese su carnet de biblioteca por el scanner",
-	    			content: "input",
-	    			icon: "/siscae/resources/images/lectora.gif",
-	    		
-	    		}).then(function (inputValue) {
-
-	    			if(inputValue != null && inputValue.length != 0){
-	    				
-	    				inputValue = limpiarSalidaScanner(inputValue);
-	    				
-	    				var prestamo ={
+	//Este evento se activa cuando el usuario solicita un cubículo
+    $('body #for-each').on('click', 'button', function(){
+	   	 //Se obtendrá el id del cubículo y su número de orden (primer, segundo,...etc)
+	   	 const idRecurso = $(this).attr('key');
+	   	 const numRecurso = $(this).attr('num');
+	   	 //También se obtiene los campos para saber si esta cerca de un enchufe y el link lógico de la carpeta donde se guardan las imagenes
+	   	 const observacionRecurso = $(this).attr('observacion');
+	   	 const enlaceRecurso = $(this).attr('enlace');
+	   	 swal({
+				title: "Solicitud de recurso " + numRecurso,
+				text: "Ingrese su carnet de biblioteca por el scanner",
+				content: "input",
+				icon: "/siscae/resources/images/lectora.gif",
+			    html: true
+				
+	   	 }).then(function(valorRecibido){
+	   		 //Este evento se activa cuando el usuario apreta el botón de enviar en el modal, o simplemente apreta enter dando el valor introducido en la casilla
+	   		 //También se activa si el usuario sale del modal haciendo click afuera en este caso se recibirá null como valor
+	   		 
+	   		 if(valorRecibido != null && valorRecibido.length != 0){
+	   			 //Si entra aca hay un valor introducido por el usuario
+	   			 //NOTA FALTA CHEQUEAR SI LO INTRODUCIDO ES UN NUMERO O NO (CONSISTENCIA)
+	   			 
+	   			 //Esta función elimina los primeros dos ceros si es que lo hay
+	   			 //NOTA CHEQUEAR ESTA FUNCION CON EL ADMINISTRADOR
+	   			 valorRecibido = limpiarSalidaScanner(valorRecibido);
+					 //Se prepara el objeto prestamo para enviarlo por AJAX
+					 var prestamo ={
 		    		        	"idRecurso": idRecurso,
-		    		        	"numDocumentoSolicitante": inputValue
-		    		    };
-	    				
-	    				$.ajax({
+		    		        	"numDocumentoSolicitante": valorRecibido
+		    		 };
+					
+					
+					 $.ajax({
 		                    url :  $variableUtil.root + "movimientoPrestamo",
 		                    type : 'POST',
 		                    data : JSON.stringify(prestamo),
@@ -184,57 +196,39 @@ $(document).ready(function(){
 		        				}
 		        			},
 		        			success : function(response) {
-		        				
+		        				//Siempre que pasa por aca, la petición es exitosa, no sirve response
+		        				//Se analiza que imagen ponerle al nuevo html
+		        				let cadenaHtml ='';
+		        				if(observacionRecurso == 'UBICADO CERCA A UN ENCHUFE'){
+		        					cadenaHtml += '<img src="'+enlaceRecurso+'/cubiculo_con_corriente_rojo.png" width="40" height="40"> ';
+		        				}else{
+		        					cadenaHtml += '<img src="'+enlaceRecurso+'/cubo_rojo.png" width="40" height="40"> ';
+		        				}
+		        				cadenaHtml += '<p>'+numRecurso+'</p><p class="ocupado">OCUPADO</p>';
+		        				//Se modifica el html
+		        				$('#recurso'+idRecurso).html(cadenaHtml);
+		        				//Se visualiza que la petición fue exitosa
 		        				swal({
-		      					  title: "Peticion realizada con exito",
-		      					  text: "Usted esta prestando el recurso "+numRecurso,
-		      					  icon: "success",
-		      					  button: false,
-		      					  timer: 1000,
-			      				}).then((value) => {
-			      					//location.reload();
-			      					
-			      					//Busca el div de recurso con numero : numRecurso
-			      					var recursoPedido;
-			      					
-			      					
-			      					
-			      					$('.recurso').each(function(){
-			      						console.log(numRecurso + "  : "+ $(this).find('.solicitar').attr('num'));
-			      						if(numRecurso == $(this).find('.solicitar').attr('num')){
-			      							recursoPedido = $(this);
-			      							return true;
-			      						}
-			      					});
-			      					
-			      					
-			      					if(recursoPedido != null){
-			      						var enchufe = recursoPedido.find('img').attr('data-enchufe');
-			      						//Segun tenga enchufe cambiamos la imagen a la correspondiente
-			      						if(enchufe == '1'){
-			      							recursoPedido.find('img').attr('src','/siscae/resources/images/cubiculo_con_corriente_rojo.png');
-			      						}else{
-			      							recursoPedido.find('img').attr('src','/siscae/resources/images/cubo_rojo.png');
-			      						}
-			      						recursoPedido.find('button').addClass('invisible');
-		      							$p = recursoPedido.find('.disponible');
-		      							$p.text('OCUPADO');
-		      							$p.removeClass('disponible');
-		      							$p.addClass('ocupado');
-			      					}
-			      					
-			      				});
+			      					  title: "Peticion realizada con exito",
+			      					  text: "Usted esta prestando el recurso "+numRecurso,
+			      					  icon: "success",
+			      					  button: false,
+			      					  timer: 1400
+				      				});
+		        				
 		        			}
-
-		    			});
-	    				
-	    			}else{
-	    				if(inputValue.length == 0){
-	    					swal('El número de documento no puede estar vacío');
-	    				}
-	    			}
-	          });
-      });      
+	
+		    		 });
+	   			 
+	   		 }else{
+	   			 //Si entra acá el usuario ha cerrado el modal o introdujo algo vacío
+	   			 //NOTA ARREGLAR LA VISUALIZACION DE ESTE SWAL NO RECIBE EL UTF-8
+	   			 if(valorRecibido.length == 0){
+	   				 swal('El número de documento no puede estar vacío');
+					 }
+   		 	}
+   	 	});
+     });          
       $("#desocupar").click(function(){
     		swal({
     			  title: "¿Deseas desocupar todo?",

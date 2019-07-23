@@ -90,15 +90,15 @@
 											<label th:if="${existenIndividuales} == 1" >Recursos individuales</label>
 											<div class="row" id="for-each">
 												<th:block th:each="prestamo : ${recursosIndividuales}">
-													<div class="recurso">
+													<div class="recurso" th:id="${'recurso'+prestamo.idRecurso}">
 														<img th:if="(${prestamo.estado} == 'DISPONIBLE') and (${prestamo.tipoRecurso} == 'CUBICULO') and (${prestamo.observacion} == 'UBICADO CERCA A UN ENCHUFE') " 
-														    th:src="@{/resources/images/cubiculo_con_corriente_verde.png}" data-enchufe='1' width="40" height="40"> 
+														    th:src="@{/resources/images/cubiculo_con_corriente_verde.png}" width="40" height="40"> 
 														<img th:if="(${prestamo.estado} == 'DISPONIBLE') and (${prestamo.tipoRecurso} == 'CUBICULO') and (${prestamo.observacion} != 'UBICADO CERCA A UN ENCHUFE') "
-															th:src="@{/resources/images/cubo_verde.png}" data-enchufe='0' width="40" height="40"> 
+															th:src="@{/resources/images/cubo_verde.png}" width="40" height="40"> 
 														<img th:if="(${prestamo.estado} == 'OCUPADO') and (${prestamo.tipoRecurso} == 'CUBICULO') and (${prestamo.observacion} == 'UBICADO CERCA A UN ENCHUFE') "
-															th:src="@{/resources/images/cubiculo_con_corriente_rojo.png}" data-enchufe='1' width="40" height="40"> 
+															th:src="@{/resources/images/cubiculo_con_corriente_rojo.png}" width="40" height="40"> 
 														<img th:if="(${prestamo.estado} == 'OCUPADO') and (${prestamo.tipoRecurso} == 'CUBICULO') and (${prestamo.observacion} != 'UBICADO CERCA A UN ENCHUFE') "
-															th:src="@{/resources/images/cubo_rojo.png}" data-enchufe='0' width="40" height="40"> 
+															th:src="@{/resources/images/cubo_rojo.png}" width="40" height="40"> 
 														<img th:if="(${prestamo.estado} == 'LIBERABLE') and (${prestamo.tipoRecurso} == 'CUBICULO') and (${prestamo.observacion} == 'UBICADO CERCA A UN ENCHUFE') "
 															th:src="@{/resources/images/cubiculo_con_corriente_amarillo.png}" width="40" height="40"> 
 														<img th:if="(${prestamo.estado} == 'LIBERABLE') and (${prestamo.tipoRecurso} == 'CUBICULO') and (${prestamo.observacion} != 'UBICADO CERCA A UN ENCHUFE') "
@@ -107,7 +107,7 @@
 														<p th:if="${prestamo.estado} == 'DISPONIBLE'" th:text="DISPONIBLE" class="disponible"></p>
 														<p th:if="${prestamo.estado} == 'OCUPADO'" th:text="OCUPADO" class="ocupado"></p>
 														<p th:if="${prestamo.estado} == 'LIBERABLE'" th:text="LIBERABLE" class="liberable"></p>
-														<button th:num="${prestamo.numero}" th:key="${prestamo.idRecurso}" th:class="${prestamo.estado} == 'DISPONIBLE' ? 'btn btn-info solicitar sweet-ajax' : 'btn btn-info solicitar sweet-ajax invisible' ">SOLICITAR</button>
+														<button th:num="${prestamo.numero}" th:enlace="@{/resources/images}" th:observacion="${prestamo.observacion}" th:key="${prestamo.idRecurso}" th:class="${prestamo.estado} == 'DISPONIBLE' ? 'btn btn-info solicitar sweet-ajax' : 'invisible' ">SOLICITAR</button>
 													</div>
 												</th:block>
 											</div>
