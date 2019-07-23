@@ -2,11 +2,93 @@ var espacioDisponible;
 var recurso;
 var cantidadPrestamosRealizados;
 var cantidadPrestamosTotales;
+var scannerCodigo = "";
 
 $(document).ready(function(){
 	
 	$('#detalleInfracciones').css('display', 'none');
 	$('#mensajeInfracciones').css('display', 'none');
+	
+	//Detecta la entrada del scanner y marca la salida automatica
+	$(document).keydown(function(e)
+	{
+	    scannerCodigo = scannerCodigo+keyToValue(e.which);
+	    var auxCodigo  = scannerCodigo; 
+	    
+	    if(scannerCodigo.length >= 10){
+	    	scannerCodigo = ""; 
+	    	auxCodigo = limpiarSalidaScanner(auxCodigo);
+			
+			var inputValue = auxCodigo;
+			
+			var cont = $('.swal-overlay--show-modal').length;
+			cont = cont + $('.modal-backdrop').length;
+			
+			
+			if(inputValue != null && cont == 0){
+				
+				var finPrestamo ={
+			        	"numDocumentoSolicitante": inputValue
+			    };
+	
+				$.ajax({
+	                url :  $variableUtil.root + "movimientoFinPrestamo",
+	                type : 'POST',
+	                data : JSON.stringify(finPrestamo),
+	                beforeSend : function(xhr) {
+	    				xhr.setRequestHeader('Content-Type', 'application/json');
+	    				xhr.setRequestHeader("X-CSRF-TOKEN", $variableUtil.csrf);
+	    			},
+	    			statusCode : {
+	    				400 : function(response) {
+	    					swal(response.responseJSON);
+	    				}
+	    			},
+	    			statusCode : {
+	    				400 : function(response) {
+	    					swal(response.responseJSON);
+	    				},
+	    				500 : function(response) {
+	    					swal("Error", response.responseText, "warning");
+	    				}
+	    			},
+	    			success : function(response) {
+	    				
+	    				swal({
+	    					  title: "Registro de salida",
+	    					  text: "Marco su salida con exito",
+	    					  icon: "success",
+	    					  button: false,
+	    					  timer: 1000,
+	    				}).then((value) => {
+	    					location.reload();
+	    				});
+	    			}
+	
+	
+				});
+				
+			}
+			
+		}
+	    
+	});
+	
+	function keyToValue(key){
+		switch (key) {
+		case 48:return 0;break;
+		case 49:return 1;break;
+		case 50:return 2;break;
+		case 51:return 3;break;
+		case 52:return 4;break;
+		case 53:return 5;break;
+		case 54:return 6;break;
+		case 55:return 7;break;
+		case 56:return 8;break;
+		case 57:return 9;break;
+		default: return "";break;
+		}
+	}
 	
 	$('#salida').click(function () {
 		swal("Registrar salida",{
