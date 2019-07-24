@@ -103,7 +103,7 @@
 															th:src="@{/resources/images/cubiculo_con_corriente_amarillo.png}" width="40" height="40"> 
 														<img th:if="(${prestamo.estado} == 'LIBERABLE') and (${prestamo.tipoRecurso} == 'CUBICULO') and (${prestamo.observacion} != 'UBICADO CERCA A UN ENCHUFE') "
 															th:src="@{/resources/images/cubo_amarillo.png}" width="40" height="40">
-														<p th:text="${prestamo.numero}"></p>
+														<p th:text="${prestamo.numero}" class="numero"></p>
 														<p th:if="${prestamo.estado} == 'DISPONIBLE'" th:text="DISPONIBLE" class="disponible"></p>
 														<p th:if="${prestamo.estado} == 'OCUPADO'" th:text="OCUPADO" class="ocupado"></p>
 														<p th:if="${prestamo.estado} == 'LIBERABLE'" th:text="LIBERABLE" class="liberable"></p>
