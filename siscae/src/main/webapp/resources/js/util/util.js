@@ -205,14 +205,21 @@ $(document).ready(function() {
 		},
 		llenarFormulario : function(dto, formulario) {
 			$.each(dto, function(i, value) {
-				var input = formulario.find("input[name=" + i + "], select[name=" + i + "]");
-				if (input.is(":checkbox")) {
-					input.prop("checked", (value == "1" || value == "true"));
-				} else {
-					input.val(value);
-				}
-				if (input.hasClass("select2")) {
-					input.val(value).trigger("change.select2");
+				if(i=="fechaInicio"||i=="fechaFin"||i=="fechaNac"){
+					console.log(i+" "+value);
+					var input = formulario.find("input[name="+ i +"]");
+					let arregloFecha = value.split('-');
+					input.val(arregloFecha[0]+"-"+arregloFecha[1]+"-"+arregloFecha[2]);
+				}else{
+					var input = formulario.find("input[name=" + i + "], select[name=" + i + "]");
+					if (input.is(":checkbox")) {
+						input.prop("checked", (value == "1" || value == "true"));
+					} else {
+						input.val(value);
+					}
+					if (input.hasClass("select2")) {
+						input.val(value).trigger("change.select2");
+					}	
 				}
 			});
 		},
