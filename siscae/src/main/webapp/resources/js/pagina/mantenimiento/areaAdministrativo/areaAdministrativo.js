@@ -64,7 +64,7 @@ $(document).ready(function() {
 			"title" : "Cargo"
 		}, {
 			"data" : 'fechaInicio',
-			"title" : "Fecha de inicio"
+			"title" : "Fecha de iniciogg"
 		}, {
 			"data" : 'fechaFin',
 			"title" : "Fecha Fin"
