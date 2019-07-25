@@ -89,7 +89,7 @@ $(document).ready(function() {
 //		height : 400,
 //		width : 626,
 //	});
-
+ 
 	$local.$aniadirMantenimento.on("click", function() {
 		$funcionUtil.prepararFormularioRegistro($formMantenimiento);
 		$local.$actualizarMantenimiento.addClass("hidden");
@@ -180,6 +180,7 @@ $(document).ready(function() {
 			data : JSON.stringify(areaAdministrativo),
 			beforeSend : function(xhr) {
 				$('#modalMantenimiento').modal('hide');
+				$local.tablaMantenimiento.draw();
 				$local.$actualizarMantenimiento.attr("disabled", true).find("i").removeClass("fa-pencil-square").addClass("fa-spinner fa-pulse fa-fw");
 				xhr.setRequestHeader('Content-Type', 'application/json');
 				xhr.setRequestHeader("X-CSRF-TOKEN", $variableUtil.csrf);
@@ -194,8 +195,11 @@ $(document).ready(function() {
 				
 				$funcionUtil.notificarException(response, "fa-check", "Aviso", "success");
 				$local.tablaMantenimiento.row($local.$filaSeleccionada).remove().draw(false);
+				console.log(areaAdministrativo);
+				
 				var row = $local.tablaMantenimiento.row.add(areaAdministrativo).draw();
 				row.show().draw(false);
+				$local.tablaMantenimiento.ajax.reload();
 				//$(row.node()).animateHighlight();
 				//$local.$modalMantenimiento.PopupWindow("close");
 			},
