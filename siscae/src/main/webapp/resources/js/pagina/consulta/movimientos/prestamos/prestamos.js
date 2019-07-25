@@ -9,6 +9,106 @@ $(document).ready(function(){
 	$('#detalleInfracciones').css('display', 'none');
 	$('#mensajeInfracciones').css('display', 'none');
 	
+	function marcarSalida(inputValue, cont){
+		if(inputValue != null ){
+			
+			var finPrestamo ={
+		        	"numDocumentoSolicitante": inputValue
+		    };
+			
+			//Busco el recurso que esta usando el usuario y lo almaceno en la variable recurso
+			$.ajax({
+                url :  $variableUtil.root + "consultaPrestamosTabla",
+                type : 'GET',
+                data : {
+                	accion: "buscarTodos"
+                },
+                beforeSend : function(xhr) {
+    				xhr.setRequestHeader('Content-Type', 'application/json');
+    				xhr.setRequestHeader("X-CSRF-TOKEN", $variableUtil.csrf);
+    			},
+    			statusCode : {
+    				400 : function(response) {
+    					swal(response.responseJSON);
+    				}
+    			},
+    			statusCode : {
+    				400 : function(response) {
+    					swal(response.responseJSON);
+    				},
+    				500 : function(response) {
+    					swal("Error", response.responseText, "warning");
+    				}
+    			},
+    			success : function(response) {
+    				recurso = response.find(function(recurso) {
+    					  return recurso.codigoAlumno == inputValue;
+    				});
+    				
+    				//Solicito el fin de prestamo
+    				$.ajax({
+    	                url :  $variableUtil.root + "movimientoFinPrestamo",
+    	                type : 'POST',
+    	                data : JSON.stringify(finPrestamo),
+    	                beforeSend : function(xhr) {
+    	    				xhr.setRequestHeader('Content-Type', 'application/json');
+    	    				xhr.setRequestHeader("X-CSRF-TOKEN", $variableUtil.csrf);
+    	    			},
+    	    			statusCode : {
+    	    				400 : function(response) {
+    	    					swal(response.responseJSON);
+    	    				}
+    	    			},
+    	    			statusCode : {
+    	    				400 : function(response) {
+    	    					swal(response.responseJSON);
+    	    				},
+    	    				500 : function(response) {
+    	    					swal("Error", response.responseText, "warning");
+    	    				}
+    	    			},
+    	    			success : function(response) {
+    	    				
+    	    				//Se analiza que imagen ponerle al nuevo html
+    	    				let idRecurso = recurso.idRecurso;
+            				let cadenaHtml ='';
+            				let observacionRecurso = $('#recurso'+idRecurso+' button').attr('observacion');
+            				let enlaceRecurso = $('#recurso'+idRecurso+' button').attr('enlace');
+            				let numRecurso = $('#recurso'+idRecurso+' button').attr('num');
+            				let keyRecurso = $('#recurso'+idRecurso+' button').attr('key');
+            				
+            				if(observacionRecurso == 'UBICADO CERCA A UN ENCHUFE'){
+            					cadenaHtml += '<img src="'+enlaceRecurso+'/cubiculo_con_corriente_verde.png" width="40" height="40"> ';
+            				}else{
+            					cadenaHtml += '<img src="'+enlaceRecurso+'/cubo_verde.png" width="40" height="40"> ';
+            				}
+            				cadenaHtml += '<p>'+numRecurso+'</p><p class="disponible">DISPONIBLE</p>';
+            				cadenaHtml += '<button num="'+numRecurso+'" enlace="'+enlaceRecurso+'" observacion="'+observacionRecurso+'" key="'+keyRecurso+'" class="btn btn-info solicitar sweet-ajax">SOLICITAR</button>'	
+            				
+            				//Se modifica el html
+            				$('#recurso'+idRecurso).html(cadenaHtml);
+            				//Se visualiza que la petición fue exitosa
+        					
+    	    				
+    	    				swal({
+    	    					  title: "Registro de salida",
+    	    					  text: "Marco su salida con exito",
+    	    					  icon: "success",
+    	    					  button: false,
+    	    					  timer: 1000,
+    	    				});
+    	    			}
+    	
+    	
+    				});
+    				
+    			}
+
+			});
+			
+		}
+	}
+	
 	//Detecta la entrada del scanner y marca la salida automatica
 	$(document).keydown(function(e)
 	{
@@ -24,51 +124,10 @@ $(document).ready(function(){
 			var cont = $('.swal-overlay--show-modal').length;
 			cont = cont + $('.modal-backdrop').length;
 			
-			
-			if(inputValue != null && cont == 0){
-				
-				var finPrestamo ={
-			        	"numDocumentoSolicitante": inputValue
-			    };
-	
-				$.ajax({
-	                url :  $variableUtil.root + "movimientoFinPrestamo",
-	                type : 'POST',
-	                data : JSON.stringify(finPrestamo),
-	                beforeSend : function(xhr) {
-	    				xhr.setRequestHeader('Content-Type', 'application/json');
-	    				xhr.setRequestHeader("X-CSRF-TOKEN", $variableUtil.csrf);
-	    			},
-	    			statusCode : {
-	    				400 : function(response) {
-	    					swal(response.responseJSON);
-	    				}
-	    			},
-	    			statusCode : {
-	    				400 : function(response) {
-	    					swal(response.responseJSON);
-	    				},
-	    				500 : function(response) {
-	    					swal("Error", response.responseText, "warning");
-	    				}
-	    			},
-	    			success : function(response) {
-	    				
-	    				swal({
-	    					  title: "Registro de salida",
-	    					  text: "Marco su salida con exito",
-	    					  icon: "success",
-	    					  button: false,
-	    					  timer: 1000,
-	    				}).then((value) => {
-	    					location.reload();
-	    				});
-	    			}
-	
-	
-				});
-				
+			if(cont == 0){
+				marcarSalida(inputValue);
 			}
+			
 			
 		}
 	    
@@ -100,49 +159,7 @@ $(document).ready(function(){
 			
 			inputValue = limpiarSalidaScanner(inputValue);
 			
-			if(inputValue != null){
-				var finPrestamo ={
-			        	"numDocumentoSolicitante": inputValue
-			    };
-
-				$.ajax({
-	                url :  $variableUtil.root + "movimientoFinPrestamo",
-	                type : 'POST',
-	                data : JSON.stringify(finPrestamo),
-	                beforeSend : function(xhr) {
-	    				xhr.setRequestHeader('Content-Type', 'application/json');
-	    				xhr.setRequestHeader("X-CSRF-TOKEN", $variableUtil.csrf);
-	    			},
-	    			statusCode : {
-	    				400 : function(response) {
-	    					swal(response.responseJSON);
-	    				}
-	    			},
-	    			statusCode : {
-	    				400 : function(response) {
-	    					swal(response.responseJSON);
-	    				},
-	    				500 : function(response) {
-	    					swal("Error", response.responseText, "warning");
-	    				}
-	    			},
-	    			success : function(response) {
-	    				
-	    				swal({
-	    					  title: "Registro de salida",
-	    					  text: "Marco su salida con exito",
-	    					  icon: "success",
-	    					  button: false,
-	    					  timer: 1000,
-	    				}).then((value) => {
-	    					location.reload();
-	    				});
-	    			}
-
-
-				});
-				
-			}
+			marcarSalida(inputValue);
 			
       });
 	});
@@ -205,6 +222,7 @@ $(document).ready(function(){
 		        					cadenaHtml += '<img src="'+enlaceRecurso+'/cubo_rojo.png" width="40" height="40"> ';
 		        				}
 		        				cadenaHtml += '<p>'+numRecurso+'</p><p class="ocupado">OCUPADO</p>';
+		        				cadenaHtml += '<button num="'+numRecurso+'" enlace="'+enlaceRecurso+'" observacion="'+observacionRecurso+'" key="'+idRecurso+'" class="invisible">SOLICITAR</button>'
 		        				//Se modifica el html
 		        				$('#recurso'+idRecurso).html(cadenaHtml);
 		        				//Se visualiza que la petición fue exitosa
