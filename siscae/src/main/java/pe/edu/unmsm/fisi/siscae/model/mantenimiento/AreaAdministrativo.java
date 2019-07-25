@@ -36,11 +36,12 @@ public class AreaAdministrativo {
 	//@Pattern(regexp = Regex.SOLO_DIGITOS, message = "{Pattern.AreaAdministrativo.id_Administrativo}")
 	private Integer idAdministrativo;
 	
-	//@NotNull(message = "{NotNull.AreaAdministrativo.fecha_inicio}")
+	@NotNull(message = "Fecha de inicio no debe estar vacío")
+	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd-MM-yyyy", timezone = "EST")
 	private Date fechaInicio;
 	
 	//@NotNull(message = "{NotNull.AreaAdministrativo.fecha_fin}")
-	//@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd", timezone = "EST")
+	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd-MM-yyyy", timezone = "EST")
 	private Date fechaFin;
 	
 	@Size(min=3,max=30)

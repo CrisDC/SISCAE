@@ -20,8 +20,8 @@ $(document).ready(function() {
 		posDerecho : "derecho",
 		rutaIconoSimp : this.root + "resources/css/icono-simp/",
 		botonDesalojar : "<button class='btn btn-danger desocupar-soli' title='Desocupar'><i class='fa fa-share-square'></i></button>",
-		botonEliminar : "<button class='btn btn-xs btn-danger eliminar' title='Eliminar' data-tooltip='tooltip'><i class='fa fa-trash'></i></button>",
-		botonActualizar : "<button class='btn btn-xs btn-primary actualizar' title='Actualizar' data-tooltip='tooltip'><i class='fa fa-pencil-square'></i></button>",
+		botonEliminar : "<button class='btn btn-xs btn-danger eliminar' title='Eliminar' data-tooltip='Eliminar'><i class='fa fa-trash'></i></button>",
+		botonActualizar : "<button class='btn btn-xs btn-primary actualizar' title='Actualizar' data-tooltip='Actualizar'><i class='fa fa-pencil-square'></i></button>",
 		botonActualizarNuevo : "<button type='button' class='btn btn-xs btn-info actualizar' data-tooltip='Actualizar' data-toggle='modal' data-target='#modalMantenimiento'><i class='fa fa-pencil-square'></i></button>",
 		botonEliminarNuevo : "<button type='button' class='btn btn-xs btn-danger eliminar' data-tooltip='Eliminar'><i class='fa fa-trash'></i></button>",
 		

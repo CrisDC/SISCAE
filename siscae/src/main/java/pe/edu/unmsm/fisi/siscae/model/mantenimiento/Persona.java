@@ -8,6 +8,8 @@ import javax.validation.constraints.Pattern;
 import org.hibernate.validator.constraints.Length;
 import org.hibernate.validator.constraints.NotBlank;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -61,6 +63,8 @@ public class Persona {
 
 	//@NotNull(message = "{NotNull.Persona.fechaNac}")
 	//@NotBlank(message = "{NotBlank.Persona.fechaNac}")
+	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd-MM-yyyy", timezone = "EST")
+    @NotNull(message = "{NotNull.Persona.fechaNac}")
 	private Date fechaNac;
 
 	@NotNull(message = "{NotNull.Persona.numTelef}")

@@ -27,7 +27,7 @@ public class Infraccion {
     @Length(min = 10, max  = 45, message = "{Length.CodigoProcesoSwitch.descripcion}")
 	private String descripcion;
 	
-	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd", timezone = "EST")
+	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd-MM-yyyy", timezone = "EST")
     @NotNull(message = "{NotNull.Infraccion.fecha}")
 	private Date fecha;
 	
