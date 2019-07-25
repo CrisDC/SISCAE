@@ -122,11 +122,13 @@ $(document).ready(function() {
 			return;
 		}
 		var areaAdministrativo = $formMantenimiento.serializeJSON();
+		console.log(areaAdministrativo);
 		$.ajax({
 			type : "POST",
 			url : $variableUtil.root + "areaAdministrativo",
 			data : JSON.stringify(areaAdministrativo),
 			beforeSend : function(xhr) {
+				$('#modalMantenimiento').modal('hide');
 				$local.$registrarMantenimiento.attr("disabled", true).find("i").removeClass("fa-floppy-o").addClass("fa-spinner fa-pulse fa-fw");
 				xhr.setRequestHeader('Content-Type', 'application/json');
 				xhr.setRequestHeader("X-CSRF-TOKEN", $variableUtil.csrf);
@@ -138,6 +140,7 @@ $(document).ready(function() {
 				}
 			},
 			success : function(response) {
+				
 				$funcionUtil.notificarException(response, "fa-check", "Aviso", "success");
 				var row = $local.tablaMantenimiento.row.add(areaAdministrativo).draw();
 				row.show().draw(false);
@@ -169,12 +172,14 @@ $(document).ready(function() {
 			return;
 		}
 		var areaAdministrativo = $formMantenimiento.serializeJSON();
+		console.log(areaAdministrativo); 
 		areaAdministrativo.idAreaAdministrativo = $local.idAreaAdministrativoSeleccionado;
 		$.ajax({
 			type : "PUT",
 			url : $variableUtil.root + "areaAdministrativo",
 			data : JSON.stringify(areaAdministrativo),
 			beforeSend : function(xhr) {
+				$('#modalMantenimiento').modal('hide');
 				$local.$actualizarMantenimiento.attr("disabled", true).find("i").removeClass("fa-pencil-square").addClass("fa-spinner fa-pulse fa-fw");
 				xhr.setRequestHeader('Content-Type', 'application/json');
 				xhr.setRequestHeader("X-CSRF-TOKEN", $variableUtil.csrf);
@@ -186,6 +191,7 @@ $(document).ready(function() {
 				}
 			},
 			success : function(response) {
+				
 				$funcionUtil.notificarException(response, "fa-check", "Aviso", "success");
 				$local.tablaMantenimiento.row($local.$filaSeleccionada).remove().draw(false);
 				var row = $local.tablaMantenimiento.row.add(areaAdministrativo).draw();
@@ -206,7 +212,7 @@ $(document).ready(function() {
 		$.confirm({
 			icon : "fa fa-info-circle",
 			title : "Aviso",
-			content : "¿Desea eliminar la Area Administrativo <b>'" + areaAdministrativo.idAreaAdministrativo + "'<b/>?",
+			content : "¿Desea eliminar la Area Administrativo  <b>'" + areaAdministrativo.idAreaAdministrativo + "'<b/>?",
 			buttons : {
 				Aceptar : {
 					action : function() {

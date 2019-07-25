@@ -208,8 +208,7 @@ $(document).ready(function() {
 				if(i=="fechaInicio"||i=="fechaFin"||i=="fechaNac"){
 					console.log(i+" "+value);
 					var input = formulario.find("input[name="+ i +"]");
-					let arregloFecha = value.split('-');
-					input.val(arregloFecha[0]+"-"+arregloFecha[1]+"-"+arregloFecha[2]);
+					input.val(value);
 				}else{
 					var input = formulario.find("input[name=" + i + "], select[name=" + i + "]");
 					if (input.is(":checkbox")) {
