@@ -103,6 +103,7 @@ $(document).ready(function() {
 			url : $variableUtil.root + "facultad",
 			data : JSON.stringify(facultad),
 			beforeSend : function(xhr) {
+				$('#modalMantenimiento').modal('hide');
 				$local.$registrarMantenimiento.attr("disabled", true).find("i").removeClass("fa-floppy-o").addClass("fa-spinner fa-pulse fa-fw");
 				xhr.setRequestHeader('Content-Type', 'application/json');
 				xhr.setRequestHeader("X-CSRF-TOKEN", $variableUtil.csrf);
@@ -115,8 +116,9 @@ $(document).ready(function() {
 			},
 			success : function(response) {
 				$funcionUtil.notificarException(response, "fa-check", "Aviso", "success");
-				var row = $local.tablaMantenimiento.row.add(facultad).draw();
-				row.show().draw(false);
+				//var row = $local.tablaMantenimiento.row.add(facultad).draw();
+				//row.show().draw(false);
+				$local.tablaMantenimiento.ajax.reload();
 				//$(row.node()).animateHighlight();
 				//$local.$modalMantenimiento.PopupWindow("close");
 			},
@@ -141,6 +143,7 @@ $(document).ready(function() {
 			url : $variableUtil.root + "facultad",
 			data : JSON.stringify(facultad),
 			beforeSend : function(xhr) {
+				$('#modalMantenimiento').modal('hide');
 				$local.$actualizarMantenimiento.attr("disabled", true).find("i").removeClass("fa-pencil-square").addClass("fa-spinner fa-pulse fa-fw");
 				xhr.setRequestHeader('Content-Type', 'application/json');
 				xhr.setRequestHeader("X-CSRF-TOKEN", $variableUtil.csrf);
@@ -154,8 +157,9 @@ $(document).ready(function() {
 			success : function(response) {
 				$funcionUtil.notificarException(response, "fa-check", "Aviso", "success");
 				$local.tablaMantenimiento.row($local.$filaSeleccionada).remove().draw(false);
-				var row = $local.tablaMantenimiento.row.add(facultad).draw();
-				row.show().draw(false);
+				//var row = $local.tablaMantenimiento.row.add(facultad).draw();
+				//row.show().draw(false);
+				$local.tablaMantenimiento.ajax.reload();
 				//$(row.node()).animateHighlight();
 				//$local.$modalMantenimiento.PopupWindow("close");
 			},
