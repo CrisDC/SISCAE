@@ -63,7 +63,7 @@ public class Persona {
 
 	//@NotNull(message = "{NotNull.Persona.fechaNac}")
 	//@NotBlank(message = "{NotBlank.Persona.fechaNac}")
-	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd", timezone = "EST")
+	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd")
     @NotNull(message = "{NotNull.Persona.fechaNac}")
 	private Date fechaNac;
 
