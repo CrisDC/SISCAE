@@ -2,11 +2,152 @@ var espacioDisponible;
 var recurso;
 var cantidadPrestamosRealizados;
 var cantidadPrestamosTotales;
+var scannerCodigo = "";
 
 $(document).ready(function(){
 	
 	$('#detalleInfracciones').css('display', 'none');
 	$('#mensajeInfracciones').css('display', 'none');
+	
+	function marcarSalida(inputValue, cont){
+		if(inputValue != null ){
+			
+			var finPrestamo ={
+		        	"numDocumentoSolicitante": inputValue
+		    };
+			
+			//Busco el recurso que esta usando el usuario y lo almaceno en la variable recurso
+			$.ajax({
+                url :  $variableUtil.root + "consultaPrestamosTabla",
+                type : 'GET',
+                data : {
+                	accion: "buscarTodos"
+                },
+                beforeSend : function(xhr) {
+    				xhr.setRequestHeader('Content-Type', 'application/json');
+    				xhr.setRequestHeader("X-CSRF-TOKEN", $variableUtil.csrf);
+    			},
+    			statusCode : {
+    				400 : function(response) {
+    					swal(response.responseJSON);
+    				}
+    			},
+    			statusCode : {
+    				400 : function(response) {
+    					swal(response.responseJSON);
+    				},
+    				500 : function(response) {
+    					swal("Error", response.responseText, "warning");
+    				}
+    			},
+    			success : function(response) {
+    				recurso = response.find(function(recurso) {
+    					  return recurso.codigoAlumno == inputValue;
+    				});
+    				
+    				//Solicito el fin de prestamo
+    				$.ajax({
+    	                url :  $variableUtil.root + "movimientoFinPrestamo",
+    	                type : 'POST',
+    	                data : JSON.stringify(finPrestamo),
+    	                beforeSend : function(xhr) {
+    	    				xhr.setRequestHeader('Content-Type', 'application/json');
+    	    				xhr.setRequestHeader("X-CSRF-TOKEN", $variableUtil.csrf);
+    	    			},
+    	    			statusCode : {
+    	    				400 : function(response) {
+    	    					swal(response.responseJSON);
+    	    				}
+    	    			},
+    	    			statusCode : {
+    	    				400 : function(response) {
+    	    					swal(response.responseJSON);
+    	    				},
+    	    				500 : function(response) {
+    	    					swal("Error", response.responseText, "warning");
+    	    				}
+    	    			},
+    	    			success : function(response) {
+    	    				
+    	    				//Se analiza que imagen ponerle al nuevo html
+    	    				let idRecurso = recurso.idRecurso;
+            				let cadenaHtml ='';
+            				let observacionRecurso = $('#recurso'+idRecurso+' button').attr('observacion');
+            				let enlaceRecurso = $('#recurso'+idRecurso+' button').attr('enlace');
+            				let numRecurso = $('#recurso'+idRecurso+' button').attr('num');
+            				let keyRecurso = $('#recurso'+idRecurso+' button').attr('key');
+            				
+            				if(observacionRecurso == 'UBICADO CERCA A UN ENCHUFE'){
+            					cadenaHtml += '<img src="'+enlaceRecurso+'/cubiculo_con_corriente_verde.png" width="40" height="40"> ';
+            				}else{
+            					cadenaHtml += '<img src="'+enlaceRecurso+'/cubo_verde.png" width="40" height="40"> ';
+            				}
+            				cadenaHtml += '<p>'+numRecurso+'</p><p class="disponible">DISPONIBLE</p>';
+            				cadenaHtml += '<button num="'+numRecurso+'" enlace="'+enlaceRecurso+'" observacion="'+observacionRecurso+'" key="'+keyRecurso+'" class="btn btn-info solicitar sweet-ajax">SOLICITAR</button>'	
+            				
+            				//Se modifica el html
+            				$('#recurso'+idRecurso).html(cadenaHtml);
+            				//Se visualiza que la petición fue exitosa
+        					
+    	    				
+    	    				swal({
+    	    					  title: "Registro de salida",
+    	    					  text: "Marco su salida con exito",
+    	    					  icon: "success",
+    	    					  button: false,
+    	    					  timer: 1000,
+    	    				});
+    	    			}
+    	
+    	
+    				});
+    				
+    			}
+
+			});
+			
+		}
+	}
+	
+	//Detecta la entrada del scanner y marca la salida automatica
+	$(document).keydown(function(e)
+	{
+	    scannerCodigo = scannerCodigo+keyToValue(e.which);
+	    var auxCodigo  = scannerCodigo; 
+	    
+	    if(scannerCodigo.length >= 10){
+	    	scannerCodigo = ""; 
+	    	auxCodigo = limpiarSalidaScanner(auxCodigo);
+			
+			var inputValue = auxCodigo;
+			
+			var cont = $('.swal-overlay--show-modal').length;
+			cont = cont + $('.modal-backdrop').length;
+			
+			if(cont == 0){
+				marcarSalida(inputValue);
+			}
+			
+			
+		}
+	    
+	});
+	
+	function keyToValue(key){
+		switch (key) {
+		case 48:return 0;break;
+		case 49:return 1;break;
+		case 50:return 2;break;
+		case 51:return 3;break;
+		case 52:return 4;break;
+		case 53:return 5;break;
+		case 54:return 6;break;
+		case 55:return 7;break;
+		case 56:return 8;break;
+		case 57:return 9;break;
+		default: return "";break;
+		}
+	}
 	
 	$('#salida').click(function () {
 		swal("Registrar salida",{
@@ -18,74 +159,44 @@ $(document).ready(function(){
 			
 			inputValue = limpiarSalidaScanner(inputValue);
 			
-			if(inputValue != null){
-				var finPrestamo ={
-			        	"numDocumentoSolicitante": inputValue
-			    };
-
-				$.ajax({
-	                url :  $variableUtil.root + "movimientoFinPrestamo",
-	                type : 'POST',
-	                data : JSON.stringify(finPrestamo),
-	                beforeSend : function(xhr) {
-	    				xhr.setRequestHeader('Content-Type', 'application/json');
-	    				xhr.setRequestHeader("X-CSRF-TOKEN", $variableUtil.csrf);
-	    			},
-	    			statusCode : {
-	    				400 : function(response) {
-	    					swal(response.responseJSON);
-	    				}
-	    			},
-	    			statusCode : {
-	    				400 : function(response) {
-	    					swal(response.responseJSON);
-	    				},
-	    				500 : function(response) {
-	    					swal("Error", response.responseText, "warning");
-	    				}
-	    			},
-	    			success : function(response) {
-	    				
-	    				swal({
-	    					  title: "Registro de salida",
-	    					  text: "Marco su salida con exito",
-	    					  icon: "success",
-	    					  button: false,
-	    					  timer: 1000,
-	    				}).then((value) => {
-	    					location.reload();
-	    				});
-	    			}
-
-
-				});
-				
-			}
+			marcarSalida(inputValue);
 			
       });
 	});
-     $('body #for-each').on('click', 'button', function(){
-	        let idRecurso = $(this).attr('key');
-	        let numRecurso = $(this).attr('num');
-	        	
-	        	swal({
-	    			title: "Solicitud de recurso "+numRecurso,
-	    			text: "Ingrese su carnet de biblioteca por el scanner",
-	    			content: "input",
-	    			icon: "/siscae/resources/images/lectora.gif",
-	    		
-	    		}).then(function (inputValue) {
-
-	    			if(inputValue != null && inputValue.length != 0){
-	    				
-	    				inputValue = limpiarSalidaScanner(inputValue);
-	    				
-	    				var prestamo ={
+	//Este evento se activa cuando el usuario solicita un cubículo
+    $('body #for-each').on('click', 'button', function(){
+	   	 //Se obtendrá el id del cubículo y su número de orden (primer, segundo,...etc)
+	   	 const idRecurso = $(this).attr('key');
+	   	 const numRecurso = $(this).attr('num');
+	   	 //También se obtiene los campos para saber si esta cerca de un enchufe y el link lógico de la carpeta donde se guardan las imagenes
+	   	 const observacionRecurso = $(this).attr('observacion');
+	   	 const enlaceRecurso = $(this).attr('enlace');
+	   	 swal({
+				title: "Solicitud de recurso " + numRecurso,
+				text: "Ingrese su carnet de biblioteca por el scanner",
+				content: "input",
+				icon: "/siscae/resources/images/lectora.gif",
+			    html: true
+				
+	   	 }).then(function(valorRecibido){
+	   		 //Este evento se activa cuando el usuario apreta el botón de enviar en el modal, o simplemente apreta enter dando el valor introducido en la casilla
+	   		 //También se activa si el usuario sale del modal haciendo click afuera en este caso se recibirá null como valor
+	   		 
+	   		 if(valorRecibido != null && valorRecibido.length != 0){
+	   			 //Si entra aca hay un valor introducido por el usuario
+	   			 //NOTA FALTA CHEQUEAR SI LO INTRODUCIDO ES UN NUMERO O NO (CONSISTENCIA)
+	   			 
+	   			 //Esta función elimina los primeros dos ceros si es que lo hay
+	   			 //NOTA CHEQUEAR ESTA FUNCION CON EL ADMINISTRADOR
+	   			 valorRecibido = limpiarSalidaScanner(valorRecibido);
+					 //Se prepara el objeto prestamo para enviarlo por AJAX
+					 var prestamo ={
 		    		        	"idRecurso": idRecurso,
-		    		        	"numDocumentoSolicitante": inputValue
-		    		    };
-	    				
-	    				$.ajax({
+		    		        	"numDocumentoSolicitante": valorRecibido
+		    		 };
+					
+					
+					 $.ajax({
 		                    url :  $variableUtil.root + "movimientoPrestamo",
 		                    type : 'POST',
 		                    data : JSON.stringify(prestamo),
@@ -102,27 +213,40 @@ $(document).ready(function(){
 		        				}
 		        			},
 		        			success : function(response) {
-		        				
+		        				//Siempre que pasa por aca, la petición es exitosa, no sirve response
+		        				//Se analiza que imagen ponerle al nuevo html
+		        				let cadenaHtml ='';
+		        				if(observacionRecurso == 'UBICADO CERCA A UN ENCHUFE'){
+		        					cadenaHtml += '<img src="'+enlaceRecurso+'/cubiculo_con_corriente_rojo.png" width="40" height="40"> ';
+		        				}else{
+		        					cadenaHtml += '<img src="'+enlaceRecurso+'/cubo_rojo.png" width="40" height="40"> ';
+		        				}
+		        				cadenaHtml += '<p>'+numRecurso+'</p><p class="ocupado">OCUPADO</p>';
+		        				cadenaHtml += '<button num="'+numRecurso+'" enlace="'+enlaceRecurso+'" observacion="'+observacionRecurso+'" key="'+idRecurso+'" class="invisible">SOLICITAR</button>'
+		        				//Se modifica el html
+		        				$('#recurso'+idRecurso).html(cadenaHtml);
+		        				//Se visualiza que la petición fue exitosa
 		        				swal({
-		      					  title: "Peticion realizada con exito",
-		      					  text: "Usted esta prestando el recurso "+numRecurso,
-		      					  icon: "success",
-		      					  button: false,
-		      					  timer: 1000,
-			      				}).then((value) => {
-			      					location.reload();
-			      				});
+			      					  title: "Peticion realizada con exito",
+			      					  text: "Usted esta prestando el recurso "+numRecurso,
+			      					  icon: "success",
+			      					  button: false,
+			      					  timer: 1400
+				      				});
+		        				
 		        			}
-
-		    			});
-	    				
-	    			}else{
-	    				if(inputValue.length == 0){
-	    					swal('El número de documento no puede estar vacío');
-	    				}
-	    			}
-	          });
-      });      
+	
+		    		 });
+	   			 
+	   		 }else{
+	   			 //Si entra acá el usuario ha cerrado el modal o introdujo algo vacío
+	   			 //NOTA ARREGLAR LA VISUALIZACION DE ESTE SWAL NO RECIBE EL UTF-8
+	   			 if(valorRecibido.length == 0){
+	   				 swal('El número de documento no puede estar vacío');
+					 }
+   		 	}
+   	 	});
+     });          
       $("#desocupar").click(function(){
     		swal({
     			  title: "¿Deseas desocupar todo?",

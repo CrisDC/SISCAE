@@ -1,4 +1,8 @@
 $(document).ready(function() {
+	/***
+	if($.validator === undefined){
+		return "";
+	}**/
 	
 	$.validator.addMethod('selectlength', function(value, element, param) {
 		if ($.isArray(param)) {
