@@ -88,7 +88,7 @@
 																th:src="@{/resources/images/mesa.png}" width="100" height="100">
 																			
 															<p 	th:if = "(${prestamo.estado} == 'OCUPADO') or (${prestamo.estado} == 'LIBERABLE')"
-																th:text="${prestamo.numero}"></p>
+																th:text="${prestamo.numero}" class="numero"></p>
 																
 															<p th:if="${prestamo.estado} == 'OCUPADO'"
 																th:text="OCUPADO" class="ocupado">

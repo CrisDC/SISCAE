@@ -42,6 +42,7 @@ private Integer idAreaEstudio;
 	@Pattern(regexp = Regex.ALFANUMERICO, message = "{Pattern.AreaEstudio.nivel}")
 	private String nivel ;
 	
+	@NotNull(message = "Fecha de inicio no debe estar vacío")
 	private Integer aforo;
 	
 	

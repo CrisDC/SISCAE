@@ -6922,7 +6922,7 @@ tbody tr td:last-child {
   display: inline-block;
   outline: none;
   line-height: 30px;
-  padding: 0 20px;
+  padding: 0 10px;
   font-size: 1em;
   text-align: center;
   text-decoration: none;
@@ -6940,21 +6940,34 @@ tbody tr td:last-child {
 .ocupado{
   color: #df003a;
   text-transform: uppercase;
-  width: 95px;
+  width: 115px;
+  font-size: 18px;
+  font-weight: 700;
 
 }
 
 .disponible{
   color: #18A15F;
   text-transform: uppercase;
-  width: 95px;
+  width: 115px;
+  font-size: 18px;
+  font-weight: 700;
 }
 
 
 .liberable{
   color: #DADF51;
   text-transform: uppercase;
-  width: 95px;
+  width: 115px;
+  font-size: 18px;
+  font-weight: 700;
+}
+
+.numero{
+	color:black;
+	font-size:30px;
+	margin-bottom:0px;
+	font-weight:700;
 }
 
 /*

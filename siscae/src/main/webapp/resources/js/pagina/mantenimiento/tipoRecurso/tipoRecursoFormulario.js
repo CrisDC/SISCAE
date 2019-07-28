@@ -20,6 +20,9 @@ $(document).ready(function() {
 				notOnlySpace : true,
 				rangelength : [ 0, 20 ]
 			},
+			maxCapacidad : {
+				required : true
+			},
 			
 		},
 		messages : {
@@ -42,6 +45,9 @@ $(document).ready(function() {
 				notOnlySpace : "El uso no puede contener solo espacios en blanco.",
 				rangelength : "El uso debe contener entre 3 y 45 car&aacute;cteres."
 			},
+			maxCapacidad : {
+				required : "Ingrese capacidad"
+			}
 		}
 	});
 });

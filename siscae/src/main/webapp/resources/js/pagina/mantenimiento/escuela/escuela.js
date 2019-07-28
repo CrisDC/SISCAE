@@ -8,6 +8,7 @@ $(document).ready(function() {
 		$filaSeleccionada : "",
 		$actualizarMantenimiento : $("#actualizarMantenimiento"),
 		idEscuelaSeleccionado : ""
+			
 	}
 	$formMantenimiento = $("#formMantenimiento");
 
@@ -20,6 +21,7 @@ $(document).ready(function() {
 			break;
 		}
 	});
+	
 	$local.tablaMantenimiento = $local.$tablaMantenimiento.DataTable({
 		"ajax" : {
 			"url" : $variableUtil.root + "escuela?accion=buscarTodos",
@@ -30,6 +32,7 @@ $(document).ready(function() {
 			"emptyTable" : "No hay registros encontrados." // Nuevo
 		},
 		"initComplete" : function() {
+			console.log($variableUtil.root);
 			$local.$tablaMantenimiento.wrap("<div class='table-responsive'></div>");
 			//$tablaFuncion.aniadirFiltroDeBusquedaEnEncabezado(this, $local.$tablaMantenimiento);
 		},
@@ -52,6 +55,7 @@ $(document).ready(function() {
 			"title" : 'Acción'
 		} ]
 	});
+	
 	$local.$tablaMantenimiento.find("thead").on('keyup', 'input', function() {
 		$local.tablaMantenimiento.column($(this).parent().index() + ':visible').search(this.value).draw();
 	});
@@ -106,6 +110,7 @@ $(document).ready(function() {
 			url : $variableUtil.root + "escuela",
 			data : JSON.stringify(escuela),
 			beforeSend : function(xhr) {
+				$('#modalMantenimiento').modal('hide');
 				$local.$registrarMantenimiento.attr("disabled", true).find("i").removeClass("fa-floppy-o").addClass("fa-spinner fa-pulse fa-fw");
 				xhr.setRequestHeader('Content-Type', 'application/json');
 				xhr.setRequestHeader("X-CSRF-TOKEN", $variableUtil.csrf);
@@ -118,8 +123,9 @@ $(document).ready(function() {
 			},
 			success : function(escuelaResponse) {
 				$funcionUtil.notificarException(escuelaResponse, "fa-check", "Aviso", "success");
-				var row = $local.tablaMantenimiento.row.add(escuela).draw();
-				row.show().draw(false);
+				//var row = $local.tablaMantenimiento.row.add(escuela).draw();
+				//row.show().draw(false);
+				$local.tablaMantenimiento.ajax.reload();
 				//$(row.node()).animateHighlight();
 				//$local.$modalMantenimiento.PopupWindow("close");
 				
@@ -140,14 +146,17 @@ $(document).ready(function() {
 			return;
 		}
 		var escuela = $formMantenimiento.serializeJSON();
+		console.log($formMantenimiento);
 		escuela.idEscuela = $local.idEscuelaSeleccionado;
-		
+		console.log($local.tablaMantenimiento.row($local.$filaSeleccionada).data());
+		console.log($local);
 		console.log(escuela);
 		$.ajax({
 			type : "PUT",
 			url : $variableUtil.root + "escuela",
 			data : JSON.stringify(escuela),
 			beforeSend : function(xhr) {
+				$('#modalMantenimiento').modal('hide');
 				$local.$actualizarMantenimiento.attr("disabled", true).find("i").removeClass("fa-pencil-square").addClass("fa-spinner fa-pulse fa-fw");
 				xhr.setRequestHeader('Content-Type', 'application/json');
 				xhr.setRequestHeader("X-CSRF-TOKEN", $variableUtil.csrf);
@@ -161,8 +170,9 @@ $(document).ready(function() {
 			success : function(escuelaResponse) {
 				$funcionUtil.notificarException(escuelaResponse, "fa-check", "Aviso", "success");
 				$local.tablaMantenimiento.row($local.$filaSeleccionada).remove().draw(false);
-				var row = $local.tablaMantenimiento.row.add(escuela).draw();
-				row.show().draw(false);
+				//var row = $local.tablaMantenimiento.row.add(escuela).draw();
+				//row.show().draw(false);
+                $local.tablaMantenimiento.ajax.reload();
 				//$(row.node()).animateHighlight();
 				//$local.$modalMantenimiento.PopupWindow("close");
 			},
@@ -237,8 +247,10 @@ $(document).ready(function() {
 		$funcionUtil.prepararFormularioActualizacion($formMantenimiento);
 		$local.$filaSeleccionada = $(this).parents("tr");
 		var escuela = $local.tablaMantenimiento.row($local.$filaSeleccionada).data();
+		console.log(escuela);
 		$local.idEscuelaSeleccionado = escuela.idEscuela;
 		$funcionUtil.llenarFormulario(escuela, $formMantenimiento);
+		console.log($formMantenimiento);
 		$local.$actualizarMantenimiento.removeClass("hidden");
 		$local.$registrarMantenimiento.addClass("hidden");
 		//$local.$modalMantenimiento.PopupWindow("open");//asdadasdasdsadas

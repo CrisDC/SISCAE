@@ -30,6 +30,7 @@ $(document).ready(function() {
 			"emptyTable" : "No hay registros encontrados." // Nuevo
 		},
 		"initComplete" : function() {
+			console.log($variableUtil.root);
 			$local.$tablaMantenimiento.wrap("<div class='table-responsive'></div>");
 			//$tablaFuncion.aniadirFiltroDeBusquedaEnEncabezado(this, $local.$tablaMantenimiento);
 		},
