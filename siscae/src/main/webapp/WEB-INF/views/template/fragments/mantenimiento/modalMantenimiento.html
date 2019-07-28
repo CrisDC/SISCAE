@@ -731,8 +731,14 @@
 		<div class="form-group">
 			<label class="col-lg-2 control-label">Uso</label>
 			<div class="col-lg-10">
-				<input class="form-control upperCase upperCase elemento-modificable"
-					type="text" name="uso" autofocus="autofocus" />
+				<select id="sexo" class="form-control select2 elemento-modificable"
+					name="sexo">
+					<option value="" selected="selected" disabled="disabled">Seleccione
+						el uso</option>
+					<option selected="selected" th:value="GRUPAL"
+						th:text="GRUPAL">GRUPAL</option>
+					<option selected="selected" th:value="INDIVIDUAL" th:text="INDIVIDUAL">INDIVIDUAL</option>
+				</select>
 			</div>
 		</div>
 		<div class="form-group">
