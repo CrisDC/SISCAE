@@ -15,7 +15,7 @@ $(document).ready(function() {
 				notOnlySpace : true,
 				rangelength : [ 3,20]
 			},
-            estado : {
+			idEstadoTabla : {
 				required : true,
 				notOnlySpace : true
 			},
@@ -57,8 +57,12 @@ $(document).ready(function() {
 				notOnlySpace : "La descripcion no puede contener solo espacios en blanco.",
 				rangelength : "La descripcion debe contener entre 3 y 20 car&aacute;cteres."
 			},
-			estado : {
+			idEstadoTabla : {
 				required : "Ingrese un estado",
+				number : "El estado debe contener solo números."
+			},
+			idTipoRecurso : {
+				required: "Ingrese tipo de recurso",
 				number : "El estado debe contener solo números."
 			},
 			idRecurso : {

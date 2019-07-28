@@ -27,7 +27,7 @@ $(document).ready(function() {
 		
 		botonEliminarSolicitante : "<button class='btn btn-danger eliminar-soli eliminar' data-tooltip='Eliminar'><i class='fa fa-trash-o'></i></button>",
 		botonActualizarSolicitante : "<button class='btn btn-info actualizar-soli actualizar' data-tooltip='Actualizar'><i class='fa fa-cog'></i></button>",
-		botonAniadirDetalle : "<button class='btn btn-xs btn-success aniadir-detalle' title='Añadir' data-tooltip='tooltip'><i class='fa fa-plus'></i></button>",
+		botonAniadirDetalle : "<button class='btn btn-xs btn-success aniadir-detalle'  data-tooltip='Añadir'><i class='fa fa-plus'></i></button>",
 		botonVerDetalle : "<button class='btn btn-xs btn-primary descargar' title='Descargar' data-tooltip='tooltip'><i class='fa fa-eye'></i></button>",
 		botonVerComision : "<button class='btn btn-xs btn-success ver-comisiones' title='Ver Comisiones' data-tooltip='tooltip'><i class='fa fa-money'></i></button>",
 		botonPermisos : "<button class='btn btn-xs btn-success permiso' title='Asignar permisos' data-tooltip='tooltip'><i class='fa fa-check-square-o'></i></button>",

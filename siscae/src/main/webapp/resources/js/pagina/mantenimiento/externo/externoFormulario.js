@@ -15,7 +15,7 @@ $(document).ready(function() {
 				notOnlySpace : true,
 				rangelength : [ 2, 45 ]
 			},
-			numDocumento : {
+			numeroDocumento : {
 				required : true,
 				soloalfanumericos: true,
 				rangelength : [ 8, 45]
@@ -23,6 +23,9 @@ $(document).ready(function() {
 			idEstadoTabla : {
 				required : true,
 				number:true
+			},
+			nombreCompleto : {
+				required:true
 			},
 			nombre : {
 				required : true,
@@ -46,7 +49,7 @@ $(document).ready(function() {
 				number:"El Id del Externo debe contener solo n&uacute;meros.",
 			},
 			idTipoDocumento : {
-				required : "Ingrese un Id de Tipo de documento",
+				required : "Elija un Tipo de documento",
 				number:"El Id del Tipo de documento debe contener solo n&uacute;meros.",
 			},
 			descripcionTipoDocumento : {
@@ -54,7 +57,7 @@ $(document).ready(function() {
 				notOnlySpace : "El Tipo de documento no puede contener solo espacios en blanco.",
 				rangelength : "El Tipo de documento debe contener entre 2 y 45 car&aacute;cteres."
 			},
-			numDocumento : {
+			numeroDocumento : {
 				required : "Ingrese un número de documento ",
 				soloalfanumericos : "El número de documento debe contener solo car&aacute;cteres alfanumericos.",
 				rangelength : "La número de documento debe contener entre 8 y 45 car&aacute;cteres."
@@ -62,6 +65,9 @@ $(document).ready(function() {
 			idEstadoTabla : {
 				required : "Ingrese un estado de Externo",
 				number:"El Id del Estado debe contener solo n&uacute;meros."
+			},
+			nombreCompleto : {
+				required: "Debe realizar la b&uacute;squeda de una persona"
 			},
 			nombre : {
 				required : "Ingrese un Nombre.",

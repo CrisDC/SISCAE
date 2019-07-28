@@ -6,7 +6,11 @@ $(document).ready(function() {
 				required : true,
 				number:true
 			},
-			numDocumento : {
+			idTipoDocumento :{
+				required:true,
+				number:true
+			},
+			numeroDocumento : {
 				required : true,
 				soloalfanumericos: true,
 				rangelength : [ 8, 45]
@@ -14,6 +18,9 @@ $(document).ready(function() {
 			idEstadoTabla : {
 				required : true,
 				number:true
+			},
+			nombreCompleto:{
+				required:true
 			},
 			nombre : {
 				required : true,
@@ -36,7 +43,11 @@ $(document).ready(function() {
 				required : "Ingrese un Id de Docente",
 				number:"El Id del Docente debe contener solo n&uacute;meros.",
 			},
-			numDocumento : {
+			idTipoDocumento : {
+				required : "Elija un Tipo de Documento",
+				number:"El Id del estado debe contener solo n&uacute;meros."
+			},
+			numeroDocumento : {
 				required : "Ingrese un número de documento ",
 				soloalfanumericos : "El número de documento debe contener solo car&aacute;cteres alfanumericos.",
 				rangelength : "La número de documento debe contener entre 8 y 45 car&aacute;cteres."
@@ -44,6 +55,9 @@ $(document).ready(function() {
 			idEstadoTabla : {
 				required : "Ingrese un estado de Docente",
 				number:"El Id del estado debe contener solo n&uacute;meros."
+			},
+			nombreCompleto : {
+				required: "Debe realizar la b&uacute;squeda de una persona"
 			},
 			nombre : {
 				required : "Ingrese un Nombre.",

@@ -8,6 +8,10 @@ $(document).ready(function() {
 				number : true,
 				range : [ 1, 99 ]
 			},
+			nombre : {
+				required : true,
+				notOnlySpace : true
+			},
 			descripcion : {
 				required : true,
 				notOnlySpace : true,
@@ -19,6 +23,10 @@ $(document).ready(function() {
 				required : "Ingrese un Identificador de Tabla.",
 				number : "El Identificador de Tabla debe ser un n&uacute;mero.",
 				range : "El Identificador de Tabla debe estar entre 1 y 99."
+			},
+			nombre: {
+				required :"Ingrese nombre de la Tabla",
+				notOnlySpace : "El nombre no puede contener solo espacios en blanco"
 			},
 			descripcion : {
 				required : "Ingrese una descripci&oacute;n.",

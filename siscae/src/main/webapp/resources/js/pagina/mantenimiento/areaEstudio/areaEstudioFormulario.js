@@ -20,6 +20,10 @@ $(document).ready(function() {
 				notOnlySpace : true,
 				rangelength : [ 0,45]
 			},
+			aforo: {
+				required:true,
+				notOnlySpace:true
+			}
 			
 		},
 		messages : {
@@ -42,6 +46,11 @@ $(document).ready(function() {
 				notOnlySpace : "El pabellon no puede contener solo espacios en blanco.",
 				rangelength : "La pabellon debe contener entre 3 y 45 car&aacute;cteres."
 			},
+			aforo:{
+				required:"Ingrese aforo",
+				notOnlySpace:"El aforo no puede contener solo espacios en blanco."
+			},
+			
 			
 		}
 	});

@@ -207,7 +207,7 @@
 
 				</div>
 				<input type="hidden" name="idPersona" value="all" id="idPersona">
-				<input type="text" class="form-control" name="numeroDocumento"
+				<input id="numeroDocumento" type="number" class="form-control" name="numeroDocumento"
 					placeholder="Número de Documento"> <span
 					class="input-group-btn">
 					<button class="btn btn-default" type="button" id="buscar">
@@ -221,7 +221,7 @@
 			<label class="col-lg-2 control-label">Nombre</label>
 			<div class="col-lg-10">
 				<input id="nombreCompleto"
-					class="form-control upperCase elemento-modificable" name="nombre">
+					class="form-control upperCase elemento-modificable" disabled="disabled" name="nombre">
 			</div>
 		</div>
 
@@ -231,7 +231,7 @@
 				<select id="idEstadoTabla"
 					class="form-control select2 elemento-modificable"
 					name="idEstadoTabla">
-					<option value="" selected="selected" disabled="disabled">Seleccione
+					<option value="" selected="selected">Seleccione
 						el estado</option>
 					<option th:each="estado : ${estado}"
 						th:value="${estado.idEstadoTabla}"
@@ -257,7 +257,7 @@
 
 				</div>
 				<input type="hidden" name="idPersona" value="all" id="idPersona">
-				<input type="text" class="form-control" name="numeroDocumento"
+				<input id="numeroDocumento" type="text" class="form-control" name="numeroDocumento"
 					placeholder="Número de Documento"> <span
 					class="input-group-btn">
 					<button class="btn btn-default" type="button" id="buscar">
@@ -271,7 +271,7 @@
 			<label class="col-lg-2 control-label">Nombre</label>
 			<div class="col-lg-10">
 				<input id="nombreCompleto"
-					class="form-control upperCase elemento-modificable" name="nombre">
+					class="form-control upperCase elemento-modificable" disabled="disabled" name="nombre">
 			</div>
 		</div>
 
@@ -281,7 +281,7 @@
 				<select id="idEstadoTabla"
 					class="form-control select2 elemento-modificable"
 					name="idEstadoTabla">
-					<option value="" selected="selected" disabled="disabled">Seleccione
+					<option value="" selected="selected" >Seleccione
 						el estado</option>
 					<option th:each="estado : ${estado}"
 						th:value="${estado.idEstadoTabla}"
@@ -610,7 +610,7 @@
 			<label class="col-lg-2 control-label">Aforo</label>
 			<div class="col-lg-10">
 				<input class="form-control upperCase elemento-modificable"
-					type="text" name="aforo" autofocus="autofocus" />
+					type="number" name="aforo" autofocus="autofocus" />
 			</div>
 		</div>
 	</th:block>
@@ -710,8 +710,25 @@
 			</div>
 		</div>
 	</th:block>
-
-
+     
+    <!-- Tabla de tablas -->
+    <th:block th:fragment="multiTabCab">
+		<div class="form-group">
+			<label class="col-lg-8 control-label">Nombre de la tabla</label>
+			<div class="col-lg-10">
+				<input class="form-control upperCase elemento-modificable"
+					type="text" name="nombre" autofocus="autofocus" />
+			</div>
+		</div>
+		<div class="form-group">
+			<label class="col-lg-5 control-label">Descripción</label>
+			<div class="col-lg-10">
+				<input class="form-control upperCase elemento-modificable"
+					type="text" name="descripcion" autofocus="autofocus" />
+			</div>
+		</div>
+	</th:block>
+    
 	<!-- Tabla Tipo Recurso -->
 	<th:block th:fragment="tipoRecurso">
 		<div class="form-group">
@@ -731,14 +748,19 @@
 		<div class="form-group">
 			<label class="col-lg-2 control-label">Uso</label>
 			<div class="col-lg-10">
-				<input class="form-control upperCase upperCase elemento-modificable"
-					type="text" name="uso" autofocus="autofocus" />
+				<select id="uso" class="form-control select2"
+					name="uso">
+					<option value="" selected="selected">Seleccione el uso</option>
+					<option value="GRUPAL">GRUPAL</option>
+					<option value="INDIVIDUAL">INDIVIDUAL</option>
+				</select>
 			</div>
 		</div>
+		
 		<div class="form-group">
 			<label class="col-lg-5 control-label">Maxima capacidad</label>
 			<div class="col-lg-10">
-				<input class="form-control upperCase elemento-modificable"
+				<input id="maxCapacidad" class="form-control upperCase elemento-modificable"
 					type="number" name="maxCapacidad" autofocus="autofocus" />
 			</div>
 		</div>
