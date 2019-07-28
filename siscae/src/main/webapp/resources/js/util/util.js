@@ -20,14 +20,14 @@ $(document).ready(function() {
 		posDerecho : "derecho",
 		rutaIconoSimp : this.root + "resources/css/icono-simp/",
 		botonDesalojar : "<button class='btn btn-danger desocupar-soli' title='Desocupar'><i class='fa fa-share-square'></i></button>",
-		botonEliminar : "<button class='btn btn-xs btn-danger eliminar' title='Eliminar' data-tooltip='tooltip'><i class='fa fa-trash'></i></button>",
-		botonActualizar : "<button class='btn btn-xs btn-primary actualizar' title='Actualizar' data-tooltip='tooltip'><i class='fa fa-pencil-square'></i></button>",
+		botonEliminar : "<button class='btn btn-xs btn-danger eliminar' title='Eliminar' data-tooltip='Eliminar'><i class='fa fa-trash'></i></button>",
+		botonActualizar : "<button class='btn btn-xs btn-primary actualizar' title='Actualizar' data-tooltip='Actualizar'><i class='fa fa-pencil-square'></i></button>",
 		botonActualizarNuevo : "<button type='button' class='btn btn-xs btn-info actualizar' data-tooltip='Actualizar' data-toggle='modal' data-target='#modalMantenimiento'><i class='fa fa-pencil-square'></i></button>",
 		botonEliminarNuevo : "<button type='button' class='btn btn-xs btn-danger eliminar' data-tooltip='Eliminar'><i class='fa fa-trash'></i></button>",
 		
 		botonEliminarSolicitante : "<button class='btn btn-danger eliminar-soli eliminar' data-tooltip='Eliminar'><i class='fa fa-trash-o'></i></button>",
 		botonActualizarSolicitante : "<button class='btn btn-info actualizar-soli actualizar' data-tooltip='Actualizar'><i class='fa fa-cog'></i></button>",
-		botonAniadirDetalle : "<button class='btn btn-xs btn-success aniadir-detalle' title='Añadir' data-tooltip='tooltip'><i class='fa fa-plus'></i></button>",
+		botonAniadirDetalle : "<button class='btn btn-xs btn-success aniadir-detalle'  data-tooltip='Añadir'><i class='fa fa-plus'></i></button>",
 		botonVerDetalle : "<button class='btn btn-xs btn-primary descargar' title='Descargar' data-tooltip='tooltip'><i class='fa fa-eye'></i></button>",
 		botonVerComision : "<button class='btn btn-xs btn-success ver-comisiones' title='Ver Comisiones' data-tooltip='tooltip'><i class='fa fa-money'></i></button>",
 		botonPermisos : "<button class='btn btn-xs btn-success permiso' title='Asignar permisos' data-tooltip='tooltip'><i class='fa fa-check-square-o'></i></button>",
@@ -205,14 +205,20 @@ $(document).ready(function() {
 		},
 		llenarFormulario : function(dto, formulario) {
 			$.each(dto, function(i, value) {
-				var input = formulario.find("input[name=" + i + "], select[name=" + i + "]");
-				if (input.is(":checkbox")) {
-					input.prop("checked", (value == "1" || value == "true"));
-				} else {
+				if(i=="fechaInicio"||i=="fechaFin"||i=="fechaNac"){
+					console.log(i+" "+value);
+					var input = formulario.find("input[name="+ i +"]");
 					input.val(value);
-				}
-				if (input.hasClass("select2")) {
-					input.val(value).trigger("change.select2");
+				}else{
+					var input = formulario.find("input[name=" + i + "], select[name=" + i + "]");
+					if (input.is(":checkbox")) {
+						input.prop("checked", (value == "1" || value == "true"));
+					} else {
+						input.val(value);
+					}
+					if (input.hasClass("select2")) {
+						input.val(value).trigger("change.select2");
+					}	
 				}
 			});
 		},

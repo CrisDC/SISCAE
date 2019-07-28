@@ -1,0 +1,11 @@
+/target/
+.settings/
+bin/
+.target
+.tern-project
+target/
+*.class
+.classpath
+.project
+rebel.xml
+/siscae/src/main/resources/database.properties

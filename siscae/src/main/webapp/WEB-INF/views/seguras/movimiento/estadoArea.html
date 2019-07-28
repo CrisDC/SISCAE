@@ -90,7 +90,7 @@
 											<label th:if="${existenIndividuales} == 1" >Recursos individuales</label>
 											<div class="row" id="for-each">
 												<th:block th:each="prestamo : ${recursosIndividuales}">
-													<div class="recurso">
+													<div class="recurso" th:id="${'recurso'+prestamo.idRecurso}">
 														<img th:if="(${prestamo.estado} == 'DISPONIBLE') and (${prestamo.tipoRecurso} == 'CUBICULO') and (${prestamo.observacion} == 'UBICADO CERCA A UN ENCHUFE') " 
 														    th:src="@{/resources/images/cubiculo_con_corriente_verde.png}" width="40" height="40"> 
 														<img th:if="(${prestamo.estado} == 'DISPONIBLE') and (${prestamo.tipoRecurso} == 'CUBICULO') and (${prestamo.observacion} != 'UBICADO CERCA A UN ENCHUFE') "
@@ -103,11 +103,11 @@
 															th:src="@{/resources/images/cubiculo_con_corriente_amarillo.png}" width="40" height="40"> 
 														<img th:if="(${prestamo.estado} == 'LIBERABLE') and (${prestamo.tipoRecurso} == 'CUBICULO') and (${prestamo.observacion} != 'UBICADO CERCA A UN ENCHUFE') "
 															th:src="@{/resources/images/cubo_amarillo.png}" width="40" height="40">
-														<p th:text="${prestamo.numero}"></p>
+														<p th:text="${prestamo.numero}" class="numero"></p>
 														<p th:if="${prestamo.estado} == 'DISPONIBLE'" th:text="DISPONIBLE" class="disponible"></p>
 														<p th:if="${prestamo.estado} == 'OCUPADO'" th:text="OCUPADO" class="ocupado"></p>
 														<p th:if="${prestamo.estado} == 'LIBERABLE'" th:text="LIBERABLE" class="liberable"></p>
-														<button th:num="${prestamo.numero}" th:key="${prestamo.idRecurso}" th:class="${prestamo.estado} == 'DISPONIBLE' ? 'btn btn-info solicitar sweet-ajax' : 'invisible' ">SOLICITAR</button>
+														<button th:num="${prestamo.numero}" th:enlace="@{/resources/images}" th:observacion="${prestamo.observacion}" th:key="${prestamo.idRecurso}" th:class="${prestamo.estado} == 'DISPONIBLE' ? 'btn btn-info solicitar sweet-ajax' : 'invisible' ">SOLICITAR</button>
 													</div>
 												</th:block>
 											</div>
@@ -328,8 +328,8 @@
 			th:src="@{/resources/js/guiuser/lib/bootstrap/js/bootstrap.min.js}"></script>
 		<!-- slimscrollbar scrollbar JavaScript -->
 		<script th:src="@{/resources/js/guiuser/jquery.slimscroll.js}"></script>
-		<!--Menu sidebar 
-		<script th:src="@{/resources/js/guiuser/sidebarmenu.js}"></script>-->
+		<!--Menu sidebar -->
+		<script th:src="@{/resources/js/guiuser/sidebarmenu.js}"></script>
 		<!--stickey kit -->
 		<script
 			th:src="@{/resources/js/guiuser/lib/sticky-kit-master/dist/sticky-kit.min.js}"></script>

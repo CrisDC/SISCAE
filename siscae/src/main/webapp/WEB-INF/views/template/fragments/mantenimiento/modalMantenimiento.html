@@ -41,7 +41,7 @@
 	<!-- TABLA Persona -->
 	<th:block th:fragment="persona">
 		<div class="form-group">
-			<label class="col-lg-2 control-label">Tipo de documento</label>
+			<label class="col-lg-5 control-label" style="max-width:50%;">Tipo de documento</label>
 			<div class="col-lg-10">
 				<select id="idTipoDocumento"
 					class="form-control select2 elemento-modificable"
@@ -55,32 +55,32 @@
 			</div>
 		</div>
 		<div class="form-group">
-			<label class="col-lg-2 control-label">Número de Documento</label>
+			<label class="col-lg-5 control-label">Número de Documento</label>
 			<div class="col-lg-10">
 				<input class="form-control numbersOnly elemento-modificable"
 					name="numDocumento" autofocus="autofocus" />
 			</div>
 		</div>
 		<div class="form-group">
-			<label class="col-lg-2 control-label">Nombre</label>
+			<label class="col-lg-5 control-label">Nombre</label>
 			<div class="col-lg-10">
 				<input class="form-control" name="nombre">
 			</div>
 		</div>
 		<div class="form-group">
-			<label class="col-lg-2 control-label">Apellido Paterno </label>
+			<label class="col-lg-5 control-label">Apellido Paterno </label>
 			<div class="col-lg-10">
 				<input class="form-control" name="appPaterno">
 			</div>
 		</div>
 		<div class="form-group">
-			<label class="col-lg-2 control-label">Apellido Materno</label>
+			<label class="col-lg-5 control-label">Apellido Materno</label>
 			<div class="col-lg-10">
 				<input class="form-control" name="appMaterno">
 			</div>
 		</div>
 		<div class="form-group">
-			<label class="col-lg-2 control-label">Sexo</label>
+			<label class="col-lg-5 control-label">Sexo</label>
 			<div class="col-lg-10">
 				<select id="sexo" class="form-control select2 elemento-modificable"
 					name="sexo">
@@ -93,13 +93,13 @@
 			</div>
 		</div>
 		<div class="form-group">
-			<label class="col-lg-2 control-label">Telefono</label>
+			<label class="col-lg-5 control-label">Telefono</label>
 			<div class="col-lg-10">
 				<input class="form-control numbersOnly" name="numTelef">
 			</div>
 		</div>
 		<div class="form-group">
-			<label class="col-lg-2 control-label">Fecha de nacimiento</label>
+			<label class="col-lg-5 control-label">Fecha de nacimiento</label>
 			<div class="col-lg-10">
 				<input type="date" class="form-control" name="fechaNac">
 			</div>
@@ -143,7 +143,7 @@
 		</div>
 
 		<div class="form-group">
-			<label class="col-lg-2 control-label">Código de Alumno</label>
+			<label class="col-lg-5 control-label">Código de Alumno</label>
 			<div class="col-lg-10">
 				<input class="form-control upperCase elemento-modificable"
 					name="codigoAlumno">
@@ -152,7 +152,7 @@
 
 
 		<div class="form-group">
-			<label class="col-lg-2 control-label">Estado del Alumno </label>
+			<label class="col-lg-5 control-label">Estado del Alumno </label>
 			<div class="col-lg-10">
 				<select id="idEstadoTabla" class="form-control select2"
 					name="idEstadoTabla">
@@ -164,7 +164,7 @@
 			</div>
 		</div>
 		<div class="form-group">
-			<label class="col-lg-2 control-label">Tipo Académico</label>
+			<label class="col-lg-5 control-label">Tipo Académico</label>
 			<div class="col-lg-10">
 				<select id="idTipoAcademico" class="form-control select2"
 					name="idTipoAcademico">
@@ -177,7 +177,7 @@
 			</div>
 		</div>
 		<div class="form-group">
-			<label class="col-lg-2 control-label">Escuela a la que
+			<label class="col-lg-8 control-label">Escuela a la que
 				pertenece</label>
 			<div class="col-lg-10">
 				<select id="idEscuela" class="form-control select2" name="idEscuela">
@@ -207,7 +207,7 @@
 
 				</div>
 				<input type="hidden" name="idPersona" value="all" id="idPersona">
-				<input type="text" class="form-control" name="numeroDocumento"
+				<input id="numeroDocumento" type="number" class="form-control" name="numeroDocumento"
 					placeholder="Número de Documento"> <span
 					class="input-group-btn">
 					<button class="btn btn-default" type="button" id="buscar">
@@ -221,17 +221,17 @@
 			<label class="col-lg-2 control-label">Nombre</label>
 			<div class="col-lg-10">
 				<input id="nombreCompleto"
-					class="form-control upperCase elemento-modificable" name="nombre">
+					class="form-control upperCase elemento-modificable" disabled="disabled" name="nombre">
 			</div>
 		</div>
 
 		<div class="form-group">
-			<label class="col-lg-2 control-label">Estado del Docente </label>
+			<label class="col-lg-5 control-label">Estado del Docente </label>
 			<div class="col-lg-10">
 				<select id="idEstadoTabla"
 					class="form-control select2 elemento-modificable"
 					name="idEstadoTabla">
-					<option value="" selected="selected" disabled="disabled">Seleccione
+					<option value="" selected="selected">Seleccione
 						el estado</option>
 					<option th:each="estado : ${estado}"
 						th:value="${estado.idEstadoTabla}"
@@ -257,7 +257,7 @@
 
 				</div>
 				<input type="hidden" name="idPersona" value="all" id="idPersona">
-				<input type="text" class="form-control" name="numeroDocumento"
+				<input id="numeroDocumento" type="text" class="form-control" name="numeroDocumento"
 					placeholder="Número de Documento"> <span
 					class="input-group-btn">
 					<button class="btn btn-default" type="button" id="buscar">
@@ -271,7 +271,7 @@
 			<label class="col-lg-2 control-label">Nombre</label>
 			<div class="col-lg-10">
 				<input id="nombreCompleto"
-					class="form-control upperCase elemento-modificable" name="nombre">
+					class="form-control upperCase elemento-modificable" disabled="disabled" name="nombre">
 			</div>
 		</div>
 
@@ -281,7 +281,7 @@
 				<select id="idEstadoTabla"
 					class="form-control select2 elemento-modificable"
 					name="idEstadoTabla">
-					<option value="" selected="selected" disabled="disabled">Seleccione
+					<option value="" selected="selected" >Seleccione
 						el estado</option>
 					<option th:each="estado : ${estado}"
 						th:value="${estado.idEstadoTabla}"
@@ -297,19 +297,19 @@
 	<th:block th:fragment="horario">
 
 		<div class="form-group">
-			<label class="col-lg-2 control-label">Hora de inicio</label>
+			<label class="col-lg-5 control-label">Hora de inicio</label>
 			<div class="col-lg-10">
 				<input  class="form-control" name="horaInicioAlt">
 			</div>
 		</div>
 		<div class="form-group">
-			<label class="col-lg-2 control-label">Hora de fin</label>
+			<label class="col-lg-5 control-label">Hora de fin</label>
 			<div class="col-lg-10">
 				<input  class="form-control" name="horaFinAlt">
 			</div>
 		</div>
 		<div class="form-group">
-			<label class="col-lg-2 control-label">Tiempo máximo</label>
+			<label class="col-lg-5 control-label">Tiempo máximo</label>
 			<div class="col-lg-10">
 				<input class="form-control" name="tiempoMax">
 			</div>
@@ -321,7 +321,7 @@
 			</div>
 		</div>
 		<div class="form-group">
-			<label class="col-lg-2 control-label">Estado del Horario </label>
+			<label class="col-lg-5 control-label">Estado del Horario </label>
 			<div class="col-lg-10">
 				<select id="idEstadoTabla"
 					class="form-control select2 elemento-modificable"
@@ -359,7 +359,7 @@
 			</div>
 		</div>
 		<div class="form-group">
-			<label class="col-lg-2 control-label">Tipo de Horario </label>
+			<label class="col-lg-5 control-label">Tipo de Horario </label>
 			<div class="col-lg-10">
 				<select id="idTipoHorario"
 					class="form-control select2 elemento-modificable"
@@ -373,7 +373,7 @@
 			</div>
 		</div>
 		<div class="form-group">
-			<label class="col-lg-2 control-label">Área de estudio </label>
+			<label class="col-lg-5 control-label">Área de estudio </label>
 			<div class="col-lg-10">
 				<select id="idAreaEstudio"
 					class="form-control select2 elemento-modificable"
@@ -387,6 +387,9 @@
 			</div>
 		</div>
 	</th:block>
+	
+	<!--TABLA HORARIO -->
+	
 	<th:block th:fragment="infraccion">
 
 		<div class="form-group">
@@ -436,7 +439,7 @@
 	<!-- Tabla Facultad -->
 	<th:block th:fragment="facultad">
 		<div class="form-group">
-			<label class="col-lg-2 control-label">Nombre de la Facultad</label>
+			<label class="col-lg-5 control-label">Nombre de la Facultad</label>
 			<div class="col-lg-10">
 				<input class="form-control upperCase elemento-modificable"
 					name="nombre" autofocus="autofocus" />
@@ -449,7 +452,7 @@
 	<th:block th:fragment="escuela">
 
 		<div class="form-group">
-			<label class="col-lg-2 control-label">Facultad a la que
+			<label class="col-lg-8 control-label">Facultad a la que
 				pertenece</label>
 			<div class="col-lg-10">
 				<select id="idFacultad"
@@ -463,14 +466,14 @@
 			</div>
 		</div>
 		<div class="form-group">
-			<label class="col-lg-2 control-label">Codigo de Escuela</label>
+			<label class="col-lg-5 control-label">Codigo de Escuela</label>
 			<div class="col-lg-10">
 				<input class="form-control numbersOnly elemento-modificable"
 					name="codigo" autofocus="autofocus" />
 			</div>
 		</div>
 		<div class="form-group">
-			<label class="col-lg-2 control-label">Nombre de Escuela</label>
+			<label class="col-lg-5 control-label">Nombre de Escuela</label>
 			<div class="col-lg-10">
 				<input class="form-control upperCase elemento-modificable"
 					name="nombre" autofocus="autofocus" />
@@ -516,7 +519,7 @@
 		</div>
 
 		<div class="form-group">
-			<label class="col-lg-2 control-label">Código de
+			<label class="col-lg-8 control-label">Código de
 				Administrativo</label>
 			<div class="col-lg-10">
 				<input class="form-control upperCase elemento-modificable"
@@ -529,8 +532,8 @@
 	<!-- Tabla Area-Administrativo -->
 	<th:block th:fragment="areaAdministrativo">
 		<div class="form-group">
-			<label class="col-lg-2 control-label">Area de Estudio</label>
-			<div class="col-lg-10">
+			<label class="col-lg-5 control-label">Area de Estudio</label>
+			<div class="col-lg-10">	
 				<select id="idAreaEstudio" class="form-control select2"
 					name="idAreaEstudio">
 					<option value="" selected="selected">Seleccione el area de
@@ -556,14 +559,15 @@
 			</div>
 		</div>
 		<div class="form-group">
-			<label class="col-lg-2 control-label">Fecha de inicio</label>
+			<label class="col-lg-5 control-label">Fecha de inicio</label>
 			<div class="col-lg-10">
-				<input class="form-control upperCase elemento-modificable"
-					type="date" name="fechaInicio" autofocus="autofocus" />
+				<input 
+				class="form-control upperCase elemento-modificable"
+					type="date" name="fechaInicio"  autofocus="autofocus" />
 			</div>
 		</div>
 		<div class="form-group">
-			<label class="col-lg-2 control-label">Fecha de Fin</label>
+			<label class="col-lg-5 control-label">Fecha de Fin</label>
 			<div class="col-lg-10">
 				<input class="form-control upperCase elemento-modificable"
 					type="date" name="fechaFin" autofocus="autofocus" />
@@ -606,7 +610,7 @@
 			<label class="col-lg-2 control-label">Aforo</label>
 			<div class="col-lg-10">
 				<input class="form-control upperCase elemento-modificable"
-					type="text" name="aforo" autofocus="autofocus" />
+					type="number" name="aforo" autofocus="autofocus" />
 			</div>
 		</div>
 	</th:block>
@@ -632,7 +636,7 @@
 	<!-- Tabla Recurso-->
 	<th:block th:fragment="recurso">
 		<div class="form-group">
-			<label class="col-lg-2 control-label">Numero de Serie</label>
+			<label class="col-lg-5 control-label">Numero de Serie</label>
 			<div class="col-lg-10">
 				<input class="form-control  elemento-modificable" type="text"
 					name="numeroSerie" autofocus="autofocus" />
@@ -652,7 +656,7 @@
 		</div>
 
 		<div class="form-group">
-			<label class="col-lg-2 control-label">Estado del Recurso</label>
+			<label class="col-lg-5 control-label">Estado del Recurso</label>
 			<div class="col-lg-10">
 				<select id="idEstadoTabla" class="form-control select2"
 					name="idEstadoTabla">
@@ -665,7 +669,7 @@
 		</div>
 
 		<div class="form-group">
-			<label class="col-lg-2 control-label">Tipo de Recurso</label>
+			<label class="col-lg-5 control-label">Tipo de Recurso</label>
 			<div class="col-lg-10">
 				<select id="idTipoRecurso"
 					class="form-control select2 elemento-modificable"
@@ -680,7 +684,7 @@
 		</div>
 
 		<div class="form-group">
-			<label class="col-lg-2 control-label">Area de Estudio</label>
+			<label class="col-lg-5 control-label">Area de Estudio</label>
 			<div class="col-lg-10">
 				<select id="idAreaEstudio" class="form-control select2"
 					name="idAreaEstudio">
@@ -706,8 +710,25 @@
 			</div>
 		</div>
 	</th:block>
-
-
+     
+    <!-- Tabla de tablas -->
+    <th:block th:fragment="multiTabCab">
+		<div class="form-group">
+			<label class="col-lg-8 control-label">Nombre de la tabla</label>
+			<div class="col-lg-10">
+				<input class="form-control upperCase elemento-modificable"
+					type="text" name="nombre" autofocus="autofocus" />
+			</div>
+		</div>
+		<div class="form-group">
+			<label class="col-lg-5 control-label">Descripción</label>
+			<div class="col-lg-10">
+				<input class="form-control upperCase elemento-modificable"
+					type="text" name="descripcion" autofocus="autofocus" />
+			</div>
+		</div>
+	</th:block>
+    
 	<!-- Tabla Tipo Recurso -->
 	<th:block th:fragment="tipoRecurso">
 		<div class="form-group">
@@ -727,14 +748,19 @@
 		<div class="form-group">
 			<label class="col-lg-2 control-label">Uso</label>
 			<div class="col-lg-10">
-				<input class="form-control upperCase upperCase elemento-modificable"
-					type="text" name="uso" autofocus="autofocus" />
+				<select id="uso" class="form-control select2"
+					name="uso">
+					<option value="" selected="selected">Seleccione el uso</option>
+					<option value="GRUPAL">GRUPAL</option>
+					<option value="INDIVIDUAL">INDIVIDUAL</option>
+				</select>
 			</div>
 		</div>
+		
 		<div class="form-group">
-			<label class="col-lg-2 control-label">Maxima capacidad</label>
+			<label class="col-lg-5 control-label">Maxima capacidad</label>
 			<div class="col-lg-10">
-				<input class="form-control upperCase elemento-modificable"
+				<input id="maxCapacidad" class="form-control upperCase elemento-modificable"
 					type="number" name="maxCapacidad" autofocus="autofocus" />
 			</div>
 		</div>
