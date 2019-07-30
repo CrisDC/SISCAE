@@ -8,6 +8,7 @@ import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 
 import pe.edu.unmsm.fisi.siscae.configuracion.security.SecurityContextFacade;
@@ -47,6 +48,13 @@ public @Controller class HomeController
 		//model.addAttribute("nDias", iSecUsuarioService.numCaducidadContrasenia(principal.getName()));
 		model.addAttribute("usuario",principal.getName());
 		return "redirect:/movimiento/estadoArea";
+	}
+    
+    @CrossOrigin(origins = "http://localhost:8280")
+    @GetMapping("/hola")
+	public String irConfiguracionContrasenia(Model model, Principal principal) {
+		model.addAttribute("usuario",principal.getName());
+		return "seguras/inicio";
 	}
     
    

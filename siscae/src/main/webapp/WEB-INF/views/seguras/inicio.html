@@ -1,82 +1,163 @@
 <!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org"
+<html xmlns:th="http://www.thymeleaf.org"
 	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
-	xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4" layout:decorator="layout">
+	layout:decorate="~{layout_user}">
 <head>
-<title>Inicio</title>
+<title>Inicioxxxx</title>
 </head>
-<th:block layout:fragment="style">
-</th:block>
 <body>
-	<th:block layout:fragment="content">
-		<div class="page-content-wrap">
+	<div layout:fragment="content">
+		<div th:class="page-wrapper">
+			
 			<div class="row">
-				<div class="col-md-12 col-sm-12 col-xs-12"></div>
-				<p th:text="${nDias}" id="message"></p>
-			</div>
-			<div class="modal fade" id="myModal" tabindex="-1" data-backdrop="static" role="dialog"
-				aria-labelledby="exampleModalLabel" aria-hidden="true">
-				<div class="modal-dialog" role="document">
-					<div class="modal-content">
-						<div class="modal-header">
-							<h5 class="modal-title" id="exampleModalLabel">Cambio de ContraseÃ±a</h5>
-						</div>
-						<div class="modal-body">
-							<form id="formContrasenia" class="form-horizontal" role="form">
-								<div class="form-group">
-									<label class="col-sm-5 control-label"> ContraseÃ±a Actual</label>
-									<div class="col-sm-6">
-										<input type="password" class="form-control" name="password"></input>
-									</div>
-								</div>
-								<div class="form-group">
-									<label for="inputEmail3" class="col-sm-5 control-label"> Nueva ContraseÃ±a</label>
-									<div class="col-sm-6">
-										<input type="password" class="form-control" id="nuevoPassword" name="nuevoPassword"></input>
-									</div>
-								</div>
-								<div class="form-group">
-									<label for="inputEmail3" class="col-sm-5 control-label"> Confirmar ContraseÃ±a</label>
-									<div class="col-sm-6">
-										<input type="password" class="form-control" id="nuevo_password_2" name="nuevoPassword2"></input>
-									</div>
-								</div>
-								<div class="form-group" id="idUsuario">
-									<div class="col-sm-4">
-										<input type="text" class="form-control" th:value="${usuario}" name="idUsuario"></input>
-									</div>
-								</div>
-								<br></br>
-								<div class="form-group">
-									<div class="col-lg-12 text-center">
-										<button id="actualizarContrasenia" type="button" class="btn btn-success">
-											<i class="fa fa-refresh"></i> Actualizar
-										</button>
-									</div>
-								</div>
-							</form>
-						</div>
-					</div>
+				<div class="col offset-md-3 col-md-6">
+					<form>
+					  <div class="form-group">
+					    <label for="contraAnterior">Contraseña anterior</label>
+					    <input type="password" class="form-control" id="contraAnterior">
+					  </div>
+					  <div class="form-group">
+					    <label for="contraNueva">Contraseña nueva</label>
+					    <input type="password" class="form-control" id="contraNueva">
+					  </div>
+					  <div class="form-group">
+					    <label for="contraNuevaRep">Repite contraseña nueva</label>
+					    <input type="password" class="form-control" id="contraNuevaRep">
+					  </div>
+					  <a th:id="btnEnviarDatos" type="submit" href="#" class="btn btn-primary">Cambiar</a>
+					</form>
+					<p th:text="|Bienvenido: ${#httpSession.getAttribute('nombreAdministrativo')}|"></p>
+					<input type="text" class="form-control" id="contraPasada">
 				</div>
 			</div>
 		</div>
-	</th:block>
-	<th:block layout:fragment="script">
-		<script th:src="@{/resources/js/bootstrap/bootstrap-notify.min.js}"></script>
-		<script th:src="@{/resources/js/pagina/inicioModal/inicioModal.js}"></script>
+		
+		
+		
+
+		<!-- All Jquery -->
+		<script th:src="@{/resources/js/guiuser/lib/jquery/jquery.min.js}"></script>
+		<!-- Bootstrap tether Core JavaScript -->
+		<script
+			th:src="@{/resources/js/guiuser/lib/bootstrap/js/popper.min.js}"></script>
+		<script
+			th:src="@{/resources/js/guiuser/lib/bootstrap/js/bootstrap.min.js}"></script>
+		<!-- slimscrollbar scrollbar JavaScript -->
+		<script th:src="@{/resources/js/guiuser/jquery.slimscroll.js}"></script>
+		<!--Menu sidebar -->
+		<script th:src="@{/resources/js/guiuser/sidebarmenu.js}"></script>
+		<!--stickey kit -->
+		<script
+			th:src="@{/resources/js/guiuser/lib/sticky-kit-master/dist/sticky-kit.min.js}"></script>
+		<!--Custom JavaScript -->
+
+		<script th:src="@{/resources/js/guiuser/scripts.js}"></script>
+		<!-- scripit init-->
+		<script th:src="@{/resources/js/guiuser/custom.min.js}"></script>
+		<script src="https://cdn.jsdelivr.net/npm/sweetalert2@8"></script>
+		<script th:src="@{/resources/js/util/util.js}"></script>
+		<script th:src="@{/resources/js/util/formularioUtil.js}"></script>
+
+		<!-- JS de datatables -->
 		<script th:src="@{/resources/js/datatables/jquery.dataTables.min.js}"></script>
-		<script th:src="@{/resources/js/datatables/dataTables.bootstrap.min.js}"></script>
 		<script th:src="@{/resources/js/datatables/dataTables.responsive.min.js}"></script>
 		<script th:src="@{/resources/js/datatables/dataTables.show.rows.js}"></script>
-		<script th:src="@{/resources/js/bootstrap/bootstrap-notify.min.js}"></script>
-		<script th:src="@{/resources/js/jquery/popupwindow.min.js}"></script>
-		<script th:src="@{/resources/js/jquery/jquery.serializejson.min.js}"></script>
-		<script th:src="@{/resources/js/jquery/jquery.validate.min.js}"></script>
-		<script th:src="@{/resources/js/jquery/additional-methods.min.js}"></script>
-		<script th:src="@{/resources/js/jquery/jquery-confirm.min.js}"></script>
-		<script th:src="@{/resources/js/jquery/jquery.animate.min.js}"></script>
-		<script th:src="@{/resources/js/jquery/select2.full.min.js}"></script>
-		<script th:src="@{/resources/js/util/formularioUtil.js}"></script>
-	</th:block>
+		<script th:src="@{/resources/js/datatables/dataTables.rowsGroup.js}"></script>
+
+		
+		<!-- JS de envio de peticion -->
+		<script
+			th:src="@{/resources/js/pagina/consulta/movimientos/prestamos/prestamos.js}"></script>
+		<script
+			th:src="@{/resources/js/pagina/consulta/movimientos/prestamos/initTablaRecursos.js}"></script>
+
+		<script>
+			$("#btnEnviarDatos").on("click",function(){
+				alert("Me hiciste click");
+				let contraAnterior = $("#contraAnterior").val();
+				let contraNueva = $("#contraNueva").val();
+				let contraNuevaRep = $("#contraNuevaRep").val();
+				
+				let contraPasada = $("#contraPasada").val();
+				alert(contraAnterior);
+				if(contraNueva === contraNuevaRep){
+					//Las contraseñas nuevas son iguales
+					alert(contraNueva);
+					
+					//Aca se tiene que traer la contraseña de ese usuario encriptada
+					//Esta parte se llenará cuando este lista la parte de Alexis
+					/*
+					$.ajax({
+					    url : 'http://bcrypt.org/api/check-password.json',
+
+					    // la información a enviar
+					    // (también es posible utilizar una cadena de datos)
+					    data : { 
+					    			hash : '$2a$06$8DhuLEJC5PS8a8XfuvybUOqwLj4ykJ091lyVBF8R9GlYstIfZMjVm',
+					    			password : 'super-secret'
+					    		},
+
+					    // especifica si será una petición POST o GET
+					    type : 'POST',
+
+					    // el tipo de información que se espera de respuesta
+					    dataType : 'json',
+
+					    // código a ejecutar si la petición es satisfactoria;
+					    // la respuesta es pasada como argumento a la función
+					    success : function(json) {
+					        alert(json);
+					        console.log(json);
+					    },
+
+					    // código a ejecutar si la petición falla;
+					    // son pasados como argumentos a la función
+					    // el objeto de la petición en crudo y código de estatus de la petición
+					    error : function(xhr, status) {
+					        //alert('Disculpe, existió un problema');
+					    },
+
+					    // código a ejecutar sin importar si la petición falló o no
+					    complete : function(xhr, status) {
+					        //alert('Petición realizada');
+					    }
+					});
+					*/
+					
+					var request = new XMLHttpRequest();
+
+					request.open('POST', 'http://bcrypt.org/api/check-password.json', true);
+
+					request.onreadystatechange = function () {
+
+					if (request.readyState ==4 && request.status ==200) {
+
+					     var response = JSON.parse(this.response);
+
+					     var sessionId = response.sessionId;
+
+					     //Use this sessionId in all other calls
+
+					  }
+
+					}
+
+					// Send request
+
+					request.send('{"hash":"$2a$06$8DhuLEJC5PS8a8XfuvybUOqwLj4ykJ091lyVBF8R9GlYstIfZMjVm","password":"super-secret"}');
+					
+				}else{
+					Swal.fire({
+						  type: 'error',
+						  title: 'Error',
+						  text: 'Los campos para la contraseña nueva deben ser iguales!'
+						})
+				}
+			})
+		</script>
+
+
+	</div>
+
 </body>
 </html>
