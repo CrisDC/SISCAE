@@ -279,10 +279,11 @@ $(document).ready(function() {
 	$local.$tablaMantenimiento.children("tbody").on("click", ".eliminar", function() {
 		$local.$filaSeleccionada = $(this).parents("tr");
 		var alumno = $local.tablaMantenimiento.row($local.$filaSeleccionada).data();
+		console.log(alumno);
 		$.confirm({
 			icon : "fa fa-info-circle",
 			title : "Aviso",
-			content : "¿Desea eliminar al alumno <b>'" + alumno.idAlumno + " - "+ alumno.codigoAlumno + "-" + alumno.nombre + " "+alumno.appPaterno+" "+alumno.appMaterno + "'<b/>?",
+			content : "¿Desea eliminar al alumno <b>" + alumno.nombres + " "+alumno.appPaterno+" "+alumno.appMaterno + " con código "+alumno.codigoAlumno +"<b/>?",
 			buttons : {
 				Aceptar : {
 					action : function() {
