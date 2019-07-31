@@ -55,16 +55,16 @@ $(document).ready(function() {
 			"title" : "Nombre Adm."
 		}, {
 			"data" : 'appPatAdministrativo',
-			"title" : "Apellido Pat Adm."
+			"title" : "Apellido Pat. Adm."
 		}, {
 			"data" : 'appMatAdministrativo',
-			"title" : "Apellido Mat Adm."
+			"title" : "Apellido Mat. Adm."
 		},  {
 			"data" : 'cargo',
 			"title" : "Cargo"
 		}, {
 			"data" : 'fechaInicio',
-			"title" : "Fecha de iniciogg"
+			"title" : "Fecha de inicio"
 		}, {
 			"data" : 'fechaFin',
 			"title" : "Fecha Fin"
