@@ -14,9 +14,11 @@ $(document).ready(function() {
 	
 	$funcionUtil.crearSelect2($local.$selectTipoDocumento,"Seleccione el tipo de documento");
 	$funcionUtil.crearSelect2($local.$selectSexo,"Seleccione el sexo");
-	
 	$formMantenimiento = $("#formMantenimiento");
-
+	
+	//Cambia el tamaño del modal
+	$('#modalMantenimiento .modal-dialog').addClass('modal-lg');
+	
 	$.fn.dataTable.ext.errMode = 'none';
 
 	$local.$tablaMantenimiento.on('xhr.dt', function(e, settings, json, xhr) {
@@ -126,6 +128,9 @@ $(document).ready(function() {
 			return;
 		}
 		var persona = $formMantenimiento.serializeJSON();
+		
+		console.log(persona);
+		
 		$.ajax({
 			type : "POST",
 			url : $variableUtil.root + "persona",
@@ -138,17 +143,15 @@ $(document).ready(function() {
 			},
 			statusCode : {
 				400 : function(response) {
-					$funcionUtil.limpiarMensajesDeError($formMantenimiento);
-					$funcionUtil.mostrarMensajeDeError(response.responseJSON, $formMantenimiento);
+					swal(response.responseJSON);
+				},
+				500 : function(response) {
+					swal("Error", response.responseText, "warning");
 				}
 			},
 			success : function(response) {
 				$funcionUtil.notificarException(response, "fa-check", "Aviso", "success");
-				//var row = $local.tablaMantenimiento.row.add(persona).draw();
-				//row.show().draw(false);
 				$local.tablaMantenimiento.ajax.reload();
-				//$(row.node()).animateHighlight();
-				//$local.$modalMantenimiento.PopupWindow("close");
 			},
 			error : function(response) {
 			},
@@ -192,8 +195,10 @@ $(document).ready(function() {
 			},
 			statusCode : {
 				400 : function(response) {
-					$funcionUtil.limpiarMensajesDeError($formMantenimiento);
-					$funcionUtil.mostrarMensajeDeError(response.responseJSON, $formMantenimiento);
+					swal(response.responseJSON);
+				},
+				500 : function(response) {
+					swal("Error", response.responseText, "warning");
 				}
 			},
 			success : function(response) {
@@ -219,7 +224,7 @@ $(document).ready(function() {
 		$.confirm({
 			icon : "fa fa-info-circle",
 			title : "Aviso",
-			content : "¿Desea eliminar a la persona <b>'" + persona.idPersona + " - " +persona.numDocumento+"-"+ persona.nombre+" "+persona.appPaterno+" "+persona.appMaterno + "'<b/>?",
+			content : "¿Desea eliminar a la persona <b>"+persona.nombre+" "+persona.appPaterno+" "+persona.appMaterno + "</b> con número de documento <b>"+ persona.numDocumento +"<b/>?",
 			buttons : {
 				Aceptar : {
 					action : function() {
