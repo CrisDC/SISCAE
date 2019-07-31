@@ -17,7 +17,7 @@ $(document).ready(function() {
 	$funcionUtil.crearSelect2($local.$selectTipoAcademico,"Seleccione el Tipo Académico");
 	$funcionUtil.crearSelect2($local.$selectEscuela,"Seleccione una escuela");
 	
-	
+	//Inicializa el selector de persona
 	$local.$selectPersona.select2({
 	  "width" : "100%",
 	  ajax: {
