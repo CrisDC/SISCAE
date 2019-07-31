@@ -41,68 +41,52 @@
 	<!-- TABLA Persona -->
 	<th:block th:fragment="persona">
 		<div class="form-group">
-			<label class="col-lg-5 control-label" style="max-width:50%;">Tipo de documento</label>
-			<div class="col-lg-10">
-				<select id="idTipoDocumento"
-					class="form-control select2 elemento-modificable"
-					name="idTipoDocumento">
-					<option value="" selected="selected">Seleccione el tipo de
-						documento</option>
-					<option th:each="tipoDocumento : ${tipoDocumento}"
-						th:value="${tipoDocumento.idItem}"
-						th:text="|${tipoDocumento.descripcion}|"></option>
-				</select>
-			</div>
+			<label class="control-label">Tipo de documento</label>
+			<select id="idTipoDocumento"
+				class="form-control select2 elemento-modificable"
+				name="idTipoDocumento">
+				<option value="" selected="selected">Seleccione el tipo de
+					documento</option>
+				<option th:each="tipoDocumento : ${tipoDocumento}"
+					th:value="${tipoDocumento.idItem}"
+					th:text="|${tipoDocumento.descripcion}|"></option>
+			</select>
 		</div>
 		<div class="form-group">
-			<label class="col-lg-5 control-label">Número de Documento</label>
-			<div class="col-lg-10">
-				<input class="form-control numbersOnly elemento-modificable"
-					name="numDocumento" autofocus="autofocus" />
-			</div>
+			<label class="control-label">Número de Documento</label>
+			<input class="form-control numbersOnly elemento-modificable"
+				name="numDocumento" autofocus="autofocus" />
 		</div>
 		<div class="form-group">
-			<label class="col-lg-5 control-label">Nombre</label>
-			<div class="col-lg-10">
-				<input class="form-control" name="nombre">
-			</div>
+			<label class="control-label">Nombre</label>
+			<input class="form-control" name="nombre">
 		</div>
 		<div class="form-group">
-			<label class="col-lg-5 control-label">Apellido Paterno </label>
-			<div class="col-lg-10">
-				<input class="form-control" name="appPaterno">
-			</div>
+			<label class="control-label">Apellido Paterno </label>
+			<input class="form-control" name="appPaterno">
 		</div>
 		<div class="form-group">
-			<label class="col-lg-5 control-label">Apellido Materno</label>
-			<div class="col-lg-10">
-				<input class="form-control" name="appMaterno">
-			</div>
+			<label class="control-label">Apellido Materno</label>
+			<input class="form-control" name="appMaterno">
 		</div>
 		<div class="form-group">
-			<label class="col-lg-5 control-label">Sexo</label>
-			<div class="col-lg-10">
-				<select id="sexo" class="form-control select2 elemento-modificable"
-					name="sexo">
-					<option value="" selected="selected" disabled="disabled">Seleccione
-						el sexo</option>
-					<option selected="selected" th:value="MASCULINO"
-						th:text="MASCULINO">Masculino</option>
-					<option selected="selected" th:value="FEMENINO" th:text="FEMENINO">Femenino</option>
-				</select>
-			</div>
+			<label class="control-label">Sexo</label>
+			<select id="sexo" class="form-control select2 elemento-modificable"
+				name="sexo">
+				<option value="" selected="selected" disabled="disabled">Seleccione
+					el sexo</option>
+				<option selected="selected" th:value="MASCULINO"
+					th:text="MASCULINO">Masculino</option>
+				<option selected="selected" th:value="FEMENINO" th:text="FEMENINO">Femenino</option>
+			</select>
 		</div>
 		<div class="form-group">
-			<label class="col-lg-5 control-label">Telefono</label>
-			<div class="col-lg-10">
-				<input class="form-control numbersOnly" name="numTelef">
-			</div>
+			<label class="control-label">Teléfono</label>
+			<input class="form-control numbersOnly" name="numTelef">
 		</div>
 		<div class="form-group">
-			<label class="col-lg-5 control-label">Fecha de nacimiento</label>
-			<div class="col-lg-10">
-				<input type="date" class="form-control" name="fechaNac">
-			</div>
+			<label class="control-label">Fecha de nacimiento</label>
+			<input type="date" class="form-control" name="fechaNac">
 		</div>
 
 	</th:block>

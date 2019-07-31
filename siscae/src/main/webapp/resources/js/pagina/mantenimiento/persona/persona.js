@@ -7,8 +7,14 @@ $(document).ready(function() {
 		$registrarMantenimiento : $("#registrarMantenimiento"),
 		$filaSeleccionada : "",
 		$actualizarMantenimiento : $("#actualizarMantenimiento"),
-		idPersonaSeleccionada : ""
-	}
+		idPersonaSeleccionada : "",
+		$selectTipoDocumento: $('#idTipoDocumento'),
+		$selectSexo: $('#sexo'),
+	} 
+	
+	$funcionUtil.crearSelect2($local.$selectTipoDocumento,"Seleccione el tipo de documento");
+	$funcionUtil.crearSelect2($local.$selectSexo,"Seleccione el sexo");
+	
 	$formMantenimiento = $("#formMantenimiento");
 
 	$.fn.dataTable.ext.errMode = 'none';
