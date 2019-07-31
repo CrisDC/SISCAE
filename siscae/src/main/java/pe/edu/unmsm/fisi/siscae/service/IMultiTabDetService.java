@@ -20,5 +20,7 @@ public interface IMultiTabDetService extends IMantenibleService<MultiTabDet> {
 	public void actualizarMultiTabDet(MultiTabDet multiTabDet);
 
 	public void eliminarMultiTabDet(MultiTabDet multiTabDet);
+	
+	public List<MultiTabDet> buscarDetalle(int idDetalle);
 
 }

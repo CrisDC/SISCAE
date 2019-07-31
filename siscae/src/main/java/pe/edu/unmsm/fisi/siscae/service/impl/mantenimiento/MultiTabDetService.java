@@ -78,4 +78,15 @@ public class MultiTabDetService extends MantenibleService<MultiTabDet> implement
 		this.eliminar(multiTabDet);
 	}
 
+	@Override
+	@Transactional(propagation = Propagation.REQUIRED)
+	public List<MultiTabDet> buscarDetalle(int idDetalle) {
+		MultiTabDet detalle = MultiTabDet.builder().idTabla(idDetalle).build();
+		
+		
+		List<MultiTabDet> lista = super.buscar(detalle,OperacionParam.TIPO_DETALLE);
+		
+		return lista;
+	}
+
 }

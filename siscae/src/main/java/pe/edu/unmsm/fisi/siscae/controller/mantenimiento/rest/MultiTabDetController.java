@@ -22,6 +22,7 @@ import pe.edu.unmsm.fisi.siscae.aspecto.enumeracion.Accion;
 import pe.edu.unmsm.fisi.siscae.aspecto.enumeracion.Comentario;
 import pe.edu.unmsm.fisi.siscae.aspecto.enumeracion.Dato;
 import pe.edu.unmsm.fisi.siscae.aspecto.enumeracion.Tipo;
+import pe.edu.unmsm.fisi.siscae.model.criterio.numeroCriterioDetalle;
 import pe.edu.unmsm.fisi.siscae.model.mantenimiento.MultiTabDet;
 import pe.edu.unmsm.fisi.siscae.service.IMultiTabDetService;
 import pe.edu.unmsm.fisi.siscae.service.excepcion.BadRequestException;
@@ -90,4 +91,18 @@ public @RestController class MultiTabDetController
         multiTabDetService.eliminarMultiTabDet(multiTabDet);
         return ResponseEntity.ok(ConstantesGenerales.ELIMINACION_EXITOSA);
     }
+    
+    @Audit(accion = Accion.CONSULTA, comentario = Comentario.ConsultaTodos)
+	@GetMapping(params = "accion=buscarIdDetalle")
+    public List<MultiTabDet> buscarDetalle(numeroCriterioDetalle criterio){
+    	
+    	int valor = Integer.parseInt(criterio.getIdDetalle());
+    	
+    	System.out.print("aca me llega el maldito null");
+    	return multiTabDetService.buscarDetalle(valor);
+    	
+    	
+    }
+    
+    
 }
