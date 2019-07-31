@@ -460,53 +460,43 @@
 	<!-- Tabla Area-Administrativo -->
 	<th:block th:fragment="areaAdministrativo">
 		<div class="form-group">
-			<label class="col-lg-5 control-label">Area de Estudio</label>
-			<div class="col-lg-10">	
-				<select id="idAreaEstudio" class="form-control select2"
-					name="idAreaEstudio">
-					<option value="" selected="selected">Seleccione el area de
-						estudio</option>
-					<option th:each="areaEstudio : ${areaEstudio}"
-						th:value="${areaEstudio.idAreaEstudio}"
-						th:text="|${areaEstudio.nombre}|"></option>
-				</select>
-			</div>
+			<label class="control-label">Area de Estudio</label>
+			<select id="idAreaEstudio" class="form-control select2"
+				name="idAreaEstudio">
+				<option value="" selected="selected">Seleccione el area de
+					estudio</option>
+				<option th:each="areaEstudio : ${areaEstudio}"
+					th:value="${areaEstudio.idAreaEstudio}"
+					th:text="|${areaEstudio.nombre}|"></option>
+			</select>
 		</div>
 		<div class="form-group">
-			<label class="col-lg-2 control-label">Administrativo</label>
-			<div class="col-lg-10">
-				<select id="idAdministrativo"
-					class="form-control select2 upperCase elemento-modificable"
-					name="idAdministrativo">
-					<option value="" selected="selected">Seleccione un
-						Administrativo</option>
-					<option th:each="administrativo : ${administrativo}"
-						th:value="${administrativo.idAdministrativo}"
-						th:text="|${administrativo.nombre}|"></option>
-				</select>
-			</div>
+			<label class="control-label">Administrativo</label>
+			<select id="idAdministrativo"
+				class="form-control select2 upperCase elemento-modificable"
+				name="idAdministrativo">
+				<option value="" selected="selected">Seleccione un
+					Administrativo</option>
+				<option th:each="administrativo : ${administrativo}"
+					th:value="${administrativo.idAdministrativo}"
+					th:text="|${administrativo.nombre}|"></option>
+			</select>
 		</div>
 		<div class="form-group">
-			<label class="col-lg-5 control-label">Fecha de inicio</label>
-			<div class="col-lg-10">
-				<input 
-				class="form-control upperCase elemento-modificable"
-					type="date" name="fechaInicio"  autofocus="autofocus" />
-			</div>
+			<label class="control-label">Fecha de inicio</label>
+			<input 
+			class="form-control upperCase elemento-modificable"
+				type="date" name="fechaInicio"  autofocus="autofocus" />
 		</div>
 		<div class="form-group">
-			<label class="col-lg-5 control-label">Fecha de Fin</label>
-			<div class="col-lg-10">
-				<input class="form-control upperCase elemento-modificable"
-					type="date" name="fechaFin" autofocus="autofocus" />
-			</div>
+			<label class="control-label">Fecha de Fin</label>
+			<input class="form-control upperCase elemento-modificable"
+				type="date" name="fechaFin" autofocus="autofocus" />
 		</div>
 		<div class="form-group">
-			<label class="col-lg-2 control-label">Cargo</label>
-			<div class="col-lg-10">
-				<input class="form-control " type="text" name="cargo"
-					autofocus="autofocus" />
-			</div>
+			<label class="control-label">Cargo</label>
+			<input class="form-control " type="text" name="cargo"
+				autofocus="autofocus" />
 		</div>
 	</th:block>
 
