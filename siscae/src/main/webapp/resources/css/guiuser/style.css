@@ -4964,7 +4964,7 @@ footer p {
   border-color: #ffb64d;
 }
 .has-error .control-label {
-  color: #fc6180;
+  color: #dd4b39;
 }
 .has-error .form-control {
   border-color: #fc6180;
@@ -7030,7 +7030,7 @@ tbody tr td:last-child {
 }
 
 .help-block{
-	color: red;
+	color: #dd4b39;
 }
 
 .boton-confirmar{
@@ -7065,3 +7065,7 @@ tbody tr td:last-child {
 .fondo-blanco{
 	background-color: #fff !important;
 }
+.select2-selection--single{
+	height: 30px !important;
+}
+

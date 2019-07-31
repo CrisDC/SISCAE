@@ -2,82 +2,41 @@ $(document).ready(function() {
 
 	$formMantenimiento.validate({
 		rules : {
-			idAdministrativo : {
+			idPersona : {
 				required : true,
-				number:true
-			},
-			codigoAdministrativo : {
-			
-				required : true,
-				soloalfanumericos: true,
-				rangelength : [ 8, 20 ]
-			},
-			idEstadoTabla : {
-				required : true,
-				number:true
-			},
-			idTipoAcademico : {
-				required : true,
-				number:true
-			},
-			descripcionTipoAcademico : {
-				required : true,
-				notOnlySpace : true,
-				rangelength : [ 3, 70 ]
-			},
-			nombre : {
-				required : true,
-				notOnlySpace : true,
-				rangelength : [ 2, 45 ]
-			},
-			appPaterno : {
-				required : true,
-				notOnlySpace : true,
-				rangelength : [ 2, 45 ]
-			},
-			appMaterno : {
-				required : true,
-				notOnlySpace : true,
-				rangelength : [ 2, 45 ]
-			}
-		},
-		messages : {
-			idAlumno : {
-				required : "Ingrese un Id de Alumno",
-				number:"El Id del Alumno debe contener solo n&uacute;meros.",
 			},
 			codigoAlumno : {
-				required : "Ingrese un C&oacute;digo ",
-				soloalfanumericos : "El C&oacute;digo debe contener solo car&aacute;cteres alfanumericos.",
-				rangelength : "La C&oacute;digo debe contener entre 8 y 10 car&aacute;cteres."
+				required : true,
+				number : true,
+				rangelength : [ 8, 8 ]
 			},
 			idEstadoTabla : {
-				required : "Ingrese un estado de Alumno",
-				number:"El Id del estado debe contener solo n&uacute;meros."
+				required : true,
 			},
 			idTipoAcademico : {
-				required : "Ingrese un Id de Tipo Academico",
-				number:"El Id del Tipo Academico debe contener solo n&uacute;meros."
+				required : true,
 			},
-			descripcionTipoAcademico : {
-				required : "Ingrese un tipo académico.",
-				notOnlySpace : "El tipo académico no puede contener solo espacios en blanco.",
-				rangelength : "El tipo Academico debe contener entre 3 y 70 car&aacute;cteres."
+			idEscuela : {
+				required : true,
 			},
-			nombre : {
-				required : "Ingrese un Nombre.",
-				notOnlySpace : "El nombre no puede contener solo espacios en blanco.",
-				rangelength : "El nombre debe contener entre 2 y 45 car&aacute;cteres."
+		},
+		messages : {
+			idPersona : {
+				required : "Seleccione una persona."
 			},
-			appPaterno : {
-				required : "Ingrese un Apellido Paterno.",
-				notOnlySpace : "El Apellido Paterno no puede contener solo espacios en blanco.",
-				rangelength : "El Apellido Paterno debe contener entre 2 y 45 car&aacute;cteres."
+			codigoAlumno : {
+				required : "Ingrese el código de alumno.",
+				number : "El código de alumno solo puede contener números.",
+				rangelength : "El código de alumno debe contener 8 digitos."
 			},
-			appMaterno : {
-				required : "Ingrese un Apellido Materno.",
-				notOnlySpace : "El Apellido Materno no puede contener solo espacios en blanco.",
-				rangelength : "El Apellido Materno debe contener entre 2 y 45 car&aacute;cteres."
+			idEstadoTabla : {
+				required : "Seleccione un estado para el alumno.",
+			},
+			idTipoAcademico : {
+				required : "Seleccione un el tipo académico.",
+			},
+			idEscuela : {
+				required : "Seleccione la escuela del alumno.",
 			}
 		}
 	});
