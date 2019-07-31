@@ -7,9 +7,6 @@ $(document).ready(function() {
 		$registrarMantenimiento : $("#registrarMantenimiento"),
 		$filaSeleccionada : "",
 		$actualizarMantenimiento : $("#actualizarMantenimiento"),
-		idAlumnoSeleccionado : "",
-		personaActual : null,	
-		$btnBuscar : $("#buscar"),
 		$selectEstadoTabla: $("#idEstadoTabla"),
 		$selectTipoAcademico: $("#idTipoAcademico"),
 		$selectEscuela: $("#idEscuela"),
@@ -21,7 +18,7 @@ $(document).ready(function() {
 	$funcionUtil.crearSelect2($local.$selectEscuela,"Seleccione una escuela");
 	
 	
-	$("#idPersona").select2({
+	$local.$selectPersona.select2({
 	  "width" : "100%",
 	  ajax: {
 	    url: $variableUtil.root+'persona',
@@ -179,7 +176,7 @@ $(document).ready(function() {
 		}
 		
 		var alumno = $formMantenimiento.serializeJSON();
-		alumno.idAlumno = $('#idPersona').find('option:selected').val();
+		alumno.idAlumno = $local.$selectPersona.find('option:selected').val();
 		
 		console.log(alumno);
 		
@@ -220,21 +217,28 @@ $(document).ready(function() {
 		$funcionUtil.prepararFormularioActualizacion($formMantenimiento);
 		$local.$filaSeleccionada = $(this).parents("tr");
 		var alumno = $local.tablaMantenimiento.row($local.$filaSeleccionada).data();
-		$local.idAlumnoSeleccionado = alumno.idAlumno;
 		$funcionUtil.llenarFormulario(alumno, $formMantenimiento);
 		$local.$actualizarMantenimiento.removeClass("hidden");
 		$local.$registrarMantenimiento.addClass("hidden");
 		//$local.$modalMantenimiento.PopupWindow("open");
+		
+		//Borra todas los opciones de persona y agrega el seleccionado
+		$local.$selectPersona.html("");
+		var nuevaOpcion = new Option(alumno.nombres+" "+alumno.appPaterno+" "+alumno.appMaterno, alumno.idAlumno, false, false);
+		$local.$selectPersona.append(nuevaOpcion).trigger('change');
+		
 		console.log(alumno);
-		console.log($local.idAlumnoSeleccionado);
+		
 	});
 	
 	$local.$actualizarMantenimiento.on("click", function() {
 		if (!$formMantenimiento.valid()) {
 			return;
 		}
+		
 		var alumno = $formMantenimiento.serializeJSON();
-		alumno.idAlumno = $local.idAlumnoSeleccionado;
+		alumno.idAlumno = $local.$selectPersona.find('option:selected').val();
+		
 		console.log(alumno);
 		
 		$.ajax({
