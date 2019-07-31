@@ -1,4 +1,5 @@
 $(document).ready(function() {
+	var $max_tamaño_error = 200;
 	var $local = {
 		$tablaMantenimiento : $("#tablaMantenimiento"),
 		tablaMantenimiento : "",
@@ -140,10 +141,14 @@ $(document).ready(function() {
 			},
 			statusCode : {
 				400 : function(response) {
-					swal(response.responseJSON);
+					response.responseText.length > $max_tamaño_error ? 
+							swal("Error", "La operación no pudo realizarse con exito.", "warning") : 
+							swal("Error", response.responseText, "warning");
 				},
 				500 : function(response) {
-					swal("Error", response.responseText, "warning");
+					response.responseText.length > $max_tamaño_error ? 
+							swal("Error", "La operación no pudo realizarse con exito.", "warning") : 
+							swal("Error", response.responseText, "warning");
 				}
 			},
 			success : function(response) {
@@ -195,10 +200,14 @@ $(document).ready(function() {
 			},
 			statusCode : {
 				400 : function(response) {
-					swal(response.responseJSON);
+					response.responseText.length > $max_tamaño_error ? 
+							swal("Error", "La operación no pudo realizarse con exito.", "warning") : 
+							swal("Error", response.responseText, "warning");
 				},
 				500 : function(response) {
-					swal("Error", response.responseText, "warning");
+					response.responseText.length > $max_tamaño_error ? 
+							swal("Error", "La operación no pudo realizarse con exito.", "warning") : 
+							swal("Error", response.responseText, "warning");
 				}
 			},
 			success : function(response) {
@@ -243,22 +252,26 @@ $(document).ready(function() {
 									beforeSend : function(xhr) {
 										xhr.setRequestHeader('Content-Type', 'application/json');
 										xhr.setRequestHeader("X-CSRF-TOKEN", $variableUtil.csrf);
+									},
+									statusCode : {
+										400 : function(response) {
+											confirmar.close();
+											response.responseText.length > $max_tamaño_error ? 
+													swal("Error", "La operación no pudo realizarse con exito.", "warning") : 
+													swal("Error", response.responseText, "warning");
+										},
+										500 : function(response) {
+											confirmar.close();
+											response.responseText.length > $max_tamaño_error ? 
+													swal("Error", "La operación no pudo realizarse con exito.", "warning") : 
+													swal("Error", response.responseText, "warning");
+											
+										}
 									}
 								}).done(function(response) {
 									$funcionUtil.notificarException(response, "fa-check", "Aviso", "success");
 									$local.tablaMantenimiento.row($local.$filaSeleccionada).remove().draw(false);
 									confirmar.close();
-								}).fail(function(xhr) {
-									confirmar.close();
-									switch (xhr.status) {
-									case 400:
-										$funcionUtil.notificarException($funcionUtil.obtenerMensajeErrorEnCadena(xhr.responseJSON), "fa-warning", "Aviso", "warning");
-										break;
-									case 409:
-										var mensaje = $funcionUtil.obtenerMensajeError("La Area Administrativo <b>" + areaAdministrativo.idAreaAdministrativo + "</b>", xhr.responseJSON, $variableUtil.accionEliminado);
-										$funcionUtil.notificarException(mensaje, "fa-warning", "Aviso", "warning");
-										break;
-									}
 								});
 							},
 							buttons : {

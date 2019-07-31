@@ -119,13 +119,11 @@ $(document).ready(function() {
 			},
 			statusCode : {
 				400 : function(response) {
-					$funcionUtil.limpiarMensajesDeError($formMantenimiento);
 					response.responseText.length > $max_tamaño_error ? 
 							swal("Error", "La operación no pudo realizarse con exito.", "warning") : 
 							swal("Error", response.responseText, "warning");
 				},
 				500 : function(response) {
-					$funcionUtil.limpiarMensajesDeError($formMantenimiento);
 					response.responseText.length > $max_tamaño_error ? 
 							swal("Error", "La operación no pudo realizarse con exito.", "warning") : 
 							swal("Error", response.responseText, "warning");
@@ -173,13 +171,11 @@ $(document).ready(function() {
 			},
 			statusCode : {
 				400 : function(response) {
-					$funcionUtil.limpiarMensajesDeError($formMantenimiento);
 					response.responseText.length > $max_tamaño_error ? 
 							swal("Error", "La operación no pudo realizarse con exito.", "warning") : 
 							swal("Error", response.responseText, "warning");
 				},
 				500 : function(response) {
-					$funcionUtil.limpiarMensajesDeError($formMantenimiento);
 					response.responseText.length > $max_tamaño_error ? 
 							swal("Error", "La operación no pudo realizarse con exito.", "warning") : 
 							swal("Error", response.responseText, "warning");
@@ -241,6 +237,10 @@ $(document).ready(function() {
 											
 										}
 									},
+								}).done(function(escuelaResponse) {
+									$funcionUtil.notificarException(escuelaResponse, "fa-check", "Aviso", "success");
+									$local.tablaMantenimiento.row($local.$filaSeleccionada).remove().draw(false);
+									confirmar.close();
 								});
 							},
 							buttons : {
