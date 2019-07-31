@@ -17,12 +17,13 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 public class Usuario {
 
-	private Integer idUsuario;
+	private Integer idUsuario;/*n_id_usuario*/
 	
 	@NotNull(message = "{NotNull.Usuario.username}")
     @NotBlank(message = "{NotBlank.Usuario.username}")
     @Length(min = 3, max = 45, message = "{Length.CodigoProcesoSwitch.username}")
 	private String nombre;
+	/*v_username*/
 	
 	@NotNull(message = "{NotNull.Usuario.pass}")
     @NotBlank(message = "{NotBlank.Usuario.pass}")
@@ -31,12 +32,11 @@ public class Usuario {
 	
 	@NotNull(message = "{NotNull.Usuario.estado}")
 	private Integer idEstadoTabla;
+	/*n_id_estado_tabla*/
 	
-	private Integer idRol;
-	
-	private Integer idPersona;
-	private String nombreRol;
+	private Integer idRol;/*n_id_rol*/
+	private Integer idPersona;/*n_id_persona*/
+	private String nombreRol;/*puede ser el */
  
-	
 	
 }

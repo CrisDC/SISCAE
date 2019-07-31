@@ -6,6 +6,7 @@ import java.util.List;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -53,6 +54,19 @@ public @Controller class HomeController
     @CrossOrigin(origins = "http://localhost:8280")
     @GetMapping("/hola")
 	public String irConfiguracionContrasenia(Model model, Principal principal) {
+    	BCryptPasswordEncoder encriptador = new BCryptPasswordEncoder();
+    	System.out.println("------------------------------------------------------");
+    	System.out.println(encriptador.encode("Bica"));
+    	if(encriptador.matches("Bica", encriptador.encode("Bica"))) {
+    		System.out.println("si es igual");
+    	}else {
+    		System.out.println("no es igual");
+    	}
+    	if(encriptador.matches("Bica2", encriptador.encode("Bica"))) {
+    		System.out.println("si es igual");
+    	}else {
+    		System.out.println("no es igual");
+    	}
 		model.addAttribute("usuario",principal.getName());
 		return "seguras/inicio";
 	}

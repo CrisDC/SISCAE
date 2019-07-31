@@ -21,6 +21,15 @@ public interface IUsuarioMapper extends IMantenibleMapper<Usuario>
 			+ "#{objeto.idEstadoTabla, jdbcType = INTEGER, mode = IN},"
 			+ "#{objeto.idRol, jdbcType = INTEGER, mode = IN},"
 			+ "#{objeto.idPersona, jdbcType = INTEGER, mode = IN})}"} )
+   	
+   	/*IN iv_operacion			VARCHAR(20),
+	IN iv_operacion_param	VARCHAR(20),
+    IN in_id_usuario		INT,
+    IN iv_nombre			VARCHAR(45),
+    IN iv_pass				VARCHAR(200),
+    IN in_id_estado_tabla	INT,
+    IN in_id_rol			INT,
+    IN in_id_persona		INT*/
 	@Options(statementType = StatementType.CALLABLE)
     public List<Usuario> mantener(Parametro parametro);
  
