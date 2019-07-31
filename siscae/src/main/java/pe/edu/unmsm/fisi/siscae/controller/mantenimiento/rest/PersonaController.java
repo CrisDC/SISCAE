@@ -1,6 +1,7 @@
 package pe.edu.unmsm.fisi.siscae.controller.mantenimiento.rest;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 import javax.validation.groups.Default;
 
@@ -14,6 +15,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import pe.edu.unmsm.fisi.siscae.aspecto.anotacion.Audit;
@@ -22,6 +24,7 @@ import pe.edu.unmsm.fisi.siscae.aspecto.enumeracion.Comentario;
 import pe.edu.unmsm.fisi.siscae.aspecto.enumeracion.Dato;
 import pe.edu.unmsm.fisi.siscae.aspecto.enumeracion.Tipo;
 import pe.edu.unmsm.fisi.siscae.model.criterio.NumeroDocumentoIdentidadCriterioBusqueda;
+import pe.edu.unmsm.fisi.siscae.model.mantenimiento.Alumno;
 import pe.edu.unmsm.fisi.siscae.model.mantenimiento.Persona;
 import pe.edu.unmsm.fisi.siscae.service.IPersonaService;
 import pe.edu.unmsm.fisi.siscae.service.excepcion.BadRequestException;
@@ -41,6 +44,14 @@ public @RestController class PersonaController {
 	public List<Persona> buscarTodos() {
 		return personaService.buscarTodos();
 	}
+	
+	@Audit(accion = Accion.CONSULTA, comentario = Comentario.ConsultaTodos)
+    @GetMapping(params = "search")
+    public List<Persona> buscar(@RequestParam("search") String search)
+    {	
+    	List<Persona> alumnos =  personaService.buscarTodos();
+    	return  alumnos.stream().filter(x -> ((x.getNombre()+" "+x.getAppPaterno()+" "+x.getAppMaterno()).toUpperCase()).contains(search.toUpperCase())).collect(Collectors.toList());
+    }
 
 	@Audit(accion = Accion.REGISTRO, comentario = Comentario.Registro)
 	@PostMapping

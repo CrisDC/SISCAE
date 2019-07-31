@@ -1,4 +1,5 @@
 $(document).ready(function() {
+	var $max_tamaño_error = 200;
 	var $local = {
 		$tablaMantenimiento : $("#tablaMantenimiento"),
 		tablaMantenimiento : "",
@@ -7,10 +8,18 @@ $(document).ready(function() {
 		$registrarMantenimiento : $("#registrarMantenimiento"),
 		$filaSeleccionada : "",
 		$actualizarMantenimiento : $("#actualizarMantenimiento"),
-		idPersonaSeleccionada : ""
-	}
+		idPersonaSeleccionada : "",
+		$selectTipoDocumento: $('#idTipoDocumento'),
+		$selectSexo: $('#sexo'),
+	} 
+	
+	$funcionUtil.crearSelect2($local.$selectTipoDocumento,"Seleccione el tipo de documento");
+	$funcionUtil.crearSelect2($local.$selectSexo,"Seleccione el sexo");
 	$formMantenimiento = $("#formMantenimiento");
-
+	
+	//Cambia el tamaño del modal
+	$('#modalMantenimiento .modal-dialog').addClass('modal-lg');
+	
 	$.fn.dataTable.ext.errMode = 'none';
 
 	$local.$tablaMantenimiento.on('xhr.dt', function(e, settings, json, xhr) {
@@ -120,6 +129,9 @@ $(document).ready(function() {
 			return;
 		}
 		var persona = $formMantenimiento.serializeJSON();
+		
+		console.log(persona);
+		
 		$.ajax({
 			type : "POST",
 			url : $variableUtil.root + "persona",
@@ -132,17 +144,19 @@ $(document).ready(function() {
 			},
 			statusCode : {
 				400 : function(response) {
-					$funcionUtil.limpiarMensajesDeError($formMantenimiento);
-					$funcionUtil.mostrarMensajeDeError(response.responseJSON, $formMantenimiento);
+					response.responseText.length > $max_tamaño_error ? 
+							swal("Error", "La operación no pudo realizarse con exito.", "warning") : 
+							swal("Error", response.responseText, "warning");
+				},
+				500 : function(response) {
+					response.responseText.length > $max_tamaño_error ? 
+							swal("Error", "La operación no pudo realizarse con exito.", "warning") : 
+							swal("Error", response.responseText, "warning");
 				}
 			},
 			success : function(response) {
 				$funcionUtil.notificarException(response, "fa-check", "Aviso", "success");
-				//var row = $local.tablaMantenimiento.row.add(persona).draw();
-				//row.show().draw(false);
 				$local.tablaMantenimiento.ajax.reload();
-				//$(row.node()).animateHighlight();
-				//$local.$modalMantenimiento.PopupWindow("close");
 			},
 			error : function(response) {
 			},
@@ -186,8 +200,14 @@ $(document).ready(function() {
 			},
 			statusCode : {
 				400 : function(response) {
-					$funcionUtil.limpiarMensajesDeError($formMantenimiento);
-					$funcionUtil.mostrarMensajeDeError(response.responseJSON, $formMantenimiento);
+					response.responseText.length > $max_tamaño_error ? 
+							swal("Error", "La operación no pudo realizarse con exito.", "warning") : 
+							swal("Error", response.responseText, "warning");
+				},
+				500 : function(response) {
+					response.responseText.length > $max_tamaño_error ? 
+							swal("Error", "La operación no pudo realizarse con exito.", "warning") : 
+							swal("Error", response.responseText, "warning");
 				}
 			},
 			success : function(response) {
@@ -213,7 +233,7 @@ $(document).ready(function() {
 		$.confirm({
 			icon : "fa fa-info-circle",
 			title : "Aviso",
-			content : "¿Desea eliminar a la persona <b>'" + persona.idPersona + " - " +persona.numDocumento+"-"+ persona.nombre+" "+persona.appPaterno+" "+persona.appMaterno + "'<b/>?",
+			content : "¿Desea eliminar a la persona <b>"+persona.nombre+" "+persona.appPaterno+" "+persona.appMaterno + "</b> con número de documento <b>"+ persona.numDocumento +"<b/>?",
 			buttons : {
 				Aceptar : {
 					action : function() {
@@ -231,22 +251,26 @@ $(document).ready(function() {
 									beforeSend : function(xhr) {
 										xhr.setRequestHeader('Content-Type', 'application/json');
 										xhr.setRequestHeader("X-CSRF-TOKEN", $variableUtil.csrf);
+									},
+									statusCode : {
+										400 : function(response) {
+											confirmar.close();
+											response.responseText.length > $max_tamaño_error ? 
+													swal("Error", "La operación no pudo realizarse con exito.", "warning") : 
+													swal("Error", response.responseText, "warning");
+										},
+										500 : function(response) {
+											confirmar.close();
+											response.responseText.length > $max_tamaño_error ? 
+													swal("Error", "La operación no pudo realizarse con exito.", "warning") : 
+													swal("Error", response.responseText, "warning");
+											
+										}
 									}
 								}).done(function(response) {
 									$funcionUtil.notificarException(response, "fa-check", "Aviso", "success");
 									$local.tablaMantenimiento.row($local.$filaSeleccionada).remove().draw(false);
 									confirmar.close();
-								}).fail(function(xhr) {
-									confirmar.close();
-									switch (xhr.status) {
-									case 400:
-										$funcionUtil.notificarException($funcionUtil.obtenerMensajeErrorEnCadena(xhr.responseJSON), "fa-warning", "Aviso", "warning");
-										break;
-									case 409:
-										var mensaje = $funcionUtil.obtenerMensajeError("La persona <b>" + persona.idPersona + " - " +persona.numDocumento+"-" +persona.nombre+" "+persona.appPaterno+" "+persona.appMaterno+ "</b>", xhr.responseJSON, $variableUtil.accionEliminado);
-										$funcionUtil.notificarException(mensaje, "fa-warning", "Aviso", "warning");
-										break;
-									}
 								});
 							},
 							buttons : {

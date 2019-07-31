@@ -1,6 +1,7 @@
 package pe.edu.unmsm.fisi.siscae.controller.mantenimiento.rest;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 import javax.validation.groups.Default;
 
@@ -14,6 +15,8 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import pe.edu.unmsm.fisi.siscae.aspecto.anotacion.Audit;
@@ -42,7 +45,7 @@ public @RestController class AlumnoController {
     {
         return alumnoService.buscarTodos();
     }
-
+    
     @Audit(accion = Accion.REGISTRO, comentario = Comentario.Registro)
     @PostMapping
     public ResponseEntity<?> registrarAlumno(

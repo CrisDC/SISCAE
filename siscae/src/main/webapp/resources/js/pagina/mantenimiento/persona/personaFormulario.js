@@ -38,6 +38,9 @@ $(document).ready(function() {
 			idTipoDocumento : {
 				required : true,
 				number:true
+			},
+			fechaNac : {
+				required : true,
 			}
 		},
 		messages : {
@@ -78,6 +81,9 @@ $(document).ready(function() {
 			idTipoDocumento : {
 				required : "Ingrese un Tipo de documento",
 				number:"El Id del Tipo de documento  debe contener solo n&uacute;meros.",
+			},
+			fechaNac: {
+				required : "Ingrese la fecha de nacimiento",
 			}
 		}
 	});

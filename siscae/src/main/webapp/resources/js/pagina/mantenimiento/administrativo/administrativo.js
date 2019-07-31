@@ -8,12 +8,56 @@ $(document).ready(function() {
 		$filaSeleccionada : "",
 		$actualizarMantenimiento : $("#actualizarMantenimiento"),
 		idAdministrativoSeleccionado : "",
-		personaActual : null,	
-		$btnBuscar : $("#buscar")
+		$selectPersona: $("#idPersona"),
 	}
 	$formMantenimiento = $("#formMantenimiento");
-
+ 
 	$.fn.dataTable.ext.errMode = 'none';
+	
+	//Inicializa el selector de persona
+	$local.$selectPersona.select2({
+	  "width" : "100%",
+	  ajax: {
+	    url: $variableUtil.root+'persona',
+	    dataType: 'json',
+	    type: 'GET',
+	    data: function (params) {
+	    	var query = {
+	          search: params.term,
+	        }
+	    	return query;
+	    },
+		processResults: function (data,params) {
+			return {
+	            results: $.map(data, function (item) {
+	                return {
+	                    text: item.nombre+" "+item.appPaterno+" "+item.appMaterno,
+	                    id: item.idPersona
+	                }
+	            })
+	        };
+	    },
+	    beforeSend : function(xhr) {
+			xhr.setRequestHeader('Content-Type', 'application/json');
+			xhr.setRequestHeader("X-CSRF-TOKEN", $variableUtil.csrf);
+		}
+	  },
+	  minimumInputLength: 1,
+	  placeholder : "Busque a la persona",
+	  language : {
+		noResults : function() {
+			return "No se encontró resultados.";
+		},
+		searching: function() {
+	      return "Buscando..";
+	    },
+	    inputTooShort: function () {
+          return "Por favor ingrese 1 o más carácteres.";
+        }
+	  },
+	  "width" : "100%",
+	  "dropdownAutoWidth" : true	  
+	});
 
 	$local.$tablaMantenimiento.on('xhr.dt', function(e, settings, json, xhr) {
 		switch (xhr.status) {
@@ -114,13 +158,13 @@ $(document).ready(function() {
 		if (!$formMantenimiento.valid()) {
 			return;
 		}
+		
 		var administrativo = $formMantenimiento.serializeJSON();
+		administrativo.idAdministrativo = $local.$selectPersona.find('option:selected').val();
 		
-		administrativo.persona = {};
-		
-		administrativo.persona.idPersona = $local.personaActual.idPersona;
-		administrativo.idAdministrativo = administrativo.persona.idPersona;
 		console.log(administrativo);
+		
+		
 		$.ajax({
 			type : "POST",
 			url : $variableUtil.root + "administrativo",
@@ -133,8 +177,10 @@ $(document).ready(function() {
 			},
 			statusCode : {
 				400 : function(response) {
-					$funcionUtil.limpiarMensajesDeError($formMantenimiento);
-					$funcionUtil.mostrarMensajeDeError(response.responseJSON, $formMantenimiento);
+					swal(response.responseJSON);
+				},
+				500 : function(response) {
+					swal("Error", response.responseText, "warning");
 				}
 			},
 			success : function(response) {
@@ -164,10 +210,14 @@ $(document).ready(function() {
 		$local.$actualizarMantenimiento.removeClass("hidden");
 		$local.$registrarMantenimiento.addClass("hidden");
 		//$local.$modalMantenimiento.PopupWindow("open");
+
+		
+		//Borra todas los opciones de persona y agrega el seleccionado
+		$local.$selectPersona.html("");
+		var nuevaOpcion = new Option(administrativo.nombre+" "+administrativo.appPaterno+" "+administrativo.appMaterno, administrativo.idAdministrativo, false, false);
+		$local.$selectPersona.append(nuevaOpcion).trigger('change');
 		
 		console.log(administrativo);
-		console.log($local.idAdministrativoSeleccionado);
-		console.log(administrativo.idAdministrativo);
 	});
 	
 	
@@ -175,10 +225,11 @@ $(document).ready(function() {
 		if (!$formMantenimiento.valid()) {
 			return;
 		}
+		
 		var administrativo = $formMantenimiento.serializeJSON();
-		administrativo.idAdministrativo = $local.idAdministrativoSeleccionado;
+		administrativo.idAdministrativo = $local.$selectPersona.find('option:selected').val();
+		
 		console.log(administrativo);
-		console.log($local.idAdministrativoSeleccionado);
 		
 		$.ajax({
 			type : "PUT",
@@ -192,8 +243,10 @@ $(document).ready(function() {
 			},
 			statusCode : {
 				400 : function(response) {
-					$funcionUtil.limpiarMensajesDeError($formMantenimiento);
-					$funcionUtil.mostrarMensajeDeError(response.responseJSON, $formMantenimiento);
+					swal(response.responseJSON);
+				},
+				500 : function(response) {
+					swal("Error", response.responseText, "warning");
 				}
 			},
 			success : function(response) {
@@ -221,7 +274,7 @@ $(document).ready(function() {
 		$.confirm({
 			icon : "fa fa-info-circle",
 			title : "Aviso",
-			content : "¿Desea eliminar al administrativo <b>'" + administrativo.idAdministrativo + "'<b/>?",
+			content : "¿Desea eliminar al administrativo <b>" + administrativo.nombre+ " "+administrativo.appPaterno+" "+administrativo.appMaterno+"<b/>?",
 			buttons : {
 				Aceptar : {
 					action : function() {
@@ -277,58 +330,6 @@ $(document).ready(function() {
 	});
 				
 		
-	
-		
-		
-		$local.$btnBuscar.on("click", function() {
-//			if (!$formMantenimiento.valid()) {
-//				return;
-//			}
-			var alumno = $formMantenimiento.serializeJSON();
-			var criterio = {idTipoDocumento   :  alumno.idTipoDocumento,
-							numeroDocumento :   alumno.numeroDocumento};
-			
-			//$('#idTipoDocumento').removeAttr('disabled');
-			//criterio.numeroDocumentoIdentidad = alumno.numeroDocumentoIdentidad; 
-			console.log("funcion");
-							
-			$.ajax({
-				type : "GET",
-				url : $variableUtil.root + "persona?accion=buscarIdPersona",
-				data : criterio,//*
-				beforeSend : function(xhr) {
-					$local.$registrarMantenimiento.attr("disabled", true).find("i").removeClass("fa-floppy-o").addClass("fa-spinner fa-pulse fa-fw");
-					xhr.setRequestHeader('Content-Type', 'application/json');
-					xhr.setRequestHeader("X-CSRF-TOKEN", $variableUtil.csrf);
-				},
-				statusCode : {
-					400 : function(response) {
-						$funcionUtil.limpiarMensajesDeError($formMantenimiento);
-						$funcionUtil.mostrarMensajeDeError(response.responseJSON, $formMantenimiento);
-					}
-				},
-				success : function(response) {
-					console.log(response)
-					
-					//$funcionUtil.notificarException(response, "fa-check", "Aviso", "success");
-					
-					$("#nombreCompleto").val(response.appPaterno + " " + response.appMaterno + ", " + response.nombre);
-					
-					$local.personaActual = response;
-					
-					
-					
-				},
-				error : function(response) {
-				},
-				complete : function(response) {
-					$local.$registrarMantenimiento.attr("disabled", false).find("i").addClass("fa-floppy-o").removeClass("fa-spinner fa-pulse fa-fw");
-					
-					
-				}
-			});	
-			
-		});
 		
 		
 		
