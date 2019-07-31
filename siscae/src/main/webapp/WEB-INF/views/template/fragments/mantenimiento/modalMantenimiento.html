@@ -408,32 +408,25 @@
 	<th:block th:fragment="escuela">
 
 		<div class="form-group">
-			<label class="col-lg-8 control-label">Facultad a la que
+			<label class="control-label">Facultad a la que
 				pertenece</label>
-			<div class="col-lg-10">
-				<select id="idFacultad"
-					class="form-control select2 elemento-modificable" name="idFacultad">
-					<option value="" selected="selected">Seleccione una
-						Facultad</option>
-					<option th:each="facultad : ${facultad}"
-						th:value="${facultad.idFacultad}"
-						th:text="|${facultad.idFacultad} - ${facultad.nombre}|"></option>
-				</select>
-			</div>
+			<select id="idFacultad" class="form-control select2 elemento-modificable" name="idFacultad">
+				<option value="" selected="selected">Seleccione una
+					Facultad</option>
+				<option th:each="facultad : ${facultad}"
+					th:value="${facultad.idFacultad}"
+					th:text="|${facultad.idFacultad} - ${facultad.nombre}|"></option>
+			</select>
 		</div>
 		<div class="form-group">
-			<label class="col-lg-5 control-label">Codigo de Escuela</label>
-			<div class="col-lg-10">
-				<input class="form-control numbersOnly elemento-modificable"
-					name="codigo" autofocus="autofocus" />
-			</div>
+			<label class="control-label">Codigo de Escuela</label>
+			<input class="form-control numbersOnly elemento-modificable"
+				name="codigo" autofocus="autofocus" />
 		</div>
 		<div class="form-group">
-			<label class="col-lg-5 control-label">Nombre de Escuela</label>
-			<div class="col-lg-10">
-				<input class="form-control upperCase elemento-modificable"
-					name="nombre" autofocus="autofocus" />
-			</div>
+			<label class="control-label">Nombre de Escuela</label>
+			<input class="form-control upperCase elemento-modificable"
+				name="nombre" autofocus="autofocus" />
 		</div>
 
 	</th:block>

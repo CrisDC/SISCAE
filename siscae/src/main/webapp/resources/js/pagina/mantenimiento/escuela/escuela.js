@@ -1,4 +1,5 @@
 $(document).ready(function() {
+	var $max_tamaño_error = 200;
 	var $local = {
 		$tablaMantenimiento : $("#tablaMantenimiento"),
 		tablaMantenimiento : "",
@@ -7,9 +8,10 @@ $(document).ready(function() {
 		$registrarMantenimiento : $("#registrarMantenimiento"),
 		$filaSeleccionada : "",
 		$actualizarMantenimiento : $("#actualizarMantenimiento"),
-		idEscuelaSeleccionado : ""
-			
+		idEscuelaSeleccionado : "",
+		$selectFacultad : $("#idFacultad"),
 	}
+	$funcionUtil.crearSelect2($local.$selectFacultad,"Seleccione una facultad");
 	$formMantenimiento = $("#formMantenimiento");
 
 	$.fn.dataTable.ext.errMode = 'none';
@@ -116,9 +118,17 @@ $(document).ready(function() {
 				xhr.setRequestHeader("X-CSRF-TOKEN", $variableUtil.csrf);
 			},
 			statusCode : {
-				400 : function(escuelaResponse) {
+				400 : function(response) {
 					$funcionUtil.limpiarMensajesDeError($formMantenimiento);
-					$funcionUtil.mostrarMensajeDeError(escuelaResponse.escuelaResponseJSON, $formMantenimiento);
+					response.responseText.length > $max_tamaño_error ? 
+							swal("Error", "La operación no pudo realizarse con exito.", "warning") : 
+							swal("Error", response.responseText, "warning");
+				},
+				500 : function(response) {
+					$funcionUtil.limpiarMensajesDeError($formMantenimiento);
+					response.responseText.length > $max_tamaño_error ? 
+							swal("Error", "La operación no pudo realizarse con exito.", "warning") : 
+							swal("Error", response.responseText, "warning");
 				}
 			},
 			success : function(escuelaResponse) {
@@ -162,9 +172,17 @@ $(document).ready(function() {
 				xhr.setRequestHeader("X-CSRF-TOKEN", $variableUtil.csrf);
 			},
 			statusCode : {
-				400 : function(escuelaResponse) {
+				400 : function(response) {
 					$funcionUtil.limpiarMensajesDeError($formMantenimiento);
-					$funcionUtil.mostrarMensajeDeError(escuelaResponse.escuelaResponseJSON, $formMantenimiento);
+					response.responseText.length > $max_tamaño_error ? 
+							swal("Error", "La operación no pudo realizarse con exito.", "warning") : 
+							swal("Error", response.responseText, "warning");
+				},
+				500 : function(response) {
+					$funcionUtil.limpiarMensajesDeError($formMantenimiento);
+					response.responseText.length > $max_tamaño_error ? 
+							swal("Error", "La operación no pudo realizarse con exito.", "warning") : 
+							swal("Error", response.responseText, "warning");
 				}
 			},
 			success : function(escuelaResponse) {
@@ -207,22 +225,22 @@ $(document).ready(function() {
 									beforeSend : function(xhr) {
 										xhr.setRequestHeader('Content-Type', 'application/json');
 										xhr.setRequestHeader("X-CSRF-TOKEN", $variableUtil.csrf);
-									}
-								}).done(function(escuelaResponse) {
-									$funcionUtil.notificarException(escuelaResponse, "fa-check", "Aviso", "success");
-									$local.tablaMantenimiento.row($local.$filaSeleccionada).remove().draw(false);
-									confirmar.close();
-								}).fail(function(xhr) {
-									confirmar.close();
-									switch (xhr.status) {
-									case 400:
-										$funcionUtil.notificarException($funcionUtil.obtenerMensajeErrorEnCadena(xhr.escuelaResponseJSON), "fa-warning", "Aviso", "warning");
-										break;
-									case 409:
-										var mensaje = $funcionUtil.obtenerMensajeError("La escuela <b>" + escuela.idEscuela + " - " + escuela.nombre + "</b>", xhr.escuelaResponseJSON, $variableUtil.accionEliminado);
-										$funcionUtil.notificarException(mensaje, "fa-warning", "Aviso", "warning");
-										break;
-									}
+									},
+									statusCode : {
+										400 : function(response) {
+											confirmar.close();
+											response.responseText.length > $max_tamaño_error ? 
+													swal("Error", "La operación no pudo realizarse con exito.", "warning") : 
+													swal("Error", response.responseText, "warning");
+										},
+										500 : function(response) {
+											confirmar.close();
+											response.responseText.length > $max_tamaño_error ? 
+													swal("Error", "La operación no pudo realizarse con exito.", "warning") : 
+													swal("Error", response.responseText, "warning");
+											
+										}
+									},
 								});
 							},
 							buttons : {
