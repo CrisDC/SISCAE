@@ -55,16 +55,13 @@ $(document).ready(function() {
 		},
 		"columnDefs" : [ {
 			"targets" : [0, 1],
-			"className" : "filtrable",
+			"className" : "all filtrable",
 			"width" : "5%",
-		}, {
-			"targets" : [0, 1],
-			"className" : "all  filtrable",
 		}, {
 			"targets" : 2,
 			"className" : "all dt-center",
 			"width" : "10%",
-			"defaultContent" : $variableUtil.botonActualizar + " " + $variableUtil.botonEliminar
+			"defaultContent" : $variableUtil.botonActualizarNuevo + " " + $variableUtil.botonEliminarNuevo
 		} ],
 		"columns" : [ {
 			"data" : 'descripcion',
@@ -78,7 +75,9 @@ $(document).ready(function() {
 		} ]
 	});
 	
-	$localDetalle.$tablaMantenimiento.wrap("<div class='table-responsive'></div>");
+	console.log($localDetalle.tablaMantenimiento);
+	
+	//$localDetalle.$tablaMantenimiento.wrap("<div class='table-responsive'></div>");
 
 	$localDetalle.$tablaMantenimiento.find("thead").on('keyup', 'input', function() {
 		$localDetalle.tablaMantenimiento.column($(this).parent().index() + ':visible').search(this.value).draw();
@@ -97,13 +96,21 @@ $(document).ready(function() {
 //		width : 900,
 //	});
 
+    $('#aniadirMantenimiento').on("click", function() {
+    	$funcionUtil.prepararFormularioRegistro($formMantenimiento);
+		$localDetalle.$actualizarMantenimiento.addClass("hidden");
+		$localDetalle.$registrarMantenimiento.removeClass("hidden");
+		$('#registrarMantenimiento').removeClass("hidden");
+    });
+    /*
 	$localDetalle.$aniadirMantenimiento.on("click", function() {
 		$funcionUtil.prepararFormularioRegistro($formMantenimiento);
+		console.log("fgfgfg");
 		$localDetalle.$actualizarMantenimiento.addClass("hidden");
 		$localDetalle.$registrarMantenimiento.removeClass("hidden");
 		//$localDetalle.$modalDetalleMantenimiento.PopupWindow("open");
 	});
-
+*/
 	$localDetalle.$modalMantenimiento.on("open.popupwindow", function() {
 		$formMantenimiento.find("input:first").focus();
 	});
@@ -125,18 +132,22 @@ $(document).ready(function() {
 			}
 		}
 	});
-
-	$localDetalle.$registrarMantenimiento.on("click", function() {
+    
+	
+	$('#registrarMantenimiento').on("click",function() {
 		if (!$formMantenimiento.valid()) {
 			return;
 		}
 		var multiTabDet = $formMantenimiento.serializeJSON();
-		multiTabDet.idTabla = $localDetalle.id_tablaSeleccionado;
+		
+		multiTabDet.idTabla = id;
+		console.log(multiTabDet);
 		$.ajax({
 			type : "POST",
 			url : $variableUtil.root + "multiTabDet",
 			data : JSON.stringify(multiTabDet),
 			beforeSend : function(xhr) {
+				$('#modalMantenimiento').modal('hide');
 				$localDetalle.$registrarMantenimiento.attr("disabled", true).find("i").removeClass("fa-floppy-o").addClass("fa-spinner fa-pulse fa-fw");
 				xhr.setRequestHeader('Content-Type', 'application/json');
 				xhr.setRequestHeader("X-CSRF-TOKEN", $variableUtil.csrf);
@@ -149,14 +160,56 @@ $(document).ready(function() {
 			},
 			success : function(response) {
 				$funcionUtil.notificarException(response, "fa-check", "Aviso", "success");
-				var row = $localDetalle.tablaMantenimiento.row.add({
+				/*var row = $localDetalle.tablaMantenimiento.row.add({
 					"idItem" : multiTabDet.idItem,
 					"descripcion" : multiTabDet.descripcion,
 					"descripcionCorta" : multiTabDet.descripcionCorta
 				}).draw();
 				row.show().draw(false);
-				$(row.node()).animateHighlight();
-				$funcionUtil.prepararFormularioRegistro($formMantenimiento);
+				$(row.node()).animateHighlight();*/
+				//$funcionUtil.prepararFormularioRegistro($formMantenimiento);
+				$localDetalle.tablaMantenimiento.ajax.reload();
+			},
+			error : function(response) {
+			},
+			complete : function(response) {
+				$localDetalle.$registrarMantenimiento.attr("disabled", false).find("i").addClass("fa-floppy-o").removeClass("fa-spinner fa-pulse fa-fw");
+			}
+		});
+	});
+	$localDetalle.$registrarMantenimiento.on("click", function() {
+		if (!$formMantenimiento.valid()) {
+			return;
+		}
+		var multiTabDet = $formMantenimiento.serializeJSON();
+		multiTabDet.idTabla = $localDetalle.id_tablaSeleccionado;
+		$.ajax({
+			type : "POST",
+			url : $variableUtil.root + "multiTabDet",
+			data : JSON.stringify(multiTabDet),
+			beforeSend : function(xhr) {
+				$('#modalMantenimiento').modal('hide');
+				$localDetalle.$registrarMantenimiento.attr("disabled", true).find("i").removeClass("fa-floppy-o").addClass("fa-spinner fa-pulse fa-fw");
+				xhr.setRequestHeader('Content-Type', 'application/json');
+				xhr.setRequestHeader("X-CSRF-TOKEN", $variableUtil.csrf);
+			},
+			statusCode : {
+				400 : function(response) {
+					$funcionUtil.limpiarMensajesDeError($formMantenimiento);
+					$funcionUtil.mostrarMensajeDeError(response.responseJSON, $formMantenimiento);
+				}
+			},
+			success : function(response) {
+				$funcionUtil.notificarException(response, "fa-check", "Aviso", "success");
+				/*var row = $localDetalle.tablaMantenimiento.row.add({
+					"idItem" : multiTabDet.idItem,
+					"descripcion" : multiTabDet.descripcion,
+					"descripcionCorta" : multiTabDet.descripcionCorta
+				}).draw();
+				row.show().draw(false);
+				$(row.node()).animateHighlight();*/
+				//$funcionUtil.prepararFormularioRegistro($formMantenimiento);
+				$localDetalle.tablaMantenimiento.ajax.reload();
 			},
 			error : function(response) {
 			},
@@ -183,13 +236,14 @@ $(document).ready(function() {
 		}
 		var multiTabDet = $formMantenimiento.serializeJSON();
 
-		multiTabDet.idTabla = $localDetalle.id_tablaSeleccionado;
+		multiTabDet.idTabla = id;
 		multiTabDet.idItem = $localDetalle.id_itemSeleccionado;
 		$.ajax({
 			type : "PUT",
 			url : $variableUtil.root + "multiTabDet",
 			data : JSON.stringify(multiTabDet),
 			beforeSend : function(xhr) {
+				$('#modalMantenimiento').modal('hide');
 				$localDetalle.$actualizarMantenimiento.attr("disabled", true).find("i").removeClass("fa-pencil-square").addClass("fa-spinner fa-pulse fa-fw");
 				xhr.setRequestHeader('Content-Type', 'application/json');
 				xhr.setRequestHeader("X-CSRF-TOKEN", $variableUtil.csrf);
@@ -202,7 +256,7 @@ $(document).ready(function() {
 			},
 			success : function(response) {
 				$funcionUtil.notificarException(response, "fa-check", "Aviso", "success");
-				$localDetalle.tablaMantenimiento.row($localDetalle.$filaSeleccionada).remove().draw(false);
+				/*$localDetalle.tablaMantenimiento.row($localDetalle.$filaSeleccionada).remove().draw(false);
 				var row = $localDetalle.tablaMantenimiento.row.add({
 					"idTabla": multiTabDet.idTabla,
 					"idItem" : multiTabDet.idItem,
@@ -210,7 +264,8 @@ $(document).ready(function() {
 					"descripcionCorta" : multiTabDet.descripcionCorta
 				}).draw();
 				row.show().draw(false);
-				$(row.node()).animateHighlight();
+				$(row.node()).animateHighlight();*/
+				$localDetalle.tablaMantenimiento.ajax.reload();
 			},
 			error : function(response) {
 				console.log(response);
@@ -227,7 +282,7 @@ $(document).ready(function() {
 		$.confirm({
 			icon : "fa fa-info-circle",
 			title : "Aviso",
-			content : "¿Desea eliminar la tabla <b>'" + multiTabDet.idItem + " - " + multiTabDet.descripcionItem + "'<b/>?",
+			content : "¿Desea eliminar la tabla <b>'" + multiTabDet.idItem + " - " + multiTabDet.descripcion + "'<b/>?",
 			buttons : {
 				Aceptar : {
 					action : function() {

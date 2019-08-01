@@ -842,11 +842,22 @@
 		</div>
 	</th:block>
 	
-	<!-- datatable de detalle -->
-	<th:block th:fragment="listaDetalle">
-	
-	
-	
+	<!-- Tabla de tablas Mantenimiento -->
+	<th:block th:fragment="multiTabDet">
+		<div class="form-group">
+			<label class="col-lg-8 control-label">Descripción</label>
+			<div class="col-lg-10">
+				<input class="form-control upperCase elemento-modificable"
+					type="text" name="descripcion" autofocus="autofocus" />
+			</div>
+		</div>
+		<div class="form-group">
+			<label class="col-lg-5 control-label">Descripción corta</label>
+			<div class="col-lg-10">
+				<input class="form-control upperCase elemento-modificable"
+					type="text" name="descripcionCorta" autofocus="autofocus" />
+			</div>
+		</div>
 	</th:block>
 	
 

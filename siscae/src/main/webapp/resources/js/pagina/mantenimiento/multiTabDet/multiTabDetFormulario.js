@@ -16,6 +16,11 @@ $(document).ready(function() {
 				required : true,
 				notOnlySpace : true,
 				rangelength : [ 3, 80 ]
+			},
+			descripcionCorta :{
+				required : true,
+				notOnlySpace : true,
+				rangelength : [ 3, 80 ]
 			}
 		},
 		messages : {
@@ -32,6 +37,11 @@ $(document).ready(function() {
 				required : "Ingrese una descripci&oacute;n.",
 				notOnlySpace : "La descripci&oacute;n no puede contener solo espacios en blanco.",
 				rangelength : "La descripci&oacute;n debe contener entre 3 y 80 car&aacute;cteres"
+			},
+			descripcionCorta : {
+				required : "Ingrese una descripci&oacute;n corta.",
+				notOnlySpace : "La descripci&oacute;n corta no puede contener solo espacios en blanco.",
+				rangelength : "La descripci&oacute;n corta debe contener entre 3 y 80 car&aacute;cteres"
 			}
 		},
 		highlight : function(element) {
