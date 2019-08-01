@@ -98,8 +98,15 @@ public @RestController class MultiTabDetController
     	
     	int valor = Integer.parseInt(criterio.getIdDetalle());
     	
-    	System.out.print("aca me llega el maldito null");
     	return multiTabDetService.buscarDetalle(valor);
+    	
+    	
+    }
+    
+    @GetMapping(params = "accion=detalle")
+    public String detalle(){
+    	
+    	return "multiTabDet";
     	
     	
     }

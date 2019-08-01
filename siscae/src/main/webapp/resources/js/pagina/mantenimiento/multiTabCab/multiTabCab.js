@@ -278,10 +278,12 @@ $(document).ready(function() {
 		var criterio = {idDetalle   :  multiTabCab.idTabla};
 		
 		console.log(criterio);
-								
+		
+		location.href= $variableUtil.root + "multiTabDet?id="+multiTabCab.idTabla;
+		/**
 		$.ajax({
 			type : "GET",
-			url : $variableUtil.root + "multiTabDet?accion=buscarIdDetalle",
+			url : $variableUtil.root + "multiTabDet?accion=detalle",
 			data : criterio,
 			beforeSend : function(xhr) {
 				$local.$registrarMantenimiento.attr("disabled", true).find("i").removeClass("fa-floppy-o").addClass("fa-spinner fa-pulse fa-fw");
@@ -295,8 +297,8 @@ $(document).ready(function() {
 				}
 			},
 			success : function(response) {
-				console.log(response)
-				
+				location.href= $variableUtil.root + response;//"multiTabDet/multiTabCab/"+multiTabCab.idTabla;
+				console.log("aaaaa");
 				//$funcionUtil.notificarException(response, "fa-check", "Aviso", "success");
 				
 			},
@@ -308,7 +310,7 @@ $(document).ready(function() {
 				
 			}
 		});	
-		
+		**/
 	});
 	
 	
