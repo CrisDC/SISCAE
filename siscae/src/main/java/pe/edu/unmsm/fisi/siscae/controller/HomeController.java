@@ -6,11 +6,17 @@ import java.util.List;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.authentication.AnonymousAuthenticationToken;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import pe.edu.unmsm.fisi.siscae.configuracion.security.SecurityContextFacade;
 import pe.edu.unmsm.fisi.siscae.controller.excepcion.anotacion.Vista;
@@ -71,5 +77,19 @@ public @Controller class HomeController
 		return "seguras/inicio";
 	}
     
-   
+    
+    //@RequestMapping(value = "/username", method = RequestMethod.GET)
+    @GetMapping("/username")
+    @ResponseBody
+    public String name() {
+    	String currentUserName= "";
+    	Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+    	if (!(authentication instanceof AnonymousAuthenticationToken)) {
+    	    currentUserName = authentication.getName();
+    	    
+    	}
+    	System.out.println("**************************************");
+    	System.out.println("nombre user es "+ currentUserName );
+    	return currentUserName;
+    }
 }

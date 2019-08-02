@@ -38,5 +38,4 @@ public class Usuario {
 	private Integer idPersona;/*n_id_persona*/
 	private String nombreRol;/*puede ser el */
  
-	
 }

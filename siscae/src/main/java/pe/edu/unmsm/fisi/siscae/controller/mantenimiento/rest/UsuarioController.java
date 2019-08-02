@@ -9,23 +9,38 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.Errors;
 import org.springframework.validation.annotation.Validated;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import pe.edu.unmsm.fisi.siscae.aspecto.anotacion.Audit;
+import pe.edu.unmsm.fisi.siscae.aspecto.enumeracion.Accion;
+import pe.edu.unmsm.fisi.siscae.aspecto.enumeracion.Comentario;
 import pe.edu.unmsm.fisi.siscae.aspecto.enumeracion.Dato;
 import pe.edu.unmsm.fisi.siscae.aspecto.enumeracion.Tipo;
+import pe.edu.unmsm.fisi.siscae.model.criterio.NumeroDocumentoIdentidadCriterioBusqueda;
+import pe.edu.unmsm.fisi.siscae.model.mantenimiento.Persona;
 import pe.edu.unmsm.fisi.siscae.model.mantenimiento.Usuario;
 import pe.edu.unmsm.fisi.siscae.service.IUsuarioService;
 import pe.edu.unmsm.fisi.siscae.service.excepcion.BadRequestException;
 import pe.edu.unmsm.fisi.siscae.utilitario.ConstantesGenerales;
 import pe.edu.unmsm.fisi.siscae.utilitario.ValidatorUtil;
 import pe.edu.unmsm.fisi.siscae.validacion.grupo.accion.IRegistro;
-
+//@Audit(tipo = Tipo.RECURSO, datos = Dato.RECURSO)
+@RequestMapping("/password")
 public @RestController class UsuarioController {
 
 	private @Autowired IUsuarioService usuarioService;
+	
+	
+	
+	@Audit(accion = Accion.CONSULTA, comentario = Comentario.ConsultaPassword)
+	@GetMapping(params = "accion=validarPassword")
+	public boolean password(String clave) {
+		return usuarioService.verificarPassword(clave);
+	}
+	
 	
 	public List<Usuario> buscarTodos(){
 		return usuarioService.buscarTodos();
@@ -62,6 +77,7 @@ public @RestController class UsuarioController {
 		return ResponseEntity.ok(ConstantesGenerales.ELIMINACION_EXITOSA);
 		
 	}
+	
 	
 	
 }

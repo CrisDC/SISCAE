@@ -17,6 +17,7 @@ public enum Comentario
     VisitaConsulta("Se intenta visitar la página de CONSULTA de %s"),
     Ejecucion("Se intenta ejecutar el proceso de %s %s"),
     OperacionWebService("Se intenta realizar una operación mediante WS"),
+    ConsultaPassword("Valida la password actual"),
     
     /*Login*/
     CredencialCorrecta("El Usuario ha accedido al sistema exitosamente"),

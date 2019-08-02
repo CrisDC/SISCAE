@@ -73,13 +73,12 @@ public class PersonaService extends MantenibleService<Persona> implements IPerso
 				.idTipoDocumento(criterioBusqueda.getIdTipoDocumento()).build();
 		
 		List<Persona> listaRetornada = super.buscar(persona,OperacionParam.TIPO_NUM_DOCUMENTO);
-		
+	
 		if (!listaRetornada.isEmpty()){
 			return listaRetornada.get(0);
 		}else{
 			throw new ValorNoEncontradoException("No se encontró la persona");
 		}
-		
 		
 	}
 

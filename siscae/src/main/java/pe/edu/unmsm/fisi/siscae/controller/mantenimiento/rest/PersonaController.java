@@ -90,15 +90,9 @@ public @RestController class PersonaController {
 		return ResponseEntity.ok(ConstantesGenerales.ELIMINACION_EXITOSA);
 	}
 	
-	
-	
 	@Audit(accion = Accion.CONSULTA, comentario = Comentario.ConsultaTodos)
 	@GetMapping(params = "accion=buscarIdPersona")
 	public Persona buscarIdPersona(NumeroDocumentoIdentidadCriterioBusqueda criterioBusqueda) {
-		
-		System.out.println("angel was here");
-		System.out.println(criterioBusqueda.getNumeroDocumento());
-		System.out.println(criterioBusqueda.getIdTipoDocumento());
 		return personaService.buscarPorNumeroDocumentoIdentidad(criterioBusqueda);
 	}
 	

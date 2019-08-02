@@ -36,8 +36,6 @@ public class Parametro<T>
         this.resultados = new ArrayList<T>();
     }
 
-    
-    
     public Parametro(Operacion operacion, OperacionParam operacionParam, T objeto)
     {
         System.out.println(operacion.name() + "-" + operacionParam.name());
@@ -50,9 +48,9 @@ public class Parametro<T>
     public Parametro(Operacion operacion, OperacionParam operacionParam, T objeto, String userAudit)
     {
         System.out.println(operacion.name() + "-" + operacionParam.name());
-        this.operacion = operacion.name();
-        this.operacionParam = operacionParam.name();
-        this.objeto = objeto;
+        this.operacion = operacion.name();/*retorna el nombre de mi cte en este caso es select, update,delete o insert*/
+        this.operacionParam = operacionParam.name();/*para esta constante en la clase operación */
+        this.objeto = objeto;/*alguno de los modelos*/
         this.userAudit = userAudit;
         this.resultados = new ArrayList<T>();
     }

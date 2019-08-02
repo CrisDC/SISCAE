@@ -16,13 +16,11 @@ public interface IUsuarioService extends IMantenibleService<Usuario> {
 	public void actualizarUsuario(Usuario usuario);
 
 	public void eliminarUsuario(Usuario usuario);
-	/*IN iv_operacion			VARCHAR(20),
-	IN iv_operacion_param	VARCHAR(20),
-    IN in_id_usuario		INT,
-    IN iv_nombre			VARCHAR(45),
-    IN iv_pass				VARCHAR(200),
-    IN in_id_estado_tabla	INT,
-    IN in_id_rol			INT,
-    IN in_id_persona		INT*/
+
+	/*Funciones agregadas para validar contraseña y hacer los cambios*/
+	
+	public boolean verificarPassword(String rawPassword);
+	
+	public void cambiarPassword(String rawPassword);
 
 }
