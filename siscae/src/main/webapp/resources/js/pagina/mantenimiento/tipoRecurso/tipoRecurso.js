@@ -7,8 +7,11 @@ $(document).ready(function() {
 		$registrarMantenimiento : $("#registrarMantenimiento"),
 		$filaSeleccionada : "",
 		$actualizarMantenimiento : $("#actualizarMantenimiento"),
+		$selectUso : $("#uso"),
 		idTipoRecursoSeleccionado : ""
 	}
+	
+	$funcionUtil.crearSelect2($local.$selectUso,"Seleccione el uso");
 	$formMantenimiento = $("#formMantenimiento");
 
 	$.fn.dataTable.ext.errMode = 'none';

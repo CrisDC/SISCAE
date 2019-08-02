@@ -9,10 +9,14 @@ $(document).ready(function() {
 		$registrarMantenimiento : $("#registrarMantenimiento"),
 		$filaSeleccionada : "",
 		$actualizarMantenimiento : $("#actualizarMantenimiento"),
+		$selectTipoDocumento : $("#idTipoDocumento"),
+		$selectEstado : $("#idEstadoTabla"),
 		idDocenteSeleccionado : "",
 		personaActual : null,	
 		$btnBuscar : $("#buscar")
 	}
+	$funcionUtil.crearSelect2($local.$selectTipoDocumento,"Tipo de documento");
+	$funcionUtil.crearSelect2($local.$selectEstado,"Seleccione el estado");
 	$formMantenimiento = $("#formMantenimiento");
 
 	$.fn.dataTable.ext.errMode = 'none';
