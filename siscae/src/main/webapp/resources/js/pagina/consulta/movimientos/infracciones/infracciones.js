@@ -33,7 +33,7 @@ $(document).ready(function() {
 			} , {
 				"targets" : 8,
 				"className" : "all dt-center",
-				"defaultContent" : $variableUtil.botonActualizar + " " + $variableUtil.botonEliminar
+				"defaultContent" : $variableUtil.botonActualizarNuevo + " " + $variableUtil.botonEliminarNuevo
 			}  ],
 			"columns" : [{
 				"data" : 'numDocumento',
@@ -187,7 +187,7 @@ $(document).ready(function() {
       				}
     			},
     			success : function(response) {
-    				
+    				console.log(response)
 	    			swal({
   					  title: "Operacion realizada con exito",
   					  text: "Infraccion aplicada",

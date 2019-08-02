@@ -1,5 +1,5 @@
 $(document).ready(function() { 
-	
+	document.getElementById('elemento').hidden = false;
     $.get = function(key)   {  
         key = key.replace(/[\[]/, '\\[');  
         key = key.replace(/[\]]/, '\\]');  
