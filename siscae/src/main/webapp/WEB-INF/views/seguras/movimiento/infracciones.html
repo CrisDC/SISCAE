@@ -222,7 +222,7 @@
 											<form id="formEstadisticas">
 												<div class="row" style="width: 100%;">
 												
-													<div class="col-md-3" id="divPersona">
+													<div class="col-sm" id="divPersona">
 														<div class="input-group">
 														<label class="m-r-15">Identificar a la persona</label>
 															<div class="input-group-btn search-panel">
@@ -249,8 +249,8 @@
 												
 												
 												
-													<div class="col-md-3" id="divGrafica">
-														<div class="form-group m-b-10">
+													<div class="col-sm" id="divGrafica">
+														<div class="form-group m-b-3">
 															<label class="m-r-15">Tipo de infraccion</label>
 															<div class="input-group">
 																<select id="selectTipoGrafico" name="tipoGrafica"
@@ -271,71 +271,25 @@
 															</div>
 														</div>
 													</div>
-													
-												<div class="row" style="width: 100%;">
-													<div class="col-md-3 hidden" id="divSerie">
-														<div class="form-group m-b-10">
-															<label class="m-r-15">Series</label>
-															<div class="input-group">
-																<select id="selectSeries" name="valSeries"
-																	class="form-control js-example-basic-single " >
-																	<option value="" disabled="disabled"
-																		selected="selected">Seleccione una Serie</option>
-																	<option value="ESCUELA">Escuela</option>
-																	<option value="AREA_ESTUDIO">Area Estudio</option>
-																	<option value="SOLICITANTE">Solicitante</option>
-															</select>
+												
+													<div class="col-sm" id="divEstado">
+															<div class="form-group m-b-10">
+																<label class="m-r-15">Estado de la infraccion</label>
+																<div class="input-group">
+																	<select id="selectTipoGrafico" name="tipoGrafica"
+																		class="form-control js-example-basic-single">
+																		<option value="-1" disabled="disabled"
+																			selected="selected">Seleccione un estado</option>
+																		<option value="10">NO PENALIZADA</option>
+																		<option value="11">PENALIZADA</option>																		
+																	</select>
+																</div>
 															</div>
 														</div>
-													</div>
-													<div class="col-md-3 hidden" id="divEjeX">
-														<div class="form-group m-b-10">
-															<label class="m-r-15">Eje X</label>
-															<div class="input-group">
-																<select id="selectEjeX" name="valEjeX"
-																	class="form-control js-example-basic-single " >
-																	<option value="" disabled="disabled"
-																		selected="selected">Seleccione un eje</option>
-																	<option value="PERIODO">Periodo</option>
-																	<option value="ESCUELA">Escuela</option>
-																	<option value="AREA_ESTUDIO">Area Estudio</option>
-																</select>
-															</div>
-														</div>
-													</div>
-													<div class="col-md-3 hidden" id="divSegmY">
-														<div class="form-group m-b-10 ">
-															<label class="m-r-15">Segmentacion en Y</label>
-															<div class="input-group">
-																<select id="selectSegmY" name="valSegY"
-																	class="form-control js-example-basic-single" >
-																	<option value="NINGUNA" selected="selected">Ninguna</option>
-																	<option value="TIPO_SOLICITANTE">Tipo
-																		Solicitante</option>
-																	<option value="ESCUELA">Escuela</option>
-																	<option value="RECURSO">Tipo de Recurso</option>
-																	<option value="AREA_ESTUDIO">Area Estudios</option>
-																</select>
-															</div>
-														</div>
-													</div>
-													<div class="col-md-3 hidden" id="divPresentacion">
-														<div class="form-group m-b-10">
-															<label class="m-r-15">Presentación</label>
-															<div class="input-group">
-																<select id="selectPresentacion" name="valPresentacion"
-																	class="form-control js-example-basic-single" >
-																	<option value="-1" selected="selected"
-																		disabled="disabled">Seleccione una
-																		presentación</option>
-																	<option value="APILADO">Barras apilado</option>
-																	<option value="PARALELO">Barras paralelo</option>
-																</select>
-															</div>
-														</div>
-													</div>
-												</div>
-												<h3 style="font-size: 18px;">Contenido</h3>
+											<div class="row" style="font-size: 18px; width: 100%;">
+											<h3 >Contenido</h3>
+											</div>
+												
 												<div class="row" style="width: 100%;">
 
 
