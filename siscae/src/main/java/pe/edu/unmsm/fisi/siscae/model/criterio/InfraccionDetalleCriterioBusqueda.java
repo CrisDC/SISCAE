@@ -15,9 +15,9 @@ import pe.edu.unmsm.fisi.siscae.model.criterio.ReporteEstadisticaPrestamosCriter
 public class InfraccionDetalleCriterioBusqueda {
 
 	private String numDocumento;
-	private int tipoPersona;
-	private int tipoInfraccion;
-	private int tipoEstado;
+	private String tipoPersona;
+	private String tipoInfraccion;
+	private String tipoEstado;
 	
 	//fechas
 	private String fechaInicio;

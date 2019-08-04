@@ -15,8 +15,8 @@ $(document).ready(function() {
 		//inputs de la pagina (select, inputs)
 		$tipoPersona : $('#tipoPersona'),
 		$numDoc : $('#numeroDocumento'),
-		$selectTipoInfraccion : $('#selectTipoInfraccion'),
-		$selectTipoEstado : $('#selectTipoEstado'),
+		$selectTipoInfraccion : $('#tipoInfraccion'),
+		$selectTipoEstado : $('#tipoEstado'),
 		
 		//Botones de la pagina
 		$buscar : $('#buscarI'),
@@ -191,7 +191,36 @@ $(document).ready(function() {
 		
 		var criterioB = obtenerCriterio();
 		
-		
+		$.ajax({
+			type : "GET",
+			url : $variableUtil.root + "infraccionDetalle?accion=buscarPorCriterio",
+			contentType : "application/json",
+			data: criterioB,
+			dataType : "json",
+			beforeSend : function(xhr) {
+				xhr.setRequestHeader('Content-Type', 'application/json');
+				//Borrando tabla antes de hacer la consulta
+				$local.tblConsulta.clear().draw();
+				$local.$buscar.attr("disabled", true).find("i").removeClass("fa-search").addClass("fa-spinner fa-pulse fa-fw");
+			},
+			success : function(response) {
+				console.log(response);
+				if (response.length === 0) {
+					$funcionUtil.notificarException($variableUtil.busquedaSinResultados, "fa-exclamation-circle", "Información", "info");
+					return;
+				}
+				//Dibujando tabla
+				
+				$local.tblConsulta.rows.add(response).draw();
+				//Dibujando grafico
+				//var chart = AmCharts.makeChart('chartdiv',$funcionGraficoUtil.crearGraficoPie(response,'segmento','numeroPrestamos','Análisis de Préstamos','Número de prestamos', "<b style='font-size:12px'>[[title]]</b> ([[percents]]%) <br> <b>Prestamos:</b> [[value]] </br> <b>Tiempo Total: </b> [[estadiaTotal]] <br> <b>Tiempo Prom: </b> [[estadiaPromedio]]"));
+			},
+			error : function(response) {
+			},
+			complete : function() {
+				$local.$buscar.attr("disabled", false).find("i").addClass("fa-search").removeClass("fa-spinner fa-pulse fa-fw");
+			}
+		});
 		
 	});
 	

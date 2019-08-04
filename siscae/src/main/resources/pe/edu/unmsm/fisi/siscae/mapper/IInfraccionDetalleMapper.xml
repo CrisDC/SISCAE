@@ -29,12 +29,36 @@
 	</select>
 	
 	<select id="buscarPorCriterio" resultType="InfraccionDetalle">
-		<include refid="fragmentoSelectBuscarInfraccionDetalle" />
+		
+		SELECT
+			num_documento,
+		    app_paterno,
+		    app_materno,
+		    nombre,
+		    tipo_persona,
+		    infraccion,
+		    estado,
+		    fecha
+		FROM vw_infraccion_detalle
 		<where>
-			<if test="numDocumento != null and numDocumento != ''">
-				vw_infraccion_detalle.num_documento = #{numDocumento}
-			</if>
-		</where>
+		<if test="tipoInfraccion != null">
+		         infraccion like #{tipoInfraccion}
+		    </if>
+			<if test="tipoPersona != null">
+		        AND tipo_persona = #{tipoPersona}
+		    </if>
+		    <if test="numDocumento != null and numDocumento != '' ">
+		        AND num_documento = #{numDocumento}
+		    </if>
+		    
+		    
+		    <if test="tipoEstado != null">
+		        AND estado = #{tipoEstado}
+		    </if>
+		    
+		  </where>
+		
+		
 	</select>
 
 
