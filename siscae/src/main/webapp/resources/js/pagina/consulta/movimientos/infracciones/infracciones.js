@@ -9,20 +9,95 @@ $(document).ready(function() {
 		$divPersona: $('#divPersona'),
 		$divTipo: $('#divTipo'),
 		$divEstado: $('#divEstado'),
+		$divPeriodoDia : $('#divPeriodoDia'),
+		$divSemanaInicio : $('#divSemanaInicio'),
+		$divSemanaFin : $('#divSemanaFin'),
+		$divMesInicio : $('#divMesInicio'),
+		$divMesFin : $('#divMesFin'),
+		$divAnioInicio : $('#divAnioInicio'),
+		$divAnioFin : $('#divAnioFin'),
 		
 		
 		
 		//inputs de la pagina (select, inputs)
 		$tipoPersona : $('#tipoPersona'),
 		$numDoc : $('#numeroDocumento'),
+<<<<<<< HEAD
 		$selectTipoInfraccion : $('#tipoInfraccion'),
 		$selectTipoEstado : $('#tipoEstado'),
+=======
+		$selectTipoInfraccion : $('#selectTipoInfraccion'),
+		$selectTipoEstado : $('#selectTipoEstado'),
+		$selectPeriodo : $('#selectPeriodo'),
+		$fechaPrestamo : $('#fechaPrestamo'),
+		$semanaInicio : $('#semanaInicio'),
+		$anioInicio : $('#anioInicio'),
+		$mesInicio : $('#mesInicio'),
+		$semanaFin : $('#semanaFin'),
+		$anioFin : $('#anioFin'),
+		$mesFin : $('#mesFin'),
+>>>>>>> branch 'master' of https://gitlab.com/unmsm-fisi-des/siscae
 		
 		//Botones de la pagina
 		$buscar : $('#buscarI'),
 		$exportar : $('#exportar')
 		
 	}
+
+	$funcionUtil.crearDateRangePickerSimple($local.$fechaPrestamo, "YYYY-MM-DD");
+	
+	//Creando elementos combobox con estilo chevere (Plugin Select2)
+    $funcionUtil.crearSelect2($local.$selectTipoEstado);
+	$funcionUtil.crearSelect2($local.$selectTipoInfraccion);
+	$funcionUtil.crearSelect2($local.$selectPeriodo);
+	$funcionUtil.crearSelect2($local.$tipoPersona);
+	
+	//Evento que se dispara cuando el combo Periodo cambie
+	$local.$selectPeriodo.on("change", function(){
+		var val = $(this).val();
+
+		if(val=="DIA"){
+			
+			$local.$divPeriodoDia.removeClass("hidden");
+			$local.$divSemanaInicio.addClass("hidden");
+			$local.$divSemanaFin.addClass("hidden");
+			$local.$divMesInicio.addClass("hidden");
+			$local.$divMesFin.addClass("hidden");
+			$local.$divAnioInicio.addClass("hidden");
+			$local.$divAnioFin.addClass("hidden");
+		}else if(val == "SEMANA") {
+			
+			
+			$local.$divPeriodoDia.addClass("hidden");
+			$local.$divSemanaInicio.removeClass("hidden");
+			$local.$divSemanaFin.removeClass("hidden");
+			$local.$divMesInicio.addClass("hidden");
+			$local.$divMesFin.addClass("hidden");
+			$local.$divAnioInicio.addClass("hidden");
+			$local.$divAnioFin.addClass("hidden");
+		}else if(val == "MES"){
+			
+			$local.$divPeriodoDia.addClass("hidden");
+			$local.$divSemanaInicio.addClass("hidden");
+			$local.$divSemanaFin.addClass("hidden");
+			$local.$divMesInicio.removeClass("hidden");
+			$local.$divMesFin.removeClass("hidden");
+			$local.$divAnioInicio.addClass("hidden");
+			$local.$divAnioFin.addClass("hidden");
+		}else if(val == "ANIO"){
+			
+			
+			$local.$divPeriodoDia.addClass("hidden");
+			$local.$divSemanaInicio.addClass("hidden");
+			$local.$divSemanaFin.addClass("hidden");
+			$local.$divMesInicio.addClass("hidden");
+			$local.$divMesFin.addClass("hidden");
+			$local.$divAnioInicio.removeClass("hidden");
+			$local.$divAnioFin.removeClass("hidden");
+		}	
+	});
+	
+	
 	/* ---------- Construcción de tabla ---------- */
 	$.fn.dataTable.ext.errMode = 'none';
 
@@ -183,6 +258,28 @@ $(document).ready(function() {
 		criterio.selectTipoEstado = $local.$selectTipoEstado.val();
 		
 		console.log(criterio);
+		//Obtener datos del periodo
+		if($local.$selectPeriodo.val() == 'DIA'){
+			var rangoFechaBusqueda = $funcionUtil.obtenerFechasDateRangePicker($local.$fechaPrestamo);
+			criterio.fechaInicio = rangoFechaBusqueda.fechaInicio;
+			criterio.fechaFin = rangoFechaBusqueda.fechaFin;
+		}
+		if($local.$selectPeriodo.val() == 'SEMANA'){
+			criterio.semanaInicio = $funcionUtil.obtenerSemanaInputWeek($local.$semanaInicio);
+			criterio.anioInicio = $funcionUtil.obtenerAnioInputWeek($local.$semanaInicio);
+			criterio.semanaFin = $funcionUtil.obtenerSemanaInputWeek($local.$semanaFin);
+			criterio.anioFin = $funcionUtil.obtenerAnioInputWeek($local.$semanaFin);
+		}
+		if($local.$selectPeriodo.val() == 'MES'){
+			criterio.mesInicio = $funcionUtil.obtenerMesInputMonth($local.$mesInicio);
+			criterio.anioInicio = $funcionUtil.obtenerAnioInputMonth($local.$mesInicio);
+			criterio.mesFin = $funcionUtil.obtenerMesInputMonth($local.$mesFin);
+			criterio.anioFin = $funcionUtil.obtenerAnioInputMonth($local.$mesFin);
+		}
+		if($local.$selectPeriodo.val() == 'ANIO'){
+			criterio.anioInicio = $local.$anioInicio.val();
+			criterio.anioFin = $local.$anioFin.val();
+		}
 		
 		return criterio;
 	}
