@@ -41,7 +41,7 @@
 		    fecha
 		FROM vw_infraccion_detalle
 		<where>
-		<if test="tipoInfraccion != null">
+			<if test="tipoInfraccion != null">
 		         infraccion like #{tipoInfraccion}
 		    </if>
 			<if test="tipoPersona != null">
