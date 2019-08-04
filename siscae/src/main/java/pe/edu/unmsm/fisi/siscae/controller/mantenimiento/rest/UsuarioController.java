@@ -71,18 +71,18 @@ public @RestController class UsuarioController {
 		return ResponseEntity.ok(ConstantesGenerales.ACTUALIZACION_EXITOSA);
 	}
 	
+	/*Metodo para actualizar contraseña tipo PUT recibe parametro un objeto de tipo usuario*/
 	@Audit(accion = Accion.ACTUALIZACION, comentario = Comentario.Actualizacion)
-	//@PutMapping
-	@PutMapping()
+	@PutMapping
 	public ResponseEntity<?> actualizarPassword(
 			@Validated({ Default.class, IRegistro.class }) @RequestBody Usuario usuario, Errors error){
 		
 		if(error.hasErrors()){
 			 throw new BadRequestException(ValidatorUtil.obtenerMensajeValidacionError(error));
 		}
-		usuarioService.cambiarPassword("12345");
-		//usuarioService.actualizarUsuario(usuario);
-		return ResponseEntity.ok(ConstantesGenerales.ACTUALIZACION_EXITOSA);
+		
+		usuarioService.cambiarPassword(usuario);
+		return ResponseEntity.ok(ConstantesGenerales.ACTUALIZACION_PASSWORD_EXISTOSA);
 	}
 	
 	/*metodo que se uso para prueba con getMapping*/

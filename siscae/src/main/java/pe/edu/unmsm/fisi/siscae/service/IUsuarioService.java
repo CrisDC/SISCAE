@@ -21,6 +21,8 @@ public interface IUsuarioService extends IMantenibleService<Usuario> {
 	
 	public boolean verificarPassword(String rawPassword);
 	
+	public void cambiarPassword(Usuario usuario);
+	
 	public void cambiarPassword(String rawPassword);
 
 }

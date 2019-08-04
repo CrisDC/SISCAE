@@ -4,6 +4,7 @@ public class ConstantesGenerales
 {
     public static final String REGISTRO_EXITOSO = "Se registró correctamente";
     public static final String ACTUALIZACION_EXITOSA = "Se actualizó correctamente";
+    public static final String ACTUALIZACION_PASSWORD_EXISTOSA = "Se actualizó la contraseña correctamente";
     public static final String ELIMINACION_EXITOSA = "Se eliminó correctamente";
     public static final String COMPENSACION_COMISION = "COMISION";
     public static final String COMPENSACION_FONDO = "FONDO";

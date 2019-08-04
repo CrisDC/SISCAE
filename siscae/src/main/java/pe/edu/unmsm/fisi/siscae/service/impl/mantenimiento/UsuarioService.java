@@ -105,7 +105,22 @@ public class UsuarioService extends MantenibleService<Usuario> implements IUsuar
 		
 	}
 	/*METODO PARA ACTUALIZAR SOLO LA CONTRASEÑA*/
-	public void cambiarPassword(String newPassword) {
+	public void cambiarPassword(Usuario usuario) {
+		BCryptPasswordEncoder encriptador = new BCryptPasswordEncoder();
+		String currentUserName="";
+		
+		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+		if (!(authentication instanceof AnonymousAuthenticationToken)) {
+		    currentUserName = authentication.getName();
+		}
+		
+		String updatePassword= encriptador.encode(usuario.getPass());
+		Usuario usuarioTemp =  Usuario.builder().nombre(currentUserName).pass(updatePassword).build();
+
+		actualizar(usuarioTemp, OperacionParam.PASSWORD);
+	}
+	
+	public void cambiarPasswordParameterPassword(String newPassword) {
 		BCryptPasswordEncoder encriptador = new BCryptPasswordEncoder();
 		String currentUserName="";
 		
