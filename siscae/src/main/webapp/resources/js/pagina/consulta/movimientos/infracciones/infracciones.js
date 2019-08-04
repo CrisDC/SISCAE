@@ -2,7 +2,26 @@ $(document).ready(function() {
 	
 	var $local = {
 		$tblConsulta : $("#tblSancionados"),
-		tblConsulta  : ""
+		tblConsulta  : "",
+		
+		//div de la pagina
+		
+		$divPersona: $('#divPersona'),
+		$divTipo: $('#divTipo'),
+		$divEstado: $('#divEstado'),
+		
+		
+		
+		//inputs de la pagina (select, inputs)
+		$idTipoDoc : $('#idTipoDocumento'),
+		$numDoc : $('#numeroDocumento'),
+		$selectTipoInfraccion : $('#selectTipoInfraccion'),
+		$selectTipoEstado : $('#selectTipoEstado'),
+		
+		//Botones de la pagina
+		$buscar : $('#buscarI'),
+		$exportar : $('#exportar')
+		
 	}
 	/* ---------- Construcción de tabla ---------- */
 	$.fn.dataTable.ext.errMode = 'none';
@@ -74,74 +93,130 @@ $(document).ready(function() {
 		var val = $.fn.dataTable.util.escapeRegex($(this).val());
 		$local.tblConsulta.column($(this).parent().index() + ':visible').search(val ? '^' + val + '$' : '', true, false).draw();
 	});
+	
+	
 	/* ------ fin Construcción de tablas ------------ */
-	var $local = {
-			$tblConsulta2 : $("#tblSancionados"),
-			tblConsulta2  : ""
+//	var $local = {
+//			$tblConsulta2 : $("#tblSancionados"),
+//			tblConsulta2  : ""
+//	}
+//	/* ---------- Construcción de tabla sancionado ---------- */
+//	$.fn.dataTable.ext.errMode = 'none';
+//
+//	$local.$tblConsulta2.on('xhr.dt', function(e, settings, json, xhr) {
+//		switch (xhr.status) {
+//			case 500:
+//				$local.tblConsulta2.clear().draw();
+//				break;
+//		}
+//	});
+//	
+//	$local.tblConsulta2 = $local.$tblConsulta2.DataTable({
+//		"ajax" : {
+//			"url" : $variableUtil.root + "consultaSancionados?accion=buscarTodos",
+//			"dataSrc" : ""
+//		},
+//			"language" : {
+//				"url": "//cdn.datatables.net/plug-ins/1.10.16/i18n/Spanish.json"
+//			},
+//			"initComplete" : function() {
+//				$local.$tblConsulta2.wrap("<div class='table-responsive'></div>");
+//				$tablaFuncion.aniadirFiltroDeBusquedaEnEncabezado(this, $local.$tblConsulta2);
+//			},
+//			"columnDefs" : [ {
+//				"targets" : [ 0, 1, 2, 3, 4, 5, 6 ],
+//				"className" : "all filtrable",
+//			} , {
+//				"targets" : 6,
+//				"className" : "all dt-center",
+//			}  ],
+//			"columns" : [{
+//				"data" : 'docIdentificador',
+//				"title" : "Num. documento"
+//			}, {
+//				"data" : 'appPaterno',
+//				"title" : "Ap. Paterno"
+//			}, {
+//				"data" : 'appMaterno',
+//				"title" : "Ap. Materno"
+//			}, {
+//				"data" : 'nombre',
+//				"title" : "Nombre"
+//			}, {
+//				"data" : 'fechaRegistro',
+//				"title" : "Fecha de Sanción"
+//			}, {
+//				"data" : 'tiempoRestante',
+//				"title" : "Tiempo restante"
+//			}, {
+//				"data" : 'tipoSolicitante',
+//				"title" : "Tipo de Solicitante"
+//			}]
+//		});
+//		
+//	$local.$tblConsulta2.find("thead").on('keyup', 'input', function() {
+//		$local.tblConsulta2.column($(this).parent().index() + ':visible').search(this.value).draw();
+//	});
+//
+//	$local.$tblConsulta2.find("thead").on('change', 'select', function() {
+//		var val = $.fn.dataTable.util.escapeRegex($(this).val());
+//		$local.tblConsulta2.column($(this).parent().index() + ':visible').search(val ? '^' + val + '$' : '', true, false).draw();
+//	});
+	
+	
+	/*---creando datos importantes----*/
+	//Creando elementos combobox con estilo chevere (Plugin Select2)
+				
+			//no se pudo :'v
+	
+	//Formulario
+	$formInfracciones = $("#formInfracciones");
+	
+	/*---------CONSTRUCCION DE LAS TABLAS POR FILTROS---------------*/
+	
+	var obtenerCriterio = function (){
+						
+		var criterio = $formInfracciones.serializeJSON();
+		criterio.idTipoDoc = $local.$idTipoDoc.val();
+		criterio.numDoc = $local.$numDoc.val();
+		criterio.tipoInfraccion = $local.$selectTipoInfraccion.val();
+		criterio.tipoEstado = $local.$selectTipoEstado.val();
+		
+		console.log(criterio);
+		
+		return criterio;
 	}
-	/* ---------- Construcción de tabla sancionado ---------- */
-	$.fn.dataTable.ext.errMode = 'none';
-
-	$local.$tblConsulta2.on('xhr.dt', function(e, settings, json, xhr) {
-		switch (xhr.status) {
-			case 500:
-				$local.tblConsulta2.clear().draw();
-				break;
-		}
+	
+	$local.$buscar.on('click', function() {
+		
+		console.log("hBL");
+		
+	
+		
+		var criterioB = obtenerCriterio();
+		
+		
 	});
 	
-	$local.tblConsulta2 = $local.$tblConsulta2.DataTable({
-		"ajax" : {
-			"url" : $variableUtil.root + "consultaSancionados?accion=buscarTodos",
-			"dataSrc" : ""
-		},
-			"language" : {
-				"url": "//cdn.datatables.net/plug-ins/1.10.16/i18n/Spanish.json"
-			},
-			"initComplete" : function() {
-				$local.$tblConsulta2.wrap("<div class='table-responsive'></div>");
-				$tablaFuncion.aniadirFiltroDeBusquedaEnEncabezado(this, $local.$tblConsulta2);
-			},
-			"columnDefs" : [ {
-				"targets" : [ 0, 1, 2, 3, 4, 5, 6 ],
-				"className" : "all filtrable",
-			} , {
-				"targets" : 6,
-				"className" : "all dt-center",
-			}  ],
-			"columns" : [{
-				"data" : 'docIdentificador',
-				"title" : "Num. documento"
-			}, {
-				"data" : 'appPaterno',
-				"title" : "Ap. Paterno"
-			}, {
-				"data" : 'appMaterno',
-				"title" : "Ap. Materno"
-			}, {
-				"data" : 'nombre',
-				"title" : "Nombre"
-			}, {
-				"data" : 'fechaRegistro',
-				"title" : "Fecha de Sanción"
-			}, {
-				"data" : 'tiempoRestante',
-				"title" : "Tiempo restante"
-			}, {
-				"data" : 'tipoSolicitante',
-				"title" : "Tipo de Solicitante"
-			}]
-		});
-		
-	$local.$tblConsulta2.find("thead").on('keyup', 'input', function() {
-		$local.tblConsulta2.column($(this).parent().index() + ':visible').search(this.value).draw();
-	});
-
-	$local.$tblConsulta2.find("thead").on('change', 'select', function() {
-		var val = $.fn.dataTable.util.escapeRegex($(this).val());
-		$local.tblConsulta2.column($(this).parent().index() + ':visible').search(val ? '^' + val + '$' : '', true, false).draw();
-	});
-	/* ------ Construcción de tablas ------------ */	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	/* ------ Construcción de modal ------------ */	
 	$('#infraccionModal').on('show.bs.modal', function (event){
 		var button = $(event.relatedTarget)
 		var numDoc = button.data('doc')
@@ -151,20 +226,20 @@ $(document).ready(function() {
 		
 		var modal = $(this)
 		
-		modal.find('#codigoAlumno').text(codigo)
-		modal.find('#nombreAlumno').text(nombre)
-		modal.find('#apellidosAlumno').text(apellidos)
-		modal.find('#numDoc').text(numDoc)
+		modal.find('#codigoAlumno').text(codigo);
+		modal.find('#nombreAlumno').text(nombre);
+		modal.find('#apellidosAlumno').text(apellidos);
+		modal.find('#numDoc').text(numDoc);
 		
 		$('#btnRegistrar').on('click', function (event){
 			
-			var combo = document.getElementById("tipoInfraccion")
-			var txtArea = $('#inputDescripcionInfraccion')
+			var combo = document.getElementById("tipoInfraccion");
+			var txtArea = $('#inputDescripcionInfraccion');
 			
-			var idItem = combo.value
-			var descripcion = txtArea.val()
+			var idItem = combo.value;
+			var descripcion = txtArea.val();
 			
-			var movimientoInfraccion = {
+			var movimientoInfracczeion = {
 				"numDocumento" : numDoc,
 				"idTipoInfraccion" : idItem,
 				"descripcion" : descripcion
@@ -209,13 +284,17 @@ $(document).ready(function() {
 			});
 			
 			
-		})
+		});
 		
 		$('#btnClose').on('click', function (event){
 			location.reload();
-		})
+		});
 		
-	})
+	});
+	
+	
+	
+	
 	
 	
 

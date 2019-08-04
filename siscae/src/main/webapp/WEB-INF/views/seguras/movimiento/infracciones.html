@@ -213,12 +213,12 @@
 											
 											<label>Lista de los solicitantes sancionados</label>
 									<!-- Filtros -->
-											<div>
 											
-											<div class="tab-content">
+											
+								<div class="tab-content">
 									<div class="tab-pane active m-t-20" id="tabReporteGeneral"
 										role="tabpanel">
-										<div id="estadisticas" class="m-l-15 m-r-15">
+										<div id="infracciones" class="m-l-15 m-r-15">
 											<form id="formInfracciones">
 												<div class="row" style="width: 100%;">
 												
@@ -250,14 +250,14 @@
 												
 												
 												
-													<div class="col-sm" id="divGrafica">
+													<div class="col-sm" id="divTipo">
 														<div class="form-group m-b-3">
 															<label class="m-r-15">Tipo de infraccion</label>
 															<div class="input-group">
-																<select id="selectTipoGrafico" name="tipoGrafica"
+																<select id="selectTipoInfraccion" name="tipoInfraccion"
 																	class="form-control js-example-basic-single">
 																	<option value="-1" disabled="disabled"
-																		selected="selected">Seleccione una infracci&#243n</option>
+																		selected="selected">Seleccione una infracci&#243n </option>
 																	<option value="28">FALTAR EL RESPETO AL PERSONAL DEL AREA</option>
 																	<option value="29">PROPICIAR EL DESORDEN EN EL AREA</option>
 																	<option value="30">INGERIR ALIMENTOS DENTRO DEL AREA</option>
@@ -277,7 +277,7 @@
 															<div class="form-group m-b-10">
 																<label class="m-r-15">Estado de la infraccion</label>
 																<div class="input-group">
-																	<select id="selectTipoGrafico" name="tipoGrafica"
+																	<select id="selectTipoEstado" name="tipoEstado"
 																		class="form-control js-example-basic-single">
 																		<option value="-1" disabled="disabled"
 																			selected="selected">Seleccione un estado</option>
@@ -287,8 +287,11 @@
 																</div>
 															</div>
 														</div>
+													</div>
 											<div class="row" style="font-size: 20px; width: 100%;">
 												<div class="input-group">
+												
+												
 													<h3 style="font-size: 20px;">Contenido</h3>
 												</div>
 											
@@ -393,9 +396,20 @@
 
 
 												</div>
-
+												<div class="row text-center m-t-5"
+													style="width: 100%; justify-content: center;">
+													<button id="buscarI" class="btn btn-info m-r-3"
+														type="button">
+														<i class="fa fa-search"></i> Buscar
+													</button>
+<!-- 													<button id="exportar" class="btn btn-success m-l-3" -->
+<!-- 														type="button"> -->
+<!-- 														<i class="fa fa-download"></i> Exportar -->
+<!-- 													</button> -->
+												</div>
+										</form>
 									</div>
-
+								
 
 									<div class="tab-pane" id="tabReporteMasFrecuentes"
 										role="tabpanel">
@@ -404,15 +418,8 @@
 										<!-- 										</div> -->
 									</div>
 
-								</div>
-											
-											
-											
-											
-											
-											
-											
-											</div>
+								
+						</div>
 
 											<table id="tblSancionados" class="table table-bordered table-striped">
 <!-- 												<thead> -->
@@ -442,7 +449,7 @@
 											</table>
 											
 											
-										</div>
+										
 									</div>
 									<!-- Fin Panel Detalle -->
 									
@@ -584,7 +591,15 @@
     <script th:src="@{/resources/js/guiuser/lib/sweetalert/sweetalert.init.js}"></script>
 
     <script th:src="@{/resources/js/guiuser/custom.min.js}"></script>
-    
+<!--     faltaba esto importante -->
+    	<script th:src="@{/resources/js/guiuser//utils.js}"></script>
+		<script th:src="@{/resources/js/jquery/moment.min.js}"></script>
+		<script th:src="@{/resources/js/jquery/daterangepicker.js}"></script>
+		<script th:src="@{/resources/js/jquery/jquery.serializejson.min.js}"></script>
+		<script th:src="@{/resources/js/guiuser/scripts.js}"></script>
+		<script th:src="@{/resources/js/guiuser/custom.min.js}"></script>
+		<script th:src="@{/resources/js/guiuser/sweetalert.min.js}"></script>
+<!--      -->
     <script
 			th:src="@{/resources/js/pagina/consulta/movimientos/infracciones/infracciones.js}"></script>
 	<script
