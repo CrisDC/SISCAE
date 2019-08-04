@@ -13,7 +13,7 @@ $(document).ready(function() {
 		
 		
 		//inputs de la pagina (select, inputs)
-		$idTipoDoc : $('#idTipoDocumento'),
+		$tipoPersona : $('#tipoPersona'),
 		$numDoc : $('#numeroDocumento'),
 		$selectTipoInfraccion : $('#selectTipoInfraccion'),
 		$selectTipoEstado : $('#selectTipoEstado'),
@@ -177,10 +177,10 @@ $(document).ready(function() {
 	var obtenerCriterio = function (){
 						
 		var criterio = $formInfracciones.serializeJSON();
-		criterio.idTipoDoc = $local.$idTipoDoc.val();
-		criterio.numDoc = $local.$numDoc.val();
-		criterio.tipoInfraccion = $local.$selectTipoInfraccion.val();
-		criterio.tipoEstado = $local.$selectTipoEstado.val();
+		criterio.idTipoDocumento = $local.$tipoPersona.val();
+		criterio.numeroDocumento = $local.$numDoc.val();
+		criterio.selectTipoInfraccion = $local.$selectTipoInfraccion.val();
+		criterio.selectTipoEstado = $local.$selectTipoEstado.val();
 		
 		console.log(criterio);
 		
@@ -189,11 +189,8 @@ $(document).ready(function() {
 	
 	$local.$buscar.on('click', function() {
 		
-		console.log("hBL");
-		
-	
-		
 		var criterioB = obtenerCriterio();
+		
 		
 		
 	});
@@ -239,7 +236,7 @@ $(document).ready(function() {
 			var idItem = combo.value;
 			var descripcion = txtArea.val();
 			
-			var movimientoInfracczeion = {
+			var movimientoInfraccion = {
 				"numDocumento" : numDoc,
 				"idTipoInfraccion" : idItem,
 				"descripcion" : descripcion

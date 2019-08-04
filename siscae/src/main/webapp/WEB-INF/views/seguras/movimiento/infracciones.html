@@ -223,28 +223,36 @@
 												<div class="row" style="width: 100%;">
 												
 													<div class="col-sm" id="divPersona">
-													<label class="m-r-15">Identificar a la persona</label>
+														<label class="m-r-15">Numero de documento</label>
 														<div class="input-group">
 														
 															<div class="input-group-btn search-panel">
 											
-																<select id="idTipoDocumento"
-																	class="btn btn-default dropdown-toggle select2 elemento-desactivable"
-																	name="idTipoDocumento" data-toggle="dropdown">
-																	<option value="-1" disabled="disabled" selected="selected">Tipo de documento</option>
-																	<option value="28">DNI</option>
-																	<option value="29">L.E</option>
-																	<option value="30">CARNET EXT.</option>
-																	<option value="31">RUC</option>
-																	<option value="32">PASAPORTE</option>
-																	<option value="33">P. NAC.</option>
-																	<option value="34">OTROS</option>																	
+																<input type="number" class="form-control" name="numeroDocumento"
+																placeholder="N&#250mero de Documento" id="numeroDocumento"> 
+											
+															</div>
+															
+														</div>
+													</div>
+												
+													<div class="col-sm" id="divPersona">
+														<label class="m-r-15">Tipo de persona</label>
+														<div class="input-group">
+														
+															<div class="input-group-btn search-panel">
+											
+																<select id="tipoPersona" name="tipoPersona"
+																	class="form-control js-example-basic-single">
+																	<option value="-1" disabled="disabled" selected="selected">Tipo de persona</option>
+																	<option value="AL">ALUMNO</option>
+																	<option value="DO">DOCENTE</option>
+																	<option value="EX">EXTERNO</option>
+																	<option value="AD">ADMINISTRATIVO</option>																																
 																</select>
 											
 															</div>
-															<input type="hidden" name="idPersona" value="all" id="idPersona">
-															<input type="number" class="form-control" name="numeroDocumento"
-																placeholder="N&#250mero de Documento"> 
+															
 														</div>
 													</div>
 												
@@ -555,6 +563,7 @@
     <script th:src="@{/resources/js/guiuser/lib/jquery/jquery.min.js}"></script>
     <!-- Bootstrap tether Core JavaScript -->
     <script th:src="@{/resources/js/guiuser/lib/bootstrap/js/popper.min.js}"></script>
+    
     <script th:src="@{/resources/js/guiuser/lib/bootstrap/js/bootstrap.min.js}"></script>
     <!-- slimscrollbar scrollbar JavaScript -->
     <script th:src="@{/resources/js/guiuser/jquery.slimscroll.js}"></script>
@@ -584,7 +593,7 @@
     <script th:src="@{/resources/js/guiuser/lib/owl-carousel/owl.carousel-init.js}"></script>
     <script th:src="@{/resources/js/guiuser/scripts.js}"></script>
     <!-- scripit init-->
-    <script th:src="@{/resources/js/guiuser/lib/bootstrap/js/popper.min.js}"></script>
+<!--     <script th:src="@{/resources/js/guiuser/lib/bootstrap/js/popper.min.js}"></script> -->
     <script th:src="@{/resources/js/util/util.js}"></script>
     <script th:src="@{/resources/js/guiuser/lib/sweetalert/sweetalert.min.js}"></script>
     <!-- scripit init-->
