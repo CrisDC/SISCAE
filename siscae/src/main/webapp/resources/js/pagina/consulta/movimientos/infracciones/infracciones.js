@@ -22,10 +22,9 @@ $(document).ready(function() {
 		//inputs de la pagina (select, inputs)
 		$tipoPersona : $('#tipoPersona'),
 		$numDoc : $('#numeroDocumento'),
-<<<<<<< HEAD
 		$selectTipoInfraccion : $('#tipoInfraccion'),
 		$selectTipoEstado : $('#tipoEstado'),
-=======
+
 		$selectTipoInfraccion : $('#selectTipoInfraccion'),
 		$selectTipoEstado : $('#selectTipoEstado'),
 		$selectPeriodo : $('#selectPeriodo'),
@@ -36,7 +35,7 @@ $(document).ready(function() {
 		$semanaFin : $('#semanaFin'),
 		$anioFin : $('#anioFin'),
 		$mesFin : $('#mesFin'),
->>>>>>> branch 'master' of https://gitlab.com/unmsm-fisi-des/siscae
+
 		
 		//Botones de la pagina
 		$buscar : $('#buscarI'),

@@ -23,7 +23,6 @@ public @RestController class InfraccionDetalleController {
 
 	@GetMapping(params = "accion=buscarPorCriterio")
 	public List<InfraccionDetalle> buscarPorCriterio(InfraccionDetalleCriterioBusqueda criterioBusqueda) {
-		
 		System.out.println(criterioBusqueda);
 		
 		return infraccionDetalleService.buscarPorCriterio(criterioBusqueda);

@@ -13,7 +13,9 @@ import pe.edu.unmsm.fisi.siscae.model.criterio.ReporteEstadisticaPrestamosCriter
 @NoArgsConstructor
 @AllArgsConstructor
 public class InfraccionDetalleCriterioBusqueda {
-
+	
+	
+	//primera parte
 	private String numDocumento;
 	private String tipoPersona;
 	private String tipoInfraccion;

@@ -42,7 +42,7 @@
 		FROM vw_infraccion_detalle
 		<where>
 			<if test="tipoInfraccion != null">
-		         infraccion like #{tipoInfraccion}
+		        infraccion like #{tipoInfraccion}
 		    </if>
 			<if test="tipoPersona != null">
 		        AND tipo_persona = #{tipoPersona}
