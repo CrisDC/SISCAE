@@ -283,7 +283,7 @@
 												
 													<div class="col-sm" id="divEstado">
 															<div class="form-group m-b-10">
-																<label class="m-r-15">Estado de la infraccion</label>
+																<label class="m-r-15">Estado de la infracci&#243n</label>
 																<div class="input-group">
 																	<select id="selectTipoEstado" name="tipoEstado"
 																		class="form-control js-example-basic-single">
@@ -316,10 +316,10 @@
 																	class="form-control js-example-basic-single" >
 																	<option value="-1" disabled="disabled"
 																		selected="selected">Seleccione un periodo</option>
-																	<option value="DIA">Por día</option>
+																	<option value="DIA">Por d&#237a</option>
 																	<option value="SEMANA">Por semana</option>
 																	<option value="MES">Por mes</option>
-																	<option value="ANIO">Por año</option>
+																	<option value="ANIO">Por a&#241o</option>
 																</select>
 															</div>
 														</div>
@@ -632,6 +632,11 @@
 			th:src="@{/resources/js/guiuser/lib/datatables/cdn.datatables.net/buttons/1.2.2/js/buttons.print.min.js}"></script>
 		<script
 			th:src="@{/resources/js/guiuser/lib/datatables/datatables-init.js}"></script>
+		
+		<!-- select2-->
+		<script th:src="@{/resources/js/bootstrap/bootstrap-notify.min.js}"></script>
+		<script th:src="@{/resources/js/guiuser/select2.min.js}"></script>
+		<script th:src="@{/resources/js/util/util.js}"></script>
 	</div>
 
 
