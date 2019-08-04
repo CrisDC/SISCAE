@@ -21,11 +21,12 @@ $(document).ready(function() {
 			"dataSrc" : ""
 		},
 			"language" : {
-				"url": "//cdn.datatables.net/plug-ins/1.10.16/i18n/Spanish.json"
+				"url": "//cdn.datatables.net/plug-ins/1.10.16/i18n/Spanish.json",
+				"emptyTable" : "No hay registros encontrados." // Nuevo
 			},
 			"initComplete" : function() {
 				$local.$tblConsulta.wrap("<div class='table-responsive'></div>");
-				$tablaFuncion.aniadirFiltroDeBusquedaEnEncabezado(this, $local.$tblConsulta);
+				//$tablaFuncion.aniadirFiltroDeBusquedaEnEncabezado(this, $local.$tblConsulta);
 			},
 			"columnDefs" : [ {
 				"targets" : [ 0, 1, 2, 3, 4, 5, 6, 7 ],
@@ -61,7 +62,7 @@ $(document).ready(function() {
 				"title" : "Fecha"
 			} ,{
 				"data" : null,
-				"title" : 'Acción'
+				"title" : 'Acci&#243n'
 			}]
 		});
 		

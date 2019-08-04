@@ -212,6 +212,249 @@
 											<h2>Sancionados</h2>
 											
 											<label>Lista de los solicitantes sancionados</label>
+									<!-- Filtros -->
+											<div>
+											
+											<div class="tab-content">
+									<div class="tab-pane active m-t-20" id="tabReporteGeneral"
+										role="tabpanel">
+										<div id="estadisticas" class="m-l-15 m-r-15">
+											<form id="formEstadisticas">
+												<div class="row" style="width: 100%;">
+												
+													<div class="col-md-3" id="divPersona">
+														<div class="input-group">
+														<label class="m-r-15">Identificar a la persona</label>
+															<div class="input-group-btn search-panel">
+											
+																<select id="idTipoDocumento"
+																	class="btn btn-default dropdown-toggle select2 elemento-desactivable"
+																	name="idTipoDocumento" data-toggle="dropdown">
+																	<option value="-1" disabled="disabled" selected="selected">Tipo de documento</option>
+																	<option value="28">DNI</option>
+																	<option value="29">L.E</option>
+																	<option value="30">CARNET EXT.</option>
+																	<option value="31">RUC</option>
+																	<option value="32">PASAPORTE</option>
+																	<option value="33">P. NAC.</option>
+																	<option value="34">OTROS</option>																	
+																</select>
+											
+															</div>
+															<input type="hidden" name="idPersona" value="all" id="idPersona">
+															<input type="number" class="form-control" name="numeroDocumento"
+																placeholder="N&#250mero de Documento"> 
+														</div>
+													</div>
+												
+												
+												
+													<div class="col-md-3" id="divGrafica">
+														<div class="form-group m-b-10">
+															<label class="m-r-15">Tipo de infraccion</label>
+															<div class="input-group">
+																<select id="selectTipoGrafico" name="tipoGrafica"
+																	class="form-control js-example-basic-single">
+																	<option value="-1" disabled="disabled"
+																		selected="selected">Seleccione una infracci&#243n</option>
+																	<option value="28">FALTAR EL RESPETO AL PERSONAL DEL AREA</option>
+																	<option value="29">PROPICIAR EL DESORDEN EN EL AREA</option>
+																	<option value="30">INGERIR ALIMENTOS DENTRO DEL AREA</option>
+																	<option value="31">USAR EL AREA DE ESTUDIOS CON FINES NO ACADEMICOS</option>
+																	<option value="32">USAR RECURSOS INDIVIDUALES PARA FINES GRUPALES</option>
+																	<option value="33">HACER USO DE LOS RECURSOS DEL AREA SIN HABER SOLICITADO SU USO</option>
+																	<option value="34">ABANDONAR EL AREA DE ESTUDIO SIN HABER REGISTRADO EL FIN DE SU USO</option>
+																	<option value="35">SOLICITAR UN RECURSO SIN HACER USO DEL CARN&#201 DE BIBLIOTECA, DNI O CARN&#201 UNIVERSITARIO</option>
+																	<option value="36">PROVOCAR DA&#209OS EN LOS RECURSO DEL AREA</option>
+																	<option value="37">INTENTAR SOLICITAR M&#193S DE UN RECURSO A LA VEZ </option>
+																</select>
+															</div>
+														</div>
+													</div>
+													
+												<div class="row" style="width: 100%;">
+													<div class="col-md-3 hidden" id="divSerie">
+														<div class="form-group m-b-10">
+															<label class="m-r-15">Series</label>
+															<div class="input-group">
+																<select id="selectSeries" name="valSeries"
+																	class="form-control js-example-basic-single " >
+																	<option value="" disabled="disabled"
+																		selected="selected">Seleccione una Serie</option>
+																	<option value="ESCUELA">Escuela</option>
+																	<option value="AREA_ESTUDIO">Area Estudio</option>
+																	<option value="SOLICITANTE">Solicitante</option>
+															</select>
+															</div>
+														</div>
+													</div>
+													<div class="col-md-3 hidden" id="divEjeX">
+														<div class="form-group m-b-10">
+															<label class="m-r-15">Eje X</label>
+															<div class="input-group">
+																<select id="selectEjeX" name="valEjeX"
+																	class="form-control js-example-basic-single " >
+																	<option value="" disabled="disabled"
+																		selected="selected">Seleccione un eje</option>
+																	<option value="PERIODO">Periodo</option>
+																	<option value="ESCUELA">Escuela</option>
+																	<option value="AREA_ESTUDIO">Area Estudio</option>
+																</select>
+															</div>
+														</div>
+													</div>
+													<div class="col-md-3 hidden" id="divSegmY">
+														<div class="form-group m-b-10 ">
+															<label class="m-r-15">Segmentacion en Y</label>
+															<div class="input-group">
+																<select id="selectSegmY" name="valSegY"
+																	class="form-control js-example-basic-single" >
+																	<option value="NINGUNA" selected="selected">Ninguna</option>
+																	<option value="TIPO_SOLICITANTE">Tipo
+																		Solicitante</option>
+																	<option value="ESCUELA">Escuela</option>
+																	<option value="RECURSO">Tipo de Recurso</option>
+																	<option value="AREA_ESTUDIO">Area Estudios</option>
+																</select>
+															</div>
+														</div>
+													</div>
+													<div class="col-md-3 hidden" id="divPresentacion">
+														<div class="form-group m-b-10">
+															<label class="m-r-15">Presentación</label>
+															<div class="input-group">
+																<select id="selectPresentacion" name="valPresentacion"
+																	class="form-control js-example-basic-single" >
+																	<option value="-1" selected="selected"
+																		disabled="disabled">Seleccione una
+																		presentación</option>
+																	<option value="APILADO">Barras apilado</option>
+																	<option value="PARALELO">Barras paralelo</option>
+																</select>
+															</div>
+														</div>
+													</div>
+												</div>
+												<h3 style="font-size: 18px;">Contenido</h3>
+												<div class="row" style="width: 100%;">
+
+
+													<div class="col-md-3">
+														<div class="form-group m-b-10">
+															<label class="m-r-15">Periodo</label>
+															<div class="input-group">
+																<select id="selectPeriodo" name="tipoPeriodo"
+																	class="form-control js-example-basic-single" >
+																	<option value="-1" disabled="disabled"
+																		selected="selected">Seleccione un periodo</option>
+																	<option value="DIA">Por día</option>
+																	<option value="SEMANA">Por semana</option>
+																	<option value="MES">Por mes</option>
+																	<option value="ANIO">Por año</option>
+																</select>
+															</div>
+														</div>
+													</div>
+
+													<div class="col-md-6 hidden" id="divPeriodoDia">
+														<div class="form-group m-b-10">
+															<label class="m-r-15">Intervalo Fechas</label>
+															<div class="input-group">
+																<span class="input-group-addon"> <i
+																	class="fa fa-calendar m-r-5 m-t-5 text-center"></i></span> <input
+																	id="fechaPrestamo" type="text" name="fechaPrestamo"
+																	class="form-control filtro" readonly="readonly">
+															</div>
+														</div>
+													</div>
+
+
+													<div class="col-md-3 hidden" id="divSemanaInicio">
+														<div class="form-group m-b-10">
+															<label class="m-r-10">Desde:</label>
+															<div class="input-group">
+																<input id="semanaInicio" type="week"
+																	name="valSemanaIncio" class="form-control">
+															</div>
+														</div>
+													</div>
+
+
+													<div class="col-md-3 hidden" id="divSemanaFin">
+														<div class="form-group m-b-10">
+															<label class="m-r-15">Hasta:</label>
+															<div class="input-group">
+																<input id="semanaFin" type="week" name="valSemanaFin"
+																	class="form-control">
+															</div>
+														</div>
+													</div>
+
+
+													<div class="col-md-3 hidden" id="divMesInicio">
+														<div class="form-group m-b-10">
+															<label class="m-r-10">Desde:</label>
+															<div class="input-group">
+																<input id="mesInicio" type="month" name="valMesIncio"
+																	class="form-control">
+															</div>
+														</div>
+													</div>
+
+
+													<div class="col-md-3 hidden" id="divMesFin">
+														<div class="form-group m-b-10">
+															<label class="m-r-15">Hasta:</label>
+															<div class="input-group">
+																<input id="mesFin" type="month" name="valMesFin"
+																	class="form-control">
+															</div>
+														</div>
+													</div>
+
+													<div class="col-md-3 hidden" id="divAnioInicio">
+														<div class="form-group m-b-10">
+															<label class="m-r-10">Desde:</label>
+															<div class="input-group">
+																<input id="anioInicio" type="number"
+																	name="valAnioInicio" class="form-control">
+															</div>
+														</div>
+													</div>
+
+
+													<div class="col-md-3 hidden" id="divAnioFin">
+														<div class="form-group m-b-10">
+															<label class="m-r-15">Hasta:</label>
+															<div class="input-group">
+																<input id="anioFin" type="number" name="valAnioFin"
+																	class="form-control">
+															</div>
+														</div>
+													</div>
+
+
+												</div>
+
+									</div>
+
+
+									<div class="tab-pane" id="tabReporteMasFrecuentes"
+										role="tabpanel">
+										<!-- 										<div class="p-20"> -->
+
+										<!-- 										</div> -->
+									</div>
+
+								</div>
+											
+											
+											
+											
+											
+											
+											
+											</div>
 
 											<table id="tblSancionados" class="table table-bordered table-striped">
 <!-- 												<thead> -->
