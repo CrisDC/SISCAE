@@ -51,7 +51,7 @@ public class MantenibleService<T> implements IMantenibleService<T> {
 		mantenimientoMapper.mantener(new Parametro<T>(operacion, dto, SecurityContextFacade.obtenerNombreUsuario()));
 	}
 	
-	/*metodo nuevo*/
+	/*metodo NUEVO no es un metodo de la interface IMantenibleService, se crea para el uso de cambio de contraseña*/
 	//@Override
 	@Transactional(propagation = Propagation.MANDATORY)
 	public void actualizar(T dto, OperacionParam operacionParam) {

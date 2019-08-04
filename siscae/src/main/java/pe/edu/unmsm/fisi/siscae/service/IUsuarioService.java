@@ -17,7 +17,7 @@ public interface IUsuarioService extends IMantenibleService<Usuario> {
 
 	public void eliminarUsuario(Usuario usuario);
 
-	/*Funciones agregadas para validar contraseña y hacer los cambios*/
+	/*Funciones agregadas para validar contraseña y hacer cambio de contraseña*/
 	
 	public boolean verificarPassword(String rawPassword);
 	

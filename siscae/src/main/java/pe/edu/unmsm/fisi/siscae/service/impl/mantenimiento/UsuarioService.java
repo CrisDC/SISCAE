@@ -69,11 +69,11 @@ public class UsuarioService extends MantenibleService<Usuario> implements IUsuar
 	public void eliminarUsuario(Usuario usuario) {
 		super.eliminar(usuario);
 	}
-	
+	/*METODO NO USADO*/
 	 public String currentUserName(Principal principal) {
 	        return principal.getName();
 	    }
-	
+	/*METODO PARA VALIDAR CONTRASEÑA*/
 	public boolean verificarPassword(String rawPassword) {
 		BCryptPasswordEncoder encriptador = new BCryptPasswordEncoder();
 		String passwordEncriptada="";
@@ -104,26 +104,19 @@ public class UsuarioService extends MantenibleService<Usuario> implements IUsuar
     	}
 		
 	}
-	
-	public void cambiarPassword(String rawPassword) {
+	/*METODO PARA ACTUALIZAR SOLO LA CONTRASEÑA*/
+	public void cambiarPassword(String newPassword) {
 		BCryptPasswordEncoder encriptador = new BCryptPasswordEncoder();
-		String passwordEncriptada="";
 		String currentUserName="";
 		
 		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
 		if (!(authentication instanceof AnonymousAuthenticationToken)) {
 		    currentUserName = authentication.getName();
 		}
-		
-		Usuario usuario =  Usuario.builder().nombre(currentUserName).build();
-	
-		List<Usuario> listaRetornada = super.buscar(usuario,OperacionParam.PASSWORD);
+		String updatePassword= encriptador.encode(newPassword);
+		Usuario usuario =  Usuario.builder().nombre(currentUserName).pass(updatePassword).build();
 
-		if (!listaRetornada.isEmpty()){
-			passwordEncriptada =listaRetornada.get(0).getPass();
-		}else{
-			throw new ValorNoEncontradoException("No se encontró la contraseña del usuario");
-		}
+		actualizar(usuario, OperacionParam.PASSWORD);
 	}
 	
 	
