@@ -24,9 +24,7 @@ $(document).ready(function() {
 		$numDoc : $('#numeroDocumento'),
 		$selectTipoInfraccion : $('#tipoInfraccion'),
 		$selectTipoEstado : $('#tipoEstado'),
-
-		$selectTipoInfraccion : $('#selectTipoInfraccion'),
-		$selectTipoEstado : $('#selectTipoEstado'),
+		
 		$selectPeriodo : $('#selectPeriodo'),
 		$fechaPrestamo : $('#fechaPrestamo'),
 		$semanaInicio : $('#semanaInicio'),
@@ -248,10 +246,12 @@ $(document).ready(function() {
 	
 	/*---------CONSTRUCCION DE LAS TABLAS POR FILTROS---------------*/
 	
+	
+	
 	var obtenerCriterio = function (){
 						
 		var criterio = $formInfracciones.serializeJSON();
-		criterio.idTipoDocumento = $local.$tipoPersona.val();
+		criterio.tipoPersona = $local.$tipoPersona.val();
 		criterio.numeroDocumento = $local.$numDoc.val();
 		criterio.selectTipoInfraccion = $local.$selectTipoInfraccion.val();
 		criterio.selectTipoEstado = $local.$selectTipoEstado.val();
@@ -283,10 +283,46 @@ $(document).ready(function() {
 		return criterio;
 	}
 	
+	var contador = function(){
+		
+		var cont = 0;
+		
+		if($local.$tipoPersona.val()==-1 )	cont++;
+		if($local.$numDoc.val()==0 )	cont++;
+		if($local.$selectTipoInfraccion.val()==-1 )	cont++;
+		if($local.$selectTipoEstado.val()==-1 )	cont++;
+		if($local.$selectPeriodo.val()==-1 ){
+			cont++;
+		}else{
+			if($local.$selectPeriodo.val() == 'DIA'){
+				console.log($local.$fechaPrestamo.val());
+				//if($local.$fechaPrestamo.val() ==null)cont++;
+			}
+			if($local.$selectPeriodo.val() == 'SEMANA'){
+								
+				if( $local.$semanaInicio.val() =='' || $local.$semanaFin.val() =='') cont++;
+			}
+			if($local.$selectPeriodo.val() == 'MES'){
+				
+				if( $local.$mesInicio.val() =='' || $local.$mesFin.val() =='') cont++;
+			}
+			if($local.$selectPeriodo.val() == 'ANIO'){
+				
+				if( $local.$anioInicio.val() =='' || $local.$anioFin.val() =='') cont++;
+			}
+		}
+			
+				
+		return cont;
+		
+		
+	}
+	
 	$local.$buscar.on('click', function() {
 		
 		var criterioB = obtenerCriterio();
-		
+		var c = contador();
+		console.log(c);
 		$.ajax({
 			type : "GET",
 			url : $variableUtil.root + "infraccionDetalle?accion=buscarPorCriterio",

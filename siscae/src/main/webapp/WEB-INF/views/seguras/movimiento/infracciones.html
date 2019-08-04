@@ -228,8 +228,8 @@
 														
 															<div class="input-group-btn search-panel">
 											
-																<input type="number" class="form-control" name="numDocumento"
-																placeholder="N&#250mero de Documento" id="numeDocumento"> 
+																<input type="number" value="0" class="form-control" name="numeroDocumento"
+																placeholder="N&#250mero de Documento" id="numeroDocumento"> 
 											
 															</div>
 															
@@ -244,7 +244,7 @@
 											
 																<select id="tipoPersona" name="tipoPersona"
 																	class="form-control js-example-basic-single">
-																	<option value="-1" disabled="disabled" selected="selected">Tipo de persona</option>
+																	<option value="-1" selected="selected">Tipo de persona</option>
 																	<option value="ALUMNO">ALUMNO</option>
 																	<option value="DOCENTE">DOCENTE</option>
 																	<option value="EXTERNO">EXTERNO</option>
@@ -264,18 +264,10 @@
 															<div class="input-group">
 																<select id="tipoInfraccion" name="tipoInfraccion"
 																	class="form-control js-example-basic-single">
-																	<option value="-1" disabled="disabled"
+																	<option value="-1" 
 																		selected="selected">Seleccione una infracci&#243n </option>
-																	<option value="FALTAR EL RESPETO AL PERSONAL">FALTAR EL RESPETO AL PERSONAL DEL AREA</option>
-																	<option value="PROPICIAR EL DESORDEN">PROPICIAR EL DESORDEN EN EL AREA</option>
-																	<option value="INGERIR ALIMENTOS">INGERIR ALIMENTOS DENTRO DEL AREA</option>
-																	<option value="USAR EL AREA DE ESTUDIOS CON FINES NO ACADEMICOS">USAR EL AREA DE ESTUDIOS CON FINES NO ACADEMICOS</option>
-																	<option value="USAR RECURSOS INDIVIDUALES PARA FINES GRUPALES">USAR RECURSOS INDIVIDUALES PARA FINES GRUPALES</option>
-																	<option value="HACER USO DE LOS RECURSOS SIN HABER SOLICITADO">HACER USO DE LOS RECURSOS DEL AREA SIN HABER SOLICITADO SU USO</option>
-																	<option value="ABANDONAR EL AREA SIN HABER REGISTRADO EL FIN DE SU USO">ABANDONAR EL AREA DE ESTUDIO SIN HABER REGISTRADO EL FIN DE SU USO</option>
-																	<option value="SOLICITAR UN RECURSO SIN HACER USO DEL CARNÉ O DNI ">SOLICITAR UN RECURSO SIN HACER USO DEL CARN&#201 DE BIBLIOTECA, DNI O CARN&#201 UNIVERSITARIO</option>
-																	<option value="PROVOCAR DAÑOS EN LOS RECURSO DEL AREA">PROVOCAR DA&#209OS EN LOS RECURSO DEL AREA</option>
-																	<option value="INTENTAR SOLICITAR MÁS DE UN RECURSO A LA VEZ ">INTENTAR SOLICITAR M&#193S DE UN RECURSO A LA VEZ </option>
+																	<option th:each="infraccion : ${tipoInfracciones}" th:value="${infraccion.idItem}"
+																	th:text="|${infraccion.descripcionCorta}|"></option>
 																</select>
 															</div>
 														</div>
@@ -287,10 +279,10 @@
 																<div class="input-group">
 																	<select id="tipoEstado" name="tipoEstado"
 																		class="form-control js-example-basic-single">
-																		<option value="-1" disabled="disabled"
+																		<option value="-1" 
 																			selected="selected">Seleccione un estado</option>
-																		<option value="NO PENALIZADA">NO PENALIZADA</option>
-																		<option value="PENALIZADA">PENALIZADA</option>																		
+																		<option th:each="estado : ${estadosI}" th:value="${estado.idEstadoTabla}"
+																	th:text="|${estado.descripcion}|"></option>																	
 																	</select>
 																</div>
 															</div>
@@ -314,7 +306,7 @@
 															<div class="input-group">
 																<select id="selectPeriodo" name="tipoPeriodo"
 																	class="form-control js-example-basic-single" >
-																	<option value="-1" disabled="disabled"
+																	<option value="-1" 
 																		selected="selected">Seleccione un periodo</option>
 																	<option value="DIA">Por d&#237a</option>
 																	<option value="SEMANA">Por semana</option>
