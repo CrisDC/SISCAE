@@ -19,5 +19,9 @@ public class InfraccionDetalle {
 	String infraccion;
 	String estado;
 	String fecha;
+	int idEstadoTabla;
+	int idPersona;
+	int idTipoInfraccion;
+	int idInfraccion;
 	
 }

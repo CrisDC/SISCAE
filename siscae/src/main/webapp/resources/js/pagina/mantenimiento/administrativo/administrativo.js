@@ -205,6 +205,7 @@ $(document).ready(function() {
 		$funcionUtil.prepararFormularioActualizacion($formMantenimiento);
 		$local.$filaSeleccionada = $(this).parents("tr");
 		var administrativo = $local.tablaMantenimiento.row($local.$filaSeleccionada).data();
+		
 		$local.idAdministrativoSeleccionado = administrativo.idAdministrativo;
 		$funcionUtil.llenarFormulario(administrativo, $formMantenimiento);
 		$local.$actualizarMantenimiento.removeClass("hidden");
@@ -217,7 +218,7 @@ $(document).ready(function() {
 		var nuevaOpcion = new Option(administrativo.nombre+" "+administrativo.appPaterno+" "+administrativo.appMaterno, administrativo.idAdministrativo, false, false);
 		$local.$selectPersona.append(nuevaOpcion).trigger('change');
 		
-		console.log(administrativo);
+		
 	});
 	
 	
