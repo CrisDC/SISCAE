@@ -150,10 +150,10 @@ $(document).ready(function() {
 		$local.$registrarMantenimiento.removeClass("hidden");
 		//$local.$modalMantenimiento.PopupWindow("open");
 		
-		//Borra todas los opciones de persona y agrega el seleccionado
+		//Borra todas los opciones de persona
 		$local.$selectPersona.html("");
-		var nuevaOpcion = new Option(alumno.nombres+" "+alumno.appPaterno+" "+alumno.appMaterno, alumno.idAlumno, false, false);
-		$local.$selectPersona.append(nuevaOpcion).trigger('change');
+		$local.$selectPersona.prop('disabled', false);
+		console.log("entra");
 	});
 
 	$local.$modalMantenimiento.on("open.popupwindow", function() {
@@ -238,8 +238,10 @@ $(document).ready(function() {
 		
 		//Borra todas los opciones de persona y agrega el seleccionado
 		$local.$selectPersona.html("");
-		var nuevaOpcion = new Option(alumno.nombres+" "+alumno.appPaterno+" "+alumno.appMaterno, alumno.idAlumno, false, false);
+		var nuevaOpcion = new Option(alumno.numeroDocumento + " - " + alumno.nombres+" "+alumno.appPaterno+" "+alumno.appMaterno, alumno.idAlumno, false, false);
 		$local.$selectPersona.append(nuevaOpcion).trigger('change');
+		
+		$local.$selectPersona.prop('disabled', true);
 		
 		console.log(alumno);
 		
