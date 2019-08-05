@@ -16,10 +16,10 @@ public class InfraccionDetalleCriterioBusqueda {
 	
 	
 	//primera parte
-	private String numeroDocumento;
+	private int numeroDocumento;
 	private String tipoPersona;
-	private String tipoInfraccion;
-	private String tipoEstado;
+	private int tipoInfraccion;
+	private int tipoEstado;
 	
 	//fechas
 	private String fechaInicio;

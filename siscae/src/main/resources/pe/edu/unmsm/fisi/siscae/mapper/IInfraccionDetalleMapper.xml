@@ -29,35 +29,183 @@
 	</select>
 	
 	<select id="buscarPorCriterio" resultType="InfraccionDetalle">
+		<if test="tipoPersona == '-1' ">
+			SELECT
+			
+				mp.v_num_documento				AS		num_documento,
+			    mp.v_app_paterno				AS		app_paterno,
+			    mp.v_app_materno				AS		app_materno,
+			    mp.v_nombre						AS		nombre,
+			    mmd.v_descripcion_Corta			AS		infraccion,
+			    met.v_descripcion				AS		estado,
+			    mi.d_fecha						AS		fecha,
+			    F_TIPO_PERSONA(mp.v_num_documento)		AS		tipo_persona					    				
+			    
+			FROM mov_infraccion mi
+			LEFT JOIN mae_persona mp			ON mi.n_id_persona = mp.n_id_persona
+	        LEFT JOIN mae_estado_tabla 	met		ON mi.n_id_estado_tabla=met.n_id_estado_tabla
+	        LEFT JOIN mae_multi_tab_det mmd		ON mi.n_id_tipo_infraccion=mmd.n_id_item
+			<where>
+				<if test="tipoInfraccion != -1">
+			        mmd.n_id_item = #{tipoInfraccion}
+			    </if>
+			    
+			    <if test="tipoEstado != -1">
+			        AND met.n_id_estado_tabla = #{tipoEstado}
+			    </if>
+			    		    
+			    <if test="numeroDocumento != 0 and numeroDocumento != '' ">
+			        AND mp.v_num_documento = #{numeroDocumento}
+			    </if>
+			    
+			    
+			  </where>
+		
+		</if>
+		
+		<if test="tipoPersona == 'ALUMNO'">
 		
 		SELECT
-			num_documento,
-		    app_paterno,
-		    app_materno,
-		    nombre,
-		    tipo_persona,
-		    infraccion,
-		    estado,
-		    fecha
-		FROM vw_infraccion_detalle
-		<where>
-			<if test="tipoInfraccion != null">
-		        infraccion like #{tipoInfraccion}
-		    </if>
-			<if test="tipoPersona != null">
-		        AND tipo_persona = #{tipoPersona}
-		    </if>
-		    <if test="numeroDocumento != null and numDocumento != '' ">
-		        AND num_documento = #{numDocumento}
-		    </if>
-		    
-		    
-		    <if test="tipoEstado != null">
-		        AND estado = #{tipoEstado}
-		    </if>
-		    
-		  </where>
+			
+				mp.v_num_documento				AS		num_documento,
+			    mp.v_app_paterno				AS		app_paterno,
+			    mp.v_app_materno				AS		app_materno,
+			    mp.v_nombre						AS		nombre,
+			    mmd.v_descripcion_Corta			AS		infraccion,
+			    met.v_descripcion				AS		estado,
+			    mi.d_fecha						AS		fecha,
+			    'ALUMNO'						AS		tipo_persona					    				
+			    
+			FROM mov_infraccion mi
+			LEFT JOIN mae_persona mp			ON mi.n_id_persona = mp.n_id_persona
+	        LEFT JOIN mae_estado_tabla 	met		ON mi.n_id_estado_tabla=met.n_id_estado_tabla
+	        LEFT JOIN mae_multi_tab_det mmd		ON mi.n_id_tipo_infraccion=mmd.n_id_item
+	        JOIN mae_alumno ma 					ON mp.n_id_persona = ma.n_id_alumno
+			<where>
+				<if test="tipoInfraccion != -1">
+			        mmd.n_id_item = #{tipoInfraccion}
+			    </if>
+			    
+			    <if test="tipoEstado != -1">
+			        AND met.n_id_estado_tabla = #{tipoEstado}
+			    </if>
+			    		    
+			    <if test="numeroDocumento != 0 and numeroDocumento != '' ">
+			        AND mp.v_num_documento = #{numeroDocumento}
+			    </if>
+			    
+			    
+			  </where>
 		
+		</if>
+		
+		<if test="tipoPersona == 'DOCENTE'">
+		
+		SELECT
+			
+				mp.v_num_documento				AS		num_documento,
+			    mp.v_app_paterno				AS		app_paterno,
+			    mp.v_app_materno				AS		app_materno,
+			    mp.v_nombre						AS		nombre,
+			    mmd.v_descripcion_Corta			AS		infraccion,
+			    met.v_descripcion				AS		estado,
+			    mi.d_fecha						AS		fecha,
+			    'DOCENTE'						AS		tipo_persona					    				
+			    
+			FROM mov_infraccion mi
+			LEFT JOIN mae_persona mp			ON mi.n_id_persona = mp.n_id_persona
+	        LEFT JOIN mae_estado_tabla 	met		ON mi.n_id_estado_tabla=met.n_id_estado_tabla
+	        LEFT JOIN mae_multi_tab_det mmd		ON mi.n_id_tipo_infraccion=mmd.n_id_item
+	        JOIN mae_docente md 					ON mp.n_id_persona = md.n_id_docente
+			<where>
+				<if test="tipoInfraccion != -1">
+			        mmd.n_id_item = #{tipoInfraccion}
+			    </if>
+			    
+			    <if test="tipoEstado != -1">
+			        AND met.n_id_estado_tabla = #{tipoEstado}
+			    </if>
+			    		    
+			    <if test="numeroDocumento != 0 and numeroDocumento != '' ">
+			        AND mp.v_num_documento = #{numeroDocumento}
+			    </if>
+			    
+			    
+			  </where>
+		
+		</if>
+		
+		<if test="tipoPersona == 'EXTERNO'">
+		
+		SELECT
+			
+				mp.v_num_documento				AS		num_documento,
+			    mp.v_app_paterno				AS		app_paterno,
+			    mp.v_app_materno				AS		app_materno,
+			    mp.v_nombre						AS		nombre,
+			    mmd.v_descripcion_Corta			AS		infraccion,
+			    met.v_descripcion				AS		estado,
+			    mi.d_fecha						AS		fecha,
+			    'EXTERNO'						AS		tipo_persona					    				
+			    
+			FROM mov_infraccion mi
+			LEFT JOIN mae_persona mp			ON mi.n_id_persona = mp.n_id_persona
+	        LEFT JOIN mae_estado_tabla 	met		ON mi.n_id_estado_tabla=met.n_id_estado_tabla
+	        LEFT JOIN mae_multi_tab_det mmd		ON mi.n_id_tipo_infraccion=mmd.n_id_item
+	        JOIN mae_externo me 					ON mp.n_id_persona = me.n_id_externo
+			<where>
+				<if test="tipoInfraccion != -1">
+			        mmd.n_id_item = #{tipoInfraccion}
+			    </if>
+			    
+			    <if test="tipoEstado != -1">
+			        AND met.n_id_estado_tabla = #{tipoEstado}
+			    </if>
+			    		    
+			    <if test="numeroDocumento != 0 and numeroDocumento != '' ">
+			        AND mp.v_num_documento = #{numeroDocumento}
+			    </if>
+			    
+			    
+			  </where>
+		
+		</if>
+		
+		<if test="tipoPersona == 'ADMINISTRATIVO'">
+		
+		SELECT
+			
+				mp.v_num_documento				AS		num_documento,
+			    mp.v_app_paterno				AS		app_paterno,
+			    mp.v_app_materno				AS		app_materno,
+			    mp.v_nombre						AS		nombre,
+			    mmd.v_descripcion_Corta			AS		infraccion,
+			    met.v_descripcion				AS		estado,
+			    mi.d_fecha						AS		fecha,
+			    'ADMINISTRATIVO'		AS		tipo_persona					    				
+			    
+			FROM mov_infraccion mi
+			LEFT JOIN mae_persona mp			ON mi.n_id_persona = mp.n_id_persona
+	        LEFT JOIN mae_estado_tabla 	met		ON mi.n_id_estado_tabla=met.n_id_estado_tabla
+	        LEFT JOIN mae_multi_tab_det mmd		ON mi.n_id_tipo_infraccion=mmd.n_id_item
+	        JOIN mae_administrativo mad 					ON mp.n_id_persona = mad.n_id_administrativo
+			<where>
+				<if test="tipoInfraccion != -1">
+			        mmd.n_id_item = #{tipoInfraccion}
+			    </if>
+			    
+			    <if test="tipoEstado != -1">
+			        AND met.n_id_estado_tabla = #{tipoEstado}
+			    </if>
+			    		    
+			    <if test="numeroDocumento != 0 and numeroDocumento != '' ">
+			        AND mp.v_num_documento = #{numeroDocumento}
+			    </if>
+			    
+			    
+			  </where>
+		
+		</if>
 		
 	</select>
 
