@@ -36,11 +36,11 @@ public class Infraccion {
 	private Integer idPersona;
 	private Integer idTipoInfraccion;
 
-	private String descripcionTabla;
-	private String nombre;
-	private String appPaterno;
-	private String appMaterno;
-	private String descripcionTipoInfraccion;
+	//private String descripcionTabla;
+	//private String nombre;
+	//private String appPaterno;
+	//private String appMaterno;
+	//private String descripcionTipoInfraccion;
 	
 	
 }

@@ -24,6 +24,8 @@ $(document).ready(function() {
 		botonActualizar : "<button class='btn btn-xs btn-primary actualizar' title='Actualizar' data-tooltip='Actualizar'><i class='fa fa-pencil-square'></i></button>",
 		botonActualizarNuevo : "<button type='button' class='btn btn-xs btn-info actualizar' data-tooltip='Actualizar' data-toggle='modal' data-target='#modalMantenimiento'><i class='fa fa-pencil-square'></i></button>",
 		botonEliminarNuevo : "<button type='button' class='btn btn-xs btn-danger eliminar' data-tooltip='Eliminar'><i class='fa fa-trash'></i></button>",
+		botonActualizarNuevoi : "<button type='button' class='btn btn-xs btn-info actualizar' data-tooltip='Actualizar' data-toggle='modal' data-target='#sancionadoModal'><i class='fa fa-pencil-square'></i></button>",
+		botonEliminarNuevoi : "<button type='button' class='btn btn-xs btn-danger eliminar' data-tooltip='Eliminar'><i class='fa fa-trash'></i></button>",
 		
 		botonEliminarSolicitante : "<button class='btn btn-danger eliminar-soli eliminar' data-tooltip='Eliminar'><i class='fa fa-trash-o'></i></button>",
 		botonActualizarSolicitante : "<button class='btn btn-info actualizar-soli actualizar' data-tooltip='Actualizar'><i class='fa fa-cog'></i></button>",

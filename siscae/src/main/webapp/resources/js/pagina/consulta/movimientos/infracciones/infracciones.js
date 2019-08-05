@@ -24,6 +24,8 @@ $(document).ready(function() {
 		$numDoc : $('#numeroDocumento'),
 		$selectTipoInfraccion : $('#tipoInfraccion'),
 		$selectTipoEstado : $('#tipoEstado'),
+		$selectTipoInfraccionm : $('#tipoInfraccionm'),
+		$selectTipoEstadom : $('#tipoEstadom'),
 		
 		$selectPeriodo : $('#selectPeriodo'),
 		$fechaPrestamo : $('#fechaPrestamo'),
@@ -40,12 +42,16 @@ $(document).ready(function() {
 		$exportar : $('#exportar')
 		
 	}
+	
+	var escuela1 = {};
 
 	$funcionUtil.crearDateRangePickerSimple($local.$fechaPrestamo, "YYYY-MM-DD");
 	
 	//Creando elementos combobox con estilo chevere (Plugin Select2)
     $funcionUtil.crearSelect2($local.$selectTipoEstado);
 	$funcionUtil.crearSelect2($local.$selectTipoInfraccion);
+	$funcionUtil.crearSelect2($local.$selectTipoEstadom);
+	$funcionUtil.crearSelect2($local.$selectTipoInfraccionm);
 	$funcionUtil.crearSelect2($local.$selectPeriodo);
 	$funcionUtil.crearSelect2($local.$tipoPersona);
 	
@@ -108,7 +114,7 @@ $(document).ready(function() {
 	
 	$local.tblConsulta = $local.$tblConsulta.DataTable({
 		"ajax" : {
-			"url" : $variableUtil.root + "infraccionDetalle?accion=buscarTodos",
+			"url" : "",
 			"dataSrc" : ""
 		},
 			"language" : {
@@ -125,7 +131,7 @@ $(document).ready(function() {
 			} , {
 				"targets" : 8,
 				"className" : "all dt-center",
-				"defaultContent" : $variableUtil.botonActualizarNuevo + " " + $variableUtil.botonEliminarNuevo
+				"defaultContent" : $variableUtil.botonActualizarNuevoi + " " + $variableUtil.botonEliminarNuevoi
 			}  ],
 			"columns" : [{
 				"data" : 'numDocumento',
@@ -243,9 +249,92 @@ $(document).ready(function() {
 	
 	//Formulario
 	$formInfracciones = $("#formInfracciones");
+	$formMantenimiento = $("#formMantenimiento");
 	
 	/*---------CONSTRUCCION DE LAS TABLAS POR FILTROS---------------*/
+	/**ACTUALIZAR**/
+	$local.$tblConsulta.children("tbody").on("click", ".actualizar", function() {
+		//$funcionUtil.prepararFormularioActualizacion($formMantenimiento);
+		$local.$filaSeleccionada = $(this).parents("tr");
+		escuela1 = $local.tblConsulta.row($local.$filaSeleccionada).data();
+		console.log(escuela1);
+		
+		});
+	/***ELIMINAR***/
+	$local.$tblConsulta.children("tbody").on("click", ".eliminar", function() {
+		$local.$filaSeleccionada = $(this).parents("tr");
+		var escuela = $local.tblConsulta.row($local.$filaSeleccionada).data();
+		console.log(escuela);
+		var infraccion = {"idInfraccion" : escuela.idInfraccion,
+				          "descripcion"  : escuela.infraccion,
+				          "fecha"        : escuela.fecha,
+				          "idEstadoTabla": escuela.idEstadoTabla,
+				          "idPersona"    : escuela.idPersona,
+				          "idTipoInfraccion" : escuela.idTipoInfraccion,
+		                         };
+		console.log(infraccion);
+		$.confirm({
+			icon : "fa fa-info-circle",
+			title : "Aviso",
+			content : "¿Desea eliminar la infracción <b>'" + escuela.infraccion + " - " + escuela.nombre + "'<b/>?",
+			buttons : {
+				Aceptar : {
+					action : function() {
+						var confirmar = $.confirm({
+							icon : 'fa fa-spinner fa-pulse fa-fw',
+							title : "Eliminando...",
+							content : function() {
+								var self = this;
+								self.buttons.close.hide();
+								$.ajax({
+									type : "DELETE",
+									url : $variableUtil.root + "infraccion",
+									data : JSON.stringify(infraccion),
+									autoclose : true,
+									beforeSend : function(xhr) {
+										xhr.setRequestHeader('Content-Type', 'application/json');
+										xhr.setRequestHeader("X-CSRF-TOKEN", $variableUtil.csrf);
+									},
+									statusCode : {
+										400 : function(response) {
+											confirmar.close();
+											response.responseText.length > $max_tamaño_error ? 
+													swal("Error", "La operación no pudo realizarse con exito.", "warning") : 
+													swal("Error", response.responseText, "warning");
+										},
+										500 : function(response) {
+											confirmar.close();
+											response.responseText.length > $max_tamaño_error ? 
+													swal("Error", "La operación no pudo realizarse con exito.", "warning") : 
+													swal("Error", response.responseText, "warning");
+											
+										}
+									},
+								}).done(function(escuelaResponse) {
+									$funcionUtil.notificarException(escuelaResponse, "fa-check", "Aviso", "success");
+									$local.tblConsulta.row($local.$filaSeleccionada).remove().draw(false);
+									confirmar.close();
+								});
+							},
+							buttons : {
+								close : {
+									text : 'Aceptar'
+								}
+							}
+						});
+					},
+					keys : [ 'enter' ],
+					btnClass : "btn-primary"
+				},
+				Cancelar : {
+					keys : [ 'esc' ]
+				},
+			}
+		});
+		
+	});
 	
+	/***dfdf*/
 	
 	
 	var obtenerCriterio = function (){
@@ -323,36 +412,41 @@ $(document).ready(function() {
 		var criterioB = obtenerCriterio();
 		var c = contador();
 		console.log(c);
-		$.ajax({
-			type : "GET",
-			url : $variableUtil.root + "infraccionDetalle?accion=buscarPorCriterio",
-			contentType : "application/json",
-			data: criterioB,
-			dataType : "json",
-			beforeSend : function(xhr) {
-				xhr.setRequestHeader('Content-Type', 'application/json');
-				//Borrando tabla antes de hacer la consulta
-				$local.tblConsulta.clear().draw();
-				$local.$buscar.attr("disabled", true).find("i").removeClass("fa-search").addClass("fa-spinner fa-pulse fa-fw");
-			},
-			success : function(response) {
-				console.log(response);
-				if (response.length === 0) {
-					$funcionUtil.notificarException($variableUtil.busquedaSinResultados, "fa-exclamation-circle", "Información", "info");
-					return;
+		if(c ==5){
+			swal("No se pudo realizar la búsqueda", "No ingreso ningún valor", "error");
+		}else{
+			$.ajax({
+				type : "GET",
+				url : $variableUtil.root + "infraccionDetalle?accion=buscarPorCriterio",
+				contentType : "application/json",
+				data: criterioB,
+				dataType : "json",
+				beforeSend : function(xhr) {
+					xhr.setRequestHeader('Content-Type', 'application/json');
+					//Borrando tabla antes de hacer la consulta
+					$local.tblConsulta.clear().draw();
+					$local.$buscar.attr("disabled", true).find("i").removeClass("fa-search").addClass("fa-spinner fa-pulse fa-fw");
+				},
+				success : function(response) {
+					console.log(response);
+					if (response.length === 0) {
+						$funcionUtil.notificarException($variableUtil.busquedaSinResultados, "fa-exclamation-circle", "Información", "info");
+						return;
+					}
+					//Dibujando tabla
+					
+					$local.tblConsulta.rows.add(response).draw();
+					//Dibujando grafico
+					//var chart = AmCharts.makeChart('chartdiv',$funcionGraficoUtil.crearGraficoPie(response,'segmento','numeroPrestamos','Análisis de Préstamos','Número de prestamos', "<b style='font-size:12px'>[[title]]</b> ([[percents]]%) <br> <b>Prestamos:</b> [[value]] </br> <b>Tiempo Total: </b> [[estadiaTotal]] <br> <b>Tiempo Prom: </b> [[estadiaPromedio]]"));
+				},
+				error : function(response) {
+				},
+				complete : function() {
+					$local.$buscar.attr("disabled", false).find("i").addClass("fa-search").removeClass("fa-spinner fa-pulse fa-fw");
 				}
-				//Dibujando tabla
-				
-				$local.tblConsulta.rows.add(response).draw();
-				//Dibujando grafico
-				//var chart = AmCharts.makeChart('chartdiv',$funcionGraficoUtil.crearGraficoPie(response,'segmento','numeroPrestamos','Análisis de Préstamos','Número de prestamos', "<b style='font-size:12px'>[[title]]</b> ([[percents]]%) <br> <b>Prestamos:</b> [[value]] </br> <b>Tiempo Total: </b> [[estadiaTotal]] <br> <b>Tiempo Prom: </b> [[estadiaPromedio]]"));
-			},
-			error : function(response) {
-			},
-			complete : function() {
-				$local.$buscar.attr("disabled", false).find("i").addClass("fa-search").removeClass("fa-spinner fa-pulse fa-fw");
-			}
-		});
+			});
+		}
+		
 		
 	});
 	
@@ -447,6 +541,87 @@ $(document).ready(function() {
 		$('#btnClose').on('click', function (event){
 			location.reload();
 		});
+		
+	});
+	
+	
+	/* ------ Construcción de modal ------------ */	
+	$('#sancionadoModal').on('show.bs.modal', function (event){
+		console.log(escuela1);
+		var button = $(event.relatedTarget)
+		
+		var ti = escuela1.idTipoInfraccion;
+		var es = escuela1.idEstadoTabla;
+		
+		console.log
+
+		
+		var modal = $(this)
+		
+		modal.find('#tipoInfraccionm').val(ti);
+		//modal.find('#tipoInfraccionm').text(escuela1.infraccion);
+		modal.find('#tipoEstadom').val(es);
+		//modal.find('#tipoEstadom').text(escuela1.estado);
+		
+		$('#actualizarMantenimiento').on('click', function (event){
+			
+			var combo = document.getElementById("tipoInfraccionm");
+			var combo1 = document.getElementById("tipoEstadom");
+			
+			var idt = Number(combo.value);
+			var et = Number(combo1.value);
+			var texto = $('#tipoInfraccionm').find('option:selected').text()
+			
+			var infraccion = {"idInfraccion" : escuela1.idInfraccion,
+			          "descripcion"  : texto,
+			          "fecha"        : escuela1.fecha,
+			          "idEstadoTabla": et,
+			          "idPersona"    : escuela1.idPersona,
+			          "idTipoInfraccion" : idt,
+	                         };
+	        console.log(infraccion);
+			
+			
+			$.ajax({
+				url :  $variableUtil.root + "infraccion",
+				type : 'PUT',
+				data : JSON.stringify(infraccion),
+                beforeSend : function(xhr) {
+    				xhr.setRequestHeader('Content-Type', 'application/json');
+    				xhr.setRequestHeader("X-CSRF-TOKEN", $variableUtil.csrf);
+    			},
+    			statusCode : {
+    				400 : function(response) {
+    						swal(response.responseJSON);
+    					},
+      				500 : function(response) {
+      					swal("Error", response.responseText, "warning");
+      				}
+    			},
+    			success : function(response) {
+    				console.log(response)
+	    			swal({
+  					  title: "Operacion realizada con exito",
+  					  text: "Actualización aplicada",
+  					  icon: "success",
+  					  button: false,
+  					  timer: 1000,
+	  				}).then((value) => {
+	  					location.reload();
+	  				});
+	    				
+    			},
+    			error : function(response) {
+    				swal("Error", "Ha ocurrido un problema con el servidor", "warning"); 
+    			},
+    			complete : function(response) {
+    				
+    			}
+			});
+			
+			
+		});
+		
 		
 	});
 	
