@@ -25,11 +25,19 @@
 								<div class="col-6 p-l-0">
 									<h3 class="panel-title pull-left" th:text="|Mantenimiento de  #{__${mantenimiento}__}|"></h3>
 								</div>
+								
 								<div class="col-6 p-r-0">
 									<ul th:unless="${esSoloConsulta} ?: false" class="panel-controls">
-										<li><button id="aniadirMantenimiento" data-toggle='modal' data-target='#modalMantenimiento' class="btn boton-confirmar pull-right">
+										<li>
+										<button id="aniadirMantenimiento" data-toggle='modal' data-target='#modalMantenimiento' class="btn boton-confirmar pull-right">
 											<i class="fa fa-plus"></i> <span th:text="|#{__|boton-${mantenimiento}|__}|"></span>
-											</button>
+										</button>
+										</li>
+										<li>
+										<span id="elemento" hidden="hidden">
+										<button style="margin-right:10px;" class="btn btn-primary pull-right" onclick="window.history.back()">
+										REGRESAR</span>
+										</button>
 										</li>
 									</ul>
 								</div>

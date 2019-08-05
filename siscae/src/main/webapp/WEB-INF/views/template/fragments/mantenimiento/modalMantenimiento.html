@@ -337,7 +337,7 @@
 		</div>
 	</th:block>
 	
-	<!--TABLA HORARIO -->
+	<!--TABLA INFRACCION -->
 	
 	<th:block th:fragment="infraccion">
 
@@ -385,6 +385,9 @@
 			</div>
 		</div>
 	</th:block>
+	
+	
+	
 	<!-- Tabla Facultad -->
 	<th:block th:fragment="facultad">
 		<div class="form-group">
@@ -739,6 +742,25 @@
 			</div>
 		</div>
 	</th:block>
+	
+	<!-- Tabla de tablas Mantenimiento -->
+	<th:block th:fragment="multiTabDet">
+		<div class="form-group">
+			<label class="col-lg-8 control-label">Descripción</label>
+			<div class="col-lg-10">
+				<input class="form-control upperCase elemento-modificable"
+					type="text" name="descripcion" autofocus="autofocus" />
+			</div>
+		</div>
+		<div class="form-group">
+			<label class="col-lg-5 control-label">Descripción corta</label>
+			<div class="col-lg-10">
+				<input class="form-control upperCase elemento-modificable"
+					type="text" name="descripcionCorta" autofocus="autofocus" />
+			</div>
+		</div>
+	</th:block>
+	
 
 </body>
 </html>

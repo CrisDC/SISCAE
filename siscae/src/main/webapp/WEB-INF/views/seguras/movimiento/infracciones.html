@@ -41,13 +41,14 @@
 											class="hidden-sm-up"> <i class="ti-home"></i></span> <span
 											class="hidden-xs-down">Aplicar Infraccion</span>
 									</a></li>
-									<!-- 
-									<li th:if="(${areaAdministrativo.cargo} != 'SOLICITANTE')"
-										class="nav-item"><a class="nav-link" data-toggle="tab"
-										href="#tablaInfraccionDetalle" role="tab"> <span class="hidden-sm-up"><i
-												class="ti-user"></i></span> <span class="hidden-xs-down">Detalles</span>
-									</a></li>
-									 -->
+
+
+<!-- 									<li th:if="(${areaAdministrativo.cargo} != 'SOLICITANTE')" -->
+<!-- 										class="nav-item"><a class="nav-link" data-toggle="tab" -->
+<!-- 										href="#tablaInfraccionDetalle" role="tab"> <span class="hidden-sm-up"><i -->
+<!-- 												class="ti-user"></i></span> <span class="hidden-xs-down">Detalles</span> -->
+<!-- 									</a></li> -->
+			
 									<li th:if="(${areaAdministrativo.cargo} != 'SOLICITANTE')"
 										class="nav-item"><a class="nav-link" data-toggle="tab"
 										href="#sancionados" id="desocupar" role="tab"> <span class="hidden-sm-up"><i
@@ -212,6 +213,214 @@
 											<h2>Sancionados</h2>
 											
 											<label>Lista de los solicitantes sancionados</label>
+									<!-- Filtros -->
+											
+											
+								<div class="tab-content">
+									<div class="tab-pane active m-t-20" id="tabReporteGeneral"
+										role="tabpanel">
+										<div id="infracciones" class="m-l-15 m-r-15">
+											<form id="formInfracciones">
+												<div class="row" style="width: 100%;">
+												
+													<div class="col-sm" id="divPersona">
+														<label class="m-r-15">Numero de documento</label>
+														<div class="input-group">
+														
+															<div class="input-group-btn search-panel">
+											
+																<input type="number" value="0" class="form-control" name="numeroDocumento"
+																placeholder="N&#250mero de Documento" id="numeroDocumento"> 
+											
+															</div>
+															
+														</div>
+													</div>
+												
+													<div class="col-sm" id="divPersona">
+														<label class="m-r-15">Tipo de persona</label>
+														<div class="input-group">
+														
+															<div class="input-group-btn search-panel">
+											
+																<select id="tipoPersona" name="tipoPersona"
+																	class="form-control js-example-basic-single">
+																	<option value="-1" selected="selected">Tipo de persona</option>
+																	<option value="ALUMNO">ALUMNO</option>
+																	<option value="DOCENTE">DOCENTE</option>
+																	<option value="EXTERNO">EXTERNO</option>
+																	<option value="ADMINISTRATIVO">ADMINISTRATIVO</option>																																
+																</select>
+											
+															</div>
+															
+														</div>
+													</div>
+												
+<!-- 												ok -->
+												
+													<div class="col-sm" id="divTipo">
+														<div class="form-group m-b-3">
+															<label class="m-r-15">Tipo de infraccion</label>
+															<div class="input-group">
+																<select id="tipoInfraccion" name="tipoInfraccion"
+																	class="form-control js-example-basic-single">
+																	<option value="-1" 
+																		selected="selected">Seleccione una infracci&#243n </option>
+																	<option th:each="infraccion : ${tipoInfracciones}" th:value="${infraccion.idItem}"
+																	th:text="|${infraccion.descripcionCorta}|"></option>
+																</select>
+															</div>
+														</div>
+													</div>
+												
+													<div class="col-sm" id="divEstado">
+															<div class="form-group m-b-10">
+																<label class="m-r-15">Estado de la infracci&#243n</label>
+																<div class="input-group">
+																	<select id="tipoEstado" name="tipoEstado"
+																		class="form-control js-example-basic-single">
+																		<option value="-1" 
+																			selected="selected">Seleccione un estado</option>
+																		<option th:each="estado : ${estadosI}" th:value="${estado.idEstadoTabla}"
+																	th:text="|${estado.descripcion}|"></option>																	
+																	</select>
+																</div>
+															</div>
+														</div>
+													</div>
+											<div class="row" style="font-size: 20px; width: 100%;">
+												<div class="input-group">
+												
+												
+													<h3 style="font-size: 20px;">Contenido</h3>
+												</div>
+											
+											</div>
+												
+												<div class="row" style="width: 100%;">
+
+
+													<div class="col-md-3">
+														<div class="form-group m-b-10">
+															<label class="m-r-15">Periodo</label>
+															<div class="input-group">
+																<select id="selectPeriodo" name="tipoPeriodo"
+																	class="form-control js-example-basic-single" >
+																	<option value="-1" 
+																		selected="selected">Seleccione un periodo</option>
+																	<option value="DIA">Por d&#237a</option>
+																	<option value="SEMANA">Por semana</option>
+																	<option value="MES">Por mes</option>
+																	<option value="ANIO">Por a&#241o</option>
+																</select>
+															</div>
+														</div>
+													</div>
+
+													<div class="col-md-6 hidden" id="divPeriodoDia">
+														<div class="form-group m-b-10">
+															<label class="m-r-15">Intervalo Fechas</label>
+															<div class="input-group">
+																<span class="input-group-addon"> <i
+																	class="fa fa-calendar m-r-5 m-t-5 text-center"></i></span> <input
+																	id="fechaPrestamo" type="text" name="fechaPrestamo"
+																	class="form-control filtro" readonly="readonly">
+															</div>
+														</div>
+													</div>
+
+
+													<div class="col-md-3 hidden" id="divSemanaInicio">
+														<div class="form-group m-b-10">
+															<label class="m-r-10">Desde:</label>
+															<div class="input-group">
+																<input id="semanaInicio" type="week"
+																	name="valSemanaIncio" class="form-control">
+															</div>
+														</div>
+													</div>
+
+
+													<div class="col-md-3 hidden" id="divSemanaFin">
+														<div class="form-group m-b-10">
+															<label class="m-r-15">Hasta:</label>
+															<div class="input-group">
+																<input id="semanaFin" type="week" name="valSemanaFin"
+																	class="form-control">
+															</div>
+														</div>
+													</div>
+
+
+													<div class="col-md-3 hidden" id="divMesInicio">
+														<div class="form-group m-b-10">
+															<label class="m-r-10">Desde:</label>
+															<div class="input-group">
+																<input id="mesInicio" type="month" name="valMesIncio"
+																	class="form-control">
+															</div>
+														</div>
+													</div>
+
+
+													<div class="col-md-3 hidden" id="divMesFin">
+														<div class="form-group m-b-10">
+															<label class="m-r-15">Hasta:</label>
+															<div class="input-group">
+																<input id="mesFin" type="month" name="valMesFin"
+																	class="form-control">
+															</div>
+														</div>
+													</div>
+
+													<div class="col-md-3 hidden" id="divAnioInicio">
+														<div class="form-group m-b-10">
+															<label class="m-r-10">Desde:</label>
+															<div class="input-group">
+																<input id="anioInicio" type="number"
+																	name="valAnioInicio" class="form-control">
+															</div>
+														</div>
+													</div>
+
+
+													<div class="col-md-3 hidden" id="divAnioFin">
+														<div class="form-group m-b-10">
+															<label class="m-r-15">Hasta:</label>
+															<div class="input-group">
+																<input id="anioFin" type="number" name="valAnioFin"
+																	class="form-control">
+															</div>
+														</div>
+													</div>
+
+
+												</div>
+												<div class="row text-center m-t-5"
+													style="width: 100%; justify-content: center;">
+													<button id="buscarI" class="btn btn-info m-r-3"
+														type="button">
+														<i class="fa fa-search"></i> Buscar
+													</button>
+<!-- 													<button id="exportar" class="btn btn-success m-l-3" -->
+<!-- 														type="button"> -->
+<!-- 														<i class="fa fa-download"></i> Exportar -->
+<!-- 													</button> -->
+												</div>
+										</form>
+									</div>
+								
+
+									<div class="tab-pane" id="tabReporteMasFrecuentes"
+										role="tabpanel">
+										<!-- 										<div class="p-20"> -->
+
+										<!-- 										</div> -->
+									</div>
+
+								
+						</div>
 
 											<table id="tblSancionados" class="table table-bordered table-striped">
 <!-- 												<thead> -->
@@ -241,7 +450,7 @@
 											</table>
 											
 											
-										</div>
+										
 									</div>
 									<!-- Fin Panel Detalle -->
 									
@@ -347,6 +556,7 @@
     <script th:src="@{/resources/js/guiuser/lib/jquery/jquery.min.js}"></script>
     <!-- Bootstrap tether Core JavaScript -->
     <script th:src="@{/resources/js/guiuser/lib/bootstrap/js/popper.min.js}"></script>
+    
     <script th:src="@{/resources/js/guiuser/lib/bootstrap/js/bootstrap.min.js}"></script>
     <!-- slimscrollbar scrollbar JavaScript -->
     <script th:src="@{/resources/js/guiuser/jquery.slimscroll.js}"></script>
@@ -378,14 +588,22 @@
     <script th:src="@{/resources/js/guiuser/lib/owl-carousel/owl.carousel-init.js}"></script>
     <script th:src="@{/resources/js/guiuser/scripts.js}"></script>
     <!-- scripit init-->
-    <script th:src="@{/resources/js/guiuser/lib/bootstrap/js/popper.min.js}"></script>
+<!--     <script th:src="@{/resources/js/guiuser/lib/bootstrap/js/popper.min.js}"></script> -->
     <script th:src="@{/resources/js/util/util.js}"></script>
     <script th:src="@{/resources/js/guiuser/lib/sweetalert/sweetalert.min.js}"></script>
     <!-- scripit init-->
     <script th:src="@{/resources/js/guiuser/lib/sweetalert/sweetalert.init.js}"></script>
 
     <script th:src="@{/resources/js/guiuser/custom.min.js}"></script>
-    
+<!--     faltaba esto importante -->
+    	<script th:src="@{/resources/js/guiuser//utils.js}"></script>
+		<script th:src="@{/resources/js/jquery/moment.min.js}"></script>
+		<script th:src="@{/resources/js/jquery/daterangepicker.js}"></script>
+		<script th:src="@{/resources/js/jquery/jquery.serializejson.min.js}"></script>
+		<script th:src="@{/resources/js/guiuser/scripts.js}"></script>
+		<script th:src="@{/resources/js/guiuser/custom.min.js}"></script>
+		<script th:src="@{/resources/js/guiuser/sweetalert.min.js}"></script>
+<!--      -->
     <script
 			th:src="@{/resources/js/pagina/consulta/movimientos/infracciones/infracciones.js}"></script>
 	<script
@@ -409,6 +627,11 @@
 			th:src="@{/resources/js/guiuser/lib/datatables/cdn.datatables.net/buttons/1.2.2/js/buttons.print.min.js}"></script>
 		<script
 			th:src="@{/resources/js/guiuser/lib/datatables/datatables-init.js}"></script>
+		
+		<!-- select2-->
+		<script th:src="@{/resources/js/bootstrap/bootstrap-notify.min.js}"></script>
+		<script th:src="@{/resources/js/guiuser/select2.min.js}"></script>
+		<script th:src="@{/resources/js/util/util.js}"></script>
 	</div>
 
 

@@ -7,10 +7,14 @@ $(document).ready(function() {
 		$registrarMantenimiento : $("#registrarMantenimiento"),
 		$filaSeleccionada : "",
 		$actualizarMantenimiento : $("#actualizarMantenimiento"),
+		$selectTipoDocumento : $("#idTipoDocumento"),
+		$selectEstado : $("#idEstadoTabla"),
 		idExternoSeleccionado : "",
 		personaActual : null,	
 		$btnBuscar : $("#buscar")
 	}
+	$funcionUtil.crearSelect2($local.$selectTipoDocumento,"Tipo de documento");
+	$funcionUtil.crearSelect2($local.$selectEstado,"Seleccione el estado");
 	$formMantenimiento = $("#formMantenimiento");
 
 	$.fn.dataTable.ext.errMode = 'none';
@@ -113,7 +117,6 @@ $(document).ready(function() {
 		
 		externo.persona.idPersona = $local.personaActual.idPersona;
 		externo.idExterno = externo.persona.idPersona;
-		
 		$.ajax({
 			type : "POST",
 			url : $variableUtil.root + "externo",

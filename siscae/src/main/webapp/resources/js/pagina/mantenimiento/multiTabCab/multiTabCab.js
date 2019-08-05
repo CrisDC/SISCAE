@@ -9,7 +9,7 @@ $(document).ready(function() {
 		$filaSeleccionada : "",
 		$actualizarMantenimiento : $("#actualizarMantenimiento"),
 		id_tablaSeleccionado : ""
-	};
+		};
 
 	$formMantenimiento = $("#formMantenimiento");
 	
@@ -270,6 +270,57 @@ $(document).ready(function() {
 		$local.id_tablaSeleccionado = recurso.idTabla;
 		//$local.$modalMantenimiento.PopupWindow("open");
 	});
+	
+	
+	$local.$tablaMantenimiento.children("tbody").on("click", ".detalle", function() {
+		$local.$filaSeleccionada = $(this).parents("tr");
+		var multiTabCab = $local.tablaMantenimiento.row($local.$filaSeleccionada).data();
+		var criterio = {idDetalle   :  multiTabCab.idTabla};
+		
+		console.log(criterio);
+		
+		location.href= $variableUtil.root + "multiTabDet?id="+multiTabCab.idTabla;
+		/**
+		$.ajax({
+			type : "GET",
+			url : $variableUtil.root + "multiTabDet?accion=detalle",
+			data : criterio,
+			beforeSend : function(xhr) {
+				$local.$registrarMantenimiento.attr("disabled", true).find("i").removeClass("fa-floppy-o").addClass("fa-spinner fa-pulse fa-fw");
+				xhr.setRequestHeader('Content-Type', 'application/json');
+				xhr.setRequestHeader("X-CSRF-TOKEN", $variableUtil.csrf);
+			},
+			statusCode : {
+				400 : function(response) {
+					$funcionUtil.limpiarMensajesDeError($formMantenimiento);
+					$funcionUtil.mostrarMensajeDeError(response.responseJSON, $formMantenimiento);
+				}
+			},
+			success : function(response) {
+				location.href= $variableUtil.root + response;//"multiTabDet/multiTabCab/"+multiTabCab.idTabla;
+				console.log("aaaaa");
+				//$funcionUtil.notificarException(response, "fa-check", "Aviso", "success");
+				
+			},
+			error : function(response) {
+			},
+			complete : function(response) {
+				$local.$registrarMantenimiento.attr("disabled", false).find("i").addClass("fa-floppy-o").removeClass("fa-spinner fa-pulse fa-fw");
+				
+				
+			}
+		});	
+		**/
+	});
+	
+	
+	
+	
+	
+	
+	
+	
+	
 });
 
 

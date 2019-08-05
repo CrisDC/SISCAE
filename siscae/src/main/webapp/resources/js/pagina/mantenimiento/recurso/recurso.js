@@ -7,8 +7,14 @@ $(document).ready(function() {
 		$registrarMantenimiento : $("#registrarMantenimiento"),
 		$filaSeleccionada : "",
 		$actualizarMantenimiento : $("#actualizarMantenimiento"),
+		$selectEstado : $("#idEstadoTabla"),
+		$selectRecurso : $("#idTipoRecurso"),
+		$selectAreaEstudio : $("#idAreaEstudio"),
 		idRecursoSeleccionado : ""
 	}
+	$funcionUtil.crearSelect2($local.$selectEstado,"Seleccione el estado");
+	$funcionUtil.crearSelect2($local.$selectRecurso,"Seleccione el tipo de recurso");
+	$funcionUtil.crearSelect2($local.$selectAreaEstudio,"Seleccione el area de estudio");
 	$formMantenimiento = $("#formMantenimiento");
 
 	$.fn.dataTable.ext.errMode = 'none';
@@ -113,7 +119,7 @@ $(document).ready(function() {
 		if (!$formMantenimiento.valid()) {
 			return;
 		}
-		var recurso = $formMantenimiento.serializeJSON();
+		var recurso = $formMantenimiento.serializeJSON(); 
 		$.ajax({
 			type : "POST",
 			url : $variableUtil.root + "recurso",
@@ -167,8 +173,6 @@ $(document).ready(function() {
 		}
 		var recurso = $formMantenimiento.serializeJSON();
 		recurso.idRecurso = $local.idRecursoSeleccionado;
-		
-		console.log(recurso);
 		$.ajax({
 			type : "PUT",
 			url : $variableUtil.root + "recurso",

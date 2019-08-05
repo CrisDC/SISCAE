@@ -36,6 +36,7 @@ import pe.edu.unmsm.fisi.siscae.service.IConsultaPrestamosService;
 import pe.edu.unmsm.fisi.siscae.service.IConsultaPrestamosTablaService;
 import pe.edu.unmsm.fisi.siscae.service.IConsultaSancionadosService;
 import pe.edu.unmsm.fisi.siscae.service.IEscuelaService;
+import pe.edu.unmsm.fisi.siscae.service.IEstadoTablaService;
 import pe.edu.unmsm.fisi.siscae.service.IInfraccionDetalleService;
 import pe.edu.unmsm.fisi.siscae.service.IMultiTabCabService;
 import pe.edu.unmsm.fisi.siscae.service.IMultiTabDetService;
@@ -64,6 +65,7 @@ public @Controller class ConsultaController {
 	private @Autowired IMultiTabCabService multiTabCabService;
 	private @Autowired ISolicitantesDetallesService solicitantesDetallesService;
 	private @Autowired IConsultaAdministrativoService consultaAdministrativoService; 
+	private @Autowired IEstadoTablaService estadoTablasService;  // ANGEL
 	
 	private @Autowired IEscuelaService escuelaService;
 
@@ -223,6 +225,8 @@ public @Controller class ConsultaController {
 		}
 		List<MultiTabDet> tiposInfracciones = multiTabDetService.buscarPorIdTabla(ID_TABLA_INFRACCION);
 		
+		
+		
 		model.addAttribute("prestamos", listaRecursosIndividuales);
 		model.addAttribute("recursosGrupales", listaRecursosGrupales);
 		model.addAttribute("infraccionesDetalle", infraccionesDetalle);
@@ -230,6 +234,7 @@ public @Controller class ConsultaController {
 		model.addAttribute("existenSancionados", existenSancionados);
 		model.addAttribute("areaAdministrativo", listaAdministrativoUsuario.get(0));
 		model.addAttribute("tipoInfracciones", tiposInfracciones);
+		model.addAttribute("estadosI", estadoTablasService.buscarporTablaOrigen("MOV_INFRACCION")); //ANGEL
 		model.addAttribute("consulta", consulta);
 		model.addAttribute("existenGrupales", existenGrupales);
 		model.addAttribute("existenIndividuales", existenIndividuales);

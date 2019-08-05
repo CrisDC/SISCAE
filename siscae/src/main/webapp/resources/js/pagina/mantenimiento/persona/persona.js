@@ -175,6 +175,7 @@ $(document).ready(function() {
 		//$local.$modalMantenimiento.PopupWindow("open");
 		console.log($local.idPersonaSeleccionada);
 		console.log(persona);
+		
 		});
 	
 	$local.$actualizarMantenimiento.on("click", function() {
@@ -182,6 +183,7 @@ $(document).ready(function() {
 			return;
 		}
 		var persona = $formMantenimiento.serializeJSON();
+		
 		persona.idPersona = $local.idPersonaSeleccionada;
 		console.log($local.idPersonaSeleccionada);
 		console.log(persona);
