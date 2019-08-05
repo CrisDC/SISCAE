@@ -288,7 +288,7 @@ $(document).ready(function() {
 		var cont = 0;
 		
 		if($local.$tipoPersona.val()==-1 )	cont++;
-		if($local.$numDoc.val()==0 )	cont++;
+		if($local.$numDoc.val()=='' )	cont++;
 		if($local.$selectTipoInfraccion.val()==-1 )	cont++;
 		if($local.$selectTipoEstado.val()==-1 )	cont++;
 		if($local.$selectPeriodo.val()==-1 ){

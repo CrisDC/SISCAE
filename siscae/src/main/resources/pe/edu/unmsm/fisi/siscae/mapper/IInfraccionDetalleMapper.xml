@@ -31,7 +31,8 @@
 	<select id="buscarPorCriterio" resultType="InfraccionDetalle">
 		<if test="tipoPersona == '-1' ">
 			SELECT
-			
+				
+				mi.n_id_infraccion				AS id_infraccion,
 				mp.v_num_documento				AS		num_documento,
 			    mp.v_app_paterno				AS		app_paterno,
 			    mp.v_app_materno				AS		app_materno,
@@ -66,7 +67,7 @@
 		<if test="tipoPersona == 'ALUMNO'">
 		
 		SELECT
-			
+				mi.n_id_infraccion				AS id_infraccion,
 				mp.v_num_documento				AS		num_documento,
 			    mp.v_app_paterno				AS		app_paterno,
 			    mp.v_app_materno				AS		app_materno,
@@ -90,7 +91,7 @@
 			        AND met.n_id_estado_tabla = #{tipoEstado}
 			    </if>
 			    		    
-			    <if test="numeroDocumento != 0 and numeroDocumento != '' ">
+			    <if test="numeroDocumento != '0' and numeroDocumento != '' ">
 			        AND mp.v_num_documento = #{numeroDocumento}
 			    </if>
 			    
@@ -102,7 +103,7 @@
 		<if test="tipoPersona == 'DOCENTE'">
 		
 		SELECT
-			
+				mi.n_id_infraccion				AS id_infraccion,
 				mp.v_num_documento				AS		num_documento,
 			    mp.v_app_paterno				AS		app_paterno,
 			    mp.v_app_materno				AS		app_materno,
@@ -138,7 +139,7 @@
 		<if test="tipoPersona == 'EXTERNO'">
 		
 		SELECT
-			
+				mi.n_id_infraccion				AS id_infraccion,
 				mp.v_num_documento				AS		num_documento,
 			    mp.v_app_paterno				AS		app_paterno,
 			    mp.v_app_materno				AS		app_materno,
@@ -174,7 +175,7 @@
 		<if test="tipoPersona == 'ADMINISTRATIVO'">
 		
 		SELECT
-			
+				mi.n_id_infraccion				AS id_infraccion,
 				mp.v_num_documento				AS		num_documento,
 			    mp.v_app_paterno				AS		app_paterno,
 			    mp.v_app_materno				AS		app_materno,
