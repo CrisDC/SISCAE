@@ -41,13 +41,13 @@
 											class="hidden-sm-up"> <i class="ti-home"></i></span> <span
 											class="hidden-xs-down">Aplicar Infraccion</span>
 									</a></li>
-
+									<!-- 
 									<li th:if="(${areaAdministrativo.cargo} != 'SOLICITANTE')"
 										class="nav-item"><a class="nav-link" data-toggle="tab"
 										href="#tablaInfraccionDetalle" role="tab"> <span class="hidden-sm-up"><i
 												class="ti-user"></i></span> <span class="hidden-xs-down">Detalles</span>
 									</a></li>
-									
+									 -->
 									<li th:if="(${areaAdministrativo.cargo} != 'SOLICITANTE')"
 										class="nav-item"><a class="nav-link" data-toggle="tab"
 										href="#sancionados" id="desocupar" role="tab"> <span class="hidden-sm-up"><i
@@ -162,7 +162,7 @@
 									</div>
 									<!-- Fin Panel Esquema -->
 
-									<!-- Tabla Infracccion Detalle -->
+									<!-- Tabla Infracccion Detalle 
 									<div class="tab-pane p-20" id="tablaInfraccionDetalle" role="tabpanel">
 										<div class="table-responsive m-t-5">
 											<h2>Infracciones registradas por alumno</h2>
@@ -354,7 +354,7 @@
     <!--stickey kit -->
     <script th:src="@{/resources/js/guiuser/lib/sticky-kit-master/dist/sticky-kit.min.js}"></script>
     <!--Custom JavaScript -->
-	<script th:src="@{/resources/js/guiuser/sidebarmenu.js}"></script>
+	<script th:src="@{/resources/js/guiuser/metisMenu.min.js}"></script> 
 
     <!-- Amchart -->
     <script th:src="@{/resources/js/guiuser/lib/morris-chart/raphael-min.js}"></script>

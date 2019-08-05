@@ -153,7 +153,7 @@ $(document).ready(function() {
 		//Borra todas los opciones de persona
 		$local.$selectPersona.html("");
 		$local.$selectPersona.prop('disabled', false);
-		console.log("entra");
+		
 	});
 
 	$local.$modalMantenimiento.on("open.popupwindow", function() {
@@ -185,8 +185,6 @@ $(document).ready(function() {
 		
 		var alumno = $formMantenimiento.serializeJSON();
 		alumno.idAlumno = $local.$selectPersona.find('option:selected').val();
-		
-		console.log(alumno);
 		
 		$.ajax({
 			type : "POST",
@@ -243,8 +241,6 @@ $(document).ready(function() {
 		
 		$local.$selectPersona.prop('disabled', true);
 		
-		console.log(alumno);
-		
 	});
 	
 	$local.$actualizarMantenimiento.on("click", function() {
@@ -255,7 +251,6 @@ $(document).ready(function() {
 		var alumno = $formMantenimiento.serializeJSON();
 		alumno.idAlumno = $local.$selectPersona.find('option:selected').val();
 		
-		console.log(alumno);
 		
 		$.ajax({
 			type : "PUT",
@@ -301,7 +296,7 @@ $(document).ready(function() {
 	$local.$tablaMantenimiento.children("tbody").on("click", ".eliminar", function() {
 		$local.$filaSeleccionada = $(this).parents("tr");
 		var alumno = $local.tablaMantenimiento.row($local.$filaSeleccionada).data();
-		console.log(alumno);
+		
 		$.confirm({
 			icon : "fa fa-info-circle",
 			title : "Aviso",
