@@ -16,7 +16,7 @@ public class InfraccionDetalleCriterioBusqueda {
 	
 	
 	//primera parte
-	private String numDocumento;
+	private String numeroDocumento;
 	private String tipoPersona;
 	private String tipoInfraccion;
 	private String tipoEstado;

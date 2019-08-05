@@ -47,7 +47,7 @@
 			<if test="tipoPersona != null">
 		        AND tipo_persona = #{tipoPersona}
 		    </if>
-		    <if test="numDocumento != null and numDocumento != '' ">
+		    <if test="numeroDocumento != null and numDocumento != '' ">
 		        AND num_documento = #{numDocumento}
 		    </if>
 		    
