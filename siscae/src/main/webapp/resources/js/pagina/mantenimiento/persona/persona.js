@@ -17,9 +17,6 @@ $(document).ready(function() {
 	$funcionUtil.crearSelect2($local.$selectSexo,"Seleccione el sexo");
 	$formMantenimiento = $("#formMantenimiento");
 	
-	//Cambia el tamaño del modal
-	$('#modalMantenimiento .modal-dialog').addClass('modal-lg');
-	
 	$.fn.dataTable.ext.errMode = 'none';
 
 	$local.$tablaMantenimiento.on('xhr.dt', function(e, settings, json, xhr) {

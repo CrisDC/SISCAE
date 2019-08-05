@@ -82,7 +82,7 @@ $(document).ready(function(){
             				}else{
             					cadenaHtml += '<img src="'+enlaceRecurso+'/cubo_verde.png" width="40" height="40"> ';
             				}
-            				cadenaHtml += '<p>'+numRecurso+'</p><p class="disponible">DISPONIBLE</p>';
+            				cadenaHtml += '<p class="numero">'+numRecurso+'</p><p class="disponible">DISPONIBLE</p>';
             				cadenaHtml += '<button num="'+numRecurso+'" enlace="'+enlaceRecurso+'" observacion="'+observacionRecurso+'" key="'+keyRecurso+'" class="btn btn-info solicitar sweet-ajax">SOLICITAR</button>'	
             				
             				//Se modifica el html
@@ -221,7 +221,7 @@ $(document).ready(function(){
 		        				}else{
 		        					cadenaHtml += '<img src="'+enlaceRecurso+'/cubo_rojo.png" width="40" height="40"> ';
 		        				}
-		        				cadenaHtml += '<p>'+numRecurso+'</p><p class="ocupado">OCUPADO</p>';
+		        				cadenaHtml += '<p class="numero">'+numRecurso+'</p><p class="ocupado">OCUPADO</p>';
 		        				cadenaHtml += '<button num="'+numRecurso+'" enlace="'+enlaceRecurso+'" observacion="'+observacionRecurso+'" key="'+idRecurso+'" class="invisible">SOLICITAR</button>'
 		        				//Se modifica el html
 		        				$('#recurso'+idRecurso).html(cadenaHtml);

@@ -35,7 +35,7 @@ $(document).ready(function() {
 			return {
 	            results: $.map(data, function (item) {
 	                return {
-	                    text: item.nombre+" "+item.appPaterno+" "+item.appMaterno,
+	                    text: item.numDocumento + " - " +item.nombre+" "+item.appPaterno+" "+item.appMaterno,
 	                    id: item.idPersona
 	                }
 	            })
@@ -149,6 +149,11 @@ $(document).ready(function() {
 		$local.$actualizarMantenimiento.addClass("hidden");
 		$local.$registrarMantenimiento.removeClass("hidden");
 		//$local.$modalMantenimiento.PopupWindow("open");
+		
+		//Borra todas los opciones de persona y agrega el seleccionado
+		$local.$selectPersona.html("");
+		var nuevaOpcion = new Option(alumno.nombres+" "+alumno.appPaterno+" "+alumno.appMaterno, alumno.idAlumno, false, false);
+		$local.$selectPersona.append(nuevaOpcion).trigger('change');
 	});
 
 	$local.$modalMantenimiento.on("open.popupwindow", function() {
@@ -175,6 +180,8 @@ $(document).ready(function() {
 		if (!$formMantenimiento.valid()) {
 			return;
 		}
+		
+		//Borra todas los opciones de persona y agrega el seleccionado
 		
 		var alumno = $formMantenimiento.serializeJSON();
 		alumno.idAlumno = $local.$selectPersona.find('option:selected').val();

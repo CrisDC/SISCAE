@@ -50,7 +50,7 @@ public @RestController class PersonaController {
     public List<Persona> buscar(@RequestParam("search") String search)
     {	
     	List<Persona> alumnos =  personaService.buscarTodos();
-    	return  alumnos.stream().filter(x -> ((x.getNombre()+" "+x.getAppPaterno()+" "+x.getAppMaterno()).toUpperCase()).contains(search.toUpperCase())).collect(Collectors.toList());
+    	return  alumnos.stream().filter(x -> ((x.getNumDocumento()+" "+x.getNombre()+" "+x.getAppPaterno()+" "+x.getAppMaterno()).toUpperCase()).contains(search.toUpperCase())).limit(5).collect(Collectors.toList());
     }
 
 	@Audit(accion = Accion.REGISTRO, comentario = Comentario.Registro)
