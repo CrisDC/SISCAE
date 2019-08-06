@@ -22,9 +22,9 @@ import com.fasterxml.jackson.annotation.JsonFormat;
 public class Infraccion {
 	private Integer idInfraccion;
 	
-	@NotNull(message = "{NotNull.Infraccion.descripcion}")
-    @NotBlank(message = "{NotBlank.Infraccion.descripcion}")
-    @Length(min = 10, max  = 45, message = "{Length.CodigoProcesoSwitch.descripcion}")
+	//@NotNull(message = "{NotNull.Infraccion.descripcion}")
+    //@NotBlank(message = "{NotBlank.Infraccion.descripcion}")
+    //@Length(min = 3, max  = 45, message = "{Length.CodigoProcesoSwitch.descripcion}")
 	private String descripcion;
 	
 	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd")

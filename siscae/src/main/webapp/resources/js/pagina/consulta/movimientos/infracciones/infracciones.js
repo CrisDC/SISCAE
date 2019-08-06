@@ -39,11 +39,11 @@ $(document).ready(function() {
 		
 		//Botones de la pagina
 		$buscar : $('#buscarI'),
-		$exportar : $('#exportar')
+		$limpiar : $('#limpiar')
 		
 	}
 	
-	var escuela1 = {};
+
 
 	$funcionUtil.crearDateRangePickerSimple($local.$fechaPrestamo, "YYYY-MM-DD");
 	
@@ -256,8 +256,93 @@ $(document).ready(function() {
 	$local.$tblConsulta.children("tbody").on("click", ".actualizar", function() {
 		//$funcionUtil.prepararFormularioActualizacion($formMantenimiento);
 		$local.$filaSeleccionada = $(this).parents("tr");
-		escuela1 = $local.tblConsulta.row($local.$filaSeleccionada).data();
+		var escuela1 = $local.tblConsulta.row($local.$filaSeleccionada).data();
 		console.log(escuela1);
+		
+		/* ------ Construcción de modal ------------ */	
+		$('#sancionadoModal').on('show.bs.modal', function (event){
+			console.log(escuela1);
+			var button = $(event.relatedTarget)
+			
+			var ti = escuela1.idTipoInfraccion;
+			var es = escuela1.idEstadoTabla;
+			
+			document.getElementById("persona").value = escuela1.nombre.concat(" ",escuela1.appPaterno," ",escuela1.appMaterno);
+			document.getElementById("descripcion").value = escuela1.descripcion;
+			
+			var modal = $(this)
+
+
+			modal.find('#tipoInfraccionm').val(ti);
+			
+			modal.find('#tipoEstadom').val(es);
+			//modal.find('#tipoEstadom').text(escuela1.estado);
+			console.log(escuela1.descripcion);
+			$('#actualizarMantenimiento').on('click', function (event){
+				
+				var combo = document.getElementById("tipoInfraccionm");
+				var combo1 = document.getElementById("tipoEstadom");
+				var input = document.getElementById("descripcion");
+				
+				var idt = Number(combo.value);
+				var et = Number(combo1.value);
+				var inputd = input.value;
+				console.log(inputd);
+				console.log(escuela1.descripcion); 
+				var texto = $('#tipoInfraccionm').find('option:selected').text()
+				console.log(texto);
+				var infraccion = {"idInfraccion" : escuela1.idInfraccion,
+				          "descripcion"  : inputd ,
+				          "fecha"        : escuela1.fecha,
+				          "idEstadoTabla": et,
+				          "idPersona"    : escuela1.idPersona,
+				          "idTipoInfraccion" : idt,
+		                         };
+		        console.log(infraccion);
+				
+				
+				$.ajax({
+					url :  $variableUtil.root + "infraccion",
+					type : 'PUT',
+					data : JSON.stringify(infraccion),
+	                beforeSend : function(xhr) {
+	    				xhr.setRequestHeader('Content-Type', 'application/json');
+	    				xhr.setRequestHeader("X-CSRF-TOKEN", $variableUtil.csrf);
+	    			},
+	    			statusCode : {
+	    				400 : function(response) {
+	    						swal(response.responseJSON);
+	    					},
+	      				500 : function(response) {
+	      					swal("Error", response.responseText, "warning");
+	      				}
+	    			},
+	    			success : function(response) {
+	    				console.log(response)
+		    			swal({
+	  					  title: "Operacion realizada con exito",
+	  					  text: "Actualización aplicada",
+	  					  icon: "success",
+	  					  button: false,
+	  					  timer: 1000,
+		  				}).then((value) => {
+		  					location.reload();
+		  				});
+		    				
+	    			},
+	    			error : function(response) {
+	    				swal("Error", "Ha ocurrido un problema con el servidor", "warning"); 
+	    			},
+	    			complete : function(response) {
+	    				
+	    			}
+				});
+				
+				
+			});
+			
+			
+		});
 		
 		});
 	/***ELIMINAR***/
@@ -266,7 +351,7 @@ $(document).ready(function() {
 		var escuela = $local.tblConsulta.row($local.$filaSeleccionada).data();
 		console.log(escuela);
 		var infraccion = {"idInfraccion" : escuela.idInfraccion,
-				          "descripcion"  : escuela.infraccion,
+				          "descripcion"  : escuela.descripcion,
 				          "fecha"        : escuela.fecha,
 				          "idEstadoTabla": escuela.idEstadoTabla,
 				          "idPersona"    : escuela.idPersona,
@@ -451,6 +536,13 @@ $(document).ready(function() {
 	});
 	
 	
+$local.$limpiar.on('click', function() {
+		
+	$funcionUtil.limpiarCamposFormulario($formInfracciones);
+	
+	});
+	
+	
 	
 	
 	
@@ -485,7 +577,7 @@ $(document).ready(function() {
 		
 		$('#btnRegistrar').on('click', function (event){
 			
-			var combo = document.getElementById("tipoInfraccion");
+			var combo = document.getElementById("tipoInfracciona");
 			var txtArea = $('#inputDescripcionInfraccion');
 			
 			var idItem = combo.value;
@@ -545,85 +637,7 @@ $(document).ready(function() {
 	});
 	
 	
-	/* ------ Construcción de modal ------------ */	
-	$('#sancionadoModal').on('show.bs.modal', function (event){
-		console.log(escuela1);
-		var button = $(event.relatedTarget)
-		
-		var ti = escuela1.idTipoInfraccion;
-		var es = escuela1.idEstadoTabla;
-		
-		console.log
-
-		
-		var modal = $(this)
-		
-		modal.find('#tipoInfraccionm').val(ti);
-		//modal.find('#tipoInfraccionm').text(escuela1.infraccion);
-		modal.find('#tipoEstadom').val(es);
-		//modal.find('#tipoEstadom').text(escuela1.estado);
-		
-		$('#actualizarMantenimiento').on('click', function (event){
-			
-			var combo = document.getElementById("tipoInfraccionm");
-			var combo1 = document.getElementById("tipoEstadom");
-			
-			var idt = Number(combo.value);
-			var et = Number(combo1.value);
-			var texto = $('#tipoInfraccionm').find('option:selected').text()
-			
-			var infraccion = {"idInfraccion" : escuela1.idInfraccion,
-			          "descripcion"  : texto,
-			          "fecha"        : escuela1.fecha,
-			          "idEstadoTabla": et,
-			          "idPersona"    : escuela1.idPersona,
-			          "idTipoInfraccion" : idt,
-	                         };
-	        console.log(infraccion);
-			
-			
-			$.ajax({
-				url :  $variableUtil.root + "infraccion",
-				type : 'PUT',
-				data : JSON.stringify(infraccion),
-                beforeSend : function(xhr) {
-    				xhr.setRequestHeader('Content-Type', 'application/json');
-    				xhr.setRequestHeader("X-CSRF-TOKEN", $variableUtil.csrf);
-    			},
-    			statusCode : {
-    				400 : function(response) {
-    						swal(response.responseJSON);
-    					},
-      				500 : function(response) {
-      					swal("Error", response.responseText, "warning");
-      				}
-    			},
-    			success : function(response) {
-    				console.log(response)
-	    			swal({
-  					  title: "Operacion realizada con exito",
-  					  text: "Actualización aplicada",
-  					  icon: "success",
-  					  button: false,
-  					  timer: 1000,
-	  				}).then((value) => {
-	  					location.reload();
-	  				});
-	    				
-    			},
-    			error : function(response) {
-    				swal("Error", "Ha ocurrido un problema con el servidor", "warning"); 
-    			},
-    			complete : function(response) {
-    				
-    			}
-			});
-			
-			
-		});
-		
-		
-	});
+	
 	
 	
 	

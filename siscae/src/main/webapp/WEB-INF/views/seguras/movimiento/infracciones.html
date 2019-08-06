@@ -229,7 +229,7 @@
 														
 															<div class="input-group-btn search-panel">
 											
-																<input type="number" value="" class="form-control" name="numeroDocumento"
+																<input type="number" min=0 value="" class="form-control" name="numeroDocumento"
 																placeholder="N&#250mero de Documento" id="numeroDocumento"> 
 											
 															</div>
@@ -244,7 +244,7 @@
 															<div class="input-group-btn search-panel">
 											
 																<select id="tipoPersona" name="tipoPersona"
-																	class="form-control js-example-basic-single">
+																	class="form-control js-example-basic-single" data-default-value="-1">
 																	<option value="-1" selected="selected">Tipo de persona</option>
 																	<option value="ALUMNO">ALUMNO</option>
 																	<option value="DOCENTE">DOCENTE</option>
@@ -396,10 +396,10 @@
 														type="button">
 														<i class="fa fa-search"></i> Buscar
 													</button>
-<!-- 													<button id="exportar" class="btn btn-success m-l-3" -->
-<!-- 														type="button"> -->
-<!-- 														<i class="fa fa-download"></i> Exportar -->
-<!-- 													</button> -->
+ 													<button  id="limpiar"  class="btn btn-success m-l-3" 
+ 														type="button"> 
+ 														<i class="fa fa-clean"></i> Limpiar 
+													</button> 
 												</div>
 										</form> 
 									</div>
@@ -472,6 +472,21 @@
 				</div>
 				<div class="modal-body">
 					<form id="formMantenimiento" class="form-horizontal" role="form">
+					<div class="col-sm">
+					<div class="form-group m-b-3">
+			<label class="control-label">Persona </label>
+			<input id="persona"  class="form-control upperCase elemento-modificable"
+				name="persona" disabled>
+				</div>
+		</div>
+
+		<div class="col-sm">
+		 <div class="form-group m-b-3">
+			<label class="control-label">Descripcion</label>
+			<input id="descripcion" class="form-control upperCase elemento-modificable"
+				name="descripcion">
+				</div>
+		</div>
 						<div class="col-sm" id="divTipo">
 														<div class="form-group m-b-3">
 															<label class="m-r-15">Tipo de infraccion</label>
@@ -575,7 +590,7 @@
 			        			<form role="form">
 			        				<div class="form-group col-md-12">
 			        					<label for="inputInfraccion">Tipo de infraccion</label>
-			        						<select id="tipoInfraccion" class="form-control select2" name="tipoInfraccion">
+			        						<select id="tipoInfracciona" class="form-control select2" name="tipoInfracciona">
 			        							<option value="0" selected="selected">SELECCIONE LA INFRACCION</option>
 			        							<option th:each="infraccion : ${tipoInfracciones}" th:value="${infraccion.idItem}"
 													th:text="|${infraccion.descripcionCorta}|"></option>
