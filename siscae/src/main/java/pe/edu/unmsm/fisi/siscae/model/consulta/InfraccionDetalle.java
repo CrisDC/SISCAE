@@ -23,5 +23,6 @@ public class InfraccionDetalle {
 	int idPersona;
 	int idTipoInfraccion;
 	int idInfraccion;
+	String descripcion;
 	
 }
