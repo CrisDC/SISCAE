@@ -539,7 +539,7 @@ $(document).ready(function() {
 $local.$limpiar.on('click', function() {
 		
 	$funcionUtil.limpiarCamposFormulario($formInfracciones);
-	
+	console.log("Funciona por favor");
 	});
 	
 	
