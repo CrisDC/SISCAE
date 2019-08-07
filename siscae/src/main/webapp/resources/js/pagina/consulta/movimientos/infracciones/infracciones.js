@@ -383,15 +383,15 @@ $(document).ready(function() {
 									statusCode : {
 										400 : function(response) {
 											confirmar.close();
-											response.responseText.length > $max_tamaño_error ? 
-													swal("Error", "La operación no pudo realizarse con exito.", "warning") : 
-													swal("Error", response.responseText, "warning");
+//											response.responseText.length > $max_tamaño_error ? 
+//													swal("Error", "La operación no pudo realizarse con exito.", "warning") : 
+//													swal("Error", response.responseText, "warning");
 										},
 										500 : function(response) {
 											confirmar.close();
-											response.responseText.length > $max_tamaño_error ? 
-													swal("Error", "La operación no pudo realizarse con exito.", "warning") : 
-													swal("Error", response.responseText, "warning");
+//											response.responseText.length > $max_tamaño_error ? 
+//													swal("Error", "La operación no pudo realizarse con exito.", "warning") : 
+//													swal("Error", response.responseText, "warning");
 											
 										}
 									},
