@@ -1,6 +1,6 @@
 $(document).ready(function()
 {
-	$formMantenimiento1.validate({
+	/*$formMantenimiento1.validate({
 		rules : {
 			tipoInfraccion : {
 				required : true,
@@ -14,5 +14,5 @@ $(document).ready(function()
 			}
 		}
 		
-	});
+	});*/
 });

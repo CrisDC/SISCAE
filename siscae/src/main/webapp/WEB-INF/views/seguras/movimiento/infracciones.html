@@ -244,7 +244,7 @@
 															<div class="input-group-btn search-panel">
 											
 																<select id="tipoPersona" name="tipoPersona"
-																	class="form-control js-example-basic-single" data-default-value="-1">
+																	class="form-control select2 elemento-modificable" data-default-value="-1">
 																	<option value="-1" selected="selected">Tipo de persona</option>
 																	<option value="ALUMNO">ALUMNO</option>
 																	<option value="DOCENTE">DOCENTE</option>
@@ -264,7 +264,7 @@
 															<label class="m-r-15">Tipo de infraccion</label>
 															<div class="input-group">
 																<select id="tipoInfraccion" name="tipoInfraccion"
-																	class="form-control js-example-basic-single">
+																	class="form-control select2 elemento-modificable">
 																	<option value="-1" 
 																		selected="selected">Seleccione una infracci&#243n </option>
 																	<option th:each="infraccion : ${tipoInfracciones}" th:value="${infraccion.idItem}"
@@ -279,7 +279,7 @@
 																<label class="m-r-15">Estado de la infracci&#243n</label>
 																<div class="input-group">
 																	<select id="tipoEstado" name="tipoEstado"
-																		class="form-control js-example-basic-single">
+																		class="form-control select2 elemento-modificable">
 																		<option value="-1" 
 																			selected="selected">Seleccione un estado</option>
 																		<option th:each="estado : ${estadosI}" th:value="${estado.idEstadoTabla}"
@@ -299,7 +299,7 @@
 															<label class="m-r-15">Periodo</label>
 															<div class="input-group">
 																<select id="selectPeriodo" name="tipoPeriodo"
-																	class="form-control js-example-basic-single" >
+																	class="form-control select2 elemento-modificable" >
 																	<option value="-1" 
 																		selected="selected">Seleccione un periodo</option>
 																	<option value="DIA">Por d&#237a</option>
@@ -411,6 +411,8 @@
 
 										<!-- 										</div> -->
 									</div>
+									
+									
 
 								
 						</div>
@@ -464,7 +466,7 @@
 		
 		<!-- End Page wrapper  -->
 		<!-- Modal Sancionados -->
-		<div id="sancionadoModal" class="modal fade" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true" th:fragment="modalMantenimiento" th:with="tipo=${tipo}">
+		<div id="sancionadoModal" class="modal fade" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true"  >
 		<div class="modal-dialog modal-dialog-centered" role="document">
 			<div class="modal-content">
 				<div class="modal-header">
@@ -492,7 +494,7 @@
 															<label class="m-r-15">Tipo de infraccion</label>
 															<div class="input-group">
 																<select id="tipoInfraccionm" name="tipoInfraccionm"
-																	class="form-control js-example-basic-single">
+																	class="form-control select2 elemento-modificable">
 																	<option value="-1" 
 																		selected="selected">Seleccione una infracci&#243n </option>
 																	<option th:each="infraccion : ${tipoInfracciones}" th:value="${infraccion.idItem}"
@@ -506,7 +508,7 @@
 																<label class="m-r-15">Estado de la infracci&#243n</label>
 																<div class="input-group">
 																	<select id="tipoEstadom" name="tipoEstadom"
-																		class="form-control js-example-basic-single">
+																		class="form-control select2 elemento-modificable">
 																		<option value="-1" 
 																			selected="selected">Seleccione un estado</option>
 																		<option th:each="estado : ${estadosI}" th:value="${estado.idEstadoTabla}"
@@ -524,7 +526,7 @@
 									<i class="fa fa-pencil-square"></i> Actualizar
 								</button>
 								
-								<button type="button" class="swal-button swal-button--cancel" data-dismiss="modal">Cerrar</button>
+								<button id="cerrm" type="button" class="swal-button swal-button--cancel" data-dismiss="modal">Cerrar</button>
 							</div>
 						</div>
 					</form>
@@ -532,6 +534,8 @@
 			</div>
 		</div>
 	</div>
+		
+		
 	
 		<!-- Modal -->
 		<div class="modal fade" id="infraccionModal" tabindex="-1" role="dialog" aria-labelledby="infraccionModalLabel" aria-hidden="true">
@@ -696,8 +700,11 @@
 		<script th:src="@{/resources/js/bootstrap/bootstrap-notify.min.js}"></script>
 		<script th:src="@{/resources/js/guiuser/select2.min.js}"></script>
 		<script th:src="@{/resources/js/util/util.js}"></script>
+		
+		<script type="text/javascript" src="http://ajax.aspnetcdn.com/ajax/jquery.validate/1.7/jquery.validate.min.js"></script>
 	</div>
 
+</div>
 
 </body>
 </html>

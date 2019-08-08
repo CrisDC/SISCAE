@@ -1,8 +1,14 @@
 $(document).ready(function() {
-	
+	var $max_tamaño_error = 200;
 	var $local = {
 		$tblConsulta : $("#tblSancionados"),
 		tblConsulta  : "",
+		$actualizarMantenimiento : $("#actualizarMantenimiento"),
+		idPersonaSeleccionada : "",
+		fecha :"",
+		idInfraccionSeleccionada:"",
+		$filaSeleccionada : "",
+		$modalMantenimiento : $("#sancionadoModal"),
 		
 		//div de la pagina
 		
@@ -45,7 +51,7 @@ $(document).ready(function() {
 	
 
 
-	$funcionUtil.crearDateRangePickerSimple($local.$fechaPrestamo, "YYYY-MM-DD");
+	//$funcionUtil.crearDateRangePickerSimple($local.$fechaPrestamo, "YYYY-MM-DD");
 	
 	//Creando elementos combobox con estilo chevere (Plugin Select2)
     $funcionUtil.crearSelect2($local.$selectTipoEstado);
@@ -60,7 +66,7 @@ $(document).ready(function() {
 		var val = $(this).val();
 
 		if(val=="DIA"){
-			
+			$funcionUtil.crearDateRangePickerSimple($local.$fechaPrestamo, "YYYY-MM-DD");
 			$local.$divPeriodoDia.removeClass("hidden");
 			$local.$divSemanaInicio.addClass("hidden");
 			$local.$divSemanaFin.addClass("hidden");
@@ -97,7 +103,15 @@ $(document).ready(function() {
 			$local.$divMesFin.addClass("hidden");
 			$local.$divAnioInicio.removeClass("hidden");
 			$local.$divAnioFin.removeClass("hidden");
-		}	
+		}else{
+			$local.$divPeriodoDia.addClass("hidden");
+			$local.$divSemanaInicio.addClass("hidden");
+			$local.$divSemanaFin.addClass("hidden");
+			$local.$divMesInicio.addClass("hidden");
+			$local.$divMesFin.addClass("hidden");
+			$local.$divAnioInicio.addClass("hidden");
+			$local.$divAnioFin.addClass("hidden");
+		}
 	});
 	
 	
@@ -113,13 +127,10 @@ $(document).ready(function() {
 	});
 	
 	$local.tblConsulta = $local.$tblConsulta.DataTable({
-		"ajax" : {
-			"url" : "",
-			"dataSrc" : ""
-		},
+		
 			"language" : {
 				"url": "//cdn.datatables.net/plug-ins/1.10.16/i18n/Spanish.json",
-				"emptyTable" : "No hay registros encontrados." // Nuevo
+				"emptyTable" : "Ningún dato disponible en esta tabla." // Nuevo
 			},
 			"initComplete" : function() {
 				$local.$tblConsulta.wrap("<div class='table-responsive'></div>");
@@ -258,93 +269,92 @@ $(document).ready(function() {
 		$local.$filaSeleccionada = $(this).parents("tr");
 		var escuela1 = $local.tblConsulta.row($local.$filaSeleccionada).data();
 		console.log(escuela1);
+		$local.idPersonaSeleccionada = escuela1.idPersona;
+		$local.fecha = escuela1.fecha;
+		$local.idInfraccionSeleccionada = escuela1.idInfraccion;
+		var form = {
+				"persona"         : escuela1.nombre.concat(" ",escuela1.appPaterno," ",escuela1.appMaterno),
+				"descripcion"     : escuela1.descripcion,
+				"tipoInfraccionm" : escuela1.idTipoInfraccion,
+				"tipoEstadom"     : escuela1.idEstadoTabla
+		}
+		$funcionUtil.llenarFormulario(form, $formMantenimiento);
+
+		});
+	
+	$local.$modalMantenimiento.on("open.popupwindow", function() {
+		$formMantenimiento.find("input:not([disabled]):first").focus();
+	});
+
+	$local.$modalMantenimiento.on("close.popupwindow", function() {
+		$local.idPersonaSeleccionada = "";
+	});
+	
+	
+	$local.$actualizarMantenimiento.on("click", function() {
+		if (!$formMantenimiento.valid()) {
+			return;
+		}
+		var form = $formMantenimiento.serializeJSON();
 		
-		/* ------ Construcción de modal ------------ */	
-		$('#sancionadoModal').on('show.bs.modal', function (event){
-			console.log(escuela1);
-			var button = $(event.relatedTarget)
-			
-			var ti = escuela1.idTipoInfraccion;
-			var es = escuela1.idEstadoTabla;
-			
-			document.getElementById("persona").value = escuela1.nombre.concat(" ",escuela1.appPaterno," ",escuela1.appMaterno);
-			document.getElementById("descripcion").value = escuela1.descripcion;
-			
-			var modal = $(this)
-
-
-			modal.find('#tipoInfraccionm').val(ti);
-			
-			modal.find('#tipoEstadom').val(es);
-			//modal.find('#tipoEstadom').text(escuela1.estado);
-			console.log(escuela1.descripcion);
-			$('#actualizarMantenimiento').on('click', function (event){
-				
-				var combo = document.getElementById("tipoInfraccionm");
-				var combo1 = document.getElementById("tipoEstadom");
-				var input = document.getElementById("descripcion");
-				
-				var idt = Number(combo.value);
-				var et = Number(combo1.value);
-				var inputd = input.value;
-				console.log(inputd);
-				console.log(escuela1.descripcion); 
-				var texto = $('#tipoInfraccionm').find('option:selected').text()
-				console.log(texto);
-				var infraccion = {"idInfraccion" : escuela1.idInfraccion,
-				          "descripcion"  : inputd ,
-				          "fecha"        : escuela1.fecha,
-				          "idEstadoTabla": et,
-				          "idPersona"    : escuela1.idPersona,
-				          "idTipoInfraccion" : idt,
-		                         };
-		        console.log(infraccion);
-				
-				
-				$.ajax({
-					url :  $variableUtil.root + "infraccion",
-					type : 'PUT',
-					data : JSON.stringify(infraccion),
-	                beforeSend : function(xhr) {
-	    				xhr.setRequestHeader('Content-Type', 'application/json');
-	    				xhr.setRequestHeader("X-CSRF-TOKEN", $variableUtil.csrf);
-	    			},
-	    			statusCode : {
-	    				400 : function(response) {
-	    						swal(response.responseJSON);
-	    					},
-	      				500 : function(response) {
-	      					swal("Error", response.responseText, "warning");
-	      				}
-	    			},
-	    			success : function(response) {
-	    				console.log(response)
-		    			swal({
-	  					  title: "Operacion realizada con exito",
-	  					  text: "Actualización aplicada",
-	  					  icon: "success",
-	  					  button: false,
-	  					  timer: 1000,
-		  				}).then((value) => {
-		  					location.reload();
-		  				});
-		    				
-	    			},
-	    			error : function(response) {
-	    				swal("Error", "Ha ocurrido un problema con el servidor", "warning"); 
-	    			},
-	    			complete : function(response) {
-	    				
-	    			}
-				});
-				
-				
-			});
-			
-			
+		var infraccion = {
+				"idInfraccion" : $local.idInfraccionSeleccionada,
+				"descripcion"  : form.descripcion,
+				"fecha"        : $local.fecha,
+				"idEstadoTabla": form.tipoEstadom,
+				"idPersona"    : $local.idPersonaSeleccionada,
+				"idTipoInfraccion" : form.tipoInfraccionm
+		}
+		
+		console.log(infraccion);
+		$.ajax({
+			type : "PUT",
+			url : $variableUtil.root + "infraccion",
+			data : JSON.stringify(infraccion),
+			beforeSend : function(xhr) {
+				$local.$actualizarMantenimiento.attr("disabled", true).find("i").removeClass("fa-pencil-square").addClass("fa-spinner fa-pulse fa-fw");
+				xhr.setRequestHeader('Content-Type', 'application/json');
+				xhr.setRequestHeader("X-CSRF-TOKEN", $variableUtil.csrf);
+				$local.tblConsulta.clear().draw();
+			},
+			statusCode : {
+				400 : function(response) {
+					response.responseText.length > $max_tamaño_error ? 
+							swal("Error", "La operación no pudo realizarse con exito.", "warning") : 
+							swal("Error", response.responseText, "warning");
+				},
+				500 : function(response) {
+					response.responseText.length > $max_tamaño_error ? 
+							swal("Error", "La operación no pudo realizarse con exito.", "warning") : 
+							swal("Error", response.responseText, "warning");
+				}
+			},
+			success : function(response) {
+				$funcionUtil.notificarException(response, "fa-check", "Aviso", "success");
+				//$local.tblConsulta.row($local.$filaSeleccionada).remove().draw(false);
+				//var row = $local.tablaMantenimiento.row.add(persona).draw();
+				//row.show().draw(false);
+				/*swal({
+					  title: "Operacion realizada con exito",
+					  text: "Actualización aplicada",
+					  icon: "success",
+					  button: false,
+					  timer:1000,
+	  				});*/
+			    $('#buscarI').click();
+				$('#cerrm').click();
+				//$(row.node()).animateHighlight();
+				//$local.$modalMantenimiento.PopupWindow("close");
+			},
+			error : function(response) {
+			},
+			complete : function(response) {
+				$local.$actualizarMantenimiento.attr("disabled", false).find("i").addClass("fa-pencil-square").removeClass("fa-spinner fa-pulse fa-fw");
+			}
 		});
 		
-		});
+	});
+	
 	/***ELIMINAR***/
 	$local.$tblConsulta.children("tbody").on("click", ".eliminar", function() {
 		$local.$filaSeleccionada = $(this).parents("tr");
@@ -485,8 +495,7 @@ $(document).ready(function() {
 				if( $local.$anioInicio.val() =='' || $local.$anioFin.val() =='') cont++;
 			}
 		}
-			
-				
+						
 		return cont;
 		
 		
@@ -538,27 +547,26 @@ $(document).ready(function() {
 	
 $local.$limpiar.on('click', function() {
 		
-	$funcionUtil.limpiarCamposFormulario($formInfracciones);
-	console.log("Funciona por favor");
+	var f ={
+			"numeroDocumento":"",
+			"tipoPersona":-1,
+			"tipoInfraccion":-1,
+			"tipoEstado":-1,
+			"tipoPeriodo":-1
+			
+	}
+	$funcionUtil.llenarFormulario(f,$formInfracciones);
+	$local.$divPeriodoDia.addClass("hidden");
+	$local.$divSemanaInicio.addClass("hidden");
+	$local.$divSemanaFin.addClass("hidden");
+	$local.$divMesInicio.addClass("hidden");
+	$local.$divMesFin.addClass("hidden");
+	$local.$divAnioInicio.addClass("hidden");
+	$local.$divAnioFin.addClass("hidden");
+	$local.tblConsulta.clear().draw();
 	});
 	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
+
 	
 	/* ------ Construcción de modal ------------ */	
 	$('#infraccionModal').on('show.bs.modal', function (event){
@@ -615,7 +623,7 @@ $local.$limpiar.on('click', function() {
   					  button: false,
   					  timer: 1000,
 	  				}).then((value) => {
-	  					location.reload();
+	  					$('#btnClose').click();
 	  				});
 	    				
     			},
@@ -630,19 +638,8 @@ $local.$limpiar.on('click', function() {
 			
 		});
 		
-		$('#btnClose').on('click', function (event){
-			location.reload();
-		});
 		
 	});
-	
-	
-	
-	
-	
-	
-	
-	
 	
 
 });
