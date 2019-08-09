@@ -67,7 +67,27 @@
 			
 			<if test="tipoPeriodo == 'DIA'">
 			LEFT JOIN vw_reporte_prestamos reporte ON (reporte.fecha_registro = lista.fecha)
+			<where>
+				<if test="areasEstudio != null">
+			        reporte.id_area_estudio = #{areasEstudio}
+			    </if>
+			    
+			    <if test="escuelas != null">
+			        AND reporte.id_escuela IN #{escuelas}
+			    </if>
+			    		    
+			    <if test="recursos != null ">
+			        AND reporte.id_recurso = #{recursos}
+			    </if>
+			    
+			    <if test="solicitantes != null and solicitante != '' ">
+			        AND reporte.nombre_tipo = #{solicitantes}
+			    </if>
+			    
+			    
+			  </where>
 			</if>
+			
 			<if test="tipoPeriodo == 'SEMANA'">
 			LEFT JOIN vw_reporte_prestamos reporte ON (CONCAT(lista.anio,'-',lista.semana) = CONCAT(YEAR(reporte.fecha_registro),'-',WEEK(reporte.fecha_registro)))
 			</if>

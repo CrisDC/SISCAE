@@ -124,20 +124,56 @@ $(document).ready(function() {
 	$local.$selectEjeX.on("change", function(){
 		let data;
 		let title;
+		console.log("entro");
 		switch($local.$selectEjeX.val()){
 			case "PERIODO":{
-				data = "periodoPrestamo",
+				data = "ejeX",
 				title = "Periodo"
+					console.log("funciona mal ");
 				break;
 			}
 			case "ESCUELA":{
 				data = "ejeX",
 				title = "Escuela"
+				console.log("funciona");
 				break;
 			}
 			case "AREA_ESTUDIO":{
 				data = "ejeX",
 				title = "Area Estudio"
+				break;
+			}
+		}
+		cambiarEjeXTabla(data, title);
+		
+	});
+	
+	$local.$selectSeries.on("change", function(){
+		let data;
+		let title;
+		console.log("entro");
+		console.log($local.$selectSeries.val());
+		switch($local.$selectSeries.val()){
+			case "SOLICITANTE":{
+				data = "segmento",
+				title = "Solicitante"
+					console.log("funciona mal ");
+				break;
+			}
+			case "ESCUELA":{
+				data = "segmento",
+				title = "Escuela"
+				console.log("funciona");
+				break;
+			}
+			case "AREA_ESTUDIO":{
+				data = "segmento",
+				title = "Area Estudio"
+				break;
+			}
+			case "TIPO_INFRACCION":{
+				data ="segmento",
+				title="Tipo de Infraccion"
 				break;
 			}
 		}
@@ -204,8 +240,10 @@ $(document).ready(function() {
 	}
 
 	var cambiarEjeXTabla = function (data, title){
+		console.log("ella");
 		$local.tablaResultadosPrestamo.destroy();
-		$local.tablaResultadosInfraccion.destroy();
+		$local.tablaResultadosInfraccion. destroy();
+		console.log("no te ama");
 
 		$local.tablaResultadosPrestamo = $local.$tablaResultadosPrestamo.DataTable({
 			"language" : {
@@ -285,14 +323,18 @@ $(document).ready(function() {
 		let ejeX = $local.$selectEjeX.val();
 		let serie= $local.$selectSeries.val();
 		console.log(criterioBusqueda);
+		console.log($.param(criterioBusqueda));
+		var a = reemplazarCadena("%5B%5D","",$.param(criterioBusqueda));
+		console.log(a);
 		if($local.$tipoReporte =="P"){
 			if(tipoGrafico == "PIE"){
+				//arreglado
 					$.ajax({
 						type : "GET",
-						url : $variableUtil.root + "reporteEstadisticaPrestamos?accion=buscarPorCriterio",
+						url : $variableUtil.root + "reporteEstadisticaPrestamos?accion=buscarPorCriterio&"+a,
 						contentType : "application/json",
-						data: criterioBusqueda,
-						dataType : "json",
+						//data: criterioBusqueda,
+						//dataType : "json",
 						beforeSend : function(xhr) {
 							xhr.setRequestHeader('Content-Type', 'application/json');
 							//Borrando tabla antes de hacer la consulta
@@ -305,7 +347,7 @@ $(document).ready(function() {
 								return;
 							}
 							//Dibujando tabla
-							
+							console.log(response);
 							$local.tablaResultadosPrestamo.rows.add(response).draw();
 							//Dibujando grafico
 							var chart = AmCharts.makeChart('chartdiv',$funcionGraficoUtil.crearGraficoPie(response,'segmento','numeroPrestamos','Análisis de Préstamos','Número de prestamos', "<b style='font-size:12px'>[[title]]</b> ([[percents]]%) <br> <b>Prestamos:</b> [[value]] </br> <b>Tiempo Total: </b> [[estadiaTotal]] <br> <b>Tiempo Prom: </b> [[estadiaPromedio]]"));
@@ -320,12 +362,13 @@ $(document).ready(function() {
 			if(tipoGrafico == "BARRAS"){
 				if(ejeX=="PERIODO"){
 					if(segmentacionY=="NINGUNA"){
+						console.log("caso1,r");
 						$.ajax({
 							type : "GET",
-							url : $variableUtil.root + "reporteEstadisticaPrestamos?accion=buscarPorPeriodoSinSegmentar",
+							url : $variableUtil.root + "reporteEstadisticaPrestamos?accion=buscarPorPeriodoSinSegmentar&"+a,
 							contentType : "application/json",
-							data: criterioBusqueda,
-							dataType : "json",
+							//data: criterioBusqueda,
+							//dataType : "json",
 							beforeSend : function(xhr) {
 								xhr.setRequestHeader('Content-Type', 'application/json');
 								//Borrando tabla antes de hacer la consulta
@@ -350,9 +393,10 @@ $(document).ready(function() {
 							}
 						});
 					}else{
+						console.log("caso2");
 						$.ajax({
 							type : "GET",
-							url : $variableUtil.root + "reporteEstadisticaPrestamos?accion=buscarPorPeriodoSegmentado",
+							url : $variableUtil.root + "reporteEstadisticaPrestamos?accion=buscarPorPeriodoSegmentado&"+a,
 							contentType : "application/json",
 							data: criterioBusqueda,
 							dataType : "json",
@@ -420,6 +464,7 @@ $(document).ready(function() {
 					}
 				}else{
 					if(segmentacionY=="NINGUNA"){
+						console.log("caso3,quitar lo q tiene cero?");
 						$.ajax({
 							type : "GET",
 							url : $variableUtil.root + "reporteEstadisticaPrestamos?accion=buscarPorEjeXSinSegmentar",
@@ -437,7 +482,6 @@ $(document).ready(function() {
 									$funcionUtil.notificarException($variableUtil.busquedaSinResultados, "fa-exclamation-circle", "Información", "info");
 									return;
 								}
-								console.log("RESPONSE: ");
 								console.log(response);
 								//Dibujando tabla
 								$local.tablaResultadosPrestamo.rows.add(response).draw();
@@ -451,12 +495,14 @@ $(document).ready(function() {
 							}
 						});
 					}else{
+						
+						console.log("caso4,revisar");
 						$.ajax({
 							type : "GET",
-							url : $variableUtil.root + "reporteEstadisticaPrestamos?accion=buscarPorEjeXSegmentado",
+							url : $variableUtil.root + "reporteEstadisticaPrestamos?accion=buscarPorEjeXSegmentado&"+a,
 							contentType : "application/json",
-							data: criterioBusqueda,
-							dataType : "json",
+							//data: criterioBusqueda,
+							//dataType : "json",
 							beforeSend : function(xhr) {
 								xhr.setRequestHeader('Content-Type', 'application/json');
 								//Borrando tabla antes de hacer la consulta
@@ -522,12 +568,14 @@ $(document).ready(function() {
 				}
 				
 			}if(tipoGrafico == "LINEAL"){
+				console.log(criterioBusqueda);
+				console.log("caso5");
 				$.ajax({
 					type : "GET",
-					url : $variableUtil.root + "reporteEstadisticaPrestamos?accion=buscarPorPeriodoSinSegmentar",
+					url : $variableUtil.root + "reporteEstadisticaPrestamos?accion=buscarPorPeriodoSinSegmentar&"+a,
 					contentType : "application/json",
-					data: criterioBusqueda,
-					dataType : "json",
+					//data: criterioBusqueda,
+					//dataType : "json",
 					beforeSend : function(xhr) {
 						xhr.setRequestHeader('Content-Type', 'application/json');
 						//Borrando tabla antes de hacer la consulta
@@ -544,6 +592,7 @@ $(document).ready(function() {
 						//$local.tablaResultadosPrestamo.rows.add(response).draw();
 						//Dibujando grafico
 						var chart = AmCharts.makeChart('chartdiv',$funcionGraficoUtil.crearGraficoLineal(response,'ejeX','numeroPrestamos',"<b>Periodo:</b> [[category]] </br> <b>Prestamos:</b> [[value]] </br> <b>Tiempo Total: </b> [[estadiaTotal]] </br> <b>Tiempo Prom: </b> [[estadiaPromedio]]"));
+						//$window.disablescroll();
 					},
 					error : function(response) {
 					},
@@ -555,6 +604,8 @@ $(document).ready(function() {
 		}
 		else if($local.$tipoReporte =="I"){
 			if(tipoGrafico == "PIE"){
+				//arreglado,volver a revisar
+				console.log("caso6,r");
 				$.ajax({
 					type : "GET",
 					url : $variableUtil.root + "reporteEstadisticaInfracciones?accion=buscarPorCriterio",
@@ -572,6 +623,7 @@ $(document).ready(function() {
 							$funcionUtil.notificarException($variableUtil.busquedaSinResultados, "fa-exclamation-circle", "Información", "info");
 							return;
 						}
+						console.log(response);
 						//Dibujando tabla
 						$local.tablaResultadosInfraccion.rows.add(response).draw();
 						//Dibujando grafico
@@ -586,13 +638,14 @@ $(document).ready(function() {
 		}
 		if(tipoGrafico == "BARRAS"){
 			if(ejeX=="PERIODO"){
+				console.log("caso7");
 				if(segmentacionY=="NINGUNA"){
 					$.ajax({
 						type : "GET",
-						url : $variableUtil.root + "reporteEstadisticaInfracciones?accion=buscarPorPeriodoSinSegmentar",
+						url : $variableUtil.root + "reporteEstadisticaInfracciones?accion=buscarPorPeriodoSinSegmentar&"+a,
 						contentType : "application/json",
-						data: criterioBusqueda,
-						dataType : "json",
+						//data: criterioBusqueda,
+						//dataType : "json",
 						beforeSend : function(xhr) {
 							xhr.setRequestHeader('Content-Type', 'application/json');
 							//Borrando tabla antes de hacer la consulta
@@ -616,12 +669,13 @@ $(document).ready(function() {
 						}
 					});
 				}else{
+					console.log("caso8");
 					$.ajax({
 						type : "GET",
-						url : $variableUtil.root + "reporteEstadisticaInfracciones?accion=buscarPorPeriodoSegmentado",
+						url : $variableUtil.root + "reporteEstadisticaInfracciones?accion=buscarPorPeriodoSegmentado&"+a,
 						contentType : "application/json",
-						data: criterioBusqueda,
-						dataType : "json",
+						//data: criterioBusqueda,
+						//dataType : "json",
 						beforeSend : function(xhr) {
 							xhr.setRequestHeader('Content-Type', 'application/json');
 							//Borrando tabla antes de hacer la consulta
@@ -688,12 +742,13 @@ $(document).ready(function() {
 				}
 			}else{
 				if(segmentacionY=="NINGUNA"){
+					console.log("caso9,r");
 					$.ajax({
 						type : "GET",
-						url : $variableUtil.root + "reporteEstadisticaInfracciones?accion=buscarPorEjeXSinSegmentar",
+						url : $variableUtil.root + "reporteEstadisticaInfracciones?accion=buscarPorEjeXSinSegmentar&"+a,
 						contentType : "application/json",
-						data: criterioBusqueda,
-						dataType : "json",
+						//data: criterioBusqueda,
+						//dataType : "json",
 						beforeSend : function(xhr) {
 							xhr.setRequestHeader('Content-Type', 'application/json');
 							//Borrando tabla antes de hacer la consulta
@@ -719,12 +774,13 @@ $(document).ready(function() {
 						}
 					});
 				}else{
+					console.log("caso10,revisar");
 					$.ajax({
 						type : "GET",
-						url : $variableUtil.root + "reporteEstadisticaInfracciones?accion=buscarPorEjeXSegmentado",
+						url : $variableUtil.root + "reporteEstadisticaInfracciones?accion=buscarPorEjeXSegmentado&"+a,
 						contentType : "application/json",
-						data: criterioBusqueda,
-						dataType : "json",
+						//data: criterioBusqueda,
+						//dataType : "json",
 						beforeSend : function(xhr) {
 							xhr.setRequestHeader('Content-Type', 'application/json');
 							//Borrando tabla antes de hacer la consulta
@@ -790,6 +846,7 @@ $(document).ready(function() {
 			}
 
 		}if(tipoGrafico == "LINEAL"){
+			console.log("caso11,r");
 			$.ajax({
 				type : "GET",
 				url : $variableUtil.root + "reporteEstadisticaInfracciones?accion=buscarPorPeriodoSinSegmentar",
@@ -799,7 +856,7 @@ $(document).ready(function() {
 				beforeSend : function(xhr) {
 					xhr.setRequestHeader('Content-Type', 'application/json');
 					//Borrando tabla antes de hacer la consulta
-					//$local.tablaResultadosPrestamo.clear().draw();
+					$local.tablaResultadosInfraccion.clear().draw();
 					$local.$buscar.attr("disabled", true).find("i").removeClass("fa-search").addClass("fa-spinner fa-pulse fa-fw");
 				},
 				success : function(response) {
@@ -809,7 +866,7 @@ $(document).ready(function() {
 					}
 					console.log(response);
 					//Dibujando tabla
-					//$local.tablaResultadosPrestamo.rows.add(response).draw();
+					$local.tablaResultadosInfraccion.rows.add(response).draw();
 					//Dibujando grafico
 					var chart = AmCharts.makeChart('chartdiv',$funcionGraficoUtil.crearGraficoLineal(response,'ejeX','numeroInfracciones',"<b>Periodo:</b> [[category]] </br> <b>Infracciones:</b> [[value]] </br> <b>Sancionados: </b> [[numeroSancionados]] </br> <b>Infracc. Prom: </b> [[numeroInfraccionesPromedioPorAlumno]]"));
 				},
@@ -925,8 +982,21 @@ $(document).ready(function() {
 	$local.$exportar.on('click', function(){
 		criterioBusqueda = obtenerCriteriosDeBusqueda();
 		if($local.$tipoReporte =="P"){
+		   
 			window.location.href = $variableUtil.root + "reporteEstadisticaPrestamos?accion=exportar&" + $.param(criterioBusqueda);	
+			console.log($.param(criterioBusqueda));
 		}
 	});
+	
+	function reemplazarCadena(cadenaVieja, cadenaNueva, cadenaCompleta){
+		//Reemplaza cadenaVieja por cadenaNueva en cadenaCompleta
+		
+		for(var i = 0;i< cadenaCompleta.length; i++){
+			if(cadenaCompleta.substring(i, i + cadenaVieja.length) == cadenaVieja){
+				cadenaCompleta= cadenaCompleta.substring(0,i) + cadenaNueva +cadenaCompleta.substring(i + cadenaVieja.length, cadenaCompleta.length);
+			}
+		}
+		return cadenaCompleta;
+	}
 
 });
