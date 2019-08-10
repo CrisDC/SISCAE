@@ -260,20 +260,52 @@
 		FROM vw_reporte_prestamos
 		WHERE 
 			<if test="tipoPeriodo == 'DIA'">
-				    fecha_registro BETWEEN #{fechaInicio}  AND #{fechaFin}
+				    (fecha_registro BETWEEN #{fechaInicio}  AND #{fechaFin})
 			</if>
 			<if test="tipoPeriodo == 'SEMANA'">
-				   fecha_registro BETWEEN F_GENERADOR_FECHAS('INI', 'SEMANA',#{anioInicio} ,null, null, #{semanaInicio} )
-				   AND F_GENERADOR_FECHAS('FIN', 'SEMANA',#{anioInicio} ,null, null, #{semanaInicio} )
+				   (fecha_registro BETWEEN F_GENERADOR_FECHAS('INI', 'SEMANA',#{anioInicio} ,null, null, #{semanaInicio} )
+				   AND F_GENERADOR_FECHAS('FIN', 'SEMANA',#{anioInicio} ,null, null, #{semanaInicio} ) )
 			</if>
 			<if test="tipoPeriodo == 'MES'">
-				   fecha_registro BETWEEN F_GENERADOR_FECHAS('INI', 'MES',#{anioInicio} ,#{mesInicio}, null, null )
-				   AND F_GENERADOR_FECHAS('FIN', 'MES',#{anioInicio} ,#{mesInicio}, null, null )
+				  ( fecha_registro BETWEEN F_GENERADOR_FECHAS('INI', 'MES',#{anioInicio} ,#{mesInicio}, null, null )
+				   AND F_GENERADOR_FECHAS('FIN', 'MES',#{anioInicio} ,#{mesInicio}, null, null ))
 			</if>
 			<if test="tipoPeriodo == 'ANIO'">
-				    fecha_registro BETWEEN F_GENERADOR_FECHAS('INI', 'ANIO',#{anioInicio} ,null, null, null )
-				   AND F_GENERADOR_FECHAS('FIN', 'ANIO',#{anioInicio} ,null, null, null )
+				    (fecha_registro BETWEEN F_GENERADOR_FECHAS('INI', 'ANIO',#{anioInicio} ,null, null, null )
+				   AND F_GENERADOR_FECHAS('FIN', 'ANIO',#{anioInicio} ,null, null, null ) )
 			</if>
+			
+			<if test="areasEstudio != null">
+			        AND id_area_estudio IN
+			        <foreach item="item" index="index" collection="areasEstudio"
+					      open="(" separator="," close=")">
+					        #{item}
+					  </foreach>
+			    </if>
+			    
+			    <if test="escuelas != null">
+			        AND id_escuela IN 
+			        <foreach item="item" index="index" collection="escuelas"
+					      open="(" separator="," close=")">
+					        #{item}
+					  </foreach>
+			    </if>
+			    		    
+			    <if test="recursos != null ">
+			        AND id_tipo_recurso IN
+			        <foreach item="item" index="index" collection="recursos"
+					      open="(" separator="," close=")">
+					        #{item}
+					  </foreach>
+			    </if>
+			    
+			    <if test="solicitantes != null and solicitantes != '' ">
+			        AND nombre_tipo IN 
+			        <foreach item="item" index="index" collection="solicitantes"
+					      open="(" separator="," close=")">
+					        #{item}
+					  </foreach>
+			    </if>
 		<if test="serie == 'ESCUELA'">
 				GROUP BY escuela
 		</if>
