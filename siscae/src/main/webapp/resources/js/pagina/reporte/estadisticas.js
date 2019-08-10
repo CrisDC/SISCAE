@@ -19,6 +19,8 @@ $(document).ready(function() {
 			$semanaFin : $('#semanaFin'),
 			$anioFin : $('#anioFin'),
 			$mesFin : $('#mesFin'),
+			$opAreaEstudio : 'S',
+			$opEscuela : 'S',
 			
 			//Divs de la pagina
 			$divPeriodoDia : $('#divPeriodoDia'),
@@ -118,6 +120,41 @@ $(document).ready(function() {
 		}else{
 			$local.$divPresentacion.addClass("hidden");
 		}
+		console.log(val);
+		console.log($local.$selectEjeX.val());
+		console.log($local.$selectSegmY.val());
+		switch($local.$selectSegmY.val()){
+		case "ESCUELA":{		
+			$('#selectEjeX').find("option[value='"+$local.$selectSegmY.val()+"']").remove();
+			$local.$opEscuela = 'N';
+			if($local.$opAreaEstudio =='N'){
+				$('#selectEjeX').append('<option  value="AREA_ESTUDIO">Area Estudios</option>');
+				$local.$opAreaEstudio = 'S';
+			}
+			
+			break;
+		}
+		case "AREA_ESTUDIO":{
+				$('#selectEjeX').find("option[value='"+$local.$selectSegmY.val()+"']").remove();
+			$local.$opAreaEstudio = 'N';
+			if($local.$opEscuela == 'N'){
+				$('#selectEjeX').append('<option value="ESCUELA">Escuela</option>');
+				$local.$opEscuela = 'S';
+			}
+			break;
+		}
+		default :{
+			if($local.$opAreaEstudio == 'N'){
+				$('#selectEjeX').append('<option  value="AREA_ESTUDIO">Area Estudios</option>');
+				$local.$opAreaEstudio = 'S';
+			}
+			if($local.$opEscuela == 'N'){
+				$('#selectEjeX').append('<option value="ESCUELA">Escuela</option>');
+				$local.$opEscuela = 'S';
+			}
+		}
+	}
+        
 	});
 
 	//Evento que se dispara cuando el combo Eje X cambia
@@ -127,26 +164,105 @@ $(document).ready(function() {
 		console.log("entro");
 		switch($local.$selectEjeX.val()){
 			case "PERIODO":{
+				console.log("p");
 				data = "ejeX",
 				title = "Periodo"
-					console.log("funciona mal ");
+				console.log("funciona mal ");
+				if($local.$opAreaEstudio == 'N'){
+					$('#selectSegmY').append('<option  value="AREA_ESTUDIO">Area Estudios</option>');
+					$local.$opAreaEstudio = 'S';
+				}
+				if($local.$opEscuela == 'N'){
+					$('#selectSegmY').append('<option value="ESCUELA">Escuela</option>');
+					$local.$opEscuela = 'S';
+				}
+				
 				break;
 			}
 			case "ESCUELA":{
-				data = "ejeX",
-				title = "Escuela"
+				data = "ejeX";
+				title = "Escuela",
 				console.log("funciona");
+				
+				$('#selectSegmY').find("option[value='"+$local.$selectEjeX.val()+"']").remove();
+				$local.$opEscuela = 'N';
+				if($local.$opAreaEstudio =='N'){
+					$('#selectSegmY').append('<option  value="AREA_ESTUDIO">Area Estudios</option>');
+					$local.$opAreaEstudio = 'S';
+				}
+				
 				break;
 			}
 			case "AREA_ESTUDIO":{
+				console.log("ae");
 				data = "ejeX",
 				title = "Area Estudio"
+					//$('#selectSegmY').find("option[value='ESCUELA']").prop("disabled",false);
+					$('#selectSegmY').find("option[value='"+$local.$selectEjeX.val()+"']").remove();
+				$local.$opAreaEstudio = 'N';
+				if($local.$opEscuela == 'N'){
+					$('#selectSegmY').append('<option value="ESCUELA">Escuela</option>');
+					$local.$opEscuela = 'S';
+				}
 				break;
 			}
 		}
+		
 		cambiarEjeXTabla(data, title);
 		
 	});
+	
+	$local.$selectSegmY.on("change", function(){
+		let data;
+		let title;
+		switch($local.$selectSegmY.val()){
+			case "PERIODO":{
+				console.log("p");
+				console.log("funciona mal ");
+				if($local.$opAreaEstudio == 'N'){
+					$('#selectSegmY').append('<option  value="AREA_ESTUDIO">Area Estudios</option>');
+					$local.$opAreaEstudio = 'S';
+				}
+				if($local.$opEscuela == 'N'){
+					$('#selectSegmY').append('<option value="ESCUELA">Escuela</option>');
+					$local.$opEscuela = 'S';
+				}
+				
+				break;
+			}
+			case "ESCUELA":{
+				data = "ejeX";
+				title = "Escuela",
+				console.log("funciona");
+				
+				$('#selectSegmY').find("option[value='"+$local.$selectEjeX.val()+"']").remove();
+				$local.$opEscuela = 'N';
+				if($local.$opAreaEstudio =='N'){
+					$('#selectSegmY').append('<option  value="AREA_ESTUDIO">Area Estudios</option>');
+					$local.$opAreaEstudio = 'S';
+				}
+				
+				break;
+			}
+			case "AREA_ESTUDIO":{
+				console.log("ae");
+				data = "ejeX",
+				title = "Area Estudio"
+					//$('#selectSegmY').find("option[value='ESCUELA']").prop("disabled",false);
+					$('#selectSegmY').find("option[value='"+$local.$selectEjeX.val()+"']").remove();
+				$local.$opAreaEstudio = 'N';
+				if($local.$opEscuela == 'N'){
+					$('#selectSegmY').append('<option value="ESCUELA">Escuela</option>');
+					$local.$opEscuela = 'S';
+				}
+				break;
+			}
+		}
+		
+		cambiarEjeXTabla(data, title);
+		
+	});
+	
 	
 	$local.$selectSeries.on("change", function(){
 		let data;
