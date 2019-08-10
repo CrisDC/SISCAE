@@ -67,126 +67,22 @@
 			
 			<if test="tipoPeriodo == 'DIA'">
 			LEFT JOIN vw_reporte_prestamos reporte ON (reporte.fecha_registro = lista.fecha)
-			<where>
-				<if test="areasEstudio != null">
-			        reporte.id_area_estudio IN
-			        <foreach item="item" index="index" collection="areasEstudio"
-					      open="(" separator="," close=")">
-					        #{item}
-					  </foreach>
-			    </if>
-			    
-			    <if test="escuelas != null">
-			        AND reporte.id_escuela IN 
-			        <foreach item="item" index="index" collection="escuelas"
-					      open="(" separator="," close=")">
-					        #{item}
-					  </foreach>
-			    </if>
-			    		    
-			    <if test="recursos != null ">
-			        AND reporte.id_tipo_recurso IN
-			        <foreach item="item" index="index" collection="recursos"
-					      open="(" separator="," close=")">
-					        #{item}
-					  </foreach>
-			    </if>
-			    
-			    <if test="solicitantes != null and solicitantes != '' ">
-			        AND reporte.nombre_tipo IN 
-			        <foreach item="item" index="index" collection="solicitantes"
-					      open="(" separator="," close=")">
-					        #{item}
-					  </foreach>
-			    </if>
-			    
-			    
-			  </where>
+			
 			</if>
 			
 			<if test="tipoPeriodo == 'SEMANA'">
 			LEFT JOIN vw_reporte_prestamos reporte ON (CONCAT(lista.anio,'-',lista.semana) = CONCAT(YEAR(reporte.fecha_registro),'-',WEEK(reporte.fecha_registro)))
 			
-			<where>
-				<if test="areasEstudio != null">
-			        reporte.id_area_estudio IN
-			        <foreach item="item" index="index" collection="areasEstudio"
-					      open="(" separator="," close=")">
-					        #{item}
-					  </foreach>
-			    </if>
-			    
-			    <if test="escuelas != null">
-			        AND reporte.id_escuela IN 
-			        <foreach item="item" index="index" collection="escuelas"
-					      open="(" separator="," close=")">
-					        #{item}
-					  </foreach>
-			    </if>
-			    		    
-			    <if test="recursos != null ">
-			        AND reporte.id_tipo_recurso IN
-			        <foreach item="item" index="index" collection="recursos"
-					      open="(" separator="," close=")">
-					        #{item}
-					  </foreach>
-			    </if>
-			    
-			    <if test="solicitantes != null and solicitantes != '' ">
-			        AND reporte.nombre_tipo IN 
-			        <foreach item="item" index="index" collection="solicitantes"
-					      open="(" separator="," close=")">
-					        #{item}
-					  </foreach>
-			    </if>
-			    
-			    
-			  </where>
-			
 			</if>
 			<if test="tipoPeriodo == 'MES'">
 			LEFT JOIN vw_reporte_prestamos reporte ON (CONCAT(lista.anio,'-',lista.mes) = CONCAT(YEAR(reporte.fecha_registro),'-',MONTH(reporte.fecha_registro)))
-			
-			<where>
-				<if test="areasEstudio != null">
-			        reporte.id_area_estudio IN
-			        <foreach item="item" index="index" collection="areasEstudio"
-					      open="(" separator="," close=")">
-					        #{item}
-					  </foreach>
-			    </if>
-			    
-			    <if test="escuelas != null">
-			        AND reporte.id_escuela IN 
-			        <foreach item="item" index="index" collection="escuelas"
-					      open="(" separator="," close=")">
-					        #{item}
-					  </foreach>
-			    </if>
-			    		    
-			    <if test="recursos != null ">
-			        AND reporte.id_tipo_recurso IN
-			        <foreach item="item" index="index" collection="recursos"
-					      open="(" separator="," close=")">
-					        #{item}
-					  </foreach>
-			    </if>
-			    
-			    <if test="solicitantes != null and solicitantes != '' ">
-			        AND reporte.nombre_tipo IN 
-			        <foreach item="item" index="index" collection="solicitantes"
-					      open="(" separator="," close=")">
-					        #{item}
-					  </foreach>
-			    </if>
-			    
-			    
-			  </where>
 			
 			</if>
 			 <if test="tipoPeriodo == 'ANIO'">
 			LEFT JOIN vw_reporte_prestamos reporte ON (lista.anio = YEAR(reporte.fecha_registro))
 			
+			</if>
+			
 			<where>
 				<if test="areasEstudio != null">
 			        reporte.id_area_estudio IN
@@ -223,7 +119,6 @@
 			    
 			  </where>
 			
-			</if>
 			
 			GROUP BY
 			<if test="tipoPeriodo == 'DIA'">
@@ -388,22 +283,82 @@
 				</if>
 
 			FROM 
-			ListaPeriodo lista ,
+			
 			<if test="criterioSegmentacion == 'AREA_ESTUDIO'">
-				mae_area_estudio  cr
+				mae_area_estudio  cr,
+				ListaPeriodo lista 
 			</if>
 			<if test="criterioSegmentacion == 'ESCUELA'">
-				mae_escuela  cr
+				mae_escuela  cr,
+				ListaPeriodo lista 
 			</if>
 			<if test="criterioSegmentacion == 'TIPO_SOLICITANTE'">
 				(SELECT 
 					DISTINCT(F_GET_TIPO_SOLICITANTE(n_id_persona)) AS v_nombre
-	  			FROM mae_persona) cr
+	  			FROM mae_persona) cr,
+	  			ListaPeriodo lista 
 			</if>
 			<if test="criterioSegmentacion == 'RECURSO'">
-				mae_tipo_recurso cr
-				WHERE cr.v_usable='SI'
+				mae_tipo_recurso cr,
+				ListaPeriodo lista 
+				
 			</if>
+			
+			<if test="tipoPeriodo == 'DIA'">
+			LEFT JOIN vw_reporte_prestamos reporte ON (reporte.fecha_registro = lista.fecha)
+			
+			</if>
+			
+			<if test="tipoPeriodo == 'SEMANA'">
+			LEFT JOIN vw_reporte_prestamos reporte ON (CONCAT(lista.anio,'-',lista.semana) = CONCAT(YEAR(reporte.fecha_registro),'-',WEEK(reporte.fecha_registro)))
+			
+			</if>
+			<if test="tipoPeriodo == 'MES'">
+			LEFT JOIN vw_reporte_prestamos reporte ON (CONCAT(lista.anio,'-',lista.mes) = CONCAT(YEAR(reporte.fecha_registro),'-',MONTH(reporte.fecha_registro)))
+			
+			</if>
+			 <if test="tipoPeriodo == 'ANIO'">
+			LEFT JOIN vw_reporte_prestamos reporte ON (lista.anio = YEAR(reporte.fecha_registro))
+			
+			</if>
+			
+			<where>
+			
+				<if test="recursos != null ">
+			         ( reporte.id_tipo_recurso IN
+			        <foreach item="item" index="index" collection="recursos"
+					      open="(" separator="," close=")">
+					        #{item}
+					  </foreach>
+					AND cr.v_usable='SI')
+			    </if>
+			
+				<if test="areasEstudio != null">
+			        reporte.id_area_estudio IN
+			        <foreach item="item" index="index" collection="areasEstudio"
+					      open="(" separator="," close=")">
+					        #{item}
+					  </foreach>
+			    </if>
+			    
+			    <if test="escuelas != null">
+			        AND reporte.id_escuela IN 
+			        <foreach item="item" index="index" collection="escuelas"
+					      open="(" separator="," close=")">
+					        #{item}
+					  </foreach>
+			    </if>
+			    			    
+			    <if test="solicitantes != null and solicitantes != '' ">
+			        AND reporte.nombre_tipo IN 
+			        <foreach item="item" index="index" collection="solicitantes"
+					      open="(" separator="," close=")">
+					        #{item}
+					  </foreach>
+			    </if>
+			    
+			  </where>
+			
 			
 	</select>
 
