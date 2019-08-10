@@ -579,7 +579,7 @@ $(document).ready(function() {
 					beforeSend : function(xhr) {
 						xhr.setRequestHeader('Content-Type', 'application/json');
 						//Borrando tabla antes de hacer la consulta
-						//$local.tablaResultadosPrestamo.clear().draw();
+						$local.tablaResultadosPrestamo.clear().draw();
 						$local.$buscar.attr("disabled", true).find("i").removeClass("fa-search").addClass("fa-spinner fa-pulse fa-fw");
 					},
 					success : function(response) {
@@ -589,7 +589,7 @@ $(document).ready(function() {
 						}
 						console.log(response);
 						//Dibujando tabla
-						//$local.tablaResultadosPrestamo.rows.add(response).draw();
+						$local.tablaResultadosPrestamo.rows.add(response).draw();
 						//Dibujando grafico
 						var chart = AmCharts.makeChart('chartdiv',$funcionGraficoUtil.crearGraficoLineal(response,'ejeX','numeroPrestamos',"<b>Periodo:</b> [[category]] </br> <b>Prestamos:</b> [[value]] </br> <b>Tiempo Total: </b> [[estadiaTotal]] </br> <b>Tiempo Prom: </b> [[estadiaPromedio]]"));
 						//$window.disablescroll();
