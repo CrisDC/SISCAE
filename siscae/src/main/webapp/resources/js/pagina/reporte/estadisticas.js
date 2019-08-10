@@ -240,10 +240,8 @@ $(document).ready(function() {
 	}
 
 	var cambiarEjeXTabla = function (data, title){
-		console.log("ella");
 		$local.tablaResultadosPrestamo.destroy();
 		$local.tablaResultadosInfraccion. destroy();
-		console.log("no te ama");
 
 		$local.tablaResultadosPrestamo = $local.$tablaResultadosPrestamo.DataTable({
 			"language" : {
@@ -324,14 +322,14 @@ $(document).ready(function() {
 		let serie= $local.$selectSeries.val();
 		console.log(criterioBusqueda);
 		console.log($.param(criterioBusqueda));
-		var a = reemplazarCadena("%5B%5D","",$.param(criterioBusqueda));
-		console.log(a);
+		var criterio = "&"+reemplazarCadena("%5B%5D","",$.param(criterioBusqueda));
+		console.log(criterio);
 		if($local.$tipoReporte =="P"){
 			if(tipoGrafico == "PIE"){
 				//arreglado
 					$.ajax({
 						type : "GET",
-						url : $variableUtil.root + "reporteEstadisticaPrestamos?accion=buscarPorCriterio&"+a,
+						url : $variableUtil.root + "reporteEstadisticaPrestamos?accion=buscarPorCriterio"+criterio,
 						contentType : "application/json",
 						//data: criterioBusqueda,
 						//dataType : "json",
@@ -365,7 +363,7 @@ $(document).ready(function() {
 						console.log("caso1,r");
 						$.ajax({
 							type : "GET",
-							url : $variableUtil.root + "reporteEstadisticaPrestamos?accion=buscarPorPeriodoSinSegmentar&"+a,
+							url : $variableUtil.root + "reporteEstadisticaPrestamos?accion=buscarPorPeriodoSinSegmentar"+criterio,
 							contentType : "application/json",
 							//data: criterioBusqueda,
 							//dataType : "json",
@@ -396,10 +394,10 @@ $(document).ready(function() {
 						console.log("caso2");
 						$.ajax({
 							type : "GET",
-							url : $variableUtil.root + "reporteEstadisticaPrestamos?accion=buscarPorPeriodoSegmentado&"+a,
+							url : $variableUtil.root + "reporteEstadisticaPrestamos?accion=buscarPorPeriodoSegmentado"+criterio,
 							contentType : "application/json",
-							data: criterioBusqueda,
-							dataType : "json",
+							//data: criterioBusqueda,
+							//dataType : "json",
 							beforeSend : function(xhr) {
 								xhr.setRequestHeader('Content-Type', 'application/json');
 								//Borrando tabla antes de hacer la consulta
@@ -467,10 +465,10 @@ $(document).ready(function() {
 						console.log("caso3,quitar lo q tiene cero?");
 						$.ajax({
 							type : "GET",
-							url : $variableUtil.root + "reporteEstadisticaPrestamos?accion=buscarPorEjeXSinSegmentar",
+							url : $variableUtil.root + "reporteEstadisticaPrestamos?accion=buscarPorEjeXSinSegmentar"+criterio,
 							contentType : "application/json",
-							data: criterioBusqueda,
-							dataType : "json",
+							//data: criterioBusqueda,
+							//dataType : "json",
 							beforeSend : function(xhr) {
 								xhr.setRequestHeader('Content-Type', 'application/json');
 								//Borrando tabla antes de hacer la consulta
@@ -499,7 +497,7 @@ $(document).ready(function() {
 						console.log("caso4,revisar");
 						$.ajax({
 							type : "GET",
-							url : $variableUtil.root + "reporteEstadisticaPrestamos?accion=buscarPorEjeXSegmentado&"+a,
+							url : $variableUtil.root + "reporteEstadisticaPrestamos?accion=buscarPorEjeXSegmentado"+criterio,
 							contentType : "application/json",
 							//data: criterioBusqueda,
 							//dataType : "json",
@@ -572,7 +570,7 @@ $(document).ready(function() {
 				console.log("caso5");
 				$.ajax({
 					type : "GET",
-					url : $variableUtil.root + "reporteEstadisticaPrestamos?accion=buscarPorPeriodoSinSegmentar&"+a,
+					url : $variableUtil.root + "reporteEstadisticaPrestamos?accion=buscarPorPeriodoSinSegmentar"+criterio,
 					contentType : "application/json",
 					//data: criterioBusqueda,
 					//dataType : "json",
@@ -608,10 +606,10 @@ $(document).ready(function() {
 				console.log("caso6,r");
 				$.ajax({
 					type : "GET",
-					url : $variableUtil.root + "reporteEstadisticaInfracciones?accion=buscarPorCriterio",
+					url : $variableUtil.root + "reporteEstadisticaInfracciones?accion=buscarPorCriterio"+criterio,
 					contentType : "application/json",
-					data: criterioBusqueda,
-					dataType : "json",
+					//data: criterioBusqueda,
+					//dataType : "json",
 					beforeSend : function(xhr) {
 						xhr.setRequestHeader('Content-Type', 'application/json');
 						//Borrando tabla antes de hacer la consulta
@@ -642,7 +640,7 @@ $(document).ready(function() {
 				if(segmentacionY=="NINGUNA"){
 					$.ajax({
 						type : "GET",
-						url : $variableUtil.root + "reporteEstadisticaInfracciones?accion=buscarPorPeriodoSinSegmentar&"+a,
+						url : $variableUtil.root + "reporteEstadisticaInfracciones?accion=buscarPorPeriodoSinSegmentar"+criterio,
 						contentType : "application/json",
 						//data: criterioBusqueda,
 						//dataType : "json",
@@ -672,7 +670,7 @@ $(document).ready(function() {
 					console.log("caso8");
 					$.ajax({
 						type : "GET",
-						url : $variableUtil.root + "reporteEstadisticaInfracciones?accion=buscarPorPeriodoSegmentado&"+a,
+						url : $variableUtil.root + "reporteEstadisticaInfracciones?accion=buscarPorPeriodoSegmentado"+criterio,
 						contentType : "application/json",
 						//data: criterioBusqueda,
 						//dataType : "json",
@@ -745,7 +743,7 @@ $(document).ready(function() {
 					console.log("caso9,r");
 					$.ajax({
 						type : "GET",
-						url : $variableUtil.root + "reporteEstadisticaInfracciones?accion=buscarPorEjeXSinSegmentar&"+a,
+						url : $variableUtil.root + "reporteEstadisticaInfracciones?accion=buscarPorEjeXSinSegmentar"+criterio,
 						contentType : "application/json",
 						//data: criterioBusqueda,
 						//dataType : "json",
@@ -760,7 +758,6 @@ $(document).ready(function() {
 								$funcionUtil.notificarException($variableUtil.busquedaSinResultados, "fa-exclamation-circle", "Información", "info");
 								return;
 							}
-							console.log("RESPONSE: ");
 							console.log(response);
 							//Dibujando tabla
 							$local.tablaResultadosInfraccion.rows.add(response).draw();
@@ -777,7 +774,7 @@ $(document).ready(function() {
 					console.log("caso10,revisar");
 					$.ajax({
 						type : "GET",
-						url : $variableUtil.root + "reporteEstadisticaInfracciones?accion=buscarPorEjeXSegmentado&"+a,
+						url : $variableUtil.root + "reporteEstadisticaInfracciones?accion=buscarPorEjeXSegmentado"+criterio,
 						contentType : "application/json",
 						//data: criterioBusqueda,
 						//dataType : "json",
@@ -849,10 +846,10 @@ $(document).ready(function() {
 			console.log("caso11,r");
 			$.ajax({
 				type : "GET",
-				url : $variableUtil.root + "reporteEstadisticaInfracciones?accion=buscarPorPeriodoSinSegmentar",
+				url : $variableUtil.root + "reporteEstadisticaInfracciones?accion=buscarPorPeriodoSinSegmentar"+criterio,
 				contentType : "application/json",
-				data: criterioBusqueda,
-				dataType : "json",
+				//data: criterioBusqueda,
+				//dataType : "json",
 				beforeSend : function(xhr) {
 					xhr.setRequestHeader('Content-Type', 'application/json');
 					//Borrando tabla antes de hacer la consulta
