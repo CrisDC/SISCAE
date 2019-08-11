@@ -257,107 +257,266 @@
 			      cr.v_nombre 												AS criterioSegmentacion,
 				<if test="tipoPeriodo == 'DIA'">
 					lista.fecha 											AS ejeX,
-				    F_OBTENER_ESTADISTICO_PRESTAMOS_BETWEEN(#{criterioSegmentacion}, cr.v_nombre,lista.fecha,
-					adddate(lista.fecha, INTERVAL 1 DAY),"CANTIDAD_PRESTAMOS")  	AS numeroPrestamos
+				    
+					(SELECT 
+						COUNT(fecha_registro)
+						FROM vw_reporte_prestamos
+					WHERE (fecha_registro BETWEEN lista.fecha AND adddate(lista.fecha, INTERVAL 1 DAY) )
+						 <if test="criterioSegmentacion == 'AREA_ESTUDIO'">
+							AND area_estudio=cr.v_nombre
+							
+						</if>
+						<if test="criterioSegmentacion == 'ESCUELA'">
+							AND escuela=cr.v_nombre
+							
+						</if>
+						<if test="criterioSegmentacion == 'TIPO_SOLICITANTE'">
+							AND nombre_tipo=cr.v_nombre
+				  			
+						</if>
+						<if test="criterioSegmentacion == 'RECURSO'">
+							AND tipo_recurso=cr.v_nombre
+							
+						</if>
+						
+						  <if test="recursos != null ">
+					        AND  id_tipo_recurso IN
+					        <foreach item="item" index="index" collection="recursos"
+							      open="(" separator="," close=")">
+							        #{item}
+							  </foreach>
+							  
+					    </if>
+					
+						<if test="areasEstudio != null">
+					        AND id_area_estudio IN
+					        <foreach item="item" index="index" collection="areasEstudio"
+							      open="(" separator="," close=")">
+							        #{item}
+							  </foreach>
+					    </if>
+					    
+					    <if test="escuelas != null">
+					        AND id_escuela IN 
+					        <foreach item="item" index="index" collection="escuelas"
+							      open="(" separator="," close=")">
+							        #{item}
+							  </foreach>
+					    </if>
+					    			    
+					    <if test="solicitantes != null and solicitantes != '' ">
+					        AND nombre_tipo IN 
+					        <foreach item="item" index="index" collection="solicitantes"
+							      open="(" separator="," close=")">
+							        #{item}
+							  </foreach>
+					    </if>
+								  
+						)					AS numeroPrestamos
+					
 				</if>
 				<if test="tipoPeriodo == 'SEMANA'">
 				    CONCAT(lista.anio,'-',lista.semana)							AS ejeX,
-				    F_OBTENER_ESTADISTICO_PRESTAMOS_BETWEEN(#{criterioSegmentacion}, cr.v_nombre,
-				    F_GENERADOR_FECHAS('INI', 'SEMANA',lista.anio,null, null,lista.semana),
-				    F_GENERADOR_FECHAS('FIN', 'SEMANA',lista.anio,null, null,lista.semana),
-				    "CANTIDAD_PRESTAMOS")  									AS numeroPrestamos
+				    
+				    (SELECT 
+						COUNT(fecha_registro)
+						FROM vw_reporte_prestamos
+					WHERE (fecha_registro BETWEEN F_GENERADOR_FECHAS('INI', 'SEMANA',lista.anio,null, null,lista.semana) AND F_GENERADOR_FECHAS('FIN', 'SEMANA',lista.anio,null, null,lista.semana) )
+						 <if test="criterioSegmentacion == 'AREA_ESTUDIO'">
+							AND area_estudio=cr.v_nombre
+							
+						</if>
+						<if test="criterioSegmentacion == 'ESCUELA'">
+							AND escuela=cr.v_nombre
+							
+						</if>
+						<if test="criterioSegmentacion == 'TIPO_SOLICITANTE'">
+							AND nombre_tipo=cr.v_nombre
+				  			
+						</if>
+						<if test="criterioSegmentacion == 'RECURSO'">
+							AND tipo_recurso=cr.v_nombre
+							
+						</if>
+						
+						  <if test="recursos != null ">
+					        AND  id_tipo_recurso IN
+					        <foreach item="item" index="index" collection="recursos"
+							      open="(" separator="," close=")">
+							        #{item}
+							  </foreach>
+							  
+					    </if>
+					
+						<if test="areasEstudio != null">
+					        AND id_area_estudio IN
+					        <foreach item="item" index="index" collection="areasEstudio"
+							      open="(" separator="," close=")">
+							        #{item}
+							  </foreach>
+					    </if>
+					    
+					    <if test="escuelas != null">
+					        AND id_escuela IN 
+					        <foreach item="item" index="index" collection="escuelas"
+							      open="(" separator="," close=")">
+							        #{item}
+							  </foreach>
+					    </if>
+					    			    
+					    <if test="solicitantes != null and solicitantes != '' ">
+					        AND nombre_tipo IN 
+					        <foreach item="item" index="index" collection="solicitantes"
+							      open="(" separator="," close=")">
+							        #{item}
+							  </foreach>
+					    </if>
+								  
+						)					AS numeroPrestamos
+				    
 				</if>
 				<if test="tipoPeriodo == 'MES'">
 				    CONCAT(lista.anio,'-',lista.mes)							AS ejeX,
-				    F_OBTENER_ESTADISTICO_PRESTAMOS_BETWEEN(#{criterioSegmentacion}, cr.v_nombre,
-				    F_GENERADOR_FECHAS('INI', 'MES',lista.anio,lista.mes, null,null),
-				    F_GENERADOR_FECHAS('FIN', 'MES',lista.anio,lista.mes, null,null),
-				    "CANTIDAD_PRESTAMOS")  										AS numeroPrestamos
+				    				    
+				    (SELECT 
+						COUNT(fecha_registro)
+						FROM vw_reporte_prestamos
+					WHERE (fecha_registro BETWEEN F_GENERADOR_FECHAS('INI', 'MES',lista.anio,lista.mes, null,null) AND F_GENERADOR_FECHAS('FIN', 'MES',lista.anio,lista.mes, null,null) )
+						 <if test="criterioSegmentacion == 'AREA_ESTUDIO'">
+							AND area_estudio=cr.v_nombre
+							
+						</if>
+						<if test="criterioSegmentacion == 'ESCUELA'">
+							AND escuela=cr.v_nombre
+							
+						</if>
+						<if test="criterioSegmentacion == 'TIPO_SOLICITANTE'">
+							AND nombre_tipo=cr.v_nombre
+				  			
+						</if>
+						<if test="criterioSegmentacion == 'RECURSO'">
+							AND tipo_recurso=cr.v_nombre
+							
+						</if>
+						
+						  <if test="recursos != null ">
+					        AND  id_tipo_recurso IN
+					        <foreach item="item" index="index" collection="recursos"
+							      open="(" separator="," close=")">
+							        #{item}
+							  </foreach>
+							  
+					    </if>
+					
+						<if test="areasEstudio != null">
+					        AND id_area_estudio IN
+					        <foreach item="item" index="index" collection="areasEstudio"
+							      open="(" separator="," close=")">
+							        #{item}
+							  </foreach>
+					    </if>
+					    
+					    <if test="escuelas != null">
+					        AND id_escuela IN 
+					        <foreach item="item" index="index" collection="escuelas"
+							      open="(" separator="," close=")">
+							        #{item}
+							  </foreach>
+					    </if>
+					    			    
+					    <if test="solicitantes != null and solicitantes != '' ">
+					        AND nombre_tipo IN 
+					        <foreach item="item" index="index" collection="solicitantes"
+							      open="(" separator="," close=")">
+							        #{item}
+							  </foreach>
+					    </if>
+								  
+						)					AS numeroPrestamos
+				    
 				</if>
 				<if test="tipoPeriodo == 'ANIO'">
 				    lista.anio													AS ejeX,
-				    F_OBTENER_ESTADISTICO_PRESTAMOS_BETWEEN(#{criterioSegmentacion}, cr.v_nombre,
-				    F_GENERADOR_FECHAS('INI', 'ANIO',lista.anio,null, null,null),
-				    F_GENERADOR_FECHAS('FIN', 'ANIO',lista.anio,null, null,null),
-				    "CANTIDAD_PRESTAMOS")  										AS numeroPrestamos
+				    
+				    (SELECT 
+						COUNT(fecha_registro)
+						FROM vw_reporte_prestamos
+					WHERE (fecha_registro BETWEEN F_GENERADOR_FECHAS('INI', 'ANIO',lista.anio,null, null,null) AND F_GENERADOR_FECHAS('FIN', 'ANIO',lista.anio,null, null,null) )
+						 <if test="criterioSegmentacion == 'AREA_ESTUDIO'">
+							AND area_estudio=cr.v_nombre
+							
+						</if>
+						<if test="criterioSegmentacion == 'ESCUELA'">
+							AND escuela=cr.v_nombre
+							
+						</if>
+						<if test="criterioSegmentacion == 'TIPO_SOLICITANTE'">
+							AND nombre_tipo=cr.v_nombre
+				  			
+						</if>
+						<if test="criterioSegmentacion == 'RECURSO'">
+							AND tipo_recurso=cr.v_nombre
+							
+						</if>
+						
+						  <if test="recursos != null ">
+					        AND  id_tipo_recurso IN
+					        <foreach item="item" index="index" collection="recursos"
+							      open="(" separator="," close=")">
+							        #{item}
+							  </foreach>
+							  
+					    </if>
+					
+						<if test="areasEstudio != null">
+					        AND id_area_estudio IN
+					        <foreach item="item" index="index" collection="areasEstudio"
+							      open="(" separator="," close=")">
+							        #{item}
+							  </foreach>
+					    </if>
+					    
+					    <if test="escuelas != null">
+					        AND id_escuela IN 
+					        <foreach item="item" index="index" collection="escuelas"
+							      open="(" separator="," close=")">
+							        #{item}
+							  </foreach>
+					    </if>
+					    			    
+					    <if test="solicitantes != null and solicitantes != '' ">
+					        AND nombre_tipo IN 
+					        <foreach item="item" index="index" collection="solicitantes"
+							      open="(" separator="," close=")">
+							        #{item}
+							  </foreach>
+					    </if>
+								  
+						)					AS numeroPrestamos
+				    
 				</if>
 
-			FROM 
+			FROM ListaPeriodo lista,
 			
 			<if test="criterioSegmentacion == 'AREA_ESTUDIO'">
-				mae_area_estudio  cr,
-				ListaPeriodo lista 
+				mae_area_estudio  cr
+				
 			</if>
 			<if test="criterioSegmentacion == 'ESCUELA'">
-				mae_escuela  cr,
-				ListaPeriodo lista 
+				mae_escuela  cr
+				
 			</if>
 			<if test="criterioSegmentacion == 'TIPO_SOLICITANTE'">
 				(SELECT 
 					DISTINCT(F_GET_TIPO_SOLICITANTE(n_id_persona)) AS v_nombre
-	  			FROM mae_persona) cr,
-	  			ListaPeriodo lista 
+	  			FROM mae_persona) cr
+	  			
 			</if>
 			<if test="criterioSegmentacion == 'RECURSO'">
-				mae_tipo_recurso cr,
-				ListaPeriodo lista 
-				
+				mae_tipo_recurso cr
+				WHERE cr.v_usable='SI'
 			</if>
 			
-			<if test="tipoPeriodo == 'DIA'">
-			LEFT JOIN vw_reporte_prestamos reporte ON (reporte.fecha_registro = lista.fecha)
-			
-			</if>
-			
-			<if test="tipoPeriodo == 'SEMANA'">
-			LEFT JOIN vw_reporte_prestamos reporte ON (CONCAT(lista.anio,'-',lista.semana) = CONCAT(YEAR(reporte.fecha_registro),'-',WEEK(reporte.fecha_registro)))
-			
-			</if>
-			<if test="tipoPeriodo == 'MES'">
-			LEFT JOIN vw_reporte_prestamos reporte ON (CONCAT(lista.anio,'-',lista.mes) = CONCAT(YEAR(reporte.fecha_registro),'-',MONTH(reporte.fecha_registro)))
-			
-			</if>
-			 <if test="tipoPeriodo == 'ANIO'">
-			LEFT JOIN vw_reporte_prestamos reporte ON (lista.anio = YEAR(reporte.fecha_registro))
-			
-			</if>
-			
-			<where>
-			
-				<if test="recursos != null ">
-			         ( reporte.id_tipo_recurso IN
-			        <foreach item="item" index="index" collection="recursos"
-					      open="(" separator="," close=")">
-					        #{item}
-					  </foreach>
-					AND cr.v_usable='SI')
-			    </if>
-			
-				<if test="areasEstudio != null">
-			        reporte.id_area_estudio IN
-			        <foreach item="item" index="index" collection="areasEstudio"
-					      open="(" separator="," close=")">
-					        #{item}
-					  </foreach>
-			    </if>
-			    
-			    <if test="escuelas != null">
-			        AND reporte.id_escuela IN 
-			        <foreach item="item" index="index" collection="escuelas"
-					      open="(" separator="," close=")">
-					        #{item}
-					  </foreach>
-			    </if>
-			    			    
-			    <if test="solicitantes != null and solicitantes != '' ">
-			        AND reporte.nombre_tipo IN 
-			        <foreach item="item" index="index" collection="solicitantes"
-					      open="(" separator="," close=")">
-					        #{item}
-					  </foreach>
-			    </if>
-			    
-			  </where>
 			
 			
 	</select>
@@ -434,6 +593,12 @@
 				(SELECT v_nombre
 	  			FROM mae_escuela) lista
 			</if>
+			
+			
+			
+			
+			
+			
 			GROUP BY 
 				lista.v_nombre		
 	</select>
