@@ -1199,6 +1199,41 @@
 							  <if test="criterioSegmentacion == 'RECURSO'">
 								AND trec.v_nombre=cr.v_nombre
 							 </if>
+							 
+							  <if test="recursos != null ">
+					        AND  rep.id_tipo_recurso IN
+					        <foreach item="item" index="index" collection="recursos"
+							      open="(" separator="," close=")">
+							        #{item}
+							  </foreach>
+							  
+					    </if>
+					
+						<if test="areasEstudio != null">
+					        AND rep.id_area_estudio IN
+					        <foreach item="item" index="index" collection="areasEstudio"
+							      open="(" separator="," close=")">
+							        #{item}
+							  </foreach>
+					    </if>
+					    
+					    <if test="escuelas != null">
+					        AND rep.id_escuela IN 
+					        <foreach item="item" index="index" collection="escuelas"
+							      open="(" separator="," close=")">
+							        #{item}
+							  </foreach>
+					    </if>
+					    			    
+					    <if test="solicitantes != null and solicitantes != '' ">
+					        AND rep.nombre_tipo IN 
+					        <foreach item="item" index="index" collection="solicitantes"
+							      open="(" separator="," close=")">
+							        #{item}
+							  </foreach>
+					    </if>
+							 
+							 
                               )						AS numeroPrestamos
 				</if>
 				<if test="tipoPeriodo == 'SEMANA'">
@@ -1229,6 +1264,40 @@
 							  <if test="criterioSegmentacion == 'RECURSO'">
 								AND trec.v_nombre=cr.v_nombre
 							 </if>
+							 
+							  <if test="recursos != null ">
+					        AND  rep.id_tipo_recurso IN
+					        <foreach item="item" index="index" collection="recursos"
+							      open="(" separator="," close=")">
+							        #{item}
+							  </foreach>
+							  
+					    </if>
+					
+						<if test="areasEstudio != null">
+					        AND rep.id_area_estudio IN
+					        <foreach item="item" index="index" collection="areasEstudio"
+							      open="(" separator="," close=")">
+							        #{item}
+							  </foreach>
+					    </if>
+					    
+					    <if test="escuelas != null">
+					        AND rep.id_escuela IN 
+					        <foreach item="item" index="index" collection="escuelas"
+							      open="(" separator="," close=")">
+							        #{item}
+							  </foreach>
+					    </if>
+					    			    
+					    <if test="solicitantes != null and solicitantes != '' ">
+					        AND rep.nombre_tipo IN 
+					        <foreach item="item" index="index" collection="solicitantes"
+							      open="(" separator="," close=")">
+							        #{item}
+							  </foreach>
+					    </if>
+							 
 					          
                               )						AS numeroPrestamos
 				</if>
@@ -1261,6 +1330,39 @@
 								AND trec.v_nombre=cr.v_nombre
 							 </if>
 					          
+					           <if test="recursos != null ">
+					        AND  rep.id_tipo_recurso IN
+					        <foreach item="item" index="index" collection="recursos"
+							      open="(" separator="," close=")">
+							        #{item}
+							  </foreach>
+							  
+					    </if>
+					
+						<if test="areasEstudio != null">
+					        AND rep.id_area_estudio IN
+					        <foreach item="item" index="index" collection="areasEstudio"
+							      open="(" separator="," close=")">
+							        #{item}
+							  </foreach>
+					    </if>
+					    
+					    <if test="escuelas != null">
+					        AND rep.id_escuela IN 
+					        <foreach item="item" index="index" collection="escuelas"
+							      open="(" separator="," close=")">
+							        #{item}
+							  </foreach>
+					    </if>
+					    			    
+					    <if test="solicitantes != null and solicitantes != '' ">
+					        AND rep.nombre_tipo IN 
+					        <foreach item="item" index="index" collection="solicitantes"
+							      open="(" separator="," close=")">
+							        #{item}
+							  </foreach>
+					    </if>
+					          
                               )						AS numeroPrestamos
 				</if>
 				<if test="tipoPeriodo == 'ANIO'">
@@ -1291,6 +1393,39 @@
 							  <if test="criterioSegmentacion == 'RECURSO'">
 								AND trec.v_nombre=cr.v_nombre
 							 </if>
+					          
+					           <if test="recursos != null ">
+					        AND  rep.id_tipo_recurso IN
+					        <foreach item="item" index="index" collection="recursos"
+							      open="(" separator="," close=")">
+							        #{item}
+							  </foreach>
+							  
+					    </if>
+					
+						<if test="areasEstudio != null">
+					        AND rep.id_area_estudio IN
+					        <foreach item="item" index="index" collection="areasEstudio"
+							      open="(" separator="," close=")">
+							        #{item}
+							  </foreach>
+					    </if>
+					    
+					    <if test="escuelas != null">
+					        AND rep.id_escuela IN 
+					        <foreach item="item" index="index" collection="escuelas"
+							      open="(" separator="," close=")">
+							        #{item}
+							  </foreach>
+					    </if>
+					    			    
+					    <if test="solicitantes != null and solicitantes != '' ">
+					        AND rep.nombre_tipo IN 
+					        <foreach item="item" index="index" collection="solicitantes"
+							      open="(" separator="," close=")">
+							        #{item}
+							  </foreach>
+					    </if>
 					          
                               )						AS numeroPrestamos
 				</if>
