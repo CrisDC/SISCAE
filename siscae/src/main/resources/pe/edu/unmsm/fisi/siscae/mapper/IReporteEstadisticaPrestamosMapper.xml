@@ -526,62 +526,626 @@
 			SELECT
 			      lista.v_nombre												AS ejeX,
 				<if test="tipoPeriodo == 'DIA'">
-					F_OBTENER_ESTADISTICO_PRESTAMOS_BETWEEN(#{ejeX}, lista.v_nombre,#{fechaInicio},
-					 #{fechaFin},'CANTIDAD_PRESTAMOS')							AS numeroPrestamos,
+					
+<!-- 					cantidad de prestamos -->
+					(SELECT 
+						COUNT(fecha_registro)
+						FROM vw_reporte_prestamos
+					WHERE (fecha_registro BETWEEN #{fechaInicio} AND #{fechaFin} )
+						 <if test="ejeX == 'AREA_ESTUDIO'">
+							AND area_estudio=lista.v_nombre
+							
+						</if>
+						<if test="ejeX == 'ESCUELA'">
+							AND escuela=lista.v_nombre
+							
+						</if>
+						
+						  <if test="recursos != null ">
+					        AND  id_tipo_recurso IN
+					        <foreach item="item" index="index" collection="recursos"
+							      open="(" separator="," close=")">
+							        #{item}
+							  </foreach>
+							  
+					    </if>
+					
+						<if test="areasEstudio != null">
+					        AND id_area_estudio IN
+					        <foreach item="item" index="index" collection="areasEstudio"
+							      open="(" separator="," close=")">
+							        #{item}
+							  </foreach>
+					    </if>
+					    
+					    <if test="escuelas != null">
+					        AND id_escuela IN 
+					        <foreach item="item" index="index" collection="escuelas"
+							      open="(" separator="," close=")">
+							        #{item}
+							  </foreach>
+					    </if>
+					    			    
+					    <if test="solicitantes != null and solicitantes != '' ">
+					        AND nombre_tipo IN 
+					        <foreach item="item" index="index" collection="solicitantes"
+							      open="(" separator="," close=")">
+							        #{item}
+							  </foreach>
+					    </if>
+								  
+						)					AS numeroPrestamos,
+
+<!-- 						estadia total -->
+					COALESCE(SEC_TO_TIME2(
+					(SELECT 
+						SUM(TIME_TO_SEC(estadia))
+						FROM vw_reporte_prestamos
+					WHERE (fecha_registro BETWEEN #{fechaInicio} AND #{fechaFin} )
+						 <if test="ejeX == 'AREA_ESTUDIO'">
+							AND area_estudio=lista.v_nombre
+							
+						</if>
+						<if test="ejeX == 'ESCUELA'">
+							AND escuela=lista.v_nombre
+							
+						</if>
+						
+						  <if test="recursos != null ">
+					        AND  id_tipo_recurso IN
+					        <foreach item="item" index="index" collection="recursos"
+							      open="(" separator="," close=")">
+							        #{item}
+							  </foreach>
+							  
+					    </if>
+					
+						<if test="areasEstudio != null">
+					        AND id_area_estudio IN
+					        <foreach item="item" index="index" collection="areasEstudio"
+							      open="(" separator="," close=")">
+							        #{item}
+							  </foreach>
+					    </if>
+					    
+					    <if test="escuelas != null">
+					        AND id_escuela IN 
+					        <foreach item="item" index="index" collection="escuelas"
+							      open="(" separator="," close=")">
+							        #{item}
+							  </foreach>
+					    </if>
+					    			    
+					    <if test="solicitantes != null and solicitantes != '' ">
+					        AND nombre_tipo IN 
+					        <foreach item="item" index="index" collection="solicitantes"
+							      open="(" separator="," close=")">
+							        #{item}
+							  </foreach>
+					    </if>)
+					
+					),0) 							AS estadiaTotal,
+
+
+<!-- 						estadia promedio -->
+
 					IFNULL(SEC_TO_TIME2(
-					F_OBTENER_ESTADISTICO_PRESTAMOS_BETWEEN(#{ejeX}, lista.v_nombre, #{fechaInicio},
-					#{fechaFin},'ESTADIA_TOTAL')),0) 							AS estadiaTotal,
-					IFNULL(SEC_TO_TIME(
-					F_OBTENER_ESTADISTICO_PRESTAMOS_BETWEEN(#{ejeX}, lista.v_nombre, #{fechaInicio},
-					#{fechaFin},'ESTADIA_PROMEDIO')),0)  						AS estadiaPromedio
+					
+					(SELECT 
+						IFNULL(AVG(TIME_TO_SEC(estadia)),0)
+						FROM vw_reporte_prestamos
+					WHERE (fecha_registro BETWEEN #{fechaInicio} AND #{fechaFin} )
+						 <if test="ejeX == 'AREA_ESTUDIO'">
+							AND area_estudio=lista.v_nombre
+							
+						</if>
+						<if test="ejeX == 'ESCUELA'">
+							AND escuela=lista.v_nombre
+							
+						</if>
+						
+						  <if test="recursos != null ">
+					        AND  id_tipo_recurso IN
+					        <foreach item="item" index="index" collection="recursos"
+							      open="(" separator="," close=")">
+							        #{item}
+							  </foreach>
+							  
+					    </if>
+					
+						<if test="areasEstudio != null">
+					        AND id_area_estudio IN
+					        <foreach item="item" index="index" collection="areasEstudio"
+							      open="(" separator="," close=")">
+							        #{item}
+							  </foreach>
+					    </if>
+					    
+					    <if test="escuelas != null">
+					        AND id_escuela IN 
+					        <foreach item="item" index="index" collection="escuelas"
+							      open="(" separator="," close=")">
+							        #{item}
+							  </foreach>
+					    </if>
+					    			    
+					    <if test="solicitantes != null and solicitantes != '' ">
+					        AND nombre_tipo IN 
+					        <foreach item="item" index="index" collection="solicitantes"
+							      open="(" separator="," close=")">
+							        #{item}
+							  </foreach>
+					    </if>)
+					
+					),0)  						AS estadiaPromedio
+									
 				</if>
 				<if test="tipoPeriodo == 'SEMANA'">
-					F_OBTENER_ESTADISTICO_PRESTAMOS_BETWEEN(#{ejeX}, lista.v_nombre,
-					F_GENERADOR_FECHAS('INI', 'SEMANA',#{anioInicio},null, null,#{semanaInicio}),
-				    F_GENERADOR_FECHAS('FIN', 'SEMANA',#{anioFin},null, null,#{semanaFin}),
-				    'CANTIDAD_PRESTAMOS')							AS numeroPrestamos,
+					
+<!-- 					cantidad de prestamos -->
+					(SELECT 
+						COUNT(fecha_registro)
+						FROM vw_reporte_prestamos
+					WHERE (fecha_registro BETWEEN F_GENERADOR_FECHAS('INI', 'SEMANA',#{anioInicio},null, null,#{semanaInicio}) AND F_GENERADOR_FECHAS('FIN', 'SEMANA',#{anioFin},null, null,#{semanaFin}) )
+						 <if test="ejeX == 'AREA_ESTUDIO'">
+							AND area_estudio=lista.v_nombre
+							
+						</if>
+						<if test="ejeX == 'ESCUELA'">
+							AND escuela=lista.v_nombre
+							
+						</if>
+						
+						  <if test="recursos != null ">
+					        AND  id_tipo_recurso IN
+					        <foreach item="item" index="index" collection="recursos"
+							      open="(" separator="," close=")">
+							        #{item}
+							  </foreach>
+							  
+					    </if>
+					
+						<if test="areasEstudio != null">
+					        AND id_area_estudio IN
+					        <foreach item="item" index="index" collection="areasEstudio"
+							      open="(" separator="," close=")">
+							        #{item}
+							  </foreach>
+					    </if>
+					    
+					    <if test="escuelas != null">
+					        AND id_escuela IN 
+					        <foreach item="item" index="index" collection="escuelas"
+							      open="(" separator="," close=")">
+							        #{item}
+							  </foreach>
+					    </if>
+					    			    
+					    <if test="solicitantes != null and solicitantes != '' ">
+					        AND nombre_tipo IN 
+					        <foreach item="item" index="index" collection="solicitantes"
+							      open="(" separator="," close=")">
+							        #{item}
+							  </foreach>
+					    </if>
+								  
+						)					AS numeroPrestamos,
+
+<!-- 						estadia total -->
+					COALESCE(SEC_TO_TIME2(
+					(SELECT 
+						SUM(TIME_TO_SEC(estadia))
+						FROM vw_reporte_prestamos
+					WHERE (fecha_registro BETWEEN F_GENERADOR_FECHAS('INI', 'SEMANA',#{anioInicio},null, null,#{semanaInicio}) AND F_GENERADOR_FECHAS('FIN', 'SEMANA',#{anioFin},null, null,#{semanaFin}) )
+						 <if test="ejeX == 'AREA_ESTUDIO'">
+							AND area_estudio=lista.v_nombre
+							
+						</if>
+						<if test="ejeX == 'ESCUELA'">
+							AND escuela=lista.v_nombre
+							
+						</if>
+						
+						  <if test="recursos != null ">
+					        AND  id_tipo_recurso IN
+					        <foreach item="item" index="index" collection="recursos"
+							      open="(" separator="," close=")">
+							        #{item}
+							  </foreach>
+							  
+					    </if>
+					
+						<if test="areasEstudio != null">
+					        AND id_area_estudio IN
+					        <foreach item="item" index="index" collection="areasEstudio"
+							      open="(" separator="," close=")">
+							        #{item}
+							  </foreach>
+					    </if>
+					    
+					    <if test="escuelas != null">
+					        AND id_escuela IN 
+					        <foreach item="item" index="index" collection="escuelas"
+							      open="(" separator="," close=")">
+							        #{item}
+							  </foreach>
+					    </if>
+					    			    
+					    <if test="solicitantes != null and solicitantes != '' ">
+					        AND nombre_tipo IN 
+					        <foreach item="item" index="index" collection="solicitantes"
+							      open="(" separator="," close=")">
+							        #{item}
+							  </foreach>
+					    </if>)
+					
+					),0) 							AS estadiaTotal,
+
+
+<!-- 						estadia promedio -->
+
 					IFNULL(SEC_TO_TIME2(
-					F_OBTENER_ESTADISTICO_PRESTAMOS_BETWEEN(#{ejeX}, lista.v_nombre,
-					F_GENERADOR_FECHAS('INI', 'SEMANA',#{anioInicio},null, null,#{semanaInicio}),
-				    F_GENERADOR_FECHAS('FIN', 'SEMANA',#{anioFin},null, null,#{semanaFin}),
-				    'ESTADIA_TOTAL')),0) 							AS estadiaTotal,
-					IFNULL(SEC_TO_TIME(
-					F_OBTENER_ESTADISTICO_PRESTAMOS_BETWEEN(#{ejeX}, lista.v_nombre,
-					F_GENERADOR_FECHAS('INI', 'SEMANA',#{anioInicio},null, null,#{semanaInicio}),
-				    F_GENERADOR_FECHAS('FIN', 'SEMANA',#{anioFin},null, null,#{semanaFin}),
-				    'ESTADIA_PROMEDIO')),0)  						AS estadiaPromedio
+					
+					(SELECT 
+						IFNULL(AVG(TIME_TO_SEC(estadia)),0)
+						FROM vw_reporte_prestamos
+					WHERE (fecha_registro BETWEEN F_GENERADOR_FECHAS('INI', 'SEMANA',#{anioInicio},null, null,#{semanaInicio}) AND F_GENERADOR_FECHAS('FIN', 'SEMANA',#{anioFin},null, null,#{semanaFin}) )
+						 <if test="ejeX == 'AREA_ESTUDIO'">
+							AND area_estudio=lista.v_nombre
+							
+						</if>
+						<if test="ejeX == 'ESCUELA'">
+							AND escuela=lista.v_nombre
+							
+						</if>
+						
+						  <if test="recursos != null ">
+					        AND  id_tipo_recurso IN
+					        <foreach item="item" index="index" collection="recursos"
+							      open="(" separator="," close=")">
+							        #{item}
+							  </foreach>
+							  
+					    </if>
+					
+						<if test="areasEstudio != null">
+					        AND id_area_estudio IN
+					        <foreach item="item" index="index" collection="areasEstudio"
+							      open="(" separator="," close=")">
+							        #{item}
+							  </foreach>
+					    </if>
+					    
+					    <if test="escuelas != null">
+					        AND id_escuela IN 
+					        <foreach item="item" index="index" collection="escuelas"
+							      open="(" separator="," close=")">
+							        #{item}
+							  </foreach>
+					    </if>
+					    			    
+					    <if test="solicitantes != null and solicitantes != '' ">
+					        AND nombre_tipo IN 
+					        <foreach item="item" index="index" collection="solicitantes"
+							      open="(" separator="," close=")">
+							        #{item}
+							  </foreach>
+					    </if>)
+					
+					),0)  						AS estadiaPromedio
+				    
+				    
 				</if>
 				<if test="tipoPeriodo == 'MES'">
-				    F_OBTENER_ESTADISTICO_PRESTAMOS_BETWEEN(#{ejeX}, lista.v_nombre,
-					F_GENERADOR_FECHAS('INI', 'MES',#{anioInicio},#{mesInicio}, null,null),
-				    F_GENERADOR_FECHAS('FIN', 'MES',#{anioFin},#{mesFin}, null,null),
-				    'CANTIDAD_PRESTAMOS')							AS numeroPrestamos,
+				   
+<!-- 					cantidad de prestamos -->
+					(SELECT 
+						COUNT(fecha_registro)
+						FROM vw_reporte_prestamos
+					WHERE (fecha_registro BETWEEN F_GENERADOR_FECHAS('INI', 'MES',#{anioInicio},#{mesInicio}, null,null) AND F_GENERADOR_FECHAS('FIN', 'MES',#{anioFin},#{mesFin}, null,null) )
+						 <if test="ejeX == 'AREA_ESTUDIO'">
+							AND area_estudio=lista.v_nombre
+							
+						</if>
+						<if test="ejeX == 'ESCUELA'">
+							AND escuela=lista.v_nombre
+							
+						</if>
+						
+						  <if test="recursos != null ">
+					        AND  id_tipo_recurso IN
+					        <foreach item="item" index="index" collection="recursos"
+							      open="(" separator="," close=")">
+							        #{item}
+							  </foreach>
+							  
+					    </if>
+					
+						<if test="areasEstudio != null">
+					        AND id_area_estudio IN
+					        <foreach item="item" index="index" collection="areasEstudio"
+							      open="(" separator="," close=")">
+							        #{item}
+							  </foreach>
+					    </if>
+					    
+					    <if test="escuelas != null">
+					        AND id_escuela IN 
+					        <foreach item="item" index="index" collection="escuelas"
+							      open="(" separator="," close=")">
+							        #{item}
+							  </foreach>
+					    </if>
+					    			    
+					    <if test="solicitantes != null and solicitantes != '' ">
+					        AND nombre_tipo IN 
+					        <foreach item="item" index="index" collection="solicitantes"
+							      open="(" separator="," close=")">
+							        #{item}
+							  </foreach>
+					    </if>
+								  
+						)					AS numeroPrestamos,
+
+<!-- 						estadia total -->
+					COALESCE(SEC_TO_TIME2(
+					(SELECT 
+						SUM(TIME_TO_SEC(estadia))
+						FROM vw_reporte_prestamos
+					WHERE (fecha_registro BETWEEN F_GENERADOR_FECHAS('INI', 'MES',#{anioInicio},#{mesInicio}, null,null) AND F_GENERADOR_FECHAS('FIN', 'MES',#{anioFin},#{mesFin}, null,null) )
+						 <if test="ejeX == 'AREA_ESTUDIO'">
+							AND area_estudio=lista.v_nombre
+							
+						</if>
+						<if test="ejeX == 'ESCUELA'">
+							AND escuela=lista.v_nombre
+							
+						</if>
+						
+						  <if test="recursos != null ">
+					        AND  id_tipo_recurso IN
+					        <foreach item="item" index="index" collection="recursos"
+							      open="(" separator="," close=")">
+							        #{item}
+							  </foreach>
+							  
+					    </if>
+					
+						<if test="areasEstudio != null">
+					        AND id_area_estudio IN
+					        <foreach item="item" index="index" collection="areasEstudio"
+							      open="(" separator="," close=")">
+							        #{item}
+							  </foreach>
+					    </if>
+					    
+					    <if test="escuelas != null">
+					        AND id_escuela IN 
+					        <foreach item="item" index="index" collection="escuelas"
+							      open="(" separator="," close=")">
+							        #{item}
+							  </foreach>
+					    </if>
+					    			    
+					    <if test="solicitantes != null and solicitantes != '' ">
+					        AND nombre_tipo IN 
+					        <foreach item="item" index="index" collection="solicitantes"
+							      open="(" separator="," close=")">
+							        #{item}
+							  </foreach>
+					    </if>)
+					
+					),0) 							AS estadiaTotal,
+
+
+<!-- 						estadia promedio -->
+
 					IFNULL(SEC_TO_TIME2(
-					F_OBTENER_ESTADISTICO_PRESTAMOS_BETWEEN(#{ejeX}, lista.v_nombre,
-					F_GENERADOR_FECHAS('INI', 'MES',#{anioInicio},#{mesInicio}, null,null),
-				    F_GENERADOR_FECHAS('FIN', 'MES',#{anioFin},#{mesFin}, null,null),
-				    'ESTADIA_TOTAL')),0) 							AS estadiaTotal,
-					IFNULL(SEC_TO_TIME(
-					F_OBTENER_ESTADISTICO_PRESTAMOS_BETWEEN(#{ejeX}, lista.v_nombre,
-					F_GENERADOR_FECHAS('INI', 'MES',#{anioInicio},#{mesInicio}, null,null),
-				    F_GENERADOR_FECHAS('FIN', 'MES',#{anioFin},#{mesFin}, null,null),
-				    'ESTADIA_PROMEDIO')),0)  						AS estadiaPromedio
+					
+					(SELECT 
+						IFNULL(AVG(TIME_TO_SEC(estadia)),0)
+						FROM vw_reporte_prestamos
+					WHERE (fecha_registro BETWEEN F_GENERADOR_FECHAS('INI', 'MES',#{anioInicio},#{mesInicio}, null,null) AND F_GENERADOR_FECHAS('FIN', 'MES',#{anioFin},#{mesFin}, null,null) )
+						 <if test="ejeX == 'AREA_ESTUDIO'">
+							AND area_estudio=lista.v_nombre
+							
+						</if>
+						<if test="ejeX == 'ESCUELA'">
+							AND escuela=lista.v_nombre
+							
+						</if>
+						
+						  <if test="recursos != null ">
+					        AND  id_tipo_recurso IN
+					        <foreach item="item" index="index" collection="recursos"
+							      open="(" separator="," close=")">
+							        #{item}
+							  </foreach>
+							  
+					    </if>
+					
+						<if test="areasEstudio != null">
+					        AND id_area_estudio IN
+					        <foreach item="item" index="index" collection="areasEstudio"
+							      open="(" separator="," close=")">
+							        #{item}
+							  </foreach>
+					    </if>
+					    
+					    <if test="escuelas != null">
+					        AND id_escuela IN 
+					        <foreach item="item" index="index" collection="escuelas"
+							      open="(" separator="," close=")">
+							        #{item}
+							  </foreach>
+					    </if>
+					    			    
+					    <if test="solicitantes != null and solicitantes != '' ">
+					        AND nombre_tipo IN 
+					        <foreach item="item" index="index" collection="solicitantes"
+							      open="(" separator="," close=")">
+							        #{item}
+							  </foreach>
+					    </if>)
+					
+					),0)  						AS estadiaPromedio
+				    
 				</if>
 				<if test="tipoPeriodo == 'ANIO'">
-				    F_OBTENER_ESTADISTICO_PRESTAMOS_BETWEEN(#{ejeX}, lista.v_nombre,
-					F_GENERADOR_FECHAS('INI', 'ANIO',#{anioInicio},null, null,null),
-				    F_GENERADOR_FECHAS('FIN', 'ANIO',#{anioFin},null, null,null),
-				    'CANTIDAD_PRESTAMOS')							AS numeroPrestamos,
+				    
+<!-- 					cantidad de prestamos -->
+					(SELECT 
+						COUNT(fecha_registro)
+						FROM vw_reporte_prestamos
+					WHERE (fecha_registro BETWEEN F_GENERADOR_FECHAS('INI', 'ANIO',#{anioInicio},null, null,null) AND F_GENERADOR_FECHAS('FIN', 'ANIO',#{anioFin},null, null,null) )
+						 <if test="ejeX == 'AREA_ESTUDIO'">
+							AND area_estudio=lista.v_nombre
+							
+						</if>
+						<if test="ejeX == 'ESCUELA'">
+							AND escuela=lista.v_nombre
+							
+						</if>
+						
+						  <if test="recursos != null ">
+					        AND  id_tipo_recurso IN
+					        <foreach item="item" index="index" collection="recursos"
+							      open="(" separator="," close=")">
+							        #{item}
+							  </foreach>
+							  
+					    </if>
+					
+						<if test="areasEstudio != null">
+					        AND id_area_estudio IN
+					        <foreach item="item" index="index" collection="areasEstudio"
+							      open="(" separator="," close=")">
+							        #{item}
+							  </foreach>
+					    </if>
+					    
+					    <if test="escuelas != null">
+					        AND id_escuela IN 
+					        <foreach item="item" index="index" collection="escuelas"
+							      open="(" separator="," close=")">
+							        #{item}
+							  </foreach>
+					    </if>
+					    			    
+					    <if test="solicitantes != null and solicitantes != '' ">
+					        AND nombre_tipo IN 
+					        <foreach item="item" index="index" collection="solicitantes"
+							      open="(" separator="," close=")">
+							        #{item}
+							  </foreach>
+					    </if>
+								  
+						)					AS numeroPrestamos,
+
+<!-- 						estadia total -->
+					COALESCE(SEC_TO_TIME2(
+					(SELECT 
+						SUM(TIME_TO_SEC(estadia))
+						FROM vw_reporte_prestamos
+					WHERE (fecha_registro BETWEEN F_GENERADOR_FECHAS('INI', 'ANIO',#{anioInicio},null, null,null) AND F_GENERADOR_FECHAS('FIN', 'ANIO',#{anioFin},null, null,null) )
+						 <if test="ejeX == 'AREA_ESTUDIO'">
+							AND area_estudio=lista.v_nombre
+							
+						</if>
+						<if test="ejeX == 'ESCUELA'">
+							AND escuela=lista.v_nombre
+							
+						</if>
+						
+						  <if test="recursos != null ">
+					        AND  id_tipo_recurso IN
+					        <foreach item="item" index="index" collection="recursos"
+							      open="(" separator="," close=")">
+							        #{item}
+							  </foreach>
+							  
+					    </if>
+					
+						<if test="areasEstudio != null">
+					        AND id_area_estudio IN
+					        <foreach item="item" index="index" collection="areasEstudio"
+							      open="(" separator="," close=")">
+							        #{item}
+							  </foreach>
+					    </if>
+					    
+					    <if test="escuelas != null">
+					        AND id_escuela IN 
+					        <foreach item="item" index="index" collection="escuelas"
+							      open="(" separator="," close=")">
+							        #{item}
+							  </foreach>
+					    </if>
+					    			    
+					    <if test="solicitantes != null and solicitantes != '' ">
+					        AND nombre_tipo IN 
+					        <foreach item="item" index="index" collection="solicitantes"
+							      open="(" separator="," close=")">
+							        #{item}
+							  </foreach>
+					    </if>)
+					
+					),0) 							AS estadiaTotal,
+
+
+<!-- 						estadia promedio -->
+
 					IFNULL(SEC_TO_TIME2(
-					F_OBTENER_ESTADISTICO_PRESTAMOS_BETWEEN(#{ejeX}, lista.v_nombre,
-					F_GENERADOR_FECHAS('INI', 'ANIO',#{anioInicio},null, null,null),
-				    F_GENERADOR_FECHAS('FIN', 'ANIO',#{anioFin},null, null,null),
-				    'ESTADIA_TOTAL')),0) 							AS estadiaTotal,
-					IFNULL(SEC_TO_TIME(
-					F_OBTENER_ESTADISTICO_PRESTAMOS_BETWEEN(#{ejeX}, lista.v_nombre,
-					F_GENERADOR_FECHAS('INI', 'ANIO',#{anioInicio},null, null,null),
-				    F_GENERADOR_FECHAS('FIN', 'ANIO',#{anioFin},null, null,null),
-				    'ESTADIA_PROMEDIO')),0)  						AS estadiaPromedio
+					
+					(SELECT 
+						IFNULL(AVG(TIME_TO_SEC(estadia)),0)
+						FROM vw_reporte_prestamos
+					WHERE (fecha_registro BETWEEN F_GENERADOR_FECHAS('INI', 'ANIO',#{anioInicio},null, null,null) AND F_GENERADOR_FECHAS('FIN', 'ANIO',#{anioFin},null, null,null) )
+						 <if test="ejeX == 'AREA_ESTUDIO'">
+							AND area_estudio=lista.v_nombre
+							
+						</if>
+						<if test="ejeX == 'ESCUELA'">
+							AND escuela=lista.v_nombre
+							
+						</if>
+						
+						  <if test="recursos != null ">
+					        AND  id_tipo_recurso IN
+					        <foreach item="item" index="index" collection="recursos"
+							      open="(" separator="," close=")">
+							        #{item}
+							  </foreach>
+							  
+					    </if>
+					
+						<if test="areasEstudio != null">
+					        AND id_area_estudio IN
+					        <foreach item="item" index="index" collection="areasEstudio"
+							      open="(" separator="," close=")">
+							        #{item}
+							  </foreach>
+					    </if>
+					    
+					    <if test="escuelas != null">
+					        AND id_escuela IN 
+					        <foreach item="item" index="index" collection="escuelas"
+							      open="(" separator="," close=")">
+							        #{item}
+							  </foreach>
+					    </if>
+					    			    
+					    <if test="solicitantes != null and solicitantes != '' ">
+					        AND nombre_tipo IN 
+					        <foreach item="item" index="index" collection="solicitantes"
+							      open="(" separator="," close=")">
+							        #{item}
+							  </foreach>
+					    </if>)
+					
+					),0)  						AS estadiaPromedio
+				    
+				    
 				</if>
 
 			FROM 
