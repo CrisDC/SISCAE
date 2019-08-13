@@ -608,7 +608,7 @@ $(document).ready(function() {
 								else if ($local.$selectPresentacion.val()=="PARALELO"){
 									presentacion='none';
 								}
-								console.log(data);
+								//console.log(data);
 								console.log(arrayJSONX);
 								eliminarVacios(data);
 								console.log(data);
