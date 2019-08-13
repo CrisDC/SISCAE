@@ -563,12 +563,13 @@ $(document).ready(function() {
 										console.log(response[i].ejeX);
 									}
 									console.log(response.length);
-									var j =0;
 									var datanuevo = [];
-									var dn = new Object();
 									for (l=0;l<response.length;l++){
 										var n = response[l].detalle;
+										var dn = new Object();
 										dn['ejeX']=response[l].ejeX;
+										var j =0;
+										console.log(response[l].ejeX);
 										for(i=0;i<n.length;i++){
 											if( n[i].segmento == Object.keys(data[0])[$local.$selectEscuela.val()[j]-1] ){
 												var e = new Object();
