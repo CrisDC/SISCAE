@@ -153,7 +153,7 @@
 			                reporte.estado_infraccion		   as est_inf,
 			                reporte.fecha_infraccion		   as fec_inf
 							FROM vw_reporte_infracciones reporte
-							WHERE reporte.fecha_infraccion BETWEEN #{fechaInicio}  AND #{fechaFin}
+							WHERE (reporte.fecha_infraccion BETWEEN #{fechaInicio}  AND #{fechaFin})
 							<if test="serie == 'ESCUELA'">
 									AND reporte.escuela_programa=r.escuela_programa
 							</if>
@@ -166,7 +166,36 @@
 							<if test="serie == 'TIPO_INFRACCION'">
 									AND reporte.tipo_infraccion=r.tipo_infraccion
 							</if>
-					     ) as consulta
+							
+							<if test="areasEstudio != null">
+						        AND reporte.id_area_estudio IN
+						        <foreach item="item" index="index" collection="areasEstudio"
+								      open="(" separator="," close=")">
+								        #{item}
+								  </foreach>
+						    </if>
+						    
+						    <if test="escuelas != null">
+						        AND reporte.id_escuela_programa IN 
+						        <foreach item="item" index="index" collection="escuelas"
+								      open="(" separator="," close=")">
+								        #{item}
+								  </foreach>
+						    </if>
+						    		    
+
+						    
+						    <if test="solicitantes != null and solicitantes != '' ">
+						        AND reporte.nombre_tipo IN 
+						        <foreach item="item" index="index" collection="solicitantes"
+								      open="(" separator="," close=")">
+								        #{item}
+								  </foreach>
+						    </if>
+							
+							
+							
+					     ) as consulta 
 			     WHERE consulta.est_inf='PENALIZADA')						AS numeroSancionados,
 						(SELECT AVG(consulta.nInfracciones)
 			     FROM (SELECT 
@@ -186,6 +215,33 @@
 							<if test="serie == 'TIPO_INFRACCION'">
 									AND reporte.tipo_infraccion=r.tipo_infraccion
 							</if>
+							
+							<if test="areasEstudio != null">
+						        AND reporte.id_area_estudio IN
+						        <foreach item="item" index="index" collection="areasEstudio"
+								      open="(" separator="," close=")">
+								        #{item}
+								  </foreach>
+						    </if>
+						    
+						    <if test="escuelas != null">
+						        AND reporte.id_escuela_programa IN 
+						        <foreach item="item" index="index" collection="escuelas"
+								      open="(" separator="," close=")">
+								        #{item}
+								  </foreach>
+						    </if>
+						    		    
+
+						    
+						    <if test="solicitantes != null and solicitantes != '' ">
+						        AND reporte.nombre_tipo IN 
+						        <foreach item="item" index="index" collection="solicitantes"
+								      open="(" separator="," close=")">
+								        #{item}
+								  </foreach>
+						    </if>
+							
 					  ) as consulta
 			    )															AS numeroInfraccionesPromedioPorAlumno
 			</if>
@@ -209,6 +265,33 @@
 							<if test="serie == 'TIPO_INFRACCION'">
 									AND reporte.tipo_infraccion=r.tipo_infraccion
 							</if>
+							
+							<if test="areasEstudio != null">
+						        AND reporte.id_area_estudio IN
+						        <foreach item="item" index="index" collection="areasEstudio"
+								      open="(" separator="," close=")">
+								        #{item}
+								  </foreach>
+						    </if>
+						    
+						    <if test="escuelas != null">
+						        AND reporte.id_escuela_programa IN 
+						        <foreach item="item" index="index" collection="escuelas"
+								      open="(" separator="," close=")">
+								        #{item}
+								  </foreach>
+						    </if>
+						    		    
+
+						    
+						    <if test="solicitantes != null and solicitantes != '' ">
+						        AND reporte.nombre_tipo IN 
+						        <foreach item="item" index="index" collection="solicitantes"
+								      open="(" separator="," close=")">
+								        #{item}
+								  </foreach>
+						    </if>
+							
 					     ) as consulta
 			     WHERE consulta.est_inf='PENALIZADA')						AS numeroSancionados,
 			    (SELECT AVG(consulta.nInfracciones)
@@ -229,6 +312,33 @@
 							<if test="serie == 'TIPO_INFRACCION'">
 									AND reporte.tipo_infraccion=r.tipo_infraccion
 							</if>
+							
+							<if test="areasEstudio != null">
+						        AND reporte.id_area_estudio IN
+						        <foreach item="item" index="index" collection="areasEstudio"
+								      open="(" separator="," close=")">
+								        #{item}
+								  </foreach>
+						    </if>
+						    
+						    <if test="escuelas != null">
+						        AND reporte.id_escuela_programa IN 
+						        <foreach item="item" index="index" collection="escuelas"
+								      open="(" separator="," close=")">
+								        #{item}
+								  </foreach>
+						    </if>
+						    		    
+
+						    
+						    <if test="solicitantes != null and solicitantes != '' ">
+						        AND reporte.nombre_tipo IN 
+						        <foreach item="item" index="index" collection="solicitantes"
+								      open="(" separator="," close=")">
+								        #{item}
+								  </foreach>
+						    </if>
+							
 					  ) as consulta
 			    )															AS numeroInfraccionesPromedioPorAlumno
 			</if>
@@ -252,6 +362,33 @@
 							<if test="serie == 'TIPO_INFRACCION'">
 									AND reporte.tipo_infraccion=r.tipo_infraccion
 							</if>
+							
+							<if test="areasEstudio != null">
+						        AND reporte.id_area_estudio IN
+						        <foreach item="item" index="index" collection="areasEstudio"
+								      open="(" separator="," close=")">
+								        #{item}
+								  </foreach>
+						    </if>
+						    
+						    <if test="escuelas != null">
+						        AND reporte.id_escuela_programa IN 
+						        <foreach item="item" index="index" collection="escuelas"
+								      open="(" separator="," close=")">
+								        #{item}
+								  </foreach>
+						    </if>
+						    		    
+
+
+						    
+						    <if test="solicitantes != null and solicitantes != '' ">
+						        AND reporte.nombre_tipo IN 
+						        <foreach item="item" index="index" collection="solicitantes"
+								      open="(" separator="," close=")">
+								        #{item}
+								  </foreach>
+						    </if>
 					     ) as consulta
 			     WHERE consulta.est_inf='PENALIZADA')						AS numeroSancionados,
 			    (SELECT AVG(consulta.nInfracciones)
@@ -272,6 +409,33 @@
 							<if test="serie == 'TIPO_INFRACCION'">
 									AND reporte.tipo_infraccion=r.tipo_infraccion
 							</if>
+							
+							<if test="areasEstudio != null">
+						        AND reporte.id_area_estudio IN
+						        <foreach item="item" index="index" collection="areasEstudio"
+								      open="(" separator="," close=")">
+								        #{item}
+								  </foreach>
+						    </if>
+						    
+						    <if test="escuelas != null">
+						        AND reporte.id_escuela_programa IN 
+						        <foreach item="item" index="index" collection="escuelas"
+								      open="(" separator="," close=")">
+								        #{item}
+								  </foreach>
+						    </if>
+						    		    
+
+						    
+						    <if test="solicitantes != null and solicitantes != '' ">
+						        AND reporte.nombre_tipo IN 
+						        <foreach item="item" index="index" collection="solicitantes"
+								      open="(" separator="," close=")">
+								        #{item}
+								  </foreach>
+						    </if>
+							
 					  ) as consulta
 			    )												AS numeroInfraccionesPromedioPorAlumno
 			</if>
@@ -295,6 +459,32 @@
 							<if test="serie == 'TIPO_INFRACCION'">
 									AND reporte.tipo_infraccion=r.tipo_infraccion
 							</if>
+							
+							<if test="areasEstudio != null">
+						        AND reporte.id_area_estudio IN
+						        <foreach item="item" index="index" collection="areasEstudio"
+								      open="(" separator="," close=")">
+								        #{item}
+								  </foreach>
+						    </if>
+						    
+						    <if test="escuelas != null">
+						        AND reporte.id_escuela_programa IN 
+						        <foreach item="item" index="index" collection="escuelas"
+								      open="(" separator="," close=")">
+								        #{item}
+								  </foreach>
+						    </if>
+
+						    
+						    <if test="solicitantes != null and solicitantes != '' ">
+						        AND reporte.nombre_tipo IN 
+						        <foreach item="item" index="index" collection="solicitantes"
+								      open="(" separator="," close=")">
+								        #{item}
+								  </foreach>
+						    </if>
+							
 					     ) as consulta
 			     WHERE consulta.est_inf='PENALIZADA')						AS numeroSancionados,
 			    (SELECT AVG(consulta.nInfracciones)
@@ -315,6 +505,33 @@
 							<if test="serie == 'TIPO_INFRACCION'">
 									AND reporte.tipo_infraccion=r.tipo_infraccion
 							</if>
+							
+							<if test="areasEstudio != null">
+						        AND reporte.id_area_estudio IN
+						        <foreach item="item" index="index" collection="areasEstudio"
+								      open="(" separator="," close=")">
+								        #{item}
+								  </foreach>
+						    </if>
+						    
+						    <if test="escuelas != null">
+						        AND reporte.id_escuela_programa IN 
+						        <foreach item="item" index="index" collection="escuelas"
+								      open="(" separator="," close=")">
+								        #{item}
+								  </foreach>
+						    </if>
+						    		    
+
+						    
+						    <if test="solicitantes != null and solicitantes != '' ">
+						        AND reporte.nombre_tipo IN 
+						        <foreach item="item" index="index" collection="solicitantes"
+								      open="(" separator="," close=")">
+								        #{item}
+								  </foreach>
+						    </if>
+							
 					  ) as consulta
 			    )												AS numeroInfraccionesPromedioPorAlumno
 			</if>
@@ -323,20 +540,47 @@
 		LEFT JOIN mae_persona pe ON (pe.v_num_documento=r.numero_documento)
 		WHERE 
 			<if test="tipoPeriodo == 'DIA'">
-				    fecha_infraccion BETWEEN #{fechaInicio}  AND #{fechaFin}
+				    r.fecha_infraccion BETWEEN #{fechaInicio}  AND #{fechaFin}
 			</if>
 			<if test="tipoPeriodo == 'SEMANA'">
-				   fecha_infraccion BETWEEN F_GENERADOR_FECHAS('INI', 'SEMANA',#{anioInicio} ,null, null, #{semanaInicio} )
+				   r.fecha_infraccion BETWEEN F_GENERADOR_FECHAS('INI', 'SEMANA',#{anioInicio} ,null, null, #{semanaInicio} )
 				   AND F_GENERADOR_FECHAS('FIN', 'SEMANA',#{anioInicio} ,null, null, #{semanaInicio} )
 			</if>
 			<if test="tipoPeriodo == 'MES'">
-				   fecha_infraccion BETWEEN F_GENERADOR_FECHAS('INI', 'MES',#{anioInicio} ,#{mesInicio}, null, null )
+				   r.fecha_infraccion BETWEEN F_GENERADOR_FECHAS('INI', 'MES',#{anioInicio} ,#{mesInicio}, null, null )
 				   AND F_GENERADOR_FECHAS('FIN', 'MES',#{anioInicio} ,#{mesInicio}, null, null )
 			</if>
 			<if test="tipoPeriodo == 'ANIO'">
-				    fecha_infraccion BETWEEN F_GENERADOR_FECHAS('INI', 'ANIO',#{anioInicio} ,null, null, null )
+				    r.fecha_infraccion BETWEEN F_GENERADOR_FECHAS('INI', 'ANIO',#{anioInicio} ,null, null, null )
 				   AND F_GENERADOR_FECHAS('FIN', 'ANIO',#{anioInicio} ,null, null, null )
 			</if>
+			
+			<if test="areasEstudio != null">
+						        AND r.id_area_estudio IN
+						        <foreach item="item" index="index" collection="areasEstudio"
+								      open="(" separator="," close=")">
+								        #{item}
+								  </foreach>
+						    </if>
+						    
+						    <if test="escuelas != null">
+						        AND r.id_escuela_programa IN 
+						        <foreach item="item" index="index" collection="escuelas"
+								      open="(" separator="," close=")">
+								        #{item}
+								  </foreach>
+						    </if>
+						    		    
+
+						    
+						    <if test="solicitantes != null and solicitantes != '' ">
+						        AND r.nombre_tipo IN 
+						        <foreach item="item" index="index" collection="solicitantes"
+								      open="(" separator="," close=")">
+								        #{item}
+								  </foreach>
+						    </if>
+			
 		<if test="serie == 'ESCUELA'">
 				GROUP BY r.escuela_programa
 		</if>
@@ -349,7 +593,6 @@
 		<if test="serie == 'TIPO_INFRACCION'">
 				GROUP BY r.tipo_infraccion
 		</if>
-		
 	</select>
 	
 	<select id="buscarPorPeriodoSegmentado" resultMap="objetoSegmentado">
