@@ -127,7 +127,7 @@ $(document).ready(function() {
 		case "ESCUELA":{		
 			$('#selectEjeX').find("option[value='"+$local.$selectSegmY.val()+"']").remove();
 			$local.$opEscuela = 'N';
-			if($local.$opAreaEstudio =='N'){
+			if($local.$opAreaEstudio =='N' && ($local.$selectEjeX.val() != "AREA_ESTUDIO")){
 				$('#selectEjeX').append('<option  value="AREA_ESTUDIO">Area Estudios</option>');
 				$local.$opAreaEstudio = 'S';
 			}
@@ -137,18 +137,18 @@ $(document).ready(function() {
 		case "AREA_ESTUDIO":{
 				$('#selectEjeX').find("option[value='"+$local.$selectSegmY.val()+"']").remove();
 			$local.$opAreaEstudio = 'N';
-			if($local.$opEscuela == 'N'){
+			if($local.$opEscuela == 'N' && ($local.$selectEjeX.val() != "ESCUELA")){
 				$('#selectEjeX').append('<option value="ESCUELA">Escuela</option>');
 				$local.$opEscuela = 'S';
 			}
 			break;
 		}
 		default :{
-			if($local.$opAreaEstudio == 'N'){
-				$('#selectEjeX').append('<option  value="AREA_ESTUDIO">Area Estudios</option>');
+			if($local.$opAreaEstudio == 'N' && ($local.$selectEjeX.val() != "AREA_ESTUDIO")){
+				$('#selectEjeX').append('<option  value="AREA_ESTUDIO">Area Estudio</option>');
 				$local.$opAreaEstudio = 'S';
 			}
-			if($local.$opEscuela == 'N'){
+			if($local.$opEscuela == 'N' && ($local.$selectEjeX.val() != "ESCUELA")){
 				$('#selectEjeX').append('<option value="ESCUELA">Escuela</option>');
 				$local.$opEscuela = 'S';
 			}
@@ -168,15 +168,14 @@ $(document).ready(function() {
 				data = "ejeX",
 				title = "Periodo"
 				console.log("funciona mal ");
-				if($local.$opAreaEstudio == 'N'){
+				if($local.$opAreaEstudio == 'N' && ($local.$selectSegmY.val() != "AREA_ESTUDIO")){
 					$('#selectSegmY').append('<option  value="AREA_ESTUDIO">Area Estudios</option>');
 					$local.$opAreaEstudio = 'S';
 				}
-				if($local.$opEscuela == 'N'){
+				if($local.$opEscuela == 'N' && ($local.$selectSegmY.val() != "ESCUELA")){
 					$('#selectSegmY').append('<option value="ESCUELA">Escuela</option>');
 					$local.$opEscuela = 'S';
 				}
-				
 				break;
 			}
 			case "ESCUELA":{
@@ -186,7 +185,7 @@ $(document).ready(function() {
 				
 				$('#selectSegmY').find("option[value='"+$local.$selectEjeX.val()+"']").remove();
 				$local.$opEscuela = 'N';
-				if($local.$opAreaEstudio =='N'){
+				if($local.$opAreaEstudio =='N' && ($local.$selectSegmY.val() != "AREA_ESTUDIO")){
 					$('#selectSegmY').append('<option  value="AREA_ESTUDIO">Area Estudios</option>');
 					$local.$opAreaEstudio = 'S';
 				}
@@ -197,10 +196,9 @@ $(document).ready(function() {
 				console.log("ae");
 				data = "ejeX",
 				title = "Area Estudio"
-					//$('#selectSegmY').find("option[value='ESCUELA']").prop("disabled",false);
 					$('#selectSegmY').find("option[value='"+$local.$selectEjeX.val()+"']").remove();
 				$local.$opAreaEstudio = 'N';
-				if($local.$opEscuela == 'N'){
+				if($local.$opEscuela == 'N' && ($local.$selectSegmY.val() != "ESCUELA")){
 					$('#selectSegmY').append('<option value="ESCUELA">Escuela</option>');
 					$local.$opEscuela = 'S';
 				}
@@ -212,56 +210,6 @@ $(document).ready(function() {
 		
 	});
 	
-	$local.$selectSegmY.on("change", function(){
-		let data;
-		let title;
-		switch($local.$selectSegmY.val()){
-			case "PERIODO":{
-				console.log("p");
-				console.log("funciona mal ");
-				if($local.$opAreaEstudio == 'N'){
-					$('#selectSegmY').append('<option  value="AREA_ESTUDIO">Area Estudios</option>');
-					$local.$opAreaEstudio = 'S';
-				}
-				if($local.$opEscuela == 'N'){
-					$('#selectSegmY').append('<option value="ESCUELA">Escuela</option>');
-					$local.$opEscuela = 'S';
-				}
-				
-				break;
-			}
-			case "ESCUELA":{
-				data = "ejeX";
-				title = "Escuela",
-				console.log("funciona");
-				
-				$('#selectSegmY').find("option[value='"+$local.$selectEjeX.val()+"']").remove();
-				$local.$opEscuela = 'N';
-				if($local.$opAreaEstudio =='N'){
-					$('#selectSegmY').append('<option  value="AREA_ESTUDIO">Area Estudios</option>');
-					$local.$opAreaEstudio = 'S';
-				}
-				
-				break;
-			}
-			case "AREA_ESTUDIO":{
-				console.log("ae");
-				data = "ejeX",
-				title = "Area Estudio"
-					//$('#selectSegmY').find("option[value='ESCUELA']").prop("disabled",false);
-					$('#selectSegmY').find("option[value='"+$local.$selectEjeX.val()+"']").remove();
-				$local.$opAreaEstudio = 'N';
-				if($local.$opEscuela == 'N'){
-					$('#selectSegmY').append('<option value="ESCUELA">Escuela</option>');
-					$local.$opEscuela = 'S';
-				}
-				break;
-			}
-		}
-		
-		cambiarEjeXTabla(data, title);
-		
-	});
 	
 	
 	$local.$selectSeries.on("change", function(){
@@ -421,6 +369,72 @@ $(document).ready(function() {
 		});
 	}
 	
+	function tabla(){
+		$local.tablaResultadosPrestamo.destroy();
+		$local.tablaResultadosInfraccion. destroy();
+
+		$local.tablaResultadosPrestamo = $local.$tablaResultadosPrestamo.DataTable({
+			"language" : {
+				"emptyTable" : "No hay registros encontrados."
+			},
+			"pageLength": 10,
+			"initComplete" : function() {
+				$local.$tablaResultadosPrestamo.wrap("<div class='table-responsive'></div>");
+			},
+			"columnDefs" : [ {
+				"targets" : [ 0],
+				"className" : "all dt-center fondo-blanco"
+			},{
+				"targets" : [ 1, 2, 3],
+				"className" : "all dt-right"
+			} ],
+			"columns" : [ {
+				"data" : "ejeX",
+				"title" : "Periodo"
+			}, {
+				"data" : "CABINA",
+				"title" : "Cabina"
+			}, {
+				"data" : "CUBICULO",
+				"title" : "Cubiculo"
+			}, {
+				"data" : "MESA",
+				"title" : "Mesa"
+			}]
+		});
+	
+		
+	/*	$local.tablaResultadosInfraccion = $local.$tablaResultadosInfraccion.DataTable({
+			"language" : {
+				"emptyTable" : "No hay registros encontrados."
+			},
+			"pageLength": 10,
+			"initComplete" : function() {
+				$local.$tablaResultadosInfraccion.wrap("<div class='table-responsive'></div>");
+			},
+			"columnDefs" : [ {
+				"targets" : [ 0],
+				"className" : "all dt-center fondo-blanco"
+			},{
+				"targets" : [ 1, 2, 3],
+				"className" : "all dt-right"
+			} ],
+			"columns" : [ {
+				"data" : data,
+				"title" : title
+			}, {
+				"data" : "numeroInfracciones",
+				"title" : "Cantidad Infracciones"
+			}, {
+				"data" : "numeroSancionados",
+				"title" : "Cantidad Sancionados"
+			}, {
+				"data" : "numeroInfraccionesPromedioPorAlumno",
+				"title" : "Infracciones promedio"
+			}]
+		});*/
+	}
+	
 	$local.$buscar.on('click', function() {
 		if (!$formEstadisticas.valid()) {
 			return;
@@ -436,10 +450,7 @@ $(document).ready(function() {
 		let segmentacionY = $local.$selectSegmY.val();
 		let ejeX = $local.$selectEjeX.val();
 		let serie= $local.$selectSeries.val();
-		console.log(criterioBusqueda);
-		console.log($.param(criterioBusqueda));
 		var criterio = "&"+reemplazarCadena("%5B%5D","",$.param(criterioBusqueda));
-		console.log(criterio);
 		if($local.$tipoReporte =="P"){
 			if(tipoGrafico == "PIE"){
 				//arreglado
@@ -539,7 +550,43 @@ $(document).ready(function() {
 								}
 								//Generando Leyenda
 								var resultGraph = [];
-								var arrayJSONX = response[0].detalle;
+								console.log($local.$selectEscuela.val());
+								if($local.$selectEscuela.val() == "" ){
+								    console.log("funciono");
+									var arrayJSONX = response[0].detalle;
+								}else{
+									//eliminarVacios(data);
+									console.log($local.$selectEscuela.val());
+									var arrayJSONX = [];
+									//var n = response[0].detalle;
+									for(i=0;i<response.length;i++){
+										console.log(response[i].ejeX);
+									}
+									console.log(response.length);
+									var j =0;
+									var datanuevo = [];
+									var dn = new Object();
+									for (l=0;l<response.length;l++){
+										var n = response[l].detalle;
+										dn['ejeX']=response[l].ejeX;
+										for(i=0;i<n.length;i++){
+											if( n[i].segmento == Object.keys(data[0])[$local.$selectEscuela.val()[j]-1] ){
+												var e = new Object();
+												e['segmento'] = n[i].segmento;
+												e['numeroPrestamos'] = n[i].numeroPrestamos;
+												e['ejeX'] = n[i].ejeX;
+												arrayJSONX.push(e);
+												dn[n[i].segmento] = n[i].numeroPrestamos;
+												j++;
+											}
+										}
+										datanuevo.push(dn);
+									}
+								}	
+									
+								
+								console.log(datanuevo);
+
 								arrayJSONX.sort();								
 								for(i=0;i<arrayJSONX.length;i++){
 									var g = new Object();
@@ -561,13 +608,45 @@ $(document).ready(function() {
 								else if ($local.$selectPresentacion.val()=="PARALELO"){
 									presentacion='none';
 								}
+								console.log(data);
+								console.log(arrayJSONX);
+								eliminarVacios(data);
+								console.log(data);
+								console.log(resultGraph);
+								console.log(Object.keys(data[0]));
+								var c = [];
+								for(i=0;i<Object.keys(datanuevo[0]).length;i++){
+									var ej = new Object();
+									if(i==0){
+										ej['title'] = "Periodo";
+										ej['data']  = Object.keys(datanuevo[0])[i];
+									}else{
+										ej['title'] = Object.keys(datanuevo[0])[i];;
+										ej['data']  = Object.keys(datanuevo[0])[i];
+									}
+									c.push(ej);
+								};
+								
+								//console.log(c); eval('[{"columns":' +c+ ',"data":' +data+0 '}]')
+								var dataObject = [];
+								var ayuda = new Object();
+								ayuda['columns'] = c;
+								ayuda['data'] = datanuevo;
+								dataObject.push(ayuda);
+								console.log(ayuda);
+								console.log(dataObject);
+								$local.tablaResultadosPrestamo.destroy();
+								$local.tablaResultadosPrestamo = $local.$tablaResultadosPrestamo.DataTable(dataObject[0]);
+	
 								//Dibujando tabla
-								//$local.tablaResultadosPrestamo.rows.add(response).draw();
+                                //$local.tablaResultadosPrestamo.rows.add(data).draw();
 								//Dibujando grafico
 								var chart = AmCharts.makeChart('chartdiv',$funcionGraficoUtil.crearGraficoBarrasSegmentado(data,resultGraph,'ejeX','Cantidad de Préstamos',presentacion,'Prestamos por criterio'));
 								data = [];
 								resultGraph = [];
 								arrayJSONX = [];
+								dataObject = [];
+								c =[];
 							},
 							error : function(response) {
 							},
@@ -1094,10 +1173,10 @@ $(document).ready(function() {
 
 	$local.$exportar.on('click', function(){
 		criterioBusqueda = obtenerCriteriosDeBusqueda();
+		var criterio = "&"+reemplazarCadena("%5B%5D","",$.param(criterioBusqueda));
+		console.log(criterio);
 		if($local.$tipoReporte =="P"){
-		   
-			window.location.href = $variableUtil.root + "reporteEstadisticaPrestamos?accion=exportar&" + $.param(criterioBusqueda);	
-			console.log($.param(criterioBusqueda));
+		   			window.location.href = $variableUtil.root + "reporteEstadisticaPrestamos?accion=exportar" + criterio;	
 		}
 	});
 	
@@ -1111,5 +1190,18 @@ $(document).ready(function() {
 		}
 		return cadenaCompleta;
 	}
+	
+	function eliminarVacios(jsonx){
+		 console.log(jsonx);
+	    for (var clave in jsonx) {
+	      if(typeof jsonx[clave] == 'number'){
+	        if(jsonx[clave] == 0){
+	          delete jsonx[clave]
+	        }
+	      } else if (typeof jsonx[clave] == 'object') {
+	        eliminarVacios(jsonx[clave])
+	      }
+	    }
+	  }
 
 });
