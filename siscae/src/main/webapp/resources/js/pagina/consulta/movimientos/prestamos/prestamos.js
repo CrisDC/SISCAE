@@ -1,4 +1,5 @@
 var espacioDisponible;
+var aespacioDisponible;
 var recurso;
 var cantidadPrestamosRealizados;
 var cantidadPrestamosTotales;
@@ -395,6 +396,7 @@ $(function () {
     $(document).on('click', '.borrar', function (event) {
         event.preventDefault();
         $(this).closest('tr').remove();
+        console.log($(this));
         espacioDisponible =  espacioDisponible + 1;
         $('#espacioDisponibleLabel').text('Espacio disponible: '+espacioDisponible);
     });
@@ -409,7 +411,7 @@ function enviarDatosATabla(){
 	var aMaterno;
 	
 	numeroDocumento = limpiarSalidaScanner(numeroDocumento);
-	
+	aespacioDisponible = espacioDisponible;
 	if(espacioDisponible!=0){
 		if(numeroDocumento=='' || numeroDocumento == null){
 			swal('El numero de documento no puede estar vacio');
@@ -511,6 +513,7 @@ function enviarDatosATabla(){
 	    	        		    				espacioDisponible =  espacioDisponible - 1;
 	    	        		    				$('#espacioDisponibleLabel').text('Espacio disponible: '+espacioDisponible)
 	    	        		    				refrescarInput();
+	    	        		    				
 		        	        				}
 		    	        				}
 		    	        			}
@@ -525,6 +528,14 @@ function enviarDatosATabla(){
 	}
 }
 
+$('#cerrarModal').on('click', function (event) {
+    event.preventDefault();
+    $('#cuerpoTablaGrupal tr:last').remove();
+    if(aespacioDisponible !=espacioDisponible){
+    espacioDisponible =  espacioDisponible + 1;
+    console.log("ella no te ama");
+    $('#espacioDisponibleLabel').text('Espacio disponible: '+espacioDisponible);}
+});
 
 function refrescarInput() {
 	//Refrescar campos y hacer focus en 
