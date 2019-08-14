@@ -8,7 +8,7 @@
 	<!--    ¡¡ OBSERVACION !!              '&lt;'   significa   '<' -->
 	
 	
-	<select id="buscarPorNumeroDocumento" resultMap="objetoSinSegmentar">
+	<select id="buscarPorNumeroDocumento" resultMap="consultaInf">
 			
 		select numero_documento as numeroDocumento,
 				tipo_documento as tipoDocumento,
@@ -17,7 +17,8 @@
 		        descripcion as descripcion,
 		        fecha_infraccion as fechaInfraccion,
 		        estado_infraccion as estadoInfraccion,
-		        estado_solicitante as estadoSolicitante
+		        estado_solicitante as estadoSolicitante,
+		        nombre as nombre
 		        
 		        from vw_reporte_infracciones where numero_documento=#{numeroDocumento};
 			
@@ -933,6 +934,18 @@
 					<result property="numeroInfracciones" column="numeroInfracciones"></result>
 			</collection>
 	</resultMap>
-
+	
+	<resultMap type="ConsultaInfracciones" id="consultaInf">
+		<id property="nombre" column="nombre"></id>
+		<id property="numeroDocumento" column="numeroDocumento"></id>
+		<id property="appPaterno" column="appPaterno"></id>
+		<id property="appMaterno" column="appMaterno"></id>
+		<id property="descripcion" column="descripcion"></id>
+		<id property="fechaInfraccion" column="fechaInfraccion"></id>
+		<id property="estadoInfraccion" column="estadoInfraccion"></id>
+		<id property="estadoSolicitante" column="estadoSolicitante"></id>
+		
+	</resultMap>
+	
 	
 </mapper>

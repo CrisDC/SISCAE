@@ -5,18 +5,15 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 @Data
-@Builder
-@NoArgsConstructor
-@AllArgsConstructor
 public class ConsultaInfracciones {
 
-	    String nombre;
-	    String numeroDocumento;
-	    String appPaterno;
-	    String appMaterno;
-	    String descripcion;
-	    String fechaInfraccion;
-	    String estadoInfraccion;
-	    String estadoSolicitante;
+	    private String nombre;
+	    private String numeroDocumento;
+	    private String appPaterno;
+	    private String appMaterno;
+	    private String descripcion;
+	    private String fechaInfraccion;
+	    private String estadoInfraccion;
+	    private String estadoSolicitante;
 	
 }
