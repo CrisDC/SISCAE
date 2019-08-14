@@ -583,10 +583,17 @@ function consultarInfracciones(){
 	
 	//Desaparecer la barra de busqueda
 	$('#consultarInfraccionesPorDocumento').css('display', 'none');
+	var dni = {
+			numeroDocumento : numDoc
+	}
+	
 	
 	$.ajax({
-            url :  $variableUtil.root + "reporteEstadisticaInfracciones?accion=buscarPorCriterio&numeroDocumento="+numDoc,
+            url :  $variableUtil.root + "reporteEstadisticaInfracciones?accion=buscarPorNumeroDocumento",
             type : 'GET',
+            data : {
+            	numeroDocumento: numDoc
+            },
             beforeSend : function(xhr) {
 				xhr.setRequestHeader('Content-Type', 'application/json');
 				xhr.setRequestHeader("X-CSRF-TOKEN", $variableUtil.csrf);
@@ -600,7 +607,7 @@ function consultarInfracciones(){
 				}
 			},
 			success : function(response) {
-
+               console.log(response);
 				if(response.length!=0){
 					let nombre = response[0].nombre;
     				let numeroDocumento = response[0].numeroDocumento;
