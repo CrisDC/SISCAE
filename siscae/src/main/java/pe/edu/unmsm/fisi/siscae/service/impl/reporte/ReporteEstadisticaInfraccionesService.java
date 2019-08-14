@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import pe.edu.unmsm.fisi.siscae.mapper.IReporteEstadisticaInfraccionesMapper;
+import pe.edu.unmsm.fisi.siscae.model.consulta.ConsultaInfracciones;
 import pe.edu.unmsm.fisi.siscae.model.criterio.ReporteEstadisticaInfraccionesCriterioBusqueda;
 import pe.edu.unmsm.fisi.siscae.model.reporte.resumen.ReporteEstadisticaInfraccionesPorEjeX;
 import pe.edu.unmsm.fisi.siscae.model.reporte.resumen.ReporteInfraccionesPorEjeXSegmentado;
@@ -55,6 +56,11 @@ public class ReporteEstadisticaInfraccionesService implements IReporteEstadistic
 	public List<ReporteInfraccionesPorEjeXSegmentado> buscarPorEjeXSegmentado(
 			ReporteEstadisticaInfraccionesCriterioBusqueda criterioBusqueda) {
 		return reporteEstadisticaInfraccionesMapper.buscarPorEjeXSegmentado(criterioBusqueda);
+	}
+	@Override
+	public List<ConsultaInfracciones> buscarPorNumeroDocumento(ConsultaInfracciones criterioBusqueda) {
+		
+		return reporteEstadisticaInfraccionesMapper.buscarPorNumeroDocumento(criterioBusqueda);
 	} 
 
 
