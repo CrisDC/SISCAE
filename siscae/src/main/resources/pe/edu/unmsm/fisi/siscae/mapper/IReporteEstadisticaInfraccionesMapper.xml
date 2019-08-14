@@ -10,7 +10,16 @@
 	
 	<select id="buscarPorNumeroDocumento" resultMap="objetoSinSegmentar">
 			
-		select *	from vw_reporte_infracciones where numero_documento=#{numeroDocumento});
+		select numero_documento as numeroDocumento,
+				tipo_documento as tipoDocumento,
+		        app_paterno as appPaterno,
+		        app_materno as appMaterno,
+		        descripcion as descripcion,
+		        fecha_infraccion as fechaInfraccion,
+		        estado_infraccion as estadoInfraccion,
+		        estado_solicitante as estadoSolicitante
+		        
+		        from vw_reporte_infracciones where numero_documento=#{numeroDocumento};
 			
 			
 			

@@ -59,7 +59,7 @@ public class ReporteEstadisticaInfraccionesService implements IReporteEstadistic
 	}
 	@Override
 	public List<ConsultaInfracciones> buscarPorNumeroDocumento(ConsultaInfracciones criterioBusqueda) {
-		
+		//esto tambien
 		return reporteEstadisticaInfraccionesMapper.buscarPorNumeroDocumento(criterioBusqueda);
 	} 
 
