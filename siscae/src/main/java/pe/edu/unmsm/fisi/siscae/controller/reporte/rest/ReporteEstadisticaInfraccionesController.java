@@ -24,6 +24,21 @@ public @RestController class ReporteEstadisticaInfraccionesController {
 	public List<ReporteEstadisticaInfracciones> buscarPorCriterio(ReporteEstadisticaInfraccionesCriterioBusqueda criterioBusqueda) {
 		return reporteEstadisticaInfraccionesService.buscarPorCriterio(criterioBusqueda);
 	}*/
+	
+	@GetMapping(params = "accion=buscarPorNumeroDocumento")
+	public List<ConsultaInfracciones > buscarPorNumeroDocumento(ConsultaInfracciones  criterioBusqueda/*,
+			@RequestParam("areasEstudio") List<Integer> areasEstudio,
+			@RequestParam("escuelas") List<Integer> escuelas,
+			@RequestParam("solicitantes") List<String> solicitantes,
+			@RequestParam("tiposInfraccion") List<Integer> tiposInfraccion*/) {
+		/*criterioBusqueda.setAreasEstudio(areasEstudio);
+		criterioBusqueda.setEscuelas(escuelas);
+		criterioBusqueda.setSolicitantes(solicitantes);
+		criterioBusqueda.setTiposInfraccion(tiposInfraccion);*/
+		System.out.println(criterioBusqueda);		
+		return reporteEstadisticaInfraccionesService.buscarPorNumeroDocumento(criterioBusqueda);
+	}
+	
 	@GetMapping(params = "accion=buscarPorPeriodoSinSegmentar")
 	public List<ReporteEstadisticaInfraccionesPorEjeX> buscarPorPeriodoSinSegmentar(ReporteEstadisticaInfraccionesCriterioBusqueda criterioBusqueda/*,
 			@RequestParam("areasEstudio") List<Integer> areasEstudio,

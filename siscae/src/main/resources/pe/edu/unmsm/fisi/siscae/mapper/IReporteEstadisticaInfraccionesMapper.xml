@@ -4,7 +4,19 @@
 
 	
 	
+	
 	<!--    ¡¡ OBSERVACION !!              '&lt;'   significa   '<' -->
+	
+	
+	<select id="buscarPorNumeroDocumento" resultMap="objetoSinSegmentar">
+			
+		select *	from vw_reporte_infracciones where numero_documento=#{numeroDocumento});
+			
+			
+			
+	</select>
+	
+	
 	
 	<select id="buscarPorPeriodoSinSegementar" resultMap="objetoSinSegmentar">
 			WITH RECURSIVE ListaPeriodo  AS

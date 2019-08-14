@@ -13,6 +13,7 @@ public interface IReporteEstadisticaInfraccionesService {
 	public List<ReporteInfraccionesPorEjeXSegmentado> buscarPorPeriodoSegmentado(ReporteEstadisticaInfraccionesCriterioBusqueda criterioBusqueda);
 	public List<ReporteEstadisticaInfraccionesPorEjeX> buscarPorEjeXSinSegmentar(ReporteEstadisticaInfraccionesCriterioBusqueda criterioBusqueda);
 	public List<ReporteInfraccionesPorEjeXSegmentado> buscarPorEjeXSegmentado(ReporteEstadisticaInfraccionesCriterioBusqueda criterioBusqueda);
+	public List<ReporteInfraccionesPorEjeXSegmentado> buscarPorNumeroDocumento(ReporteEstadisticaInfraccionesCriterioBusqueda criterioBusqueda);
 }
 
 
