@@ -809,7 +809,7 @@ $(document).ready(function() {
 					beforeSend : function(xhr) {
 						xhr.setRequestHeader('Content-Type', 'application/json');
 						//Borrando tabla antes de hacer la consulta
-						$local.tablaResultadosPrestamo.clear().draw();
+						$local.tablaResultadosInfraccion.clear().draw();
 						$local.$buscar.attr("disabled", true).find("i").removeClass("fa-search").addClass("fa-spinner fa-pulse fa-fw");
 					},
 					success : function(response) {
