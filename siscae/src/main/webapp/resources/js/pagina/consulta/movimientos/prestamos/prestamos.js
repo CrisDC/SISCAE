@@ -69,7 +69,31 @@ $(document).ready(function(){
     	    				}
     	    			},
     	    			success : function(response) {
-    	    				
+    	    				console.log(recurso);
+    	    				if(recurso.tipoRecurso=="CABINA"){
+    	    					console.log("Ella no te ama");
+    	    					let idRecurso = recurso.idRecurso;
+    	    					let cadenaHtml = '';
+    	    					let id = $('#recurso'+idRecurso+' button').attr('id');
+    	    					let keyRecurso = $('#recurso'+idRecurso+' button').attr('key');
+    	    					let prestado = $('#recurso'+idRecurso+' button').attr('prestado') - 1;
+    	    					let libre;
+    	    					if(prestado ==1){
+    	    					  libre = prestado;
+    	    					}else{
+    	    					  libre = prestado + 2;
+    	    					}
+    	    					let max = $('#recurso'+idRecurso+' button').attr('max');
+    	    					
+    	    					cadenaHtml += '<img src ="/siscae/resources/images/pantalla.png" width="40" height="40"> ';
+    	    					cadenaHtml += '<p style=" color: #3C4043 !important;" >'+id+'</p>';
+    	    					cadenaHtml += '<p style=" color: #6F7375 !important;" >'+prestado+' / '+max+' </p>';
+    	    					cadenaHtml += '<p style=" color: #6F7375 !important;" >Libres: '+libre+'</p>';
+    	    					cadenaHtml += '<p class="disponible" >DISPONIBLE</p>';
+    	    					cadenaHtml += '<button id="'+id+'" key="'+keyRecurso+'" max="'+max+'" prestado="'+prestado+'" type="button" class="btn btn-info solicitar" data-toggle="modal" data-target="#grupalesModal">SOLICITAR</button>'
+    	    					//Se modifica el html
+                				$('#recurso'+idRecurso).html(cadenaHtml);
+    	    				}else{
     	    				//Se analiza que imagen ponerle al nuevo html
     	    				let idRecurso = recurso.idRecurso;
             				let cadenaHtml ='';
@@ -88,6 +112,7 @@ $(document).ready(function(){
             				
             				//Se modifica el html
             				$('#recurso'+idRecurso).html(cadenaHtml);
+    	    				}
             				//Se visualiza que la petición fue exitosa
         					
     	    				
@@ -533,7 +558,6 @@ $('#cerrarModal').on('click', function (event) {
     $('#cuerpoTablaGrupal tr:last').remove();
     if(aespacioDisponible !=espacioDisponible){
     espacioDisponible =  espacioDisponible + 1;
-    console.log("ella no te ama");
     $('#espacioDisponibleLabel').text('Espacio disponible: '+espacioDisponible);}
 });
 

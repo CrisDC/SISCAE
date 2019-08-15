@@ -115,7 +115,7 @@
 											<label th:if="${existenGrupales} == 1" class="m-t-10">Recursos grupales</label>
 											<div th:if="${existenGrupales} == 1"  class="row" id="for-each-grupales">
 												<th:block th:each="recursoGrupal : ${recursosGrupales}">
-													<div class="recurso">
+													<div class="recurso" th:id="${'recurso'+recursoGrupal.idRecurso}">
 														<img th:if="${recursoGrupal.tipoRecurso} == 'CABINA'" th:src="@{/resources/images/pantalla.png}" width="40" height="40">
 														<img th:if="${recursoGrupal.tipoRecurso} == 'MESA'" th:src="@{/resources/images/mesa.png}" width="100" height="100">
 														<p style="color: #3C4043 !important;" th:text="${recursoGrupal.numero}"></p>
