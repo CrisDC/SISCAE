@@ -1,0 +1,6 @@
+#tablaGrupal thead tr th:nth-child(3){
+	text-align: center!important;
+}
+#tablaGrupal tbody tr td:nth-child(3){
+	text-align: center;
+}

@@ -349,7 +349,7 @@ $(document).ready(function(){
         let cantidadPrestamos = $(this).attr('prestado');
         let maxCapacidad = $(this).attr('max');
         espacioDisponible =  parseInt(maxCapacidad) - parseInt(cantidadPrestamos);
-		$('#infoRecurso').text('Solicititud de recurso '+numRecurso)
+		$('#infoRecurso').text('Solicitud de recurso '+numRecurso)
 		$('#espacioDisponibleLabel').text('Espacio disponible: '+espacioDisponible)
 	});	
 	$('#confirmarPrestamo').on('click', function (event){
@@ -553,13 +553,16 @@ function enviarDatosATabla(){
 	}
 }
 
-$('#cerrarModal').on('click', function (event) {
-    event.preventDefault();
-    $('#cuerpoTablaGrupal tr:last').remove();
-    if(aespacioDisponible !=espacioDisponible){
-    espacioDisponible =  espacioDisponible + 1;
-    $('#espacioDisponibleLabel').text('Espacio disponible: '+espacioDisponible);}
-});
+
+
+//Cuando se cierre el modal debe limpiarse todo
+$('#grupalesModal').on('hidden.bs.modal', function (e) {
+	event.preventDefault();
+	$('#cuerpoTablaGrupal').html('<tr></tr>');
+    espacioDisponible =  2;
+    $('#espacioDisponibleLabel').text('Espacio disponible: '+espacioDisponible);
+})
+
 
 function refrescarInput() {
 	//Refrescar campos y hacer focus en 
