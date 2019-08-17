@@ -12,6 +12,8 @@ $(document).ready(function() {
 			$selectEscuela : $('#selectEscuela'),
 			$selectRecurso : $('#selectRecurso'),
 			$selectSolicitante : $('#selectSolicitante'),
+			$selecttipoInfraccion: $('#selecttipoInfraccion'),
+			$selecttipoEstado : $('#selecttipoEstado'),
 			$fechaPrestamo : $('#fechaPrestamo'),
 			$semanaInicio : $('#semanaInicio'),
 			$anioInicio : $('#anioInicio'),
@@ -70,6 +72,8 @@ $(document).ready(function() {
 	$funcionUtil.crearMultipleSelect2($local.$selectEscuela, "TODOS");	
 	$funcionUtil.crearMultipleSelect2($local.$selectRecurso, "TODOS");
 	$funcionUtil.crearMultipleSelect2($local.$selectSolicitante, "TODOS");
+	$funcionUtil.crearMultipleSelect2($local.$selecttipoInfraccion,"TODOS");
+	$funcionUtil.crearMultipleSelect2($local.$selecttipoEstado,"TODOS");
 	
 	//Formulario
 	$formEstadisticas = $("#formEstadisticas");
@@ -221,13 +225,11 @@ $(document).ready(function() {
 			case "SOLICITANTE":{
 				data = "segmento",
 				title = "Solicitante"
-					console.log("funciona mal ");
 				break;
 			}
 			case "ESCUELA":{
 				data = "segmento",
 				title = "Escuela"
-				console.log("funciona");
 				break;
 			}
 			case "AREA_ESTUDIO":{
@@ -548,20 +550,49 @@ $(document).ready(function() {
 									}
 									data.push(aux);
 								}
+								var arr;
+								var cant;
+								switch($local.$selectSegmY.val()){
+								case "ESCUELA":{		
+									arr = $local.$selectEscuela.val();
+									console.log(arr);
+									cant = -1;
+									break;
+								}
+								case "AREA_ESTUDIO":{
+									arr = $local.$selectAreaEstudio.val();
+									console.log(arr);
+									cant = -4;
+									break;
+								}
+								case "TIPO_SOLICITANTE":{
+									arr = $local.$selectSolicitante.val();
+									console.log(arr);
+									break;
+								}
+								case "RECURSO":{
+									arr = "";
+									console.log(arr);
+									break;
+								}
+								case "NINGUNA" :{
+									arr = "";
+									break;
+								}
+								}
+
 								//Generando Leyenda
 								var resultGraph = [];
-								console.log($local.$selectEscuela.val());
-								if($local.$selectEscuela.val() == "" ){
+								if(arr == "" ){
 								    console.log("funciono");
 									var arrayJSONX = response[0].detalle;
+									arr = arrayJSONX;
+									
 								}else{
 									//eliminarVacios(data);
 									console.log($local.$selectEscuela.val());
 									var arrayJSONX = [];
 									//var n = response[0].detalle;
-									for(i=0;i<response.length;i++){
-										console.log(response[i].ejeX);
-									}
 									console.log(response.length);
 									var datanuevo = [];
 									for (l=0;l<response.length;l++){
@@ -570,16 +601,30 @@ $(document).ready(function() {
 										dn['ejeX']=response[l].ejeX;
 										var j =0;
 										console.log(response[l].ejeX);
+										console.log(Object.keys(data[0]));
 										for(i=0;i<n.length;i++){
-											if( n[i].segmento == Object.keys(data[0])[$local.$selectEscuela.val()[j]-1] ){
-												var e = new Object();
-												e['segmento'] = n[i].segmento;
-												e['numeroPrestamos'] = n[i].numeroPrestamos;
-												e['ejeX'] = n[i].ejeX;
-												arrayJSONX.push(e);
-												dn[n[i].segmento] = n[i].numeroPrestamos;
-												j++;
+											if($local.$selectSegmY.val()=="TIPO_SOLICITANTE"){
+												if( n[i].segmento == arr[j] ){
+													var e = new Object();
+													e['segmento'] = n[i].segmento;
+													e['numeroPrestamos'] = n[i].numeroPrestamos;
+													e['ejeX'] = n[i].ejeX;
+													arrayJSONX.push(e);
+													dn[n[i].segmento] = n[i].numeroPrestamos;
+													j++;
+												}
+											}else{
+												if( n[i].segmento == Object.keys(data[0])[Number(arr[j])+cant] ){
+													var e = new Object();
+													e['segmento'] = n[i].segmento;
+													e['numeroPrestamos'] = n[i].numeroPrestamos;
+													e['ejeX'] = n[i].ejeX;
+													arrayJSONX.push(e);
+													dn[n[i].segmento] = n[i].numeroPrestamos;
+													j++;
+												}
 											}
+											
 										}
 										datanuevo.push(dn);
 									}
@@ -589,7 +634,7 @@ $(document).ready(function() {
 								console.log(datanuevo);
 
 								arrayJSONX.sort();								
-								for(i=0;i<arrayJSONX.length;i++){
+								for(i=0;i<arr.length;i++){
 									var g = new Object();
 									g['balloonText'] = "<b style='font-size:12px'>[[title]]</b><br><span><b>Periodo : </b></span> [[category]]<br><span><b>Número Préstamos: </b> [[value]]";
 									g['fillAlphas'] = 0.8;
@@ -615,15 +660,20 @@ $(document).ready(function() {
 								console.log(data);
 								console.log(resultGraph);
 								console.log(Object.keys(data[0]));
+								if(arr==arrayJSONX){
+										var d = data;
+								}else{
+									var d = datanuevo;
+								}
 								var c = [];
-								for(i=0;i<Object.keys(datanuevo[0]).length;i++){
+								for(i=0;i<Object.keys(d[0]).length;i++){
 									var ej = new Object();
 									if(i==0){
 										ej['title'] = "Periodo";
-										ej['data']  = Object.keys(datanuevo[0])[i];
+										ej['data']  = Object.keys(d[0])[i];
 									}else{
-										ej['title'] = Object.keys(datanuevo[0])[i];;
-										ej['data']  = Object.keys(datanuevo[0])[i];
+										ej['title'] = Object.keys(d[0])[i];;
+										ej['data']  = Object.keys(d[0])[i];
 									}
 									c.push(ej);
 								};
@@ -632,7 +682,7 @@ $(document).ready(function() {
 								var dataObject = [];
 								var ayuda = new Object();
 								ayuda['columns'] = c;
-								ayuda['data'] = datanuevo;
+								ayuda['data'] = d;
 								dataObject.push(ayuda);
 								console.log(ayuda);
 								console.log(dataObject);
@@ -1144,6 +1194,8 @@ $(document).ready(function() {
 		if($local.$tipoReporte=="P"){
 			$local.$divTablaResumenPrestamo.removeClass("hidden");
 			$local.$divTablaResumenInfraccion.addClass("hidden");
+			$('#tipoInfraccion').addClass("hidden");
+			$('#tipoEstado').addClass("hidden");
 			//agregar opcion recurso al seleccionar reporte de PRESTAMO
 			$('#selectSegmY').append($('<option>', {
 			    value: 'RECURSO',
@@ -1156,7 +1208,9 @@ $(document).ready(function() {
 		}
 		if($local.$tipoReporte=="I"){
 			$local.$divTablaResumenPrestamo.addClass("hidden");
-			$local.$divTablaResumenInfraccion.removeClass("hidden"); 
+			$local.$divTablaResumenInfraccion.removeClass("hidden");
+			$('#tipoInfraccion').removeClass("hidden");
+			$('#tipoEstado').removeClass("hidden");
 			//agregar opcion Tipo de infraccion al seleccionar reporte de INFRACCION
 			$('#selectSegmY').append($('<option>', {
 			    value: 'TIPO_INFRACCION',
@@ -1173,12 +1227,17 @@ $(document).ready(function() {
 	});
 
 	$local.$exportar.on('click', function(){
-		criterioBusqueda = obtenerCriteriosDeBusqueda();
-		var criterio = "&"+reemplazarCadena("%5B%5D","",$.param(criterioBusqueda));
-		console.log(criterio);
-		if($local.$tipoReporte =="P"){
-		   			window.location.href = $variableUtil.root + "reporteEstadisticaPrestamos?accion=exportar" + criterio;	
+		if (!$formEstadisticas.valid()) {
+			return;
 		}
+		criterioBusqueda = obtenerCriteriosDeBusqueda();
+		console.log(criterioBusqueda);
+			var criterio = "&"+reemplazarCadena("%5B%5D","",$.param(criterioBusqueda));
+			console.log(criterio);
+			if($local.$tipoReporte =="P"){
+			   			window.location.href = $variableUtil.root + "reporteEstadisticaPrestamos?accion=exportar" + criterio;	
+			}
+		
 	});
 	
 	function reemplazarCadena(cadenaVieja, cadenaNueva, cadenaCompleta){

@@ -283,7 +283,33 @@
 																	class="js-example-basic-multiple js-states form-control filtro"
 																	multiple="multiple" >
 																	<option th:each="t : ${tiposRecursos}"
-																		th:value="${t.idTipoRecurso}" th:text="${t.nombre}"></option>
+																		 th:value="${t.idTipoRecurso}" th:text="${t.nombre}"></option>
+																</select>
+															</div>
+														</div>
+													</div>
+													<div id="tipoInfraccion" class="col-md-3  hidden">
+														<div class="form-group m-b-10">
+															<label class="m-r-15">Tipo Infraccion</label>
+															<div class="input-group">
+																<select id="selecttipoInfraccion" name="tipoInfracciones[]"
+																	class="js-example-basic-multiple js-states form-control filtro"
+																	multiple="multiple" >
+																	<option th:each="m : ${multiTabDets}"
+																		th:if="${m.idTabla== 2}" th:value="${m.idItem}" th:text="${m.descripcionCorta}"></option>
+																</select>
+															</div>
+														</div>
+													</div>
+													<div id="tipoEstado" class="col-md-3 hidden">
+														<div class="form-group m-b-10">
+															<label class="m-r-15">Tipo de Estado</label>
+															<div class="input-group">
+																<select id="selecttipoEstado" name="tipoEstados[]"
+																	class="js-example-basic-multiple js-states form-control filtro"
+																	multiple="multiple" >
+																		<option th:each="et : ${estadoTablas}"
+																		th:if="${et.tablaOrigen=='MOV_INFRACCION'}" th:value="${et.idEstadoTabla}" th:text="${et.descripcion}"></option>
 																</select>
 															</div>
 														</div>
