@@ -1,3 +1,4 @@
+
 package pe.edu.unmsm.fisi.siscae.service.impl.mantenimiento;
 
 import java.util.List;
@@ -64,6 +65,12 @@ public class TipoRecursoService extends MantenibleService<TipoRecurso> implement
 	public void eliminarTipoRecurso(TipoRecurso tiporecurso) {
 		this.eliminar(tiporecurso);
 
+	}
+
+	@Override
+	@Transactional(propagation = Propagation.REQUIRES_NEW)
+	public List<TipoRecurso> buscarUsables() {
+		return super.buscar(new TipoRecurso(), OperacionParam.USABLES);
 	}
 
 }

@@ -23,7 +23,8 @@ public enum Operacion
         TIPO_NUM_DOCUMENTO,
         TABLA_ORIGEN,
         ADMI_NOMBRES,
-        TIPO_DETALLE
+        TIPO_DETALLE,
+        USABLES
     }
     
     private OperacionParam parametro;

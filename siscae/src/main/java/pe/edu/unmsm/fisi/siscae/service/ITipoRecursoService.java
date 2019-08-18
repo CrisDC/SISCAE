@@ -8,6 +8,8 @@ public interface ITipoRecursoService extends IMantenibleService<TipoRecurso> {
 	  public List<TipoRecurso> buscarTodos();
 
 	    public List<TipoRecurso> buscarPorIdTipoRecurso(Integer idTipoRecurso);
+	    
+	    public List<TipoRecurso> buscarUsables();
 
 	    public boolean existeTipoRecurso(Integer idTipoRecurso);
 

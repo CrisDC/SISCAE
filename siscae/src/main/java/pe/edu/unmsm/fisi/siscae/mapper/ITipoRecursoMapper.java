@@ -18,6 +18,7 @@ public interface ITipoRecursoMapper extends IMantenibleMapper <TipoRecurso> {
             + "#{objeto.descripcion, jdbcType = VARCHAR, mode = IN},"
             + "#{objeto.uso, jdbcType = VARCHAR, mode = IN},"
             + "#{objeto.maxCapacidad, jdbcType = INTEGER, mode = IN},"
+            + "#{objeto.usable, jdbcType = VARCHAR, mode = IN},"
             + "#{userAudit, jdbcType = VARCHAR, mode = IN})}" })
 	 @Options (statementType = StatementType.CALLABLE)
 	 public List<TipoRecurso> mantener (Parametro parametro);

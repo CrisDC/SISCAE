@@ -59,7 +59,7 @@ public @Controller class ReporteController
    		model.addAttribute("areaAdministrativo", areaAdministrativo);
    		model.addAttribute("escuelas", escuelaService.buscarTodos());
    		model.addAttribute("areasEstudio", areaEstudioService.buscarTodos());
-   		model.addAttribute("tiposRecursos", tipoRecursoService.buscarTodos());
+   		model.addAttribute("tiposRecursos", tipoRecursoService.buscarUsables());
    		model.addAttribute("multiTabDets",multiTabDetService.buscarTodos());
    		model.addAttribute("estadoTablas",estadoTablaService.buscarTodos());
    		
