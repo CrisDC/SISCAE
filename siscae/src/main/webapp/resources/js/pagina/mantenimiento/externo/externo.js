@@ -10,6 +10,8 @@ $(document).ready(function() {
 		$selectEstadoTabla: $("#idEstadoTabla"),
 		$selectPersona: $("#idPersona"),
 	}
+	$funcionUtil.crearSelect2($local.$selectEstadoTabla,"Seleccione el estado");
+
 	$local.$selectPersona.select2({
 	  "width" : "100%",
 	  ajax: {

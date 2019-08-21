@@ -11,6 +11,8 @@ $(document).ready(function() {
 		$selectEstadoTabla: $("#idEstadoTabla"),
 		$selectPersona: $("#idPersona"),
 	}
+	$funcionUtil.crearSelect2($local.$selectEstadoTabla,"Seleccione el estado");
+
 		//Inicializa el selector de persona
 	$local.$selectPersona.select2({
 	  "width" : "100%",
