@@ -165,28 +165,10 @@
 	<!-- Tabla Externo-->
 	<th:block th:fragment="externo">
 		<div class="form-group">
-			<div class="input-group">
-				<div class="input-group-btn search-panel">
-
-					<select id="idTipoDocumento"
-						class="btn btn-default dropdown-toggle select2 elemento-desactivable"
-						name="idTipoDocumento" data-toggle="dropdown">
-						<option value="" selected="selected">Tipo de documento</option>
-						<option th:each="tipoDocumento : ${tipoDocumento}"
-							th:value="${tipoDocumento.idItem}"
-							th:text="|${tipoDocumento.descripcionCorta}|"></option>
-					</select>
-
-				</div>
-				<input type="hidden" name="idPersona" value="all" id="idPersona">
-				<input id="numeroDocumento" type="text" class="form-control" name="numeroDocumento"
-					placeholder="Número de Documento"> <span
-					class="input-group-btn">
-					<button class="btn btn-default" type="button" id="buscar">
-						<span class="fa fa-search"></span>
-					</button>
-				</span>
-			</div>
+			<label class="control-label">Persona </label>
+			<select id="idPersona" class="form-control"
+				name="idPersona">
+			</select>
 		</div>
 
 		<div class="form-group">

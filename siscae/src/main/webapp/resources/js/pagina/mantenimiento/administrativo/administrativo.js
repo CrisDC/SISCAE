@@ -217,6 +217,8 @@ $(document).ready(function() {
 		$local.$selectPersona.html("");
 		var nuevaOpcion = new Option(administrativo.nombre+" "+administrativo.appPaterno+" "+administrativo.appMaterno, administrativo.idAdministrativo, false, false);
 		$local.$selectPersona.append(nuevaOpcion).trigger('change');
+		$local.$selectPersona.prop('disabled', true);
+
 		
 		
 	});
