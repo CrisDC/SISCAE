@@ -8,10 +8,12 @@ $(document).ready(function() {
 		$filaSeleccionada : "",
 		$actualizarMantenimiento : $("#actualizarMantenimiento"),
 		$selectUso : $("#uso"),
+		$selectUsable : $("#usable"),
 		idTipoRecursoSeleccionado : ""
 	}
 	
 	$funcionUtil.crearSelect2($local.$selectUso,"Seleccione el uso");
+	$funcionUtil.crearSelect2($local.$selectUsable,"¿Es usable?");
 	$formMantenimiento = $("#formMantenimiento");
 
 	$.fn.dataTable.ext.errMode = 'none';

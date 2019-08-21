@@ -23,6 +23,9 @@ $(document).ready(function() {
 			maxCapacidad : {
 				required : true
 			},
+			usable : {
+				required : true,
+			},
 			
 		},
 		messages : {
@@ -47,6 +50,9 @@ $(document).ready(function() {
 			},
 			maxCapacidad : {
 				required : "Ingrese capacidad"
+			},
+			usable : {
+				required : "Ingrese si es usable o no "
 			}
 		}
 	});
