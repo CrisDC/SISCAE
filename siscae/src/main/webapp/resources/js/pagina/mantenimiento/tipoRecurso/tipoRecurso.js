@@ -40,10 +40,10 @@ $(document).ready(function() {
 			"targets" : [ 0, 1 ],
 			"className" : "all filtrable",
 		}, {
-			"targets" : [ 2, 3 ],
+			"targets" : [ 2, 3, 4 ],
 			"className" : "filtrable",
 		}, {
-			"targets" : 4,
+			"targets" : 5,
 			"className" : "all dt-center",
 			"defaultContent" : $variableUtil.botonActualizarNuevo + " " + $variableUtil.botonEliminarNuevo
 		} ],
@@ -59,6 +59,9 @@ $(document).ready(function() {
 		}, {
 			"data" : 'maxCapacidad',
 			"title" : "Max Capacidad"
+		},{
+			"data" : 'usable',
+			"title" : "Usable"
 		}, {
 			"data" : null,
 			"title" : 'Acción'
