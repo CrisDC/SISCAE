@@ -70,81 +70,150 @@
 			th:src="@{/resources/js/pagina/consulta/movimientos/prestamos/prestamos.js}"></script>
 		<script
 			th:src="@{/resources/js/pagina/consulta/movimientos/prestamos/initTablaRecursos.js}"></script>
-
+			
+			<script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/3.1.2/rollups/md5.js"></script>
 		<script>
 			$("#btnEnviarDatos").on("click",function(){
-				alert("Me hiciste click");
+				
+				
+				
 				let contraAnterior = $("#contraAnterior").val();
 				let contraNueva = $("#contraNueva").val();
 				let contraNuevaRep = $("#contraNuevaRep").val();
 				
 				let contraPasada = $("#contraPasada").val();
-				alert(contraAnterior);
 				if(contraNueva === contraNuevaRep){
-					//Las contraseñas nuevas son iguales
-					alert(contraNueva);
-					
-					//Aca se tiene que traer la contraseña de ese usuario encriptada
-					//Esta parte se llenará cuando este lista la parte de Alexis
-					/*
 					$.ajax({
-					    url : 'http://bcrypt.org/api/check-password.json',
-
-					    // la información a enviar
-					    // (también es posible utilizar una cadena de datos)
-					    data : { 
-					    			hash : '$2a$06$8DhuLEJC5PS8a8XfuvybUOqwLj4ykJ091lyVBF8R9GlYstIfZMjVm',
-					    			password : 'super-secret'
-					    		},
-
-					    // especifica si será una petición POST o GET
-					    type : 'POST',
-
-					    // el tipo de información que se espera de respuesta
-					    dataType : 'json',
-
-					    // código a ejecutar si la petición es satisfactoria;
-					    // la respuesta es pasada como argumento a la función
-					    success : function(json) {
-					        alert(json);
-					        console.log(json);
-					    },
-
-					    // código a ejecutar si la petición falla;
-					    // son pasados como argumentos a la función
-					    // el objeto de la petición en crudo y código de estatus de la petición
-					    error : function(xhr, status) {
-					        //alert('Disculpe, existió un problema');
-					    },
-
-					    // código a ejecutar sin importar si la petición falló o no
-					    complete : function(xhr, status) {
-					        //alert('Petición realizada');
-					    }
+						type : "GET",
+						url : $variableUtil.root + "username",
+						beforeSend : function(xhr) {
+							//$local.$actualizarContrasenia.attr("disabled", true).find("i").removeClass("fa-floppy-o").addClass("fa-spinner fa-pulse fa-fw");
+							xhr.setRequestHeader('Content-Type', 'application/json');
+							xhr.setRequestHeader("X-CSRF-TOKEN", $variableUtil.csrf);
+						},
+						statusCode : {
+							400 : function(response) {
+								$funcionUtil.limpiarMensajesDeError($formContrasenia);
+								$funcionUtil.mostrarMensajeDeError(response.responseJSON, $formContrasenia);
+							}
+						},
+						success : function(usuario) {
+							console.log(usuario);
+							$.ajax({
+								type : "GET",
+								url : $variableUtil.root + "usuario?accion=buscarTodos",
+								beforeSend : function(xhr) {
+									xhr.setRequestHeader('Content-Type', 'application/json');
+									xhr.setRequestHeader("X-CSRF-TOKEN", $variableUtil.csrf);
+								},
+								statusCode : {
+									400 : function(response) {
+									//	$funcionUtil.limpiarMensajesDeError($formContrasenia);
+									//	$funcionUtil.mostrarMensajeDeError(response.responseJSON, $formContrasenia);
+									}
+								},
+								success : function(usuarios) {
+									var us = [];
+									var n ;
+									console.log(usuarios);
+									for(i=0;i<usuarios.length;i++){
+										if(usuarios[i].nombre == usuario){
+											n = i;
+											var e = new Object();
+											e['username']=usuarios[i].nombre;
+											e['pass'] = usuarios[i].pass;
+											e['ingrepass'] = contraAnterior;
+											e['nuevopass'] = contraNueva;
+											us.push(e);
+										}
+									}
+									console.log(us);
+									
+									$.ajax({
+										type : "POST",
+										url : $variableUtil.root + "cambiocontra",
+										dataType: 'json',
+										data :  JSON.stringify(us[0]),
+										beforeSend : function(xhr) {
+											//$local.$actualizarContrasenia.attr("disabled", true).find("i").removeClass("fa-floppy-o").addClass("fa-spinner fa-pulse fa-fw");
+											xhr.setRequestHeader('Content-Type', 'application/json');
+											xhr.setRequestHeader("X-CSRF-TOKEN", $variableUtil.csrf);
+										},
+										statusCode : {
+											400 : function(response) {
+											//	$funcionUtil.limpiarMensajesDeError($formContrasenia);
+											//	$funcionUtil.mostrarMensajeDeError(response.responseJSON, $formContrasenia);
+											}
+										},
+										success : function(contrasenias) {
+											console.log(contrasenias);
+											if(contrasenias.nuevopass == "incorrecto"){
+												Swal.fire({
+													  type: 'error',
+													  title: 'Error',
+													  text: 'La contraseña anterior escrita no es la correcta'
+													})
+											}else{
+											
+												var u ={
+														"idUsuario" : usuarios[n].idUsuario,
+														"nombre" : usuarios[n].nombre,
+														"pass": contrasenias.nuevopass,
+														"idEstadoTabla"  :usuarios[n].idEstadoTabla,
+														"idRol": usuarios[n].idRol,
+														"idPersona" : usuarios[n].idPersona
+												}
+												console.log(u);
+												
+												$.ajax({
+													type : "PUT",
+													url : $variableUtil.root + "usuario",
+													dataType: 'json',
+													data :  JSON.stringify(u),
+													beforeSend : function(xhr) {
+														//$local.$actualizarContrasenia.attr("disabled", true).find("i").removeClass("fa-floppy-o").addClass("fa-spinner fa-pulse fa-fw");
+														xhr.setRequestHeader('Content-Type', 'application/json');
+														xhr.setRequestHeader("X-CSRF-TOKEN", $variableUtil.csrf);
+													},
+													statusCode : {
+														400 : function(response) {
+														//	$funcionUtil.limpiarMensajesDeError($formContrasenia);
+														//	$funcionUtil.mostrarMensajeDeError(response.responseJSON, $formContrasenia);
+														}
+													},
+													success : function(contrasenias) {
+														console.log(contrasenias);
+														
+													},
+													error : function(response) {
+													},
+													complete : function(response) {
+														//$local.$actualizarContrasenia.attr("disabled", false).find("i").addClass("fa-floppy-o").removeClass("fa-spinner fa-pulse fa-fw");
+													}
+												});
+											}
+										},
+										error : function(response) {
+										},
+										complete : function(response) {
+											//$local.$actualizarContrasenia.attr("disabled", false).find("i").addClass("fa-floppy-o").removeClass("fa-spinner fa-pulse fa-fw");
+										}
+									});
+									
+								},
+								error : function(response) {
+								},
+								complete : function(response) {
+									//$local.$actualizarContrasenia.attr("disabled", false).find("i").addClass("fa-floppy-o").removeClass("fa-spinner fa-pulse fa-fw");
+								}
+							});
+						},
+						error : function(response) {
+						},
+						complete : function(response) {
+							//$local.$actualizarContrasenia.attr("disabled", false).find("i").addClass("fa-floppy-o").removeClass("fa-spinner fa-pulse fa-fw");
+						}
 					});
-					*/
-					
-					var request = new XMLHttpRequest();
-
-					request.open('POST', 'http://bcrypt.org/api/check-password.json', true);
-
-					request.onreadystatechange = function () {
-
-					if (request.readyState ==4 && request.status ==200) {
-
-					     var response = JSON.parse(this.response);
-
-					     var sessionId = response.sessionId;
-
-					     //Use this sessionId in all other calls
-
-					  }
-
-					}
-
-					// Send request
-
-					request.send('{"hash":"$2a$06$8DhuLEJC5PS8a8XfuvybUOqwLj4ykJ091lyVBF8R9GlYstIfZMjVm","password":"super-secret"}');
 					
 				}else{
 					Swal.fire({

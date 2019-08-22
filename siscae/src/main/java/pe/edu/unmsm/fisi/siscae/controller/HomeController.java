@@ -14,6 +14,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -22,6 +24,7 @@ import pe.edu.unmsm.fisi.siscae.configuracion.security.SecurityContextFacade;
 import pe.edu.unmsm.fisi.siscae.controller.excepcion.anotacion.Vista;
 import pe.edu.unmsm.fisi.siscae.model.consulta.ConsultaAdministrativo;
 import pe.edu.unmsm.fisi.siscae.model.criterio.ConsultaAdministrativoCriterioBusqueda;
+import pe.edu.unmsm.fisi.siscae.model.seguridad.Cambiocontra;
 import pe.edu.unmsm.fisi.siscae.service.IConsultaAdministrativoService;
 import pe.edu.unmsm.fisi.siscae.service.IParametroGeneralService;
 
@@ -63,6 +66,7 @@ public @Controller class HomeController
     	BCryptPasswordEncoder encriptador = new BCryptPasswordEncoder();
     	System.out.println("------------------------------------------------------");
     	System.out.println(encriptador.encode("Bica"));
+    	System.out.println(encriptador.encode("12345"));
     	if(encriptador.matches("Bica", encriptador.encode("Bica"))) {
     		System.out.println("si es igual");
     	}else {
@@ -85,11 +89,28 @@ public @Controller class HomeController
     	String currentUserName= "";
     	Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
     	if (!(authentication instanceof AnonymousAuthenticationToken)) {
-    	    currentUserName = authentication.getName();
-    	    
+    	    currentUserName = authentication.getName(); 
     	}
     	System.out.println("**************************************");
     	System.out.println("nombre user es "+ currentUserName );
     	return currentUserName;
     }
+    
+    @PostMapping("/cambiocontra")
+    @ResponseBody	
+    public Cambiocontra cambiar(@RequestBody Cambiocontra c) {
+    	Cambiocontra nuevo = new Cambiocontra();
+    	BCryptPasswordEncoder encriptador = new BCryptPasswordEncoder();
+    	if(encriptador.matches(c.getIngrepass(), c.getPass())) {
+    		nuevo.setNuevopass(encriptador.encode(c.getNuevopass()));
+    	}else {
+    		nuevo.setNuevopass("incorrecto");
+    	}
+    	nuevo.setPass(c.getPass());
+    	nuevo.setUsername(c.getUsername());
+		nuevo.setIngrepass(c.getIngrepass());
+    	return nuevo;
+    }
+    
+    
 }

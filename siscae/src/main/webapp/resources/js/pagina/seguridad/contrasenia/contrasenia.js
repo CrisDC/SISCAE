@@ -16,6 +16,7 @@ $(document).ready(function() {
 	$local.$actualizarContrasenia.on("click", function() {
 
 		var contrasenia = $formContrasenia.serializeJSON();
+		console.log(contrasenia);
 		contrasenia.requiereCambio = true;
 		$.ajax({
 			type : "PUT",

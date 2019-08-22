@@ -46,7 +46,8 @@ public @RestController class UsuarioController {
 		return usuarioService.verificarPassword(clave);
 	}
 	
-	
+	@Audit(accion = Accion.CONSULTA, comentario = Comentario.ConsultaTodos)
+	@GetMapping(params = "accion=buscarTodos")
 	public List<Usuario> buscarTodos(){
 		return usuarioService.buscarTodos();
 	}
@@ -61,6 +62,8 @@ public @RestController class UsuarioController {
 		
 	}
 	
+	@Audit(accion = Accion.ACTUALIZACION, comentario = Comentario.Actualizacion)
+	@PutMapping
 	public ResponseEntity<?> actualizarUsuario(
 			@Validated({ Default.class, IRegistro.class }) @RequestBody Usuario usuario, Errors error){
 		
@@ -72,8 +75,8 @@ public @RestController class UsuarioController {
 	}
 	
 	/*Metodo para actualizar contraseña tipo PUT recibe parametro un objeto de tipo usuario*/
-	@Audit(accion = Accion.ACTUALIZACION, comentario = Comentario.Actualizacion)
-	@PutMapping
+	//@Audit(accion = Accion.ACTUALIZACION, comentario = Comentario.Actualizacion)
+	//@PutMapping
 	public ResponseEntity<?> actualizarPassword(
 			@Validated({ Default.class, IRegistro.class }) @RequestBody Usuario usuario, Errors error){
 		
