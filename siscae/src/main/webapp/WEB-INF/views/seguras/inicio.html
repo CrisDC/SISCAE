@@ -183,6 +183,15 @@
 													},
 													success : function(contrasenias) {
 														console.log(contrasenias);
+								    					swal({
+								    						title: "Cambio de contraseña",
+								    					  	text: "La contraseña se cambio con éxito",
+								    					  	icon: "success",
+								    					  	button: false,
+								    					  	timer: 1000,
+								    					}).then((value) => {
+								    						location.reload();
+								    					});
 														
 													},
 													error : function(response) {
