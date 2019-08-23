@@ -58,19 +58,6 @@
 		<script th:src="@{/resources/js/util/util.js}"></script>
 		<script th:src="@{/resources/js/util/formularioUtil.js}"></script>
 
-		<!-- JS de datatables -->
-		<script th:src="@{/resources/js/datatables/jquery.dataTables.min.js}"></script>
-		<script th:src="@{/resources/js/datatables/dataTables.responsive.min.js}"></script>
-		<script th:src="@{/resources/js/datatables/dataTables.show.rows.js}"></script>
-		<script th:src="@{/resources/js/datatables/dataTables.rowsGroup.js}"></script>
-
-		
-		<!-- JS de envio de peticion -->
-		<script
-			th:src="@{/resources/js/pagina/consulta/movimientos/prestamos/prestamos.js}"></script>
-		<script
-			th:src="@{/resources/js/pagina/consulta/movimientos/prestamos/initTablaRecursos.js}"></script>
-			
 			<script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/3.1.2/rollups/md5.js"></script>
 		<script>
 			$("#btnEnviarDatos").on("click",function(){
@@ -82,6 +69,7 @@
 				let contraNuevaRep = $("#contraNuevaRep").val();
 				
 				let contraPasada = $("#contraPasada").val();
+				console.log($variableUtil.root);
 				if(contraNueva === contraNuevaRep){
 					$.ajax({
 						type : "GET",
@@ -128,7 +116,8 @@
 										}
 									}
 									console.log(us);
-									
+									console.log($variableUtil.root);
+
 									$.ajax({
 										type : "POST",
 										url : $variableUtil.root + "cambiocontra",
