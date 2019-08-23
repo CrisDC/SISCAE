@@ -1344,6 +1344,7 @@ $(document).ready(function() {
 		if($local.$tipoReporte=="P"){
 			$local.$divTablaResumenPrestamo.removeClass("hidden");
 			$local.$divTablaResumenInfraccion.addClass("hidden");
+			$('#recurso').removeClass("hidden");
 			$('#tipoInfraccion').addClass("hidden");
 			$('#tipoEstado').addClass("hidden");
 			//agregar opcion recurso al seleccionar reporte de PRESTAMO
@@ -1361,6 +1362,7 @@ $(document).ready(function() {
 			$local.$divTablaResumenInfraccion.removeClass("hidden");
 			$('#tipoInfraccion').removeClass("hidden");
 			$('#tipoEstado').removeClass("hidden");
+			$('#recurso').addClass("hidden");
 			//agregar opcion Tipo de infraccion al seleccionar reporte de INFRACCION
 			$('#selectSegmY').append($('<option>', {
 			    value: 'TIPO_INFRACCION',
