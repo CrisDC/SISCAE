@@ -1,6 +1,7 @@
 package pe.edu.unmsm.fisi.siscae.controller.reporte;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -17,6 +18,7 @@ import pe.edu.unmsm.fisi.siscae.configuracion.security.SecurityContextFacade;
 import pe.edu.unmsm.fisi.siscae.controller.excepcion.anotacion.Vista;
 import pe.edu.unmsm.fisi.siscae.model.criterio.ConsultaPrestamosCriterioBusqueda;
 import pe.edu.unmsm.fisi.siscae.model.mantenimiento.AreaAdministrativo;
+import pe.edu.unmsm.fisi.siscae.model.mantenimiento.MultiTabDet;
 import pe.edu.unmsm.fisi.siscae.service.IAreaAdministrativoService;
 import pe.edu.unmsm.fisi.siscae.service.IAreaEstudioService;
 import pe.edu.unmsm.fisi.siscae.service.IEscuelaService;
@@ -33,6 +35,8 @@ public @Controller class ReporteController
  
 	private static final String REPORTE = "seguras/reporte/";
 	private static final String REPORTE_ESTADISTICAS = REPORTE + "estadisticas";
+	private static final String REPORTE_HISTORIAL = REPORTE + "historial";
+	private static final Integer ID_TABLA_INFRACCION = 2;
 	
     private @Autowired IMultiTabDetService multiTabDetService;
 	private @Autowired IAreaAdministrativoService areaAdministrativoService;
@@ -40,6 +44,7 @@ public @Controller class ReporteController
 	private @Autowired IAreaEstudioService areaEstudioService;
 	private @Autowired ITipoRecursoService tipoRecursoService;
 	private @Autowired IEstadoTablaService estadoTablaService;
+	private @Autowired IEstadoTablaService estadoTablasService;
     
     @Audit(tipo = Tipo.REP_EST_PRESTAMOS)
    	@GetMapping("/estadisticas")
@@ -65,6 +70,35 @@ public @Controller class ReporteController
    		
    		
    		return REPORTE_ESTADISTICAS;
+   	}
+    
+    @Audit(tipo = Tipo.HIS)
+   	@GetMapping("/historial")
+   	public String irPaginaConsultaHistorial(ModelMap model) {
+   		System.out.println(SecurityContextFacade.getAuthenticatedUser());
+   		int idAdministrativo = 3;
+   		AreaAdministrativo areaAdministrativo = null;
+
+   		ArrayList<AreaAdministrativo> listaAreaAdministrativo = (ArrayList) areaAdministrativoService.buscarTodos();
+   		for (int i = 0; i < listaAreaAdministrativo.size(); i++) {
+   			if (listaAreaAdministrativo.get(i).getIdAdministrativo() == idAdministrativo) {
+   				areaAdministrativo = listaAreaAdministrativo.get(i);
+   			}
+   		}
+   		ConsultaPrestamosCriterioBusqueda criterioBusqueda = new ConsultaPrestamosCriterioBusqueda();
+   		criterioBusqueda.setAreaEstudio(areaAdministrativo.getNombreAreaEstudio());
+   		List<MultiTabDet> tiposInfracciones = multiTabDetService.buscarPorIdTabla(ID_TABLA_INFRACCION);
+   		model.addAttribute("areaAdministrativo", areaAdministrativo);
+   		model.addAttribute("escuelas", escuelaService.buscarTodos());
+   		model.addAttribute("areasEstudio", areaEstudioService.buscarTodos());
+   		model.addAttribute("tiposRecursos", tipoRecursoService.buscarUsables());
+   		model.addAttribute("multiTabDets",multiTabDetService.buscarTodos());
+   		model.addAttribute("estadoTablas",estadoTablaService.buscarTodos());
+   		model.addAttribute("estadosI", estadoTablasService.buscarporTablaOrigen("MOV_INFRACCION"));
+   		model.addAttribute("tipoInfracciones", tiposInfracciones);
+   		
+   		
+   		return REPORTE_HISTORIAL;
    	}
 //    
 //    @Audit(tipo = Tipo.REP_EST_PRESTAMOS)

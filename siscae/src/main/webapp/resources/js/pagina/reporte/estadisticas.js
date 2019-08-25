@@ -1032,8 +1032,8 @@ $(document).ready(function() {
 		}
 		if(tipoGrafico == "BARRAS"){
 			if(ejeX=="PERIODO"){
-				console.log("caso7");
 				if(segmentacionY=="NINGUNA"){
+					console.log("caso7");
 					$.ajax({
 						type : "GET",
 						url : $variableUtil.root + "reporteEstadisticaInfracciones?accion=buscarPorPeriodoSinSegmentar"+criterio,
@@ -1094,37 +1094,547 @@ $(document).ready(function() {
 								data.push(aux);
 							}
 							console.log(data);
-							//Generando Leyenda
-							var resultGraph = [];
-							var arrayJSONX = response[0].detalle;
-							arrayJSONX.sort();								
-							for(i=0;i<arrayJSONX.length;i++){
-								var g = new Object();
-								g['balloonText'] = "<b style='font-size:12px'>[[title]]</b><br><span><b>Periodo : </b></span> [[category]]<br><span><b>Número Infracciones: </b> [[value]]";
-								g['fillAlphas'] = 0.8;
-								g['labelText'] = "[[value]]";
-								g['labelPosition'] = "middle";
-								g['lineAlpha'] = 0.3;
-								g['title'] = arrayJSONX[i].segmento;
-								g['type'] = "column";
-								g['valueField'] = arrayJSONX[i].segmento;
-								resultGraph.push(g);
+							
+							var arr;
+							var cant;
+							switch($local.$selectSegmY.val()){
+							case "ESCUELA":{		
+								arr = $local.$selectEscuela.val();
+								console.log(arr);
+								$.ajax({
+									type : "GET",
+									url : $variableUtil.root + "escuela?accion=buscarTodos",
+									//data : JSON.stringify(alumno),
+									beforeSend : function(xhr) {
+										//$local.$registrarMantenimiento.attr("disabled", true).find("i").removeClass("fa-floppy-o").addClass("fa-spinner fa-pulse fa-fw");
+										xhr.setRequestHeader('Content-Type', 'application/json');
+										xhr.setRequestHeader("X-CSRF-TOKEN", $variableUtil.csrf);
+									},
+									
+									success : function(tr) {
+										console.log(tr);
+
+										//Generando Leyenda
+										var resultGraph = [];
+										if(arr == "" ){
+										    console.log("funciono");
+											var arrayJSONX = response[0].detalle;
+											arr = arrayJSONX;
+											
+										}else{
+											//eliminarVacios(data);
+											console.log($local.$selectEscuela.val());
+											var datos=[];
+											var j =0;
+											
+											for(i =0;i<tr.length;i++){
+												if(j<arr.length){									
+													if(tr[i].idEscuela == arr[j]){
+														var e = new Object();
+														e['id']=tr[i].idEscuela;
+														e['nombre']=tr[i].nombre;
+														datos.push(e);
+														j++;	
+													}
+														
+												}
+												
+											}
+											console.log(datos);
+											var arrayJSONX = [];
+											//var n = response[0].detalle;
+											console.log(response.length);
+											var datanuevo = [];
+											for (l=0;l<response.length;l++){
+												var n = response[l].detalle;
+												var dn = new Object();
+												dn['ejeX']=response[l].ejeX;
+												var j =0;
+												for(i=0;i<n.length;i++){
+													   if(j<datos.length){
+														   if( n[i].segmento == datos[j].nombre ){
+																var e = new Object();
+																e['segmento'] = n[i].segmento;
+																e['numeroInfracciones'] = n[i].numeroInfracciones;
+																e['ejeX'] = n[i].ejeX;
+																arrayJSONX.push(e);
+																dn[n[i].segmento] = n[i].numeroInfracciones;
+																j++;
+															}   
+													   }
+												}
+												datanuevo.push(dn);
+											}
+										}	
+											
+										console.log(datanuevo);
+
+										arrayJSONX.sort();								
+										for(i=0;i<arr.length;i++){
+											var g = new Object();
+											g['balloonText'] = "<b style='font-size:12px'>[[title]]</b><br><span><b>Periodo : </b></span> [[category]]<br><span><b>Número Préstamos: </b> [[value]]";
+											g['fillAlphas'] = 0.8;
+											g['labelText'] = "[[value]]";
+											g['labelPosition'] = "middle";
+											g['lineAlpha'] = 0.3;
+											g['title'] = arrayJSONX[i].segmento;
+											g['type'] = "column";
+											g['valueField'] = arrayJSONX[i].segmento;
+											resultGraph.push(g);
+										}
+										//obteniendo presentacion
+										var presentacion ='';
+										if($local.$selectPresentacion.val()=="APILADO"){
+											presentacion='regular';
+										}
+										else if ($local.$selectPresentacion.val()=="PARALELO"){
+											presentacion='none';
+										}
+										//console.log(data);
+										console.log(arrayJSONX);
+										eliminarVacios(data);
+										console.log(data);
+										console.log(resultGraph);
+										console.log(Object.keys(data[0]));
+										if(arr==arrayJSONX){
+												var d = data;
+										}else{
+											var d = datanuevo;
+										}
+										var c = [];
+										for(i=0;i<Object.keys(d[0]).length;i++){
+											var ej = new Object();
+											if(i==0){
+												ej['title'] = "Periodo";
+												ej['data']  = Object.keys(d[0])[i];
+											}else{
+												ej['title'] = Object.keys(d[0])[i];;
+												ej['data']  = Object.keys(d[0])[i];
+											}
+											c.push(ej);
+										};
+										
+										//console.log(c); eval('[{"columns":' +c+ ',"data":' +data+0 '}]')
+										var dataObject = [];
+										var ayuda = new Object();
+										ayuda['columns'] = c;
+										ayuda['data'] = d;
+										dataObject.push(ayuda);
+										console.log(ayuda);
+										console.log(dataObject);
+										$local.tablaResultadosInfraccion.destroy();
+										$local.tablaResultadosInfraccion = $local.$tablaResultadosInfraccion.DataTable(dataObject[0]);
+			
+										//Dibujando tabla
+		                                //$local.tablaResultadosPrestamo.rows.add(data).draw();
+										//Dibujando grafico
+										var chart = AmCharts.makeChart('chartdiv',$funcionGraficoUtil.crearGraficoBarrasSegmentado(data,resultGraph,'ejeX','Cantidad de Infracciones',presentacion,'Infracciones por criterio'));
+										data = [];
+										resultGraph = [];
+										arrayJSONX = [];
+										dataObject = [];
+										c =[];
+									}
+								});	
+								break;
 							}
-							//obteniendo presentacion
-							var presentacion ='';
-							if($local.$selectPresentacion.val()=="APILADO"){
-								presentacion='regular';
+							case "AREA_ESTUDIO":{
+								arr = $local.$selectAreaEstudio.val();
+								console.log(arr);
+								$.ajax({
+									type : "GET",
+									url : $variableUtil.root + "areaEstudio?accion=buscarTodos",
+									//data : JSON.stringify(alumno),
+									beforeSend : function(xhr) {
+										//$local.$registrarMantenimiento.attr("disabled", true).find("i").removeClass("fa-floppy-o").addClass("fa-spinner fa-pulse fa-fw");
+										xhr.setRequestHeader('Content-Type', 'application/json');
+										xhr.setRequestHeader("X-CSRF-TOKEN", $variableUtil.csrf);
+									},
+									
+									success : function(tr) {
+										console.log(tr);
+
+										//Generando Leyenda
+										var resultGraph = [];
+										if(arr == "" ){
+										    console.log("funciono");
+											var arrayJSONX = response[0].detalle;
+											arr = arrayJSONX;
+											
+										}else{
+											var datos=[];
+											var j =0;
+											
+											for(i =0;i<tr.length;i++){
+												if(j<arr.length){									
+													if(tr[i].idAreaEstudio == arr[j]){
+														var e = new Object();
+														e['id']=tr[i].idAreaEstudio;
+														e['nombre']=tr[i].nombre;
+														datos.push(e);
+														j++;	
+													}
+														
+												}
+												
+											}
+											console.log(datos);
+											var arrayJSONX = [];
+											//var n = response[0].detalle;
+											console.log(response.length);
+											var datanuevo = [];
+											for (l=0;l<response.length;l++){
+												var n = response[l].detalle;
+												var dn = new Object();
+												dn['ejeX']=response[l].ejeX;
+												var j =0;
+												for(i=0;i<n.length;i++){
+													   if(j<datos.length){
+														   if( n[i].segmento == datos[j].nombre ){
+																var e = new Object();
+																e['segmento'] = n[i].segmento;
+																e['numeroPrestamos'] = n[i].numeroInfracciones;
+																e['ejeX'] = n[i].ejeX;
+																arrayJSONX.push(e);
+																dn[n[i].segmento] = n[i].numeroInfracciones;
+																j++;
+															}   
+													   }
+												}
+												datanuevo.push(dn);
+											}
+										}	
+											
+										console.log(datanuevo);
+
+										arrayJSONX.sort();								
+										for(i=0;i<arr.length;i++){
+											var g = new Object();
+											g['balloonText'] = "<b style='font-size:12px'>[[title]]</b><br><span><b>Periodo : </b></span> [[category]]<br><span><b>Número Préstamos: </b> [[value]]";
+											g['fillAlphas'] = 0.8;
+											g['labelText'] = "[[value]]";
+											g['labelPosition'] = "middle";
+											g['lineAlpha'] = 0.3;
+											g['title'] = arrayJSONX[i].segmento;
+											g['type'] = "column";
+											g['valueField'] = arrayJSONX[i].segmento;
+											resultGraph.push(g);
+										}
+										//obteniendo presentacion
+										var presentacion ='';
+										if($local.$selectPresentacion.val()=="APILADO"){
+											presentacion='regular';
+										}
+										else if ($local.$selectPresentacion.val()=="PARALELO"){
+											presentacion='none';
+										}
+										//console.log(data);
+										console.log(arrayJSONX);
+										eliminarVacios(data);
+										console.log(data);
+										console.log(resultGraph);
+										console.log(Object.keys(data[0]));
+										if(arr==arrayJSONX){
+												var d = data;
+										}else{
+											var d = datanuevo;
+										}
+										var c = [];
+										for(i=0;i<Object.keys(d[0]).length;i++){
+											var ej = new Object();
+											if(i==0){
+												ej['title'] = "Periodo";
+												ej['data']  = Object.keys(d[0])[i];
+											}else{
+												ej['title'] = Object.keys(d[0])[i];;
+												ej['data']  = Object.keys(d[0])[i];
+											}
+											c.push(ej);
+										};
+										
+										//console.log(c); eval('[{"columns":' +c+ ',"data":' +data+0 '}]')
+										var dataObject = [];
+										var ayuda = new Object();
+										ayuda['columns'] = c;
+										ayuda['data'] = d;
+										dataObject.push(ayuda);
+										console.log(ayuda);
+										console.log(dataObject);
+										$local.tablaResultadosInfraccion.destroy();
+										$local.tablaResultadosInfraccion = $local.$tablaResultadosInfraccion.DataTable(dataObject[0]);
+			
+										//Dibujando tabla
+		                                //$local.tablaResultadosPrestamo.rows.add(data).draw();
+										//Dibujando grafico
+										var chart = AmCharts.makeChart('chartdiv',$funcionGraficoUtil.crearGraficoBarrasSegmentado(data,resultGraph,'ejeX','Cantidad de Infracciones',presentacion,'Infracciones por criterio'));
+										data = [];
+										resultGraph = [];
+										arrayJSONX = [];
+										dataObject = [];
+										c =[];
+									}
+								});	
+								break;
 							}
-							else if ($local.$selectPresentacion.val()=="PARALELO"){
-								presentacion='none';
+							case "TIPO_SOLICITANTE":{
+								arr = $local.$selectSolicitante.val();
+								console.log(arr);
+								//Generando Leyenda
+								var resultGraph = [];
+								if(arr==""){
+									var arraJSONX = response[0].detalle;
+									arr = arrayJSONX;
+								}else{
+									
+									var datos = [];
+									var j =0;
+									console.log(data[0][arr[0]]);
+									for(i =0;i<arr.length;i++){
+										
+									}
+									
+									var arrayJSONX = [];
+									var datanuevo = [];
+									for(l=0;l<response.length;l++){
+										var n = response[l].detalle;
+										var dn = new Object();
+										dn['ejeX'] = response[l].ejeX;
+										var j =0;
+										for(i=0;i<n.length;i++){
+											if(j<arr.length){
+												if(n[i].segmento == arr[j]){
+													var e = new Object();
+													e['segmento']= n[i].segmento;
+													e['numeroInfracciones'] = n[i].numeroInfracciones;
+													e['ejeX']= n[i].ejeX;
+													arrayJSONX.push(e);
+													dn[n[i].segmento]= n[i].numeroInfracciones;
+													j++;
+												}
+													
+											}
+											
+										}
+										datanuevo.push(dn);
+									}
+								}	
+								
+								
+								console.log(datanuevo);
+
+								arrayJSONX.sort();	
+								
+									for(i=0;i<arr.length;i++){
+										var g = new Object();
+										g['balloonText'] = "<b style='font-size:12px'>[[title]]</b><br><span><b>Periodo : </b></span> [[category]]<br><span><b>Número Préstamos: </b> [[value]]";
+										g['fillAlphas'] = 0.8;
+										g['labelText'] = "[[value]]";
+										g['labelPosition'] = "middle";
+										g['lineAlpha'] = 0.3;
+										g['title'] = arrayJSONX[i].segmento;
+										g['type'] = "column";
+										g['valueField'] = arrayJSONX[i].segmento;
+										resultGraph.push(g);
+									}
+									
+									//obteniendo presentacion
+									var presentacion ='';
+									if($local.$selectPresentacion.val()=="APILADO"){
+										presentacion='regular';
+									}
+									else if ($local.$selectPresentacion.val()=="PARALELO"){
+										presentacion='none';
+									}
+									//console.log(data);
+									console.log(arrayJSONX);
+									eliminarVacios(data);
+									console.log(data);
+									console.log(resultGraph);
+									console.log(Object.keys(data[0]));
+									if(arr==arrayJSONX){
+											var d = data;
+									}else{
+										var d = datanuevo;
+									}
+									var c = [];
+									for(i=0;i<Object.keys(d[0]).length;i++){
+										var ej = new Object();
+										if(i==0){
+											ej['title'] = "Periodo";
+											ej['data']  = Object.keys(d[0])[i];
+										}else{
+											ej['title'] = Object.keys(d[0])[i];;
+											ej['data']  = Object.keys(d[0])[i];
+										}
+										c.push(ej);
+									};
+									
+									//console.log(c); eval('[{"columns":' +c+ ',"data":' +data+0 '}]')
+									var dataObject = [];
+									var ayuda = new Object();
+									ayuda['columns'] = c;
+									ayuda['data'] = d;
+									dataObject.push(ayuda);
+									console.log(ayuda);
+									console.log(dataObject);
+									$local.tablaResultadosInfraccion.destroy();
+									$local.tablaResultadosInfraccion = $local.$tablaResultadosInfraccion.DataTable(dataObject[0]);
+		
+									//Dibujando tabla
+	                                //$local.tablaResultadosPrestamo.rows.add(data).draw();
+									//Dibujando grafico
+									var chart = AmCharts.makeChart('chartdiv',$funcionGraficoUtil.crearGraficoBarrasSegmentado(data,resultGraph,'ejeX','Cantidad de Infracciones',presentacion,'Infracciones por criterio'));
+									data = [];
+									resultGraph = [];
+									arrayJSONX = [];
+									dataObject = [];
+									c =[];
+
+								break;
 							}
-							//Dibujando tabla
-							//$local.tablaResultadosInfraccion.rows.add(response).draw();
-							//Dibujando grafico
-							var chart = AmCharts.makeChart('chartdiv',$funcionGraficoUtil.crearGraficoBarrasSegmentado(data,resultGraph,'ejeX','Cantidad de Infracciones',presentacion,'Infracciones por criterio'));
-							data = [];
-							resultGraph = [];
-							arrayJSONX = [];
+							case "TIPO_INFRACCION":{
+								arr = $local.$selecttipoInfraccion.val();
+								console.log(arr);
+								$.ajax({
+									type : "GET",
+									url : $variableUtil.root + "multiTabDet/multiTabCab/"+2,
+									beforeSend : function(xhr) {
+										//$local.$registrarMantenimiento.attr("disabled", true).find("i").removeClass("fa-floppy-o").addClass("fa-spinner fa-pulse fa-fw");
+										xhr.setRequestHeader('Content-Type', 'application/json');
+										xhr.setRequestHeader("X-CSRF-TOKEN", $variableUtil.csrf);
+									},
+									
+									success : function(tr) {
+										console.log(tr);
+
+										//Generando Leyenda
+										var resultGraph = [];
+										if(arr == "" ){
+										    console.log("funciono");
+											var arrayJSONX = response[0].detalle;
+											arr = arrayJSONX;
+											
+										}else{
+											var datos=[];
+											var j =0;
+											
+											for(i =0;i<tr.length;i++){
+												if(j<arr.length){									
+													if(tr[i].idItem == arr[j]){
+														var e = new Object();
+														e['id']=tr[i].idItem;
+														e['descripcion']=tr[i].descripcion;
+														datos.push(e);
+														j++;	
+													}
+														
+												}
+												
+											}
+											console.log(datos);
+											var arrayJSONX = [];
+											//var n = response[0].detalle;
+											console.log(response.length);
+											var datanuevo = [];
+											for (l=0;l<response.length;l++){
+												var n = response[l].detalle;
+												var dn = new Object();
+												dn['ejeX']=response[l].ejeX;
+												var j =0;
+												for(i=0;i<n.length;i++){
+													   if(j<datos.length){
+														   if( n[i].segmento == datos[j].descripcion ){
+																var e = new Object();
+																e['segmento'] = n[i].segmento;
+																e['numeroPrestamos'] = n[i].numeroInfracciones;
+																e['ejeX'] = n[i].ejeX;
+																arrayJSONX.push(e);
+																dn[n[i].segmento] = n[i].numeroInfracciones;
+																j++;
+															}   
+													   }
+												}
+												datanuevo.push(dn);
+											}
+										}	
+											
+										console.log(datanuevo);
+
+										arrayJSONX.sort();								
+										for(i=0;i<arr.length;i++){
+											var g = new Object();
+											g['balloonText'] = "<b style='font-size:12px'>[[title]]</b><br><span><b>Periodo : </b></span> [[category]]<br><span><b>Número Préstamos: </b> [[value]]";
+											g['fillAlphas'] = 0.8;
+											g['labelText'] = "[[value]]";
+											g['labelPosition'] = "middle";
+											g['lineAlpha'] = 0.3;
+											g['title'] = arrayJSONX[i].segmento;
+											g['type'] = "column";
+											g['valueField'] = arrayJSONX[i].segmento;
+											resultGraph.push(g);
+										}
+										//obteniendo presentacion
+										var presentacion ='';
+										if($local.$selectPresentacion.val()=="APILADO"){
+											presentacion='regular';
+										}
+										else if ($local.$selectPresentacion.val()=="PARALELO"){
+											presentacion='none';
+										}
+										//console.log(data);
+										console.log(arrayJSONX);
+										eliminarVacios(data);
+										console.log(data);
+										console.log(resultGraph);
+										console.log(Object.keys(data[0]));
+										if(arr==arrayJSONX){
+												var d = data;
+										}else{
+											var d = datanuevo;
+										}
+										var c = [];
+										for(i=0;i<Object.keys(d[0]).length;i++){
+											var ej = new Object();
+											if(i==0){
+												ej['title'] = "Periodo";
+												ej['data']  = Object.keys(d[0])[i];
+											}else{
+												ej['title'] = Object.keys(d[0])[i];;
+												ej['data']  = Object.keys(d[0])[i];
+											}
+											c.push(ej);
+										};
+										
+										//console.log(c); eval('[{"columns":' +c+ ',"data":' +data+0 '}]')
+										var dataObject = [];
+										var ayuda = new Object();
+										ayuda['columns'] = c;
+										ayuda['data'] = d;
+										dataObject.push(ayuda);
+										console.log(ayuda);
+										console.log(dataObject);
+										$local.tablaResultadosInfraccion.destroy();
+										$local.tablaResultadosInfraccion = $local.$tablaResultadosInfraccion.DataTable(dataObject[0]);
+			
+										//Dibujando tabla
+		                                //$local.tablaResultadosPrestamo.rows.add(data).draw();
+										//Dibujando grafico
+										var chart = AmCharts.makeChart('chartdiv',$funcionGraficoUtil.crearGraficoBarrasSegmentado(data,resultGraph,'ejeX','Cantidad de Infracciones',presentacion,'Infracciones por criterio'));
+										data = [];
+										resultGraph = [];
+										arrayJSONX = [];
+										dataObject = [];
+										c =[];
+									}
+								});	
+								break;
+							}
+							case "NINGUNA" :{
+								arr = "";
+								break;
+							}
+							}
+							
 						},
 						error : function(response) {
 						},
@@ -1197,37 +1707,546 @@ $(document).ready(function() {
 								}
 								data.push(aux);
 							}
-							//Generando Leyenda
-							var resultGraph = [];
-							var arrayJSONX = response[0].detalle;
-							arrayJSONX.sort();								
-							for(i=0;i<arrayJSONX.length;i++){
-								var g = new Object();
-								g['balloonText'] = "<b style='font-size:12px'>[[title]]</b><br><span><b>"+ejeX+" : </b></span> [[category]]<br><span><b>Número Préstamos: </b> [[value]]";
-								g['fillAlphas'] = 0.8;
-								g['labelText'] = "[[value]]";
-								g['labelPosition'] = "middle";
-								g['lineAlpha'] = 0.3;
-								g['title'] = arrayJSONX[i].segmento;
-								g['type'] = "column";
-								g['valueField'] = arrayJSONX[i].segmento;
-								resultGraph.push(g);
+							
+							var arr;
+							var cant;
+							switch($local.$selectSegmY.val()){
+							case "ESCUELA":{		
+								arr = $local.$selectEscuela.val();
+								console.log(arr);
+								$.ajax({
+									type : "GET",
+									url : $variableUtil.root + "escuela?accion=buscarTodos",
+									//data : JSON.stringify(alumno),
+									beforeSend : function(xhr) {
+										//$local.$registrarMantenimiento.attr("disabled", true).find("i").removeClass("fa-floppy-o").addClass("fa-spinner fa-pulse fa-fw");
+										xhr.setRequestHeader('Content-Type', 'application/json');
+										xhr.setRequestHeader("X-CSRF-TOKEN", $variableUtil.csrf);
+									},
+									
+									success : function(tr) {
+										console.log(tr);
+
+										//Generando Leyenda
+										var resultGraph = [];
+										if(arr == "" ){
+										    console.log("funciono");
+											var arrayJSONX = response[0].detalle;
+											arr = arrayJSONX;
+											
+										}else{
+											//eliminarVacios(data);
+											console.log($local.$selectEscuela.val());
+											var datos=[];
+											var j =0;
+											
+											for(i =0;i<tr.length;i++){
+												if(j<arr.length){									
+													if(tr[i].idEscuela == arr[j]){
+														var e = new Object();
+														e['id']=tr[i].idEscuela;
+														e['nombre']=tr[i].nombre;
+														datos.push(e);
+														j++;	
+													}
+														
+												}
+												
+											}
+											console.log(datos);
+											var arrayJSONX = [];
+											//var n = response[0].detalle;
+											console.log(response.length);
+											var datanuevo = [];
+											for (l=0;l<response.length;l++){
+												var n = response[l].detalle;
+												var dn = new Object();
+												dn['ejeX']=response[l].ejeX;
+												var j =0;
+												for(i=0;i<n.length;i++){
+													   if(j<datos.length){
+														   if( n[i].segmento == datos[j].nombre ){
+																var e = new Object();
+																e['segmento'] = n[i].segmento;
+																e['numeroInfracciones'] = n[i].numeroInfracciones;
+																e['ejeX'] = n[i].ejeX;
+																arrayJSONX.push(e);
+																dn[n[i].segmento] = n[i].numeroInfracciones;
+																j++;
+															}   
+													   }
+												}
+												datanuevo.push(dn);
+											}
+										}	
+											
+										console.log(datanuevo);
+
+										arrayJSONX.sort();								
+										for(i=0;i<arr.length;i++){
+											var g = new Object();
+											g['balloonText'] = "<b style='font-size:12px'>[[title]]</b><br><span><b>Periodo : </b></span> [[category]]<br><span><b>Número Préstamos: </b> [[value]]";
+											g['fillAlphas'] = 0.8;
+											g['labelText'] = "[[value]]";
+											g['labelPosition'] = "middle";
+											g['lineAlpha'] = 0.3;
+											g['title'] = arrayJSONX[i].segmento;
+											g['type'] = "column";
+											g['valueField'] = arrayJSONX[i].segmento;
+											resultGraph.push(g);
+										}
+										//obteniendo presentacion
+										var presentacion ='';
+										if($local.$selectPresentacion.val()=="APILADO"){
+											presentacion='regular';
+										}
+										else if ($local.$selectPresentacion.val()=="PARALELO"){
+											presentacion='none';
+										}
+										//console.log(data);
+										console.log(arrayJSONX);
+										eliminarVacios(data);
+										console.log(data);
+										console.log(resultGraph);
+										console.log(Object.keys(data[0]));
+										if(arr==arrayJSONX){
+												var d = data;
+										}else{
+											var d = datanuevo;
+										}
+										var c = [];
+										for(i=0;i<Object.keys(d[0]).length;i++){
+											var ej = new Object();
+											if(i==0){
+												ej['title'] = "Periodo";
+												ej['data']  = Object.keys(d[0])[i];
+											}else{
+												ej['title'] = Object.keys(d[0])[i];;
+												ej['data']  = Object.keys(d[0])[i];
+											}
+											c.push(ej);
+										};
+										
+										//console.log(c); eval('[{"columns":' +c+ ',"data":' +data+0 '}]')
+										var dataObject = [];
+										var ayuda = new Object();
+										ayuda['columns'] = c;
+										ayuda['data'] = d;
+										dataObject.push(ayuda);
+										console.log(ayuda);
+										console.log(dataObject);
+										$local.tablaResultadosInfraccion.destroy();
+										$local.tablaResultadosInfraccion = $local.$tablaResultadosInfraccion.DataTable(dataObject[0]);
+			
+										//Dibujando tabla
+		                                //$local.tablaResultadosPrestamo.rows.add(data).draw();
+										//Dibujando grafico
+										var chart = AmCharts.makeChart('chartdiv',$funcionGraficoUtil.crearGraficoBarrasSegmentado(data,resultGraph,'ejeX','Cantidad de Infracciones',presentacion,'Infracciones por criterio'));
+										data = [];
+										resultGraph = [];
+										arrayJSONX = [];
+										dataObject = [];
+										c =[];
+									}
+								});	
+								break;
 							}
-							//obteniendo presentacion
-							var presentacion ='';
-							if($local.$selectPresentacion.val()=="APILADO"){
-								presentacion='regular';
+							case "AREA_ESTUDIO":{
+								arr = $local.$selectAreaEstudio.val();
+								console.log(arr);
+								$.ajax({
+									type : "GET",
+									url : $variableUtil.root + "areaEstudio?accion=buscarTodos",
+									//data : JSON.stringify(alumno),
+									beforeSend : function(xhr) {
+										//$local.$registrarMantenimiento.attr("disabled", true).find("i").removeClass("fa-floppy-o").addClass("fa-spinner fa-pulse fa-fw");
+										xhr.setRequestHeader('Content-Type', 'application/json');
+										xhr.setRequestHeader("X-CSRF-TOKEN", $variableUtil.csrf);
+									},
+									
+									success : function(tr) {
+										console.log(tr);
+
+										//Generando Leyenda
+										var resultGraph = [];
+										if(arr == "" ){
+										    console.log("funciono");
+											var arrayJSONX = response[0].detalle;
+											arr = arrayJSONX;
+											
+										}else{
+											var datos=[];
+											var j =0;
+											
+											for(i =0;i<tr.length;i++){
+												if(j<arr.length){									
+													if(tr[i].idAreaEstudio == arr[j]){
+														var e = new Object();
+														e['id']=tr[i].idAreaEstudio;
+														e['nombre']=tr[i].nombre;
+														datos.push(e);
+														j++;	
+													}
+														
+												}
+												
+											}
+											console.log(datos);
+											var arrayJSONX = [];
+											//var n = response[0].detalle;
+											console.log(response.length);
+											var datanuevo = [];
+											for (l=0;l<response.length;l++){
+												var n = response[l].detalle;
+												var dn = new Object();
+												dn['ejeX']=response[l].ejeX;
+												var j =0;
+												for(i=0;i<n.length;i++){
+													   if(j<datos.length){
+														   if( n[i].segmento == datos[j].nombre ){
+																var e = new Object();
+																e['segmento'] = n[i].segmento;
+																e['numeroPrestamos'] = n[i].numeroInfracciones;
+																e['ejeX'] = n[i].ejeX;
+																arrayJSONX.push(e);
+																dn[n[i].segmento] = n[i].numeroInfracciones;
+																j++;
+															}   
+													   }
+												}
+												datanuevo.push(dn);
+											}
+										}	
+											
+										console.log(datanuevo);
+
+										arrayJSONX.sort();								
+										for(i=0;i<arr.length;i++){
+											var g = new Object();
+											g['balloonText'] = "<b style='font-size:12px'>[[title]]</b><br><span><b>Periodo : </b></span> [[category]]<br><span><b>Número Préstamos: </b> [[value]]";
+											g['fillAlphas'] = 0.8;
+											g['labelText'] = "[[value]]";
+											g['labelPosition'] = "middle";
+											g['lineAlpha'] = 0.3;
+											g['title'] = arrayJSONX[i].segmento;
+											g['type'] = "column";
+											g['valueField'] = arrayJSONX[i].segmento;
+											resultGraph.push(g);
+										}
+										//obteniendo presentacion
+										var presentacion ='';
+										if($local.$selectPresentacion.val()=="APILADO"){
+											presentacion='regular';
+										}
+										else if ($local.$selectPresentacion.val()=="PARALELO"){
+											presentacion='none';
+										}
+										//console.log(data);
+										console.log(arrayJSONX);
+										eliminarVacios(data);
+										console.log(data);
+										console.log(resultGraph);
+										console.log(Object.keys(data[0]));
+										if(arr==arrayJSONX){
+												var d = data;
+										}else{
+											var d = datanuevo;
+										}
+										var c = [];
+										for(i=0;i<Object.keys(d[0]).length;i++){
+											var ej = new Object();
+											if(i==0){
+												ej['title'] = "Periodo";
+												ej['data']  = Object.keys(d[0])[i];
+											}else{
+												ej['title'] = Object.keys(d[0])[i];;
+												ej['data']  = Object.keys(d[0])[i];
+											}
+											c.push(ej);
+										};
+										
+										//console.log(c); eval('[{"columns":' +c+ ',"data":' +data+0 '}]')
+										var dataObject = [];
+										var ayuda = new Object();
+										ayuda['columns'] = c;
+										ayuda['data'] = d;
+										dataObject.push(ayuda);
+										console.log(ayuda);
+										console.log(dataObject);
+										$local.tablaResultadosInfraccion.destroy();
+										$local.tablaResultadosInfraccion = $local.$tablaResultadosInfraccion.DataTable(dataObject[0]);
+			
+										//Dibujando tabla
+		                                //$local.tablaResultadosPrestamo.rows.add(data).draw();
+										//Dibujando grafico
+										var chart = AmCharts.makeChart('chartdiv',$funcionGraficoUtil.crearGraficoBarrasSegmentado(data,resultGraph,'ejeX','Cantidad de Infracciones',presentacion,'Infracciones por criterio'));
+										data = [];
+										resultGraph = [];
+										arrayJSONX = [];
+										dataObject = [];
+										c =[];
+									}
+								});	
+								break;
 							}
-							else if ($local.$selectPresentacion.val()=="PARALELO"){
-								presentacion='none';
+							case "TIPO_SOLICITANTE":{
+								arr = $local.$selectSolicitante.val();
+								console.log(arr);
+								//Generando Leyenda
+								var resultGraph = [];
+								if(arr==""){
+									var arraJSONX = response[0].detalle;
+									arr = arrayJSONX;
+								}else{
+									
+									var datos = [];
+									var j =0;
+									console.log(data[0][arr[0]]);
+									for(i =0;i<arr.length;i++){
+										
+									}
+									
+									var arrayJSONX = [];
+									var datanuevo = [];
+									for(l=0;l<response.length;l++){
+										var n = response[l].detalle;
+										var dn = new Object();
+										dn['ejeX'] = response[l].ejeX;
+										var j =0;
+										for(i=0;i<n.length;i++){
+											if(j<arr.length){
+												if(n[i].segmento == arr[j]){
+													var e = new Object();
+													e['segmento']= n[i].segmento;
+													e['numeroInfracciones'] = n[i].numeroInfracciones;
+													e['ejeX']= n[i].ejeX;
+													arrayJSONX.push(e);
+													dn[n[i].segmento]= n[i].numeroInfracciones;
+													j++;
+												}
+													
+											}
+											
+										}
+										datanuevo.push(dn);
+									}
+								}	
+								
+								
+								console.log(datanuevo);
+
+								arrayJSONX.sort();	
+								
+									for(i=0;i<arr.length;i++){
+										var g = new Object();
+										g['balloonText'] = "<b style='font-size:12px'>[[title]]</b><br><span><b>Periodo : </b></span> [[category]]<br><span><b>Número Préstamos: </b> [[value]]";
+										g['fillAlphas'] = 0.8;
+										g['labelText'] = "[[value]]";
+										g['labelPosition'] = "middle";
+										g['lineAlpha'] = 0.3;
+										g['title'] = arrayJSONX[i].segmento;
+										g['type'] = "column";
+										g['valueField'] = arrayJSONX[i].segmento;
+										resultGraph.push(g);
+									}
+									
+									//obteniendo presentacion
+									var presentacion ='';
+									if($local.$selectPresentacion.val()=="APILADO"){
+										presentacion='regular';
+									}
+									else if ($local.$selectPresentacion.val()=="PARALELO"){
+										presentacion='none';
+									}
+									//console.log(data);
+									console.log(arrayJSONX);
+									eliminarVacios(data);
+									console.log(data);
+									console.log(resultGraph);
+									console.log(Object.keys(data[0]));
+									if(arr==arrayJSONX){
+											var d = data;
+									}else{
+										var d = datanuevo;
+									}
+									var c = [];
+									for(i=0;i<Object.keys(d[0]).length;i++){
+										var ej = new Object();
+										if(i==0){
+											ej['title'] = "Periodo";
+											ej['data']  = Object.keys(d[0])[i];
+										}else{
+											ej['title'] = Object.keys(d[0])[i];;
+											ej['data']  = Object.keys(d[0])[i];
+										}
+										c.push(ej);
+									};
+									
+									//console.log(c); eval('[{"columns":' +c+ ',"data":' +data+0 '}]')
+									var dataObject = [];
+									var ayuda = new Object();
+									ayuda['columns'] = c;
+									ayuda['data'] = d;
+									dataObject.push(ayuda);
+									console.log(ayuda);
+									console.log(dataObject);
+									$local.tablaResultadosInfraccion.destroy();
+									$local.tablaResultadosInfraccion = $local.$tablaResultadosInfraccion.DataTable(dataObject[0]);
+		
+									//Dibujando tabla
+	                                //$local.tablaResultadosPrestamo.rows.add(data).draw();
+									//Dibujando grafico
+									var chart = AmCharts.makeChart('chartdiv',$funcionGraficoUtil.crearGraficoBarrasSegmentado(data,resultGraph,'ejeX','Cantidad de Infracciones',presentacion,'Infracciones por criterio'));
+									data = [];
+									resultGraph = [];
+									arrayJSONX = [];
+									dataObject = [];
+									c =[];
+
+								break;
 							}
-							//Dibujando tabla
-							//$local.tablaResultadosInfraccion.rows.add(response).draw();
-							//Dibujando grafico
-							var chart = AmCharts.makeChart('chartdiv',$funcionGraficoUtil.crearGraficoBarrasSegmentado(data,resultGraph,'ejeX','Cantidad de Infracciones',presentacion,'Infracciones por criterio'));
-							data = [];
-							resultGraph = [];
-							arrayJSONX = [];
+							case "TIPO_INFRACCION":{
+								arr = $local.$selecttipoInfraccion.val();
+								console.log(arr);
+								$.ajax({
+									type : "GET",
+									url : $variableUtil.root + "multiTabDet/multiTabCab/"+2,
+									beforeSend : function(xhr) {
+										//$local.$registrarMantenimiento.attr("disabled", true).find("i").removeClass("fa-floppy-o").addClass("fa-spinner fa-pulse fa-fw");
+										xhr.setRequestHeader('Content-Type', 'application/json');
+										xhr.setRequestHeader("X-CSRF-TOKEN", $variableUtil.csrf);
+									},
+									
+									success : function(tr) {
+										console.log(tr);
+
+										//Generando Leyenda
+										var resultGraph = [];
+										if(arr == "" ){
+										    console.log("funciono");
+											var arrayJSONX = response[0].detalle;
+											arr = arrayJSONX;
+											
+										}else{
+											var datos=[];
+											var j =0;
+											
+											for(i =0;i<tr.length;i++){
+												if(j<arr.length){									
+													if(tr[i].idItem == arr[j]){
+														var e = new Object();
+														e['id']=tr[i].idItem;
+														e['descripcion']=tr[i].descripcion;
+														datos.push(e);
+														j++;	
+													}
+														
+												}
+												
+											}
+											console.log(datos);
+											var arrayJSONX = [];
+											//var n = response[0].detalle;
+											console.log(response.length);
+											var datanuevo = [];
+											for (l=0;l<response.length;l++){
+												var n = response[l].detalle;
+												var dn = new Object();
+												dn['ejeX']=response[l].ejeX;
+												var j =0;
+												for(i=0;i<n.length;i++){
+													   if(j<datos.length){
+														   if( n[i].segmento == datos[j].descripcion ){
+																var e = new Object();
+																e['segmento'] = n[i].segmento;
+																e['numeroPrestamos'] = n[i].numeroInfracciones;
+																e['ejeX'] = n[i].ejeX;
+																arrayJSONX.push(e);
+																dn[n[i].segmento] = n[i].numeroInfracciones;
+																j++;
+															}   
+													   }
+												}
+												datanuevo.push(dn);
+											}
+										}	
+											
+										console.log(datanuevo);
+
+										arrayJSONX.sort();								
+										for(i=0;i<arr.length;i++){
+											var g = new Object();
+											g['balloonText'] = "<b style='font-size:12px'>[[title]]</b><br><span><b>Periodo : </b></span> [[category]]<br><span><b>Número Préstamos: </b> [[value]]";
+											g['fillAlphas'] = 0.8;
+											g['labelText'] = "[[value]]";
+											g['labelPosition'] = "middle";
+											g['lineAlpha'] = 0.3;
+											g['title'] = arrayJSONX[i].segmento;
+											g['type'] = "column";
+											g['valueField'] = arrayJSONX[i].segmento;
+											resultGraph.push(g);
+										}
+										//obteniendo presentacion
+										var presentacion ='';
+										if($local.$selectPresentacion.val()=="APILADO"){
+											presentacion='regular';
+										}
+										else if ($local.$selectPresentacion.val()=="PARALELO"){
+											presentacion='none';
+										}
+										//console.log(data);
+										console.log(arrayJSONX);
+										eliminarVacios(data);
+										console.log(data);
+										console.log(resultGraph);
+										console.log(Object.keys(data[0]));
+										if(arr==arrayJSONX){
+												var d = data;
+										}else{
+											var d = datanuevo;
+										}
+										var c = [];
+										for(i=0;i<Object.keys(d[0]).length;i++){
+											var ej = new Object();
+											if(i==0){
+												ej['title'] = "Periodo";
+												ej['data']  = Object.keys(d[0])[i];
+											}else{
+												ej['title'] = Object.keys(d[0])[i];;
+												ej['data']  = Object.keys(d[0])[i];
+											}
+											c.push(ej);
+										};
+										
+										//console.log(c); eval('[{"columns":' +c+ ',"data":' +data+0 '}]')
+										var dataObject = [];
+										var ayuda = new Object();
+										ayuda['columns'] = c;
+										ayuda['data'] = d;
+										dataObject.push(ayuda);
+										console.log(ayuda);
+										console.log(dataObject);
+										$local.tablaResultadosInfraccion.destroy();
+										$local.tablaResultadosInfraccion = $local.$tablaResultadosInfraccion.DataTable(dataObject[0]);
+			
+										//Dibujando tabla
+		                                //$local.tablaResultadosPrestamo.rows.add(data).draw();
+										//Dibujando grafico
+										var chart = AmCharts.makeChart('chartdiv',$funcionGraficoUtil.crearGraficoBarrasSegmentado(data,resultGraph,'ejeX','Cantidad de Infracciones',presentacion,'Infracciones por criterio'));
+										data = [];
+										resultGraph = [];
+										arrayJSONX = [];
+										dataObject = [];
+										c =[];
+									}
+								});	
+								break;
+							}
+							case "NINGUNA" :{
+								arr = "";
+								break;
+							}
+							}
 						},
 						error : function(response) {
 						},

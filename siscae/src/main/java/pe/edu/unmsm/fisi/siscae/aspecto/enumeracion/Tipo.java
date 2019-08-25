@@ -54,7 +54,8 @@ public enum Tipo
     CON_MOV_INFRACCIONES("Consulta de Infracciones"),
 	CON_MOV_ESTADISTICAS("Consulta de Estadisticas"), 
 	
-	REP_EST_PRESTAMOS ("Reporte Estadistico de Prestamos");
+	REP_EST_PRESTAMOS ("Reporte Estadistico de Prestamos"),
+	HIS ("Historial");
 	
 
     private final String nombre;

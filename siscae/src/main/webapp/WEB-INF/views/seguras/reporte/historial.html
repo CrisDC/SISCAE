@@ -37,16 +37,12 @@
 									</a></li>
 
 									<li class="nav-item"><a class="nav-link comun" 
- 										data-toggle="tab" th:key="|I|" href="#tabReporteGeneral"
+ 										data-toggle="tab" th:key="|I|" href="#tabHistorial"
  										role="tab"> <span class="hidden-sm-up"><i
  												class="ti-user"></i></span> <span class="hidden-xs-down">Infracciones</span>
  									</a></li>
 
- 									<li class="nav-item"><a class="nav-link" data-toggle="tab" 
-										href="#tabReporteMasFrecuentes" role="tab"> <span
-											class="hidden-sm-up"><i class="ti-user"></i></span> <span
-											class="hidden-xs-down">Más Frecuentes</span> 
-									</a></li> 
+ 									
 									
 									
 								</ul>
@@ -233,90 +229,8 @@
 														</div>
 													</div>
 												</div>
-												<h3 style="font-size: 18px;">Contenido</h3>
-												<div class="row" style="width: 100%;">
-
-
-													<div class="col-md-3">
-														<div class="form-group m-b-10">
-															<label class="m-r-15">Areas Estudio</label>
-															<div class="input-group">
-																<select id="selectAreaEstudio" name="areasEstudio[]"
-																	class="js-example-basic-multiple js-states form-control filtro"
-																	multiple="multiple" >
-																	<option th:each="a : ${areasEstudio}"
-																		th:value="${a.idAreaEstudio}" th:text="${a.nombre}"></option>
-																</select>
-															</div>
-														</div>
-													</div>
-													<div class="col-md-3">
-														<div class="form-group m-b-10">
-															<label class="m-r-15">Escuela</label>
-															<div class="input-group">
-																<select id="selectEscuela" name="escuelas[]"
-																	class="js-example-basic-multiple js-states form-control filtro"
-																	multiple="multiple" >
-																	<option th:each="e : ${escuelas}"
-																		th:value="${e.idEscuela}" th:text="${e.nombre}"></option>
-																</select>
-															</div>
-														</div>
-													</div>
-													<div class="col-md-3">
-														<div class="form-group m-b-10">
-															<label class="m-r-15">Solicitante</label>
-															<div class="input-group">
-																<select id="selectSolicitante" name="solicitantes[]"
-																	class="js-example-basic-multiple js-states form-control filtro"
-																	multiple="multiple" >
-																	<option value="ALUMNO" th:text="|ALUMNO|"></option>
-																	<option value="DOCENTE" th:text="|DOCENTE|"></option>
-																	<option value="EXTERNO" th:text="|EXTERNO|"></option>
-																</select>
-															</div>
-														</div>
-													</div>
-													<div id="recurso" class="col-md-3">
-														<div class="form-group m-b-10">
-															<label class="m-r-15">Recurso</label>
-															<div class="input-group">
-																<select id="selectRecurso" name="recursos[]"
-																	class="js-example-basic-multiple js-states form-control filtro"
-																	multiple="multiple" >
-																	<option th:each="t : ${tiposRecursos}"
-																		 th:value="${t.idTipoRecurso}" th:text="${t.nombre}"></option>
-																</select>
-															</div>
-														</div>
-													</div>
-													<div id="tipoInfraccion" class="col-md-3  hidden">
-														<div class="form-group m-b-10">
-															<label class="m-r-15">Tipo Infraccion</label>
-															<div class="input-group">
-																<select id="selecttipoInfraccion" name="tipoInfracciones[]"
-																	class="js-example-basic-multiple js-states form-control filtro"
-																	multiple="multiple" >
-																	<option th:each="m : ${multiTabDets}"
-																		th:if="${m.idTabla== 2}" th:value="${m.idItem}" th:text="${m.descripcionCorta}"></option>
-																</select>
-															</div>
-														</div>
-													</div>
-													<div id="tipoEstado" class="col-md-3 hidden">
-														<div class="form-group m-b-10">
-															<label class="m-r-15">Tipo de Estado</label>
-															<div class="input-group">
-																<select id="selecttipoEstado" name="tipoEstados[]"
-																	class="js-example-basic-multiple js-states form-control filtro"
-																	multiple="multiple" >
-																		<option th:each="et : ${estadoTablas}"
-																		th:if="${et.tablaOrigen=='MOV_INFRACCION'}" th:value="${et.idEstadoTabla}" th:text="${et.descripcion}"></option>
-																</select>
-															</div>
-														</div>
-													</div>
-												</div>
+												
+												
 												<div class="row text-center m-t-5"
 													style="width: 100%; justify-content: center;">
 													<button id="buscar" class="btn btn-info m-r-3"
@@ -341,6 +255,220 @@
 										<!-- 										</div> -->
 									</div>
 									
+									<div class="tab-pane" id="tabHistorial"
+										role="tabpanel">
+										<div id="infracciones" class="m-l-15 m-r-15">
+											<form id="formInfracciones">
+												<div class="row" style="width: 100%;">
+												
+													<div class="col-sm" id="divPersona">
+														<label class="m-r-15">Numero de documento</label>
+														<div class="input-group">
+														
+															<div class="input-group-btn search-panel">
+											
+																<input type="number" min=0 value="" class="form-control" name="numeroDocumento"
+																placeholder="N&#250mero de Documento" id="numeroDocumento"> 
+											
+															</div>
+															
+														</div>
+													</div>
+												
+													<div class="col-sm" id="divPersona">
+														<label class="m-r-15">Tipo de persona</label>
+														<div class="input-group">
+														
+															<div class="input-group-btn search-panel">
+											
+																<select id="tipoPersona" name="tipoPersona"
+																	class="form-control select2 elemento-modificable" data-default-value="-1">
+																	<option value="-1" selected="selected">Tipo de persona</option>
+																	<option value="ALUMNO">ALUMNO</option>
+																	<option value="DOCENTE">DOCENTE</option>
+																	<option value="EXTERNO">EXTERNO</option>
+																	<option value="ADMINISTRATIVO">ADMINISTRATIVO</option>																																
+																</select>
+											
+															</div>
+															
+														</div>
+													</div>
+												
+<!-- 												ok -->
+												
+													<div class="col-sm" id="divTipo">
+														<div class="form-group m-b-3">
+															<label class="m-r-15">Tipo de infraccion</label>
+															<div class="input-group">
+																<select id="tipoInfraccion" name="tipoInfraccion"
+																	class="form-control select2 elemento-modificable">
+																	<option value="-1" 
+																		selected="selected">Seleccione una infracci&#243n </option>
+																	<option th:each="infraccion : ${tipoInfracciones}" th:value="${infraccion.idItem}"
+																	th:text="|${infraccion.descripcionCorta}|"></option>
+																</select>
+															</div>
+														</div>
+													</div>
+												
+													<div class="col-sm" id="divEstado">
+															<div class="form-group m-b-10">
+																<label class="m-r-15">Estado de la infracci&#243n</label>
+																<div class="input-group">
+																	<select id="tipoEstado" name="tipoEstado"
+																		class="form-control select2 elemento-modificable">
+																		<option value="-1" 
+																			selected="selected">Seleccione un estado</option>
+																		<option th:each="estado : ${estadosI}" th:value="${estado.idEstadoTabla}"
+																	th:text="|${estado.descripcion}|"></option>																	
+																	</select>
+																</div>
+															</div>
+														</div>
+													</div>
+											
+												
+												<div class="row" style="width: 100%;">
+
+
+													<div class="col-md-3">
+														<div class="form-group m-b-10">
+															<label class="m-r-15">Periodo</label>
+															<div class="input-group">
+																<select id="selectPeriodo" name="tipoPeriodo"
+																	class="form-control select2 elemento-modificable" >
+																	<option value="-1" 
+																		selected="selected">Seleccione un periodo</option>
+																	<option value="DIA">Por d&#237a</option>
+																	<option value="SEMANA">Por semana</option>
+																	<option value="MES">Por mes</option>
+																	<option value="ANIO">Por a&#241o</option>
+																</select>
+															</div>
+														</div>
+													</div>
+
+													<div class="col-md-6 hidden" id="divPeriodoDia">
+														<div class="form-group m-b-10">
+															<label class="m-r-15">Intervalo Fechas</label>
+															<div class="input-group">
+																<span class="input-group-addon"> <i
+																	class="fa fa-calendar m-r-5 m-t-5 text-center"></i></span> <input
+																	id="fechaPrestamo" type="text" name="fechaPrestamo"
+																	class="form-control filtro" readonly="readonly">
+															</div>
+														</div>
+													</div>
+
+
+													<div class="col-md-3 hidden" id="divSemanaInicio">
+														<div class="form-group m-b-10">
+															<label class="m-r-10">Desde:</label>
+															<div class="input-group">
+																<input id="semanaInicio" type="week"
+																	name="valSemanaIncio" class="form-control">
+															</div>
+														</div>
+													</div>
+
+
+													<div class="col-md-3 hidden" id="divSemanaFin">
+														<div class="form-group m-b-10">
+															<label class="m-r-15">Hasta:</label>
+															<div class="input-group">
+																<input id="semanaFin" type="week" name="valSemanaFin"
+																	class="form-control">
+															</div>
+														</div>
+													</div>
+
+
+													<div class="col-md-3 hidden" id="divMesInicio">
+														<div class="form-group m-b-10">
+															<label class="m-r-10">Desde:</label>
+															<div class="input-group">
+																<input id="mesInicio" type="month" name="valMesIncio"
+																	class="form-control">
+															</div>
+														</div>
+													</div>
+
+
+													<div class="col-md-3 hidden" id="divMesFin">
+														<div class="form-group m-b-10">
+															<label class="m-r-15">Hasta:</label>
+															<div class="input-group">
+																<input id="mesFin" type="month" name="valMesFin"
+																	class="form-control">
+															</div>
+														</div>
+													</div>
+
+													<div class="col-md-3 hidden" id="divAnioInicio">
+														<div class="form-group m-b-10">
+															<label class="m-r-10">Desde:</label>
+															<div class="input-group">
+																<input id="anioInicio" type="number"
+																	name="valAnioInicio" class="form-control">
+															</div>
+														</div>
+													</div>
+
+
+													<div class="col-md-3 hidden" id="divAnioFin">
+														<div class="form-group m-b-10">
+															<label class="m-r-15">Hasta:</label>
+															<div class="input-group">
+																<input id="anioFin" type="number" name="valAnioFin"
+																	class="form-control">
+															</div>
+														</div>
+													</div>
+
+
+												</div>
+												<div class="row text-center m-t-5"
+													style="width: 100%; justify-content: center;">
+													<button id="buscarI" class="btn btn-info m-r-3"
+														type="button">
+														<i class="fa fa-search"></i> Buscar
+													</button>
+ 													<button  id="limpiar"  class="btn btn-success m-l-3" 
+ 														type="button"> 
+ 														<i class="fa fa-clean"></i> Limpiar 
+													</button> 
+												</div>
+										</form> 
+									</div>
+									<table id="tblSancionados" class="table table-bordered table-striped">
+<!-- 												<thead> -->
+<!-- 													<tr> -->
+<!-- 														<th>Codigo</th> -->
+<!-- 														<th>Apellidos</th> -->
+<!-- 														<th>Nombre</th> -->
+<!-- 														<th>Fecha de sanción</th> -->
+<!-- 														<th>Tiempo restante</th> -->
+<!-- 														<th>Tipo de solicitante</th> -->
+<!-- 													</tr> -->
+<!-- 												</thead> -->
+<!-- 												<tbody> -->
+<!-- 													<th:block th:if="${existenSancionados} == 1" th:each="sancionado : ${sancionados}"> -->
+<!-- 														<tr  style="background-color: #fff;"> -->
+<!-- 															<td th:text="${sancionado.docIdentificador}" style="color: #67757C;"></td> -->
+<!-- 															<td th:text="${sancionado.appPaterno} + ' ' + ${sancionado.appMaterno}" style="color:#67757C;" ></td>											 -->
+<!-- 															<td th:text="${sancionado.nombre}" style="color:#67757C;" ></td> -->
+<!-- 															<td th:text="${sancionado.fechaRegistro}" style="color: #67757C;" ></td> -->
+<!-- 															<td th:text="${sancionado.tiempoRestante}" style="color: #67757C;" ></td> -->
+<!-- 															<td th:text="${sancionado.tipoSolicitante}" style="color: #67757C;" ></td> -->
+<!-- 														</tr> -->
+<!-- 													 </th:block>  -->
+													<!-- Fin bucle individual  -->
+													
+												</tbody>
+											</table>
+									</div>
+									
 									
 
 								</div>
@@ -351,56 +479,7 @@
 				</div>
 				<!-- Tab panes -->
 
-				<div class="row">
-					<div class="col-12">
-						<div class="card">
-							<div class="card-body p-b-0">
-								<!-- Nav tabs -->
-								<ul class="nav justify-content-end customtab2" role="tablist">
-									<li class="nav-item"><a class="nav-link active"
-										data-toggle="tab" href="#resultadoResumen" role="tab"> <span
-											class="hidden-sm-up"><i class="ti-user"></i></span> <span
-											class="hidden-xs-down">Resumen</span>
-									</a></li>
-									<li class="nav-item"><a class="nav-link" data-toggle="tab"
-										href="#resultadoGrafico" role="tab"> <span
-											class="hidden-sm-up"><i class="ti-user"></i></span> <span
-											class="hidden-xs-down">Gráfico</span>
-									</a></li>
-
-								</ul>
-								<div class="tab-content">
-									<div class="tab-pane active m-t-40" id="resultadoResumen"
-										role="tabpanel">
-										<div id="divTablaResumenPrestamo">
-											<table id="tblReporteResumenPrestamo"
-												class="display nowrap table table-hover table-striped table-bordered "
-												cellspacing="0" width="100%">
-											</table>
-										</div>
-										<div id="divTablaResumenInfraccion">
-											<table id="tblReporteResumenInfraccion"
-												class="display nowrap table table-hover table-striped table-bordered"
-												cellspacing="0" width="100%">
-											</table>
-										</div>
-									</div>
-
-									<div class="tab-pane m-t-40" id="resultadoGrafico"
-										role="tabpanel">
-										<div id="chartdiv"
-											style="width: 100%; height: 700px; font-size: 11px;"></div>
-									</div>
-								</div>
-
-							</div>
-						</div>
-					</div>
-
-				</div>
-
-			</div>
-		</div>
+				
 
 		<!-- All Jquery -->
 		<script th:src="@{/resources/js/guiuser/lib/jquery/jquery.min.js}"></script>
@@ -440,7 +519,7 @@
 		<!-- Jquery validation  -->
 		<script th:src="@{/resources/js/jquery/jquery.validate.min.js}"></script>
 
-		<script th:src="@{/resources/js/pagina/reporte/estadisticas.js}"></script>
+		<script th:src="@{/resources/js/pagina/reporte/historial.js}"></script>
 		<script
 			th:src="@{/resources/js/pagina/reporte/estadisticasFormulario.js}"></script>
 	</div>
