@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorate="~{layout_user}">
+<head>
+<title>Inicioxxxx</title>
+</head>
+<body>
+	<div layout:fragment="content">
+		<div th:class="page-wrapper">
+			
+			<div class="row">
+				<div class="col offset-md-3 col-md-6">
+					<form>
+					  <div class="form-group">
+					    <label for="contraAnterior">Contrase&ntilde;a anterior</label>
+					    <input type="password" class="form-control" id="contraAnterior">
+					  </div>
+					  <div class="form-group">
+					    <label for="contraNueva">Contrase&ntilde;a nueva</label>
+					    <input type="password" class="form-control" id="contraNueva">
+					  </div>
+					  <div class="form-group">
+					    <label for="contraNuevaRep">Repite contrase&ntilde;a nueva</label>
+					    <input type="password" class="form-control" id="contraNuevaRep">
+					  </div>
+					  <a th:id="btnEnviarDatos" type="submit" href="#" class="btn btn-primary">Cambiar</a>
+					</form>
+					<p th:text="|Bienvenido: ${#httpSession.getAttribute('nombreAdministrativo')}|"></p>
+					<input type="text" class="form-control" id="contraPasada">
+				</div>
+			</div>
+		</div>
+		
+		
+		
+
+		<!-- All Jquery -->
+		<script th:src="@{/resources/js/guiuser/lib/jquery/jquery.min.js}"></script>
+		<!-- Bootstrap tether Core JavaScript -->
+		<script
+			th:src="@{/resources/js/guiuser/lib/bootstrap/js/popper.min.js}"></script>
+		<script
+			th:src="@{/resources/js/guiuser/lib/bootstrap/js/bootstrap.min.js}"></script>
+		<!-- slimscrollbar scrollbar JavaScript -->
+		<script th:src="@{/resources/js/guiuser/jquery.slimscroll.js}"></script>
+		<!--Menu sidebar -->
+		<script th:src="@{/resources/js/guiuser/sidebarmenu.js}"></script>
+		<!--stickey kit -->
+		<script
+			th:src="@{/resources/js/guiuser/lib/sticky-kit-master/dist/sticky-kit.min.js}"></script>
+		<!--Custom JavaScript -->
+
+		<script th:src="@{/resources/js/guiuser/scripts.js}"></script>
+		<!-- scripit init-->
+		<script th:src="@{/resources/js/guiuser/custom.min.js}"></script>
+		<script src="https://cdn.jsdelivr.net/npm/sweetalert2@8"></script>
+		<script th:src="@{/resources/js/util/util.js}"></script>
+		<script th:src="@{/resources/js/util/formularioUtil.js}"></script>
+
+		<!-- JS de datatables -->
+		<script th:src="@{/resources/js/datatables/jquery.dataTables.min.js}"></script>
+		<script th:src="@{/resources/js/datatables/dataTables.responsive.min.js}"></script>
+		<script th:src="@{/resources/js/datatables/dataTables.show.rows.js}"></script>
+		<script th:src="@{/resources/js/datatables/dataTables.rowsGroup.js}"></script>
+
+		
+		<!-- JS de envio de peticion -->
+		<script
+			th:src="@{/resources/js/pagina/consulta/movimientos/prestamos/prestamos.js}"></script>
+		<script
+			th:src="@{/resources/js/pagina/consulta/movimientos/prestamos/initTablaRecursos.js}"></script>
+			
+			<script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/3.1.2/rollups/md5.js"></script>
+		<script>
+			$("#btnEnviarDatos").on("click",function(){
+				
+				
+				
+				let contraAnterior = $("#contraAnterior").val();
+				let contraNueva = $("#contraNueva").val();
+				let contraNuevaRep = $("#contraNuevaRep").val();
+				
+				let contraPasada = $("#contraPasada").val();
+				if(contraNueva === contraNuevaRep){
+					$.ajax({
+						type : "GET",
+						url : $variableUtil.root + "username",
+						beforeSend : function(xhr) {
+							//$local.$actualizarContrasenia.attr("disabled", true).find("i").removeClass("fa-floppy-o").addClass("fa-spinner fa-pulse fa-fw");
+							xhr.setRequestHeader('Content-Type', 'application/json');
+							xhr.setRequestHeader("X-CSRF-TOKEN", $variableUtil.csrf);
+						},
+						statusCode : {
+							400 : function(response) {
+								$funcionUtil.limpiarMensajesDeError($formContrasenia);
+								$funcionUtil.mostrarMensajeDeError(response.responseJSON, $formContrasenia);
+							}
+						},
+						success : function(usuario) {
+							console.log(usuario);
+							$.ajax({
+								type : "GET",
+								url : $variableUtil.root + "usuario?accion=buscarTodos",
+								beforeSend : function(xhr) {
+									xhr.setRequestHeader('Content-Type', 'application/json');
+									xhr.setRequestHeader("X-CSRF-TOKEN", $variableUtil.csrf);
+								},
+								statusCode : {
+									400 : function(response) {
+									//	$funcionUtil.limpiarMensajesDeError($formContrasenia);
+									//	$funcionUtil.mostrarMensajeDeError(response.responseJSON, $formContrasenia);
+									}
+								},
+								success : function(usuarios) {
+									var us = [];
+									var n ;
+									console.log(usuarios);
+									for(i=0;i<usuarios.length;i++){
+										if(usuarios[i].nombre == usuario){
+											n = i;
+											var e = new Object();
+											e['username']=usuarios[i].nombre;
+											e['pass'] = usuarios[i].pass;
+											e['ingrepass'] = contraAnterior;
+											e['nuevopass'] = contraNueva;
+											us.push(e);
+										}
+									}
+									console.log(us);
+									
+									$.ajax({
+										type : "POST",
+										url : $variableUtil.root + "cambiocontra",
+										dataType: 'json',
+										data :  JSON.stringify(us[0]),
+										beforeSend : function(xhr) {
+											//$local.$actualizarContrasenia.attr("disabled", true).find("i").removeClass("fa-floppy-o").addClass("fa-spinner fa-pulse fa-fw");
+											xhr.setRequestHeader('Content-Type', 'application/json');
+											xhr.setRequestHeader("X-CSRF-TOKEN", $variableUtil.csrf);
+										},
+										statusCode : {
+											400 : function(response) {
+											//	$funcionUtil.limpiarMensajesDeError($formContrasenia);
+											//	$funcionUtil.mostrarMensajeDeError(response.responseJSON, $formContrasenia);
+											}
+										},
+										success : function(contrasenias) {
+											console.log(contrasenias);
+											if(contrasenias.nuevopass == "incorrecto"){
+												Swal.fire({
+													  type: 'error',
+													  title: 'Error',
+													  text: 'La contraseña anterior escrita no es la correcta'
+													})
+											}else{
+											
+												var u ={
+														"idUsuario" : usuarios[n].idUsuario,
+														"nombre" : usuarios[n].nombre,
+														"pass": contrasenias.nuevopass,
+														"idEstadoTabla"  :usuarios[n].idEstadoTabla,
+														"idRol": usuarios[n].idRol,
+														"idPersona" : usuarios[n].idPersona
+												}
+												console.log(u);
+												
+												$.ajax({
+													type : "PUT",
+													url : $variableUtil.root + "usuario",
+													dataType: 'json',
+													data :  JSON.stringify(u),
+													beforeSend : function(xhr) {
+														//$local.$actualizarContrasenia.attr("disabled", true).find("i").removeClass("fa-floppy-o").addClass("fa-spinner fa-pulse fa-fw");
+														xhr.setRequestHeader('Content-Type', 'application/json');
+														xhr.setRequestHeader("X-CSRF-TOKEN", $variableUtil.csrf);
+													},
+													statusCode : {
+														400 : function(response) {
+														//	$funcionUtil.limpiarMensajesDeError($formContrasenia);
+														//	$funcionUtil.mostrarMensajeDeError(response.responseJSON, $formContrasenia);
+														}
+													},
+													success : function(contrasenias) {
+														console.log(contrasenias);
+								    					swal({
+								    						title: "Cambio de contraseña",
+								    					  	text: "La contraseña se cambio con éxito",
+								    					  	icon: "success",
+								    					  	button: false,
+								    					  	timer: 1000,
+								    					}).then((value) => {
+								    						location.reload();
+								    					});
+														
+													},
+													error : function(response) {
+													},
+													complete : function(response) {
+														//$local.$actualizarContrasenia.attr("disabled", false).find("i").addClass("fa-floppy-o").removeClass("fa-spinner fa-pulse fa-fw");
+													}
+												});
+											}
+										},
+										error : function(response) {
+										},
+										complete : function(response) {
+											//$local.$actualizarContrasenia.attr("disabled", false).find("i").addClass("fa-floppy-o").removeClass("fa-spinner fa-pulse fa-fw");
+										}
+									});
+									
+								},
+								error : function(response) {
+								},
+								complete : function(response) {
+									//$local.$actualizarContrasenia.attr("disabled", false).find("i").addClass("fa-floppy-o").removeClass("fa-spinner fa-pulse fa-fw");
+								}
+							});
+						},
+						error : function(response) {
+						},
+						complete : function(response) {
+							//$local.$actualizarContrasenia.attr("disabled", false).find("i").addClass("fa-floppy-o").removeClass("fa-spinner fa-pulse fa-fw");
+						}
+					});
+					
+				}else{
+					Swal.fire({
+						  type: 'error',
+						  title: 'Error',
+						  text: 'Los campos para la contraseña nueva deben ser iguales!'
+						})
+				}
+			})
+		</script>
+
+
+	</div>
+
+</body>
+</html>
