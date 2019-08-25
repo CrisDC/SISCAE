@@ -33,8 +33,13 @@ import pe.edu.unmsm.fisi.siscae.service.IEscuelaService;
 import pe.edu.unmsm.fisi.siscae.service.IEstadoTablaService;
 import pe.edu.unmsm.fisi.siscae.service.IFacultadService;
 import pe.edu.unmsm.fisi.siscae.service.IMultiTabDetService;
+import pe.edu.unmsm.fisi.siscae.service.IPersonaService;
+import pe.edu.unmsm.fisi.siscae.service.IRolService;
 import pe.edu.unmsm.fisi.siscae.service.ITipoRecursoService;
 import pe.edu.unmsm.fisi.siscae.service.IUsuarioService;
+import pe.edu.unmsm.fisi.siscae.service.IRolService;
+import pe.edu.unmsm.fisi.siscae.service.IPersonaService;
+
 
 @Vista
 @Audit(accion = Accion.Visita, comentario = Comentario.Visita)
@@ -53,7 +58,9 @@ public @Controller class MantenimientoController
     private @Autowired IAreaAdministrativoService areaAdministrativoService;
     private @Autowired IConsultaPrestamosService consultaPrestamosService;
     private @Autowired IConsultaPrestamosTablaService consultaPrestamosTablaService;
-    private @Autowired IConsultaAdministrativoService consultaAdministrativoService; 
+    private @Autowired IConsultaAdministrativoService consultaAdministrativoService;
+    private @Autowired IRolService rolService;
+    private @Autowired IPersonaService personaService;
 
 /*   */
     @Audit(tipo = Tipo.RECURSO)
@@ -211,6 +218,18 @@ public @Controller class MantenimientoController
     {
     	
         model.addAttribute("mantenimiento", mantenimiento);
+        return "seguras/mantenimiento/mantenimiento";
+    }
+    
+    @Audit(tipo = Tipo.Usuario)
+    @GetMapping("/{mantenimiento:usuario}")
+    public String irPaginaMantenimientoUsuario(@PathVariable String mantenimiento, ModelMap model)
+    {
+    	
+        model.addAttribute("mantenimiento", mantenimiento);
+        model.addAttribute("roles", this.rolService.buscarTodos());
+        model.addAttribute("personas",this.personaService.buscarTodos());	
+        model.addAttribute("estados", this.estadoTablaService.buscarporTablaOrigen("SEG_USUARIO"));
         return "seguras/mantenimiento/mantenimiento";
     }
     
