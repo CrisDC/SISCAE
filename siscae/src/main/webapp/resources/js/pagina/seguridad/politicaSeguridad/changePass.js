@@ -1,79 +1,4 @@
-<!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org"
-	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
-	layout:decorate="~{layout_user}">
-<head>
-<title>Inicioxxxx</title>
-</head>
-<body>
-	<div layout:fragment="content">
-		<div th:class="page-wrapper">
-			
-			<div class="row">
-				<div class="col offset-md-3 col-md-6">
-					<form>
-					  <div class="form-group">
-					    <label for="contraAnterior">Contrase&ntilde;a anterior</label>
-					    <input type="password" class="form-control" id="contraAnterior">
-					  </div>
-					  <div class="form-group">
-					    <label for="contraNueva">Contrase&ntilde;a nueva</label>
-					    <input type="password" class="form-control" id="contraNueva">
-					  </div>
-					  <div class="form-group">
-					    <label for="contraNuevaRep">Repite contrase&ntilde;a nueva</label>
-					    <input type="password" class="form-control" id="contraNuevaRep">
-					  </div>
-					  <a th:id="btnEnviarDatos" type="submit" href="#" class="btn btn-primary">Cambiar</a>
-					</form>
-					<p th:text="|Bienvenido: ${#httpSession.getAttribute('nombreAdministrativo')}|"></p>
-					<input type="text" class="form-control" id="contraPasada">
-				</div>
-			</div>
-		</div>
-		
-		
-		
-
-		<!-- All Jquery -->
-		<script th:src="@{/resources/js/guiuser/lib/jquery/jquery.min.js}"></script>
-		<!-- Bootstrap tether Core JavaScript -->
-		<script
-			th:src="@{/resources/js/guiuser/lib/bootstrap/js/popper.min.js}"></script>
-		<script
-			th:src="@{/resources/js/guiuser/lib/bootstrap/js/bootstrap.min.js}"></script>
-		<!-- slimscrollbar scrollbar JavaScript -->
-		<script th:src="@{/resources/js/guiuser/jquery.slimscroll.js}"></script>
-		<!--Menu sidebar -->
-		<script th:src="@{/resources/js/guiuser/sidebarmenu.js}"></script>
-		<!--stickey kit -->
-		<script
-			th:src="@{/resources/js/guiuser/lib/sticky-kit-master/dist/sticky-kit.min.js}"></script>
-		<!--Custom JavaScript -->
-
-		<script th:src="@{/resources/js/guiuser/scripts.js}"></script>
-		<!-- scripit init-->
-		<script th:src="@{/resources/js/guiuser/custom.min.js}"></script>
-		<script src="https://cdn.jsdelivr.net/npm/sweetalert2@8"></script>
-		<script th:src="@{/resources/js/util/util.js}"></script>
-		<script th:src="@{/resources/js/util/formularioUtil.js}"></script>
-
-		<!-- JS de datatables -->
-		<script th:src="@{/resources/js/datatables/jquery.dataTables.min.js}"></script>
-		<script th:src="@{/resources/js/datatables/dataTables.responsive.min.js}"></script>
-		<script th:src="@{/resources/js/datatables/dataTables.show.rows.js}"></script>
-		<script th:src="@{/resources/js/datatables/dataTables.rowsGroup.js}"></script>
-
-		
-		<!-- JS de envio de peticion -->
-		<script
-			th:src="@{/resources/js/pagina/consulta/movimientos/prestamos/prestamos.js}"></script>
-		<script
-			th:src="@{/resources/js/pagina/consulta/movimientos/prestamos/initTablaRecursos.js}"></script>
-			
-			<script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/3.1.2/rollups/md5.js"></script>
-		<script>
-			$("#btnEnviarDatos").on("click",function(){
+	$("#btnEnviarDatos").on("click",function(){
 				
 				
 				
@@ -151,7 +76,7 @@
 												Swal.fire({
 													  type: 'error',
 													  title: 'Error',
-													  text: 'La contraseña anterior escrita no es la correcta'
+													  text: 'La contraseÃ±a anterior escrita no es la correcta'
 													})
 											}else{
 											
@@ -184,8 +109,8 @@
 													success : function(contrasenias) {
 														console.log(contrasenias);
 								    					swal({
-								    						title: "Cambio de contraseña",
-								    					  	text: "La contraseña se cambio con éxito",
+								    						title: "Cambio de contraseÃ±a",
+								    					  	text: "La contraseÃ±a se cambio con Ã©xito",
 								    					  	icon: "success",
 								    					  	button: false,
 								    					  	timer: 1000,
@@ -228,14 +153,7 @@
 					Swal.fire({
 						  type: 'error',
 						  title: 'Error',
-						  text: 'Los campos para la contraseña nueva deben ser iguales!'
+						  text: 'Los campos para la contraseÃ±a nueva deben ser iguales!'
 						})
 				}
 			})
-		</script>
-
-
-	</div>
-
-</body>
-</html>
