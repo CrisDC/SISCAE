@@ -189,7 +189,7 @@
 						    </if>
 			     		)						AS numeroSancionados,
 			     		
-						(SELECT ISNULL(AVG(F_CANTIDAD_INFRACCIONES(consulta.docu, lista.fecha , lista.fecha )),0)
+						(SELECT COALESCE(AVG(F_CANTIDAD_INFRACCIONES(consulta.docu, lista.fecha , lista.fecha )),0)
 			     FROM (SELECT 
 							DISTINCT(reporte.numero_documento) 	as docu,
 							reporte.estado_infraccion		   	as est_inf,
