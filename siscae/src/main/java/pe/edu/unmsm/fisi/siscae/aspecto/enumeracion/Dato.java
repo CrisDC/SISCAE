@@ -61,6 +61,7 @@ public enum Dato
     MULTI_TAB_CAB(""),
     MULTI_TAB_DET(""),
     ESTADO_TABLA(""),
+    USUARIO(""),
     
     ROL(""),
     /*Movimientos*/

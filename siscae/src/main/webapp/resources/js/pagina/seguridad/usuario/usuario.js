@@ -4,7 +4,7 @@ $(document).ready(function() {
 			$modalUsuario : $("#modalUsuario"),
 			$registrarUsuario : $("#registrarUsuario"),
 			$actualizarUsuarioModal : $("#actualizarUsuarioModal"),
-			$tablaUsuarios : $("#tablaUsuarios"),
+			$tablaUsuarios : $("#tablaMantenimiento"),
 			tablaUsuarios : "",
 			codigo_usuarioSeleccionado : "",
 			$filaSeleccionada : "",		
@@ -63,10 +63,10 @@ $(document).ready(function() {
 		} ],
 		"columns" : [
 				{
-					"data" : 'username',
+					"data" : 'nombre',
 					"title" : 'Usuario'
 				},{
-					"data" : 'nombre',
+					"data" : 'nombreRol',
 					"title" : 'Rol'
 				},
 				{
@@ -84,13 +84,14 @@ $(document).ready(function() {
 		$local.tablaUsuarios.column($(this).parent().index() + ':visible').search(this.value).draw();
 	});
 	
+	/*
 	$local.$modalUsuario.PopupWindow({
 		title : "Mantenimiento de Usuario",
 		autoOpen : false,
 		modal : false,
 		height : 410,
 		width : 626,
-	});
+	});*/
 	
 	$local.$boton.on("click", function() {
 
