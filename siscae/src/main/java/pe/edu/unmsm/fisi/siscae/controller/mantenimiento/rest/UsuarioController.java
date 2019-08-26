@@ -9,7 +9,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.Errors;
 import org.springframework.validation.annotation.Validated;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -38,6 +41,8 @@ public @RestController class UsuarioController {
 		return usuarioService.buscarTodos();
 	}
 	
+	@Audit(accion = Accion.REGISTRO, comentario = Comentario.Registro)
+	@PostMapping
 	public ResponseEntity<?> registrarUsuario(
 			@Validated({ Default.class, IRegistro.class }) @RequestBody Usuario usuario, Errors error){
 		if(error.hasErrors()){
@@ -48,6 +53,8 @@ public @RestController class UsuarioController {
 		
 	}
 	
+	@Audit(accion = Accion.ACTUALIZACION, comentario = Comentario.Actualizacion)
+	@PutMapping
 	public ResponseEntity<?> actualizarUsuario(
 			@Validated({ Default.class, IRegistro.class }) @RequestBody Usuario usuario, Errors error){
 		
@@ -58,7 +65,8 @@ public @RestController class UsuarioController {
 		return ResponseEntity.ok(ConstantesGenerales.ACTUALIZACION_EXITOSA);
 	}
 	
-	
+	@Audit(accion = Accion.ELIMINACION, comentario = Comentario.Eliminacion)
+	@DeleteMapping
 	public ResponseEntity<?> eliminarUsuario(
 			@Validated({ Default.class, IRegistro.class }) @RequestBody Usuario usuario, Errors error){
 		

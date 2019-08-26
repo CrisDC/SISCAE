@@ -107,8 +107,9 @@
 														//	$funcionUtil.mostrarMensajeDeError(response.responseJSON, $formContrasenia);
 														}
 													},
-													success : function(contrasenias) {
-														console.log(contrasenias);
+													success : function(response) {
+														console.log(response);
+														console.log("GAAA");
 								    					swal({
 								    						title: "Cambio de contraseña",
 								    					  	text: "La contraseña se cambio con éxito",
@@ -123,6 +124,7 @@
 													error : function(response) {
 													},
 													complete : function(response) {
+														
 														//$local.$actualizarContrasenia.attr("disabled", false).find("i").addClass("fa-floppy-o").removeClass("fa-spinner fa-pulse fa-fw");
 													}
 												});
@@ -131,6 +133,13 @@
 										error : function(response) {
 										},
 										complete : function(response) {
+											Swal.fire({
+												  type: 'success',
+												  title: 'Cambio de contraseña',
+												  text: 'La contraseña se cambio con éxito'
+												}).then((value)=>{
+													location.reload();
+												});
 											//$local.$actualizarContrasenia.attr("disabled", false).find("i").addClass("fa-floppy-o").removeClass("fa-spinner fa-pulse fa-fw");
 										}
 									});
