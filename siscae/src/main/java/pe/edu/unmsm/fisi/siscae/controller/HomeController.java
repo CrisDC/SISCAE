@@ -75,7 +75,7 @@ public @Controller class HomeController
     		System.out.println("no es igual");
     	}
 		model.addAttribute("usuario",principal.getName());
-		return "seguras/inicio";
+		return "template/fragments/seguridad/inicio";
 	}
     
     
