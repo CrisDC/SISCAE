@@ -1,3 +1,4 @@
+	$(document).ready(function() {
 	$("#btnEnviarDatos").on("click",function(){
 				
 				
@@ -154,6 +155,8 @@
 						  type: 'error',
 						  title: 'Error',
 						  text: 'Los campos para la contraseña nueva deben ser iguales!'
-						})
+						});
 				}
-			})
+			});
+	
+});
