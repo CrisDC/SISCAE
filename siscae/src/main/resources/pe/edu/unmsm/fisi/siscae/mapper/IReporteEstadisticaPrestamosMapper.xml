@@ -1150,19 +1150,31 @@
 
 			FROM 
 			<if test="ejeX == 'AREA_ESTUDIO'">
-				(SELECT v_nombre
+				(SELECT v_nombre, n_id_area_estudio
 	  			FROM mae_area_estudio) lista
+	  			
+	  			<if test="areasEstudio != null">
+						        WHERE lista.n_id_area_estudio IN
+						        <foreach item="item" index="index" collection="areasEstudio"
+								      open="(" separator="," close=")">
+								        #{item}
+								  </foreach>
+						    </if>
+						    						   
 			</if>
 			<if test="ejeX == 'ESCUELA'">
-				(SELECT v_nombre
+				(SELECT v_nombre, n_id_escuela
 	  			FROM mae_escuela) lista
+	  			
+						    <if test="escuelas != null">
+						        WHERE lista.n_id_escuela IN 
+						        <foreach item="item" index="index" collection="escuelas"
+								      open="(" separator="," close=")">
+								        #{item}
+								  </foreach>
+						    </if>
+	  			
 			</if>
-			
-			
-			
-			
-			
-			
 			GROUP BY 
 				lista.v_nombre		
 	</select>
