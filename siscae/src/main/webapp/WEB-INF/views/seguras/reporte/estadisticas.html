@@ -42,8 +42,8 @@
  												class="ti-user"></i></span> <span class="hidden-xs-down">Infracciones</span>
  									</a></li>
 
- 									<li class="nav-item"><a class="nav-link" data-toggle="tab" 
-										href="#tabReporteMasFrecuentes" role="tab"> <span
+ 									<li class="nav-item"><a class="nav-link comun" data-toggle="tab" 
+										th:key="|M|" href="#tabReporteMasFrecuentes" role="tab"> <span
 											class="hidden-sm-up"><i class="ti-user"></i></span> <span
 											class="hidden-xs-down">Más Frecuentes</span> 
 									</a></li> 
@@ -336,6 +336,60 @@
 
 									<div class="tab-pane" id="tabReporteMasFrecuentes"
 										role="tabpanel">
+										<div id="estadisticas" class="m-l-15 m-r-15">
+											<form id="formEstadisticas">
+												<h3 style="font-size: 18px;">Gráfica</h3>
+												<div class="row" style="width: 100%;">
+													<div class="col-md-3" id="divGrafica">
+														<div class="form-group m-b-10">
+															<label class="m-r-15">Facultad</label>
+															<div class="input-group">
+																<select id="selectMFacultad" name="tipoGrafica"
+																	class="form-control js-example-basic-single">
+																	<option value="-1" disabled="disabled"
+																		selected="selected">Seleccione una Facultad</option>
+																	<option th:each="f : ${facultades}"
+																		th:value="${f.idFacultad}" th:text="${f.nombre}"></option>
+																</select>
+															</div>
+														</div>
+													</div>
+												
+
+												</div>
+												<div id="mfescuela" hidden="true">
+												<h3 style="font-size: 18px;">Contenido</h3>
+												<div class="row" style="width: 100%;">
+
+													<div class="col-md-3">
+														<div class="form-group m-b-10">
+															<label class="m-r-15">Escuela</label>
+															<div class="input-group">
+																<select id="selectMEscuela" name="escuelas[]"
+																	class="js-example-basic-multiple js-states form-control filtro"
+																	multiple="multiple" >
+																	
+																</select>
+															</div>
+														</div>
+													</div>
+											
+												</div>
+												</div>
+												<div class="row text-center m-t-5"
+													style="width: 100%; justify-content: center;">
+													<button id="buscar" class="btn btn-info m-r-3"
+														type="button">
+														<i class="fa fa-search"></i> Buscar
+													</button>
+													<button id="exportar" class="btn btn-success m-l-3"
+														type="button">
+														<i class="fa fa-download"></i> Exportar
+													</button>
+												</div>
+											</form>
+										</div>
+										
 										<!-- 										<div class="p-20"> -->
 
 										<!-- 										</div> -->
@@ -380,6 +434,12 @@
 										</div>
 										<div id="divTablaResumenInfraccion">
 											<table id="tblReporteResumenInfraccion"
+												class="display nowrap table table-hover table-striped table-bordered"
+												cellspacing="0" width="100%">
+											</table>
+										</div>
+										<div id="divTablaResumenMasFrecuentes">
+											<table id="tblReporteResumenMasFrecuentes"
 												class="display nowrap table table-hover table-striped table-bordered"
 												cellspacing="0" width="100%">
 											</table>

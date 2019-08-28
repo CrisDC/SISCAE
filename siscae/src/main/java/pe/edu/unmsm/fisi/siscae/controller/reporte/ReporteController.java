@@ -23,6 +23,7 @@ import pe.edu.unmsm.fisi.siscae.service.IAreaAdministrativoService;
 import pe.edu.unmsm.fisi.siscae.service.IAreaEstudioService;
 import pe.edu.unmsm.fisi.siscae.service.IEscuelaService;
 import pe.edu.unmsm.fisi.siscae.service.IEstadoTablaService;
+import pe.edu.unmsm.fisi.siscae.service.IFacultadService;
 import pe.edu.unmsm.fisi.siscae.service.IInfraccionService;
 import pe.edu.unmsm.fisi.siscae.service.IMultiTabDetService;
 import pe.edu.unmsm.fisi.siscae.service.ITipoRecursoService;
@@ -45,6 +46,7 @@ public @Controller class ReporteController
 	private @Autowired ITipoRecursoService tipoRecursoService;
 	private @Autowired IEstadoTablaService estadoTablaService;
 	private @Autowired IEstadoTablaService estadoTablasService;
+	private @Autowired IFacultadService facultadService;
     
     @Audit(tipo = Tipo.REP_EST_PRESTAMOS)
    	@GetMapping("/estadisticas")
@@ -67,6 +69,7 @@ public @Controller class ReporteController
    		model.addAttribute("tiposRecursos", tipoRecursoService.buscarUsables());
    		model.addAttribute("multiTabDets",multiTabDetService.buscarTodos());
    		model.addAttribute("estadoTablas",estadoTablaService.buscarTodos());
+   		model.addAttribute("facultades",facultadService.buscarTodos());
    		
    		
    		return REPORTE_ESTADISTICAS;

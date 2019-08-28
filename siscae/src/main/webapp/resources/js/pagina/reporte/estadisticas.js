@@ -14,6 +14,8 @@ $(document).ready(function() {
 			$selectSolicitante : $('#selectSolicitante'),
 			$selecttipoInfraccion: $('#selecttipoInfraccion'),
 			$selecttipoEstado : $('#selecttipoEstado'),
+			$selectMFacultad :$('#selectMFacultad'),
+			$selectMEscuela :$('#selectMEscuela'),
 			$fechaPrestamo : $('#fechaPrestamo'),
 			$semanaInicio : $('#semanaInicio'),
 			$anioInicio : $('#anioInicio'),
@@ -39,6 +41,7 @@ $(document).ready(function() {
 			
 			$divTablaResumenPrestamo : $('#divTablaResumenPrestamo'),
 			$divTablaResumenInfraccion : $('#divTablaResumenInfraccion'),
+			$divTablaResumenMasFrecuentes : $('#divTablaResumenMasFrecuentes'),
 			$divTablaResumenPrestamoSegmentado : $('#divTablaResumenPrestamoSegmentado'),
 			
 			//Botones de la pagina
@@ -52,6 +55,8 @@ $(document).ready(function() {
 			tablaResultadosPrestamo : "",
 			$tablaResultadosInfraccion : $("#tblReporteResumenInfraccion"),
 			tablaResultadosInfraccion : "",
+			$tablaResultadosMasFrecuentes : $('#tblReporteResumenMasFrecuentes'),
+			tablaResultadosMasFrecuentes : "",
 				
 			$tablaResultadosPrestamoSegementado : $("#tblReporteResumenPrestamoSegmentado"),
 			tablaResultadosPrestamoSegementado : ""
@@ -68,12 +73,14 @@ $(document).ready(function() {
 	$funcionUtil.crearSelect2($local.$selectSegmY);
 	$funcionUtil.crearSelect2($local.$selectSeries);
 	$funcionUtil.crearSelect2($local.$selectPresentacion);
+	$funcionUtil.crearSelect2($local.$selectMFacultad);
 	$funcionUtil.crearMultipleSelect2($local.$selectAreaEstudio, "TODOS");
 	$funcionUtil.crearMultipleSelect2($local.$selectEscuela, "TODOS");	
 	$funcionUtil.crearMultipleSelect2($local.$selectRecurso, "TODOS");
 	$funcionUtil.crearMultipleSelect2($local.$selectSolicitante, "TODOS");
 	$funcionUtil.crearMultipleSelect2($local.$selecttipoInfraccion,"TODOS");
 	$funcionUtil.crearMultipleSelect2($local.$selecttipoEstado,"TODOS");
+	$funcionUtil.crearMultipleSelect2($local.$selectMEscuela, "TODOS");	
 	
 	//Formulario
 	$formEstadisticas = $("#formEstadisticas");
@@ -274,6 +281,56 @@ $(document).ready(function() {
 		}
 	});
 	
+	$local.$selectMFacultad.on("change", function(){
+		if($('#selectMFacultad').val() != -1){
+			
+			$.ajax({
+				type : "GET",
+				url : $variableUtil.root + "escuela?accion=buscarTodos",
+				contentType : "application/json",
+				//data: criterioBusqueda,
+				//dataType : "json",
+				beforeSend : function(xhr) {
+					xhr.setRequestHeader('Content-Type', 'application/json');
+					//Borrando tabla antes de hacer la consulta
+					//$local.$buscar.attr("disabled", true).find("i").removeClass("fa-search").addClass("fa-spinner fa-pulse fa-fw");
+				},
+				success : function(response) {
+					if (response.length === 0) {
+						$funcionUtil.notificarException($variableUtil.busquedaSinResultados, "fa-exclamation-circle", "Información", "info");
+						return;
+					}
+					$('#mfescuela').removeAttr('hidden');
+					//Dibujando tabla
+					console.log(response);
+					var escuelas =[];
+					for(i=0;i<response.length;i++){
+						if(response[i].idFacultad == $local.$selectMFacultad.val()){
+							var e = new Object();
+							e['id']=response[i].idEscuela;
+							e['nombre']=response[i].nombre;
+							escuelas.push(e);
+						}
+						
+					}
+					console.log(escuelas);
+					
+					for(i=0;i<escuelas.length;i++){
+						$('#selectMEscuela').append($('<option>', {
+						    value: escuelas[i].id,
+						    text: escuelas[i].nombre
+						}));
+					}
+				},
+				error : function(response) {
+				},
+				complete : function() {
+					$local.$buscar.attr("disabled", false).find("i").addClass("fa-search").removeClass("fa-spinner fa-pulse fa-fw");
+				}
+			});	
+		}
+	});
+	
 	var obtenerCriteriosDeBusqueda = function () {
 		var criterioBusqueda = $formEstadisticas.serializeJSON();
 		criterioBusqueda.ejeX=$local.$selectEjeX.val();
@@ -371,39 +428,7 @@ $(document).ready(function() {
 		});
 	}
 	
-	function tabla(){
-		$local.tablaResultadosPrestamo.destroy();
-		$local.tablaResultadosInfraccion. destroy();
 
-		$local.tablaResultadosPrestamo = $local.$tablaResultadosPrestamo.DataTable({
-			"language" : {
-				"emptyTable" : "No hay registros encontrados."
-			},
-			"pageLength": 10,
-			"initComplete" : function() {
-				$local.$tablaResultadosPrestamo.wrap("<div class='table-responsive'></div>");
-			},
-			"columnDefs" : [ {
-				"targets" : [ 0],
-				"className" : "all dt-center fondo-blanco"
-			},{
-				"targets" : [ 1, 2, 3],
-				"className" : "all dt-right"
-			} ],
-			"columns" : [ {
-				"data" : "ejeX",
-				"title" : "Periodo"
-			}, {
-				"data" : "CABINA",
-				"title" : "Cabina"
-			}, {
-				"data" : "CUBICULO",
-				"title" : "Cubiculo"
-			}, {
-				"data" : "MESA",
-				"title" : "Mesa"
-			}]
-		});
 	
 		
 	/*	$local.tablaResultadosInfraccion = $local.$tablaResultadosInfraccion.DataTable({
@@ -435,7 +460,7 @@ $(document).ready(function() {
 				"title" : "Infracciones promedio"
 			}]
 		});*/
-	}
+	
 	
 	$local.$buscar.on('click', function() {
 		if (!$formEstadisticas.valid()) {
@@ -2355,13 +2380,45 @@ $(document).ready(function() {
 		}]
 	});
 	
+	$local.tablaResultadosMasFrecuentes = $local.$tablaResultadosMasFrecuentes.DataTable({
+		"language" : {
+			"emptyTable" : "No hay registros encontrados."
+		},
+		"pageLength": 10,
+		"initComplete" : function() {
+			$local.$tablaResultadosMasFrecuentes.wrap("<div class='table-responsive'></div>");
+		},
+		"columnDefs" : [ {
+			"targets" : [ 0],
+			"className" : "all dt-center fondo-blanco"
+		},{
+			"targets" : [ 1, 2, 3],
+			"className" : "all dt-right"
+		} ],
+		"columns" : [ {
+			"data" : "ejeX",
+			"title" : "Periodo"
+		}, {
+			"data" : "numeroInfracciones",
+			"title" : "hola"
+		}, {
+			"data" : "numeroSancionados",
+			"title" : "gg"
+		}, {
+			"data" : "numeroInfraccionesPromedioPorAlumno",
+			"title" : "gaa"
+		}]
+	});
+	
 	$local.$divTablaResumenPrestamo.removeClass("hidden"); // por defecto
 	$local.$divTablaResumenInfraccion.addClass("hidden"); // por defecto
+	$local.$divTablaResumenMasFrecuentes.addClass("hidden"); // por defecto
 	
 	$("#xd").find(".comun").on("click", function(){
 		$local.$tipoReporte = $(this).attr("key");
 		if($local.$tipoReporte=="P"){
 			$local.$divTablaResumenPrestamo.removeClass("hidden");
+			$local.$divTablaResumenMasFrecuentes.addClass("hidden");
 			$local.$divTablaResumenInfraccion.addClass("hidden");
 			$('#recurso').removeClass("hidden");
 			$('#tipoInfraccion').addClass("hidden");
@@ -2378,6 +2435,7 @@ $(document).ready(function() {
 		}
 		if($local.$tipoReporte=="I"){
 			$local.$divTablaResumenPrestamo.addClass("hidden");
+			$local.$divTablaResumenMasFrecuentes.addClass("hidden");
 			$local.$divTablaResumenInfraccion.removeClass("hidden");
 			$('#tipoInfraccion').removeClass("hidden");
 			$('#tipoEstado').removeClass("hidden");
@@ -2394,6 +2452,15 @@ $(document).ready(function() {
 			}));
 			// quitar opcion Recurso al seleccionar reporte de INFRACCION
 			$('#selectSegmY').find("option[value='RECURSO']").remove();  
+		}
+		if($local.$tipoReporte=="M"){
+			$local.$divTablaResumenPrestamo.addClass("hidden");
+			$local.$divTablaResumenInfraccion.addClass("hidden");
+			$local.$divTablaResumenMasFrecuentes.removeClass("hidden");
+			
+			
+			
+			
 		}
 	});
 
