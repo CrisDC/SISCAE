@@ -6,6 +6,61 @@
 	
 	<!--    ¡¡ OBSERVACION !!              '&lt;'   significa   '<' -->
 	
+	<select id="buscarRankingAlumno" resultMap="consultaRank">
+			
+		SELECT al.v_codigo_alumno AS codigo,
+		 CONCAT(pe.v_nombre,' ',pe.v_app_paterno,' ',pe.v_app_materno) AS nombres ,
+		 COUNT(pr.n_id_persona) AS cantidad,
+		 ar.n_id_area_estudio AS idArea,
+		 al.n_id_escuela AS idEscuela,
+		 es.n_id_facultad AS idFacultad,
+		 es.v_nombre AS escuela
+		FROM mae_alumno al
+		LEFT JOIN mae_persona pe ON ( al.n_id_alumno= pe.n_id_persona)
+		LEFT JOIN mov_prestamo pr ON ( pe.n_id_persona= pr.n_id_persona)
+		LEFT JOIN mae_recurso re	ON ( pr.n_id_recurso =re.n_id_recurso)
+		LEFT JOIN mae_area_estudio ar	ON ( re.n_id_area_estudio =ar.n_id_area_estudio)
+		LEFT JOIN mae_escuela es	ON ( es.n_id_escuela = al.n_id_escuela)
+		WHERE (pr.d_fecha BETWEEN "22-10-2018" AND sysdate()) 
+		<if test="areasEstudio != null">
+			        AND re.n_id_area_estudio IN
+			        <foreach item="item" index="index" collection="areasEstudio"
+					      open="(" separator="," close=")">
+					        #{item}
+					  </foreach>
+					  
+				<if test="facultades != null">
+			        AND es.n_id_facultad IN 
+			        <foreach item="item" index="index" collection="escuelas"
+					      open="(" separator="," close=")">
+					        #{item}
+					  </foreach>
+			    </if>
+					  
+				<if test="escuelas != null">
+			        AND al.n_id_escuela IN 
+			        <foreach item="item" index="index" collection="escuelas"
+					      open="(" separator="," close=")">
+					        #{item}
+					  </foreach>
+			    </if>
+			    
+			    
+		</if>
+			    
+			    
+		
+		
+		
+		GROUP BY nombres
+		ORDER BY cantidad DESC
+		LIMIT 10;
+			
+			
+			
+	</select>
+	
+	
 	<select id="buscarPorPeriodoSinSegementar" resultMap="objetoSinSegmentar">
 			WITH RECURSIVE ListaPeriodo  AS
 			(		
@@ -1551,6 +1606,19 @@
 		<id property="ejeX" column="ejeX"></id>
 		<id property="estadiaTotal" column="estadiaTotal"></id>
 		<id property="estadiaPromedio" column="estadiaPromedio"></id>
+	</resultMap>
+	
+	
+	<resultMap type="ConsultaRankingAlumno" id="consultaRank">
+		<id property="nombres" column="nombres"></id>
+		<id property="codigo" column="codigo"></id>
+		<id property="cantidad" column="cantidad"></id>
+		<id property="escuela" column="escuela"></id>
+		<id property="idArea" column="idArea"></id>
+		<id property="idEscuela" column="idEscuela"></id>
+		<id property="idFacultad" column="idFacultad"></id>
+		
+		
 	</resultMap>
 	
 

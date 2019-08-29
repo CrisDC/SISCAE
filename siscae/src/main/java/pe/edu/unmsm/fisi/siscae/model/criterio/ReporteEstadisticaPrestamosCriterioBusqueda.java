@@ -30,6 +30,7 @@ public class ReporteEstadisticaPrestamosCriterioBusqueda {
 	
 	//Criterios de los select2 multiples
 	private List<Integer> areasEstudio;
+	private List<Integer> facultades;
 	private List<Integer> escuelas;
 	private List<String> solicitantes;
 	private List<Integer> recursos;

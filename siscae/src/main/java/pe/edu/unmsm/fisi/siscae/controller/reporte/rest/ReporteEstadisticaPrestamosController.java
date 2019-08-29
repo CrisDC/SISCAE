@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import pe.edu.unmsm.fisi.siscae.model.consulta.ConsultaRankingAlumno;
 import pe.edu.unmsm.fisi.siscae.model.criterio.ReporteEstadisticaPrestamosCriterioBusqueda;
 import pe.edu.unmsm.fisi.siscae.model.reporte.ReporteEstadisticaPrestamos;
 import pe.edu.unmsm.fisi.siscae.model.reporte.resumen.ReporteEstadisticaPrestamosPorEjeX;
@@ -26,6 +27,22 @@ public @RestController class ReporteEstadisticaPrestamosController {
 //	public List<ReporteEstadisticaPrestamos> buscarPorCriterio(ReporteEstadisticaPrestamosCriterioBusqueda criterioBusqueda) {
 //		return reporteEstadisticaPrestamosService.buscarPorCriterio(criterioBusqueda);
 //	}
+	
+	@GetMapping(params = "accion=buscarPorPeriodoSinSegmentar")
+	public List<ConsultaRankingAlumno> buscarRankingAlumno(ReporteEstadisticaPrestamosCriterioBusqueda criterioBusqueda/*,
+			@RequestParam("areasEstudio") List<Integer> areasEstudio,
+			@RequestParam("escuelas") List<Integer> escuelas,
+			@RequestParam("solicitantes") List<String> solicitantes,
+			@RequestParam("recursos") List<Integer> recursos*/) {
+		/*criterioBusqueda.setAreasEstudio(areasEstudio);
+		criterioBusqueda.setEscuelas(escuelas);
+		criterioBusqueda.setSolicitantes(solicitantes);
+		criterioBusqueda.setRecursos(recursos);*/
+		System.out.println(criterioBusqueda);		
+		return reporteEstadisticaPrestamosService.buscarRankingAlumno(criterioBusqueda);
+	}
+	
+	
 	
 	@GetMapping(params = "accion=buscarPorPeriodoSinSegmentar")
 	public List<ReporteEstadisticaPrestamosPorEjeX> buscarPorPeriodoSinSegmentar(ReporteEstadisticaPrestamosCriterioBusqueda criterioBusqueda/*,
