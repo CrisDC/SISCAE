@@ -501,9 +501,27 @@
 			<if test="criterioSegmentacion == 'AREA_ESTUDIO'">
 				mae_area_estudio  cr
 				
+				<if test="areasEstudio != null">
+						        WHERE cr.n_id_area_estudio IN
+						        <foreach item="item" index="index" collection="areasEstudio"
+								      open="(" separator="," close=")">
+								        #{item}
+								  </foreach>
+						    </if>
+				
+				
 			</if>
 			<if test="criterioSegmentacion == 'ESCUELA'">
 				mae_escuela  cr
+				
+				<if test="escuelas != null">
+						        WHERE cr.n_id_escuela IN
+						        <foreach item="item" index="index" collection="escuelas"
+								      open="(" separator="," close=")">
+								        #{item}
+								  </foreach>
+						    </if>
+				
 				
 			</if>
 			<if test="criterioSegmentacion == 'TIPO_SOLICITANTE'">
@@ -511,10 +529,30 @@
 					DISTINCT(F_GET_TIPO_SOLICITANTE(n_id_persona)) AS v_nombre
 	  			FROM mae_persona) cr
 	  			
+	  			<if test="solicitantes != null and solicitantes != ''">
+						        WHERE cr.v_nombre IN
+						        <foreach item="item" index="index" collection="solicitantes"
+								      open="(" separator="," close=")">
+								        #{item}
+								  </foreach>
+						    </if>
+	  			
+	  			
+	  			
 			</if>
 			<if test="criterioSegmentacion == 'RECURSO'">
 				mae_tipo_recurso cr
 				WHERE cr.v_usable='SI'
+				
+				<if test="recursos != null ">
+					        AND  cr.n_id_tipo_recurso IN
+					        <foreach item="item" index="index" collection="recursos"
+							      open="(" separator="," close=")">
+							        #{item}
+							  </foreach>
+							  
+					    </if>
+				
 			</if>
 			
 			
@@ -1444,29 +1482,58 @@
 
 			FROM 
 			<if test="ejeX == 'AREA_ESTUDIO'">
-				(SELECT v_nombre
+				(SELECT v_nombre, n_id_area_estudio
 	  			FROM mae_area_estudio) lista,
+	  				  			
+				<if test="criterioSegmentacion == 'ESCUELA'">
+					mae_escuela  cr
+				</if>
+				<if test="criterioSegmentacion == 'TIPO_SOLICITANTE'">
+					(SELECT 
+						DISTINCT(F_GET_TIPO_SOLICITANTE(n_id_persona)) AS v_nombre
+		  			FROM mae_persona) cr
+				</if>
+				<if test="criterioSegmentacion == 'RECURSO'">
+					(SELECT v_nombre
+					 FROM mae_tipo_recurso 
+					 WHERE v_usable='SI') cr
+				</if>
+				
+				<if test="areasEstudio != null">
+						        WHERE lista.n_id_area_estudio IN
+						        <foreach item="item" index="index" collection="areasEstudio"
+								      open="(" separator="," close=")">
+								        #{item}
+								  </foreach>
+						    </if>
+	  			
 			</if>
 			<if test="ejeX == 'ESCUELA'">
-				(SELECT v_nombre
+				(SELECT v_nombre, n_id_escuela
 	  			FROM mae_escuela) lista,
+	  			
+	  			<if test="criterioSegmentacion == 'AREA_ESTUDIO'">
+					mae_area_estudio  cr
+				</if>
+				<if test="criterioSegmentacion == 'TIPO_SOLICITANTE'">
+					(SELECT 
+						DISTINCT(F_GET_TIPO_SOLICITANTE(n_id_persona)) AS v_nombre
+		  			FROM mae_persona) cr
+				</if>
+				<if test="criterioSegmentacion == 'RECURSO'">
+					(SELECT v_nombre
+					 FROM mae_tipo_recurso 
+					 WHERE v_usable='SI') cr
+				</if>
+	  			<if test="escuelas != null">
+						        WHERE lista.n_id_escuela IN 
+						        <foreach item="item" index="index" collection="escuelas"
+								      open="(" separator="," close=")">
+								        #{item}
+								  </foreach>
+						    </if>
 			</if>
-			<if test="criterioSegmentacion == 'AREA_ESTUDIO'">
-				mae_area_estudio  cr
-			</if>
-			<if test="criterioSegmentacion == 'ESCUELA'">
-				mae_escuela  cr
-			</if>
-			<if test="criterioSegmentacion == 'TIPO_SOLICITANTE'">
-				(SELECT 
-					DISTINCT(F_GET_TIPO_SOLICITANTE(n_id_persona)) AS v_nombre
-	  			FROM mae_persona) cr
-			</if>
-			<if test="criterioSegmentacion == 'RECURSO'">
-				(SELECT v_nombre
-				 FROM mae_tipo_recurso 
-				 WHERE v_usable='SI') cr
-			</if>
+			
 	
 	</select>
 

@@ -2762,6 +2762,47 @@
 							  <if test="criterioSegmentacion == 'TIPO_INFRACCION'">
 								AND rep.tipo_infraccion=cr.v_nombre
 							 </if>
+							 
+							 <if test="areasEstudio != null">
+						        AND rep.id_area_estudio IN
+						        <foreach item="item" index="index" collection="areasEstudio"
+								      open="(" separator="," close=")">
+								        #{item}
+								  </foreach>
+						    </if>
+						    
+						    <if test="escuelas != null">
+						        AND rep.id_escuela_programa IN 
+						        <foreach item="item" index="index" collection="escuelas"
+								      open="(" separator="," close=")">
+								        #{item}
+								  </foreach>
+						    </if>
+						        
+						    <if test="solicitantes != null and solicitantes != '' ">
+						        AND rep.nombre_tipo IN 
+						        <foreach item="item" index="index" collection="solicitantes"
+								      open="(" separator="," close=")">
+								        #{item}
+								  </foreach>
+						    </if>
+						    
+						    <if test="tipoInfracciones != null">
+						        AND rep.id_tipo_infraccion IN 
+						        <foreach item="item" index="index" collection="tipoInfracciones"
+								      open="(" separator="," close=")">
+								        #{item}
+								  </foreach>
+						    </if>
+						    
+						    <if test="tipoEstados != null">
+						        AND rep.id_estado_infraccion IN 
+						        <foreach item="item" index="index" collection="tipoEstados"
+								      open="(" separator="," close=")">
+								        #{item}
+								  </foreach>
+						    </if>
+							 
                               )						AS numeroInfracciones
 				</if>
 				<if test="tipoPeriodo == 'SEMANA'">
@@ -2789,6 +2830,47 @@
 							  <if test="criterioSegmentacion == 'TIPO_INFRACCION'">
 								AND rep.tipo_infraccion=cr.v_nombre
 							 </if>
+							 
+							 <if test="areasEstudio != null">
+						        AND rep.id_area_estudio IN
+						        <foreach item="item" index="index" collection="areasEstudio"
+								      open="(" separator="," close=")">
+								        #{item}
+								  </foreach>
+						    </if>
+						    
+						    <if test="escuelas != null">
+						        AND rep.id_escuela_programa IN 
+						        <foreach item="item" index="index" collection="escuelas"
+								      open="(" separator="," close=")">
+								        #{item}
+								  </foreach>
+						    </if>
+						        
+						    <if test="solicitantes != null and solicitantes != '' ">
+						        AND rep.nombre_tipo IN 
+						        <foreach item="item" index="index" collection="solicitantes"
+								      open="(" separator="," close=")">
+								        #{item}
+								  </foreach>
+						    </if>
+						    
+						    <if test="tipoInfracciones != null">
+						        AND rep.id_tipo_infraccion IN 
+						        <foreach item="item" index="index" collection="tipoInfracciones"
+								      open="(" separator="," close=")">
+								        #{item}
+								  </foreach>
+						    </if>
+						    
+						    <if test="tipoEstados != null">
+						        AND rep.id_estado_infraccion IN 
+						        <foreach item="item" index="index" collection="tipoEstados"
+								      open="(" separator="," close=")">
+								        #{item}
+								  </foreach>
+						    </if>
+							 
 					          
                               )						AS numeroInfracciones
 				</if>
@@ -2817,6 +2899,47 @@
 							  <if test="criterioSegmentacion == 'TIPO_INFRACCION'">
 								AND rep.tipo_infraccion=cr.v_nombre
 							 </if>
+							 
+							 <if test="areasEstudio != null">
+						        AND rep.id_area_estudio IN
+						        <foreach item="item" index="index" collection="areasEstudio"
+								      open="(" separator="," close=")">
+								        #{item}
+								  </foreach>
+						    </if>
+						    
+						    <if test="escuelas != null">
+						        AND rep.id_escuela_programa IN 
+						        <foreach item="item" index="index" collection="escuelas"
+								      open="(" separator="," close=")">
+								        #{item}
+								  </foreach>
+						    </if>
+						        
+						    <if test="solicitantes != null and solicitantes != '' ">
+						        AND rep.nombre_tipo IN 
+						        <foreach item="item" index="index" collection="solicitantes"
+								      open="(" separator="," close=")">
+								        #{item}
+								  </foreach>
+						    </if>
+						    
+						    <if test="tipoInfracciones != null">
+						        AND rep.id_tipo_infraccion IN 
+						        <foreach item="item" index="index" collection="tipoInfracciones"
+								      open="(" separator="," close=")">
+								        #{item}
+								  </foreach>
+						    </if>
+						    
+						    <if test="tipoEstados != null">
+						        AND rep.id_estado_infraccion IN 
+						        <foreach item="item" index="index" collection="tipoEstados"
+								      open="(" separator="," close=")">
+								        #{item}
+								  </foreach>
+						    </if>
+							 
 					          
                               )						AS numeroInfracciones
 				</if>
@@ -2844,37 +2967,118 @@
 							  <if test="criterioSegmentacion == 'TIPO_INFRACCION'">
 								AND rep.tipo_infraccion=cr.v_nombre
 							 </if>
+							 
+							 
+							 <if test="areasEstudio != null">
+						        AND rep.id_area_estudio IN
+						        <foreach item="item" index="index" collection="areasEstudio"
+								      open="(" separator="," close=")">
+								        #{item}
+								  </foreach>
+						    </if>
+						    
+						    <if test="escuelas != null">
+						        AND rep.id_escuela_programa IN 
+						        <foreach item="item" index="index" collection="escuelas"
+								      open="(" separator="," close=")">
+								        #{item}
+								  </foreach>
+						    </if>
+						        
+						    <if test="solicitantes != null and solicitantes != '' ">
+						        AND rep.nombre_tipo IN 
+						        <foreach item="item" index="index" collection="solicitantes"
+								      open="(" separator="," close=")">
+								        #{item}
+								  </foreach>
+						    </if>
+						    
+						    <if test="tipoInfracciones != null">
+						        AND rep.id_tipo_infraccion IN 
+						        <foreach item="item" index="index" collection="tipoInfracciones"
+								      open="(" separator="," close=")">
+								        #{item}
+								  </foreach>
+						    </if>
+						    
+						    <if test="tipoEstados != null">
+						        AND rep.id_estado_infraccion IN 
+						        <foreach item="item" index="index" collection="tipoEstados"
+								      open="(" separator="," close=")">
+								        #{item}
+								  </foreach>
+						    </if>
+							 
 					          
                               )						AS numeroInfracciones
 				</if>
 
 			FROM 
 			<if test="ejeX == 'AREA_ESTUDIO'">
-				(SELECT v_nombre
+				(SELECT v_nombre, n_id_area_estudio
 	  			FROM mae_area_estudio) lista,
+	  			
+				<if test="criterioSegmentacion == 'ESCUELA'">
+					mae_escuela  cr
+				</if>
+				<if test="criterioSegmentacion == 'TIPO_SOLICITANTE'">
+					(SELECT 
+						DISTINCT(F_GET_TIPO_SOLICITANTE(n_id_persona)) AS v_nombre
+		  			FROM mae_persona) cr
+				</if>
+				<if test="criterioSegmentacion == 'TIPO_INFRACCION'">
+				   (SELECT v_descripcion AS  v_nombre
+					FROM mae_multi_tab_det 
+					WHERE n_id_tabla=(SELECT n_id_tabla 
+									  FROM mae_multi_tab_cab 
+									  WHERE v_nombre='TIPO INFRACCION') ) cr
+				</if>
+				
+						<if test="areasEstudio != null">
+						        WHERE lista.n_id_area_estudio IN
+						        <foreach item="item" index="index" collection="areasEstudio"
+								      open="(" separator="," close=")">
+								        #{item}
+								  </foreach>
+						    </if>
+						    
+						    
+	  			
 			</if>
 			<if test="ejeX == 'ESCUELA'">
-				(SELECT v_nombre
+				(SELECT v_nombre, n_id_escuela
 	  			FROM mae_escuela) lista,
+	  			
+	  			<if test="criterioSegmentacion == 'AREA_ESTUDIO'">
+					mae_area_estudio  cr
+				</if>
+				
+				<if test="criterioSegmentacion == 'TIPO_SOLICITANTE'">
+					(SELECT 
+						DISTINCT(F_GET_TIPO_SOLICITANTE(n_id_persona)) AS v_nombre
+		  			FROM mae_persona) cr
+				</if>
+				<if test="criterioSegmentacion == 'TIPO_INFRACCION'">
+				   (SELECT v_descripcion AS  v_nombre
+					FROM mae_multi_tab_det 
+					WHERE n_id_tabla=(SELECT n_id_tabla 
+									  FROM mae_multi_tab_cab 
+									  WHERE v_nombre='TIPO INFRACCION') ) cr
+				</if>
+	  			
+	  			
+	  					<if test="escuelas != null">
+						        WHERE lista.n_id_escuela IN 
+						        <foreach item="item" index="index" collection="escuelas"
+								      open="(" separator="," close=")">
+								        #{item}
+								  </foreach>
+						    </if>
+				
+	  			
+	  			
 			</if>
-			<if test="criterioSegmentacion == 'AREA_ESTUDIO'">
-				mae_area_estudio  cr
-			</if>
-			<if test="criterioSegmentacion == 'ESCUELA'">
-				mae_escuela  cr
-			</if>
-			<if test="criterioSegmentacion == 'TIPO_SOLICITANTE'">
-				(SELECT 
-					DISTINCT(F_GET_TIPO_SOLICITANTE(n_id_persona)) AS v_nombre
-	  			FROM mae_persona) cr
-			</if>
-			<if test="criterioSegmentacion == 'TIPO_INFRACCION'">
-			   (SELECT v_descripcion AS  v_nombre
-				FROM mae_multi_tab_det 
-				WHERE n_id_tabla=(SELECT n_id_tabla 
-								  FROM mae_multi_tab_cab 
-								  WHERE v_nombre='TIPO INFRACCION') ) cr
-			</if>
+			
 	
 	</select>
 
