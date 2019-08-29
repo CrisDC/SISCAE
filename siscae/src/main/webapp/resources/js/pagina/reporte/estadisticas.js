@@ -25,6 +25,7 @@ $(document).ready(function() {
 			$mesFin : $('#mesFin'),
 			$opAreaEstudio : 'S',
 			$opEscuela : 'S',
+			$cEscuela :0,
 			
 			//Divs de la pagina
 			$divPeriodoDia : $('#divPeriodoDia'),
@@ -283,7 +284,9 @@ $(document).ready(function() {
 	
 	$local.$selectMFacultad.on("change", function(){
 		if($('#selectMFacultad').val() != -1){
-			
+			if($local.$cEscuela != 0){
+				$('#selectMEscuela').html("");
+			}
 			$.ajax({
 				type : "GET",
 				url : $variableUtil.root + "escuela?accion=buscarTodos",
@@ -300,9 +303,8 @@ $(document).ready(function() {
 						$funcionUtil.notificarException($variableUtil.busquedaSinResultados, "fa-exclamation-circle", "Información", "info");
 						return;
 					}
+					
 					$('#mfescuela').removeAttr('hidden');
-					//Dibujando tabla
-					console.log(response);
 					var escuelas =[];
 					for(i=0;i<response.length;i++){
 						if(response[i].idFacultad == $local.$selectMFacultad.val()){
@@ -311,16 +313,16 @@ $(document).ready(function() {
 							e['nombre']=response[i].nombre;
 							escuelas.push(e);
 						}
-						
 					}
-					console.log(escuelas);
-					
 					for(i=0;i<escuelas.length;i++){
 						$('#selectMEscuela').append($('<option>', {
 						    value: escuelas[i].id,
 						    text: escuelas[i].nombre
 						}));
 					}
+					
+					$local.$cEscuela = escuelas.length;
+					
 				},
 				error : function(response) {
 				},
