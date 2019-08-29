@@ -28,7 +28,7 @@ public @RestController class ReporteEstadisticaPrestamosController {
 //		return reporteEstadisticaPrestamosService.buscarPorCriterio(criterioBusqueda);
 //	}
 	
-	@GetMapping(params = "accion=buscarPorPeriodoSinSegmentar")
+	@GetMapping(params = "accion=buscarRankingAlumno")
 	public List<ConsultaRankingAlumno> buscarRankingAlumno(ReporteEstadisticaPrestamosCriterioBusqueda criterioBusqueda/*,
 			@RequestParam("areasEstudio") List<Integer> areasEstudio,
 			@RequestParam("escuelas") List<Integer> escuelas,
