@@ -60,6 +60,57 @@
 			
 	</select>
 	
+	<select id="buscarRankingEscuela" resultMap="consultaRankEsc">
+		SELECT es.v_nombre AS escuela , COUNT(pr.n_id_persona) AS cantidad
+		FROM mae_alumno al
+		LEFT JOIN mae_escuela es ON ( al.n_id_escuela= es.n_id_escuela)
+		LEFT JOIN mae_persona pe ON ( al.n_id_alumno= pe.n_id_persona)
+		LEFT JOIN mov_prestamo pr ON ( pe.n_id_persona= pr.n_id_persona)
+		LEFT JOIN mae_recurso re	ON ( pr.n_id_recurso =re.n_id_recurso)
+		WHERE (pr.d_fecha BETWEEN "22-10-2018" AND sysdate()) 
+		
+		<if test="areasEstudio != null">
+			        AND re.n_id_area_estudio IN
+			        <foreach item="item" index="index" collection="areasEstudio"
+					      open="(" separator="," close=")">
+					        #{item}
+					  </foreach>
+					  
+				
+		</if>
+		
+		group by escuela
+		order by 2 desc
+			
+	</select>
+	
+	<select id="buscarRankingFacultad" resultMap="consultaRankFac">
+			
+		SELECT fa.v_nombre AS facultad , COUNT(pr.n_id_persona) AS cantidad
+		FROM mae_alumno al
+		LEFT JOIN mae_escuela es ON ( al.n_id_escuela= es.n_id_escuela)
+		LEFT JOIN mae_facultad fa ON ( es.n_id_facultad= fa.n_id_facultad)
+		LEFT JOIN mae_persona pe ON ( al.n_id_alumno= pe.n_id_persona)
+		LEFT JOIN mov_prestamo pr ON ( pe.n_id_persona= pr.n_id_persona)
+		LEFT JOIN mae_recurso re	ON ( pr.n_id_recurso =re.n_id_recurso)
+		WHERE (pr.d_fecha BETWEEN "22-10-2018" AND sysdate()) 
+		
+		<if test="areasEstudio != null">
+			        AND re.n_id_area_estudio IN
+			        <foreach item="item" index="index" collection="areasEstudio"
+					      open="(" separator="," close=")">
+					        #{item}
+					  </foreach>
+					  
+				
+		</if>
+		
+		group by facultad
+		order by 2 desc
+			    
+		
+	</select>
+	
 	
 	<select id="buscarPorPeriodoSinSegementar" resultMap="objetoSinSegmentar">
 			WITH RECURSIVE ListaPeriodo  AS
@@ -1620,6 +1671,21 @@
 		
 		
 	</resultMap>
+
+	<resultMap type="ConsultaFacEsc" id="consultaRankEsc">
+		<id property="escuela" column="escuela"></id>
+		
+		<id property="cantidad" column="cantidad"></id>
+		
+	</resultMap>
+	
+	<resultMap type="ConsultaFacEsc" id="consultaRankFac">
+		
+		<id property="facultad" column="facultad"></id>
+		<id property="cantidad" column="cantidad"></id>
+		
+	</resultMap>
+
 	
 
 </mapper>

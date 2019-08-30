@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import pe.edu.unmsm.fisi.siscae.model.consulta.ConsultaFacEsc;
 import pe.edu.unmsm.fisi.siscae.model.consulta.ConsultaRankingAlumno;
 import pe.edu.unmsm.fisi.siscae.model.criterio.ReporteEstadisticaPrestamosCriterioBusqueda;
 import pe.edu.unmsm.fisi.siscae.model.reporte.ReporteEstadisticaPrestamos;
@@ -41,6 +42,35 @@ public @RestController class ReporteEstadisticaPrestamosController {
 		System.out.println(criterioBusqueda);		
 		return reporteEstadisticaPrestamosService.buscarRankingAlumno(criterioBusqueda);
 	}
+	
+	@GetMapping(params = "accion=buscarRankingEscuela")
+	public List<ConsultaFacEsc> buscarRankingEscuela(ReporteEstadisticaPrestamosCriterioBusqueda criterioBusqueda/*,
+			@RequestParam("areasEstudio") List<Integer> areasEstudio,
+			@RequestParam("escuelas") List<Integer> escuelas,
+			@RequestParam("solicitantes") List<String> solicitantes,
+			@RequestParam("recursos") List<Integer> recursos*/) {
+		/*criterioBusqueda.setAreasEstudio(areasEstudio);
+		criterioBusqueda.setEscuelas(escuelas);
+		criterioBusqueda.setSolicitantes(solicitantes);
+		criterioBusqueda.setRecursos(recursos);*/
+		System.out.println(criterioBusqueda);		
+		return reporteEstadisticaPrestamosService.buscarRankingEscuela(criterioBusqueda);
+	}
+	
+	@GetMapping(params = "accion=buscarRankingFacultad")
+	public List<ConsultaFacEsc> buscarRankingFacultad(ReporteEstadisticaPrestamosCriterioBusqueda criterioBusqueda/*,
+			@RequestParam("areasEstudio") List<Integer> areasEstudio,
+			@RequestParam("escuelas") List<Integer> escuelas,
+			@RequestParam("solicitantes") List<String> solicitantes,
+			@RequestParam("recursos") List<Integer> recursos*/) {
+		/*criterioBusqueda.setAreasEstudio(areasEstudio);
+		criterioBusqueda.setEscuelas(escuelas);
+		criterioBusqueda.setSolicitantes(solicitantes);
+		criterioBusqueda.setRecursos(recursos);*/
+		System.out.println(criterioBusqueda);		
+		return reporteEstadisticaPrestamosService.buscarRankingFacultad(criterioBusqueda);
+	}
+	
 	
 	
 	

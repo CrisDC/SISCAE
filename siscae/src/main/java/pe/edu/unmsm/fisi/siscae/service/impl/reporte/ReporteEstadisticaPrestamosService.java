@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import pe.edu.unmsm.fisi.siscae.mapper.IReporteEstadisticaPrestamosMapper;
+import pe.edu.unmsm.fisi.siscae.model.consulta.ConsultaFacEsc;
 import pe.edu.unmsm.fisi.siscae.model.consulta.ConsultaRankingAlumno;
 import pe.edu.unmsm.fisi.siscae.model.criterio.ReporteEstadisticaPrestamosCriterioBusqueda;
 import pe.edu.unmsm.fisi.siscae.model.reporte.resumen.ReporteEstadisticaPrestamosPorEjeX;
@@ -64,6 +65,22 @@ public class ReporteEstadisticaPrestamosService implements IReporteEstadisticaPr
 			ReporteEstadisticaPrestamosCriterioBusqueda criterioBusqueda) {
 		
 		return reporteEstadisticaPrestamosMapper.buscarRankingAlumno(criterioBusqueda);
+	}
+
+
+
+	@Override
+	public List<ConsultaFacEsc> buscarRankingEscuela(ReporteEstadisticaPrestamosCriterioBusqueda criterioBusqueda) {
+		
+		return reporteEstadisticaPrestamosMapper.buscarRankingEscuela(criterioBusqueda);
+	}
+
+
+
+	@Override
+	public List<ConsultaFacEsc> buscarRankingFacultad(ReporteEstadisticaPrestamosCriterioBusqueda criterioBusqueda) {
+		
+		return reporteEstadisticaPrestamosMapper.buscarRankingFacultad(criterioBusqueda);
 	} 
 
 }
