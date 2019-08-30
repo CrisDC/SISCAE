@@ -44,6 +44,8 @@ $(document).ready(function() {
 			$divTablaResumenPrestamo : $('#divTablaResumenPrestamo'),
 			$divTablaResumenInfraccion : $('#divTablaResumenInfraccion'),
 			$divTablaResumenMasFrecuentes : $('#divTablaResumenMasFrecuentes'),
+			$divTablaResumenMasFrecuentesFacultad : $('#divTablaResumenMasFrecuentesFacultad'),
+			$divTablaResumenMasFrecuentesEscuela : $('#divTablaResumenMasFrecuentesEscuela'),
 			$divTablaResumenPrestamoSegmentado : $('#divTablaResumenPrestamoSegmentado'),
 			
 			//Botones de la pagina
@@ -60,6 +62,10 @@ $(document).ready(function() {
 			tablaResultadosInfraccion : "",
 			$tablaResultadosMasFrecuentes : $('#tblReporteResumenMasFrecuentes'),
 			tablaResultadosMasFrecuentes : "",
+			$tablaResultadosMasFrecuentesFacultad : $('#tblReporteResumenMasFrecuentesFacultad'),
+			tablaResultadosMasFrecuentesFacultad : "",
+			$tablaResultadosMasFrecuentesEscuela : $('#tblReporteResumenMasFrecuentesEscuela'),
+			tablaResultadosMasFrecuentesEscuela : "",
 				
 			$tablaResultadosPrestamoSegementado : $("#tblReporteResumenPrestamoSegmentado"),
 			tablaResultadosPrestamoSegementado : ""
@@ -504,6 +510,67 @@ $(document).ready(function() {
 				$local.$mfbuscar.attr("disabled", false).find("i").addClass("fa-search").removeClass("fa-spinner fa-pulse fa-fw");
 			}
 		});
+		
+		$.ajax({
+			type : "GET",
+			url : $variableUtil.root + "reporteEstadisticaPrestamos?accion=buscarRankingFacultad"+criterio,
+			contentType : "application/json",
+			//data: criterioBusqueda,
+			//dataType : "json",
+			beforeSend : function(xhr) {
+				xhr.setRequestHeader('Content-Type', 'application/json');
+				//Borrando tabla antes de hacer la consulta
+				$local.tablaResultadosMasFrecuentesFacultad.clear().draw();
+				$local.$mfbuscar.attr("disabled", true).find("i").removeClass("fa-search").addClass("fa-spinner fa-pulse fa-fw");
+			},
+			success : function(response) {
+				if (response.length === 0) {
+					$funcionUtil.notificarException($variableUtil.busquedaSinResultados, "fa-exclamation-circle", "Información", "info");
+					return;
+				}
+				//Dibujando tabla
+				console.log(response);
+				$local.tablaResultadosMasFrecuentesFacultad.rows.add(response).draw();
+				//Dibujando grafico
+				//var chart = AmCharts.makeChart('chartdiv',$funcionGraficoUtil.crearGraficoPie(response,'segmento','numeroPrestamos','Análisis de Préstamos','Número de prestamos', "<b style='font-size:12px'>[[title]]</b> ([[percents]]%) <br> <b>Prestamos:</b> [[value]] </br> <b>Tiempo Total: </b> [[estadiaTotal]] <br> <b>Tiempo Prom: </b> [[estadiaPromedio]]"));
+			},
+			error : function(response) {
+			},
+			complete : function() {
+				$local.$mfbuscar.attr("disabled", false).find("i").addClass("fa-search").removeClass("fa-spinner fa-pulse fa-fw");
+			}
+		});
+		
+		$.ajax({
+			type : "GET",
+			url : $variableUtil.root + "reporteEstadisticaPrestamos?accion=buscarRankingEscuela"+criterio,
+			contentType : "application/json",
+			//data: criterioBusqueda,
+			//dataType : "json",
+			beforeSend : function(xhr) {
+				xhr.setRequestHeader('Content-Type', 'application/json');
+				//Borrando tabla antes de hacer la consulta
+				$local.tablaResultadosMasFrecuentesEscuela.clear().draw();
+				$local.$mfbuscar.attr("disabled", true).find("i").removeClass("fa-search").addClass("fa-spinner fa-pulse fa-fw");
+			},
+			success : function(response) {
+				if (response.length === 0) {
+					$funcionUtil.notificarException($variableUtil.busquedaSinResultados, "fa-exclamation-circle", "Información", "info");
+					return;
+				}
+				//Dibujando tabla
+				console.log(response);
+				$local.tablaResultadosMasFrecuentesEscuela.rows.add(response).draw();
+				//Dibujando grafico
+				//var chart = AmCharts.makeChart('chartdiv',$funcionGraficoUtil.crearGraficoPie(response,'segmento','numeroPrestamos','Análisis de Préstamos','Número de prestamos', "<b style='font-size:12px'>[[title]]</b> ([[percents]]%) <br> <b>Prestamos:</b> [[value]] </br> <b>Tiempo Total: </b> [[estadiaTotal]] <br> <b>Tiempo Prom: </b> [[estadiaPromedio]]"));
+			},
+			error : function(response) {
+			},
+			complete : function() {
+				$local.$mfbuscar.attr("disabled", false).find("i").addClass("fa-search").removeClass("fa-spinner fa-pulse fa-fw");
+			}
+		});
+		
 		
 		
 	});
@@ -3082,15 +3149,83 @@ $(document).ready(function() {
 		
 	});
 	
+	$local.tablaResultadosMasFrecuentesFacultad = $local.$tablaResultadosMasFrecuentesFacultad.DataTable({
+		"language" : {
+			"emptyTable" : "No hay registros encontrados."
+		},
+		"pageLength": 10,
+		"initComplete" : function() {
+			$local.$tablaResultadosMasFrecuentesFacultad.wrap("<div class='table-responsive'></div>");
+		},
+		"columnDefs" : [ {
+			"targets" : [ 0],
+			"className" : "all dt-center fondo-blanco"
+		},{
+			"targets" : [ 1],
+			"className" : "all dt-right"
+		} ],
+		"columns" : [ {
+			"data" : "facultad",
+			"title" : "Facultad"
+		}, {
+			"data" : "cantidad",
+			"title" : "Cantidad"
+		}],
+		"aoColumnDefs" : [ {
+		    "bSortable" : false,
+		    "aTargets" : [ "sorting_disabled" ]
+		} ],
+		 "order": [
+	            [1, 'dsc']
+	        ],
+		
+	});
+
+	$local.tablaResultadosMasFrecuentesEscuela = $local.$tablaResultadosMasFrecuentesEscuela.DataTable({
+		"language" : {
+			"emptyTable" : "No hay registros encontrados."
+		},
+		"pageLength": 10,
+		"initComplete" : function() {
+			$local.$tablaResultadosMasFrecuentesEscuela.wrap("<div class='table-responsive'></div>");
+		},
+		"columnDefs" : [ {
+			"targets" : [ 0],
+			"className" : "all dt-center fondo-blanco"
+		},{
+			"targets" : [ 1],
+			"className" : "all dt-right"
+		} ],
+		"columns" : [ {
+			"data" : "escuela",
+			"title" : "Escuela"
+		}, {
+			"data" : "cantidad",
+			"title" : "Cantidad"
+		}],
+		"aoColumnDefs" : [ {
+		    "bSortable" : false,
+		    "aTargets" : [ "sorting_disabled" ]
+		} ],
+		 "order": [
+	            [1, 'dsc']
+	        ],
+		
+	});
+	
 	$local.$divTablaResumenPrestamo.removeClass("hidden"); // por defecto
 	$local.$divTablaResumenInfraccion.addClass("hidden"); // por defecto
-	$local.$divTablaResumenMasFrecuentes.addClass("hidden"); // por defecto
+	$local.$divTablaResumenMasFrecuentes.addClass("hidden"); // por defecto}
+	$local.$divTablaResumenMasFrecuentesFacultad.addClass("hidden"); // por defecto
+	$local.$divTablaResumenMasFrecuentesEscuela.addClass("hidden"); // por defecto
 	
 	$("#xd").find(".comun").on("click", function(){
 		$local.$tipoReporte = $(this).attr("key");
 		if($local.$tipoReporte=="P"){
 			$local.$divTablaResumenPrestamo.removeClass("hidden");
 			$local.$divTablaResumenMasFrecuentes.addClass("hidden");
+			$local.$divTablaResumenMasFrecuentesFacultad.addClass("hidden");
+			$local.$divTablaResumenMasFrecuentesEscuela.addClass("hidden");
 			$local.$divTablaResumenInfraccion.addClass("hidden");
 			$('#gr').removeClass("hidden");
 			$('#recurso').removeClass("hidden");
@@ -3109,6 +3244,8 @@ $(document).ready(function() {
 		if($local.$tipoReporte=="I"){
 			$local.$divTablaResumenPrestamo.addClass("hidden");
 			$local.$divTablaResumenMasFrecuentes.addClass("hidden");
+			$local.$divTablaResumenMasFrecuentesFacultad.addClass("hidden");
+			$local.$divTablaResumenMasFrecuentesEscuela.addClass("hidden");
 			$local.$divTablaResumenInfraccion.removeClass("hidden");
 			$('#gr').removeClass("hidden");
 			$('#tipoInfraccion').removeClass("hidden");
@@ -3131,6 +3268,8 @@ $(document).ready(function() {
 			$local.$divTablaResumenPrestamo.addClass("hidden");
 			$local.$divTablaResumenInfraccion.addClass("hidden");
 			$local.$divTablaResumenMasFrecuentes.removeClass("hidden");
+			$local.$divTablaResumenMasFrecuentesFacultad.removeClass("hidden");
+			$local.$divTablaResumenMasFrecuentesEscuela.removeClass("hidden");
 			$('#gr').addClass("hidden");
 
 		}
