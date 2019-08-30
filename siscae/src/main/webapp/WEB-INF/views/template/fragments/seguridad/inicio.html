@@ -8,10 +8,14 @@
 <body>
 	  <div layout:fragment="content">
 		<div th:class="page-wrapper">
-			
-			<div class="row">
-				<div class="col offset-md-3 col-md-6">
-					<form>
+		
+			<div class="modal-content col offset-md-3 col-md-6">
+				<div >
+				<div class="modal-header">
+						<h5 class="modal-title"> Cambio de Contrase&ntilde;a</h5>
+				</div>
+				<div class="modal-body">
+					<form class="form-horizontal" role="form">
 					  <div class="form-group">
 					    <label for="contraAnterior">Contrase&ntilde;a anterior</label>
 					    <input type="password" class="form-control" id="contraAnterior">
@@ -24,12 +28,14 @@
 					    <label for="contraNuevaRep">Repite contrase&ntilde;a nueva</label>
 					    <input type="password" class="form-control" id="contraNuevaRep">
 					  </div>
+					  
 					  <a th:id="btnEnviarDatos" type="submit" href="#" class="btn btn-primary">Cambiar</a>
 					</form>
 					<p th:text="|Bienvenido: ${#httpSession.getAttribute('nombreAdministrativo')}|"></p>
 					<input type="text" class="form-control" id="contraPasada">
 				</div>
-			</div>
+				</div>
+
 		</div>
 		
 		
