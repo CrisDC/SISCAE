@@ -337,14 +337,14 @@
 									<div class="tab-pane" id="tabReporteMasFrecuentes"
 										role="tabpanel">
 										<div id="estadisticas" class="m-l-15 m-r-15">
-											<form id="formEstadisticas">
+											<form id="formMasFrecuentes">
 												<h3 style="font-size: 18px;">Gráfica</h3>
 												<div class="row" style="width: 100%;">
 													<div class="col-md-3" id="divGrafica">
 														<div class="form-group m-b-10">
 															<label class="m-r-15">Facultad</label>
 															<div class="input-group">
-																<select id="selectMFacultad" name="tipoGrafica"
+																<select id="selectMFacultad" name="facultades[]"
 																	class="form-control js-example-basic-single">
 																	<option value="-1" disabled="disabled"
 																		selected="selected">Seleccione una Facultad</option>
@@ -354,6 +354,22 @@
 															</div>
 														</div>
 													</div>
+													
+													<div class="col-md-3" id="divmfAreaEstudio">
+														<div class="form-group m-b-10">
+															<label class="m-r-15">Area de Estudio</label>
+															<div class="input-group">
+																<select id="selectMAreaEstudio" name="areasEstudio[]"
+																	class="form-control js-example-basic-single">
+																	<option value="-1" disabled="disabled"
+																		selected="selected">Seleccione un Area de Estudio</option>
+																	<option th:each="a : ${areasEstudio}"
+																		th:value="${a.idAreaEstudio}" th:text="${a.nombre}"></option>
+																</select>
+															</div>
+														</div>
+													</div>
+													
 												
 
 												</div>
@@ -378,7 +394,7 @@
 												</div>
 												<div class="row text-center m-t-5"
 													style="width: 100%; justify-content: center;">
-													<button id="buscar" class="btn btn-info m-r-3"
+													<button id="mfbuscar" class="btn btn-info m-r-3"
 														type="button">
 														<i class="fa fa-search"></i> Buscar
 													</button>
@@ -416,7 +432,7 @@
 											class="hidden-sm-up"><i class="ti-user"></i></span> <span
 											class="hidden-xs-down">Resumen</span>
 									</a></li>
-									<li class="nav-item"><a class="nav-link" data-toggle="tab"
+									<li id="gr" class="nav-item"><a class="nav-link" data-toggle="tab"
 										href="#resultadoGrafico" role="tab"> <span
 											class="hidden-sm-up"><i class="ti-user"></i></span> <span
 											class="hidden-xs-down">Gráfico</span>

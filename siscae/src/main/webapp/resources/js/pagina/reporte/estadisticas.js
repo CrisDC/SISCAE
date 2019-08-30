@@ -16,6 +16,7 @@ $(document).ready(function() {
 			$selecttipoEstado : $('#selecttipoEstado'),
 			$selectMFacultad :$('#selectMFacultad'),
 			$selectMEscuela :$('#selectMEscuela'),
+			$selectMAreaEstudio :$('#selectMAreaEstudio'),
 			$fechaPrestamo : $('#fechaPrestamo'),
 			$semanaInicio : $('#semanaInicio'),
 			$anioInicio : $('#anioInicio'),
@@ -47,6 +48,7 @@ $(document).ready(function() {
 			
 			//Botones de la pagina
 			$buscar : $('#buscar'),
+			$mfbuscar :$('#mfbuscar'),
 			$exportar : $('#exportar'),
 			//Tipo Reporte
 			$tipoReporte:'P',
@@ -75,6 +77,7 @@ $(document).ready(function() {
 	$funcionUtil.crearSelect2($local.$selectSeries);
 	$funcionUtil.crearSelect2($local.$selectPresentacion);
 	$funcionUtil.crearSelect2($local.$selectMFacultad);
+	$funcionUtil.crearSelect2($local.$selectMAreaEstudio);
 	$funcionUtil.crearMultipleSelect2($local.$selectAreaEstudio, "TODOS");
 	$funcionUtil.crearMultipleSelect2($local.$selectEscuela, "TODOS");	
 	$funcionUtil.crearMultipleSelect2($local.$selectRecurso, "TODOS");
@@ -85,6 +88,7 @@ $(document).ready(function() {
 	
 	//Formulario
 	$formEstadisticas = $("#formEstadisticas");
+	$formMasFrecuentes = $("#formMasFrecuentes");
 	
 	//Evento que se dispara cuando el combo Periodo cambie
 	$local.$selectPeriodo.on("change", function(){
@@ -462,7 +466,47 @@ $(document).ready(function() {
 				"title" : "Infracciones promedio"
 			}]
 		});*/
-	
+	$local.$mfbuscar.on('click',function(){
+		
+		if(!$formMasFrecuentes.valid()){
+			return;
+		}
+		var criterioBusqueda = $formMasFrecuentes.serializeJSON();
+		console.log(criterioBusqueda);
+		
+		var criterio = "&"+reemplazarCadena("%5B%5D","",$.param(criterioBusqueda));
+		$.ajax({
+			type : "GET",
+			url : $variableUtil.root + "reporteEstadisticaPrestamos?accion=buscarRankingAlumno"+criterio,
+			contentType : "application/json",
+			//data: criterioBusqueda,
+			//dataType : "json",
+			beforeSend : function(xhr) {
+				xhr.setRequestHeader('Content-Type', 'application/json');
+				//Borrando tabla antes de hacer la consulta
+				$local.tablaResultadosMasFrecuentes.clear().draw();
+				$local.$mfbuscar.attr("disabled", true).find("i").removeClass("fa-search").addClass("fa-spinner fa-pulse fa-fw");
+			},
+			success : function(response) {
+				if (response.length === 0) {
+					$funcionUtil.notificarException($variableUtil.busquedaSinResultados, "fa-exclamation-circle", "Información", "info");
+					return;
+				}
+				//Dibujando tabla
+				console.log(response);
+				$local.tablaResultadosMasFrecuentes.rows.add(response).draw();
+				//Dibujando grafico
+				//var chart = AmCharts.makeChart('chartdiv',$funcionGraficoUtil.crearGraficoPie(response,'segmento','numeroPrestamos','Análisis de Préstamos','Número de prestamos', "<b style='font-size:12px'>[[title]]</b> ([[percents]]%) <br> <b>Prestamos:</b> [[value]] </br> <b>Tiempo Total: </b> [[estadiaTotal]] <br> <b>Tiempo Prom: </b> [[estadiaPromedio]]"));
+			},
+			error : function(response) {
+			},
+			complete : function() {
+				$local.$mfbuscar.attr("disabled", false).find("i").addClass("fa-search").removeClass("fa-spinner fa-pulse fa-fw");
+			}
+		});
+		
+		
+	});
 	
 	$local.$buscar.on('click', function() {
 		if (!$formEstadisticas.valid()) {
@@ -474,6 +518,7 @@ $(document).ready(function() {
 //			return;
 //		}
 		var criterioBusqueda = obtenerCriteriosDeBusqueda();
+		console.log(criterioBusqueda);
 		//Obteniendo parametros de la grafica
 		let tipoGrafico = $local.$selectTipoGrafico.val();
 		let segmentacionY = $local.$selectSegmY.val();
@@ -3015,18 +3060,26 @@ $(document).ready(function() {
 			"className" : "all dt-right"
 		} ],
 		"columns" : [ {
-			"data" : "ejeX",
-			"title" : "Periodo"
+			"data" : "nombres",
+			"title" : "Nombres"
 		}, {
-			"data" : "numeroInfracciones",
-			"title" : "hola"
+			"data" : "codigo",
+			"title" : "Codigo"
 		}, {
-			"data" : "numeroSancionados",
-			"title" : "gg"
+			"data" : "cantidad",
+			"title" : "Cantidad"
 		}, {
-			"data" : "numeroInfraccionesPromedioPorAlumno",
-			"title" : "gaa"
-		}]
+			"data" : "escuela",
+			"title" : "Escuela"
+		}],
+		"aoColumnDefs" : [ {
+		    "bSortable" : false,
+		    "aTargets" : [ "sorting_disabled" ]
+		} ],
+		 "order": [
+	            [2, 'dsc']
+	        ],
+		
 	});
 	
 	$local.$divTablaResumenPrestamo.removeClass("hidden"); // por defecto
@@ -3039,6 +3092,7 @@ $(document).ready(function() {
 			$local.$divTablaResumenPrestamo.removeClass("hidden");
 			$local.$divTablaResumenMasFrecuentes.addClass("hidden");
 			$local.$divTablaResumenInfraccion.addClass("hidden");
+			$('#gr').removeClass("hidden");
 			$('#recurso').removeClass("hidden");
 			$('#tipoInfraccion').addClass("hidden");
 			$('#tipoEstado').addClass("hidden");
@@ -3056,6 +3110,7 @@ $(document).ready(function() {
 			$local.$divTablaResumenPrestamo.addClass("hidden");
 			$local.$divTablaResumenMasFrecuentes.addClass("hidden");
 			$local.$divTablaResumenInfraccion.removeClass("hidden");
+			$('#gr').removeClass("hidden");
 			$('#tipoInfraccion').removeClass("hidden");
 			$('#tipoEstado').removeClass("hidden");
 			$('#recurso').addClass("hidden");
@@ -3076,10 +3131,8 @@ $(document).ready(function() {
 			$local.$divTablaResumenPrestamo.addClass("hidden");
 			$local.$divTablaResumenInfraccion.addClass("hidden");
 			$local.$divTablaResumenMasFrecuentes.removeClass("hidden");
-			
-			
-			
-			
+			$('#gr').addClass("hidden");
+
 		}
 	});
 

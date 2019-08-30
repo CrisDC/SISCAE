@@ -31,7 +31,7 @@
 					  
 				<if test="facultades != null">
 			        AND es.n_id_facultad IN 
-			        <foreach item="item" index="index" collection="escuelas"
+			        <foreach item="item" index="index" collection="facultades"
 					      open="(" separator="," close=")">
 					        #{item}
 					  </foreach>
