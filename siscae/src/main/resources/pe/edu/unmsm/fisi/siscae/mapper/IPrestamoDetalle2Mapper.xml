@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="pe.edu.unmsm.fisi.siscae.mapper.IPrestamoDetalle2Mapper">
+
+	<select id="buscarPorNumeroDocumentoIdentidad" resultType="PrestamoDetalle2">
+	
+	
+	<if test="tipoPersona == '-1' or  tipoPersona == ''">
+	
+			SELECT
+				
+                mp.v_num_documento						AS		num_documento,
+			    mp.v_app_paterno						AS		app_paterno,
+			    mp.v_app_materno						AS		app_materno,
+			    mp.v_nombre								AS		nombre,
+                F_TIPO_PERSONA(mp.v_num_documento)		AS		tipo_persona,
+                re.v_descripcion						AS 		recurso,
+                mtr.v_nombre							AS		tipo_recurso,
+                mae.v_nombre							AS		area_Estudio,
+                SUBSTR(TIMEDIFF(mpr.t_hora_salida,
+                mpr.t_hora_entrada),-(8),8)			 AS		tiempo,
+			    CAST(mpr.d_fecha AS DATE)				AS		fecha
+			    					    				
+			    
+			FROM mov_prestamo mpr
+			LEFT JOIN mae_persona mp			ON mpr.n_id_persona = mp.n_id_persona
+            LEFT JOIN mae_recurso re			ON mpr.n_id_recurso = re.n_id_recurso
+	        LEFT JOIN mae_tipo_recurso 	mtr		ON mtr.n_id_tipo_recurso=re.n_id_tipo_recurso
+	        LEFT JOIN mae_area_estudio mae		ON mae.n_id_area_estudio=re.n_id_area_estudio
+	
+							
+			<where>
+				<if test="tipoRecurso != -1">
+			        mtr.n_id_tipo_recurso = #{tipoRecurso}
+			    </if>
+			    
+			    <if test="recurso != -1">
+			        AND re.n_id_recurso = #{recurso}
+			    </if>
+			    
+			    <if test="areaEstudio != -1">
+			        AND mae.n_id_area_estudio = #{areaEstudio}
+			    </if>
+			    		    
+			    <if test="numeroDocumento != 0 and numeroDocumento != '' ">
+			        AND mp.v_num_documento = #{numeroDocumento}
+			    </if>
+			    <if test="tipoPeriodo=='DIA'">
+				    <if test="( fechaInicio != null or fechaInicio !='') and ( fechaFin !=null or fechaFin !='')">
+						AND (mpr.d_fecha BETWEEN #{fechaInicio}  AND #{fechaFin})
+					</if>
+			    </if>
+			    
+			    <if test="tipoPeriodo=='SEMANA'">
+					<if test="( semanaInicio != null or semanaInicio !='') and ( semanaFin !=null or semanaFin !='')">
+						AND (mpr.d_fecha  BETWEEN (F_GENERADOR_FECHAS('INI', 'SEMANA',#{anioInicio} ,null, null, #{semanaInicio} ))
+					   AND (F_GENERADOR_FECHAS('FIN', 'SEMANA',#{anioFin} ,null, null, #{semanaFin} )))
+					</if>
+						
+				</if>
+			    
+			    <if test="tipoPeriodo=='MES'">
+					<if test="( mesInicio != null or mesInicio !='') and ( mesFin !=null or mesFin !='')">
+						AND (mpr.d_fecha BETWEEN (F_GENERADOR_FECHAS('INI', 'MES',#{anioInicio} ,#{mesInicio}, null, null ))
+					   AND (F_GENERADOR_FECHAS('FIN', 'MES',#{anioFin} ,#{mesFin}, null,null )))
+					</if>
+				</if>
+			    
+				<if test="tipoPeriodo=='ANIO'">
+					<if test="( fechaInicio != null or fechaInicio !='') and ( fechaFin !=null or fechaFin !='')">
+						(mpr.d_fecha BETWEEN (F_GENERADOR_FECHAS('INI', 'ANIO',#{anioInicio} ,null, null, null ))
+					   AND (F_GENERADOR_FECHAS('FIN', 'ANIO',#{anioFin} ,null, null,null )))
+					</if>
+					
+				</if>
+			    
+			  </where>
+			
+		</if>
+	
+	
+	</select>
+
+</mapper>
