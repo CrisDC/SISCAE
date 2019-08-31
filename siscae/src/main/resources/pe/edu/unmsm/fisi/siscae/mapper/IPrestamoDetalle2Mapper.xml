@@ -2,7 +2,7 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="pe.edu.unmsm.fisi.siscae.mapper.IPrestamoDetalle2Mapper">
 
-	<select id="buscarPorNumeroDocumentoIdentidad" resultType="PrestamoDetalle2">
+	<select id="buscarPorCriterio" resultType="PrestamoDetalle2">
 	
 	
 	<if test="tipoPersona == '-1' or  tipoPersona == ''">

@@ -12,7 +12,7 @@ import pe.edu.unmsm.fisi.siscae.model.criterio.PrestamoDetalle2CriterioBusqueda;
 import pe.edu.unmsm.fisi.siscae.service.IPrestamoDetalle2Service;
 
 @RequestMapping("/PrestamoDetalle2")
-public @RestController class PrestamoDetalleController2 {
+public @RestController class PrestamoDetalle2Controller {
 
 	private @Autowired IPrestamoDetalle2Service prestamoDetalle2Service; 
 	

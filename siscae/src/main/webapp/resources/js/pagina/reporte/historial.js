@@ -3,12 +3,17 @@ $(document).ready(function() {
 	var $local = {
 		$tblConsulta : $("#tblSancionados"),
 		tblConsulta  : "",
+		$tblPrestamos : $("#tblPrestamos"),
+		tblPrestamos  : "",
+		
 		$actualizarMantenimiento : $("#actualizarMantenimiento"),
 		idPersonaSeleccionada : "",
 		fecha :"",
 		idInfraccionSeleccionada:"",
 		$filaSeleccionada : "",
 		$modalMantenimiento : $("#sancionadoModal"),
+		//Tipo Reporte
+		$tipoHistorial:'P',
 		
 		//div de la pagina
 		
@@ -32,6 +37,11 @@ $(document).ready(function() {
 		$selectTipoEstado : $('#tipoEstado'),
 		$selectTipoInfraccionm : $('#tipoInfraccionm'),
 		$selectTipoEstadom : $('#tipoEstadom'),
+		$selectAreaEstudio : $('#selectareaEstudio'),
+		$selectTipoRecurso : $('#ptipoRecurso'),
+		$selectRecurso : $('#precurso'),
+		$cTr :0,
+		$cr :0,
 		
 		$selectPeriodo : $('#selectPeriodo'),
 		$fechaPrestamo : $('#fechaPrestamo'),
@@ -60,11 +70,14 @@ $(document).ready(function() {
 	$funcionUtil.crearSelect2($local.$selectTipoInfraccionm);
 	$funcionUtil.crearSelect2($local.$selectPeriodo);
 	$funcionUtil.crearSelect2($local.$tipoPersona);
+	$funcionUtil.crearSelect2($local.$selectAreaEstudio);
+	$funcionUtil.crearSelect2($local.$selectTipoRecurso);
+	$funcionUtil.crearSelect2($local.$selectRecurso);
 	
 	//Evento que se dispara cuando el combo Periodo cambie
 	$local.$selectPeriodo.on("change", function(){
 		var val = $(this).val();
-
+     
 		if(val=="DIA"){
 			$funcionUtil.crearDateRangePickerSimple($local.$fechaPrestamo, "YYYY-MM-DD");
 			$local.$divPeriodoDia.removeClass("hidden");
@@ -183,7 +196,69 @@ $(document).ready(function() {
 		$local.tblConsulta.column($(this).parent().index() + ':visible').search(val ? '^' + val + '$' : '', true, false).draw();
 	});
 	
+	$local.$tblPrestamos.on('xhr.dt', function(e, settings, json, xhr) {
+		switch (xhr.status) {
+			case 500:
+				$local.tblPrestamos.clear().draw();
+				break;
+		}
+	});
 	
+	$local.tblPrestamos = $local.$tblPrestamos.DataTable({
+		
+		"language" : {
+			"url": "//cdn.datatables.net/plug-ins/1.10.16/i18n/Spanish.json",
+			"emptyTable" : "Ningún dato disponible en esta tabla." // Nuevo
+		},
+		"initComplete" : function() {
+			$local.$tblPrestamos.wrap("<div class='table-responsive'></div>");
+			//$tablaFuncion.aniadirFiltroDeBusquedaEnEncabezado(this, $local.$tblConsulta);
+		},
+		"columnDefs" : [ {
+			"targets" : [ 0, 1, 2, 3, 4, 5, 6, 7 ],
+			"className" : "all filtrable",
+		}  ],
+		"columns" : [{
+			"data" : 'numDocumento',
+			"title" : "Num. documento"
+		}, {
+			"data" : 'appPaterno',
+			"title" : "Ap. Paterno"
+		}, {
+			"data" : 'appMaterno',
+			"title" : "Ap. Materno"
+		}, {
+			"data" : 'nombre',
+			"title" : "Nombre"
+		}, {
+			"data" : 'tipoPersona',
+			"title" : "Solicitante"
+		}, {
+			"data" : 'areaEstudio',
+			"title" : "Detalle"
+		}, {
+			"data" : 'recurso',
+			"title" : "Recurso"
+		}, {
+			"data" : 'fecha',
+			"title" : "Fecha"
+		} ]
+	});
+	
+$local.$tblPrestamos.find("thead").on('keyup', 'input', function() {
+	$local.tblPrestamos.column($(this).parent().index() + ':visible').search(this.value).draw();
+});
+
+$local.$tblPrestamos.find("thead").on('change', 'select', function() {
+	var val = $.fn.dataTable.util.escapeRegex($(this).val());
+	$local.tblPrestamos.column($(this).parent().index() + ':visible').search(val ? '^' + val + '$' : '', true, false).draw();
+});
+
+$("#xd").find(".comun").on("click", function(){
+	$local.$tipoHistorial = $(this).attr("key");
+	console.log($local.$tipoHistorial);
+	
+});
 	/* ------ fin Construcción de tablas ------------ */
 //	var $local = {
 //			$tblConsulta2 : $("#tblSancionados"),
@@ -260,6 +335,7 @@ $(document).ready(function() {
 	
 	//Formulario
 	$formInfracciones = $("#formInfracciones");
+	$formPrestamos = $("#formPrestamos");
 	$formMantenimiento = $("#formMantenimiento");
 	
 	/*---------CONSTRUCCION DE LAS TABLAS POR FILTROS---------------*/
@@ -429,7 +505,58 @@ $(document).ready(function() {
 		
 	});
 	
-	/***dfdf*/
+	
+	
+	$local.$selectTipoRecurso.on("change", function(){
+		if($('#ptipoRecurso').val() != -1){
+			if($local.$cr != 0){
+				$('#precurso').html("");
+			}
+			$.ajax({
+				type : "GET",
+				url : $variableUtil.root + "recurso?accion=buscarTodos",
+				contentType : "application/json",
+				//data: criterioBusqueda,
+				//dataType : "json",
+				beforeSend : function(xhr) {
+					xhr.setRequestHeader('Content-Type', 'application/json');
+					//Borrando tabla antes de hacer la consulta
+					//$local.$buscar.attr("disabled", true).find("i").removeClass("fa-search").addClass("fa-spinner fa-pulse fa-fw");
+				},
+				success : function(response) {
+					if (response.length === 0) {
+						$funcionUtil.notificarException($variableUtil.busquedaSinResultados, "fa-exclamation-circle", "Información", "info");
+						return;
+					}
+					console.log(response);
+					$('#pdivRecurso').removeAttr('hidden');
+					var r =[];
+					for(i=0;i<response.length;i++){
+						if(response[i].idTipoRecurso == $local.$selectTipoRecurso.val()){
+							var e = new Object();
+							e['id']=response[i].idRecurso;
+							e['nombre']=response[i].descripcion;
+							r.push(e);
+						}
+					}
+					for(i=0;i<r.length;i++){
+						$('#precurso').append($('<option>', {
+						    value: r[i].id,
+						    text: r[i].nombre
+						}));
+					}
+					
+					$local.$cr = r.length;
+					
+				},
+				error : function(response) {
+				},
+				complete : function() {
+					$local.$buscar.attr("disabled", false).find("i").addClass("fa-search").removeClass("fa-spinner fa-pulse fa-fw");
+				}
+			});	
+		}
+	});
 	
 	
 	var obtenerCriterio = function (){
@@ -539,7 +666,50 @@ $(document).ready(function() {
 					$local.$buscar.attr("disabled", false).find("i").addClass("fa-search").removeClass("fa-spinner fa-pulse fa-fw");
 				}
 			});
+		
+		
 		}
+	});
+	
+$('#buscarP').on('click', function() {
+		
+	if(!$formPrestamos.valid()){
+		return;
+	}
+	var criterioBusqueda = $formPrestamos.serializeJSON();
+	console.log(criterioBusqueda);
+
+			$.ajax({
+				type : "GET",
+				url : $variableUtil.root + "PrestamoDetalle2?accion=buscarPorCriterio",
+				contentType : "application/json",
+				data: criterioBusqueda,
+				dataType : "json",
+				beforeSend : function(xhr) {
+					xhr.setRequestHeader('Content-Type', 'application/json');
+					//Borrando tabla antes de hacer la consulta
+					$local.tblPrestamos.clear().draw();
+					$('#buscarP').attr("disabled", true).find("i").removeClass("fa-search").addClass("fa-spinner fa-pulse fa-fw");
+				},
+				success : function(response) {
+					console.log(response);
+					if (response.length === 0) {
+						$funcionUtil.notificarException($variableUtil.busquedaSinResultados, "fa-exclamation-circle", "Información", "info");
+						return;
+					}
+					//Dibujando tabla
+					
+					$local.tblPrestamos.rows.add(response).draw();
+					//Dibujando grafico
+					//var chart = AmCharts.makeChart('chartdiv',$funcionGraficoUtil.crearGraficoPie(response,'segmento','numeroPrestamos','Análisis de Préstamos','Número de prestamos', "<b style='font-size:12px'>[[title]]</b> ([[percents]]%) <br> <b>Prestamos:</b> [[value]] </br> <b>Tiempo Total: </b> [[estadiaTotal]] <br> <b>Tiempo Prom: </b> [[estadiaPromedio]]"));
+				},
+				error : function(response) {
+				},
+				complete : function() {
+					$('#buscarP').attr("disabled", false).find("i").addClass("fa-search").removeClass("fa-spinner fa-pulse fa-fw");
+				}
+			});
+		
 		
 		
 	});

@@ -52,20 +52,77 @@
 									<div class="tab-pane active m-t-20" id="tabReporteGeneral"
 										role="tabpanel">
 										<div id="estadisticas" class="m-l-15 m-r-15">
-											<form id="formEstadisticas">
-												<h3 style="font-size: 18px;">Gráfica</h3>
+											<form id="formPrestamos">
 												<div class="row" style="width: 100%;">
-													<div class="col-md-3" id="divGrafica">
-														<div class="form-group m-b-10">
-															<label class="m-r-15">Tipo</label>
+													<div class="col-md-3" id="divPersona">
+														<label class="m-r-15">Numero de documento</label>
+														<div class="input-group">
+														
+															<div class="input-group-btn search-panel">
+											
+																<input type="number" min=0 value="" class="form-control" name="numeroDocumento"
+																placeholder="N&#250mero de Documento" id="numeroDocumento"> 
+											
+															</div>
+															
+														</div>
+													</div>
+													<div class="col-sm" id="divPersona">
+														<label class="m-r-15">Tipo de persona</label>
+														<div class="input-group">
+														
+															<div class="input-group-btn search-panel">
+											
+																<select id="tipoPersona" name="tipoPersona"
+																	class="form-control select2 elemento-modificable" data-default-value="-1">
+																	<option value="-1" selected="selected">Tipo de persona</option>
+																	<option value="ALUMNO">ALUMNO</option>
+																	<option value="DOCENTE">DOCENTE</option>
+																	<option value="EXTERNO">EXTERNO</option>
+																	<option value="ADMINISTRATIVO">ADMINISTRATIVO</option>																																
+																</select>
+											
+															</div>
+															
+														</div>
+													</div>
+													<div class="col-sm" id="divTipo">
+														<div class="form-group m-b-3">
+															<label class="m-r-15">Area de Estudio</label>
 															<div class="input-group">
-																<select id="selectTipoGrafico" name="tipoGrafica"
-																	class="form-control js-example-basic-single">
-																	<option value="-1" disabled="disabled"
-																		selected="selected">Seleccione un gráfico</option>
-																	<option value="BARRAS">Barras</option> 
-																	<option value="LINEAL">Lineal</option>
-																	<option value="PIE">Pie</option>
+																<select id="selectareaEstudio" name="areaEstudio"
+																	class="form-control select2 elemento-modificable">
+																	<option value="-1" 
+																		selected="selected">Seleccione un Area de Estudio </option>
+																	<option th:each="area : ${areasEstudio}" th:value="${area.idAreaEstudio}"
+																	th:text="|${area.nombre}|"></option>
+																</select>
+															</div>
+														</div>
+													</div>
+													<div class="col-sm" id="pdivTipoRecurso">
+														<div class="form-group m-b-3">
+															<label class="m-r-15">Tipos Recursos</label>
+															<div class="input-group">
+																<select id="ptipoRecurso" name="tipoRecurso"
+																	class="form-control select2 elemento-modificable">
+																	<option value="-1" 
+																		selected="selected">Seleccione un Tipo de Recurso </option>
+																	   <option th:each="tr : ${tiposRecursos}" th:value="${tr.idTipoRecurso}"
+																	th:text="|${tr.nombre}|"></option>
+																</select>
+															</div>
+														</div>
+													</div>
+													<div class="col-sm" id="pdivRecurso" hidden="true">
+														<div class="form-group m-b-3">
+															<label class="m-r-15">Recurso</label>
+															<div class="input-group">
+																<select id="precurso" name="recurso"
+																	class="form-control select2 elemento-modificable">
+																	<option value="-1" 
+																		selected="selected">Seleccione un Recurso </option>
+																	
 																</select>
 															</div>
 														</div>
@@ -76,7 +133,7 @@
 															<div class="input-group">
 																<select id="selectPeriodo" name="tipoPeriodo"
 																	class="form-control js-example-basic-single" >
-																	<option value="-1" disabled="disabled"
+																	<option value="-1"
 																		selected="selected">Seleccione un periodo</option>
 																	<option value="DIA">Por día</option>
 																	<option value="SEMANA">Por semana</option>
@@ -167,73 +224,14 @@
 
 												</div>
 												<div class="row" style="width: 100%;">
-													<div class="col-md-3 hidden" id="divSerie">
-														<div class="form-group m-b-10">
-															<label class="m-r-15">Series</label>
-															<div class="input-group">
-																<select id="selectSeries" name="valSeries"
-																	class="form-control js-example-basic-single " >
-																	<option value="" disabled="disabled"
-																		selected="selected">Seleccione una Serie</option>
-																	<option value="ESCUELA">Escuela</option>
-																	<option value="AREA_ESTUDIO">Area Estudio</option>
-																	<option value="SOLICITANTE">Solicitante</option>
-															</select>
-															</div>
-														</div>
-													</div>
-													<div class="col-md-3 hidden" id="divEjeX">
-														<div class="form-group m-b-10">
-															<label class="m-r-15">Eje X</label>
-															<div class="input-group">
-																<select id="selectEjeX" name="valEjeX"
-																	class="form-control js-example-basic-single " >
-																	<option value="" disabled="disabled"
-																		selected="selected">Seleccione un eje</option>
-																	<option value="PERIODO">Periodo</option>
-																	<option value="ESCUELA">Escuela</option>
-																	<option value="AREA_ESTUDIO">Area Estudio</option>
-																</select>
-															</div>
-														</div>
-													</div>
-													<div class="col-md-3 hidden" id="divSegmY">
-														<div class="form-group m-b-10 ">
-															<label class="m-r-15">Segmentacion en Y</label> 
-															<div class="input-group">
-																<select id="selectSegmY" name="valSegY"
-																	class="form-control js-example-basic-single" >
-																	<option value="NINGUNA" selected="selected">Ninguna</option>
-																	<option value="TIPO_SOLICITANTE">Tipo
-																		Solicitante</option>
-																	<option value="ESCUELA">Escuela</option>
-																	<option value="RECURSO">Tipo de Recurso</option>
-																	<option value="AREA_ESTUDIO">Area Estudios</option>
-																</select>
-															</div>
-														</div>
-													</div>
-													<div class="col-md-3 hidden" id="divPresentacion">
-														<div class="form-group m-b-10">
-															<label class="m-r-15">Presentación</label>
-															<div class="input-group">
-																<select id="selectPresentacion" name="valPresentacion"
-																	class="form-control js-example-basic-single" >
-																	<option value="-1" selected="selected"
-																		disabled="disabled">Seleccione una
-																		presentación</option>
-																	<option value="APILADO">Barras apilado</option>
-																	<option value="PARALELO">Barras paralelo</option>
-																</select>
-															</div>
-														</div>
-													</div>
+													
+													
 												</div>
 												
 												
 												<div class="row text-center m-t-5"
 													style="width: 100%; justify-content: center;">
-													<button id="buscar" class="btn btn-info m-r-3"
+													<button id="buscarP" class="btn btn-info m-r-3"
 														type="button">
 														<i class="fa fa-search"></i> Buscar
 													</button>
@@ -244,16 +242,36 @@
 												</div>
 											</form>
 										</div>
-
+                                        <table id="tblPrestamos" class="table table-bordered table-striped">
+<!-- 												<thead> -->
+<!-- 													<tr> -->
+<!-- 														<th>Codigo</th> -->
+<!-- 														<th>Apellidos</th> -->
+<!-- 														<th>Nombre</th> -->
+<!-- 														<th>Fecha de sanción</th> -->
+<!-- 														<th>Tiempo restante</th> -->
+<!-- 														<th>Tipo de solicitante</th> -->
+<!-- 													</tr> -->
+<!-- 												</thead> -->
+<!-- 												<tbody> -->
+<!-- 													<th:block th:if="${existenSancionados} == 1" th:each="sancionado : ${sancionados}"> -->
+<!-- 														<tr  style="background-color: #fff;"> -->
+<!-- 															<td th:text="${sancionado.docIdentificador}" style="color: #67757C;"></td> -->
+<!-- 															<td th:text="${sancionado.appPaterno} + ' ' + ${sancionado.appMaterno}" style="color:#67757C;" ></td>											 -->
+<!-- 															<td th:text="${sancionado.nombre}" style="color:#67757C;" ></td> -->
+<!-- 															<td th:text="${sancionado.fechaRegistro}" style="color: #67757C;" ></td> -->
+<!-- 															<td th:text="${sancionado.tiempoRestante}" style="color: #67757C;" ></td> -->
+<!-- 															<td th:text="${sancionado.tipoSolicitante}" style="color: #67757C;" ></td> -->
+<!-- 														</tr> -->
+<!-- 													 </th:block>  -->
+													<!-- Fin bucle individual  -->
+													
+												</tbody>
+											</table>
 									</div>
 
 
-									<div class="tab-pane" id="tabReporteMasFrecuentes"
-										role="tabpanel">
-										<!-- 										<div class="p-20"> -->
-
-										<!-- 										</div> -->
-									</div>
+									
 									
 									<div class="tab-pane" id="tabHistorial"
 										role="tabpanel">
