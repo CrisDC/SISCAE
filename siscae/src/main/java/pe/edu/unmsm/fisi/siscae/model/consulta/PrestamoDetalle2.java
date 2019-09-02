@@ -1,15 +1,5 @@
 package pe.edu.unmsm.fisi.siscae.model.consulta;
 
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
-
-
-@Data
-@Builder
-@NoArgsConstructor
-@AllArgsConstructor
 public class PrestamoDetalle2 {
 	
 	
@@ -22,6 +12,8 @@ public class PrestamoDetalle2 {
 	String tipo_recurso;
 	String tiempo;
 	String areaEstudio;
+	String entrada;
+	String salida;
 	String fecha;
 	
 	

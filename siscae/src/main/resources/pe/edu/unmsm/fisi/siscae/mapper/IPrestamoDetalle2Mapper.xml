@@ -2,10 +2,10 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="pe.edu.unmsm.fisi.siscae.mapper.IPrestamoDetalle2Mapper">
 
-	<select id="buscarPorCriterio" resultType="PrestamoDetalle2">
+	<select id="buscarPorNumeroDocumentoIdentidad" resultType="PrestamoDetalle2">
 	
 	
-	<if test="tipoPersona == '-1' or  tipoPersona == ''">
+	
 	
 			SELECT
 				
@@ -18,7 +18,9 @@
                 mtr.v_nombre							AS		tipo_recurso,
                 mae.v_nombre							AS		area_Estudio,
                 SUBSTR(TIMEDIFF(mpr.t_hora_salida,
-                mpr.t_hora_entrada),-(8),8)			 AS		tiempo,
+                mpr.t_hora_entrada),-(8),8)			 	AS		tiempo,
+                mpr.t_hora_entrada		 				AS		entrada,
+                mpr.t_hora_salida			 			AS		salida,
 			    CAST(mpr.d_fecha AS DATE)				AS		fecha
 			    					    				
 			    
@@ -74,9 +76,22 @@
 					
 				</if>
 			    
+			    <if test="tipoPersona != '-1' or  tipoPersona != ''">
+			    	<if test="tipoPersona == 'ALUMNO' ">
+			    		AND F_TIPO_PERSONA(mp.v_num_documento) = #{tipoPersona}
+			    	</if>
+			    	<if test="tipoPersona == 'DOCENTE' ">
+			    		AND F_TIPO_PERSONA(mp.v_num_documento) = #{tipoPersona}
+			    	</if>
+			    	<if test="tipoPersona == 'EXTERNO' ">
+			    		AND F_TIPO_PERSONA(mp.v_num_documento) = #{tipoPersona}
+			    	</if>
+			    	
+			    </if>
+			    
 			  </where>
 			
-		</if>
+		
 	
 	
 	</select>
