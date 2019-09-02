@@ -795,6 +795,18 @@ $(document).ready(function() {
 											}else{
 												var d = datanuevo;
 											}
+											var cd = [];
+											for(i=0;i<Object.keys(d[0]).length;i++){
+												var ej = new Object();
+												if(i==0){
+													ej['targets'] = [i];
+													ej['className']  = "all dt-center fondo-blanco";
+												}else{
+													ej['targets'] = [i]
+													ej['className']  = "all dt-right"
+												}
+												cd.push(ej);
+											};
 											var c = [];
 											for(i=0;i<Object.keys(d[0]).length;i++){
 												var ej = new Object();
@@ -809,14 +821,24 @@ $(document).ready(function() {
 											};
 											
 											//console.log(c); eval('[{"columns":' +c+ ',"data":' +data+0 '}]')
+											
 											var dataObject = [];
 											var ayuda = new Object();
+											
+											//ayuda['pageLength'] = 10;
+											ayuda['initComplete'] = function(){
+												$local.$tablaResultadosPrestamos.wrap("<div class='table-responsive'></div>");
+											};
+											ayuda['columnDefs'] = cd;
 											ayuda['columns'] = c;
 											ayuda['data'] = d;
+											ayuda['dom'] = 'Bfrtip';
+											ayuda['buttons'] = [
+												'excelHtml5'];
 											dataObject.push(ayuda);
 											console.log(ayuda);
 											console.log(dataObject);
-											$local.tablaResultadosPrestamo.destroy();
+											$local.$tablaResultadosPrestamo.DataTable().clear().destroy();
 											$local.tablaResultadosPrestamo = $local.$tablaResultadosPrestamo.DataTable(dataObject[0]);
 				
 											//Dibujando tabla
@@ -3077,8 +3099,26 @@ $(document).ready(function() {
 		}, {
 			"data" : "estadiaPromedio",
 			"title" : "Tiempo Medio Estadia"
-		}]
+		}],
+		"dom":'Bfrtip',
+		"buttons" : [
+			'copyHtml5',
+			'excelHtml5',
+			'csvHtml5',
+			'pdfHtml5'
+		]
 	});
+	
+/*	$local.$tablaResultadosPrestamo.DataTable({
+		dom : 'Bfrtip',
+		buttons : [
+			'copyHtml5',
+			'excelHtml5',
+			'csvHtml5',
+			'pdfHtml5'
+		]
+	  
+	});*/
 
 	
 	$local.tablaResultadosInfraccion = $local.$tablaResultadosInfraccion.DataTable({

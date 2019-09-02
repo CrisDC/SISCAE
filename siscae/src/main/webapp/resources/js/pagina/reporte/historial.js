@@ -235,14 +235,22 @@ $(document).ready(function() {
 			"title" : "Solicitante"
 		}, {
 			"data" : 'areaEstudio',
-			"title" : "Detalle"
+			"title" : "Area Estudio"
 		}, {
 			"data" : 'recurso',
 			"title" : "Recurso"
 		}, {
+			"data" : 'entrada',
+			"title" : "H. inicio"
+		},{
+			"data" : 'salida',
+			"title" : "H. salida"
+		},{
 			"data" : 'fecha',
 			"title" : "Fecha"
-		} ]
+		} ],
+		"dom": 'Bfrtip',
+		"buttons": ['excelHtml5']
 	});
 	
 $local.$tblPrestamos.find("thead").on('keyup', 'input', function() {
