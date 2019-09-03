@@ -3,6 +3,7 @@ package pe.edu.unmsm.fisi.siscae.service.impl.mantenimiento;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
@@ -48,12 +49,16 @@ public class UsuarioService extends MantenibleService<Usuario> implements IUsuar
 	@Override
 	@Transactional(propagation = Propagation.REQUIRES_NEW)
 	public void registrarUsuario(Usuario usuario) {
+		BCryptPasswordEncoder encriptador = new BCryptPasswordEncoder();
+		usuario.setPass(encriptador.encode(usuario.getPass()));
 		super.registrar(usuario);
 	}
 
 	@Override
 	@Transactional(propagation = Propagation.REQUIRES_NEW)
 	public void actualizarUsuario(Usuario usuario) {
+		BCryptPasswordEncoder encriptador = new BCryptPasswordEncoder();
+		usuario.setPass(encriptador.encode(usuario.getPass()));
 		super.actualizar(usuario);
 	}
 

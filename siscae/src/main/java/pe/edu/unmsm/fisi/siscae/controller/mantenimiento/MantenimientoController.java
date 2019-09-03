@@ -228,7 +228,7 @@ public @Controller class MantenimientoController
     	
         model.addAttribute("mantenimiento", mantenimiento);
         model.addAttribute("roles", this.rolService.buscarTodos());
-        model.addAttribute("personas",this.personaService.buscarTodos());	
+        model.addAttribute("administrativo", this.administrativoService.buscarConNombre());	
         model.addAttribute("estados", this.estadoTablaService.buscarporTablaOrigen("SEG_USUARIO"));
         return "seguras/mantenimiento/mantenimiento";
     }

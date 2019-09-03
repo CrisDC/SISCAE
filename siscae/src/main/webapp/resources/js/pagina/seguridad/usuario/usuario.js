@@ -1,8 +1,9 @@
 $(document).ready(function() {
+	console.log("Gaaa");
 	var csrf = $('meta[name=_csrf]').attr("content");
 	var $local = {
 			$modalUsuario : $("#modalUsuario"),
-			$registrarUsuario : $("#registrarUsuario"),
+			$registrarUsuario : $("#registrarMantenimiento"),
 			$actualizarUsuarioModal : $("#actualizarUsuarioModal"),
 			$tablaUsuarios : $("#tablaMantenimiento"),
 			tablaUsuarios : "",
@@ -17,7 +18,7 @@ $(document).ready(function() {
 			$txtPassword : $("#txtPassword")
 		};
 	
-	$formUsuario = $("#formUsuario");
+	$formUsuario = $("#formMantenimiento");
 	$formUsuarioModal = $("#formUsuarioModal");
 	$local.$repetirContrasenia.hide();
 	
@@ -104,8 +105,17 @@ $(document).ready(function() {
 	
 
 	$local.$registrarUsuario.on("click", function() {
-
-		var usuario = $formUsuario.serializeJSON();
+        console.log("gaa");
+		var us = $formUsuario.serializeJSON();
+		var usuario ={
+				"idUsuario" : us.idUsuario,
+				"nombre" : us.username,
+				"pass" : us.pass,
+				"idEstadoTabla" : us.idEstadoTabla,
+				"idRol" : us.idRol,
+				"idPersona" : us.idPersona
+		}
+		console.log(usuario);
 		usuario.requiereCambio = true;
 		$.ajax({
 			type : "POST",

@@ -687,11 +687,11 @@
 			<div class="col-lg-10">
 				<select id="idPersona"
 					class="form-control select2 elemento-desactivable" name="idPersona">
-					<option value="" selected="selected" disabled="disabled">Seleccione
-						la persona</option>
-					<option th:each="persona : ${personas}"
-						th:value="${persona.idPersona}"
-						th:text="|${persona.idPersona} - ${persona.nombre}  ${persona.appPaterno} ${persona.appMaterno} |"></option>
+					<option value="" selected="selected">Seleccione un
+					Administrativo</option>
+				<option th:each="administrativo : ${administrativo}"
+					th:value="${administrativo.idAdministrativo}"
+					th:text="|${administrativo.nombre}|"></option>
 				</select>
 			</div>
 		</div>
