@@ -1,19 +1,31 @@
 	$(document).ready(function() {
+		console.log("gaaa");
 	$("#btnEnviarDatos").on("click",function(){
 				
-				
-				
+				console.log("gaaa");
+				var valida = 1;
 				let contraAnterior = $("#contraAnterior").val();
 				let contraNueva = $("#contraNueva").val();
 				let contraNuevaRep = $("#contraNuevaRep").val();
-				
-				let contraPasada = $("#contraPasada").val();
-				if(contraNueva === contraNuevaRep){
+				if(contraAnterior ===""||contraNueva ===""||contraNuevaRep ==="")
+				{valida=0;
+				Swal.fire({
+					  type: 'error',
+					  title: 'Error',
+					  text: 'Uno o mas campos estan vacios'
+					}).then((value) => {
+						location.reload();
+					});
+				return;
+				}
+				if(contraNueva === contraNuevaRep && valida==1){
 					$.ajax({
 						type : "GET",
 						url : $variableUtil.root + "username",
 						beforeSend : function(xhr) {
-							//$local.$actualizarContrasenia.attr("disabled", true).find("i").removeClass("fa-floppy-o").addClass("fa-spinner fa-pulse fa-fw");
+							// $local.$actualizarContrasenia.attr("disabled",
+							// true).find("i").removeClass("fa-floppy-o").addClass("fa-spinner
+							// fa-pulse fa-fw");
 							xhr.setRequestHeader('Content-Type', 'application/json');
 							xhr.setRequestHeader("X-CSRF-TOKEN", $variableUtil.csrf);
 						},
@@ -34,8 +46,9 @@
 								},
 								statusCode : {
 									400 : function(response) {
-									//	$funcionUtil.limpiarMensajesDeError($formContrasenia);
-									//	$funcionUtil.mostrarMensajeDeError(response.responseJSON, $formContrasenia);
+									// $funcionUtil.limpiarMensajesDeError($formContrasenia);
+									// $funcionUtil.mostrarMensajeDeError(response.responseJSON,
+									// $formContrasenia);
 									}
 								},
 								success : function(usuarios) {
@@ -61,14 +74,17 @@
 										dataType: 'json',
 										data :  JSON.stringify(us[0]),
 										beforeSend : function(xhr) {
-											//$local.$actualizarContrasenia.attr("disabled", true).find("i").removeClass("fa-floppy-o").addClass("fa-spinner fa-pulse fa-fw");
+											// $local.$actualizarContrasenia.attr("disabled",
+											// true).find("i").removeClass("fa-floppy-o").addClass("fa-spinner
+											// fa-pulse fa-fw");
 											xhr.setRequestHeader('Content-Type', 'application/json');
 											xhr.setRequestHeader("X-CSRF-TOKEN", $variableUtil.csrf);
 										},
 										statusCode : {
 											400 : function(response) {
-											//	$funcionUtil.limpiarMensajesDeError($formContrasenia);
-											//	$funcionUtil.mostrarMensajeDeError(response.responseJSON, $formContrasenia);
+											// $funcionUtil.limpiarMensajesDeError($formContrasenia);
+											// $funcionUtil.mostrarMensajeDeError(response.responseJSON,
+											// $formContrasenia);
 											}
 										},
 										success : function(contrasenias) {
@@ -97,14 +113,17 @@
 													dataType: 'json',
 													data :  JSON.stringify(u),
 													beforeSend : function(xhr) {
-														//$local.$actualizarContrasenia.attr("disabled", true).find("i").removeClass("fa-floppy-o").addClass("fa-spinner fa-pulse fa-fw");
+														// $local.$actualizarContrasenia.attr("disabled",
+														// true).find("i").removeClass("fa-floppy-o").addClass("fa-spinner
+														// fa-pulse fa-fw");
 														xhr.setRequestHeader('Content-Type', 'application/json');
 														xhr.setRequestHeader("X-CSRF-TOKEN", $variableUtil.csrf);
 													},
 													statusCode : {
 														400 : function(response) {
-														//	$funcionUtil.limpiarMensajesDeError($formContrasenia);
-														//	$funcionUtil.mostrarMensajeDeError(response.responseJSON, $formContrasenia);
+														// $funcionUtil.limpiarMensajesDeError($formContrasenia);
+														// $funcionUtil.mostrarMensajeDeError(response.responseJSON,
+														// $formContrasenia);
 														}
 													},
 													success : function(response) {
@@ -125,7 +144,9 @@
 													},
 													complete : function(response) {
 														
-														//$local.$actualizarContrasenia.attr("disabled", false).find("i").addClass("fa-floppy-o").removeClass("fa-spinner fa-pulse fa-fw");
+														// $local.$actualizarContrasenia.attr("disabled",
+														// false).find("i").addClass("fa-floppy-o").removeClass("fa-spinner
+														// fa-pulse fa-fw");
 													}
 												});
 											}
@@ -140,7 +161,9 @@
 												}).then((value)=>{
 													location.reload();
 												});
-											//$local.$actualizarContrasenia.attr("disabled", false).find("i").addClass("fa-floppy-o").removeClass("fa-spinner fa-pulse fa-fw");
+											// $local.$actualizarContrasenia.attr("disabled",
+											// false).find("i").addClass("fa-floppy-o").removeClass("fa-spinner
+											// fa-pulse fa-fw");
 										}
 									});
 									
@@ -148,14 +171,18 @@
 								error : function(response) {
 								},
 								complete : function(response) {
-									//$local.$actualizarContrasenia.attr("disabled", false).find("i").addClass("fa-floppy-o").removeClass("fa-spinner fa-pulse fa-fw");
+									// $local.$actualizarContrasenia.attr("disabled",
+									// false).find("i").addClass("fa-floppy-o").removeClass("fa-spinner
+									// fa-pulse fa-fw");
 								}
 							});
 						},
 						error : function(response) {
 						},
 						complete : function(response) {
-							//$local.$actualizarContrasenia.attr("disabled", false).find("i").addClass("fa-floppy-o").removeClass("fa-spinner fa-pulse fa-fw");
+							// $local.$actualizarContrasenia.attr("disabled",
+							// false).find("i").addClass("fa-floppy-o").removeClass("fa-spinner
+							// fa-pulse fa-fw");
 						}
 					});
 					
