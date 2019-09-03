@@ -3,10 +3,13 @@ $(document).ready(function() {
 	var csrf = $('meta[name=_csrf]').attr("content");
 	var $local = {
 			$modalUsuario : $("#modalUsuario"),
+			$aniadirMantenimento : $("#aniadirMantenimiento"),
 			$registrarUsuario : $("#registrarMantenimiento"),
 			$actualizarUsuarioModal : $("#actualizarUsuarioModal"),
 			$tablaUsuarios : $("#tablaMantenimiento"),
 			tablaUsuarios : "",
+			$filaSeleccionada : "",
+			$actualizarUsuario : $("#actualizarMantenimiento"),
 			codigo_usuarioSeleccionado : "",
 			$filaSeleccionada : "",		
 			arregloSiNo : [ "1", "0" ],
@@ -60,7 +63,7 @@ $(document).ready(function() {
 			"targets" : 2,
 			"className" : "all dt-center",
 
-			"defaultContent" : $variableUtil.botonActualizar + " " + $variableUtil.botonEliminar
+			"defaultContent" : $variableUtil.botonActualizarNuevo + " " + $variableUtil.botonEliminarNuevo
 		} ],
 		"columns" : [
 				{
@@ -93,9 +96,14 @@ $(document).ready(function() {
 		height : 410,
 		width : 626,
 	});*/
+	$local.$aniadirMantenimento.on("click", function() {
+		$funcionUtil.prepararFormularioRegistro($formUsuario);
+		$local.$actualizarUsuario.addClass("hidden");
+		$local.$registrarUsuario.removeClass("hidden");
+		//$local.$modalMantenimiento.PopupWindow("open");
+	});
 	
 	$local.$boton.on("click", function() {
-
 		$local.$txtPassword.attr("readonly", false);
 		$local.$txtPassword.val("");
 		$local.requiereCambio = true;
@@ -105,16 +113,7 @@ $(document).ready(function() {
 	
 
 	$local.$registrarUsuario.on("click", function() {
-        console.log("gaa");
 		var us = $formUsuario.serializeJSON();
-		var usuario ={
-				"idUsuario" : us.idUsuario,
-				"nombre" : us.username,
-				"pass" : us.pass,
-				"idEstadoTabla" : us.idEstadoTabla,
-				"idRol" : us.idRol,
-				"idPersona" : us.idPersona
-		}
 		console.log(usuario);
 		usuario.requiereCambio = true;
 		$.ajax({
@@ -122,6 +121,7 @@ $(document).ready(function() {
 			url : $variableUtil.root + "usuario",
 			data : JSON.stringify(usuario),
 			beforeSend : function(xhr) {
+				$('#modalMantenimiento').modal('hide');
 				$local.$registrarUsuario.attr("disabled", true).find("i").removeClass("fa-floppy-o").addClass("fa-spinner fa-pulse fa-fw");
 				xhr.setRequestHeader('Content-Type', 'application/json');
 				xhr.setRequestHeader("X-CSRF-TOKEN", $variableUtil.csrf);
@@ -135,14 +135,15 @@ $(document).ready(function() {
 			success : function(usuarios) {
 				$funcionUtil.notificarException($variableUtil.registroExitoso, "fa-check", "Aviso", "success");
 				var usuario = usuarios[0];
-				var row = $local.tablaUsuarios.row.add({
-					"idUsuario" : usuario.idUsuario,
-					"idPerfil" : usuario.idPerfil,
-					"activo" : usuario.activo
-				}).draw();
-				row.show().draw(false);
-				$(row.node()).animateHighlight();
-				$funcionUtil.prepararFormularioRegistro($formUsuario)
+				//var row = $local.tablaUsuarios.row.add({
+				//	"idUsuario" : usuario.idUsuario,
+				//	"idPerfil" : usuario.idPerfil,
+			//		"activo" : usuario.activo
+				//}).draw();
+				//row.show().draw(false);
+					$local.tablaUsuarios.ajax.reload();
+				//$(row.node()).animateHighlight();
+				//$funcionUtil.prepararFormularioRegistro($formUsuario)
 
 			},
 			error : function(response) {
@@ -155,22 +156,25 @@ $(document).ready(function() {
 	});
 	
 	$local.$tablaUsuarios.children("tbody").on("click", ".actualizar", function() {
-		$local.$repetirContrasenia.hide();
-		$funcionUtil.prepararFormularioActualizacion($formUsuarioModal);
+		//$local.$repetirContrasenia.hide();
+		$funcionUtil.prepararFormularioActualizacion($formUsuario);
 		$local.$filaSeleccionada = $(this).parents("tr");
 		var usuario = $local.tablaUsuarios.row($local.$filaSeleccionada).data();
 		$local.codigo_usuarioSeleccionado = usuario.idUsuario;
-		$funcionUtil.llenarFormulario(usuario, $formUsuarioModal);
+		console.log(usuario);
+		$funcionUtil.llenarFormulario(usuario, $formUsuario);
 		$local.$txtPassword.attr("readonly", true);
 		$local.requiereCambio = false;
 		$local.$txtPassword.val("12345678");
 
-		$local.$actualizarUsuarioModal.removeClass("hidden");
+		//$local.$actualizarUsuarioModal.removeClass("hidden");
+		$local.$actualizarUsuario.removeClass("hidden");
+		$local.$registrarUsuario.addClass("hidden");
 
-		$local.$modalUsuario.PopupWindow("open");
+		//$local.$modalUsuario.PopupWindow("open");
 	});
 	
-	$local.$actualizarUsuarioModal.on("click", function() {
+	$local.$actualizarUsuario.on("click", function() {
 
 		var usuario = $formUsuarioModal.serializeJSON();
 		usuario.requiereCambio = $local.requiereCambio;
