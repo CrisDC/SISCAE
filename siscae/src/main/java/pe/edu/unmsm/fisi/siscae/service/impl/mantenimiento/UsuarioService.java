@@ -57,8 +57,6 @@ public class UsuarioService extends MantenibleService<Usuario> implements IUsuar
 	@Override
 	@Transactional(propagation = Propagation.REQUIRES_NEW)
 	public void actualizarUsuario(Usuario usuario) {
-		BCryptPasswordEncoder encriptador = new BCryptPasswordEncoder();
-		usuario.setPass(encriptador.encode(usuario.getPass()));
 		super.actualizar(usuario);
 	}
 

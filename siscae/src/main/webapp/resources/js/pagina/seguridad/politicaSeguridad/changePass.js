@@ -1,8 +1,6 @@
 	$(document).ready(function() {
-		console.log("gaaa");
 	$("#btnEnviarDatos").on("click",function(){
 				
-				console.log("gaaa");
 				var valida = 1;
 				let contraAnterior = $("#contraAnterior").val();
 				let contraNueva = $("#contraNueva").val();
