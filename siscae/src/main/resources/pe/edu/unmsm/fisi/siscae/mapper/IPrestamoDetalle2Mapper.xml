@@ -4,7 +4,7 @@
 
 	<select id="buscarPorCriterio" resultType="PrestamoDetalle2">
 	
-	
+	 <if test="areaEstudio != -1">
 	
 	
 			SELECT
@@ -32,7 +32,7 @@
 	
 							
 			<where>
-				<if test="tipoRecurso != -1">
+				<if test="tipoRecurso != -1 and tipoRecurso != 0">
 			        mtr.n_id_tipo_recurso = #{tipoRecurso}
 			    </if>
 			    
@@ -40,10 +40,10 @@
 			        AND re.n_id_recurso = #{recurso}
 			    </if>
 			    
-			    <if test="areaEstudio != -1">
+			   <if test="areaEstudio != -1">
 			        AND mae.n_id_area_estudio = #{areaEstudio}
-			    </if>
-			    		    
+			   
+			     </if>		    
 			    <if test="numeroDocumento != 0 and numeroDocumento != '' ">
 			        AND mp.v_num_documento = #{numeroDocumento}
 			    </if>
@@ -92,8 +92,9 @@
 			  </where>
 			
 		
-	
-	
+	 </if>
+	 
+	 
 	</select>
 
 </mapper>

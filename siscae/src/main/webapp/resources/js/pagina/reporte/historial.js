@@ -1,5 +1,5 @@
 $(document).ready(function() {
-	var $max_tamaño_error = 200;
+	//var $max_tamaño_error = 200;
 	var $local = {
 		$tblConsulta : $("#tblSancionados"),
 		tblConsulta  : "",
@@ -403,14 +403,14 @@ $("#xd").find(".comun").on("click", function(){
 			},
 			statusCode : {
 				400 : function(response) {
-					response.responseText.length > $max_tamaño_error ? 
-							swal("Error", "La operación no pudo realizarse con exito.", "warning") : 
-							swal("Error", response.responseText, "warning");
+//					response.responseText.length > $max_tamaño_error ? 
+//							swal("Error", "La operación no pudo realizarse con exito.", "warning") : 
+//							swal("Error", response.responseText, "warning");
 				},
 				500 : function(response) {
-					response.responseText.length > $max_tamaño_error ? 
-							swal("Error", "La operación no pudo realizarse con exito.", "warning") : 
-							swal("Error", response.responseText, "warning");
+//					response.responseText.length > $max_tamaño_error ? 
+//							swal("Error", "La operación no pudo realizarse con exito.", "warning") : 
+//							swal("Error", response.responseText, "warning");
 				}
 			},
 			success : function(response) {
@@ -567,7 +567,7 @@ $("#xd").find(".comun").on("click", function(){
 	});
 	
 	
-	var obtenerCriterio = function (){
+	var obtenerCriterioI = function (){
 						
 		var criterio = $formInfracciones.serializeJSON();
 		criterio.tipoPersona = $local.$tipoPersona.val();
@@ -575,7 +575,7 @@ $("#xd").find(".comun").on("click", function(){
 		criterio.selectTipoInfraccion = $local.$selectTipoInfraccion.val();
 		criterio.selectTipoEstado = $local.$selectTipoEstado.val();
 		
-		console.log(criterio);
+		
 		//Obtener datos del periodo
 		if($local.$selectPeriodo.val() == 'DIA'){
 			var rangoFechaBusqueda = $funcionUtil.obtenerFechasDateRangePicker($local.$fechaPrestamo);
@@ -598,7 +598,46 @@ $("#xd").find(".comun").on("click", function(){
 			criterio.anioInicio = $local.$anioInicio.val();
 			criterio.anioFin = $local.$anioFin.val();
 		}
+		criterio.tipoPeriodo = $local.$selectPeriodo.val();
+		console.log(criterio);
+		return criterio;
+	}
+	
+	
+	var obtenerCriterioP = function (){
 		
+		var criterio = $formInfracciones.serializeJSON();
+		criterio.tipoPersona = $local.$tipoPersona.val();
+		criterio.numeroDocumento = $local.$numDoc.val();
+		criterio.areaEstudio = $local.$selectAreaEstudio.val();
+		criterio.tipoRecurso = $local.$selectTipoRecurso.val();
+		criterio.recurso = $local.$selectRecurso.val();
+		
+		
+		//Obtener datos del periodo
+		if($local.$selectPeriodo.val() == 'DIA'){
+			var rangoFechaBusqueda = $funcionUtil.obtenerFechasDateRangePicker($local.$fechaPrestamo);
+			criterio.fechaInicio = rangoFechaBusqueda.fechaInicio;
+			criterio.fechaFin = rangoFechaBusqueda.fechaFin;
+		}
+		if($local.$selectPeriodo.val() == 'SEMANA'){
+			criterio.semanaInicio = $funcionUtil.obtenerSemanaInputWeek($local.$semanaInicio);
+			criterio.anioInicio = $funcionUtil.obtenerAnioInputWeek($local.$semanaInicio);
+			criterio.semanaFin = $funcionUtil.obtenerSemanaInputWeek($local.$semanaFin);
+			criterio.anioFin = $funcionUtil.obtenerAnioInputWeek($local.$semanaFin);
+		}
+		if($local.$selectPeriodo.val() == 'MES'){
+			criterio.mesInicio = $funcionUtil.obtenerMesInputMonth($local.$mesInicio);
+			criterio.anioInicio = $funcionUtil.obtenerAnioInputMonth($local.$mesInicio);
+			criterio.mesFin = $funcionUtil.obtenerMesInputMonth($local.$mesFin);
+			criterio.anioFin = $funcionUtil.obtenerAnioInputMonth($local.$mesFin);
+		}
+		if($local.$selectPeriodo.val() == 'ANIO'){
+			criterio.anioInicio = $local.$anioInicio.val();
+			criterio.anioFin = $local.$anioFin.val();
+		}
+		criterio.tipoPeriodo = $local.$selectPeriodo.val();
+		console.log(criterio);
 		return criterio;
 	}
 	
@@ -638,7 +677,7 @@ $("#xd").find(".comun").on("click", function(){
 	
 	$local.$buscar.on('click', function() {
 		
-		var criterioB = obtenerCriterio();
+		var criterioB = obtenerCriterioI();
 		var c = contador();
 		console.log(c);
 		if(c ==5){
@@ -684,7 +723,7 @@ $('#buscarP').on('click', function() {
 	if(!$formPrestamos.valid()){
 		return;
 	}
-	var criterioBusqueda = $formPrestamos.serializeJSON();
+	var criterioBusqueda = obtenerCriterioP();
 	console.log(criterioBusqueda);
 
 			$.ajax({
