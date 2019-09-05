@@ -501,8 +501,33 @@ $(document).ready(function() {
 				//Dibujando tabla
 				console.log(response);
 				$local.tablaResultadosMasFrecuentes.rows.add(response).draw();
+				var resultGraph = [];
+				for(i=0;i<response.length;i++){
+					var g = new Object();
+					g['balloonText'] = "<b style='font-size:12px'>[[title]]</b><br><span><b>Periodo : </b></span> [[category]]<br><span><b>Número Préstamos: </b> [[value]]";
+					g['fillAlphas'] = 0.8;
+					g['labelText'] = "[[value]]";
+					g['labelPosition'] = "middle";
+					g['lineAlpha'] = 0.3;
+					g['title'] = response[i].codigo;
+					g['type'] = "column";
+					g['valueField'] = response[i].codigo;
+					resultGraph.push(g);
+				}
 				//Dibujando grafico
+				var datan =[];
+				for(i=0;i<response.length;i++){
+					var e = new Object();
+					e[response[i].codigo]= response[i].cantidad;
+					e['codigo']=response[i].codigo;
+					datan.push(e);		
+				}
+				console.log(datan);
+				
+				var chart = AmCharts.makeChart('chartdiv',$funcionGraficoUtil.crearGraficoBarrasSegmentado(datan,resultGraph,'codigo','Cantidad de Préstamos','regular','Prestamos por criterio'));
 				//var chart = AmCharts.makeChart('chartdiv',$funcionGraficoUtil.crearGraficoPie(response,'segmento','numeroPrestamos','Análisis de Préstamos','Número de prestamos', "<b style='font-size:12px'>[[title]]</b> ([[percents]]%) <br> <b>Prestamos:</b> [[value]] </br> <b>Tiempo Total: </b> [[estadiaTotal]] <br> <b>Tiempo Prom: </b> [[estadiaPromedio]]"));
+				datan = [];
+				resultGraph = [];
 			},
 			error : function(response) {
 			},
@@ -531,8 +556,33 @@ $(document).ready(function() {
 				//Dibujando tabla
 				console.log(response);
 				$local.tablaResultadosMasFrecuentesFacultad.rows.add(response).draw();
+				var resultGraph = [];
+				for(i=0;i<10;i++){
+					var g = new Object();
+					g['balloonText'] = "<b style='font-size:12px'>[[title]]</b><br><span><b>Periodo : </b></span> [[category]]<br><span><b>Número Préstamos: </b> [[value]]";
+					g['fillAlphas'] = 0.8;
+					g['labelText'] = "[[value]]";
+					g['labelPosition'] = "middle";
+					g['lineAlpha'] = 0.3;
+					g['title'] = response[i].facultad;
+					g['type'] = "column";
+					g['valueField'] = response[i].facultad;
+					resultGraph.push(g);
+				}
 				//Dibujando grafico
-				//var chart = AmCharts.makeChart('chartdiv',$funcionGraficoUtil.crearGraficoPie(response,'segmento','numeroPrestamos','Análisis de Préstamos','Número de prestamos', "<b style='font-size:12px'>[[title]]</b> ([[percents]]%) <br> <b>Prestamos:</b> [[value]] </br> <b>Tiempo Total: </b> [[estadiaTotal]] <br> <b>Tiempo Prom: </b> [[estadiaPromedio]]"));
+				var datanf =[];
+				for(i=0;i<10;i++){
+					var e = new Object();
+					e[response[i].facultad]= response[i].cantidad;
+					e['facultad']=response[i].facultad;
+					datanf.push(e);		
+				}
+				console.log(datanf);
+				//Dibujando grafico
+				var chartf = AmCharts.makeChart('chartdivf',$funcionGraficoUtil.crearGraficoBarrasSegmentado(datanf,resultGraph,'facultad','Cantidad de Préstamos','regular','Prestamos por criterio'));
+				$('#resultadoGraficof').removeClass("hidden");
+				datanf = [];
+				resultGraph = [];
 			},
 			error : function(response) {
 			},
@@ -561,7 +611,35 @@ $(document).ready(function() {
 				//Dibujando tabla
 				console.log(response);
 				$local.tablaResultadosMasFrecuentesEscuela.rows.add(response).draw();
+				var resultGraph = [];
+				for(i=0;i<10;i++){
+					var g = new Object();
+					g['balloonText'] = "<b style='font-size:12px'>[[title]]</b><br><span><b>Periodo : </b></span> [[category]]<br><span><b>Número Préstamos: </b> [[value]]";
+					g['fillAlphas'] = 0.8;
+					g['labelText'] = "[[value]]";
+					g['labelPosition'] = "middle";
+					g['lineAlpha'] = 0.3;
+					g['title'] = response[i].escuela;
+					g['type'] = "column";
+					g['valueField'] = response[i].escuela;
+					resultGraph.push(g);
+				}
 				//Dibujando grafico
+				var datane =[];
+				for(i=0;i<10;i++){
+					var e = new Object();
+					e[response[i].escuela]= response[i].cantidad;
+					e['escuela']=response[i].escuela;
+					datane.push(e);		
+				}
+				console.log(datane);
+				//Dibujando grafico
+				
+				$('#resultadoGraficoe').removeClass("hidden");
+				var charte = AmCharts.makeChart('chartdive',$funcionGraficoUtil.crearGraficoBarrasSegmentado(datane,resultGraph,'escuela','Cantidad de Préstamos','regular','Prestamos por criterio'));
+				//Dibujando grafico
+				datane = [];
+				resultGraph = [];
 				//var chart = AmCharts.makeChart('chartdiv',$funcionGraficoUtil.crearGraficoPie(response,'segmento','numeroPrestamos','Análisis de Préstamos','Número de prestamos', "<b style='font-size:12px'>[[title]]</b> ([[percents]]%) <br> <b>Prestamos:</b> [[value]] </br> <b>Tiempo Total: </b> [[estadiaTotal]] <br> <b>Tiempo Prom: </b> [[estadiaPromedio]]"));
 			},
 			error : function(response) {
@@ -827,14 +905,19 @@ $(document).ready(function() {
 											
 											//ayuda['pageLength'] = 10;
 											ayuda['initComplete'] = function(){
-												$local.$tablaResultadosPrestamos.wrap("<div class='table-responsive'></div>");
+												$("table").wrap("<div class='table-responsive'></div>");
 											};
+											//ayuda['scrollX']= true;
 											ayuda['columnDefs'] = cd;
 											ayuda['columns'] = c;
 											ayuda['data'] = d;
-											ayuda['dom'] = 'Bfrtip';
+											ayuda['dom'] = 'Blfrtip';
 											ayuda['buttons'] = [
-												'excelHtml5'];
+												{
+									            extend: 'excelHtml5',
+									            text: 'Exportar Excel',
+									            title:'Prestamos por Escuela',
+									        }];
 											dataObject.push(ayuda);
 											console.log(ayuda);
 											console.log(dataObject);
@@ -973,6 +1056,13 @@ $(document).ready(function() {
 											var ayuda = new Object();
 											ayuda['columns'] = c;
 											ayuda['data'] = d;
+											ayuda['dom'] = 'Blfrtip';
+											ayuda['buttons'] = [
+												{
+									            extend: 'excelHtml5',
+									            text: 'Exportar Excel',
+									            title:'Prestamos por Area de Estudio',
+									        }];
 											dataObject.push(ayuda);
 											console.log(ayuda);
 											console.log(dataObject);
@@ -1087,6 +1177,13 @@ $(document).ready(function() {
 										var ayuda = new Object();
 										ayuda['columns'] = c;
 										ayuda['data'] = d;
+										ayuda['dom'] = 'Blfrtip';
+										ayuda['buttons'] = [
+											{
+								            extend: 'excelHtml5',
+								            text: 'Exportar Excel',
+								            title:'Prestamos por Tipo de Solicitante',
+								        }];
 										dataObject.push(ayuda);
 										console.log(ayuda);
 										console.log(dataObject);
@@ -1313,6 +1410,13 @@ $(document).ready(function() {
 											var ayuda = new Object();
 											ayuda['columns'] = c;
 											ayuda['data'] = d;
+											ayuda['dom'] = 'Blfrtip';
+											ayuda['buttons'] = [
+												{
+									            extend: 'excelHtml5',
+									            text: 'Exportar Excel',
+									            title:'Prestamos por Escuela',
+									        }];
 											dataObject.push(ayuda);
 											console.log(ayuda);
 											console.log(dataObject);
@@ -1451,6 +1555,13 @@ $(document).ready(function() {
 											var ayuda = new Object();
 											ayuda['columns'] = c;
 											ayuda['data'] = d;
+											ayuda['dom'] = 'Blfrtip';
+											ayuda['buttons'] = [
+												{
+									            extend: 'excelHtml5',
+									            text: 'Exportar Excel',
+									            title:'Prestamos por Area de Estudio',
+									        }];
 											dataObject.push(ayuda);
 											console.log(ayuda);
 											console.log(dataObject);
@@ -1564,6 +1675,13 @@ $(document).ready(function() {
 										var ayuda = new Object();
 										ayuda['columns'] = c;
 										ayuda['data'] = d;
+										ayuda['dom'] = 'Blfrtip';
+										ayuda['buttons'] = [
+											{
+								            extend: 'excelHtml5',
+								            text: 'Exportar Excel',
+								            title:'Prestamos por Tipo solicitante',
+								        }];
 										dataObject.push(ayuda);
 										console.log(ayuda);
 										console.log(dataObject);
@@ -1702,6 +1820,13 @@ $(document).ready(function() {
 											var ayuda = new Object();
 											ayuda['columns'] = c;
 											ayuda['data'] = d;
+											ayuda['dom'] = 'Blfrtip';
+											ayuda['buttons'] = [
+												{
+									            extend: 'excelHtml5',
+									            text: 'Exportar Excel',
+									            title:'Prestamos por Recurso',
+									        }];
 											dataObject.push(ayuda);
 											console.log(ayuda);
 											console.log(dataObject);
@@ -1997,6 +2122,13 @@ $(document).ready(function() {
 										var ayuda = new Object();
 										ayuda['columns'] = c;
 										ayuda['data'] = d;
+										ayuda['dom'] = 'Blfrtip';
+										ayuda['buttons'] = [
+											{
+								            extend: 'excelHtml5',
+								            text: 'Exportar Excel',
+								            title:'infracciones por Escuela',
+								        }];
 										dataObject.push(ayuda);
 										console.log(ayuda);
 										console.log(dataObject);
@@ -2135,6 +2267,13 @@ $(document).ready(function() {
 										var ayuda = new Object();
 										ayuda['columns'] = c;
 										ayuda['data'] = d;
+										ayuda['dom'] = 'Blfrtip';
+										ayuda['buttons'] = [
+											{
+								            extend: 'excelHtml5',
+								            text: 'Exportar Excel',
+								            title:'Infracciones por Area de estudio',
+								        }];
 										dataObject.push(ayuda);
 										console.log(ayuda);
 										console.log(dataObject);
@@ -2252,6 +2391,13 @@ $(document).ready(function() {
 									var ayuda = new Object();
 									ayuda['columns'] = c;
 									ayuda['data'] = d;
+									ayuda['dom'] = 'Blfrtip';
+									ayuda['buttons'] = [
+										{
+							            extend: 'excelHtml5',
+							            text: 'Exportar Excel',
+							            title:'Infracciones por Tipo solicitante',
+							        }];
 									dataObject.push(ayuda);
 									console.log(ayuda);
 									console.log(dataObject);
@@ -2388,6 +2534,13 @@ $(document).ready(function() {
 										var ayuda = new Object();
 										ayuda['columns'] = c;
 										ayuda['data'] = d;
+										ayuda['dom'] = 'Blfrtip';
+										ayuda['buttons'] = [
+											{
+								            extend: 'excelHtml5',
+								            text: 'Exportar Excel',
+								            title:'Infracciones por Tipo infraccion',
+								        }];
 										dataObject.push(ayuda);
 										console.log(ayuda);
 										console.log(dataObject);
@@ -2610,6 +2763,13 @@ $(document).ready(function() {
 										var ayuda = new Object();
 										ayuda['columns'] = c;
 										ayuda['data'] = d;
+										ayuda['dom'] = 'Blfrtip';
+										ayuda['buttons'] = [
+											{
+								            extend: 'excelHtml5',
+								            text: 'Exportar Excel',
+								            title:'Infracciones por Escuela',
+								        }];
 										dataObject.push(ayuda);
 										console.log(ayuda);
 										console.log(dataObject);
@@ -2748,6 +2908,13 @@ $(document).ready(function() {
 										var ayuda = new Object();
 										ayuda['columns'] = c;
 										ayuda['data'] = d;
+										ayuda['dom'] = 'Blfrtip';
+										ayuda['buttons'] = [
+											{
+								            extend: 'excelHtml5',
+								            text: 'Exportar Excel',
+								            title:'Infracciones por Area de estudio',
+								        }];
 										dataObject.push(ayuda);
 										console.log(ayuda);
 										console.log(dataObject);
@@ -2865,6 +3032,13 @@ $(document).ready(function() {
 									var ayuda = new Object();
 									ayuda['columns'] = c;
 									ayuda['data'] = d;
+									ayuda['dom'] = 'Blfrtip';
+									ayuda['buttons'] = [
+										{
+							            extend: 'excelHtml5',
+							            text: 'Exportar Excel',
+							            title:'Infracciones por Tipo solicitante',
+							        }];
 									dataObject.push(ayuda);
 									console.log(ayuda);
 									console.log(dataObject);
@@ -3001,6 +3175,13 @@ $(document).ready(function() {
 										var ayuda = new Object();
 										ayuda['columns'] = c;
 										ayuda['data'] = d;
+										ayuda['dom'] = 'Blfrtip';
+										ayuda['buttons'] = [
+											{
+								            extend: 'excelHtml5',
+								            text: 'Exportar Excel',
+								            title:'Infracciones por Tipo infraccion',
+								        }];
 										dataObject.push(ayuda);
 										console.log(ayuda);
 										console.log(dataObject);
@@ -3100,12 +3281,9 @@ $(document).ready(function() {
 			"data" : "estadiaPromedio",
 			"title" : "Tiempo Medio Estadia"
 		}],
-		"dom":'Bfrtip',
+		"dom":'Blfrtip',
 		"buttons" : [
-			'copyHtml5',
-			'excelHtml5',
-			'csvHtml5',
-			'pdfHtml5'
+			'excelHtml5'
 		]
 	});
 	
@@ -3258,6 +3436,10 @@ $(document).ready(function() {
 	$local.$divTablaResumenMasFrecuentes.addClass("hidden"); // por defecto}
 	$local.$divTablaResumenMasFrecuentesFacultad.addClass("hidden"); // por defecto
 	$local.$divTablaResumenMasFrecuentesEscuela.addClass("hidden"); // por defecto
+	$('#cfacultad').addClass("hidden");//por defecto
+	$('#cescuela').addClass("hidden"); // por defecto
+	$('#resultadoGraficof').addClass("hidden"); // por defecto
+	$('#resultadoGraficoe').addClass("hidden"); // por defecto
 	
 	$("#xd").find(".comun").on("click", function(){
 		$local.$tipoReporte = $(this).attr("key");
@@ -3267,6 +3449,8 @@ $(document).ready(function() {
 			$local.$divTablaResumenMasFrecuentesFacultad.addClass("hidden");
 			$local.$divTablaResumenMasFrecuentesEscuela.addClass("hidden");
 			$local.$divTablaResumenInfraccion.addClass("hidden");
+			$('#cfacultad').addClass("hidden");
+			$('#cescuela').addClass("hidden"); 
 			$('#gr').removeClass("hidden");
 			$('#recurso').removeClass("hidden");
 			$('#tipoInfraccion').addClass("hidden");
@@ -3287,6 +3471,8 @@ $(document).ready(function() {
 			$local.$divTablaResumenMasFrecuentesFacultad.addClass("hidden");
 			$local.$divTablaResumenMasFrecuentesEscuela.addClass("hidden");
 			$local.$divTablaResumenInfraccion.removeClass("hidden");
+			$('#cfacultad').addClass("hidden");
+			$('#cescuela').addClass("hidden");
 			$('#gr').removeClass("hidden");
 			$('#tipoInfraccion').removeClass("hidden");
 			$('#tipoEstado').removeClass("hidden");
@@ -3310,7 +3496,8 @@ $(document).ready(function() {
 			$local.$divTablaResumenMasFrecuentes.removeClass("hidden");
 			$local.$divTablaResumenMasFrecuentesFacultad.removeClass("hidden");
 			$local.$divTablaResumenMasFrecuentesEscuela.removeClass("hidden");
-			$('#gr').addClass("hidden");
+			$('#cfacultad').removeClass("hidden");//por defecto
+			$('#cescuela').removeClass("hidden"); // por defecto
 
 		}
 	});
