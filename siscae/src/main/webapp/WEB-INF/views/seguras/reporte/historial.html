@@ -135,6 +135,7 @@
 																	class="form-control js-example-basic-single" >
 																	<option value="-1"
 																		selected="selected">Seleccione un periodo</option>
+																	<option value="HORA">Por hora</option>
 																	<option value="DIA">Por día</option>
 																	<option value="SEMANA">Por semana</option>
 																	<option value="MES">Por mes</option>
@@ -152,6 +153,27 @@
 																	class="fa fa-calendar m-r-5 m-t-5 text-center"></i></span> <input
 																	id="fechaPrestamo" type="text" name="fechaPrestamo"
 																	class="form-control filtro" readonly="readonly">
+															</div>
+														</div>
+													</div>
+													
+													<div class="col-md-3 hidden" id="divHoraInicio">
+														<div class="form-group m-b-10">
+															<label class="m-r-10">Desde:</label>
+															<div class="input-group">
+																<input id="horaInicio" type="time"
+																	name="valHoraIncio" class="form-control">
+															</div>
+														</div>
+													</div>
+
+
+													<div class="col-md-3 hidden" id="divHoraFin">
+														<div class="form-group m-b-10">
+															<label class="m-r-15">Hasta:</label>
+															<div class="input-group">
+																<input id="horaFin" type="time" name="valHoraFin"
+																	class="form-control">
 															</div>
 														</div>
 													</div>

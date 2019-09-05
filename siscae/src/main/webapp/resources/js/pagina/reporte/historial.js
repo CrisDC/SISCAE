@@ -21,6 +21,8 @@ $(document).ready(function() {
 		$divTipo: $('#divTipo'),
 		$divEstado: $('#divEstado'),
 		$divPeriodoDia : $('#divPeriodoDia'),
+		$divHoraInicio : $('#divHoraInicio'),
+		$divHoraFin : $('#divHoraFin'),
 		$divSemanaInicio : $('#divSemanaInicio'),
 		$divSemanaFin : $('#divSemanaFin'),
 		$divMesInicio : $('#divMesInicio'),
@@ -77,10 +79,22 @@ $(document).ready(function() {
 	//Evento que se dispara cuando el combo Periodo cambie
 	$local.$selectPeriodo.on("change", function(){
 		var val = $(this).val();
-     
-		if(val=="DIA"){
+        if(val=="HORA"){
+        	$local.$divPeriodoDia.addClass("hidden");
+        	$local.$divHoraInicio.removeClass("hidden");
+			$local.$divHoraFin.removeClass("hidden");
+			$local.$divSemanaInicio.addClass("hidden");
+			$local.$divSemanaFin.addClass("hidden");
+			$local.$divMesInicio.addClass("hidden");
+			$local.$divMesFin.addClass("hidden");
+			$local.$divAnioInicio.addClass("hidden");
+			$local.$divAnioFin.addClass("hidden");
+        }
+		else if(val=="DIA"){
 			$funcionUtil.crearDateRangePickerSimple($local.$fechaPrestamo, "YYYY-MM-DD");
 			$local.$divPeriodoDia.removeClass("hidden");
+			$local.$divHoraInicio.addClass("hidden");
+			$local.$divHoraFin.addClass("hidden");
 			$local.$divSemanaInicio.addClass("hidden");
 			$local.$divSemanaFin.addClass("hidden");
 			$local.$divMesInicio.addClass("hidden");
@@ -88,9 +102,9 @@ $(document).ready(function() {
 			$local.$divAnioInicio.addClass("hidden");
 			$local.$divAnioFin.addClass("hidden");
 		}else if(val == "SEMANA") {
-			
-			
 			$local.$divPeriodoDia.addClass("hidden");
+			$local.$divHoraInicio.addClass("hidden");
+			$local.$divHoraFin.addClass("hidden");
 			$local.$divSemanaInicio.removeClass("hidden");
 			$local.$divSemanaFin.removeClass("hidden");
 			$local.$divMesInicio.addClass("hidden");
@@ -98,8 +112,9 @@ $(document).ready(function() {
 			$local.$divAnioInicio.addClass("hidden");
 			$local.$divAnioFin.addClass("hidden");
 		}else if(val == "MES"){
-			
 			$local.$divPeriodoDia.addClass("hidden");
+			$local.$divHoraInicio.addClass("hidden");
+			$local.$divHoraFin.addClass("hidden");
 			$local.$divSemanaInicio.addClass("hidden");
 			$local.$divSemanaFin.addClass("hidden");
 			$local.$divMesInicio.removeClass("hidden");
@@ -107,9 +122,9 @@ $(document).ready(function() {
 			$local.$divAnioInicio.addClass("hidden");
 			$local.$divAnioFin.addClass("hidden");
 		}else if(val == "ANIO"){
-			
-			
 			$local.$divPeriodoDia.addClass("hidden");
+			$local.$divHoraInicio.addClass("hidden");
+			$local.$divHoraFin.addClass("hidden");
 			$local.$divSemanaInicio.addClass("hidden");
 			$local.$divSemanaFin.addClass("hidden");
 			$local.$divMesInicio.addClass("hidden");
@@ -118,6 +133,8 @@ $(document).ready(function() {
 			$local.$divAnioFin.removeClass("hidden");
 		}else{
 			$local.$divPeriodoDia.addClass("hidden");
+			$local.$divHoraInicio.addClass("hidden");
+			$local.$divHoraFin.addClass("hidden");
 			$local.$divSemanaInicio.addClass("hidden");
 			$local.$divSemanaFin.addClass("hidden");
 			$local.$divMesInicio.addClass("hidden");
