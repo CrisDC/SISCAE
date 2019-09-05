@@ -28,5 +28,8 @@ public class PrestamoDetalle2CriterioBusqueda {
 		private Integer anioFin;
 		private Integer semanaInicio;
 		private Integer semanaFin;
+		
+		private String horaInicio;
+		private String horaFin;
 	
 }
