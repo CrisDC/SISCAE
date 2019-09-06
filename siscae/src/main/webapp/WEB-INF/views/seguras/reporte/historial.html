@@ -15,7 +15,7 @@
 			<!-- Bread crumb -->
 			<div class="row page-titles">
 				<div class="col-md-5 align-self-center">
-					<h3 th:text="|Estadísticas|" class="text-primary"></h3>
+					<h3 th:text="|Historial|" class="text-primary"></h3>
 				</div>
 			</div>
 			<!-- End Bread crumb -->
@@ -52,7 +52,7 @@
 									<div class="tab-pane active m-t-20" id="tabReporteGeneral"
 										role="tabpanel">
 										<div id="estadisticas" class="m-l-15 m-r-15">
-											<form id="formPrestamos">
+											<form id="formPrestamos1">
 												<div class="row" style="width: 100%;">
 													<div class="col-md-3" id="divPersona">
 														<label class="m-r-15">Numero de documento</label>
@@ -61,7 +61,7 @@
 															<div class="input-group-btn search-panel">
 											
 																<input type="number" min=0 value="" class="form-control" name="numeroDocumento"
-																placeholder="N&#250mero de Documento" id="numeroDocumento"> 
+																placeholder="N&#250mero de Documento" id="numeroDocumentop"> 
 											
 															</div>
 															
@@ -131,7 +131,7 @@
 														<div class="form-group m-b-10">
 															<label class="m-r-15">Periodo</label>
 															<div class="input-group">
-																<select id="selectPeriodo" name="tipoPeriodo"
+																<select id="selectPeriodop" name="tipoPeriodo"
 																	class="form-control js-example-basic-single" >
 																	<option value="-1"
 																		selected="selected">Seleccione un periodo</option>
@@ -144,13 +144,13 @@
 														</div>
 													</div>
 
-													<div class="col-md-6 hidden" id="divPeriodoDia">
+													<div class="col-md-6 hidden" id="divPeriodoDiap">
 														<div class="form-group m-b-10">
 															<label class="m-r-15">Intervalo Fechas</label>
 															<div class="input-group">
 																<span class="input-group-addon"> <i
 																	class="fa fa-calendar m-r-5 m-t-5 text-center"></i></span> <input
-																	id="fechaPrestamo" type="text" name="fechaPrestamo"
+																	id="fechaPrestamop" type="text" name="fechaPrestamop"
 																	class="form-control filtro" readonly="readonly">
 															</div>
 														</div>
@@ -178,65 +178,65 @@
 													</div>
 
 
-													<div class="col-md-3 hidden" id="divSemanaInicio">
+													<div class="col-md-3 hidden" id="divSemanaIniciop">
 														<div class="form-group m-b-10">
 															<label class="m-r-10">Desde:</label>
 															<div class="input-group">
-																<input id="semanaInicio" type="week"
+																<input id="semanaIniciop" type="week"
 																	name="valSemanaIncio" class="form-control">
 															</div>
 														</div>
 													</div>
 
 
-													<div class="col-md-3 hidden" id="divSemanaFin">
+													<div class="col-md-3 hidden" id="divSemanaFinp">
 														<div class="form-group m-b-10">
 															<label class="m-r-15">Hasta:</label>
 															<div class="input-group">
-																<input id="semanaFin" type="week" name="valSemanaFin"
+																<input id="semanaFinp" type="week" name="valSemanaFin"
 																	class="form-control">
 															</div>
 														</div>
 													</div>
 
 
-													<div class="col-md-3 hidden" id="divMesInicio">
+													<div class="col-md-3 hidden" id="divMesIniciop">
 														<div class="form-group m-b-10">
 															<label class="m-r-10">Desde:</label>
 															<div class="input-group">
-																<input id="mesInicio" type="month" name="valMesIncio"
+																<input id="mesIniciop" type="month" name="valMesIncio"
 																	class="form-control">
 															</div>
 														</div>
 													</div>
 
 
-													<div class="col-md-3 hidden" id="divMesFin">
+													<div class="col-md-3 hidden" id="divMesFinp">
 														<div class="form-group m-b-10">
 															<label class="m-r-15">Hasta:</label>
 															<div class="input-group">
-																<input id="mesFin" type="month" name="valMesFin"
+																<input id="mesFinp" type="month" name="valMesFin"
 																	class="form-control">
 															</div>
 														</div>
 													</div>
 
-													<div class="col-md-3 hidden" id="divAnioInicio">
+													<div class="col-md-3 hidden" id="divAnioIniciop">
 														<div class="form-group m-b-10">
 															<label class="m-r-10">Desde:</label>
 															<div class="input-group">
-																<input id="anioInicio" type="number"
+																<input id="anioIniciop" type="number"
 																	name="valAnioInicio" class="form-control">
 															</div>
 														</div>
 													</div>
 
 
-													<div class="col-md-3 hidden" id="divAnioFin">
+													<div class="col-md-3 hidden" id="divAnioFinp">
 														<div class="form-group m-b-10">
 															<label class="m-r-15">Hasta:</label>
 															<div class="input-group">
-																<input id="anioFin" type="number" name="valAnioFin"
+																<input id="anioFinp" type="number" name="valAnioFin"
 																	class="form-control">
 															</div>
 														</div>
@@ -256,9 +256,9 @@
 														type="button">
 														<i class="fa fa-search"></i> Buscar
 													</button>
-													<button id="exportar" class="btn btn-success m-l-3"
-														type="button">
-														<i class="fa fa-download"></i> Exportar
+													<button  id="limpiar"  class="btn btn-success m-l-3" 
+ 														type="button"> 
+ 														<i class="fa fa-clean"></i> Limpiar 
 													</button>
 												</div>
 											</form>
@@ -469,7 +469,7 @@
 												</div>
 												<div class="row text-center m-t-5"
 													style="width: 100%; justify-content: center;">
-													<button id="buscarI" class="btn btn-info m-r-3"
+													<button id="buscarS" class="btn btn-info m-r-3"
 														type="button">
 														<i class="fa fa-search"></i> Buscar
 													</button>
@@ -480,7 +480,7 @@
 												</div>
 										</form> 
 									</div>
-									<table id="tblSancionados" class="table table-bordered table-striped">
+									<table id="tblInfracciones" class="table table-bordered table-striped">
 <!-- 												<thead> -->
 <!-- 													<tr> -->
 <!-- 														<th>Codigo</th> -->
@@ -560,7 +560,7 @@
 
 		<script th:src="@{/resources/js/pagina/reporte/historial.js}"></script>
 		<script
-			th:src="@{/resources/js/pagina/reporte/estadisticasFormulario.js}"></script>
+			th:src="@{/resources/js/pagina/reporte/historialFormulario.js}"></script>
 			
 		<!-- Script para exportar -->
 			<script type="text/javascript" src="https://cdn.datatables.net/buttons/1.5.6/js/dataTables.buttons.min.js"></script>

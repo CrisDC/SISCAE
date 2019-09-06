@@ -3,6 +3,8 @@ $(document).ready(function() {
 	var $local = {
 		$tblConsulta : $("#tblSancionados"),
 		tblConsulta  : "",
+		$tblInfracciones : $("#tblInfracciones"),
+		tblInfracciones : "",
 		$tblPrestamos : $("#tblPrestamos"),
 		tblPrestamos  : "",
 		
@@ -29,12 +31,22 @@ $(document).ready(function() {
 		$divMesFin : $('#divMesFin'),
 		$divAnioInicio : $('#divAnioInicio'),
 		$divAnioFin : $('#divAnioFin'),
+		$divPeriodoDiap : $('#divPeriodoDiap'),
+		$divHoraIniciop : $('#divHoraIniciop'),
+		$divHoraFinp : $('#divHoraFinp'),
+		$divSemanaIniciop : $('#divSemanaIniciop'),
+		$divSemanaFinp : $('#divSemanaFinp'),
+		$divMesIniciop : $('#divMesIniciop'),
+		$divMesFinp : $('#divMesFinp'),
+		$divAnioIniciop : $('#divAnioIniciop'),
+		$divAnioFinp : $('#divAnioFinp'),
 		
 		
 		
 		//inputs de la pagina (select, inputs)
 		$tipoPersona : $('#tipoPersona'),
 		$numDoc : $('#numeroDocumento'),
+		$numDocp : $('#numeroDocumentop'),
 		$selectTipoInfraccion : $('#tipoInfraccion'),
 		$selectTipoEstado : $('#tipoEstado'),
 		$selectTipoInfraccionm : $('#tipoInfraccionm'),
@@ -46,6 +58,7 @@ $(document).ready(function() {
 		$cr :0,
 		
 		$selectPeriodo : $('#selectPeriodo'),
+		$selectPeriodop : $('#selectPeriodop'),
 		$fechaPrestamo : $('#fechaPrestamo'),
 		$semanaInicio : $('#semanaInicio'),
 		$anioInicio : $('#anioInicio'),
@@ -53,6 +66,13 @@ $(document).ready(function() {
 		$semanaFin : $('#semanaFin'),
 		$anioFin : $('#anioFin'),
 		$mesFin : $('#mesFin'),
+		$fechaPrestamop : $('#fechaPrestamop'),
+		$semanaIniciop : $('#semanaIniciop'),
+		$anioIniciop : $('#anioIniciop'),
+		$mesIniciop : $('#mesIniciop'),
+		$semanaFinp : $('#semanaFinp'),
+		$anioFinp : $('#anioFinp'),
+		$mesFinp : $('#mesFinp'),
 
 		
 		//Botones de la pagina
@@ -70,6 +90,7 @@ $(document).ready(function() {
 	$funcionUtil.crearSelect2($local.$selectTipoEstadom);
 	$funcionUtil.crearSelect2($local.$selectTipoInfraccionm);
 	$funcionUtil.crearSelect2($local.$selectPeriodo);
+	$funcionUtil.crearSelect2($local.$selectPeriodop);
 	$funcionUtil.crearSelect2($local.$tipoPersona);
 	$funcionUtil.crearSelect2($local.$selectAreaEstudio);
 	$funcionUtil.crearSelect2($local.$selectTipoRecurso);
@@ -124,6 +145,54 @@ $(document).ready(function() {
 		}
 	});
 	
+	$local.$selectPeriodop.on("change", function(){
+		var val = $(this).val();
+        if(val=="DIA"){
+			$funcionUtil.crearDateRangePickerSimple($local.$fechaPrestamop, "YYYY-MM-DD");
+			$local.$divPeriodoDiap.removeClass("hidden");
+			$local.$divSemanaIniciop.addClass("hidden");
+			$local.$divSemanaFinp.addClass("hidden");
+			$local.$divMesIniciop.addClass("hidden");
+			$local.$divMesFinp.addClass("hidden");
+			$local.$divAnioIniciop.addClass("hidden");
+			$local.$divAnioFinp.addClass("hidden");
+		}else if(val == "SEMANA") {
+			$local.$divPeriodoDiap.addClass("hidden");
+			$local.$divSemanaIniciop.removeClass("hidden");
+			$local.$divSemanaFinp.removeClass("hidden");
+			$local.$divMesIniciop.addClass("hidden");
+			$local.$divMesFinp.addClass("hidden");
+			$local.$divAnioIniciop.addClass("hidden");
+			$local.$divAnioFinp.addClass("hidden");
+		}else if(val == "MES"){
+			$local.$divPeriodoDiap.addClass("hidden");
+			$local.$divSemanaIniciop.addClass("hidden");
+			$local.$divSemanaFinp.addClass("hidden");
+			$local.$divMesIniciop.removeClass("hidden");
+			$local.$divMesFinp.removeClass("hidden");
+			$local.$divAnioIniciop.addClass("hidden");
+			$local.$divAnioFinp.addClass("hidden");
+		}else if(val == "ANIO"){
+			$local.$divPeriodoDiap.addClass("hidden");
+			$local.$divHoraIniciop.addClass("hidden");
+			$local.$divHoraFinp.addClass("hidden");
+			$local.$divSemanaIniciop.addClass("hidden");
+			$local.$divSemanaFinp.addClass("hidden");
+			$local.$divMesIniciop.addClass("hidden");
+			$local.$divMesFinp.addClass("hidden");
+			$local.$divAnioIniciop.removeClass("hidden");
+			$local.$divAnioFinp.removeClass("hidden");
+		}else{
+			$local.$divPeriodoDiap.addClass("hidden");
+			$local.$divSemanaIniciop.addClass("hidden");
+			$local.$divSemanaFinp.addClass("hidden");
+			$local.$divMesIniciop.addClass("hidden");
+			$local.$divMesFinp.addClass("hidden");
+			$local.$divAnioIniciop.addClass("hidden");
+			$local.$divAnioFinp.addClass("hidden");
+		}
+	});
+	
 	
 	/* ---------- Construcción de tabla ---------- */
 	$.fn.dataTable.ext.errMode = 'none';
@@ -134,6 +203,54 @@ $(document).ready(function() {
 				$local.tblConsulta.clear().draw();
 				break;
 		}
+	});
+	
+	$local.tblInfracciones = $local.$tblInfracciones.DataTable({
+		
+		"language" : {
+			"url": "//cdn.datatables.net/plug-ins/1.10.16/i18n/Spanish.json",
+			"emptyTable" : "Ningún dato disponible en esta tabla." // Nuevo
+		},
+		"initComplete" : function() {
+			$local.$tblInfracciones.wrap("<div class='table-responsive'></div>");
+			//$tablaFuncion.aniadirFiltroDeBusquedaEnEncabezado(this, $local.$tblConsulta);
+		},
+		"columnDefs" : [ {
+			"targets" : [ 0, 1, 2, 3, 4, 5, 6, 7 ],
+			"className" : "all filtrable",
+		}  ],
+		"columns" : [{
+			"data" : 'numDocumento',
+			"title" : "Num. documento"
+		}, {
+			"data" : 'appPaterno',
+			"title" : "Ap. Paterno"
+		}, {
+			"data" : 'appMaterno',
+			"title" : "Ap. Materno"
+		}, {
+			"data" : 'nombre',
+			"title" : "Nombre"
+		}, {
+			"data" : 'tipoPersona',
+			"title" : "Solicitante"
+		}, {
+			"data" : 'infraccion',
+			"title" : "Detalle"
+		}, {
+			"data" : 'estado',
+			"title" : "Estado"
+		}, {
+			"data" : 'fecha',
+			"title" : "Fecha"
+		}],
+		"dom":'Blfrtip',
+		"buttons": [{
+			extend: 'excelHtml5',
+            text: 'Exportar Excel',
+            title:'Historial de Infracciones'
+		}]
+		
 	});
 	
 	$local.tblConsulta = $local.$tblConsulta.DataTable({
@@ -246,8 +363,12 @@ $(document).ready(function() {
 			"data" : 'fecha',
 			"title" : "Fecha"
 		} ],
-		"dom": 'Bfrtip',
-		"buttons": ['excelHtml5']
+		"dom": 'Blfrtip',
+		"buttons": [{
+			extend: 'excelHtml5',
+            text: 'Exportar Excel',
+            title:'Historial de Prestamos'
+		}]
 	});
 	
 $local.$tblPrestamos.find("thead").on('keyup', 'input', function() {
@@ -342,18 +463,7 @@ $("#xd").find(".comun").on("click", function(){
 	$formPrestamos = $("#formPrestamos");
 	$formMantenimiento = $("#formMantenimiento");
 	
-	$formPrestamos.validate({
-		rules : {
-			areaEstudio : {
-				required : true
-			}
-			 },
-		messages : {
-			areaEstudio : {
-				required : "Selecciona un area de estudio",
-			}
-		}
-	});
+	
 	
 	/*---------CONSTRUCCION DE LAS TABLAS POR FILTROS---------------*/
 	/**ACTUALIZAR**/
@@ -583,8 +693,6 @@ $("#xd").find(".comun").on("click", function(){
 		criterio.numeroDocumento = $local.$numDoc.val();
 		criterio.selectTipoInfraccion = $local.$selectTipoInfraccion.val();
 		criterio.selectTipoEstado = $local.$selectTipoEstado.val();
-        criterio.horaInicio = criterio.horaInicio.toString();
-		criterio.horaFin = criterio.horaFin.toString();
 		
 		
 		//Obtener datos del periodo
@@ -616,37 +724,44 @@ $("#xd").find(".comun").on("click", function(){
 	
 	
 	var obtenerCriterioP = function (){
+		
+		if(!$('#formPrestamos1').valid()){
+			console.log("ggaaa");
+			return;
+		}
 
-		var criterio = $formPrestamos.serializeJSON();
+		var criterio = $('#formPrestamos1').serializeJSON();
 		criterio.tipoPersona = $local.$tipoPersona.val();
-		criterio.numeroDocumento = $local.$numDoc.val();
+		criterio.numeroDocumento = $local.$numDocp.val();
 		criterio.areaEstudio = $local.$selectAreaEstudio.val();
 		criterio.tipoRecurso = $local.$selectTipoRecurso.val();
 		criterio.recurso = $local.$selectRecurso.val();
+		criterio.horaInicio = criterio.horaInicio.toString();
+		criterio.horaFin = criterio.horaFin.toString();
 
 		//Obtener datos del periodo
 		if($local.$selectPeriodo.val() == 'DIA'){
-			var rangoFechaBusqueda = $funcionUtil.obtenerFechasDateRangePicker($local.$fechaPrestamo);
+			var rangoFechaBusqueda = $funcionUtil.obtenerFechasDateRangePicker($local.$fechaPrestamop);
 			criterio.fechaInicio = rangoFechaBusqueda.fechaInicio;
 			criterio.fechaFin = rangoFechaBusqueda.fechaFin;
 		}
 		if($local.$selectPeriodo.val() == 'SEMANA'){
-			criterio.semanaInicio = $funcionUtil.obtenerSemanaInputWeek($local.$semanaInicio);
-			criterio.anioInicio = $funcionUtil.obtenerAnioInputWeek($local.$semanaInicio);
-			criterio.semanaFin = $funcionUtil.obtenerSemanaInputWeek($local.$semanaFin);
-			criterio.anioFin = $funcionUtil.obtenerAnioInputWeek($local.$semanaFin);
+			criterio.semanaInicio = $funcionUtil.obtenerSemanaInputWeek($local.$semanaIniciop);
+			criterio.anioInicio = $funcionUtil.obtenerAnioInputWeek($local.$semanaIniciop);
+			criterio.semanaFin = $funcionUtil.obtenerSemanaInputWeek($local.$semanaFinp);
+			criterio.anioFin = $funcionUtil.obtenerAnioInputWeek($local.$semanaFinp);
 		}
 		if($local.$selectPeriodo.val() == 'MES'){
-			criterio.mesInicio = $funcionUtil.obtenerMesInputMonth($local.$mesInicio);
-			criterio.anioInicio = $funcionUtil.obtenerAnioInputMonth($local.$mesInicio);
-			criterio.mesFin = $funcionUtil.obtenerMesInputMonth($local.$mesFin);
-			criterio.anioFin = $funcionUtil.obtenerAnioInputMonth($local.$mesFin);
+			criterio.mesInicio = $funcionUtil.obtenerMesInputMonth($local.$mesIniciop);
+			criterio.anioInicio = $funcionUtil.obtenerAnioInputMonth($local.$mesIniciop);
+			criterio.mesFin = $funcionUtil.obtenerMesInputMonth($local.$mesFinp);
+			criterio.anioFin = $funcionUtil.obtenerAnioInputMonth($local.$mesFinp);
 		}
 		if($local.$selectPeriodo.val() == 'ANIO'){
-			criterio.anioInicio = $local.$anioInicio.val();
-			criterio.anioFin = $local.$anioFin.val();
+			criterio.anioInicio = $local.$anioIniciop.val();
+			criterio.anioFin = $local.$anioFinp.val();
 		}
-		criterio.tipoPeriodo = $local.$selectPeriodo.val();
+		criterio.tipoPeriodo = $local.$selectPeriodop.val();
 		console.log(criterio);
 		return criterio;
 	}
@@ -728,11 +843,52 @@ $("#xd").find(".comun").on("click", function(){
 		}
 	});
 	
+	$('#buscarS').on('click', function() {
+		
+		var criterioB = obtenerCriterioI();
+		var c = contador();
+		console.log(c);
+		if(c ==5){
+			swal("No se pudo realizar la búsqueda", "No ingreso ningún valor", "error");
+		}else{
+			$.ajax({
+				type : "GET",
+				url : $variableUtil.root + "infraccionDetalle?accion=buscarPorCriterio",
+				contentType : "application/json",
+				data: criterioB,
+				dataType : "json",
+				beforeSend : function(xhr) {
+					xhr.setRequestHeader('Content-Type', 'application/json');
+					//Borrando tabla antes de hacer la consulta
+					$local.tblInfracciones.clear().draw();
+					$('#buscarS').attr("disabled", true).find("i").removeClass("fa-search").addClass("fa-spinner fa-pulse fa-fw");
+				},
+				success : function(response) {
+					console.log(response);
+					if (response.length === 0) {
+						$funcionUtil.notificarException($variableUtil.busquedaSinResultados, "fa-exclamation-circle", "Información", "info");
+						return;
+					}
+					//Dibujando tabla
+					
+					$local.tblInfracciones.rows.add(response).draw();
+					//Dibujando grafico
+					//var chart = AmCharts.makeChart('chartdiv',$funcionGraficoUtil.crearGraficoPie(response,'segmento','numeroPrestamos','Análisis de Préstamos','Número de prestamos', "<b style='font-size:12px'>[[title]]</b> ([[percents]]%) <br> <b>Prestamos:</b> [[value]] </br> <b>Tiempo Total: </b> [[estadiaTotal]] <br> <b>Tiempo Prom: </b> [[estadiaPromedio]]"));
+				},
+				error : function(response) {
+				},
+				complete : function() {
+					$('#buscarS').attr("disabled", false).find("i").addClass("fa-search").removeClass("fa-spinner fa-pulse fa-fw");
+				}
+			});
+		
+		
+		}
+	});
+	
 $('#buscarP').on('click', function() {
 		
-	if(!$formPrestamos.valid()){
-		return;
-	}
+	
 	var criterioBusqueda = obtenerCriterioP();
 	console.log(criterioBusqueda);
 
