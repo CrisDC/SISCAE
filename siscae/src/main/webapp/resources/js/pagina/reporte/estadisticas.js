@@ -54,6 +54,7 @@ $(document).ready(function() {
 			$exportar : $('#exportar'),
 			//Tipo Reporte
 			$tipoReporte:'P',
+			$title:'',
 			
 			//DataTable
 			$tablaResultadosPrestamo : $("#tblReporteResumenPrestamo"),
@@ -183,7 +184,6 @@ $(document).ready(function() {
 	$local.$selectEjeX.on("change", function(){
 		let data;
 		let title;
-		console.log("entro");
 		switch($local.$selectEjeX.val()){
 			case "PERIODO":{
 				console.log("p");
@@ -228,7 +228,8 @@ $(document).ready(function() {
 			}
 		}
 		
-		cambiarEjeXTabla(data, title);
+		$local.$title = title;
+		//cambiarEjeXTabla(data, title);
 		
 	});
 	
@@ -237,7 +238,6 @@ $(document).ready(function() {
 	$local.$selectSeries.on("change", function(){
 		let data;
 		let title;
-		console.log("entro");
 		console.log($local.$selectSeries.val());
 		switch($local.$selectSeries.val()){
 			case "SOLICITANTE":{
@@ -261,7 +261,8 @@ $(document).ready(function() {
 				break;
 			}
 		}
-		cambiarEjeXTabla(data, title);
+		$local.$title = title;
+		//cambiarEjeXTabla(data, title);
 		
 	});
 	
@@ -863,14 +864,14 @@ $(document).ready(function() {
 												presentacion='none';
 											}
 											//console.log(data);
-											console.log(arrayJSONX);
-											eliminarVacios(data);
+											console.log(arrayJSONX);	
 											console.log(data);
 											console.log(resultGraph);
 											console.log(Object.keys(data[0]));
 											if(arr==arrayJSONX){
-													var d = data;
+												var d = data;
 											}else{
+												eliminarVacios(data);
 												var d = datanuevo;
 											}
 											var cd = [];
@@ -1033,13 +1034,14 @@ $(document).ready(function() {
 											}
 											//console.log(data);
 											console.log(arrayJSONX);
-											eliminarVacios(data);
+											
 											console.log(data);
 											console.log(resultGraph);
 											console.log(Object.keys(data[0]));
 											if(arr==arrayJSONX){
 													var d = data;
 											}else{
+												eliminarVacios(data);
 												var d = datanuevo;
 											}
 											var c = [];
@@ -1157,13 +1159,14 @@ $(document).ready(function() {
 										}
 										//console.log(data);
 										console.log(arrayJSONX);
-										eliminarVacios(data);
+										
 										console.log(data);
 										console.log(resultGraph);
 										console.log(Object.keys(data[0]));
 										if(arr==arrayJSONX){
 												var d = data;
 										}else{
+											eliminarVacios(data);
 											var d = datanuevo;
 										}
 										var c = [];
@@ -1393,20 +1396,21 @@ $(document).ready(function() {
 											}
 											//console.log(data);
 											console.log(arrayJSONX);
-											eliminarVacios(data);
+											
 											console.log(data);
 											console.log(resultGraph);
 											console.log(Object.keys(data[0]));
 											if(arr==arrayJSONX){
 													var d = data;
 											}else{
+												eliminarVacios(data);
 												var d = datanuevo;
 											}
 											var c = [];
 											for(i=0;i<Object.keys(d[0]).length;i++){
 												var ej = new Object();
 												if(i==0){
-													ej['title'] = "Escuela";
+													ej['title'] = $local.$title;
 													ej['data']  = Object.keys(d[0])[i];
 												}else{
 													ej['title'] = Object.keys(d[0])[i];;
@@ -1541,20 +1545,21 @@ $(document).ready(function() {
 											}
 											//console.log(data);
 											console.log(arrayJSONX);
-											eliminarVacios(data);
+											
 											console.log(data);
 											console.log(resultGraph);
 											console.log(Object.keys(data[0]));
 											if(arr==arrayJSONX){
 													var d = data;
 											}else{
+												eliminarVacios(data);
 												var d = datanuevo;
 											}
 											var c = [];
 											for(i=0;i<Object.keys(d[0]).length;i++){
 												var ej = new Object();
 												if(i==0){
-													ej['title'] = "Area Estudio";
+													ej['title'] = $local.$title;
 													ej['data']  = Object.keys(d[0])[i];
 												}else{
 													ej['title'] = Object.keys(d[0])[i];;
@@ -1664,20 +1669,21 @@ $(document).ready(function() {
 										}
 										//console.log(data);
 										console.log(arrayJSONX);
-										eliminarVacios(data);
+										
 										console.log(data);
 										console.log(resultGraph);
 										console.log(Object.keys(data[0]));
 										if(arr==arrayJSONX){
 												var d = data;
 										}else{
+											eliminarVacios(data);
 											var d = datanuevo;
 										}
 										var c = [];
 										for(i=0;i<Object.keys(d[0]).length;i++){
 											var ej = new Object();
 											if(i==0){
-												ej['title'] = "Tipo Solicitante";
+												ej['title'] = $local.$title;
 												ej['data']  = Object.keys(d[0])[i];
 											}else{
 												ej['title'] = Object.keys(d[0])[i];;
@@ -1812,20 +1818,21 @@ $(document).ready(function() {
 											}
 											//console.log(data);
 											console.log(arrayJSONX);
-											eliminarVacios(data);
+											
 											console.log(data);
 											console.log(resultGraph);
 											console.log(Object.keys(data[0]));
 											if(arr==arrayJSONX){
 													var d = data;
 											}else{
+												eliminarVacios(data);
 												var d = datanuevo;
 											}
 											var c = [];
 											for(i=0;i<Object.keys(d[0]).length;i++){
 												var ej = new Object();
 												if(i==0){
-													ej['title'] = "Recurso";
+													ej['title'] = $local.$title;
 													ej['data']  = Object.keys(d[0])[i];
 												}else{
 													ej['title'] = Object.keys(d[0])[i];;
@@ -2117,13 +2124,14 @@ $(document).ready(function() {
 										}
 										//console.log(data);
 										console.log(arrayJSONX);
-										eliminarVacios(data);
+										
 										console.log(data);
 										console.log(resultGraph);
 										console.log(Object.keys(data[0]));
 										if(arr==arrayJSONX){
 												var d = data;
 										}else{
+											eliminarVacios(data);
 											var d = datanuevo;
 										}
 										var c = [];
@@ -2265,13 +2273,14 @@ $(document).ready(function() {
 										}
 										//console.log(data);
 										console.log(arrayJSONX);
-										eliminarVacios(data);
+										
 										console.log(data);
 										console.log(resultGraph);
 										console.log(Object.keys(data[0]));
 										if(arr==arrayJSONX){
 												var d = data;
 										}else{
+											eliminarVacios(data);
 											var d = datanuevo;
 										}
 										var c = [];
@@ -2392,13 +2401,14 @@ $(document).ready(function() {
 									}
 									//console.log(data);
 									console.log(arrayJSONX);
-									eliminarVacios(data);
+									
 									console.log(data);
 									console.log(resultGraph);
 									console.log(Object.keys(data[0]));
 									if(arr==arrayJSONX){
 											var d = data;
 									}else{
+										eliminarVacios(data);
 										var d = datanuevo;
 									}
 									var c = [];
@@ -2538,13 +2548,14 @@ $(document).ready(function() {
 										}
 										//console.log(data);
 										console.log(arrayJSONX);
-										eliminarVacios(data);
+										
 										console.log(data);
 										console.log(resultGraph);
 										console.log(Object.keys(data[0]));
 										if(arr==arrayJSONX){
 												var d = data;
 										}else{
+											eliminarVacios(data);
 											var d = datanuevo;
 										}
 										var c = [];
@@ -2770,20 +2781,21 @@ $(document).ready(function() {
 										}
 										//console.log(data);
 										console.log(arrayJSONX);
-										eliminarVacios(data);
+										
 										console.log(data);
 										console.log(resultGraph);
 										console.log(Object.keys(data[0]));
 										if(arr==arrayJSONX){
 												var d = data;
 										}else{
+											eliminarVacios(data);
 											var d = datanuevo;
 										}
 										var c = [];
 										for(i=0;i<Object.keys(d[0]).length;i++){
 											var ej = new Object();
 											if(i==0){
-												ej['title'] = "Escuela";
+												ej['title'] = $local.$title;
 												ej['data']  = Object.keys(d[0])[i];
 											}else{
 												ej['title'] = Object.keys(d[0])[i];;
@@ -2918,20 +2930,21 @@ $(document).ready(function() {
 										}
 										//console.log(data);
 										console.log(arrayJSONX);
-										eliminarVacios(data);
+										
 										console.log(data);
 										console.log(resultGraph);
 										console.log(Object.keys(data[0]));
 										if(arr==arrayJSONX){
 												var d = data;
 										}else{
+											eliminarVacios(data);
 											var d = datanuevo;
 										}
 										var c = [];
 										for(i=0;i<Object.keys(d[0]).length;i++){
 											var ej = new Object();
 											if(i==0){
-												ej['title'] = "Area Estudio";
+												ej['title'] = $local.$title;
 												ej['data']  = Object.keys(d[0])[i];
 											}else{
 												ej['title'] = Object.keys(d[0])[i];;
@@ -2980,17 +2993,13 @@ $(document).ready(function() {
 								//Generando Leyenda
 								var resultGraph = [];
 								if(arr==""){
-									var arraJSONX = response[0].detalle;
+									var arrayJSONX = response[0].detalle;
 									arr = arrayJSONX;
 								}else{
 									
 									var datos = [];
 									var j =0;
-									console.log(data[0][arr[0]]);
-									for(i =0;i<arr.length;i++){
-										
-									}
-									
+
 									var arrayJSONX = [];
 									var datanuevo = [];
 									for(l=0;l<response.length;l++){
@@ -3045,20 +3054,21 @@ $(document).ready(function() {
 									}
 									//console.log(data);
 									console.log(arrayJSONX);
-									eliminarVacios(data);
+									
 									console.log(data);
 									console.log(resultGraph);
 									console.log(Object.keys(data[0]));
 									if(arr==arrayJSONX){
 											var d = data;
 									}else{
+										eliminarVacios(data);
 										var d = datanuevo;
 									}
 									var c = [];
 									for(i=0;i<Object.keys(d[0]).length;i++){
 										var ej = new Object();
 										if(i==0){
-											ej['title'] = "Tipo Solicitante";
+											ej['title'] = $local.$title;
 											ej['data']  = Object.keys(d[0])[i];
 										}else{
 											ej['title'] = Object.keys(d[0])[i];;
@@ -3114,7 +3124,6 @@ $(document).ready(function() {
 									
 									success : function(tr) {
 										console.log(tr);
-
 										//Generando Leyenda
 										var resultGraph = [];
 										if(arr == "" ){
@@ -3191,20 +3200,21 @@ $(document).ready(function() {
 										}
 										//console.log(data);
 										console.log(arrayJSONX);
-										eliminarVacios(data);
+										
 										console.log(data);
 										console.log(resultGraph);
 										console.log(Object.keys(data[0]));
 										if(arr==arrayJSONX){
 												var d = data;
 										}else{
+											eliminarVacios(data);
 											var d = datanuevo;
 										}
 										var c = [];
 										for(i=0;i<Object.keys(d[0]).length;i++){
 											var ej = new Object();
 											if(i==0){
-												ej['title'] = "Tipo Infraccion";
+												ej['title'] = $local.$title;
 												ej['data']  = Object.keys(d[0])[i];
 											}else{
 												ej['title'] = Object.keys(d[0])[i];;
