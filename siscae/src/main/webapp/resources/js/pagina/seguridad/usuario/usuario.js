@@ -114,12 +114,12 @@ $(document).ready(function() {
 
 	$local.$registrarUsuario.on("click", function() {
 		var us = $formUsuario.serializeJSON();
-		console.log(usuario);
-		usuario.requiereCambio = true;
+		//console.log(usuario);
+		//usuario.requiereCambio = true;
 		$.ajax({
 			type : "POST",
 			url : $variableUtil.root + "usuario",
-			data : JSON.stringify(usuario),
+			data : JSON.stringify(us),
 			beforeSend : function(xhr) {
 				$('#modalMantenimiento').modal('hide');
 				$local.$registrarUsuario.attr("disabled", true).find("i").removeClass("fa-floppy-o").addClass("fa-spinner fa-pulse fa-fw");
@@ -134,7 +134,7 @@ $(document).ready(function() {
 			},
 			success : function(usuarios) {
 				$funcionUtil.notificarException($variableUtil.registroExitoso, "fa-check", "Aviso", "success");
-				var usuario = usuarios[0];
+				//var usuario = usuarios[0];
 				//var row = $local.tablaUsuarios.row.add({
 				//	"idUsuario" : usuario.idUsuario,
 				//	"idPerfil" : usuario.idPerfil,

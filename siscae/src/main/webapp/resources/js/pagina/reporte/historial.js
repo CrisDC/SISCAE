@@ -61,8 +61,7 @@ $(document).ready(function() {
 		
 	}
 	
-
-
+    
 	//$funcionUtil.crearDateRangePickerSimple($local.$fechaPrestamo, "YYYY-MM-DD");
 	
 	//Creando elementos combobox con estilo chevere (Plugin Select2)
@@ -79,22 +78,9 @@ $(document).ready(function() {
 	//Evento que se dispara cuando el combo Periodo cambie
 	$local.$selectPeriodo.on("change", function(){
 		var val = $(this).val();
-        if(val=="HORA"){
-        	$local.$divPeriodoDia.addClass("hidden");
-        	$local.$divHoraInicio.removeClass("hidden");
-			$local.$divHoraFin.removeClass("hidden");
-			$local.$divSemanaInicio.addClass("hidden");
-			$local.$divSemanaFin.addClass("hidden");
-			$local.$divMesInicio.addClass("hidden");
-			$local.$divMesFin.addClass("hidden");
-			$local.$divAnioInicio.addClass("hidden");
-			$local.$divAnioFin.addClass("hidden");
-        }
-		else if(val=="DIA"){
+        if(val=="DIA"){
 			$funcionUtil.crearDateRangePickerSimple($local.$fechaPrestamo, "YYYY-MM-DD");
 			$local.$divPeriodoDia.removeClass("hidden");
-			$local.$divHoraInicio.addClass("hidden");
-			$local.$divHoraFin.addClass("hidden");
 			$local.$divSemanaInicio.addClass("hidden");
 			$local.$divSemanaFin.addClass("hidden");
 			$local.$divMesInicio.addClass("hidden");
@@ -103,8 +89,6 @@ $(document).ready(function() {
 			$local.$divAnioFin.addClass("hidden");
 		}else if(val == "SEMANA") {
 			$local.$divPeriodoDia.addClass("hidden");
-			$local.$divHoraInicio.addClass("hidden");
-			$local.$divHoraFin.addClass("hidden");
 			$local.$divSemanaInicio.removeClass("hidden");
 			$local.$divSemanaFin.removeClass("hidden");
 			$local.$divMesInicio.addClass("hidden");
@@ -113,8 +97,6 @@ $(document).ready(function() {
 			$local.$divAnioFin.addClass("hidden");
 		}else if(val == "MES"){
 			$local.$divPeriodoDia.addClass("hidden");
-			$local.$divHoraInicio.addClass("hidden");
-			$local.$divHoraFin.addClass("hidden");
 			$local.$divSemanaInicio.addClass("hidden");
 			$local.$divSemanaFin.addClass("hidden");
 			$local.$divMesInicio.removeClass("hidden");
@@ -133,8 +115,6 @@ $(document).ready(function() {
 			$local.$divAnioFin.removeClass("hidden");
 		}else{
 			$local.$divPeriodoDia.addClass("hidden");
-			$local.$divHoraInicio.addClass("hidden");
-			$local.$divHoraFin.addClass("hidden");
 			$local.$divSemanaInicio.addClass("hidden");
 			$local.$divSemanaFin.addClass("hidden");
 			$local.$divMesInicio.addClass("hidden");
@@ -282,7 +262,6 @@ $local.$tblPrestamos.find("thead").on('change', 'select', function() {
 $("#xd").find(".comun").on("click", function(){
 	$local.$tipoHistorial = $(this).attr("key");
 	console.log($local.$tipoHistorial);
-	
 });
 	/* ------ fin Construcción de tablas ------------ */
 //	var $local = {
@@ -362,6 +341,19 @@ $("#xd").find(".comun").on("click", function(){
 	$formInfracciones = $("#formInfracciones");
 	$formPrestamos = $("#formPrestamos");
 	$formMantenimiento = $("#formMantenimiento");
+	
+	$formPrestamos.validate({
+		rules : {
+			areaEstudio : {
+				required : true
+			}
+			 },
+		messages : {
+			areaEstudio : {
+				required : "Selecciona un area de estudio",
+			}
+		}
+	});
 	
 	/*---------CONSTRUCCION DE LAS TABLAS POR FILTROS---------------*/
 	/**ACTUALIZAR**/
@@ -622,15 +614,14 @@ $("#xd").find(".comun").on("click", function(){
 	
 	
 	var obtenerCriterioP = function (){
-		
-		var criterio = $formInfracciones.serializeJSON();
+
+		var criterio = $formPrestamos.serializeJSON();
 		criterio.tipoPersona = $local.$tipoPersona.val();
 		criterio.numeroDocumento = $local.$numDoc.val();
 		criterio.areaEstudio = $local.$selectAreaEstudio.val();
 		criterio.tipoRecurso = $local.$selectTipoRecurso.val();
 		criterio.recurso = $local.$selectRecurso.val();
-		
-		
+
 		//Obtener datos del periodo
 		if($local.$selectPeriodo.val() == 'DIA'){
 			var rangoFechaBusqueda = $funcionUtil.obtenerFechasDateRangePicker($local.$fechaPrestamo);
