@@ -641,59 +641,53 @@
 	</th:block>
 
 	<!-- Tabla Usuario -->
-	<th:block th:fragment="usuario">
-		<div class="form-group">
-			<label class="col-lg-2 control-label">Usuario</label>
-			<div class="col-lg-10">
+<th:block th:fragment="usuario">
+	
+
+
+			<div class="form-group">
+			<label class="control-label">Usuario</label>
 				<input class="form-control upperCase elemento-desactivable"
 					type="text" name="nombre" autofocus="autofocus" />
-			</div>
 		</div>
 		<div class="form-group">
-			<label class="col-lg-2 control-label">Contraseña</label>
-			<div class="col-lg-10">
+			<label class="control-label">Contraseña</label>
 				<input class="form-control upperCase elemento-desactivable"
 					type="password" name="pass" autofocus="autofocus" />
-			</div>
 		</div>
 		<div class="form-group">
-			<label class="col-lg-8 control-label">Estado del Usuario</label>
-			<div class="col-lg-10">
+			<label class="control-label">Estado del Usuario</label>
 				<select id="idEstadoTabla"
-					class="form-control select2 elemento-desactivable"
+					class="form-control select2"
 					name="idEstadoTabla">
-					<option value="" selected="selected" disabled="disabled">Seleccione
-						el estado</option>
+					<option value="" selected="selected" disabled="disabled">Seleccione el estado</option>
 					<option th:each="estado : ${estados}"
 						th:value="${estado.idEstadoTabla}"
 						th:text="|${estado.idEstadoTabla} - ${estado.descripcion}|"></option>
 				</select>
-			</div>
+			
 		</div>
 		<div class="form-group">
-			<label class="col-lg-2 control-label">Rol</label>
-			<div class="col-lg-10">
+			<label class="control-label">Rol</label>
 				<select id="idRol"
-					class="form-control select2 elemento-desactivable" name="idRol">
+					class="form-control select2" name="idRol">
 					<option value="" selected="selected" disabled="disabled">Seleccione
 						el rol</option>
 					<option th:each="rol : ${roles}" th:value="${rol.idRol}"
 						th:text="|${rol.idRol} - ${rol.nombre}|"></option>
 				</select>
-			</div>
 		</div>
-		 <div class="form-group">
-			<label class="col-lg-2 control-label">Administrativo</label>
-			<div class="col-lg-10">
+		
+		<div class="form-group">
+			<label class="control-label">Administrativo</label>
 				<select id="idPersona"
-					class="form-control select2 elemento-desactivable" name="idPersona">
+					class="form-control select2" name="idPersona">
 					<option value="" selected="selected">Seleccione un
-					Administrativo</option>
-				<option th:each="administrativo : ${administrativo}"
-					th:value="${administrativo.idAdministrativo}"
-					th:text="|${administrativo.nombre}|"></option>
+						Administrativo</option>
+					<option th:each="administrativo : ${administrativo}"
+						th:value="${administrativo.idAdministrativo}"
+						th:text="|${administrativo.nombre}|"></option>
 				</select>
-			</div>
 		</div>
 	</th:block>
 	
