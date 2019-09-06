@@ -22,6 +22,8 @@ public class InfraccionDetalleCriterioBusqueda {
 	private int tipoEstado;
 	private String descripcion;
 	private String tipoPeriodo;
+	
+	private int areaEstudio;
 	//fechas
 	private String fechaInicio;
 	private String fechaFin;
