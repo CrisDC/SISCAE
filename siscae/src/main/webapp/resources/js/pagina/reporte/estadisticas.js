@@ -921,7 +921,11 @@ $(document).ready(function() {
 											dataObject.push(ayuda);
 											console.log(ayuda);
 											console.log(dataObject);
-											$local.$tablaResultadosPrestamo.DataTable().clear().destroy();
+
+											if($local.tablaResultadosPrestamo) { 
+												$local.tablaResultadosPrestamo.destroy(); 
+												$local.$tablaResultadosPrestamo.empty(); 
+											}
 											$local.tablaResultadosPrestamo = $local.$tablaResultadosPrestamo.DataTable(dataObject[0]);
 				
 											//Dibujando tabla
@@ -1066,7 +1070,10 @@ $(document).ready(function() {
 											dataObject.push(ayuda);
 											console.log(ayuda);
 											console.log(dataObject);
-											$local.tablaResultadosPrestamo.destroy();
+											if($local.tablaResultadosPrestamo) { 
+												$local.tablaResultadosPrestamo.destroy(); 
+												$local.$tablaResultadosPrestamo.empty(); 
+											}
 											$local.tablaResultadosPrestamo = $local.$tablaResultadosPrestamo.DataTable(dataObject[0]);
 				
 											//Dibujando tabla
@@ -1187,7 +1194,10 @@ $(document).ready(function() {
 										dataObject.push(ayuda);
 										console.log(ayuda);
 										console.log(dataObject);
-										$local.tablaResultadosPrestamo.destroy();
+										if($local.tablaResultadosPrestamo) { 
+											$local.tablaResultadosPrestamo.destroy(); 
+											$local.$tablaResultadosPrestamo.empty(); 
+										}
 										$local.tablaResultadosPrestamo = $local.$tablaResultadosPrestamo.DataTable(dataObject[0]);
 			
 										//Dibujando tabla
@@ -1396,7 +1406,7 @@ $(document).ready(function() {
 											for(i=0;i<Object.keys(d[0]).length;i++){
 												var ej = new Object();
 												if(i==0){
-													//ej['title'] = "Periodo";
+													ej['title'] = "Escuela";
 													ej['data']  = Object.keys(d[0])[i];
 												}else{
 													ej['title'] = Object.keys(d[0])[i];;
@@ -1420,7 +1430,10 @@ $(document).ready(function() {
 											dataObject.push(ayuda);
 											console.log(ayuda);
 											console.log(dataObject);
-											$local.tablaResultadosPrestamo.destroy();
+											if($local.tablaResultadosPrestamo) { 
+												$local.tablaResultadosPrestamo.destroy(); 
+												$local.$tablaResultadosPrestamo.empty(); 
+											}
 											$local.tablaResultadosPrestamo = $local.$tablaResultadosPrestamo.DataTable(dataObject[0]);
 				
 											//Dibujando tabla
@@ -1541,7 +1554,7 @@ $(document).ready(function() {
 											for(i=0;i<Object.keys(d[0]).length;i++){
 												var ej = new Object();
 												if(i==0){
-													//ej['title'] = "Periodo";
+													ej['title'] = "Area Estudio";
 													ej['data']  = Object.keys(d[0])[i];
 												}else{
 													ej['title'] = Object.keys(d[0])[i];;
@@ -1565,7 +1578,10 @@ $(document).ready(function() {
 											dataObject.push(ayuda);
 											console.log(ayuda);
 											console.log(dataObject);
-											$local.tablaResultadosPrestamo.destroy();
+											if($local.tablaResultadosPrestamo) { 
+												$local.tablaResultadosPrestamo.destroy(); 
+												$local.$tablaResultadosPrestamo.empty(); 
+											}
 											$local.tablaResultadosPrestamo = $local.$tablaResultadosPrestamo.DataTable(dataObject[0]);
 				
 											//Dibujando tabla
@@ -1661,7 +1677,7 @@ $(document).ready(function() {
 										for(i=0;i<Object.keys(d[0]).length;i++){
 											var ej = new Object();
 											if(i==0){
-												//ej['title'] = "Periodo";
+												ej['title'] = "Tipo Solicitante";
 												ej['data']  = Object.keys(d[0])[i];
 											}else{
 												ej['title'] = Object.keys(d[0])[i];;
@@ -1685,7 +1701,10 @@ $(document).ready(function() {
 										dataObject.push(ayuda);
 										console.log(ayuda);
 										console.log(dataObject);
-										$local.tablaResultadosPrestamo.destroy();
+										if($local.tablaResultadosPrestamo) { 
+											$local.tablaResultadosPrestamo.destroy(); 
+											$local.$tablaResultadosPrestamo.empty(); 
+										}
 										$local.tablaResultadosPrestamo = $local.$tablaResultadosPrestamo.DataTable(dataObject[0]);
 			
 										//Dibujando tabla
@@ -1806,7 +1825,7 @@ $(document).ready(function() {
 											for(i=0;i<Object.keys(d[0]).length;i++){
 												var ej = new Object();
 												if(i==0){
-													//ej['title'] = "Periodo";
+													ej['title'] = "Recurso";
 													ej['data']  = Object.keys(d[0])[i];
 												}else{
 													ej['title'] = Object.keys(d[0])[i];;
@@ -1830,7 +1849,10 @@ $(document).ready(function() {
 											dataObject.push(ayuda);
 											console.log(ayuda);
 											console.log(dataObject);
-											$local.tablaResultadosPrestamo.destroy();
+											if($local.tablaResultadosPrestamo) { 
+												$local.tablaResultadosPrestamo.destroy(); 
+												$local.$tablaResultadosPrestamo.empty(); 
+											}
 											$local.tablaResultadosPrestamo = $local.$tablaResultadosPrestamo.DataTable(dataObject[0]);
 				
 											//Dibujando tabla
@@ -2132,7 +2154,10 @@ $(document).ready(function() {
 										dataObject.push(ayuda);
 										console.log(ayuda);
 										console.log(dataObject);
-										$local.tablaResultadosInfraccion.destroy();
+										if($local.tablaResultadosInfraccion) { 
+											$local.tablaResultadosInfraccion.destroy(); 
+											$local.$tablaResultadosInfraccion.empty(); 
+										}
 										$local.tablaResultadosInfraccion = $local.$tablaResultadosInfraccion.DataTable(dataObject[0]);
 			
 										//Dibujando tabla
@@ -2277,7 +2302,10 @@ $(document).ready(function() {
 										dataObject.push(ayuda);
 										console.log(ayuda);
 										console.log(dataObject);
-										$local.tablaResultadosInfraccion.destroy();
+										if($local.tablaResultadosInfraccion) { 
+											$local.tablaResultadosInfraccion.destroy(); 
+											$local.$tablaResultadosInfraccion.empty(); 
+										}
 										$local.tablaResultadosInfraccion = $local.$tablaResultadosInfraccion.DataTable(dataObject[0]);
 			
 										//Dibujando tabla
@@ -2401,7 +2429,10 @@ $(document).ready(function() {
 									dataObject.push(ayuda);
 									console.log(ayuda);
 									console.log(dataObject);
-									$local.tablaResultadosInfraccion.destroy();
+									if($local.tablaResultadosInfraccion) { 
+										$local.tablaResultadosInfraccion.destroy(); 
+										$local.$tablaResultadosInfraccion.empty(); 
+									}
 									$local.tablaResultadosInfraccion = $local.$tablaResultadosInfraccion.DataTable(dataObject[0]);
 		
 									//Dibujando tabla
@@ -2544,7 +2575,10 @@ $(document).ready(function() {
 										dataObject.push(ayuda);
 										console.log(ayuda);
 										console.log(dataObject);
-										$local.tablaResultadosInfraccion.destroy();
+										if($local.tablaResultadosInfraccion) { 
+											$local.tablaResultadosInfraccion.destroy(); 
+											$local.$tablaResultadosInfraccion.empty(); 
+										}
 										$local.tablaResultadosInfraccion = $local.$tablaResultadosInfraccion.DataTable(dataObject[0]);
 			
 										//Dibujando tabla
@@ -2749,7 +2783,7 @@ $(document).ready(function() {
 										for(i=0;i<Object.keys(d[0]).length;i++){
 											var ej = new Object();
 											if(i==0){
-												//ej['title'] = "Periodo";
+												ej['title'] = "Escuela";
 												ej['data']  = Object.keys(d[0])[i];
 											}else{
 												ej['title'] = Object.keys(d[0])[i];;
@@ -2773,7 +2807,10 @@ $(document).ready(function() {
 										dataObject.push(ayuda);
 										console.log(ayuda);
 										console.log(dataObject);
-										$local.tablaResultadosInfraccion.destroy();
+										if($local.tablaResultadosInfraccion) { 
+											$local.tablaResultadosInfraccion.destroy(); 
+											$local.$tablaResultadosInfraccion.empty(); 
+										}
 										$local.tablaResultadosInfraccion = $local.$tablaResultadosInfraccion.DataTable(dataObject[0]);
 			
 										//Dibujando tabla
@@ -2894,7 +2931,7 @@ $(document).ready(function() {
 										for(i=0;i<Object.keys(d[0]).length;i++){
 											var ej = new Object();
 											if(i==0){
-												//ej['title'] = "Periodo";
+												ej['title'] = "Area Estudio";
 												ej['data']  = Object.keys(d[0])[i];
 											}else{
 												ej['title'] = Object.keys(d[0])[i];;
@@ -2918,7 +2955,10 @@ $(document).ready(function() {
 										dataObject.push(ayuda);
 										console.log(ayuda);
 										console.log(dataObject);
-										$local.tablaResultadosInfraccion.destroy();
+										if($local.tablaResultadosInfraccion) { 
+											$local.tablaResultadosInfraccion.destroy(); 
+											$local.$tablaResultadosInfraccion.empty(); 
+										}
 										$local.tablaResultadosInfraccion = $local.$tablaResultadosInfraccion.DataTable(dataObject[0]);
 			
 										//Dibujando tabla
@@ -3018,7 +3058,7 @@ $(document).ready(function() {
 									for(i=0;i<Object.keys(d[0]).length;i++){
 										var ej = new Object();
 										if(i==0){
-											//ej['title'] = "Periodo";
+											ej['title'] = "Tipo Solicitante";
 											ej['data']  = Object.keys(d[0])[i];
 										}else{
 											ej['title'] = Object.keys(d[0])[i];;
@@ -3042,7 +3082,10 @@ $(document).ready(function() {
 									dataObject.push(ayuda);
 									console.log(ayuda);
 									console.log(dataObject);
-									$local.tablaResultadosInfraccion.destroy();
+									if($local.tablaResultadosInfraccion) { 
+										$local.tablaResultadosInfraccion.destroy(); 
+										$local.$tablaResultadosInfraccion.empty(); 
+									}
 									$local.tablaResultadosInfraccion = $local.$tablaResultadosInfraccion.DataTable(dataObject[0]);
 		
 									//Dibujando tabla
@@ -3161,7 +3204,7 @@ $(document).ready(function() {
 										for(i=0;i<Object.keys(d[0]).length;i++){
 											var ej = new Object();
 											if(i==0){
-												//ej['title'] = "Periodo";
+												ej['title'] = "Tipo Infraccion";
 												ej['data']  = Object.keys(d[0])[i];
 											}else{
 												ej['title'] = Object.keys(d[0])[i];;
@@ -3185,7 +3228,10 @@ $(document).ready(function() {
 										dataObject.push(ayuda);
 										console.log(ayuda);
 										console.log(dataObject);
-										$local.tablaResultadosInfraccion.destroy();
+										if($local.tablaResultadosInfraccion) { 
+											$local.tablaResultadosInfraccion.destroy(); 
+											$local.$tablaResultadosInfraccion.empty(); 
+										}
 										$local.tablaResultadosInfraccion = $local.$tablaResultadosInfraccion.DataTable(dataObject[0]);
 			
 										//Dibujando tabla
@@ -3528,7 +3574,6 @@ $(document).ready(function() {
 	}
 	
 	function eliminarVacios(jsonx){
-		 console.log(jsonx);
 	    for (var clave in jsonx) {
 	      if(typeof jsonx[clave] == 'number'){
 	        if(jsonx[clave] == 0){
