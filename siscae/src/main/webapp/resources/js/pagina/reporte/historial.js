@@ -583,6 +583,8 @@ $("#xd").find(".comun").on("click", function(){
 		criterio.numeroDocumento = $local.$numDoc.val();
 		criterio.selectTipoInfraccion = $local.$selectTipoInfraccion.val();
 		criterio.selectTipoEstado = $local.$selectTipoEstado.val();
+        criterio.horaInicio = criterio.horaInicio.toString();
+		criterio.horaFin = criterio.horaFin.toString();
 		
 		
 		//Obtener datos del periodo

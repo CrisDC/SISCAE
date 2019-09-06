@@ -89,8 +89,8 @@
 			    	
 			    </if>
 			    
-			    <if test="(horaInicio != '' and horaInicio != null) and horaFin != '' and horaFin != null) ">
-			    		AND (mpr.t_hora_entrada between #{(horaInicio} and #{horaFin})
+			    <if test="(horaInicio != '' and horaInicio != null) and (horaFin != '' and horaFin != null) ">
+			    		AND (mpr.t_hora_entrada between #{horaInicio} and #{horaFin})
 			    </if>
 			    
 			  </where>
