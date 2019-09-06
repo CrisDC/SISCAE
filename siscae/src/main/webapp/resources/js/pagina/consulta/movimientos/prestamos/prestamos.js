@@ -70,8 +70,31 @@ $(document).ready(function(){
     	    			},
     	    			success : function(response) {
     	    				console.log(recurso);
-    	    				if(recurso.tipoRecurso=="CABINA"){
+    	    				if(recurso.tipoRecurso=="MESA"){
     	    					console.log("Ella no te ama");
+    	    					let idRecurso = recurso.idRecurso;
+    	    					let cadenaHtml = '';
+    	    					let id = $('#recurso'+idRecurso+' button').attr('id');
+    	    					let keyRecurso = $('#recurso'+idRecurso+' button').attr('key');
+    	    					let prestado = $('#recurso'+idRecurso+' button').attr('prestado') - 1;
+    	    					let libre;
+    	    					let max = $('#recurso'+idRecurso+' button').attr('max');
+    	    					if(prestado ==1){
+      	    					  libre = prestado;
+      	    					}else{
+      	    					  libre = max - prestado  ;
+      	    					}
+    	    					
+    	    					cadenaHtml += '<img src ="/siscae/resources/images/mesa.png" width="100" height="100"> ';
+    	    					cadenaHtml += '<p class="numero" style=" color: #3C4043 !important;" >'+id+'</p>';
+    	    					cadenaHtml += '<p style=" color: #6F7375 !important;" >'+prestado+' / '+max+' </p>';
+    	    					cadenaHtml += '<p style=" color: #6F7375 !important;" >Libres: '+libre+'</p>';
+    	    					cadenaHtml += '<p class="disponible" >DISPONIBLE</p>';
+    	    					cadenaHtml += '<button id="'+id+'" key="'+keyRecurso+'" max="'+max+'" prestado="'+prestado+'" type="button" class="btn btn-info solicitar" data-toggle="modal" data-target="#grupalesModal">SOLICITAR</button>'
+    	    					//Se modifica el html
+                				$('#recurso'+idRecurso).html(cadenaHtml);
+    	    				}
+    	    				else if(recurso.tipoRecurso=="CABINA"){
     	    					let idRecurso = recurso.idRecurso;
     	    					let cadenaHtml = '';
     	    					let id = $('#recurso'+idRecurso+' button').attr('id');
@@ -86,7 +109,7 @@ $(document).ready(function(){
     	    					let max = $('#recurso'+idRecurso+' button').attr('max');
     	    					
     	    					cadenaHtml += '<img src ="/siscae/resources/images/pantalla.png" width="40" height="40"> ';
-    	    					cadenaHtml += '<p style=" color: #3C4043 !important;" >'+id+'</p>';
+    	    					cadenaHtml += '<p class="numero" style=" color: #3C4043 !important;" >'+id+'</p>';
     	    					cadenaHtml += '<p style=" color: #6F7375 !important;" >'+prestado+' / '+max+' </p>';
     	    					cadenaHtml += '<p style=" color: #6F7375 !important;" >Libres: '+libre+'</p>';
     	    					cadenaHtml += '<p class="disponible" >DISPONIBLE</p>';
@@ -557,10 +580,11 @@ function enviarDatosATabla(){
 
 //Cuando se cierre el modal debe limpiarse todo
 $('#grupalesModal').on('hidden.bs.modal', function (e) {
-	event.preventDefault();
+	//event.preventDefault();
 	$('#cuerpoTablaGrupal').html('<tr></tr>');
     espacioDisponible =  2;
     $('#espacioDisponibleLabel').text('Espacio disponible: '+espacioDisponible);
+    
 })
 
 
