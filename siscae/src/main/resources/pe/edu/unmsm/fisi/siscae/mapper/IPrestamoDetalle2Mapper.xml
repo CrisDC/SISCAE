@@ -40,12 +40,12 @@
 			        AND re.n_id_recurso = #{recurso}
 			    </if>
 			    
-			   <if test="areaEstudio != -1">
+			   <if test="areaEstudio != -1 and areaEstudio != 0">
 			        AND mae.n_id_area_estudio = #{areaEstudio}
 			   
 			     </if>		    
 			    <if test="numeroDocumento != 0 and numeroDocumento != '' ">
-			        AND mp.v_num_documento = #{numeroDocumento}
+			        AND (mp.v_num_documento = #{numeroDocumento} OR mp.v_num_documento =F_CODIGO_PERSONA(#{numeroDocumento}))
 			    </if>
 			    <if test="tipoPeriodo=='DIA'">
 				    <if test="( fechaInicio != null or fechaInicio !='') and ( fechaFin !=null or fechaFin !='')">

@@ -45,6 +45,7 @@ $(document).ready(function() {
 		
 		//inputs de la pagina (select, inputs)
 		$tipoPersona : $('#tipoPersona'),
+		$tipoPersonaI : $('#tipoPersonaI'),
 		$numDoc : $('#numeroDocumento'),
 		$numDocp : $('#numeroDocumentop'),
 		$selectTipoInfraccion : $('#tipoInfraccion'),
@@ -689,7 +690,7 @@ $("#xd").find(".comun").on("click", function(){
 	var obtenerCriterioI = function (){
 						
 		var criterio = $formInfracciones.serializeJSON();
-		criterio.tipoPersona = $local.$tipoPersona.val();
+		criterio.tipoPersona = $local.$tipoPersonaI.val();
 		criterio.numeroDocumento = $local.$numDoc.val();
 		criterio.selectTipoInfraccion = $local.$selectTipoInfraccion.val();
 		criterio.selectTipoEstado = $local.$selectTipoEstado.val();

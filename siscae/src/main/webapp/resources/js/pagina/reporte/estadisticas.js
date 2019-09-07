@@ -1097,7 +1097,7 @@ $(document).ready(function() {
 									//Generando Leyenda
 									var resultGraph = [];
 									if(arr==""){
-										var arraJSONX = response[0].detalle;
+										var arrayJSONX = response[0].detalle;
 										arr = arrayJSONX;
 									}else{
 										
