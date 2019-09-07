@@ -43,7 +43,7 @@ $(document).ready(function() {
 		}
 	  },
 	  minimumInputLength: 1,
-	  placeholder : "Busque a la persona",
+	  placeholder : "Ingrese Documento o Nombres",
 	  language : {
 		noResults : function() {
 			return "No se encontró resultados.";

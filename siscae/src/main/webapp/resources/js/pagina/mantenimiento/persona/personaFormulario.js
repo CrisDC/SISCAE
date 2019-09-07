@@ -25,7 +25,7 @@ $(document).ready(function() {
 				notOnlySpace : true,
 				rangelength : [ 2, 45 ]
 			},
-			sexo : {
+			/*sexo : {
 				required : true,
 				notOnlySpace : true,
 				rangelength : [ 0, 10 ]
@@ -34,14 +34,14 @@ $(document).ready(function() {
 				required : true,
 				notOnlySpace : true,
 				rangelength : [ 7, 20 ]
-			},
+			},*/
 			idTipoDocumento : {
 				required : true,
 				number:true
-			},
+			}/*,
 			fechaNac : {
 				required : true,
-			}
+			}*/
 		},
 		messages : {
 			idAlumno : {
@@ -68,7 +68,7 @@ $(document).ready(function() {
 				notOnlySpace : "El Apellido Materno no puede contener solo espacios en blanco.",
 				rangelength : "El Apellido Materno debe contener entre 2 y 45 car&aacute;cteres."
 			},
-			sexo : {
+			/*sexo : {
 				required : "Ingrese un Sexo.",
 				notOnlySpace : "El sexo no puede contener solo espacios en blanco.",
 				rangelength : "El sexo debe contener entre 2 y 45 car&aacute;cteres."
@@ -77,14 +77,14 @@ $(document).ready(function() {
 				required : "Ingrese un número telefónico.",
 				notOnlySpace : "El número telefónico no puede contener solo espacios en blanco.",
 				rangelength : "El número telefónico debe contener entre 7 y 20 car&aacute;cteres."
-			},
+			},*/
 			idTipoDocumento : {
 				required : "Ingrese un Tipo de documento",
 				number:"El Id del Tipo de documento  debe contener solo n&uacute;meros.",
-			},
+			}/*,
 			fechaNac: {
 				required : "Ingrese la fecha de nacimiento",
-			}
+			}*/
 		}
 	});
 

@@ -1,5 +1,4 @@
 $(document).ready(function() {
-	console.log("Gaaa");
 	var csrf = $('meta[name=_csrf]').attr("content");
 	var $local = {
 			$modalUsuario : $("#modalUsuario"),

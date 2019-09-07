@@ -367,7 +367,7 @@ $(document).ready(function() {
 		"dom": 'Blfrtip',
 		"buttons": [{
 			extend: 'excelHtml5',
-            text: 'Exportar Excel',
+            text: '<button  class="btn btn-success m-l-3" type="button"><i class="fa fa-clean"></i> Exportar Excel </button>',
             title:'Historial de Prestamos'
 		}]
 	});

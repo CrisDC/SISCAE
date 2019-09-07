@@ -1,4 +1,5 @@
 $(document).ready(function() {
+	var $max_tamano_error = 200;
 	var $local = {
 		$tablaMantenimiento : $("#tablaMantenimiento"),
 		tablaMantenimiento : "",
@@ -40,7 +41,7 @@ $(document).ready(function() {
 		}
 	  },
 	  minimumInputLength: 1,
-	  placeholder : "Busque a la persona",
+	  placeholder : "Ingrese Documento o Nombres",
 	  language : {
 		noResults : function() {
 			return "No se encontró resultados.";
@@ -177,7 +178,7 @@ $(document).ready(function() {
 					$funcionUtil.mostrarMensajeDeError(response.responseJSON, $formMantenimiento);
 				},
 				500 : function(response) {
-					response.responseText.length > $max_tamaño_error ? 
+					response.responseText.length > $max_tamano_error ? 
 							swal("Error", "La operación no pudo realizarse con exito.", "warning") : 
 							swal("Error", response.responseText, "warning");
 				}
@@ -222,7 +223,7 @@ $(document).ready(function() {
 					$funcionUtil.mostrarMensajeDeError(response.responseJSON, $formMantenimiento);
 				},
 				500 : function(response) {
-					response.responseText.length > $max_tamaño_error ? 
+					response.responseText.length > $max_tamano_error ? 
 							swal("Error", "La operación no pudo realizarse con exito.", "warning") : 
 							swal("Error", response.responseText, "warning");
 				}
@@ -271,13 +272,13 @@ $(document).ready(function() {
 									statusCode : {
 										400 : function(response) {
 											confirmar.close();
-											response.responseText.length > $max_tamaño_error ? 
+											response.responseText.length > $max_tamano_error ? 
 													swal("Error", "La operación no pudo realizarse con exito.", "warning") : 
 													swal("Error", response.responseText, "warning");
 										},
 										500 : function(response) {
 											confirmar.close();
-											response.responseText.length > $max_tamaño_error ? 
+											response.responseText.length > $max_tamano_error ? 
 													swal("Error", "La operación no pudo realizarse con exito.", "warning") : 
 													swal("Error", response.responseText, "warning");
 											

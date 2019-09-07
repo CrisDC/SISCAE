@@ -527,7 +527,7 @@
 					<option value="" selected="selected">Seleccione el tipo de
 						recurso</option>
 					<option th:each="tipoRecursos : ${tipoRecursos}"
-						th:value="${tipoRecursos.idTipoRecurso}"
+						th:if="${tipoRecursos.usable == 'SI'}"th:value="${tipoRecursos.idTipoRecurso}"
 						th:text="|${tipoRecursos.nombre}|"></option>
 				</select>
 			</div>

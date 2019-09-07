@@ -1,5 +1,5 @@
 $(document).ready(function() {
-	var $max_tamaño_error = 200;
+	var $max_tamano_error = 200;
 	var $local = {
 		$tablaMantenimiento : $("#tablaMantenimiento"),
 		tablaMantenimiento : "",
@@ -141,12 +141,12 @@ $(document).ready(function() {
 			},
 			statusCode : {
 				400 : function(response) {
-					response.responseText.length > $max_tamaño_error ? 
+					response.responseText.length > $max_tamano_error ? 
 							swal("Error", "La operación no pudo realizarse con exito.", "warning") : 
 							swal("Error", response.responseText, "warning");
 				},
 				500 : function(response) {
-					response.responseText.length > $max_tamaño_error ? 
+					response.responseText.length > $max_tamano_error ? 
 							swal("Error", "La operación no pudo realizarse con exito.", "warning") : 
 							swal("Error", response.responseText, "warning");
 				}
@@ -200,12 +200,12 @@ $(document).ready(function() {
 			},
 			statusCode : {
 				400 : function(response) {
-					response.responseText.length > $max_tamaño_error ? 
+					response.responseText.length > $max_tamano_error ? 
 							swal("Error", "La operación no pudo realizarse con exito.", "warning") : 
 							swal("Error", response.responseText, "warning");
 				},
 				500 : function(response) {
-					response.responseText.length > $max_tamaño_error ? 
+					response.responseText.length > $max_tamano_error ? 
 							swal("Error", "La operación no pudo realizarse con exito.", "warning") : 
 							swal("Error", response.responseText, "warning");
 				}
@@ -256,13 +256,13 @@ $(document).ready(function() {
 									statusCode : {
 										400 : function(response) {
 											confirmar.close();
-											response.responseText.length > $max_tamaño_error ? 
+											response.responseText.length > $max_tamano_error ? 
 													swal("Error", "La operación no pudo realizarse con exito.", "warning") : 
 													swal("Error", response.responseText, "warning");
 										},
 										500 : function(response) {
 											confirmar.close();
-											response.responseText.length > $max_tamaño_error ? 
+											response.responseText.length > $max_tamano_error ? 
 													swal("Error", "La operación no pudo realizarse con exito.", "warning") : 
 													swal("Error", response.responseText, "warning");
 											
