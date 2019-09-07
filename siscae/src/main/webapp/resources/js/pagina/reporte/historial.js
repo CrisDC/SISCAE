@@ -461,7 +461,7 @@ $("#xd").find(".comun").on("click", function(){
 	
 	//Formulario
 	$formInfracciones = $("#formInfracciones");
-	$formPrestamos = $("#formPrestamos");
+	$formPrestamos = $("#formPrestamos1");
 	$formMantenimiento = $("#formMantenimiento");
 	
 	
@@ -726,7 +726,7 @@ $("#xd").find(".comun").on("click", function(){
 	
 	var obtenerCriterioP = function (){
 		
-		if(!$('#formPrestamos1').valid()){
+		if(!$formPrestamos.valid()){
 			console.log("ggaaa");
 			return;
 		}
@@ -930,24 +930,77 @@ $('#buscarP').on('click', function() {
 	
 	
 $local.$limpiar.on('click', function() {
-		
-	var f ={
-			"numeroDocumento":"",
-			"tipoPersona":-1,
-			"tipoInfraccion":-1,
-			"tipoEstado":-1,
-			"tipoPeriodo":-1
-			
+	if($local.$tipoHistorial=="P"){
+		var f ={
+				"numeroDocumento":"",
+				"tipoPersona":-1,
+				"tipoInfraccion":-1,
+				"tipoEstado":-1,
+				"tipoPeriodo":-1,
+				"tipoRecurso":-1,
+				"recurso":-1,
+				"areaEstudio":-1
+		}
+		$funcionUtil.llenarFormulario(f,$formPrestamos);
+		$local.$divPeriodoDiap.addClass("hidden");
+		$local.$divSemanaIniciop.addClass("hidden");
+		$local.$divSemanaFinp.addClass("hidden");
+		$local.$divMesIniciop.addClass("hidden");
+		$local.$divMesFinp.addClass("hidden");
+		$local.$divAnioIniciop.addClass("hidden");
+		$local.$divAnioFinp.addClass("hidden");
+		$local.tblPrestamos.clear().draw();	
+	}else{
+		console.log("funciona");
+		var f ={
+				"numeroDocumento":"",
+				"tipoPersona":-1,
+				"tipoInfraccion":-1,
+				"tipoEstado":-1,
+				"tipoPeriodo":-1,
+				"areaEstudio":-1,
+				"tipoEstado":-1
+				
+		}
+		$funcionUtil.llenarFormulario(f,$formInfracciones);
+		$local.$divPeriodoDia.addClass("hidden");
+		$local.$divSemanaInicio.addClass("hidden");
+		$local.$divSemanaFin.addClass("hidden");
+		$local.$divMesInicio.addClass("hidden");
+		$local.$divMesFin.addClass("hidden");
+		$local.$divAnioInicio.addClass("hidden");
+		$local.$divAnioFin.addClass("hidden");
+		$local.tblInfracciones.clear().draw();
 	}
-	$funcionUtil.llenarFormulario(f,$formInfracciones);
-	$local.$divPeriodoDia.addClass("hidden");
-	$local.$divSemanaInicio.addClass("hidden");
-	$local.$divSemanaFin.addClass("hidden");
-	$local.$divMesInicio.addClass("hidden");
-	$local.$divMesFin.addClass("hidden");
-	$local.$divAnioInicio.addClass("hidden");
-	$local.$divAnioFin.addClass("hidden");
-	$local.tblConsulta.clear().draw();
+		
+	
+	});
+
+$('#limpiari').on('click', function() {
+	
+		console.log("funciona");
+		var f ={
+				"numeroDocumento":"",
+				"tipoPersona":-1,
+				"tipoInfraccion":-1,
+				"tipoEstado":-1,
+				"tipoPeriodo":-1,
+				"areaEstudio":-1,
+				"tipoEstado":-1
+				
+		}
+		$funcionUtil.llenarFormulario(f,$formInfracciones);
+		$local.$divPeriodoDia.addClass("hidden");
+		$local.$divSemanaInicio.addClass("hidden");
+		$local.$divSemanaFin.addClass("hidden");
+		$local.$divMesInicio.addClass("hidden");
+		$local.$divMesFin.addClass("hidden");
+		$local.$divAnioInicio.addClass("hidden");
+		$local.$divAnioFin.addClass("hidden");
+		$local.tblInfracciones.clear().draw();
+	
+		
+	
 	});
 	
 

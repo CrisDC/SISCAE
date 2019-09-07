@@ -1,5 +1,5 @@
 $(document).ready(function() {
-	$('#formPrestamos1').validate({	
+	$formPrestamos.validate({	
 		rules : {
 			areaEstudio1 : {
 				required : true
