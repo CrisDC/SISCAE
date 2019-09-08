@@ -53,6 +53,7 @@ $(document).ready(function() {
 		$selectTipoInfraccionm : $('#tipoInfraccionm'),
 		$selectTipoEstadom : $('#tipoEstadom'),
 		$selectAreaEstudio : $('#selectareaEstudio'),
+		$selectAreaEstudioI : $('#selectareaEstudioI'),
 		$selectTipoRecurso : $('#ptipoRecurso'),
 		$selectRecurso : $('#precurso'),
 		$cTr :0,
@@ -783,8 +784,15 @@ $("#xd").find(".comun").on("click", function(){
 	var contador = function(){
 		
 		var cont = 0;
+		console.log($local.$tipoPersonaI.val());
+		console.log($local.$selectAreaEstudioI.val());
+		console.log($local.$numDoc.val());
+		console.log($local.$selectTipoInfraccion.val());
+		console.log($local.$selectTipoEstado.val());
+		console.log($local.$selectPeriodo.val());
 		
-		if($local.$tipoPersona.val()==-1 )	cont++;
+		if($local.$tipoPersonaI.val()==-1 )	cont++;
+		if($local.$selectAreaEstudioI.val()==-1)	cont++;
 		if($local.$numDoc.val()=='' )	cont++;
 		if($local.$selectTipoInfraccion.val()==-1 )	cont++;
 		if($local.$selectTipoEstado.val()==-1 )	cont++;
@@ -808,7 +816,7 @@ $("#xd").find(".comun").on("click", function(){
 				if( $local.$anioInicio.val() =='' || $local.$anioFin.val() =='') cont++;
 			}
 		}
-						
+			
 		return cont;
 		
 		
@@ -819,7 +827,7 @@ $("#xd").find(".comun").on("click", function(){
 		var criterioB = obtenerCriterioI();
 		var c = contador();
 		console.log(c);
-		if(c ==5){
+		if(c==6){
 			swal("No se pudo realizar la búsqueda", "No ingreso ningún valor", "error");
 		}else{
 			$.ajax({
@@ -862,7 +870,7 @@ $("#xd").find(".comun").on("click", function(){
 		var criterioB = obtenerCriterioI();
 		var c = contador();
 		console.log(c);
-		if(c ==5){
+		if(c ==6){
 			swal("No se pudo realizar la búsqueda", "No ingreso ningún valor", "error");
 		}else{
 			$.ajax({
