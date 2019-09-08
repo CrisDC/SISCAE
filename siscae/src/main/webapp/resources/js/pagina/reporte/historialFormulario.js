@@ -1,13 +1,16 @@
 $(document).ready(function() {
+	console.log("formulariogaaa3");
 	$formPrestamos.validate({	
 		rules : {
-			areaEstudio1 : {
-				required : true
+			areaEstudio : {
+				required : true,
+				number : true
 			}
 			 },
 		messages : {
-			areaEstudio1 : {
+			areaEstudio : {
 				required : "Selecciona un area de estudio",
+				number:"El Id del area de Estudio  debe contener solo n&uacute;meros.",
 			}
 		},
 		highlight : function(element) {
@@ -27,5 +30,7 @@ $(document).ready(function() {
 				error.insertAfter(element);
 			}
 		}
+
+		
 	});
 });

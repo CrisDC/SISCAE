@@ -89,15 +89,15 @@
 													<div class="col-sm" id="divTipo">
 														<div class="form-group m-b-3">
 															<label class="m-r-15">Area de Estudio</label>
-															<div class="input-group">
+															
 																<select id="selectareaEstudio" name="areaEstudio"
 																	class="form-control select2 elemento-modificable">
-																	<option value="-1" 
+																	<option value="" 
 																		selected="selected">Seleccione un Area de Estudio </option>
 																	<option th:each="area : ${areasEstudio}" th:value="${area.idAreaEstudio}"
 																	th:text="|${area.nombre}|"></option>
 																</select>
-															</div>
+															
 														</div>
 													</div>
 													<div class="col-sm" id="pdivTipoRecurso">

@@ -110,7 +110,7 @@ $(document).ready(function() {
 		notificarException : function(mensaje, icon, titulo, tipo) {
 			$.notify({
 				icon : "fa " + icon,
-				title : " <strong><li style='color:black'>" + titulo + ":</li></strong>",
+				title : " <strong>" + titulo + ":</strong>",
 				message : "<p style='color:black'>" + mensaje + "</p>"
 			}, {
 				delay : 6000,

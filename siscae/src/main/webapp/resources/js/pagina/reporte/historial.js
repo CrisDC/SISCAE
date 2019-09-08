@@ -246,11 +246,20 @@ $(document).ready(function() {
 			"title" : "Fecha"
 		}],
 		"dom":'Blfrtip',
-		"buttons": [{
-			extend: 'excelHtml5',
-            text: 'Exportar Excel',
-            title:'Historial de Infracciones'
-		}]
+		"buttons":{
+			"dom":{
+				"button":{
+					"tag":"button",
+					"className":"btn btn-success m-l-3"
+				}
+			},
+			"buttons": [{
+				extend: 'excelHtml5',
+				text :'<i class="fa fa-file-excel-o"> Exportar Excel </i>',
+	            title:'Historial de Infracciones',
+	            autoFilter: true,
+			}]
+		}
 		
 	});
 	
@@ -365,11 +374,21 @@ $(document).ready(function() {
 			"title" : "Fecha"
 		} ],
 		"dom": 'Blfrtip',
-		"buttons": [{
-			extend: 'excelHtml5',
-            text: '<button  class="btn btn-success m-l-3" type="button"><i class="fa fa-clean"></i> Exportar Excel </button>',
-            title:'Historial de Prestamos'
-		}]
+		"buttons":{
+			"dom":{
+				"button":{
+					"tag":"button",
+					"className":"btn btn-success m-l-3"
+				}
+			},
+			"buttons": [{
+				extend: 'excelHtml5',
+				text :'<i class="fa fa-file-excel-o"> Exportar Excel </i>',
+	            title:'Historial de Prestamos',
+	            autoFilter: true,
+			}]
+		}
+		
 	});
 	
 $local.$tblPrestamos.find("thead").on('keyup', 'input', function() {
@@ -726,11 +745,6 @@ $("#xd").find(".comun").on("click", function(){
 	
 	var obtenerCriterioP = function (){
 		
-		if(!$formPrestamos.valid()){
-			console.log("ggaaa");
-			return;
-		}
-
 		var criterio = $('#formPrestamos1').serializeJSON();
 		criterio.tipoPersona = $local.$tipoPersona.val();
 		criterio.numeroDocumento = $local.$numDocp.val();
@@ -741,29 +755,28 @@ $("#xd").find(".comun").on("click", function(){
 		criterio.horaFin = criterio.horaFin.toString();
 
 		//Obtener datos del periodo
-		if($local.$selectPeriodo.val() == 'DIA'){
+		if($local.$selectPeriodop.val() == 'DIA'){
 			var rangoFechaBusqueda = $funcionUtil.obtenerFechasDateRangePicker($local.$fechaPrestamop);
 			criterio.fechaInicio = rangoFechaBusqueda.fechaInicio;
 			criterio.fechaFin = rangoFechaBusqueda.fechaFin;
 		}
-		if($local.$selectPeriodo.val() == 'SEMANA'){
+		if($local.$selectPeriodop.val() == 'SEMANA'){
 			criterio.semanaInicio = $funcionUtil.obtenerSemanaInputWeek($local.$semanaIniciop);
 			criterio.anioInicio = $funcionUtil.obtenerAnioInputWeek($local.$semanaIniciop);
 			criterio.semanaFin = $funcionUtil.obtenerSemanaInputWeek($local.$semanaFinp);
 			criterio.anioFin = $funcionUtil.obtenerAnioInputWeek($local.$semanaFinp);
 		}
-		if($local.$selectPeriodo.val() == 'MES'){
+		if($local.$selectPeriodop.val() == 'MES'){
 			criterio.mesInicio = $funcionUtil.obtenerMesInputMonth($local.$mesIniciop);
 			criterio.anioInicio = $funcionUtil.obtenerAnioInputMonth($local.$mesIniciop);
 			criterio.mesFin = $funcionUtil.obtenerMesInputMonth($local.$mesFinp);
 			criterio.anioFin = $funcionUtil.obtenerAnioInputMonth($local.$mesFinp);
 		}
-		if($local.$selectPeriodo.val() == 'ANIO'){
+		if($local.$selectPeriodop.val() == 'ANIO'){
 			criterio.anioInicio = $local.$anioIniciop.val();
 			criterio.anioFin = $local.$anioFinp.val();
 		}
 		criterio.tipoPeriodo = $local.$selectPeriodop.val();
-		console.log(criterio);
 		return criterio;
 	}
 	
@@ -889,7 +902,9 @@ $("#xd").find(".comun").on("click", function(){
 	
 $('#buscarP').on('click', function() {
 		
-	
+	if(!$formPrestamos.valid()){
+		return;
+	}
 	var criterioBusqueda = obtenerCriterioP();
 	console.log(criterioBusqueda);
 
