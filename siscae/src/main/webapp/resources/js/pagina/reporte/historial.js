@@ -93,8 +93,10 @@ $(document).ready(function() {
 	$funcionUtil.crearSelect2($local.$selectTipoInfraccionm);
 	$funcionUtil.crearSelect2($local.$selectPeriodo);
 	$funcionUtil.crearSelect2($local.$selectPeriodop);
-	$funcionUtil.crearSelect2($local.$tipoPersona);
+	$funcionUtil.crearSelect2($local.$tipoPersona)
+	$funcionUtil.crearSelect2($local.$tipoPersonaI);;
 	$funcionUtil.crearSelect2($local.$selectAreaEstudio);
+	$funcionUtil.crearSelect2($local.$selectAreaEstudioI);
 	$funcionUtil.crearSelect2($local.$selectTipoRecurso);
 	$funcionUtil.crearSelect2($local.$selectRecurso);
 	
