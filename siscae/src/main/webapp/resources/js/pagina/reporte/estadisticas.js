@@ -693,7 +693,67 @@ $(document).ready(function() {
 							}
 							//Dibujando tabla
 							console.log(response);
-							$local.tablaResultadosPrestamo.rows.add(response).draw();
+							var data =[];
+							for(i=0;i<response.length;i++){
+								var e = new Object();
+								e['segmento']=response[i].segmento;
+								e['numeroPrestamos']=response[i].numeroPrestamos;
+								e['estadiaTotal']=response[i].estadiaTotal;
+								e['estadiaPromedio']=response[i].estadiaPromedio;
+								data.push(e);
+							}
+							console.log(data);
+							if($local.tablaResultadosPrestamo) { 
+								$local.tablaResultadosPrestamo.destroy(); 
+								$local.$tablaResultadosPrestamo.empty(); 
+							}
+							var cd = [];
+							for(i=0;i<Object.keys(data[0]).length;i++){
+								var ej = new Object();
+								if(i==0){
+									ej['targets'] = [i];
+									ej['className']  = "all dt-center fondo-blanco";
+								}else{
+									ej['targets'] = [i]
+									ej['className']  = "all dt-right"
+								}
+								cd.push(ej);
+							};
+							var c = [];
+							for(i=0;i<Object.keys(data[0]).length;i++){
+								var ej = new Object();
+								if(i==0){
+									ej['title'] = $local.$title;
+									ej['data']  = Object.keys(data[0])[i];
+								}else{
+									ej['title'] = Object.keys(data[0])[i];;
+									ej['data']  = Object.keys(data[0])[i];
+								}
+								c.push(ej);
+							};
+							var dataObject = [];
+							var ayuda = new Object();
+							ayuda['columnDefs']=cd;
+							ayuda['columns'] = c;
+							ayuda['data'] = response;
+							ayuda['dom'] = 'Blfrtip';
+							ayuda['buttons'] = {
+									"dom":{
+										"button":{
+											"tag":"button",
+											"className":"btn btn-success m-l-3"
+										}
+									},
+									"buttons": [{
+										extend: 'excelHtml5',
+										text :'<i class="fa fa-file-excel-o"> Exportar Excel </i>',
+							            title:'Historial de Infracciones',
+							            autoFilter: true,
+									}]
+								};
+							dataObject.push(ayuda);
+							$local.tablaResultadosPrestamo = $local.$tablaResultadosPrestamo.DataTable(dataObject[0]);
+							//$local.tablaResultadosPrestamo.rows.add(response).draw();
 							//Dibujando grafico
 							var chart = AmCharts.makeChart('chartdiv',$funcionGraficoUtil.crearGraficoPie(response,'segmento','numeroPrestamos','Análisis de Préstamos','Número de prestamos', "<b style='font-size:12px'>[[title]]</b> ([[percents]]%) <br> <b>Prestamos:</b> [[value]] </br> <b>Tiempo Total: </b> [[estadiaTotal]] <br> <b>Tiempo Prom: </b> [[estadiaPromedio]]"));
 						},
@@ -727,7 +787,66 @@ $(document).ready(function() {
 								}
 								//Dibujando tabla
 								console.log(response);
-								$local.tablaResultadosPrestamo.rows.add(response).draw();
+								var data =[];
+								for(i=0;i<response.length;i++){
+									var e = new Object();
+									e['ejeX']=response[i].ejeX;
+									e['numeroPrestamos']=response[i].numeroPrestamos;
+									e['estadiaTotal']=response[i].estadiaTotal;
+									e['estadiaPromedio']=response[i].estadiaPromedio;
+									data.push(e);
+								}
+								console.log(data);
+								if($local.tablaResultadosPrestamo) { 
+									$local.tablaResultadosPrestamo.destroy(); 
+									$local.$tablaResultadosPrestamo.empty(); 
+								}
+								var cd = [];
+								for(i=0;i<Object.keys(data[0]).length;i++){
+									var ej = new Object();
+									if(i==0){
+										ej['targets'] = [i];
+										ej['className']  = "all dt-center fondo-blanco";
+									}else{
+										ej['targets'] = [i]
+										ej['className']  = "all dt-right"
+									}
+									cd.push(ej);
+								};
+								var c = [];
+								for(i=0;i<Object.keys(data[0]).length;i++){
+									var ej = new Object();
+									if(i==0){
+										ej['title'] = $local.$title;
+										ej['data']  = Object.keys(data[0])[i];
+									}else{
+										ej['title'] = Object.keys(data[0])[i];;
+										ej['data']  = Object.keys(data[0])[i];
+									}
+									c.push(ej);
+								};
+								var dataObject = [];
+								var ayuda = new Object();
+								ayuda['columnDefs']=cd;
+								ayuda['columns'] = c;
+								ayuda['data'] = response;
+								ayuda['dom'] = 'Blfrtip';
+								ayuda['buttons'] = {
+										"dom":{
+											"button":{
+												"tag":"button",
+												"className":"btn btn-success m-l-3"
+											}
+										},
+										"buttons": [{
+											extend: 'excelHtml5',
+											text :'<i class="fa fa-file-excel-o"> Exportar Excel </i>',
+								            title:'Historial de Infracciones',
+								            autoFilter: true,
+										}]
+									};
+								dataObject.push(ayuda);
+								$local.tablaResultadosPrestamo = $local.$tablaResultadosPrestamo.DataTable(dataObject[0]);
 								//Dibujando grafico
 								var chart = AmCharts.makeChart('chartdiv',$funcionGraficoUtil.crearGraficoBarras(response,'ejeX','numeroPrestamos','Análisis de préstamos por periodo','Número de prestamos','<b>Periodo:</b> [[category]] </br> <b>Prestamos:</b> [[value]] </br> <b>Tiempo Total: </b> [[estadiaTotal]] </br> <b>Tiempo Prom: </b> [[estadiaPromedio]]'));
 							},
@@ -913,12 +1032,20 @@ $(document).ready(function() {
 											ayuda['columns'] = c;
 											ayuda['data'] = d;
 											ayuda['dom'] = 'Blfrtip';
-											ayuda['buttons'] = [
-												{
-									            extend: 'excelHtml5',
-									            text: 'Exportar Excel',
-									            title:'Prestamos por Escuela',
-									        }];
+											ayuda['buttons'] = {
+													"dom":{
+														"button":{
+															"tag":"button",
+															"className":"btn btn-success m-l-3"
+														}
+													},
+													"buttons": [{
+														extend: 'excelHtml5',
+														text :'<i class="fa fa-file-excel-o"> Exportar Excel </i>',
+											            title:'Historial de Infracciones',
+											            autoFilter: true,
+													}]
+												};
 											dataObject.push(ayuda);
 											console.log(ayuda);
 											console.log(dataObject);
@@ -1044,6 +1171,18 @@ $(document).ready(function() {
 												eliminarVacios(data);
 												var d = datanuevo;
 											}
+											var cd = [];
+											for(i=0;i<Object.keys(d[0]).length;i++){
+												var ej = new Object();
+												if(i==0){
+													ej['targets'] = [i];
+													ej['className']  = "all dt-center fondo-blanco";
+												}else{
+													ej['targets'] = [i]
+													ej['className']  = "all dt-right"
+												}
+												cd.push(ej);
+											};
 											var c = [];
 											for(i=0;i<Object.keys(d[0]).length;i++){
 												var ej = new Object();
@@ -1060,15 +1199,24 @@ $(document).ready(function() {
 											//console.log(c); eval('[{"columns":' +c+ ',"data":' +data+0 '}]')
 											var dataObject = [];
 											var ayuda = new Object();
+											ayuda['columnDefs']=cd;
 											ayuda['columns'] = c;
 											ayuda['data'] = d;
 											ayuda['dom'] = 'Blfrtip';
-											ayuda['buttons'] = [
-												{
-									            extend: 'excelHtml5',
-									            text: 'Exportar Excel',
-									            title:'Prestamos por Area de Estudio',
-									        }];
+											ayuda['buttons'] = {
+													"dom":{
+														"button":{
+															"tag":"button",
+															"className":"btn btn-success m-l-3"
+														}
+													},
+													"buttons": [{
+														extend: 'excelHtml5',
+														text :'<i class="fa fa-file-excel-o"> Exportar Excel </i>',
+											            title:'Historial de Infracciones',
+											            autoFilter: true,
+													}]
+												};
 											dataObject.push(ayuda);
 											console.log(ayuda);
 											console.log(dataObject);
@@ -1169,6 +1317,18 @@ $(document).ready(function() {
 											eliminarVacios(data);
 											var d = datanuevo;
 										}
+										var cd = [];
+										for(i=0;i<Object.keys(d[0]).length;i++){
+											var ej = new Object();
+											if(i==0){
+												ej['targets'] = [i];
+												ej['className']  = "all dt-center fondo-blanco";
+											}else{
+												ej['targets'] = [i]
+												ej['className']  = "all dt-right"
+											}
+											cd.push(ej);
+										};
 										var c = [];
 										for(i=0;i<Object.keys(d[0]).length;i++){
 											var ej = new Object();
@@ -1185,15 +1345,24 @@ $(document).ready(function() {
 										//console.log(c); eval('[{"columns":' +c+ ',"data":' +data+0 '}]')
 										var dataObject = [];
 										var ayuda = new Object();
+										ayuda['columDefs']=cd;
 										ayuda['columns'] = c;
 										ayuda['data'] = d;
 										ayuda['dom'] = 'Blfrtip';
-										ayuda['buttons'] = [
-											{
-								            extend: 'excelHtml5',
-								            text: 'Exportar Excel',
-								            title:'Prestamos por Tipo de Solicitante',
-								        }];
+										ayuda['buttons'] = {
+												"dom":{
+													"button":{
+														"tag":"button",
+														"className":"btn btn-success m-l-3"
+													}
+												},
+												"buttons": [{
+													extend: 'excelHtml5',
+													text :'<i class="fa fa-file-excel-o"> Exportar Excel </i>',
+										            title:'Historial de Infracciones',
+										            autoFilter: true,
+												}]
+											};
 										dataObject.push(ayuda);
 										console.log(ayuda);
 										console.log(dataObject);
@@ -1317,6 +1486,18 @@ $(document).ready(function() {
 												eliminarVacios(data);
 												var d = datanuevo;
 											}
+											var cd = [];
+											for(i=0;i<Object.keys(d[0]).length;i++){
+												var ej = new Object();
+												if(i==0){
+													ej['targets'] = [i];
+													ej['className']  = "all dt-center fondo-blanco";
+												}else{
+													ej['targets'] = [i]
+													ej['className']  = "all dt-right"
+												}
+												cd.push(ej);
+											};
 											var c = [];
 											for(i=0;i<Object.keys(d[0]).length;i++){
 												var ej = new Object();
@@ -1333,15 +1514,24 @@ $(document).ready(function() {
 											//console.log(c); eval('[{"columns":' +c+ ',"data":' +data+0 '}]')
 											var dataObject = [];
 											var ayuda = new Object();
+											ayuda['columDefs']=cd;
 											ayuda['columns'] = c;
 											ayuda['data'] = d;
 											ayuda['dom'] = 'Blfrtip';
-											ayuda['buttons'] = [
-												{
-									            extend: 'excelHtml5',
-									            text: 'Exportar Excel',
-									            title:'Prestamos por Tipo de Recurso',
-									        }];
+											ayuda['buttons'] = {
+													"dom":{
+														"button":{
+															"tag":"button",
+															"className":"btn btn-success m-l-3"
+														}
+													},
+													"buttons": [{
+														extend: 'excelHtml5',
+														text :'<i class="fa fa-file-excel-o"> Exportar Excel </i>',
+											            title:'Historial de Infracciones',
+											            autoFilter: true,
+													}]
+												};
 											dataObject.push(ayuda);
 											console.log(ayuda);
 											console.log(dataObject);
@@ -1400,6 +1590,54 @@ $(document).ready(function() {
 									return;
 								}
 								console.log(response);
+								if($local.tablaResultadosPrestamo) { 
+									$local.tablaResultadosPrestamo.destroy(); 
+									$local.$tablaResultadosPrestamo.empty(); 
+								}
+								$local.tablaResultadosPrestamo = $local.$tablaResultadosPrestamo.DataTable({
+									"language" : {
+										"emptyTable" : "No hay registros encontrados."
+									},
+									"pageLength": 10,
+									"initComplete" : function() {
+										$local.$tablaResultadosPrestamo.wrap("<div class='table-responsive'></div>");
+									},
+									"columnDefs" : [ {
+										"targets" : [ 0],
+										"className" : "all dt-center fondo-blanco"
+									},{
+										"targets" : [ 1, 2, 3],
+										"className" : "all dt-right"
+									} ],
+									"columns" : [ {
+										"data" : "ejeX",
+										"title" : "Periodo"
+									}, {
+										"data" : "numeroPrestamos",
+										"title" : "Cantidad Prestamos"
+									}, {
+										"data" : "estadiaTotal",
+										"title" : "Tiempo Total Estadia"
+									}, {
+										"data" : "estadiaPromedio",
+										"title" : "Tiempo Medio Estadia"
+									}],
+									"dom":'Blfrtip',
+									"buttons" : {
+											"dom":{
+												"button":{
+													"tag":"button",
+													"className":"btn btn-success m-l-3"
+												}
+											},
+											"buttons": [{
+												extend: 'excelHtml5',
+												text :'<i class="fa fa-file-excel-o"> Exportar Excel </i>',
+									            title:'Prestamos',
+									            autoFilter: true,
+											}]
+										}
+								});
 								//Dibujando tabla
 								$local.tablaResultadosPrestamo.rows.add(response).draw();
 								//Dibujando grafico
@@ -1550,6 +1788,18 @@ $(document).ready(function() {
 												eliminarVacios(data);
 												var d = datanuevo;
 											}
+											var cd = [];
+											for(i=0;i<Object.keys(d[0]).length;i++){
+												var ej = new Object();
+												if(i==0){
+													ej['targets'] = [i];
+													ej['className']  = "all dt-center fondo-blanco";
+												}else{
+													ej['targets'] = [i]
+													ej['className']  = "all dt-right"
+												}
+												cd.push(ej);
+											};
 											var c = [];
 											for(i=0;i<Object.keys(d[0]).length;i++){
 												var ej = new Object();
@@ -1566,15 +1816,24 @@ $(document).ready(function() {
 											//console.log(c); eval('[{"columns":' +c+ ',"data":' +data+0 '}]')
 											var dataObject = [];
 											var ayuda = new Object();
+											ayuda['columnDefs']=cd;
 											ayuda['columns'] = c;
 											ayuda['data'] = d;
 											ayuda['dom'] = 'Blfrtip';
-											ayuda['buttons'] = [
-												{
-									            extend: 'excelHtml5',
-									            text: 'Exportar Excel',
-									            title:'Prestamos por Escuela',
-									        }];
+											ayuda['buttons'] = {
+													"dom":{
+														"button":{
+															"tag":"button",
+															"className":"btn btn-success m-l-3"
+														}
+													},
+													"buttons": [{
+														extend: 'excelHtml5',
+														text :'<i class="fa fa-file-excel-o"> Exportar Excel </i>',
+											            title:'Historial de Infracciones',
+											            autoFilter: true,
+													}]
+												};
 											dataObject.push(ayuda);
 											console.log(ayuda);
 											console.log(dataObject);
@@ -1699,6 +1958,18 @@ $(document).ready(function() {
 												eliminarVacios(data);
 												var d = datanuevo;
 											}
+											var cd = [];
+											for(i=0;i<Object.keys(d[0]).length;i++){
+												var ej = new Object();
+												if(i==0){
+													ej['targets'] = [i];
+													ej['className']  = "all dt-center fondo-blanco";
+												}else{
+													ej['targets'] = [i]
+													ej['className']  = "all dt-right"
+												}
+												cd.push(ej);
+											};
 											var c = [];
 											for(i=0;i<Object.keys(d[0]).length;i++){
 												var ej = new Object();
@@ -1715,15 +1986,24 @@ $(document).ready(function() {
 											//console.log(c); eval('[{"columns":' +c+ ',"data":' +data+0 '}]')
 											var dataObject = [];
 											var ayuda = new Object();
+											ayuda['columnDefs']=cd;
 											ayuda['columns'] = c;
 											ayuda['data'] = d;
 											ayuda['dom'] = 'Blfrtip';
-											ayuda['buttons'] = [
-												{
-									            extend: 'excelHtml5',
-									            text: 'Exportar Excel',
-									            title:'Prestamos por Area de Estudio',
-									        }];
+											ayuda['buttons'] = {
+													"dom":{
+														"button":{
+															"tag":"button",
+															"className":"btn btn-success m-l-3"
+														}
+													},
+													"buttons": [{
+														extend: 'excelHtml5',
+														text :'<i class="fa fa-file-excel-o"> Exportar Excel </i>',
+											            title:'Historial de Infracciones',
+											            autoFilter: true,
+													}]
+												};
 											dataObject.push(ayuda);
 											console.log(ayuda);
 											console.log(dataObject);
@@ -1823,6 +2103,18 @@ $(document).ready(function() {
 											eliminarVacios(data);
 											var d = datanuevo;
 										}
+										var cd = [];
+										for(i=0;i<Object.keys(d[0]).length;i++){
+											var ej = new Object();
+											if(i==0){
+												ej['targets'] = [i];
+												ej['className']  = "all dt-center fondo-blanco";
+											}else{
+												ej['targets'] = [i]
+												ej['className']  = "all dt-right"
+											}
+											cd.push(ej);
+										};
 										var c = [];
 										for(i=0;i<Object.keys(d[0]).length;i++){
 											var ej = new Object();
@@ -1839,15 +2131,24 @@ $(document).ready(function() {
 										//console.log(c); eval('[{"columns":' +c+ ',"data":' +data+0 '}]')
 										var dataObject = [];
 										var ayuda = new Object();
+										ayuda['columnDefs']=cd;
 										ayuda['columns'] = c;
 										ayuda['data'] = d;
 										ayuda['dom'] = 'Blfrtip';
-										ayuda['buttons'] = [
-											{
-								            extend: 'excelHtml5',
-								            text: 'Exportar Excel',
-								            title:'Prestamos por Tipo solicitante',
-								        }];
+										ayuda['buttons'] = {
+												"dom":{
+													"button":{
+														"tag":"button",
+														"className":"btn btn-success m-l-3"
+													}
+												},
+												"buttons": [{
+													extend: 'excelHtml5',
+													text :'<i class="fa fa-file-excel-o"> Exportar Excel </i>',
+										            title:'Historial de Infracciones',
+										            autoFilter: true,
+												}]
+											};
 										dataObject.push(ayuda);
 										console.log(ayuda);
 										console.log(dataObject);
@@ -1972,6 +2273,18 @@ $(document).ready(function() {
 												eliminarVacios(data);
 												var d = datanuevo;
 											}
+											var cd = [];
+											for(i=0;i<Object.keys(d[0]).length;i++){
+												var ej = new Object();
+												if(i==0){
+													ej['targets'] = [i];
+													ej['className']  = "all dt-center fondo-blanco";
+												}else{
+													ej['targets'] = [i]
+													ej['className']  = "all dt-right"
+												}
+												cd.push(ej);
+											};
 											var c = [];
 											for(i=0;i<Object.keys(d[0]).length;i++){
 												var ej = new Object();
@@ -1988,15 +2301,24 @@ $(document).ready(function() {
 											//console.log(c); eval('[{"columns":' +c+ ',"data":' +data+0 '}]')
 											var dataObject = [];
 											var ayuda = new Object();
+											ayuda['columnDefs']=cd;
 											ayuda['columns'] = c;
 											ayuda['data'] = d;
 											ayuda['dom'] = 'Blfrtip';
-											ayuda['buttons'] = [
-												{
-									            extend: 'excelHtml5',
-									            text: 'Exportar Excel',
-									            title:'Prestamos por Recurso',
-									        }];
+											ayuda['buttons'] = {
+													"dom":{
+														"button":{
+															"tag":"button",
+															"className":"btn btn-success m-l-3"
+														}
+													},
+													"buttons": [{
+														extend: 'excelHtml5',
+														text :'<i class="fa fa-file-excel-o"> Exportar Excel </i>',
+											            title:'Historial de Infracciones',
+											            autoFilter: true,
+													}]
+												};
 											dataObject.push(ayuda);
 											console.log(ayuda);
 											console.log(dataObject);
@@ -2058,6 +2380,54 @@ $(document).ready(function() {
 							return;
 						}
 						console.log(response);
+						if($local.tablaResultadosPrestamo) { 
+							$local.tablaResultadosPrestamo.destroy(); 
+							$local.$tablaResultadosPrestamo.empty(); 
+						}
+						$local.tablaResultadosPrestamo = $local.$tablaResultadosPrestamo.DataTable({
+							"language" : {
+								"emptyTable" : "No hay registros encontrados."
+							},
+							"pageLength": 10,
+							"initComplete" : function() {
+								$local.$tablaResultadosPrestamo.wrap("<div class='table-responsive'></div>");
+							},
+							"columnDefs" : [ {
+								"targets" : [ 0],
+								"className" : "all dt-center fondo-blanco"
+							},{
+								"targets" : [ 1, 2, 3],
+								"className" : "all dt-right"
+							} ],
+							"columns" : [ {
+								"data" : "ejeX",
+								"title" : "Periodo"
+							}, {
+								"data" : "numeroPrestamos",
+								"title" : "Cantidad Prestamos"
+							}, {
+								"data" : "estadiaTotal",
+								"title" : "Tiempo Total Estadia"
+							}, {
+								"data" : "estadiaPromedio",
+								"title" : "Tiempo Medio Estadia"
+							}],
+							"dom":'Blfrtip',
+							"buttons" : {
+									"dom":{
+										"button":{
+											"tag":"button",
+											"className":"btn btn-success m-l-3"
+										}
+									},
+									"buttons": [{
+										extend: 'excelHtml5',
+										text :'<i class="fa fa-file-excel-o"> Exportar Excel </i>',
+							            title:'Prestamos',
+							            autoFilter: true,
+									}]
+								}
+						});
 						//Dibujando tabla
 						$local.tablaResultadosPrestamo.rows.add(response).draw();
 						//Dibujando grafico
@@ -2094,6 +2464,56 @@ $(document).ready(function() {
 							return;
 						}
 						console.log(response);
+						if($local.tablaResultadosPrestamo) { 
+							$local.tablaResultadosPrestamo.destroy(); 
+							$local.$tablaResultadosPrestamo.empty(); 
+						}
+						var cd = [];
+						for(i=0;i<Object.keys(response[0]).length;i++){
+							var ej = new Object();
+							if(i==0){
+								ej['targets'] = [i];
+								ej['className']  = "all dt-center fondo-blanco";
+							}else{
+								ej['targets'] = [i]
+								ej['className']  = "all dt-right"
+							}
+							cd.push(ej);
+						};
+						var c = [];
+						for(i=0;i<Object.keys(response[0]).length;i++){
+							var ej = new Object();
+							if(i==0){
+								ej['title'] = $local.$title;
+								ej['data']  = Object.keys(response[0])[i];
+							}else{
+								ej['title'] = Object.keys(response[0])[i];;
+								ej['data']  = Object.keys(response[0])[i];
+							}
+							c.push(ej);
+						};
+						var dataObject = [];
+						var ayuda = new Object();
+						ayuda['columnDefs']=cd;
+						ayuda['columns'] = c;
+						ayuda['data'] = response;
+						ayuda['dom'] = 'Blfrtip';
+						ayuda['buttons'] = {
+								"dom":{
+									"button":{
+										"tag":"button",
+										"className":"btn btn-success m-l-3"
+									}
+								},
+								"buttons": [{
+									extend: 'excelHtml5',
+									text :'<i class="fa fa-file-excel-o"> Exportar Excel </i>',
+						            title:'Historial de Infracciones',
+						            autoFilter: true,
+								}]
+							};
+						dataObject.push(ayuda);
+						$local.tablaResultadosInfraccion = $local.$tablaResultadosInfraccion.DataTable(dataObject[0]);
 						//Dibujando tabla
 						$local.tablaResultadosInfraccion.rows.add(response).draw();
 						//Dibujando grafico
@@ -2127,6 +2547,53 @@ $(document).ready(function() {
 								$funcionUtil.notificarException($variableUtil.busquedaSinResultados, "fa-exclamation-circle", "Información", "info");
 								return;
 							}
+							if($local.tablaResultadosInfraccion) { 
+								$local.tablaResultadosInfraccion.destroy(); 
+								$local.$tablaResultadosInfraccion.empty(); 
+							}
+							$local.tablaResultadosInfraccion = $local.$tablaResultadosInfraccion.DataTable({
+								"language" : {
+									"emptyTable" : "No hay registros encontrados."
+								},
+								"pageLength": 10,
+								"initComplete" : function() {
+									$local.$tablaResultadosInfraccion.wrap("<div class='table-responsive'></div>");
+								},
+								"columnDefs" : [ {
+									"targets" : [ 0],
+									"className" : "all dt-center fondo-blanco"
+								},{
+									"targets" : [ 1, 2, 3],
+									"className" : "all dt-right"
+								} ],
+								"columns" : [ {
+									"data" : "ejeX",
+									"title" : "Periodo"
+								}, {
+									"data" : "numeroInfracciones",
+									"title" : "Cantidad Infracciones"
+								}, {
+									"data" : "numeroSancionados",
+									"title" : "Cantidad Sancionados"
+								}, {
+									"data" : "numeroInfraccionesPromedioPorAlumno",
+									"title" : "Infracciones promedio"
+								}],
+								"buttons" : {
+									"dom":{
+										"button":{
+											"tag":"button",
+											"className":"btn btn-success m-l-3"
+										}
+									},
+									"buttons": [{
+										extend: 'excelHtml5',
+										text :'<i class="fa fa-file-excel-o"> Exportar Excel </i>',
+							            title:'Infracciones',
+							            autoFilter: true,
+									}]
+								}
+							});
 							//Dibujando tabla
 							$local.tablaResultadosInfraccion.rows.add(response).draw();
 							//Dibujando grafico
@@ -2278,6 +2745,18 @@ $(document).ready(function() {
 											eliminarVacios(data);
 											var d = datanuevo;
 										}
+										var cd = [];
+										for(i=0;i<Object.keys(d[0]).length;i++){
+											var ej = new Object();
+											if(i==0){
+												ej['targets'] = [i];
+												ej['className']  = "all dt-center fondo-blanco";
+											}else{
+												ej['targets'] = [i]
+												ej['className']  = "all dt-right"
+											}
+											cd.push(ej);
+										};
 										var c = [];
 										for(i=0;i<Object.keys(d[0]).length;i++){
 											var ej = new Object();
@@ -2294,15 +2773,24 @@ $(document).ready(function() {
 										//console.log(c); eval('[{"columns":' +c+ ',"data":' +data+0 '}]')
 										var dataObject = [];
 										var ayuda = new Object();
+										ayuda['columnDefs']=cd;
 										ayuda['columns'] = c;
 										ayuda['data'] = d;
 										ayuda['dom'] = 'Blfrtip';
-										ayuda['buttons'] = [
-											{
-								            extend: 'excelHtml5',
-								            text: 'Exportar Excel',
-								            title:'infracciones por Escuela',
-								        }];
+										ayuda['buttons'] = {
+												"dom":{
+													"button":{
+														"tag":"button",
+														"className":"btn btn-success m-l-3"
+													}
+												},
+												"buttons": [{
+													extend: 'excelHtml5',
+													text :'<i class="fa fa-file-excel-o"> Exportar Excel </i>',
+										            title:'Historial de Infracciones',
+										            autoFilter: true,
+												}]
+											};
 										dataObject.push(ayuda);
 										console.log(ayuda);
 										console.log(dataObject);
@@ -2427,6 +2915,18 @@ $(document).ready(function() {
 											eliminarVacios(data);
 											var d = datanuevo;
 										}
+										var cd = [];
+										for(i=0;i<Object.keys(d[0]).length;i++){
+											var ej = new Object();
+											if(i==0){
+												ej['targets'] = [i];
+												ej['className']  = "all dt-center fondo-blanco";
+											}else{
+												ej['targets'] = [i]
+												ej['className']  = "all dt-right"
+											}
+											cd.push(ej);
+										};
 										var c = [];
 										for(i=0;i<Object.keys(d[0]).length;i++){
 											var ej = new Object();
@@ -2443,15 +2943,24 @@ $(document).ready(function() {
 										//console.log(c); eval('[{"columns":' +c+ ',"data":' +data+0 '}]')
 										var dataObject = [];
 										var ayuda = new Object();
+										ayuda['columnDefs']=cd;
 										ayuda['columns'] = c;
 										ayuda['data'] = d;
 										ayuda['dom'] = 'Blfrtip';
-										ayuda['buttons'] = [
-											{
-								            extend: 'excelHtml5',
-								            text: 'Exportar Excel',
-								            title:'Infracciones por Area de estudio',
-								        }];
+										ayuda['buttons'] = {
+												"dom":{
+													"button":{
+														"tag":"button",
+														"className":"btn btn-success m-l-3"
+													}
+												},
+												"buttons": [{
+													extend: 'excelHtml5',
+													text :'<i class="fa fa-file-excel-o"> Exportar Excel </i>',
+										            title:'Historial de Infracciones',
+										            autoFilter: true,
+												}]
+											};
 										dataObject.push(ayuda);
 										console.log(ayuda);
 										console.log(dataObject);
@@ -2480,7 +2989,7 @@ $(document).ready(function() {
 								//Generando Leyenda
 								var resultGraph = [];
 								if(arr==""){
-									var arraJSONX = response[0].detalle;
+									var arrayJSONX = response[0].detalle;
 									arr = arrayJSONX;
 								}else{
 									
@@ -2555,6 +3064,18 @@ $(document).ready(function() {
 										eliminarVacios(data);
 										var d = datanuevo;
 									}
+									var cd = [];
+									for(i=0;i<Object.keys(d[0]).length;i++){
+										var ej = new Object();
+										if(i==0){
+											ej['targets'] = [i];
+											ej['className']  = "all dt-center fondo-blanco";
+										}else{
+											ej['targets'] = [i]
+											ej['className']  = "all dt-right"
+										}
+										cd.push(ej);
+									};
 									var c = [];
 									for(i=0;i<Object.keys(d[0]).length;i++){
 										var ej = new Object();
@@ -2571,15 +3092,24 @@ $(document).ready(function() {
 									//console.log(c); eval('[{"columns":' +c+ ',"data":' +data+0 '}]')
 									var dataObject = [];
 									var ayuda = new Object();
+									ayuda['columnDefs']=cd;
 									ayuda['columns'] = c;
 									ayuda['data'] = d;
 									ayuda['dom'] = 'Blfrtip';
-									ayuda['buttons'] = [
-										{
-							            extend: 'excelHtml5',
-							            text: 'Exportar Excel',
-							            title:'Infracciones por Tipo solicitante',
-							        }];
+									ayuda['buttons'] = {
+											"dom":{
+												"button":{
+													"tag":"button",
+													"className":"btn btn-success m-l-3"
+												}
+											},
+											"buttons": [{
+												extend: 'excelHtml5',
+												text :'<i class="fa fa-file-excel-o"> Exportar Excel </i>',
+									            title:'Historial de Infracciones',
+									            autoFilter: true,
+											}]
+										};
 									dataObject.push(ayuda);
 									console.log(ayuda);
 									console.log(dataObject);
@@ -2702,6 +3232,18 @@ $(document).ready(function() {
 											eliminarVacios(data);
 											var d = datanuevo;
 										}
+										var cd = [];
+										for(i=0;i<Object.keys(d[0]).length;i++){
+											var ej = new Object();
+											if(i==0){
+												ej['targets'] = [i];
+												ej['className']  = "all dt-center fondo-blanco";
+											}else{
+												ej['targets'] = [i]
+												ej['className']  = "all dt-right"
+											}
+											cd.push(ej);
+										};
 										var c = [];
 										for(i=0;i<Object.keys(d[0]).length;i++){
 											var ej = new Object();
@@ -2718,15 +3260,24 @@ $(document).ready(function() {
 										//console.log(c); eval('[{"columns":' +c+ ',"data":' +data+0 '}]')
 										var dataObject = [];
 										var ayuda = new Object();
+										ayuda['columnDefs']=cd;
 										ayuda['columns'] = c;
 										ayuda['data'] = d;
 										ayuda['dom'] = 'Blfrtip';
-										ayuda['buttons'] = [
-											{
-								            extend: 'excelHtml5',
-								            text: 'Exportar Excel',
-								            title:'Infracciones por Tipo infraccion',
-								        }];
+										ayuda['buttons'] = {
+												"dom":{
+													"button":{
+														"tag":"button",
+														"className":"btn btn-success m-l-3"
+													}
+												},
+												"buttons": [{
+													extend: 'excelHtml5',
+													text :'<i class="fa fa-file-excel-o"> Exportar Excel </i>',
+										            title:'Historial de Infracciones',
+										            autoFilter: true,
+												}]
+											};
 										dataObject.push(ayuda);
 										console.log(ayuda);
 										console.log(dataObject);
@@ -2785,8 +3336,67 @@ $(document).ready(function() {
 								return;
 							}
 							console.log(response);
+							var data=[];
+							for(i=0;i<response.length;i++){
+								var e = new Object();
+								e['ejeX']=response[i].segmento;
+								e['numeroInfracciones']=response[i].numeroInfracciones;
+								e['numeroSancionados']=response[i].numeroSancionados;
+								e['numeroInfraccionesPromedioPorAlumno']=response[i].numeroInfraccionesPromedioPorAlumno;
+								data.push(e);
+							}
+							if($local.tablaResultadosInfraccion) { 
+								$local.tablaResultadosInfraccion.destroy(); 
+								$local.$tablaResultadosInfraccion.empty(); 
+							}
+							var cd = [];
+							for(i=0;i<Object.keys(data[0]).length;i++){
+								var ej = new Object();
+								if(i==0){
+									ej['targets'] = [i];
+									ej['className']  = "all dt-center fondo-blanco";
+								}else{
+									ej['targets'] = [i]
+									ej['className']  = "all dt-right"
+								}
+								cd.push(ej);
+							};
+							var c = [];
+							for(i=0;i<Object.keys(data[0]).length;i++){
+								var ej = new Object();
+								if(i==0){
+									ej['title'] = $local.$title;
+									ej['data']  = Object.keys(data[0])[i];
+								}else{
+									ej['title'] = Object.keys(data[0])[i];;
+									ej['data']  = Object.keys(data[0])[i];
+								}
+								c.push(ej);
+							};
+							var dataObject = [];
+							var ayuda = new Object();
+							ayuda['columnDefs']=cd;
+							ayuda['columns'] = c;
+							ayuda['data'] = response;
+							ayuda['dom'] = 'Blfrtip';
+							ayuda['buttons'] = {
+									"dom":{
+										"button":{
+											"tag":"button",
+											"className":"btn btn-success m-l-3"
+										}
+									},
+									"buttons": [{
+										extend: 'excelHtml5',
+										text :'<i class="fa fa-file-excel-o"> Exportar Excel </i>',
+							            title:'Historial de Infracciones',
+							            autoFilter: true,
+									}]
+								};
+							dataObject.push(ayuda);
+							$local.tablaResultadosInfraccion = $local.$tablaResultadosInfraccion.DataTable(dataObject[0]);
 							//Dibujando tabla
-							$local.tablaResultadosInfraccion.rows.add(response).draw();
+							//$local.tablaResultadosInfraccion.rows.add(response).draw();
 							//Dibujando grafico
 							var chart = AmCharts.makeChart('chartdiv',$funcionGraficoUtil.crearGraficoBarras(response,'ejeX','numeroInfracciones','Análisis de Infracciones ' ,'Cantidad de Infracciones','<b>'+ejeX+':</b> [[category]] </br> <b>Infracciones:</b> [[value]] </br> <b>Sancionados: </b> [[numeroSancionados]] </br> <b>Infracciones Prom: </b> [[numeroInfraccionesPromedioPorAlumno]]'));
 						},
@@ -2935,6 +3545,18 @@ $(document).ready(function() {
 											eliminarVacios(data);
 											var d = datanuevo;
 										}
+										var cd = [];
+										for(i=0;i<Object.keys(d[0]).length;i++){
+											var ej = new Object();
+											if(i==0){
+												ej['targets'] = [i];
+												ej['className']  = "all dt-center fondo-blanco";
+											}else{
+												ej['targets'] = [i]
+												ej['className']  = "all dt-right"
+											}
+											cd.push(ej);
+										};
 										var c = [];
 										for(i=0;i<Object.keys(d[0]).length;i++){
 											var ej = new Object();
@@ -2951,15 +3573,24 @@ $(document).ready(function() {
 										//console.log(c); eval('[{"columns":' +c+ ',"data":' +data+0 '}]')
 										var dataObject = [];
 										var ayuda = new Object();
+										ayuda['columnDefs']=cd;
 										ayuda['columns'] = c;
 										ayuda['data'] = d;
 										ayuda['dom'] = 'Blfrtip';
-										ayuda['buttons'] = [
-											{
-								            extend: 'excelHtml5',
-								            text: 'Exportar Excel',
-								            title:'Infracciones por Escuela',
-								        }];
+										ayuda['buttons'] = {
+												"dom":{
+													"button":{
+														"tag":"button",
+														"className":"btn btn-success m-l-3"
+													}
+												},
+												"buttons": [{
+													extend: 'excelHtml5',
+													text :'<i class="fa fa-file-excel-o"> Exportar Excel </i>',
+										            title:'Historial de Infracciones',
+										            autoFilter: true,
+												}]
+											};
 										dataObject.push(ayuda);
 										console.log(ayuda);
 										console.log(dataObject);
@@ -3084,6 +3715,18 @@ $(document).ready(function() {
 											eliminarVacios(data);
 											var d = datanuevo;
 										}
+										var cd = [];
+										for(i=0;i<Object.keys(d[0]).length;i++){
+											var ej = new Object();
+											if(i==0){
+												ej['targets'] = [i];
+												ej['className']  = "all dt-center fondo-blanco";
+											}else{
+												ej['targets'] = [i]
+												ej['className']  = "all dt-right"
+											}
+											cd.push(ej);
+										};
 										var c = [];
 										for(i=0;i<Object.keys(d[0]).length;i++){
 											var ej = new Object();
@@ -3100,15 +3743,24 @@ $(document).ready(function() {
 										//console.log(c); eval('[{"columns":' +c+ ',"data":' +data+0 '}]')
 										var dataObject = [];
 										var ayuda = new Object();
+										ayuda['columnDefs']=cd;
 										ayuda['columns'] = c;
 										ayuda['data'] = d;
 										ayuda['dom'] = 'Blfrtip';
-										ayuda['buttons'] = [
-											{
-								            extend: 'excelHtml5',
-								            text: 'Exportar Excel',
-								            title:'Infracciones por Area de estudio',
-								        }];
+										ayuda['buttons'] = {
+												"dom":{
+													"button":{
+														"tag":"button",
+														"className":"btn btn-success m-l-3"
+													}
+												},
+												"buttons": [{
+													extend: 'excelHtml5',
+													text :'<i class="fa fa-file-excel-o"> Exportar Excel </i>',
+										            title:'Historial de Infracciones',
+										            autoFilter: true,
+												}]
+											};
 										dataObject.push(ayuda);
 										console.log(ayuda);
 										console.log(dataObject);
@@ -3208,6 +3860,18 @@ $(document).ready(function() {
 										eliminarVacios(data);
 										var d = datanuevo;
 									}
+									var cd = [];
+									for(i=0;i<Object.keys(d[0]).length;i++){
+										var ej = new Object();
+										if(i==0){
+											ej['targets'] = [i];
+											ej['className']  = "all dt-center fondo-blanco";
+										}else{
+											ej['targets'] = [i]
+											ej['className']  = "all dt-right"
+										}
+										cd.push(ej);
+									};
 									var c = [];
 									for(i=0;i<Object.keys(d[0]).length;i++){
 										var ej = new Object();
@@ -3224,15 +3888,24 @@ $(document).ready(function() {
 									//console.log(c); eval('[{"columns":' +c+ ',"data":' +data+0 '}]')
 									var dataObject = [];
 									var ayuda = new Object();
+									ayuda['columnDefs']=cd;
 									ayuda['columns'] = c;
 									ayuda['data'] = d;
 									ayuda['dom'] = 'Blfrtip';
-									ayuda['buttons'] = [
-										{
-							            extend: 'excelHtml5',
-							            text: 'Exportar Excel',
-							            title:'Infracciones por Tipo solicitante',
-							        }];
+									ayuda['buttons'] = {
+											"dom":{
+												"button":{
+													"tag":"button",
+													"className":"btn btn-success m-l-3"
+												}
+											},
+											"buttons": [{
+												extend: 'excelHtml5',
+												text :'<i class="fa fa-file-excel-o"> Exportar Excel </i>',
+									            title:'Historial de Infracciones',
+									            autoFilter: true,
+											}]
+										};
 									dataObject.push(ayuda);
 									console.log(ayuda);
 									console.log(dataObject);
@@ -3354,6 +4027,18 @@ $(document).ready(function() {
 											eliminarVacios(data);
 											var d = datanuevo;
 										}
+										var cd = [];
+										for(i=0;i<Object.keys(d[0]).length;i++){
+											var ej = new Object();
+											if(i==0){
+												ej['targets'] = [i];
+												ej['className']  = "all dt-center fondo-blanco";
+											}else{
+												ej['targets'] = [i]
+												ej['className']  = "all dt-right"
+											}
+											cd.push(ej);
+										};
 										var c = [];
 										for(i=0;i<Object.keys(d[0]).length;i++){
 											var ej = new Object();
@@ -3370,15 +4055,24 @@ $(document).ready(function() {
 										//console.log(c); eval('[{"columns":' +c+ ',"data":' +data+0 '}]')
 										var dataObject = [];
 										var ayuda = new Object();
+										ayuda['columnDefs']=cd;
 										ayuda['columns'] = c;
 										ayuda['data'] = d;
 										ayuda['dom'] = 'Blfrtip';
-										ayuda['buttons'] = [
-											{
-								            extend: 'excelHtml5',
-								            text: 'Exportar Excel',
-								            title:'Infracciones por Tipo infraccion',
-								        }];
+										ayuda['buttons'] = {
+												"dom":{
+													"button":{
+														"tag":"button",
+														"className":"btn btn-success m-l-3"
+													}
+												},
+												"buttons": [{
+													extend: 'excelHtml5',
+													text :'<i class="fa fa-file-excel-o"> Exportar Excel </i>',
+										            title:'Historial de Infracciones',
+										            autoFilter: true,
+												}]
+											};
 										dataObject.push(ayuda);
 										console.log(ayuda);
 										console.log(dataObject);
@@ -3482,9 +4176,20 @@ $(document).ready(function() {
 			"title" : "Tiempo Medio Estadia"
 		}],
 		"dom":'Blfrtip',
-		"buttons" : [
-			'excelHtml5'
-		]
+		"buttons" : {
+			"dom":{
+				"button":{
+					"tag":"button",
+					"className":"btn btn-success m-l-3"
+				}
+			},
+			"buttons": [{
+				extend: 'excelHtml5',
+				text :'<i class="fa fa-file-excel-o"> Exportar Excel </i>',
+	            title:'Prestamos',
+	            autoFilter: true,
+			}]
+		}
 	});
 	
 /*	$local.$tablaResultadosPrestamo.DataTable({
@@ -3526,7 +4231,21 @@ $(document).ready(function() {
 		}, {
 			"data" : "numeroInfraccionesPromedioPorAlumno",
 			"title" : "Infracciones promedio"
-		}]
+		}],
+		"buttons" : {
+			"dom":{
+				"button":{
+					"tag":"button",
+					"className":"btn btn-success m-l-3"
+				}
+			},
+			"buttons": [{
+				extend: 'excelHtml5',
+				text :'<i class="fa fa-file-excel-o"> Exportar Excel </i>',
+	            title:'Infracciones',
+	            autoFilter: true,
+			}]
+		}
 	});
 	
 	$local.tablaResultadosMasFrecuentes = $local.$tablaResultadosMasFrecuentes.DataTable({
@@ -3564,6 +4283,20 @@ $(document).ready(function() {
 		 "order": [
 	            [2, 'dsc']
 	        ],
+	        "buttons" : {
+				"dom":{
+					"button":{
+						"tag":"button",
+						"className":"btn btn-success m-l-3"
+					}
+				},
+				"buttons": [{
+					extend: 'excelHtml5',
+					text :'<i class="fa fa-file-excel-o"> Exportar Excel </i>',
+		            title:'Alumnos Mas Frecuentes',
+		            autoFilter: true,
+				}]
+			}
 		
 	});
 	
