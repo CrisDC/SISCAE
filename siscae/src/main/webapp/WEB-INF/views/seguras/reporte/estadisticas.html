@@ -423,7 +423,7 @@
 
 				<div class="row">
 					<div class="col-12">
-						<div class="card">
+						<div id="principal" class="card">
 							<div class="card-body p-b-0">
 								<!-- Nav tabs -->
 								<ul class="nav justify-content-end customtab2" role="tablist">
@@ -454,12 +454,7 @@
 												cellspacing="0" width="100%">
 											</table>
 										</div>
-										<div id="divTablaResumenMasFrecuentes">
-											<table id="tblReporteResumenMasFrecuentes"
-												class="display nowrap table table-hover table-striped table-bordered"
-												cellspacing="0" width="100%">
-											</table>
-										</div>
+										
 										
 									</div>
 
@@ -473,22 +468,38 @@
 							</div>
 						</div>
 						
+						<div id="cmf" class="card">
+							<div class="card-body p-b-0">
+								
+								<div class="tab-content">
+									<div class="tab-pane active m-t-40" id="resultadoResumenmf"
+										role="tabpanel">
+										<div id="divTablaResumenPrestamomf">
+									
+										<div id="divTablaResumenMasFrecuentes">
+											<table id="tblReporteResumenMasFrecuentes"
+												class="display nowrap table table-hover table-striped table-bordered"
+												cellspacing="0" width="100%">
+											</table>
+										</div>
+									</div>
+
+									<div class="tab-pane m-t-40" id="resultadoGraficomf"
+										role="tabpanel">
+										<div id="chartdivmf"
+											style="width: 100%; height: 700px; font-size: 11px;"></div>
+									</div>
+								</div>
+
+							</div>
+						</div>
+						
+						
+					</div>
+						
 						<div id="cfacultad" class="card">
 							<div class="card-body p-b-0">
-								<!-- Nav tabs -->
-								<ul class="nav justify-content-end customtab2" role="tablist">
-									<li class="nav-item"><a class="nav-link active"
-										data-toggle="tab" href="#resultadoResumenf" role="tab"> <span
-											class="hidden-sm-up"><i class="ti-user"></i></span> <span
-											class="hidden-xs-down">Resumen</span>
-									</a></li>
-									<li  class="nav-item"><a class="nav-link" data-toggle="tab"
-										href="#resultadoGraficof" role="tab"> <span
-											class="hidden-sm-up"><i class="ti-user"></i></span> <span
-											class="hidden-xs-down">Gráfico</span>
-									</a></li>
-
-								</ul>
+								
 								<div class="tab-content">
 									<div class="tab-pane active m-t-40" id="resultadoResumenf"
 										role="tabpanel">
@@ -517,20 +528,7 @@
 					
 					<div id="cescuela" class="card">
 							<div class="card-body p-b-0">
-								<!-- Nav tabs -->
-								<ul class="nav justify-content-end customtab2" role="tablist">
-									<li class="nav-item"><a class="nav-link active"
-										data-toggle="tab" href="#resultadoResumen" role="tab"> <span
-											class="hidden-sm-up"><i class="ti-user"></i></span> <span
-											class="hidden-xs-down">Resumen</span>
-									</a></li>
-									<li  class="nav-item"><a class="nav-link" data-toggle="tab"
-										href="#resultadoGraficoe" role="tab"> <span
-											class="hidden-sm-up"><i class="ti-user"></i></span> <span
-											class="hidden-xs-down">Gráfico</span>
-									</a></li>
-
-								</ul>
+								
 								<div class="tab-content">
 									<div class="tab-pane active m-t-40" id="resultadoResumen"
 										role="tabpanel">

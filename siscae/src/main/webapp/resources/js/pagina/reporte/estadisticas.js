@@ -524,8 +524,8 @@ $(document).ready(function() {
 					datan.push(e);		
 				}
 				console.log(datan);
-				
-				var chart = AmCharts.makeChart('chartdiv',$funcionGraficoUtil.crearGraficoBarrasSegmentado(datan,resultGraph,'codigo','Cantidad de Préstamos','regular','Prestamos por criterio'));
+				$('#resultadoGraficomf').removeClass("hidden");
+				var chart = AmCharts.makeChart('chartdivmf',$funcionGraficoUtil.crearGraficoBarrasSegmentado(datan,resultGraph,'codigo','Cantidad de Préstamos','regular','Prestamos por criterio'));
 				//var chart = AmCharts.makeChart('chartdiv',$funcionGraficoUtil.crearGraficoPie(response,'segmento','numeroPrestamos','Análisis de Préstamos','Número de prestamos', "<b style='font-size:12px'>[[title]]</b> ([[percents]]%) <br> <b>Prestamos:</b> [[value]] </br> <b>Tiempo Total: </b> [[estadiaTotal]] <br> <b>Tiempo Prom: </b> [[estadiaPromedio]]"));
 				datan = [];
 				resultGraph = [];
@@ -3638,17 +3638,21 @@ $(document).ready(function() {
 	$local.$divTablaResumenMasFrecuentesEscuela.addClass("hidden"); // por defecto
 	$('#cfacultad').addClass("hidden");//por defecto
 	$('#cescuela').addClass("hidden"); // por defecto
+	$('#cmf').addClass("hidden");
+	$('#resultadoGraficomf').addClass("hidden"); // por defecto
 	$('#resultadoGraficof').addClass("hidden"); // por defecto
 	$('#resultadoGraficoe').addClass("hidden"); // por defecto
 	
 	$("#xd").find(".comun").on("click", function(){
 		$local.$tipoReporte = $(this).attr("key");
 		if($local.$tipoReporte=="P"){
+			$('#principal').removeClass("hidden");
 			$local.$divTablaResumenPrestamo.removeClass("hidden");
 			$local.$divTablaResumenMasFrecuentes.addClass("hidden");
 			$local.$divTablaResumenMasFrecuentesFacultad.addClass("hidden");
 			$local.$divTablaResumenMasFrecuentesEscuela.addClass("hidden");
 			$local.$divTablaResumenInfraccion.addClass("hidden");
+			$('#cmf').addClass("hidden");
 			$('#cfacultad').addClass("hidden");
 			$('#cescuela').addClass("hidden"); 
 			$('#gr').removeClass("hidden");
@@ -3666,11 +3670,13 @@ $(document).ready(function() {
 			$('#selectSeries').find("option[value='TIPO_INFRACCION']").remove();
 		}
 		if($local.$tipoReporte=="I"){
+			$('#principal').removeClass("hidden");
 			$local.$divTablaResumenPrestamo.addClass("hidden");
 			$local.$divTablaResumenMasFrecuentes.addClass("hidden");
 			$local.$divTablaResumenMasFrecuentesFacultad.addClass("hidden");
 			$local.$divTablaResumenMasFrecuentesEscuela.addClass("hidden");
 			$local.$divTablaResumenInfraccion.removeClass("hidden");
+			$('#cmf').addClass("hidden");
 			$('#cfacultad').addClass("hidden");
 			$('#cescuela').addClass("hidden");
 			$('#gr').removeClass("hidden");
@@ -3691,11 +3697,13 @@ $(document).ready(function() {
 			$('#selectSegmY').find("option[value='RECURSO']").remove();  
 		}
 		if($local.$tipoReporte=="M"){
+			$('#principal').addClass("hidden");
 			$local.$divTablaResumenPrestamo.addClass("hidden");
 			$local.$divTablaResumenInfraccion.addClass("hidden");
 			$local.$divTablaResumenMasFrecuentes.removeClass("hidden");
 			$local.$divTablaResumenMasFrecuentesFacultad.removeClass("hidden");
 			$local.$divTablaResumenMasFrecuentesEscuela.removeClass("hidden");
+			$('#cmf').removeClass("hidden");//por defecto
 			$('#cfacultad').removeClass("hidden");//por defecto
 			$('#cescuela').removeClass("hidden"); // por defecto
 
