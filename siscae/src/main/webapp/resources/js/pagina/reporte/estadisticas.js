@@ -52,6 +52,8 @@ $(document).ready(function() {
 			$buscar : $('#buscar'),
 			$mfbuscar :$('#mfbuscar'),
 			$exportar : $('#exportar'),
+			$limpiar :$('#limpiar'),
+			$limpiarmf : $('#limpiarmf'),
 			//Tipo Reporte
 			$tipoReporte:'P',
 			$title:'',
@@ -695,12 +697,13 @@ $(document).ready(function() {
 							console.log(response);
 							var data =[];
 							for(i=0;i<response.length;i++){
+								if(response[i].segmento != null){
 								var e = new Object();
 								e['segmento']=response[i].segmento;
 								e['numeroPrestamos']=response[i].numeroPrestamos;
 								e['estadiaTotal']=response[i].estadiaTotal;
 								e['estadiaPromedio']=response[i].estadiaPromedio;
-								data.push(e);
+								data.push(e);}
 							}
 							console.log(data);
 							if($local.tablaResultadosPrestamo) { 
@@ -733,6 +736,9 @@ $(document).ready(function() {
 							};
 							var dataObject = [];
 							var ayuda = new Object();
+							ayuda['initComplete'] = function(){
+								$("table").wrap("<div class='table-responsive'></div>");
+							};
 							ayuda['columnDefs']=cd;
 							ayuda['columns'] = c;
 							ayuda['data'] = response;
@@ -827,6 +833,9 @@ $(document).ready(function() {
 								};
 								var dataObject = [];
 								var ayuda = new Object();
+								ayuda['initComplete'] = function(){
+									$("table").wrap("<div class='table-responsive'></div>");
+								};
 								ayuda['columnDefs']=cd;
 								ayuda['columns'] = c;
 								ayuda['data'] = response;
@@ -1199,6 +1208,9 @@ $(document).ready(function() {
 											//console.log(c); eval('[{"columns":' +c+ ',"data":' +data+0 '}]')
 											var dataObject = [];
 											var ayuda = new Object();
+											ayuda['initComplete'] = function(){
+												$("table").wrap("<div class='table-responsive'></div>");
+											};
 											ayuda['columnDefs']=cd;
 											ayuda['columns'] = c;
 											ayuda['data'] = d;
@@ -1345,6 +1357,9 @@ $(document).ready(function() {
 										//console.log(c); eval('[{"columns":' +c+ ',"data":' +data+0 '}]')
 										var dataObject = [];
 										var ayuda = new Object();
+										ayuda['initComplete'] = function(){
+											$("table").wrap("<div class='table-responsive'></div>");
+										};
 										ayuda['columDefs']=cd;
 										ayuda['columns'] = c;
 										ayuda['data'] = d;
@@ -1514,6 +1529,9 @@ $(document).ready(function() {
 											//console.log(c); eval('[{"columns":' +c+ ',"data":' +data+0 '}]')
 											var dataObject = [];
 											var ayuda = new Object();
+											ayuda['initComplete'] = function(){
+												$("table").wrap("<div class='table-responsive'></div>");
+											};
 											ayuda['columDefs']=cd;
 											ayuda['columns'] = c;
 											ayuda['data'] = d;
@@ -1816,6 +1834,9 @@ $(document).ready(function() {
 											//console.log(c); eval('[{"columns":' +c+ ',"data":' +data+0 '}]')
 											var dataObject = [];
 											var ayuda = new Object();
+											ayuda['initComplete'] = function(){
+												$("table").wrap("<div class='table-responsive'></div>");
+											};
 											ayuda['columnDefs']=cd;
 											ayuda['columns'] = c;
 											ayuda['data'] = d;
@@ -1986,6 +2007,9 @@ $(document).ready(function() {
 											//console.log(c); eval('[{"columns":' +c+ ',"data":' +data+0 '}]')
 											var dataObject = [];
 											var ayuda = new Object();
+											ayuda['initComplete'] = function(){
+												$("table").wrap("<div class='table-responsive'></div>");
+											};
 											ayuda['columnDefs']=cd;
 											ayuda['columns'] = c;
 											ayuda['data'] = d;
@@ -2032,7 +2056,7 @@ $(document).ready(function() {
 									//Generando Leyenda
 									var resultGraph = [];
 									if(arr==""){
-										var arraJSONX = response[0].detalle;
+										var arrayJSONX = response[0].detalle;
 										arr = arrayJSONX;
 									}else{
 										
@@ -2131,6 +2155,9 @@ $(document).ready(function() {
 										//console.log(c); eval('[{"columns":' +c+ ',"data":' +data+0 '}]')
 										var dataObject = [];
 										var ayuda = new Object();
+										ayuda['initComplete'] = function(){
+											$("table").wrap("<div class='table-responsive'></div>");
+										};
 										ayuda['columnDefs']=cd;
 										ayuda['columns'] = c;
 										ayuda['data'] = d;
@@ -2301,6 +2328,9 @@ $(document).ready(function() {
 											//console.log(c); eval('[{"columns":' +c+ ',"data":' +data+0 '}]')
 											var dataObject = [];
 											var ayuda = new Object();
+											ayuda['initComplete'] = function(){
+												$("table").wrap("<div class='table-responsive'></div>");
+											};
 											ayuda['columnDefs']=cd;
 											ayuda['columns'] = c;
 											ayuda['data'] = d;
@@ -2464,12 +2494,20 @@ $(document).ready(function() {
 							return;
 						}
 						console.log(response);
-						if($local.tablaResultadosPrestamo) { 
-							$local.tablaResultadosPrestamo.destroy(); 
-							$local.$tablaResultadosPrestamo.empty(); 
+						var data =[];
+						for(i=0;i<response.length;i++){
+							if(response[i].segmento != null){
+							var e = new Object();
+							e['segmento']=response[i].segmento;
+							e['numeroInfracciones']=response[i].numeroInfracciones;
+							e['numeroInfraccionesPromedioPorAlumno']=response[i].numeroInfraccionesPromedioPorAlumno;
+							e['numeroSancionados']=response[i].numeroSancionados;
+							data.push(e);}
 						}
+						console.log(data);
+					
 						var cd = [];
-						for(i=0;i<Object.keys(response[0]).length;i++){
+						for(i=0;i<Object.keys(data[0]).length;i++){
 							var ej = new Object();
 							if(i==0){
 								ej['targets'] = [i];
@@ -2481,19 +2519,22 @@ $(document).ready(function() {
 							cd.push(ej);
 						};
 						var c = [];
-						for(i=0;i<Object.keys(response[0]).length;i++){
+						for(i=0;i<Object.keys(data[0]).length;i++){
 							var ej = new Object();
 							if(i==0){
 								ej['title'] = $local.$title;
-								ej['data']  = Object.keys(response[0])[i];
+								ej['data']  = Object.keys(data[0])[i];
 							}else{
-								ej['title'] = Object.keys(response[0])[i];;
-								ej['data']  = Object.keys(response[0])[i];
+								ej['title'] = Object.keys(data[0])[i];;
+								ej['data']  = Object.keys(data[0])[i];
 							}
 							c.push(ej);
 						};
 						var dataObject = [];
 						var ayuda = new Object();
+						ayuda['initComplete'] = function(){
+							$("table").wrap("<div class='table-responsive'></div>");
+						};
 						ayuda['columnDefs']=cd;
 						ayuda['columns'] = c;
 						ayuda['data'] = response;
@@ -2513,9 +2554,13 @@ $(document).ready(function() {
 								}]
 							};
 						dataObject.push(ayuda);
+						if($local.tablaResultadosInfraccion) { 
+							$local.tablaResultadosInfraccion.destroy(); 
+							$local.$tablaResultadosInfraccion.empty(); 
+						}
 						$local.tablaResultadosInfraccion = $local.$tablaResultadosInfraccion.DataTable(dataObject[0]);
 						//Dibujando tabla
-						$local.tablaResultadosInfraccion.rows.add(response).draw();
+						//$local.tablaResultadosInfraccion.rows.add(response).draw();
 						//Dibujando grafico
 						var chart = AmCharts.makeChart('chartdiv',$funcionGraficoUtil.crearGraficoPie(response,'segmento','numeroInfracciones','Análisis de Infracciones','Número de Infracciones', "<b style='font-size:12px'>[[title]]</b> ([[percents]]%) </br>  <b>Infracciones:</b> [[value]] </br> <b>Sancionados: </b> [[numeroSancionados]] <br> <b>Infracciones Prom: </b> [[numeroInfraccionesPromedioPorAlumno]]"));
 					},
@@ -2773,6 +2818,9 @@ $(document).ready(function() {
 										//console.log(c); eval('[{"columns":' +c+ ',"data":' +data+0 '}]')
 										var dataObject = [];
 										var ayuda = new Object();
+										ayuda['initComplete'] = function(){
+											$("table").wrap("<div class='table-responsive'></div>");
+										};
 										ayuda['columnDefs']=cd;
 										ayuda['columns'] = c;
 										ayuda['data'] = d;
@@ -2943,6 +2991,9 @@ $(document).ready(function() {
 										//console.log(c); eval('[{"columns":' +c+ ',"data":' +data+0 '}]')
 										var dataObject = [];
 										var ayuda = new Object();
+										ayuda['initComplete'] = function(){
+											$("table").wrap("<div class='table-responsive'></div>");
+										};
 										ayuda['columnDefs']=cd;
 										ayuda['columns'] = c;
 										ayuda['data'] = d;
@@ -3092,6 +3143,9 @@ $(document).ready(function() {
 									//console.log(c); eval('[{"columns":' +c+ ',"data":' +data+0 '}]')
 									var dataObject = [];
 									var ayuda = new Object();
+									ayuda['initComplete'] = function(){
+										$("table").wrap("<div class='table-responsive'></div>");
+									};
 									ayuda['columnDefs']=cd;
 									ayuda['columns'] = c;
 									ayuda['data'] = d;
@@ -3260,6 +3314,9 @@ $(document).ready(function() {
 										//console.log(c); eval('[{"columns":' +c+ ',"data":' +data+0 '}]')
 										var dataObject = [];
 										var ayuda = new Object();
+										ayuda['initComplete'] = function(){
+											$("table").wrap("<div class='table-responsive'></div>");
+										};
 										ayuda['columnDefs']=cd;
 										ayuda['columns'] = c;
 										ayuda['data'] = d;
@@ -3375,6 +3432,9 @@ $(document).ready(function() {
 							};
 							var dataObject = [];
 							var ayuda = new Object();
+							ayuda['initComplete'] = function(){
+								$("table").wrap("<div class='table-responsive'></div>");
+							};
 							ayuda['columnDefs']=cd;
 							ayuda['columns'] = c;
 							ayuda['data'] = response;
@@ -3573,6 +3633,9 @@ $(document).ready(function() {
 										//console.log(c); eval('[{"columns":' +c+ ',"data":' +data+0 '}]')
 										var dataObject = [];
 										var ayuda = new Object();
+										ayuda['initComplete'] = function(){
+											$("table").wrap("<div class='table-responsive'></div>");
+										};
 										ayuda['columnDefs']=cd;
 										ayuda['columns'] = c;
 										ayuda['data'] = d;
@@ -3743,6 +3806,9 @@ $(document).ready(function() {
 										//console.log(c); eval('[{"columns":' +c+ ',"data":' +data+0 '}]')
 										var dataObject = [];
 										var ayuda = new Object();
+										ayuda['initComplete'] = function(){
+											$("table").wrap("<div class='table-responsive'></div>");
+										};
 										ayuda['columnDefs']=cd;
 										ayuda['columns'] = c;
 										ayuda['data'] = d;
@@ -3888,6 +3954,9 @@ $(document).ready(function() {
 									//console.log(c); eval('[{"columns":' +c+ ',"data":' +data+0 '}]')
 									var dataObject = [];
 									var ayuda = new Object();
+									ayuda['initComplete'] = function(){
+										$("table").wrap("<div class='table-responsive'></div>");
+									};
 									ayuda['columnDefs']=cd;
 									ayuda['columns'] = c;
 									ayuda['data'] = d;
@@ -4055,6 +4124,9 @@ $(document).ready(function() {
 										//console.log(c); eval('[{"columns":' +c+ ',"data":' +data+0 '}]')
 										var dataObject = [];
 										var ayuda = new Object();
+										ayuda['initComplete'] = function(){
+											$("table").wrap("<div class='table-responsive'></div>");
+										};
 										ayuda['columnDefs']=cd;
 										ayuda['columns'] = c;
 										ayuda['data'] = d;
@@ -4232,6 +4304,7 @@ $(document).ready(function() {
 			"data" : "numeroInfraccionesPromedioPorAlumno",
 			"title" : "Infracciones promedio"
 		}],
+		"dom":'Blfrtip',
 		"buttons" : {
 			"dom":{
 				"button":{
@@ -4276,27 +4349,28 @@ $(document).ready(function() {
 			"data" : "escuela",
 			"title" : "Escuela"
 		}],
+		"dom":'Blfrtip',
+		"buttons" : {
+			"dom":{
+				"button":{
+					"tag":"button",
+					"className":"btn btn-success m-l-3"
+				}
+			},
+			"buttons": [{
+				extend: 'excelHtml5',
+				text :'<i class="fa fa-file-excel-o"> Exportar Excel </i>',
+	            title:'Alumnos Mas Frecuentes',
+	            autoFilter: true,
+			}]
+		},
 		"aoColumnDefs" : [ {
 		    "bSortable" : false,
 		    "aTargets" : [ "sorting_disabled" ]
 		} ],
 		 "order": [
 	            [2, 'dsc']
-	        ],
-	        "buttons" : {
-				"dom":{
-					"button":{
-						"tag":"button",
-						"className":"btn btn-success m-l-3"
-					}
-				},
-				"buttons": [{
-					extend: 'excelHtml5',
-					text :'<i class="fa fa-file-excel-o"> Exportar Excel </i>',
-		            title:'Alumnos Mas Frecuentes',
-		            autoFilter: true,
-				}]
-			}
+	        ]
 		
 	});
 	
@@ -4329,6 +4403,21 @@ $(document).ready(function() {
 		 "order": [
 	            [1, 'dsc']
 	        ],
+	        "dom":'Blfrtip',
+			"buttons" : {
+				"dom":{
+					"button":{
+						"tag":"button",
+						"className":"btn btn-success m-l-3"
+					}
+				},
+				"buttons": [{
+					extend: 'excelHtml5',
+					text :'<i class="fa fa-file-excel-o"> Exportar Excel </i>',
+		            title:'Facultades Mas Frecuentes',
+		            autoFilter: true,
+				}]
+			}
 		
 	});
 
@@ -4361,6 +4450,21 @@ $(document).ready(function() {
 		 "order": [
 	            [1, 'dsc']
 	        ],
+	        "dom":'Blfrtip',
+			"buttons" : {
+				"dom":{
+					"button":{
+						"tag":"button",
+						"className":"btn btn-success m-l-3"
+					}
+				},
+				"buttons": [{
+					extend: 'excelHtml5',
+					text :'<i class="fa fa-file-excel-o"> Exportar Excel </i>',
+		            title:'Escuelas Mas Frecuentes',
+		            autoFilter: true,
+				}]
+			}
 		
 	});
 	
@@ -4467,6 +4571,74 @@ $(document).ready(function() {
 		}
 		return cadenaCompleta;
 	}
+	
+	$local.$limpiar.on('click', function() {
+		if($local.$tipoReporte=="P"){
+			var f ={
+					"tipoPeriodo":-1,
+					"recurso":-1,
+					"tipoGrafica":-1,
+					"areaEstudio":-1,
+					"valSeries":"",
+					"valEjeX":"",
+					"valSegY":"NINGUNA",
+					"valPresentacion":-1
+			}
+			console.log(f);
+			$funcionUtil.llenarFormulario(f,$formEstadisticas);
+			$local.$divPeriodoDia.addClass("hidden");
+			$local.$divSemanaInicio.addClass("hidden");
+			$local.$divSemanaFin.addClass("hidden");
+			$local.$divMesInicio.addClass("hidden");
+			$local.$divMesFin.addClass("hidden");
+			$local.$divAnioInicio.addClass("hidden");
+			$local.$divAnioFin.addClass("hidden");
+			if($local.tablaResultadosPrestamo){
+				$local.tablaResultadosPrestamo.clear().draw();	
+			}
+			
+		}else{
+			console.log("funciona");
+			var f ={
+					"tipoPeriodo":-1,
+					"recurso":-1,
+					"tipoGrafica":-1,
+					"areaEstudio":-1,
+					"valSeries":"",
+					"valEjeX":"",
+					"valSegY":"NINGUNA",
+					"valPresentacion":-1
+			}
+			console.log(f);
+			$funcionUtil.llenarFormulario(f,$formEstadisticas);
+			$local.$divPeriodoDia.addClass("hidden");
+			$local.$divSemanaInicio.addClass("hidden");
+			$local.$divSemanaFin.addClass("hidden");
+			$local.$divMesInicio.addClass("hidden");
+			$local.$divMesFin.addClass("hidden");
+			$local.$divAnioInicio.addClass("hidden");
+			$local.$divAnioFin.addClass("hidden");
+			if($local.tablaResultadosInfraccion){
+				$local.tablaResultadosInfraccion.clear().draw();	
+			}
+		   }
+	});
+	
+	
+	$local.$limpiarmf.on('click', function() {
+			var f ={
+					"facultades":-1,
+					"areasEstudio":-1
+			}
+			console.log(f);
+			$funcionUtil.llenarFormulario(f,$formMasFrecuentes);
+			$('#selectMEscuela').addClass("hidden");
+            $local.tablaResultadosMasFrecuentes.clear().draw();
+            $local.tablaResultadosMasFrecuentesEscuela.clear().draw();
+            $local.tablaResultadosMasFrecuentesFacultad.clear().draw();
+			
+		
+		});
 	
 	function eliminarVacios(jsonx){
 	    for (var clave in jsonx) {
