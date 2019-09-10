@@ -2569,7 +2569,7 @@ $(document).ready(function() {
 						//Dibujando tabla
 						//$local.tablaResultadosInfraccion.rows.add(response).draw();
 						//Dibujando grafico
-						var chart = AmCharts.makeChart('chartdiv',$funcionGraficoUtil.crearGraficoPie(response,'segmento','numeroInfracciones','Análisis de Infracciones','Número de Infracciones', "<b style='font-size:12px'>[[title]]</b> ([[percents]]%) </br>  <b>Infracciones:</b> [[value]] </br> <b>Sancionados: </b> [[numeroSancionados]] <br> <b>Infracciones Prom: </b> [[numeroInfraccionesPromedioPorAlumno]]"));
+						var chart = AmCharts.makeChart('chartdivin',$funcionGraficoUtil.crearGraficoPie(response,'segmento','numeroInfracciones','Análisis de Infracciones','Número de Infracciones', "<b style='font-size:12px'>[[title]]</b> ([[percents]]%) </br>  <b>Infracciones:</b> [[value]] </br> <b>Sancionados: </b> [[numeroSancionados]] <br> <b>Infracciones Prom: </b> [[numeroInfraccionesPromedioPorAlumno]]"));
 					},
 					error : function(response) {
 					},
@@ -2649,7 +2649,7 @@ $(document).ready(function() {
 							//Dibujando tabla
 							$local.tablaResultadosInfraccion.rows.add(response).draw();
 							//Dibujando grafico
-							var chart = AmCharts.makeChart('chartdiv',$funcionGraficoUtil.crearGraficoBarras(response,'ejeX','numeroInfracciones','Análisis de Infracciones por periodo','Número de Infracciones','<b>Periodo:</b> [[category]] </br> <b>Infracciones:</b> [[value]] </br> <b>Número de sancionados: </b> [[numeroSancionados]] </br> <b>Num Infracc. Prom: </b> [[numeroInfraccionesPromedioPorAlumno]]'));
+							var chart = AmCharts.makeChart('chartdivin',$funcionGraficoUtil.crearGraficoBarras(response,'ejeX','numeroInfracciones','Análisis de Infracciones por periodo','Número de Infracciones','<b>Periodo:</b> [[category]] </br> <b>Infracciones:</b> [[value]] </br> <b>Número de sancionados: </b> [[numeroSancionados]] </br> <b>Num Infracc. Prom: </b> [[numeroInfraccionesPromedioPorAlumno]]'));
 						},
 						error : function(response) {
 						},
@@ -2858,7 +2858,7 @@ $(document).ready(function() {
 										//Dibujando tabla
 		                                //$local.tablaResultadosPrestamo.rows.add(data).draw();
 										//Dibujando grafico
-										var chart = AmCharts.makeChart('chartdiv',$funcionGraficoUtil.crearGraficoBarrasSegmentado(data,resultGraph,'ejeX','Cantidad de Infracciones',presentacion,'Infracciones por criterio'));
+										var chart = AmCharts.makeChart('chartdivin',$funcionGraficoUtil.crearGraficoBarrasSegmentado(data,resultGraph,'ejeX','Cantidad de Infracciones',presentacion,'Infracciones por criterio'));
 										data = [];
 										resultGraph = [];
 										arrayJSONX = [];
@@ -3031,7 +3031,7 @@ $(document).ready(function() {
 										//Dibujando tabla
 		                                //$local.tablaResultadosPrestamo.rows.add(data).draw();
 										//Dibujando grafico
-										var chart = AmCharts.makeChart('chartdiv',$funcionGraficoUtil.crearGraficoBarrasSegmentado(data,resultGraph,'ejeX','Cantidad de Infracciones',presentacion,'Infracciones por criterio'));
+										var chart = AmCharts.makeChart('chartdivin',$funcionGraficoUtil.crearGraficoBarrasSegmentado(data,resultGraph,'ejeX','Cantidad de Infracciones',presentacion,'Infracciones por criterio'));
 										data = [];
 										resultGraph = [];
 										arrayJSONX = [];
@@ -3183,7 +3183,7 @@ $(document).ready(function() {
 									//Dibujando tabla
 	                                //$local.tablaResultadosPrestamo.rows.add(data).draw();
 									//Dibujando grafico
-									var chart = AmCharts.makeChart('chartdiv',$funcionGraficoUtil.crearGraficoBarrasSegmentado(data,resultGraph,'ejeX','Cantidad de Infracciones',presentacion,'Infracciones por criterio'));
+									var chart = AmCharts.makeChart('chartdivin',$funcionGraficoUtil.crearGraficoBarrasSegmentado(data,resultGraph,'ejeX','Cantidad de Infracciones',presentacion,'Infracciones por criterio'));
 									data = [];
 									resultGraph = [];
 									arrayJSONX = [];
@@ -3354,7 +3354,7 @@ $(document).ready(function() {
 										//Dibujando tabla
 		                                //$local.tablaResultadosPrestamo.rows.add(data).draw();
 										//Dibujando grafico
-										var chart = AmCharts.makeChart('chartdiv',$funcionGraficoUtil.crearGraficoBarrasSegmentado(data,resultGraph,'ejeX','Cantidad de Infracciones',presentacion,'Infracciones por criterio'));
+										var chart = AmCharts.makeChart('chartdivin',$funcionGraficoUtil.crearGraficoBarrasSegmentado(data,resultGraph,'ejeX','Cantidad de Infracciones',presentacion,'Infracciones por criterio'));
 										data = [];
 										resultGraph = [];
 										arrayJSONX = [];
@@ -3465,7 +3465,7 @@ $(document).ready(function() {
 							//Dibujando tabla
 							//$local.tablaResultadosInfraccion.rows.add(response).draw();
 							//Dibujando grafico
-							var chart = AmCharts.makeChart('chartdiv',$funcionGraficoUtil.crearGraficoBarras(response,'ejeX','numeroInfracciones','Análisis de Infracciones ' ,'Cantidad de Infracciones','<b>'+ejeX+':</b> [[category]] </br> <b>Infracciones:</b> [[value]] </br> <b>Sancionados: </b> [[numeroSancionados]] </br> <b>Infracciones Prom: </b> [[numeroInfraccionesPromedioPorAlumno]]'));
+							var chart = AmCharts.makeChart('chartdivin',$funcionGraficoUtil.crearGraficoBarras(response,'ejeX','numeroInfracciones','Análisis de Infracciones ' ,'Cantidad de Infracciones','<b>'+ejeX+':</b> [[category]] </br> <b>Infracciones:</b> [[value]] </br> <b>Sancionados: </b> [[numeroSancionados]] </br> <b>Infracciones Prom: </b> [[numeroInfraccionesPromedioPorAlumno]]'));
 						},
 						error : function(response) {
 						},
@@ -3673,7 +3673,7 @@ $(document).ready(function() {
 										//Dibujando tabla
 		                                //$local.tablaResultadosPrestamo.rows.add(data).draw();
 										//Dibujando grafico
-										var chart = AmCharts.makeChart('chartdiv',$funcionGraficoUtil.crearGraficoBarrasSegmentado(data,resultGraph,'ejeX','Cantidad de Infracciones',presentacion,'Infracciones por criterio'));
+										var chart = AmCharts.makeChart('chartdivin',$funcionGraficoUtil.crearGraficoBarrasSegmentado(data,resultGraph,'ejeX','Cantidad de Infracciones',presentacion,'Infracciones por criterio'));
 										data = [];
 										resultGraph = [];
 										arrayJSONX = [];
@@ -3846,7 +3846,7 @@ $(document).ready(function() {
 										//Dibujando tabla
 		                                //$local.tablaResultadosPrestamo.rows.add(data).draw();
 										//Dibujando grafico
-										var chart = AmCharts.makeChart('chartdiv',$funcionGraficoUtil.crearGraficoBarrasSegmentado(data,resultGraph,'ejeX','Cantidad de Infracciones',presentacion,'Infracciones por criterio'));
+										var chart = AmCharts.makeChart('chartdivin',$funcionGraficoUtil.crearGraficoBarrasSegmentado(data,resultGraph,'ejeX','Cantidad de Infracciones',presentacion,'Infracciones por criterio'));
 										data = [];
 										resultGraph = [];
 										arrayJSONX = [];
@@ -3994,7 +3994,7 @@ $(document).ready(function() {
 									//Dibujando tabla
 	                                //$local.tablaResultadosPrestamo.rows.add(data).draw();
 									//Dibujando grafico
-									var chart = AmCharts.makeChart('chartdiv',$funcionGraficoUtil.crearGraficoBarrasSegmentado(data,resultGraph,'ejeX','Cantidad de Infracciones',presentacion,'Infracciones por criterio'));
+									var chart = AmCharts.makeChart('chartdivin',$funcionGraficoUtil.crearGraficoBarrasSegmentado(data,resultGraph,'ejeX','Cantidad de Infracciones',presentacion,'Infracciones por criterio'));
 									data = [];
 									resultGraph = [];
 									arrayJSONX = [];
@@ -4164,7 +4164,7 @@ $(document).ready(function() {
 										//Dibujando tabla
 		                                //$local.tablaResultadosPrestamo.rows.add(data).draw();
 										//Dibujando grafico
-										var chart = AmCharts.makeChart('chartdiv',$funcionGraficoUtil.crearGraficoBarrasSegmentado(data,resultGraph,'ejeX','Cantidad de Infracciones',presentacion,'Infracciones por criterio'));
+										var chart = AmCharts.makeChart('chartdivin',$funcionGraficoUtil.crearGraficoBarrasSegmentado(data,resultGraph,'ejeX','Cantidad de Infracciones',presentacion,'Infracciones por criterio'));
 										data = [];
 										resultGraph = [];
 										arrayJSONX = [];
@@ -4212,7 +4212,7 @@ $(document).ready(function() {
 					//Dibujando tabla
 					$local.tablaResultadosInfraccion.rows.add(response).draw();
 					//Dibujando grafico
-					var chart = AmCharts.makeChart('chartdiv',$funcionGraficoUtil.crearGraficoLineal(response,'ejeX','numeroInfracciones',"<b>Periodo:</b> [[category]] </br> <b>Infracciones:</b> [[value]] </br> <b>Sancionados: </b> [[numeroSancionados]] </br> <b>Infracc. Prom: </b> [[numeroInfraccionesPromedioPorAlumno]]"));
+					var chart = AmCharts.makeChart('chartdivin',$funcionGraficoUtil.crearGraficoLineal(response,'ejeX','numeroInfracciones',"<b>Periodo:</b> [[category]] </br> <b>Infracciones:</b> [[value]] </br> <b>Sancionados: </b> [[numeroSancionados]] </br> <b>Infracc. Prom: </b> [[numeroInfraccionesPromedioPorAlumno]]"));
 				},
 				error : function(response) {
 				},
@@ -4484,9 +4484,11 @@ $(document).ready(function() {
 	$('#cescuela').addClass("hidden"); // por defecto
 	$('#cmf').addClass("hidden");
 	$('#resultadoGraficomf').addClass("hidden"); // por defecto
+	$('#resultadoGraficoin').addClass("hidden"); // por defecto
 	$('#resultadoGraficof').addClass("hidden"); // por defecto
 	$('#resultadoGraficoe').addClass("hidden"); // por defecto
 	$('#mfescuela').addClass("hidden"); // por defecto
+	$('#cinf').addClass("hidden");
 	
 	$("#xd").find(".comun").on("click", function(){
 		$local.$tipoReporte = $(this).attr("key");
@@ -4504,6 +4506,9 @@ $(document).ready(function() {
 			$('#recurso').removeClass("hidden");
 			$('#tipoInfraccion').addClass("hidden");
 			$('#tipoEstado').addClass("hidden");
+			$('#resultadoGraficoin').addClass("hidden"); // por defecto
+			$('#resultadoGrafico').removeClass("hidden"); // por defecto
+			$('#cinf').addClass("hidden");
 			//agregar opcion recurso al seleccionar reporte de PRESTAMO
 			$('#selectSegmY').append($('<option>', {
 			    value: 'RECURSO',
@@ -4515,7 +4520,7 @@ $(document).ready(function() {
 			$('#selectSeries').find("option[value='TIPO_INFRACCION']").remove();
 		}
 		if($local.$tipoReporte=="I"){
-			$('#principal').removeClass("hidden");
+			$('#principal').addClass("hidden");
 			$local.$divTablaResumenPrestamo.addClass("hidden");
 			$local.$divTablaResumenMasFrecuentes.addClass("hidden");
 			$local.$divTablaResumenMasFrecuentesFacultad.addClass("hidden");
@@ -4528,6 +4533,9 @@ $(document).ready(function() {
 			$('#tipoInfraccion').removeClass("hidden");
 			$('#tipoEstado').removeClass("hidden");
 			$('#recurso').addClass("hidden");
+			$('#resultadoGraficoin').remove("hidden"); // por defecto
+			$('#resultadoGrafico').addClass("hidden"); // por defecto
+			$('#cinf').removeClass("hidden");
 			//agregar opcion Tipo de infraccion al seleccionar reporte de INFRACCION
 			$('#selectSegmY').append($('<option>', {
 			    value: 'TIPO_INFRACCION',
@@ -4539,7 +4547,7 @@ $(document).ready(function() {
 			    text: 'Tipo de Infraccion'
 			}));
 			// quitar opcion Recurso al seleccionar reporte de INFRACCION
-			$('#selectSegmY').find("option[value='RECURSO']").remove();  
+			$('#selectSegmY').find("option[value='RECURSO']").remove();
 		}
 		if($local.$tipoReporte=="M"){
 			$('#principal').addClass("hidden");
