@@ -553,7 +553,7 @@ $(document).ready(function() {
 				console.log(response);
 				$local.tablaResultadosMasFrecuentesFacultad.rows.add(response).draw();
 				var resultGraph = [];
-				for(i=0;i<10;i++){
+				for(i=0;i<response.length;i++){
 					var g = new Object();
 					g['balloonText'] = "<b style='font-size:12px'>[[title]]</b><br><span><b>Periodo : </b></span> [[category]]<br><span><b>Número Préstamos: </b> [[value]]";
 					g['fillAlphas'] = 0.8;
@@ -567,7 +567,7 @@ $(document).ready(function() {
 				}
 				//Dibujando grafico
 				var datanf =[];
-				for(i=0;i<10;i++){
+				for(i=0;i<response.length;i++){
 					var e = new Object();
 					e[response[i].facultad]= response[i].cantidad;
 					e['facultad']=response[i].facultad;
@@ -608,7 +608,7 @@ $(document).ready(function() {
 				console.log(response);
 				$local.tablaResultadosMasFrecuentesEscuela.rows.add(response).draw();
 				var resultGraph = [];
-				for(i=0;i<10;i++){
+				for(i=0;i<response.length;i++){
 					var g = new Object();
 					g['balloonText'] = "<b style='font-size:12px'>[[title]]</b><br><span><b>Periodo : </b></span> [[category]]<br><span><b>Número Préstamos: </b> [[value]]";
 					g['fillAlphas'] = 0.8;
@@ -622,7 +622,7 @@ $(document).ready(function() {
 				}
 				//Dibujando grafico
 				var datane =[];
-				for(i=0;i<10;i++){
+				for(i=0;i<response.length;i++){
 					var e = new Object();
 					e[response[i].escuela]= response[i].cantidad;
 					e['escuela']=response[i].escuela;
@@ -4635,9 +4635,15 @@ $(document).ready(function() {
 			$('#resultadoGraficomf').addClass("hidden");
 			$('#resultadoGraficof').addClass("hidden");
 			$('#resultadoGraficoe').addClass("hidden");
-            $local.tablaResultadosMasFrecuentes.clear().draw();
-            $local.tablaResultadosMasFrecuentesEscuela.clear().draw();
-            $local.tablaResultadosMasFrecuentesFacultad.clear().draw();
+			if($local.tablaResultadosMasFrecuentes){
+				$local.tablaResultadosMasFrecuentes.clear().draw();	
+			}
+			if($local.tablaResultadosMasFrecuentesEscuela){
+				$local.tablaResultadosMasFrecuentesEscuela.clear().draw();	
+			}
+			if($local.tablaResultadosMasFrecuentesFacultad){
+				$local.tablaResultadosMasFrecuentesFacultad.clear().draw();	
+			}
 		});
 	
 	function eliminarVacios(jsonx){
