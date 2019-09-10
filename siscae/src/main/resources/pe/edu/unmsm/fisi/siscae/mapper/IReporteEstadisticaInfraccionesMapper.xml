@@ -695,10 +695,10 @@
                             reporte.tipo_infraccion				as tipo_inf,
                             reporte.id_tipo_infraccion			as id_tipo_inf
 							FROM vw_reporte_infracciones reporte
-							WHERE (reporte.fecha_infraccion BETWEEN F_GENERADOR_FECHAS('INI', #{tipoPeriodo}, #{anioInicio}, #{mesInicio},null,null )  AND F_GENERADOR_FECHAS('FIN', #{tipoPeriodo}, #{anioFin}, #{mesFin},null,null))
+							WHERE (reporte.fecha_infraccion BETWEEN F_GENERADOR_FECHAS('INI', #{tipoPeriodo}, #{anioInicio}, null,null,null )  AND F_GENERADOR_FECHAS('FIN', #{tipoPeriodo},#{anioFin}, null,null,null))
 							) consulta
 							
-							WHERE consulta.est_inf='PENALIZADA' AND (consulta.fec_inf BETWEEN F_GENERADOR_FECHAS('INI', #{tipoPeriodo}, lista.anio, lista.mes,null,null )  AND F_GENERADOR_FECHAS('FIN', #{tipoPeriodo}, lista.anio,lista.mes,null,null))
+							WHERE consulta.est_inf='PENALIZADA' AND (consulta.fec_inf BETWEEN F_GENERADOR_FECHAS('INI', #{tipoPeriodo}, lista.anio, null,null,null )  AND F_GENERADOR_FECHAS('FIN', #{tipoPeriodo}, lista.anio,null,null,null))
 							
 							<if test="areasEstudio != null">
 						        AND consulta.id_area IN
@@ -741,7 +741,7 @@
 						    </if>
 			     		)						AS numeroSancionados,
 			     		
-						(SELECT COALESCE(AVG(F_CANTIDAD_INFRACCIONES(consulta.docu,F_GENERADOR_FECHAS('INI', #{tipoPeriodo}, lista.anio, lista.mes,null,null ) ,F_GENERADOR_FECHAS('FIN', #{tipoPeriodo}, lista.anio,lista.mes,null,null) )),0)
+						(SELECT COALESCE(AVG(F_CANTIDAD_INFRACCIONES(consulta.docu,F_GENERADOR_FECHAS('INI', #{tipoPeriodo}, lista.anio, null,null,null ) ,F_GENERADOR_FECHAS('FIN', #{tipoPeriodo}, lista.anio,null,null,null) )),0)
 			     FROM (SELECT 
 							DISTINCT(reporte.numero_documento) 	as docu,
 							reporte.estado_infraccion		   	as est_inf,
@@ -755,10 +755,10 @@
                             reporte.tipo_infraccion				as tipo_inf,
                             reporte.id_tipo_infraccion			as id_tipo_inf
 						FROM vw_reporte_infracciones reporte
-						WHERE (reporte.fecha_infraccion BETWEEN F_GENERADOR_FECHAS('INI', #{tipoPeriodo}, #{anioInicio}, #{mesInicio},null,null )  AND F_GENERADOR_FECHAS('FIN', #{tipoPeriodo}, #{anioFin}, #{mesFin},null,null))
+						WHERE (reporte.fecha_infraccion BETWEEN F_GENERADOR_FECHAS('INI', #{tipoPeriodo}, #{anioInicio}, null,null,null )  AND F_GENERADOR_FECHAS('FIN', #{tipoPeriodo},#{anioFin}, null,null,null))
 													
 					  ) consulta
-					  WHERE (consulta.fec_inf BETWEEN F_GENERADOR_FECHAS('INI', #{tipoPeriodo}, lista.anio, lista.mes,null,null )  AND F_GENERADOR_FECHAS('FIN', #{tipoPeriodo}, lista.anio,lista.mes,null,null))
+					  WHERE (consulta.fec_inf BETWEEN F_GENERADOR_FECHAS('INI', #{tipoPeriodo}, lista.anio,null,null,null )  AND F_GENERADOR_FECHAS('FIN', #{tipoPeriodo}, lista.anio,null,null,null))
 					  					  									
 							<if test="areasEstudio != null">
 						        AND consulta.id_area IN
