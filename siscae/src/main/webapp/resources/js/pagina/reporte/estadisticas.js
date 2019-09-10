@@ -145,9 +145,6 @@ $(document).ready(function() {
 		}else{
 			$local.$divPresentacion.addClass("hidden");
 		}
-		console.log(val);
-		console.log($local.$selectEjeX.val());
-		console.log($local.$selectSegmY.val());
 		switch($local.$selectSegmY.val()){
 		case "ESCUELA":{		
 			$('#selectEjeX').find("option[value='"+$local.$selectSegmY.val()+"']").remove();
@@ -188,10 +185,8 @@ $(document).ready(function() {
 		let title;
 		switch($local.$selectEjeX.val()){
 			case "PERIODO":{
-				console.log("p");
 				data = "ejeX",
 				title = "Periodo"
-				console.log("funciona mal ");
 				if($local.$opAreaEstudio == 'N' && ($local.$selectSegmY.val() != "AREA_ESTUDIO")){
 					$('#selectSegmY').append('<option  value="AREA_ESTUDIO">Area Estudios</option>');
 					$local.$opAreaEstudio = 'S';
@@ -205,8 +200,6 @@ $(document).ready(function() {
 			case "ESCUELA":{
 				data = "ejeX";
 				title = "Escuela",
-				console.log("funciona");
-				
 				$('#selectSegmY').find("option[value='"+$local.$selectEjeX.val()+"']").remove();
 				$local.$opEscuela = 'N';
 				if($local.$opAreaEstudio =='N' && ($local.$selectSegmY.val() != "AREA_ESTUDIO")){
@@ -296,6 +289,7 @@ $(document).ready(function() {
 	});
 	
 	$local.$selectMFacultad.on("change", function(){
+		console.log($local.$selectMFacultad.val());
 		if($('#selectMFacultad').val() != -1){
 			if($local.$cEscuela != 0){
 				$('#selectMEscuela').html("");
@@ -316,8 +310,7 @@ $(document).ready(function() {
 						$funcionUtil.notificarException($variableUtil.busquedaSinResultados, "fa-exclamation-circle", "Información", "info");
 						return;
 					}
-					
-					$('#mfescuela').removeAttr('hidden');
+					$('#mfescuela').removeClass('hidden');
 					var escuelas =[];
 					for(i=0;i<response.length;i++){
 						if(response[i].idFacultad == $local.$selectMFacultad.val()){
@@ -741,7 +734,7 @@ $(document).ready(function() {
 							};
 							ayuda['columnDefs']=cd;
 							ayuda['columns'] = c;
-							ayuda['data'] = response;
+							ayuda['data'] = data;
 							ayuda['dom'] = 'Blfrtip';
 							ayuda['buttons'] = {
 									"dom":{
@@ -2537,7 +2530,7 @@ $(document).ready(function() {
 						};
 						ayuda['columnDefs']=cd;
 						ayuda['columns'] = c;
-						ayuda['data'] = response;
+						ayuda['data'] = data;
 						ayuda['dom'] = 'Blfrtip';
 						ayuda['buttons'] = {
 								"dom":{
@@ -4479,6 +4472,7 @@ $(document).ready(function() {
 	$('#resultadoGraficomf').addClass("hidden"); // por defecto
 	$('#resultadoGraficof').addClass("hidden"); // por defecto
 	$('#resultadoGraficoe').addClass("hidden"); // por defecto
+	$('#mfescuela').addClass("hidden"); // por defecto
 	
 	$("#xd").find(".comun").on("click", function(){
 		$local.$tipoReporte = $(this).attr("key");
@@ -4584,7 +4578,6 @@ $(document).ready(function() {
 					"valSegY":"NINGUNA",
 					"valPresentacion":-1
 			}
-			console.log(f);
 			$funcionUtil.llenarFormulario(f,$formEstadisticas);
 			$local.$divPeriodoDia.addClass("hidden");
 			$local.$divSemanaInicio.addClass("hidden");
@@ -4593,12 +4586,16 @@ $(document).ready(function() {
 			$local.$divMesFin.addClass("hidden");
 			$local.$divAnioInicio.addClass("hidden");
 			$local.$divAnioFin.addClass("hidden");
+			$local.$divSerie.addClass("hidden");
+			$local.$divEjeX.addClass("hidden");
+			$local.$divSegmY.addClass("hidden");
+			$local.$divPresentacion.addClass("hidden");
+			
 			if($local.tablaResultadosPrestamo){
 				$local.tablaResultadosPrestamo.clear().draw();	
 			}
 			
 		}else{
-			console.log("funciona");
 			var f ={
 					"tipoPeriodo":-1,
 					"recurso":-1,
@@ -4609,7 +4606,6 @@ $(document).ready(function() {
 					"valSegY":"NINGUNA",
 					"valPresentacion":-1
 			}
-			console.log(f);
 			$funcionUtil.llenarFormulario(f,$formEstadisticas);
 			$local.$divPeriodoDia.addClass("hidden");
 			$local.$divSemanaInicio.addClass("hidden");
@@ -4618,6 +4614,10 @@ $(document).ready(function() {
 			$local.$divMesFin.addClass("hidden");
 			$local.$divAnioInicio.addClass("hidden");
 			$local.$divAnioFin.addClass("hidden");
+			$local.$divSerie.addClass("hidden");
+			$local.$divEjeX.addClass("hidden");
+			$local.$divSegmY.addClass("hidden");
+			$local.$divPresentacion.addClass("hidden");
 			if($local.tablaResultadosInfraccion){
 				$local.tablaResultadosInfraccion.clear().draw();	
 			}
@@ -4630,14 +4630,14 @@ $(document).ready(function() {
 					"facultades":-1,
 					"areasEstudio":-1
 			}
-			console.log(f);
 			$funcionUtil.llenarFormulario(f,$formMasFrecuentes);
-			$('#selectMEscuela').addClass("hidden");
+			$('#mfescuela').addClass("hidden");
+			$('#resultadoGraficomf').addClass("hidden");
+			$('#resultadoGraficof').addClass("hidden");
+			$('#resultadoGraficoe').addClass("hidden");
             $local.tablaResultadosMasFrecuentes.clear().draw();
             $local.tablaResultadosMasFrecuentesEscuela.clear().draw();
             $local.tablaResultadosMasFrecuentesFacultad.clear().draw();
-			
-		
 		});
 	
 	function eliminarVacios(jsonx){
