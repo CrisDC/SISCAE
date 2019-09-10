@@ -551,11 +551,17 @@ $(document).ready(function() {
 				}
 				//Dibujando tabla
 				console.log(response);
+				var c;
+				if(response.length>10){
+					c=10;
+				}else{
+					c=response.length
+				}
 				$local.tablaResultadosMasFrecuentesFacultad.rows.add(response).draw();
 				var resultGraph = [];
-				for(i=0;i<response.length;i++){
+				for(i=0;i<c;i++){
 					var g = new Object();
-					g['balloonText'] = "<b style='font-size:12px'>[[title]]</b><br><span><b>Periodo : </b></span> [[category]]<br><span><b>Número Préstamos: </b> [[value]]";
+					g['balloonText'] = "<b style='font-size:12px'>[[title]]</b><br><span><b>Facultad : </b></span> [[category]]<br><span><b>Número Préstamos: </b> [[value]]";
 					g['fillAlphas'] = 0.8;
 					g['labelText'] = "[[value]]";
 					g['labelPosition'] = "middle";
@@ -567,7 +573,7 @@ $(document).ready(function() {
 				}
 				//Dibujando grafico
 				var datanf =[];
-				for(i=0;i<response.length;i++){
+				for(i=0;i<c;i++){
 					var e = new Object();
 					e[response[i].facultad]= response[i].cantidad;
 					e['facultad']=response[i].facultad;
@@ -608,9 +614,15 @@ $(document).ready(function() {
 				console.log(response);
 				$local.tablaResultadosMasFrecuentesEscuela.rows.add(response).draw();
 				var resultGraph = [];
-				for(i=0;i<response.length;i++){
+				var c;
+				if(response.length>10){
+					c=10;
+				}else{
+					c=response.length
+				}
+				for(i=0;i<c;i++){
 					var g = new Object();
-					g['balloonText'] = "<b style='font-size:12px'>[[title]]</b><br><span><b>Periodo : </b></span> [[category]]<br><span><b>Número Préstamos: </b> [[value]]";
+					g['balloonText'] = "<b style='font-size:12px'>[[title]]</b><br><span><b>Escuela : </b></span> [[category]]<br><span><b>Número Préstamos: </b> [[value]]";
 					g['fillAlphas'] = 0.8;
 					g['labelText'] = "[[value]]";
 					g['labelPosition'] = "middle";
@@ -622,7 +634,7 @@ $(document).ready(function() {
 				}
 				//Dibujando grafico
 				var datane =[];
-				for(i=0;i<response.length;i++){
+				for(i=0;i<c;i++){
 					var e = new Object();
 					e[response[i].escuela]= response[i].cantidad;
 					e['escuela']=response[i].escuela;
@@ -631,11 +643,13 @@ $(document).ready(function() {
 				console.log(datane);
 				//Dibujando grafico
 				
-				$('#resultadoGraficoe').removeClass("hidden");
+				
 				var charte = AmCharts.makeChart('chartdive',$funcionGraficoUtil.crearGraficoBarrasSegmentado(datane,resultGraph,'escuela','Cantidad de Préstamos','regular','Prestamos por criterio'));
+				$('#resultadoGraficoe').removeClass("hidden");
+				
 				//Dibujando grafico
 				datane = [];
-				resultGraph = [];
+				resultGraph = []; 
 				//var chart = AmCharts.makeChart('chartdiv',$funcionGraficoUtil.crearGraficoPie(response,'segmento','numeroPrestamos','Análisis de Préstamos','Número de prestamos', "<b style='font-size:12px'>[[title]]</b> ([[percents]]%) <br> <b>Prestamos:</b> [[value]] </br> <b>Tiempo Total: </b> [[estadiaTotal]] <br> <b>Tiempo Prom: </b> [[estadiaPromedio]]"));
 			},
 			error : function(response) {
