@@ -181,7 +181,10 @@ $(document).ready(function() {
 						  "titles": [{
 								"text": tituloGrafico,
 								"size": 14
-						  }]
+						  }],
+						  "export": {
+							    "enabled": true
+							  },
 				}
 				return amChartPropiedadesGraficoPie;
 			},
