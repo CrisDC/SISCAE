@@ -184,7 +184,7 @@ $(document).ready(function() {
 						  }],
 						  "export": {
 							    "enabled": true
-							  },
+						   },
 				}
 				return amChartPropiedadesGraficoPie;
 			},
