@@ -243,57 +243,81 @@ $(document).ready(function(){
 		    		        	"idRecurso": idRecurso,
 		    		        	"numDocumentoSolicitante": valorRecibido
 		    		 };
-					
-					
+					 
 					 $.ajax({
-		                    url :  $variableUtil.root + "movimientoPrestamo",
-		                    type : 'POST',
-		                    data : JSON.stringify(prestamo),
-		                    beforeSend : function(xhr) {
-		        				xhr.setRequestHeader('Content-Type', 'application/json');
-		        				xhr.setRequestHeader("X-CSRF-TOKEN", $variableUtil.csrf);
-		        			},
-		        			statusCode : {
-		        				400 : function(response) {
-		        					swal(response.responseJSON);
-		        				},
-		        				500 : function(response) {
-		        					swal("Error", response.responseText, "warning");
-		        				}
-		        			},
-		        			success : function(response) {
-		        				//Siempre que pasa por aca, la petición es exitosa, no sirve response
-		        				//Se analiza que imagen ponerle al nuevo html
-		        				let cadenaHtml ='';
-		        				if(observacionRecurso == 'UBICADO CERCA A UN ENCHUFE'){
-		        					cadenaHtml += '<img src="'+enlaceRecurso+'/cubiculo_con_corriente_rojo.png" width="40" height="40"> ';
-		        				}else{
-		        					cadenaHtml += '<img src="'+enlaceRecurso+'/cubo_rojo.png" width="40" height="40"> ';
-		        				}
-		        				cadenaHtml += '<p class="numero">'+numRecurso+'</p><p class="ocupado">OCUPADO</p>';
-		        				cadenaHtml += '<button num="'+numRecurso+'" enlace="'+enlaceRecurso+'" observacion="'+observacionRecurso+'" key="'+idRecurso+'" class="invisible">SOLICITAR</button>'
-		        				//Se modifica el html
-		        				$('#recurso'+idRecurso).html(cadenaHtml);
-		        				//Se visualiza que la petición fue exitosa
-		        				swal({
-			      					  title: "Peticion realizada con exito",
-			      					  text: "Usted esta prestando el recurso "+numRecurso,
-			      					  icon: "success",
-			      					  button: false,
-			      					  timer: 1400
-				      				});
-		        				
-		        			}
-	
-		    		 });
-	   			 
+ 	                    url :  $variableUtil.root + "solicitantesDetalles?accion=buscarPorCriterio&codigo="+prestamo.numDocumentoSolicitante,
+ 	                    type : 'GET',
+ 	                    beforeSend : function(xhr) {
+ 	        				xhr.setRequestHeader('Content-Type', 'application/json');
+ 	        				xhr.setRequestHeader("X-CSRF-TOKEN", $variableUtil.csrf);
+ 	        			},
+ 	        			statusCode : {
+ 	        				400 : function(response) {
+ 	        					swal(response.responseJSON);
+ 	        				},
+ 	        				500 : function(response) {
+ 	        					swal("Error", response.responseText, "warning");
+ 	        				}
+ 	        			},
+ 	        			success : function(response) {
+ 	        				console.log(response);
+ 	        				if(response[0].estado != "ACTIVO"){
+ 	        					swal("Error", "No se puede realizar prestamo", "warning");
+ 	        				}else{
+ 	        					 $.ajax({
+ 	    		                    url :  $variableUtil.root + "movimientoPrestamo",
+ 	    		                    type : 'POST',
+ 	    		                    data : JSON.stringify(prestamo),
+ 	    		                    beforeSend : function(xhr) {
+ 	    		        				xhr.setRequestHeader('Content-Type', 'application/json');
+ 	    		        				xhr.setRequestHeader("X-CSRF-TOKEN", $variableUtil.csrf);
+ 	    		        			},
+ 	    		        			statusCode : {
+ 	    		        				400 : function(response) {
+ 	    		        					swal(response.responseJSON);
+ 	    		        				},
+ 	    		        				500 : function(response) {
+ 	    		        					swal("Error", response.responseText, "warning");
+ 	    		        				}
+ 	    		        			},
+ 	    		        			success : function(response) {
+ 	    		        				//Siempre que pasa por aca, la petición es exitosa, no sirve response
+ 	    		        				//Se analiza que imagen ponerle al nuevo html
+ 	    		        				let cadenaHtml ='';
+ 	    		        				if(observacionRecurso == 'UBICADO CERCA A UN ENCHUFE'){
+ 	    		        					cadenaHtml += '<img src="'+enlaceRecurso+'/cubiculo_con_corriente_rojo.png" width="40" height="40"> ';
+ 	    		        				}else{
+ 	    		        					cadenaHtml += '<img src="'+enlaceRecurso+'/cubo_rojo.png" width="40" height="40"> ';
+ 	    		        				}
+ 	    		        				cadenaHtml += '<p class="numero">'+numRecurso+'</p><p class="ocupado">OCUPADO</p>';
+ 	    		        				cadenaHtml += '<button num="'+numRecurso+'" enlace="'+enlaceRecurso+'" observacion="'+observacionRecurso+'" key="'+idRecurso+'" class="invisible">SOLICITAR</button>'
+ 	    		        				//Se modifica el html
+ 	    		        				$('#recurso'+idRecurso).html(cadenaHtml);
+ 	    		        				//Se visualiza que la petición fue exitosa
+ 	    		        				swal({
+ 	    			      					  title: "Peticion realizada con exito",
+ 	    			      					  text: "Usted esta prestando el recurso "+numRecurso,
+ 	    			      					  icon: "success",
+ 	    			      					  button: false,
+ 	    			      					  timer: 1400
+ 	    				      				});
+ 	    		        				
+ 	    		        			}
+ 	    	
+ 	    		    		 });
+ 	    	   			 
+ 	    	   		
+ 	        				}
+ 	        			}
+ 				  });
+					
 	   		 }else{
-	   			 //Si entra acá el usuario ha cerrado el modal o introdujo algo vacío
-	   			 //NOTA ARREGLAR LA VISUALIZACION DE ESTE SWAL NO RECIBE EL UTF-8
-	   			 if(valorRecibido.length == 0){
-	   				 swal('El número de documento no puede estar vacío');
-					 }
-   		 	}
+ 	   			 //Si entra acá el usuario ha cerrado el modal o introdujo algo vacío
+ 	   			 //NOTA ARREGLAR LA VISUALIZACION DE ESTE SWAL NO RECIBE EL UTF-8
+ 	   			 if(valorRecibido.length == 0){
+ 	   				 swal('El número de documento no puede estar vacío');
+ 					 }
+    		 	}	
    	 	});
      });          
       $("#desocupar").click(function(){
@@ -512,7 +536,6 @@ function enviarDatosATabla(){
 		    	        				}
 		    	        			},
 		    	        			success : function(response) {
-		    	        				
 		    	        				if(response.length==0){
 		    	        					//Significa que es un documento de identidad
 		    	        					$.ajax({

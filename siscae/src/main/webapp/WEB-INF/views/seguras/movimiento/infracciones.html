@@ -66,9 +66,11 @@
 												<h3 >Registro de infracciones</h3>
 												
 												<label th:if="${existenIndividuales} == 1" >Recursos individuales</label>
+												<p th:if="${ocupadoi}==0">No hay prestamos realizados</p>
 												<div class="row" id="recursosOcupados">
-													
+										
 													<th:block th:each="prestamo : ${prestamos}">
+													    
 													
 														<div th:if = "(${prestamo.cantidadPrestamos} == 1) or (${prestamo.estado} == 'LIBERABLE')" 
 															 class = "recurso">
@@ -121,6 +123,8 @@
 													
 												</div>
 												<label th:if="${existenGrupales} == 1" >Recursos Grupales</label>
+												             <p th:if="${ocupadog}==0">No hay prestamos realizados</p>
+
 												<div class="row" id="recursosOcupadosGrupales">
 													
 													<th:block th:each="prestamo : ${recursosGrupales}">

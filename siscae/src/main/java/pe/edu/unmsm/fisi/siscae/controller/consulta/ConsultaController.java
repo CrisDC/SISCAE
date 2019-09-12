@@ -183,6 +183,8 @@ public @Controller class ConsultaController {
 		List<PrestamoRecursoTabla> listaRecursosGrupales = new ArrayList<>();
 		int existenGrupales=0;
 		int existenIndividuales=0;
+		int ocupadoi =0;
+		int ocupadog =0;
 		
 		for(int i=0;i<listaRecursosTabla.size();i++){
 			if(listaRecursosTabla.get(i).getMaxCapacidad()==1){
@@ -205,9 +207,23 @@ public @Controller class ConsultaController {
 		Collections.sort(listaRecursosIndividuales);
 		Collections.sort(listaRecursosGrupales); 
 		if(listaRecursosIndividuales.size()!=0){
+			int i =0;
+			while(ocupadoi==0 && i<listaRecursosIndividuales.size() ) {
+				if(listaRecursosIndividuales.get(i).getEstado().equals("OCUPADO")) {
+					ocupadoi=1;
+				}
+				i++;
+			}
 			existenIndividuales=1;
 		}
 		if(listaRecursosGrupales.size()!=0){
+			int i =0;
+			while(ocupadog==0 && i<listaRecursosGrupales.size() ) {
+				if(listaRecursosGrupales.get(i).getEstado().equals("OCUPADO")) {
+					ocupadog=1;
+				}
+				i++;
+			}
 			existenGrupales=1;
 		}
 		
@@ -238,6 +254,8 @@ public @Controller class ConsultaController {
 		model.addAttribute("consulta", consulta);
 		model.addAttribute("existenGrupales", existenGrupales);
 		model.addAttribute("existenIndividuales", existenIndividuales);
+		model.addAttribute("ocupadoi", ocupadoi);
+		model.addAttribute("ocupadog", ocupadog);
 		return CONSULTA_INFRACCIONES;
 	}
 
