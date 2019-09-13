@@ -22,6 +22,7 @@ import pe.edu.unmsm.fisi.siscae.model.consulta.PrestamoRecursoTabla;
 import pe.edu.unmsm.fisi.siscae.model.criterio.ConsultaAdministrativoCriterioBusqueda;
 import pe.edu.unmsm.fisi.siscae.model.criterio.ConsultaPrestamosCriterioBusqueda;
 import pe.edu.unmsm.fisi.siscae.model.mantenimiento.AreaAdministrativo;
+import pe.edu.unmsm.fisi.siscae.model.mantenimiento.EstadoTabla;
 import pe.edu.unmsm.fisi.siscae.model.mantenimiento.Usuario;
 import pe.edu.unmsm.fisi.siscae.service.IAdministrativoService;
 import pe.edu.unmsm.fisi.siscae.service.IAreaAdministrativoService;
@@ -66,10 +67,26 @@ public @Controller class MantenimientoController
     @Audit(tipo = Tipo.RECURSO)
     @GetMapping("/{mantenimiento:recurso}")
     public String irPaginaMantenimientoRecurso(@PathVariable String mantenimiento, ModelMap model)
-    {
+    {   
+    	List<EstadoTabla> estados = this.estadoTablaService.buscarporTablaOrigen("MAE_RECURSO");
+    	List<EstadoTabla> estadosr = new ArrayList<EstadoTabla>();
+    	for(int i = 0;i<estados.size();i++) {
+    		if(estados.get(i).getIdEstadoTabla()==1) {
+    			EstadoTabla a = new EstadoTabla();
+    			a=estados.get(i);
+    			estadosr.add(a);
+    			System.out.println(estados.get(i).getIdEstadoTabla());
+    		}else if(estados.get(i).getIdEstadoTabla()==2) {
+    			EstadoTabla a = new EstadoTabla();
+    			a=estados.get(i);
+    			estadosr.add(a);
+    			System.out.println(estados.get(i).getIdEstadoTabla());
+    		}else { 	
+    		}
+    	}
         model.addAttribute("mantenimiento", mantenimiento);
         model.addAttribute("areaEstudio", this.areaEstudioService.buscarTodos());
-        model.addAttribute("estados",this.estadoTablaService.buscarporTablaOrigen("MAE_RECURSO"));
+        model.addAttribute("estados",estadosr);
         model.addAttribute("tipoRecursos", this.tipoRecursoService.buscarTodos());
         return "seguras/mantenimiento/mantenimiento";
         
@@ -221,7 +238,7 @@ public @Controller class MantenimientoController
         return "seguras/mantenimiento/mantenimiento";
     }
     
-    @Audit(tipo = Tipo.Usuario)
+    @Audit(tipo = Tipo.USUARIO)
     @GetMapping("/{mantenimiento:usuario}")
     public String irPaginaMantenimientoUsuario(@PathVariable String mantenimiento, ModelMap model)
     {
