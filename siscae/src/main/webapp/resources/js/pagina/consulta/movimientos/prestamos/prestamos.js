@@ -71,7 +71,6 @@ $(document).ready(function(){
     	    			success : function(response) {
     	    				console.log(recurso);
     	    				if(recurso.tipoRecurso=="MESA"){
-    	    					console.log("Ella no te ama");
     	    					let idRecurso = recurso.idRecurso;
     	    					let cadenaHtml = '';
     	    					let id = $('#recurso'+idRecurso+' button').attr('id');
@@ -262,7 +261,7 @@ $(document).ready(function(){
  	        			success : function(response) {
  	        				console.log(response);
  	        				if(response[0].estado != "ACTIVO"){
- 	        					swal("Error", "No se puede realizar prestamo", "warning");
+ 	        					swal("Error", "No se puede realizar prestamo por que se encuentra sancionado", "warning");
  	        				}else{
  	        					 $.ajax({
  	    		                    url :  $variableUtil.root + "movimientoPrestamo",
