@@ -133,8 +133,9 @@ $(document).ready(function() {
 			},
 			statusCode : {
 				400 : function(response) {
-					$funcionUtil.limpiarMensajesDeError($formMantenimiento);
-					$funcionUtil.mostrarMensajeDeError(response.responseJSON, $formMantenimiento);
+					response.responseText.length > $max_tamano_error ? 
+							swal("Error", "La operación no pudo realizarse con exito.", "warning") : 
+							swal("Error", response.responseText, "warning");
 				},
 				500 : function(response) {
 					response.responseText.length > $max_tamano_error ? 

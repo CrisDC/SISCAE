@@ -1,5 +1,5 @@
 $(document).ready(function() {
-
+	var $max_tamano_error = 200;
 	var $localDetalle = {
 		$tablaDetalleMantenimiento : $("#tablaDetalleMantenimiento"),
 		tablaDetalleMantenimiento : "",
@@ -232,22 +232,27 @@ $(document).ready(function() {
 									beforeSend : function(xhr) {
 										xhr.setRequestHeader('Content-Type', 'application/json');
 										xhr.setRequestHeader("X-CSRF-TOKEN", $variableUtil.csrf);
-									}
+									},
+									statusCode : {
+										400 : function(response) {
+											confirmar.close();
+											response.responseText.length > $max_tamano_error ? 
+													swal("Error", "La operación no pudo realizarse con exito.", "warning") : 
+													swal("Error", response.responseText, "warning");
+										},
+										500 : function(response) {
+											confirmar.close();
+											response.responseText.length > $max_tamano_error ? 
+													swal("Error", "La operación no pudo realizarse con exito.", "warning") : 
+													swal("Error", response.responseText, "warning");
+											
+										}
+									},
 								}).done(function(response) {
 									$funcionUtil.notificarException(response, "fa-check", "Aviso", "success");
 									$localDetalle.tablaDetalleMantenimiento.row($localDetalle.$filaDetalleSeleccionada).remove().draw(false);
 									confirmar.close();
-								}).fail(function(xhr) {
-									confirmar.close();
-									switch (xhr.status) {
-									case 400:
-										$funcionUtil.notificarException($funcionUtil.obtenerMensajeErrorEnCadena(xhr.responseJSON), "fa-warning", "Aviso", "warning");
-										break;
-									case 409:
-										var mensaje = $funcionUtil.obtenerMensajeError("La tabla <b>" + multiTabDet.idTabla + " - " + multiTabDet.descripcion + "</b>", xhr.responseJSON, $variableUtil.accionEliminado);
-										$funcionUtil.notificarException(mensaje, "fa-warning", "Aviso", "warning");
-										break;
-									}
+
 								});
 							},
 							buttons : {

@@ -1,4 +1,5 @@
 $(document).ready(function() {
+	var $max_tamano_error = 200;
 	var $local = {
 		$tablaMantenimiento : $("#tablaMantenimiento"),
 		tablaMantenimiento : "",
@@ -10,10 +11,7 @@ $(document).ready(function() {
 		idAdministrativoSeleccionado : "",
 		$selectPersona: $("#idPersona"),
 	}
-	$formMantenimiento = $("#formMantenimiento");
- 
-	$.fn.dataTable.ext.errMode = 'none';
-	
+
 	//Inicializa el selector de persona
 	$local.$selectPersona.select2({
 	  "width" : "100%",
@@ -43,7 +41,7 @@ $(document).ready(function() {
 		}
 	  },
 	  minimumInputLength: 1,
-	  placeholder : "Ingrese Documento o Nombres",
+	  placeholder : "Ingrese Documento  o Nombres",
 	  language : {
 		noResults : function() {
 			return "No se encontró resultados.";
@@ -58,7 +56,11 @@ $(document).ready(function() {
 	  "width" : "100%",
 	  "dropdownAutoWidth" : true	  
 	});
-
+	
+	$formMantenimiento = $("#formMantenimiento");
+	 
+	$.fn.dataTable.ext.errMode = 'none';
+	
 	$local.$tablaMantenimiento.on('xhr.dt', function(e, settings, json, xhr) {
 		switch (xhr.status) {
 		case 500:
@@ -132,6 +134,8 @@ $(document).ready(function() {
 		$local.$actualizarMantenimiento.addClass("hidden");
 		$local.$registrarMantenimiento.removeClass("hidden");
 		//$local.$modalMantenimiento.PopupWindow("open");
+		$local.$selectPersona.html("");
+		$local.$selectPersona.prop('disabled', false);
 	});
 
 	$local.$modalMantenimiento.on("open.popupwindow", function() {
@@ -177,11 +181,13 @@ $(document).ready(function() {
 			},
 			statusCode : {
 				400 : function(response) {
-					swal(response.responseJSON);
-				},
+					response.responseText.lenght > $max_tamano_error ?
+							swal("Error", "La operación no pudo realizarse con exito.", "warning") : 
+							swal("Error", response.responseText, "warning");				},
 				500 : function(response) {
-					swal("Error", response.responseText, "warning");
-				}
+					response.responseText.length > $max_tamano_error ? 
+							swal("Error", "La operación no pudo realizarse con exito.", "warning") : 
+							swal("Error", response.responseText, "warning");				}
 			},
 			success : function(response) {
 				$funcionUtil.notificarException(response, "fa-check", "Aviso", "success");
@@ -246,11 +252,14 @@ $(document).ready(function() {
 			},
 			statusCode : {
 				400 : function(response) {
-					swal(response.responseJSON);
+					response.responseText.length > $max_tamano_error ? 
+							swal("Error", "La operación no pudo realizarse con exito.", "warning") : 
+							swal("Error", response.responseText, "warning");
 				},
 				500 : function(response) {
-					swal("Error", response.responseText, "warning");
-				}
+					response.responseText.length > $max_tamano_error ? 
+							swal("Error", "La operación no pudo realizarse con exito.", "warning") : 
+							swal("Error", response.responseText, "warning");				}
 			},
 			success : function(response) {
 				$funcionUtil.notificarException(response, "fa-check", "Aviso", "success");
@@ -295,22 +304,26 @@ $(document).ready(function() {
 									beforeSend : function(xhr) {
 										xhr.setRequestHeader('Content-Type', 'application/json');
 										xhr.setRequestHeader("X-CSRF-TOKEN", $variableUtil.csrf);
-									}
+									},
+									statusCode : {
+										400 : function(response) {
+											confirmar.close();
+											response.responseText.length > $max_tamano_error ? 
+													swal("Error", "La operación no pudo realizarse con exito.", "warning") : 
+													swal("Error", response.responseText, "warning");
+										},
+										500 : function(response) {
+											confirmar.close();
+											response.responseText.length > $max_tamano_error ? 
+													swal("Error", "La operación no pudo realizarse con exito.", "warning") : 
+													swal("Error", response.responseText, "warning");
+											
+										}
+									},
 								}).done(function(response) {
 									$funcionUtil.notificarException(response, "fa-check", "Aviso", "success");
 									$local.tablaMantenimiento.row($local.$filaSeleccionada).remove().draw(false);
-									confirmar.close();
-								}).fail(function(xhr) {
-									confirmar.close();
-									switch (xhr.status) {
-									case 400:
-										$funcionUtil.notificarException($funcionUtil.obtenerMensajeErrorEnCadena(xhr.responseJSON), "fa-warning", "Aviso", "warning");
-										break;
-									case 409:
-										var mensaje = $funcionUtil.obtenerMensajeError("El administrativo <b>" + administrativo.idAdministrativo + "</b>", xhr.responseJSON, $variableUtil.accionEliminado);
-										$funcionUtil.notificarException(mensaje, "fa-warning", "Aviso", "warning");
-										break;
-									}
+									confirmar.close()
 								});
 							},
 							buttons : {

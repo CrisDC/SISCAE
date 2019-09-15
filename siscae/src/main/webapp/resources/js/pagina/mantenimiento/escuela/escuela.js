@@ -267,7 +267,6 @@ $(document).ready(function() {
 		console.log(escuela);
 		$local.idEscuelaSeleccionado = escuela.idEscuela;
 		$funcionUtil.llenarFormulario(escuela, $formMantenimiento);
-		console.log($formMantenimiento);
 		$local.$actualizarMantenimiento.removeClass("hidden");
 		$local.$registrarMantenimiento.addClass("hidden");
 		//$local.$modalMantenimiento.PopupWindow("open");//asdadasdasdsadas
