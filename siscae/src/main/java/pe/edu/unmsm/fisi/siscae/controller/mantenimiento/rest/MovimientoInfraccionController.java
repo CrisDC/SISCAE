@@ -16,6 +16,7 @@ import pe.edu.unmsm.fisi.siscae.aspecto.enumeracion.Accion;
 import pe.edu.unmsm.fisi.siscae.aspecto.enumeracion.Comentario;
 import pe.edu.unmsm.fisi.siscae.configuracion.security.SecurityContextFacade;
 import pe.edu.unmsm.fisi.siscae.model.mantenimiento.MovimientoInfraccion;
+import pe.edu.unmsm.fisi.siscae.service.IMovimientoInfraccionLevantarService;
 import pe.edu.unmsm.fisi.siscae.service.IMovimientoInfraccionService;
 import pe.edu.unmsm.fisi.siscae.service.excepcion.BadRequestException;
 import pe.edu.unmsm.fisi.siscae.utilitario.ConstantesGenerales;
@@ -26,6 +27,9 @@ import pe.edu.unmsm.fisi.siscae.validacion.grupo.accion.IRegistro;
 public @RestController class MovimientoInfraccionController {
 
 	private @Autowired IMovimientoInfraccionService movimientoInfraccionService;
+	
+	private @Autowired IMovimientoInfraccionLevantarService movimientoInfraccionLevantarService;
+
 
 	@Audit(accion = Accion.REGISTRO, comentario = Comentario.Registro)
 	@PostMapping
@@ -41,5 +45,16 @@ public @RestController class MovimientoInfraccionController {
 		movimientoInfraccionService.registrarInfraccion(movimientoInfraccion);
 		return ResponseEntity.ok(ConstantesGenerales.REGISTRO_EXITOSO);
 	}
+	
+	
+	@Audit(accion = Accion.REGISTRO, comentario = Comentario.Registro)
+	@PostMapping
+	public void levantarInfraccion() {
+		
+		movimientoInfraccionLevantarService.levantarInfraccion();
+		
+		
+	}
+	
 
 }
