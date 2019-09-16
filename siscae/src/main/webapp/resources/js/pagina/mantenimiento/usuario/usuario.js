@@ -13,12 +13,19 @@ $(document).ready(function() {
 			$filaSeleccionada : "",		
 			arregloSiNo : [ "1", "0" ],
 			filtrosSeleccionables : {},
-
+            
 			$repetirContrasenia : $("#repetirContrasenia"),
 			requiereCambio : false,
 			$boton : $("#boton"),
-			$txtPassword : $("#txtPassword")
+			$txtPassword : $("#txtPassword"),
+			$selectEstadoTabla: $("#idEstadoTabla"),
+			$selectPersona: $("#idPersona"),
+			$selectRol : $("#idRol")
+			
 		};
+	$funcionUtil.crearSelect2($local.$selectEstadoTabla,"Seleccione el estado");
+	$funcionUtil.crearSelect2($local.$selectPersona,"Seleccione un administrativo");
+	$funcionUtil.crearSelect2($local.$selectRol,"Seleccione un Rol");
 	
 	$formUsuario = $("#formMantenimiento");
 	$formUsuarioModal = $("#formUsuarioModal");
@@ -113,12 +120,23 @@ $(document).ready(function() {
 
 	$local.$registrarUsuario.on("click", function() {
 		var us = $formUsuario.serializeJSON();
-		//console.log(usuario);
-		//usuario.requiereCambio = true;
+		console.log(us);
+		console.log(1);
+		console.log(Number(us.idRol));
+		var usuario = {
+				nombre : us.nombre,
+				pass : us.pass,
+				idEstadoTabla : Number(us.idEstadoTabla),
+				idRol : Number(us.idRol),
+				idPersona : Number(us.idPersona)
+		}
+		
+		console.log(usuario);
+		//usuario.requiereCambio = true;	
 		$.ajax({
 			type : "POST",
 			url : $variableUtil.root + "usuario",
-			data : JSON.stringify(us),
+			data : JSON.stringify(usuario),
 			beforeSend : function(xhr) {
 				$('#modalMantenimiento').modal('hide');
 				$local.$registrarUsuario.attr("disabled", true).find("i").removeClass("fa-floppy-o").addClass("fa-spinner fa-pulse fa-fw");
@@ -222,7 +240,7 @@ $(document).ready(function() {
 		$.confirm({
 			icon : "fa fa-info-circle",
 			title : "Aviso",
-			content : "¿Desea eliminar el Usuario <b>'" + usuario.idUsuario + "'<b/>?",
+			content : "¿Desea eliminar el Usuario <b>'" + usuario.nombre + "'<b/>?",
 			buttons : {
 				Aceptar : {
 					action : function() {

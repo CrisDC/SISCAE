@@ -1,4 +1,5 @@
 	$(document).ready(function() {
+		console.log("funciona");
 	$("#btnEnviarDatos").on("click",function(){
 				
 				var valida = 1;

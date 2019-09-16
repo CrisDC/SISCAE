@@ -38,7 +38,7 @@ public enum Tipo
     /*Seguridad*/
     Perfil("Perfil"),
     Recurso(""),
-    Usuario("Usuario"),
+    USUARIO("Usuario"),
     
     
     /*Movimientos*/

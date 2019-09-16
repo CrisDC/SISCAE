@@ -29,7 +29,7 @@ import pe.edu.unmsm.fisi.siscae.utilitario.ConstantesGenerales;
 import pe.edu.unmsm.fisi.siscae.utilitario.ValidatorUtil;
 import pe.edu.unmsm.fisi.siscae.validacion.grupo.accion.IRegistro;
 
-@Audit(tipo = Tipo.Usuario, datos = Dato.USUARIO)
+@Audit(tipo = Tipo.USUARIO, datos = Dato.USUARIO)
 @RequestMapping("/usuario")
 public @RestController class UsuarioController {
 

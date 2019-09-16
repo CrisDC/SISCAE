@@ -21,12 +21,12 @@ public class Usuario {
 	
 	@NotNull(message = "{NotNull.Usuario.username}")
     @NotBlank(message = "{NotBlank.Usuario.username}")
-    @Length(min = 3, max = 45, message = "{Length.CodigoProcesoSwitch.username}")
+    //@Length(min = 3, max = 45, message = "{Length.CodigoProcesoSwitch.username}")
 	private String nombre;
 	
 	@NotNull(message = "{NotNull.Usuario.pass}")
     @NotBlank(message = "{NotBlank.Usuario.pass}")
-    @Length(min = 3, max = 200, message = "{Length.CodigoProcesoSwitch.pass}")
+    //@Length(min = 3, max = 200, message = "{Length.CodigoProcesoSwitch.pass}")
 	private String pass;
 	
 	@NotNull(message = "{NotNull.Usuario.estado}")

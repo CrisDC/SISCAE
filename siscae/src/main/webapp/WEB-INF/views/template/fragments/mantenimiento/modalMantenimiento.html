@@ -663,7 +663,7 @@
 					<option value="" selected="selected" disabled="disabled">Seleccione el estado</option>
 					<option th:each="estado : ${estados}"
 						th:value="${estado.idEstadoTabla}"
-						th:text="|${estado.idEstadoTabla} - ${estado.descripcion}|"></option>
+						th:text="|${estado.descripcion}|"></option>
 				</select>
 			
 		</div>
@@ -674,7 +674,7 @@
 					<option value="" selected="selected" disabled="disabled">Seleccione
 						el rol</option>
 					<option th:each="rol : ${roles}" th:value="${rol.idRol}"
-						th:text="|${rol.idRol} - ${rol.nombre}|"></option>
+						th:text="|${rol.nombre}|"></option>
 				</select>
 		</div>
 		
