@@ -1,5 +1,5 @@
 $(document).ready(function() {
-	
+	var $max_tamano_error = 200;
 	var tdCodigo
 	var tdAppPaterno
 	var tdAppMaterno
@@ -248,11 +248,14 @@ $(document).ready(function() {
             				},
             				statusCode : {
             					400 : function(response) {
-            						swal(response.responseJSON);
+									response.responseText.length > $max_tamano_error ? 
+											swal("Error", "La operación no pudo realizarse con exito.", "warning") : 
+											swal("Error", response.responseText, "warning");
             					},
             					500 : function(response) {
-            						swal("Error", response.responseText, "warning");
-            					}
+									response.responseText.length > $max_tamano_error ? 
+											swal("Error", "La operación no pudo realizarse con exito.", "warning") : 
+											swal("Error", response.responseText, "warning");            					}
             				},
             				success : function(response) {
             					
@@ -282,11 +285,13 @@ $(document).ready(function() {
                 				},
                 				statusCode : {
                 					400 : function(response) {
-                						swal(response.responseJSON);
-                					},
+										response.responseText.length > $max_tamano_error ? 
+												swal("Error", "La operación no pudo realizarse con exito.", "warning") : 
+												swal("Error", response.responseText, "warning");                					},
                 					500 : function(response) {
-                						swal("Error", response.responseText, "warning");
-                					}
+										response.responseText.length > $max_tamano_error ? 
+												swal("Error", "La operación no pudo realizarse con exito.", "warning") : 
+												swal("Error", response.responseText, "warning");                					}
                 				},
                 				success : function(response) {
                 					
@@ -454,11 +459,13 @@ $(document).ready(function() {
       				},
       				statusCode : {
       					400 : function(response) {
-      						swal(response.responseJSON);
-      					},
+							response.responseText.length > $max_tamano_error ? 
+									swal("Error", "La operación no pudo realizarse con exito.", "warning") : 
+									swal("Error", response.responseText, "warning");      					},
       					500 : function(response) {
-      						swal("Error", response.responseText, "warning");
-      					},
+							response.responseText.length > $max_tamano_error ? 
+									swal("Error", "La operación no pudo realizarse con exito.", "warning") : 
+									swal("Error", response.responseText, "warning");      					},
       					409 : function(response) {
       						console.log(response);
       						swal("Error", "No se puede eliminar al solicitante "+tdNombre+" "+" "+tdAppPaterno+" "+tdAppMaterno+" con documento "+tdNumDocumento+" debido a que ha realizado prestamos de recursos, si desea eliminarlo consulte con el administrador", "warning");
