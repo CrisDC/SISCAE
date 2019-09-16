@@ -193,15 +193,12 @@ $(document).ready(function() {
 		}
 	});
 	
+	
 	$local.tblSancionados = $local.$tblSancionados.DataTable({
 		
 			"language" : {
 				"url": "//cdn.datatables.net/plug-ins/1.10.16/i18n/Spanish.json",
-				
-			},
-			"ajax":{
-				"url": $variableUtil.root + "Sancionados/accion=buscarPorCriterio",
-				"type" : 'GET'
+				"emptyTable" : "Ningún dato disponible en esta tabla." // Nuevo
 			},
 			"initComplete" : function() {
 				$local.$tblSancionados.wrap("<div class='table-responsive'></div>");
@@ -352,6 +349,35 @@ $(document).ready(function() {
 		$local.idPersonaSeleccionada = "";
 	});
 	
+	$('#san').on("click",function(){
+		console.log("sancionados")
+		$.ajax({
+			type : "GET",
+			url : $variableUtil.root + "Sancionados?accion=buscarPorCriterio",
+			//contentType : "application/json",
+			//data: criterioB,
+			//dataType : "json",
+			beforeSend : function(xhr) {
+				xhr.setRequestHeader('Content-Type', 'application/json');
+				//Borrando tabla antes de hacer la consulta
+				$local.tblSancionados.clear().draw();
+			},
+			success : function(response) {
+				console.log(response);
+				if (response.length === 0) {
+					$funcionUtil.notificarException($variableUtil.busquedaSinResultados, "fa-exclamation-circle", "Información", "info");
+					return;
+				}
+				//Dibujando tabla
+				
+				$local.tblSancionados.rows.add(response).draw();
+				//Dibujando grafico
+				//var chart = AmCharts.makeChart('chartdiv',$funcionGraficoUtil.crearGraficoPie(response,'segmento','numeroPrestamos','Análisis de Préstamos','Número de prestamos', "<b style='font-size:12px'>[[title]]</b> ([[percents]]%) <br> <b>Prestamos:</b> [[value]] </br> <b>Tiempo Total: </b> [[estadiaTotal]] <br> <b>Tiempo Prom: </b> [[estadiaPromedio]]"));
+			},
+			error : function(response) {
+			}
+		});
+	});
 	
 	$local.$actualizarMantenimiento.on("click", function() {
 		if (!$formMantenimiento.valid()) {

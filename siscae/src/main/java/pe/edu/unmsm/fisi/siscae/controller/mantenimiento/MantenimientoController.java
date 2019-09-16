@@ -238,7 +238,7 @@ public @Controller class MantenimientoController
         return "seguras/mantenimiento/mantenimiento";
     }
     
-    @Audit(tipo = Tipo.Usuario)
+    @Audit(tipo = Tipo.USUARIO)
     @GetMapping("/{mantenimiento:usuario}")
     public String irPaginaMantenimientoUsuario(@PathVariable String mantenimiento, ModelMap model)
     {
@@ -247,7 +247,7 @@ public @Controller class MantenimientoController
         model.addAttribute("roles", this.rolService.buscarTodos());
         model.addAttribute("administrativo", this.administrativoService.buscarConNombre());	
         model.addAttribute("estados", this.estadoTablaService.buscarporTablaOrigen("SEG_USUARIO"));
-        return "seguras/mantenimiento/mantenimiento";
+        return "seguras/mantenimiento/mantenimiento"; 
     }
     
 }
