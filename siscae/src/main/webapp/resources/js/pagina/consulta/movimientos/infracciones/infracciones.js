@@ -209,7 +209,7 @@ $(document).ready(function() {
 			}],
 			"columns" : [{
 				"data" : 'doc',
-				"title" : "Num. documento"
+				"title" : "Codigo"
 			}, {
 				"data" : 'apPat',
 				"title" : "Ap. Paterno"
@@ -221,10 +221,10 @@ $(document).ready(function() {
 				"title" : "Nombre"
 			}, {
 				"data" : 'fechaRe',
-				"title" : "Solicitante"
+				"title" : "Fecha Registro"
 			}, {
 				"data" : 'fechaLi',
-				"title" : "Detalle"
+				"title" : "Fecha Libre"
 			}, {
 				"data" : 'tiempo',
 				"title" : "Tiempo"
@@ -349,7 +349,7 @@ $(document).ready(function() {
 	});
 	
 	$('#san').on("click",function(){
-		console.log("sancionados")
+		
 		$.ajax({
 			type : "GET",
 			url : $variableUtil.root + "Sancionados?accion=buscarPorCriterio",
@@ -362,7 +362,7 @@ $(document).ready(function() {
 				$local.tblSancionados.clear().draw();
 			},
 			success : function(response) {
-				console.log(response);
+				//console.log(response);
 				if (response.length === 0) {
 					$funcionUtil.notificarException($variableUtil.busquedaSinResultados, "fa-exclamation-circle", "Información", "info");
 					return;
