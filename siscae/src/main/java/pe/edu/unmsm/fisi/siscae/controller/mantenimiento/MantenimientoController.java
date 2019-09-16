@@ -238,7 +238,7 @@ public @Controller class MantenimientoController
         return "seguras/mantenimiento/mantenimiento";
     }
     
-    @Audit(tipo = Tipo.USUARIO)
+    @Audit(tipo = Tipo.Usuario)
     @GetMapping("/{mantenimiento:usuario}")
     public String irPaginaMantenimientoUsuario(@PathVariable String mantenimiento, ModelMap model)
     {

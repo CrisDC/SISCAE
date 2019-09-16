@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="pe.edu.unmsm.fisi.siscae.mapper.ISancionadoMapper">
+
+	<select id="buscarPorCriterio" resultType="Sancionado">
+	
+		SELECT	
+				id_persona						AS		idPersona,
+				doc_identificador				AS		doc,
+				nombre							AS		nombre,
+				app_paterno						AS		appPat,
+				app_materno						AS		appMat,
+				fecha_registro					AS		fechaRe,
+				fecha_libre						AS		fechaLi,
+				tiempo_restante					AS		tiempo,
+				tipo_solicitante				AS		tipo
+			
+			FROM vw_solicitantes_sancionados
+				
+	
+	</select>
+
+</mapper>
