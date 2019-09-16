@@ -112,7 +112,7 @@
 			    
 				<if test="tipoPeriodo=='ANIO'">
 					<if test="( fechaInicio != null or fechaInicio !='') and ( fechaFin !=null or fechaFin !='')">
-						(mi.d_fecha BETWEEN (F_GENERADOR_FECHAS('INI', 'ANIO',#{anioInicio} ,null, null, null ))
+						AND (mi.d_fecha BETWEEN (F_GENERADOR_FECHAS('INI', 'ANIO',#{anioInicio} ,null, null, null ))
 					   AND (F_GENERADOR_FECHAS('FIN', 'ANIO',#{anioFin} ,null, null,null )))
 					</if>
 					
