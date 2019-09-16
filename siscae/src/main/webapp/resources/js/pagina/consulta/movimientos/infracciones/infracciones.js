@@ -195,10 +195,9 @@ $(document).ready(function() {
 	
 	
 	$local.tblSancionados = $local.$tblSancionados.DataTable({
-		
 			"language" : {
 				"url": "//cdn.datatables.net/plug-ins/1.10.16/i18n/Spanish.json",
-				"emptyTable" : "Ningún dato disponible en esta tabla." // Nuevo
+				"emptyTable" : "Ningún dato disponible en esta tabla." // Nuevo	
 			},
 			"initComplete" : function() {
 				$local.$tblSancionados.wrap("<div class='table-responsive'></div>");
