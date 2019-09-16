@@ -8,7 +8,7 @@
 				id_persona						AS		idPersona,
 				doc_identificador				AS		doc,
 				nombre							AS		nombre,
-				app_paterno						AS		appPat,
+				app_paterno						AS		apPat,
 				app_materno						AS		appMat,
 				fecha_registro					AS		fechaRe,
 				fecha_libre						AS		fechaLi,
