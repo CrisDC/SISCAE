@@ -3,6 +3,8 @@ $(document).ready(function() {
 	var $local = {
 		$tblConsulta : $("#tblSancionados"),
 		tblConsulta  : "",
+		$tblSancionados : $("#tblSancionadoss"),
+		tblSancionados  : "",
 		$actualizarMantenimiento : $("#actualizarMantenimiento"),
 		idPersonaSeleccionada : "",
 		fecha :"",
@@ -183,7 +185,67 @@ $(document).ready(function() {
 		$local.tblConsulta.column($(this).parent().index() + ':visible').search(val ? '^' + val + '$' : '', true, false).draw();
 	});
 	
+	$local.$tblSancionados.on('xhr.dt', function(e, settings, json, xhr) {
+		switch (xhr.status) {
+			case 500:
+				$local.tblSancionados.clear().draw();
+				break;
+		}
+	});
 	
+	$local.tblSancionados = $local.$tblSancionados.DataTable({
+		
+			"language" : {
+				"url": "//cdn.datatables.net/plug-ins/1.10.16/i18n/Spanish.json",
+				
+			},
+			"ajax":{
+				"url": $variableUtil.root + "Sancionados/accion=buscarPorCriterio",
+				"type" : 'GET'
+			},
+			"initComplete" : function() {
+				$local.$tblSancionados.wrap("<div class='table-responsive'></div>");
+				//$tablaFuncion.aniadirFiltroDeBusquedaEnEncabezado(this, $local.$tblConsulta);
+			},
+			"columnDefs" : [ {
+				"targets" : [ 0, 1, 2, 3, 4, 5, 6],
+				"className" : "all filtrable",
+			}],
+			"columns" : [{
+				"data" : 'doc',
+				"title" : "Num. documento"
+			}, {
+				"data" : 'apPat',
+				"title" : "Ap. Paterno"
+			}, {
+				"data" : 'appMat',
+				"title" : "Ap. Materno"
+			}, {
+				"data" : 'nombre',
+				"title" : "Nombre"
+			}, {
+				"data" : 'fechaRe',
+				"title" : "Solicitante"
+			}, {
+				"data" : 'fechaLi',
+				"title" : "Detalle"
+			}, {
+				"data" : 'tiempo',
+				"title" : "Tiempo"
+			}, {
+				"data" : 'tipo',
+				"title" : "Tipo"
+			}]
+		});
+		
+	$local.$tblSancionados.find("thead").on('keyup', 'input', function() {
+		$local.tblSancionados.column($(this).parent().index() + ':visible').search(this.value).draw();
+	});
+
+	$local.$tblSancionados.find("thead").on('change', 'select', function() {
+		var val = $.fn.dataTable.util.escapeRegex($(this).val());
+		$local.tblSancionados.column($(this).parent().index() + ':visible').search(val ? '^' + val + '$' : '', true, false).draw();
+	});
 	/* ------ fin Construcción de tablas ------------ */
 //	var $local = {
 //			$tblConsulta2 : $("#tblSancionados"),
