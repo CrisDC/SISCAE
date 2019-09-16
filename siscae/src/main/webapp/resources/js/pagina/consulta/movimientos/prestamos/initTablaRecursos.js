@@ -1,32 +1,5 @@
 $(document).ready(function(){
 	/* ---------- Construcción de tabla ---------- */
-	console.log("entro a cambio de estado sancionado");
-	$.ajax({
-         url :  $variableUtil.root + "movimientoInfraccion",
-         type : 'POST',
-         beforeSend : function(xhr) {
-				xhr.setRequestHeader('Content-Type', 'application/json');
-				xhr.setRequestHeader("X-CSRF-TOKEN", $variableUtil.csrf);
-			},
-			statusCode : {
-				400 : function(response) {
-					console.log(response);
-					//swal(response.responseJSON);
-				},
-				500 : function(response) {
-					console.log(response);
-					//swal("Error", response.responseText, "warning");
-				}
-			},
-			success : function(response) {
-				console.log(response);
-				//Siempre que pasa por aca, la petición es exitosa, no sirve response
-				//Se analiza que imagen ponerle al nuevo html
-				
-				
-			}
-
-	 });
 	var $local = {
 			$tblConsulta : $("#tblRecursos"),
 			tblConsulta  : ""
