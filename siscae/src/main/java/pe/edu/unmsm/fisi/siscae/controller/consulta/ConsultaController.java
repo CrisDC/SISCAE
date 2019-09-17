@@ -232,9 +232,12 @@ public @Controller class ConsultaController {
 		sancionados=consultaSancionadosService.buscarTodos();
 		int existenSancionados=0;
 		try {
-			if(sancionados.get(0).getDocIdentificador()!=null && sancionados.size()>0){
-				existenSancionados=1;
+			if(sancionados.size()!=0) {
+				if(sancionados.get(0).getDocIdentificador()!=null && sancionados.size()>0){
+					existenSancionados=1;
+				}
 			}
+			
 		}
 		catch(NullPointerException e){
 			existenSancionados=0;
