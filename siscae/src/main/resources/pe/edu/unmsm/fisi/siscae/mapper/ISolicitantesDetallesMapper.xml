@@ -31,11 +31,10 @@
 
 	<select id="buscarPorCriterio" resultType="SolicitantesDetalles">
 		<include refid="fragmentoSelectBuscarSolicitantesDetalles" />
-		<where>
-			<if test="codigo != null and codigo != '-1'">
-				vw_solicitantes.codigo = #{codigo}
-			</if>
-		</where>
+		<if test="codigo != null and codigo != '-1'">
+		   WHERE vw_solicitantes.codigo = #{codigo}
+			  OR vw_solicitantes.num_documento = #{codigo}
+		</if>
 	</select>
 	
 	<select id="buscarPorCriterio2" resultType="SolicitantesDetalles">

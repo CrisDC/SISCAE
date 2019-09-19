@@ -31,6 +31,7 @@ import pe.edu.unmsm.fisi.siscae.utilitario.ConstantesGenerales;
 import pe.edu.unmsm.fisi.siscae.utilitario.ValidatorUtil;
 import pe.edu.unmsm.fisi.siscae.validacion.grupo.accion.IActualizacion;
 import pe.edu.unmsm.fisi.siscae.validacion.grupo.accion.IRegistro;
+
 @Audit(tipo = Tipo.SOLICITANTE, datos = Dato.SOLICITANTE)
 @RequestMapping("/solicitante")
 public @RestController class SolicitanteController {
