@@ -43,7 +43,7 @@ $(document).ready(function(){
     			},
     			success : function(response) {
     				recurso = response.find(function(recurso) {
-    					  return recurso.codigoAlumno == inputValue;
+    					  return recurso.codigoAlumno == inputValue || recurso.numDocumento == inputValue ;
     				});
     				
     				//Solicito el fin de prestamo
@@ -70,7 +70,7 @@ $(document).ready(function(){
     	    			},
     	    			success : function(response) {
     	    				console.log(recurso);
-    	    				if(recurso.tipoRecurso=="MESA"){
+    	    				if(recurso.tipoRecurso =="MESA"){
     	    					let idRecurso = recurso.idRecurso;
     	    					let cadenaHtml = '';
     	    					let id = $('#recurso'+idRecurso+' button').attr('id');
