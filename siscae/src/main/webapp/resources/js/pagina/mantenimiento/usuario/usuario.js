@@ -211,6 +211,7 @@ $(document).ready(function() {
 			url : $variableUtil.root + "usuario",
 			data : JSON.stringify(usuario),
 			beforeSend : function(xhr) {
+				$('#modalMantenimiento').modal('hide');
 				$local.$actualizarUsuarioModal.attr("disabled", true).find("i").removeClass("fa-pencil-square").addClass("fa-spinner fa-pulse fa-fw");
 				xhr.setRequestHeader('Content-Type', 'application/json');
 				xhr.setRequestHeader("X-CSRF-TOKEN", $variableUtil.csrf);
@@ -223,7 +224,7 @@ $(document).ready(function() {
 			},
 			success : function(usuarios) {
 				$funcionUtil.notificarException($variableUtil.actualizacionExitosa, "fa-check", "Aviso", "success");
-				$local.tablaUsuarios.row($local.$filaSeleccionada).remove().draw(false);
+				/*$local.tablaUsuarios.row($local.$filaSeleccionada).remove().draw(false);
 				var usuario = usuarios[0];
 				var row = $local.tablaUsuarios.row.add({
 					"idUsuario" : usuario.idUsuario,
@@ -233,7 +234,8 @@ $(document).ready(function() {
 				row.show().draw(false);
 				$(row.node()).animateHighlight();
 				$funcionUtil.prepararFormularioRegistro($formUsuarioModal)
-				$local.$modalUsuario.PopupWindow("close");
+				$local.$modalUsuario.PopupWindow("close");*/
+				$local.tablaUsuarios.ajax.reload();
 			},
 			error : function(response) {
 			},
