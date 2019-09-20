@@ -10,6 +10,8 @@ $(document).ready(function() {
 			$filaSeleccionada : "",
 			$actualizarUsuario : $("#actualizarMantenimiento"),
 			codigo_usuarioSeleccionado : "",
+			nombre_usuarioSeleccionado : "",
+			pass_usuarioSeleccionado : "",
 			$filaSeleccionada : "",		
 			arregloSiNo : [ "1", "0" ],
 			filtrosSeleccionables : {},
@@ -27,6 +29,7 @@ $(document).ready(function() {
 	$funcionUtil.crearSelect2($local.$selectPersona,"Seleccione un administrativo");
 	$funcionUtil.crearSelect2($local.$selectRol,"Seleccione un Rol");
 	
+	$formMantenimiento = $("#formMantenimiento");
 	$formUsuario = $("#formMantenimiento");
 	$formUsuarioModal = $("#formUsuarioModal");
 	$local.$repetirContrasenia.hide();
@@ -57,14 +60,14 @@ $(document).ready(function() {
 
 		},
 		"columnDefs" : [ {
-			"targets" : [ 0 ],
+			"targets" : [ 0,1 ],
 			"className" : "all filtrable",
-		}, {
-			"targets" : 1,
-			"className" : "all seleccionable data-no-definida",
-			"render" : function(data, type, row) {
-				return $funcionUtil.insertarEtiquetaSiNo(row.activo);
-			}
+//		}, {
+//			"targets" : 0,
+//			"className" : "all seleccionable data-no-definida",
+//			"render" : function(data, type, row) {
+//				return $funcionUtil.insertarEtiquetaSiNo(row.activo);
+//			}
 		}, {
 			"targets" : 2,
 			"className" : "all dt-center",
@@ -81,7 +84,7 @@ $(document).ready(function() {
 				},
 				{
 					"data" : null,
-					"title" : 'Activo'
+					"title" : 'Accion'
 				}]
 	});
 	
@@ -178,7 +181,9 @@ $(document).ready(function() {
 		$local.$filaSeleccionada = $(this).parents("tr");
 		var usuario = $local.tablaUsuarios.row($local.$filaSeleccionada).data();
 		$local.codigo_usuarioSeleccionado = usuario.idUsuario;
-		console.log(usuario);
+		$local.nombre_usuarioSeleccionado = usuario.nombre;
+		$local.pass_usuarioSeleccionado = usuario.pass;
+		console.log($local.pass_usuarioSeleccionado);
 		$funcionUtil.llenarFormulario(usuario, $formUsuario);
 		$local.$txtPassword.attr("readonly", true);
 		$local.requiereCambio = false;
@@ -193,8 +198,12 @@ $(document).ready(function() {
 	
 	$local.$actualizarUsuario.on("click", function() {
 
-		var usuario = $formUsuarioModal.serializeJSON();
-		usuario.requiereCambio = $local.requiereCambio;
+		var usuario = $formMantenimiento.serializeJSON();
+		usuario.idUsuario =$local.codigo_usuarioSeleccionado;
+		usuario.nombre =$local.nombre_usuarioSeleccionado;
+		usuario.pass =$local.pass_usuarioSeleccionado;
+		//usuario.requiereCambio = $local.requiereCambio;
+		console.log(usuario);
 		console.log("cambio usuario : "+usuario);
 
 		$.ajax({
