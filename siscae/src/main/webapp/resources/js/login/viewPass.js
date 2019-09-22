@@ -5,7 +5,7 @@ $(document).ready(function(){
 	});
 	$('#show').mouseup(function(){
 		$('#inputPassword').attr('type','password');
-		$('#show1').addClass('fa-eye').removeClass('fa-eye-slash');
+		$('#show').addClass('fa-eye').removeClass('fa-eye-slash');
 	});
 	$('#show1').mousedown(function(){
 		$('#contraAnterior').removeAttr('type');
