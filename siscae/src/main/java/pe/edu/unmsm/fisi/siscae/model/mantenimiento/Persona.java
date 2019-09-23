@@ -64,11 +64,11 @@ public class Persona {
 	//@NotNull(message = "{NotNull.Persona.fechaNac}")
 	//@NotBlank(message = "{NotBlank.Persona.fechaNac}")
 	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd")
-    @NotNull(message = "{NotNull.Persona.fechaNac}")
+    //@NotNull(message = "{NotNull.Persona.fechaNac}")
 	private Date fechaNac;
 
-	@NotNull(message = "{NotNull.Persona.numTelef}")
-	@NotBlank(message = "{NotBlank.Persona.numTelef}")
+	//@NotNull(message = "{NotNull.Persona.numTelef}")
+	//@NotBlank(message = "{NotBlank.Persona.numTelef}")
 	@Length(min = 3, max = 20, message = "{Length.Persona.numTelef}", groups = IBasico.class)
 	private String numTelef;
 
