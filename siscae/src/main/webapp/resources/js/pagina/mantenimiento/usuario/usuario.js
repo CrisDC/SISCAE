@@ -304,5 +304,12 @@ $(document).ready(function() {
 		});
 	});
 
-	
+	$('#show').mousedown(function(){
+		$('#passw').removeAttr('type');
+		$('#show').addClass('fa-eye-slash').removeClass('fa-eye');
+	});
+	$('#show').mouseup(function(){
+		$('#passw').attr('type','password');
+		$('#show').addClass('fa-eye').removeClass('fa-eye-slash');
+	});
 });

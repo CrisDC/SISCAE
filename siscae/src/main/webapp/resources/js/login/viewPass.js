@@ -33,4 +33,5 @@ $(document).ready(function(){
 		$('#contraNuevaRep').attr('type','password');
 		$('#show3').addClass('fa-eye').removeClass('fa-eye-slash');
 	});
+
 });
