@@ -9,10 +9,8 @@
 	
 			SELECT
 				
-                mp.v_num_documento						AS		num_documento,
-			    mp.v_app_paterno						AS		app_paterno,
-			    mp.v_app_materno						AS		app_materno,
-			    mp.v_nombre								AS		nombre,
+                so.codigo								AS		num_documento,
+			    CONCAT(mp.v_app_paterno," ",mp.v_app_materno," ",mp.v_nombre)	AS		nombre,
                 F_TIPO_PERSONA(mp.v_num_documento)		AS		tipo_persona,
                 re.v_descripcion						AS 		recurso,
                 mtr.v_nombre							AS		tipo_recurso,
@@ -26,6 +24,7 @@
 			    
 			FROM mov_prestamo mpr
 			LEFT JOIN mae_persona mp			ON mpr.n_id_persona = mp.n_id_persona
+			LEFT JOIN vw_solicitantes so		ON mpr.n_id_persona = so.id_persona
             LEFT JOIN mae_recurso re			ON mpr.n_id_recurso = re.n_id_recurso
 	        LEFT JOIN mae_tipo_recurso 	mtr		ON mtr.n_id_tipo_recurso=re.n_id_tipo_recurso
 	        LEFT JOIN mae_area_estudio mae		ON mae.n_id_area_estudio=re.n_id_area_estudio

@@ -347,16 +347,10 @@ $(document).ready(function() {
 		}  ],
 		"columns" : [{
 			"data" : 'numDocumento',
-			"title" : "Num. documento"
-		}, {
-			"data" : 'appPaterno',
-			"title" : "Ap. Paterno"
-		}, {
-			"data" : 'appMaterno',
-			"title" : "Ap. Materno"
+			"title" : "Código"
 		}, {
 			"data" : 'nombre',
-			"title" : "Nombre"
+			"title" : "Nombres"
 		}, {
 			"data" : 'tipoPersona',
 			"title" : "Solicitante"
