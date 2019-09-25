@@ -220,21 +220,15 @@ $(document).ready(function() {
 			//$tablaFuncion.aniadirFiltroDeBusquedaEnEncabezado(this, $local.$tblConsulta);
 		},
 		"columnDefs" : [ {
-			"targets" : [ 0, 1, 2, 3, 4, 5, 6, 7 ],
+			"targets" : [ 0, 1, 2, 3, 4, 5],
 			"className" : "all filtrable",
 		}  ],
 		"columns" : [{
 			"data" : 'numDocumento',
-			"title" : "Num. documento"
-		}, {
-			"data" : 'appPaterno',
-			"title" : "Ap. Paterno"
-		}, {
-			"data" : 'appMaterno',
-			"title" : "Ap. Materno"
+			"title" : "Código"
 		}, {
 			"data" : 'nombre',
-			"title" : "Nombre"
+			"title" : "Nombres"
 		}, {
 			"data" : 'tipoPersona',
 			"title" : "Solicitante"
@@ -261,6 +255,11 @@ $(document).ready(function() {
 				text :'<i class="fa fa-file-excel-o"> Exportar Excel </i>',
 	            title:'Historial de Infracciones',
 	            autoFilter: true,
+			},{
+				extend: 'pdfHtml5',
+				text :'<i class="fa fa-file-pdf-o"> Exportar Pdf</i>',
+	            title:'Historial de Infracciones',
+	            orientation : 'portrait'
 			}]
 		}
 		
@@ -288,7 +287,7 @@ $(document).ready(function() {
 				"data" : 'numDocumento',
 				"title" : "Num. documento"
 			}, {
-				"data" : 'appPaterno',
+				"data" : 'appPaterno'+'appMaterno'+'nombre',
 				"title" : "Ap. Paterno"
 			}, {
 				"data" : 'appMaterno',
@@ -383,6 +382,11 @@ $(document).ready(function() {
 				text :'<i class="fa fa-file-excel-o"> Exportar Excel </i>',
 	            title:'Historial de Prestamos',
 	            autoFilter: true,
+			},{
+				extend: 'pdfHtml5',
+				text :'<i class="fa fa-file-pdf-o"> Exportar Pdf</i>',
+	            title:'Historial de Prestamos',
+	            orientation : 'portrait'
 			}]
 		}
 		

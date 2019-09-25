@@ -762,6 +762,11 @@ $(document).ready(function() {
 										text :'<i class="fa fa-file-excel-o"> Exportar Excel </i>',
 							            title:'Historial de Infracciones',
 							            autoFilter: true,
+									},{
+										extend: 'pdfHtml5',
+										text :'<i class="fa fa-file-pdf-o"> Exportar Pdf</i>',
+							            title:'Historial de Infracciones',
+							            orientation : 'portrait'
 									}]
 								};
 							dataObject.push(ayuda);
@@ -859,6 +864,11 @@ $(document).ready(function() {
 											text :'<i class="fa fa-file-excel-o"> Exportar Excel </i>',
 								            title:'Historial de Infracciones',
 								            autoFilter: true,
+										},{
+											extend: 'pdfHtml5',
+											text :'<i class="fa fa-file-pdf-o"> Exportar Pdf</i>',
+								            title:'Historial de Infracciones',
+								            orientation : 'portrait'
 										}]
 									};
 								dataObject.push(ayuda);
@@ -1060,6 +1070,11 @@ $(document).ready(function() {
 														text :'<i class="fa fa-file-excel-o"> Exportar Excel </i>',
 											            title:'Historial de Infracciones',
 											            autoFilter: true,
+													},{
+														extend: 'pdfHtml5',
+														text :'<i class="fa fa-file-pdf-o"> Exportar Pdf</i>',
+											            title:'Historial de Infracciones',
+											            orientation : 'portrait'
 													}]
 												};
 											dataObject.push(ayuda);
@@ -1234,6 +1249,11 @@ $(document).ready(function() {
 														text :'<i class="fa fa-file-excel-o"> Exportar Excel </i>',
 											            title:'Historial de Infracciones',
 											            autoFilter: true,
+													},{
+														extend: 'pdfHtml5',
+														text :'<i class="fa fa-file-pdf-o"> Exportar Pdf</i>',
+											            title:'Historial de Infracciones',
+											            orientation : 'portrait'
 													}]
 												};
 											dataObject.push(ayuda);
@@ -1383,6 +1403,11 @@ $(document).ready(function() {
 													text :'<i class="fa fa-file-excel-o"> Exportar Excel </i>',
 										            title:'Historial de Infracciones',
 										            autoFilter: true,
+												},{
+													extend: 'pdfHtml5',
+													text :'<i class="fa fa-file-pdf-o"> Exportar Pdf</i>',
+										            title:'Historial de Infracciones',
+										            orientation : 'portrait'
 												}]
 											};
 										dataObject.push(ayuda);
@@ -1555,6 +1580,11 @@ $(document).ready(function() {
 														text :'<i class="fa fa-file-excel-o"> Exportar Excel </i>',
 											            title:'Historial de Infracciones',
 											            autoFilter: true,
+													},{
+														extend: 'pdfHtml5',
+														text :'<i class="fa fa-file-pdf-o"> Exportar Pdf</i>',
+											            title:'Historial de Infracciones',
+											            orientation : 'portrait'
 													}]
 												};
 											dataObject.push(ayuda);
@@ -1660,6 +1690,11 @@ $(document).ready(function() {
 												text :'<i class="fa fa-file-excel-o"> Exportar Excel </i>',
 									            title:'Prestamos',
 									            autoFilter: true,
+											},{
+												extend: 'pdfHtml5',
+												text :'<i class="fa fa-file-pdf-o"> Exportar Pdf</i>',
+									            title:'Prestamos',
+									            orientation : 'portrait'
 											}]
 										}
 								});
@@ -1860,6 +1895,11 @@ $(document).ready(function() {
 														text :'<i class="fa fa-file-excel-o"> Exportar Excel </i>',
 											            title:'Historial de Infracciones',
 											            autoFilter: true,
+													},{
+														extend: 'pdfHtml5',
+														text :'<i class="fa fa-file-pdf-o"> Exportar Pdf</i>',
+											            title:'Historial de Infracciones',
+											            orientation : 'portrait'
 													}]
 												};
 											dataObject.push(ayuda);
@@ -2033,6 +2073,11 @@ $(document).ready(function() {
 														text :'<i class="fa fa-file-excel-o"> Exportar Excel </i>',
 											            title:'Historial de Infracciones',
 											            autoFilter: true,
+													},{
+														extend: 'pdfHtml5',
+														text :'<i class="fa fa-file-pdf-o"> Exportar Pdf</i>',
+											            title:'Historial de Infracciones',
+											            orientation : 'portrait'
 													}]
 												};
 											dataObject.push(ayuda);
@@ -2181,6 +2226,11 @@ $(document).ready(function() {
 													text :'<i class="fa fa-file-excel-o"> Exportar Excel </i>',
 										            title:'Historial de Infracciones',
 										            autoFilter: true,
+												},{
+													extend: 'pdfHtml5',
+													text :'<i class="fa fa-file-pdf-o"> Exportar Pdf</i>',
+										            title:'Historial de Infracciones',
+										            orientation : 'portrait'
 												}]
 											};
 										dataObject.push(ayuda);
@@ -2354,6 +2404,11 @@ $(document).ready(function() {
 														text :'<i class="fa fa-file-excel-o"> Exportar Excel </i>',
 											            title:'Historial de Infracciones',
 											            autoFilter: true,
+													},{
+														extend: 'pdfHtml5',
+														text :'<i class="fa fa-file-pdf-o"> Exportar Pdf</i>',
+											            title:'Historial de Infracciones',
+											            orientation : 'portrait'
 													}]
 												};
 											dataObject.push(ayuda);
@@ -2462,6 +2517,11 @@ $(document).ready(function() {
 										text :'<i class="fa fa-file-excel-o"> Exportar Excel </i>',
 							            title:'Prestamos',
 							            autoFilter: true,
+									},{
+										extend: 'pdfHtml5',
+										text :'<i class="fa fa-file-pdf-o"> Exportar Pdf</i>',
+							            title:'Prestamos',
+							            orientation : 'portrait'
 									}]
 								}
 						});
@@ -2558,6 +2618,11 @@ $(document).ready(function() {
 									text :'<i class="fa fa-file-excel-o"> Exportar Excel </i>',
 						            title:'Historial de Infracciones',
 						            autoFilter: true,
+								},{
+									extend: 'pdfHtml5',
+									text :'<i class="fa fa-file-pdf-o"> Exportar Pdf</i>',
+						            title:'Historial de Infracciones',
+						            orientation : 'portrait'
 								}]
 							};
 						dataObject.push(ayuda);
@@ -2643,6 +2708,11 @@ $(document).ready(function() {
 										text :'<i class="fa fa-file-excel-o"> Exportar Excel </i>',
 							            title:'Infracciones',
 							            autoFilter: true,
+									},{
+										extend: 'pdfHtml5',
+										text :'<i class="fa fa-file-pdf-o"> Exportar Pdf</i>',
+							            title:'Infracciones',
+							            orientation : 'portrait'
 									}]
 								}
 							});
@@ -2842,8 +2912,13 @@ $(document).ready(function() {
 												"buttons": [{
 													extend: 'excelHtml5',
 													text :'<i class="fa fa-file-excel-o"> Exportar Excel </i>',
-										            title:'Historial de Infracciones',
+										            title:'Infracciones',
 										            autoFilter: true,
+												},{
+													extend: 'pdfHtml5',
+													text :'<i class="fa fa-file-pdf-o"> Exportar Pdf</i>',
+										            title:'Infracciones',
+										            orientation : 'portrait'
 												}]
 											};
 										dataObject.push(ayuda);
@@ -3015,8 +3090,13 @@ $(document).ready(function() {
 												"buttons": [{
 													extend: 'excelHtml5',
 													text :'<i class="fa fa-file-excel-o"> Exportar Excel </i>',
-										            title:'Historial de Infracciones',
+										            title:'Infracciones',
 										            autoFilter: true,
+												},{
+													extend: 'pdfHtml5',
+													text :'<i class="fa fa-file-pdf-o"> Exportar Pdf</i>',
+										            title:'Infracciones',
+										            orientation : 'portrait'
 												}]
 											};
 										dataObject.push(ayuda);
@@ -3167,8 +3247,13 @@ $(document).ready(function() {
 											"buttons": [{
 												extend: 'excelHtml5',
 												text :'<i class="fa fa-file-excel-o"> Exportar Excel </i>',
-									            title:'Historial de Infracciones',
+									            title:'Infracciones',
 									            autoFilter: true,
+											},{
+												extend: 'pdfHtml5',
+												text :'<i class="fa fa-file-pdf-o"> Exportar Pdf</i>',
+									            title:'Infracciones',
+									            orientation : 'portrait'
 											}]
 										};
 									dataObject.push(ayuda);
@@ -3338,8 +3423,13 @@ $(document).ready(function() {
 												"buttons": [{
 													extend: 'excelHtml5',
 													text :'<i class="fa fa-file-excel-o"> Exportar Excel </i>',
-										            title:'Historial de Infracciones',
+										            title:'Infracciones',
 										            autoFilter: true,
+												},{
+													extend: 'pdfHtml5',
+													text :'<i class="fa fa-file-pdf-o"> Exportar Pdf</i>',
+										            title:'Infracciones',
+										            orientation : 'portrait'
 												}]
 											};
 										dataObject.push(ayuda);
@@ -3456,8 +3546,13 @@ $(document).ready(function() {
 									"buttons": [{
 										extend: 'excelHtml5',
 										text :'<i class="fa fa-file-excel-o"> Exportar Excel </i>',
-							            title:'Historial de Infracciones',
+							            title:'Infracciones',
 							            autoFilter: true,
+									},{
+										extend: 'pdfHtml5',
+										text :'<i class="fa fa-file-pdf-o"> Exportar Pdf</i>',
+							            title:'Infracciones',
+							            orientation : 'portrait'
 									}]
 								};
 							dataObject.push(ayuda);
@@ -3657,8 +3752,13 @@ $(document).ready(function() {
 												"buttons": [{
 													extend: 'excelHtml5',
 													text :'<i class="fa fa-file-excel-o"> Exportar Excel </i>',
-										            title:'Historial de Infracciones',
+										            title:'Infracciones',
 										            autoFilter: true,
+												},{
+													extend: 'pdfHtml5',
+													text :'<i class="fa fa-file-pdf-o"> Exportar Pdf</i>',
+										            title:'Infracciones',
+										            orientation : 'portrait'
 												}]
 											};
 										dataObject.push(ayuda);
@@ -3830,8 +3930,13 @@ $(document).ready(function() {
 												"buttons": [{
 													extend: 'excelHtml5',
 													text :'<i class="fa fa-file-excel-o"> Exportar Excel </i>',
-										            title:'Historial de Infracciones',
+										            title:'Infracciones',
 										            autoFilter: true,
+												},{
+													extend: 'pdfHtml5',
+													text :'<i class="fa fa-file-pdf-o"> Exportar Pdf</i>',
+										            title:'Infracciones',
+										            orientation : 'portrait'
 												}]
 											};
 										dataObject.push(ayuda);
@@ -3978,8 +4083,13 @@ $(document).ready(function() {
 											"buttons": [{
 												extend: 'excelHtml5',
 												text :'<i class="fa fa-file-excel-o"> Exportar Excel </i>',
-									            title:'Historial de Infracciones',
+									            title:'Infracciones',
 									            autoFilter: true,
+											},{
+												extend: 'pdfHtml5',
+												text :'<i class="fa fa-file-pdf-o"> Exportar Pdf</i>',
+									            title:'Infracciones',
+									            orientation : 'portrait'
 											}]
 										};
 									dataObject.push(ayuda);
@@ -4148,8 +4258,13 @@ $(document).ready(function() {
 												"buttons": [{
 													extend: 'excelHtml5',
 													text :'<i class="fa fa-file-excel-o"> Exportar Excel </i>',
-										            title:'Historial de Infracciones',
+										            title:'Infracciones',
 										            autoFilter: true,
+												},{
+													extend: 'pdfHtml5',
+													text :'<i class="fa fa-file-pdf-o"> Exportar Pdf</i>',
+										            title:'Infracciones',
+										            orientation : 'portrait'
 												}]
 											};
 										dataObject.push(ayuda);
@@ -4230,7 +4345,6 @@ $(document).ready(function() {
 		"language" : {
 			"emptyTable" : "No hay registros encontrados."
 		},
-		"pageLength": 10,
 		"initComplete" : function() {
 			$local.$tablaResultadosPrestamo.wrap("<div class='table-responsive'></div>");
 		},
@@ -4267,6 +4381,11 @@ $(document).ready(function() {
 				text :'<i class="fa fa-file-excel-o"> Exportar Excel </i>',
 	            title:'Prestamos',
 	            autoFilter: true,
+			},{
+				extend: 'pdfHtml5',
+				text :'<i class="fa fa-file-pdf-o"> Exportar Pdf</i>',
+	            title:'Prestamos',
+	            orientation : 'portrait'
 			}]
 		}
 	});
@@ -4287,7 +4406,6 @@ $(document).ready(function() {
 		"language" : {
 			"emptyTable" : "No hay registros encontrados."
 		},
-		"pageLength": 10,
 		"initComplete" : function() {
 			$local.$tablaResultadosInfraccion.wrap("<div class='table-responsive'></div>");
 		},
@@ -4324,6 +4442,11 @@ $(document).ready(function() {
 				text :'<i class="fa fa-file-excel-o"> Exportar Excel </i>',
 	            title:'Infracciones',
 	            autoFilter: true,
+			},{
+				extend: 'pdfHtml5',
+				text :'<i class="fa fa-file-pdf-o"> Exportar Pdf</i>',
+	            title:'Infracciones',
+	            orientation : 'portrait'
 			}]
 		}
 	});
@@ -4332,7 +4455,6 @@ $(document).ready(function() {
 		"language" : {
 			"emptyTable" : "No hay registros encontrados."
 		},
-		"pageLength": 10,
 		"initComplete" : function() {
 			$local.$tablaResultadosMasFrecuentes.wrap("<div class='table-responsive'></div>");
 		},
@@ -4369,6 +4491,11 @@ $(document).ready(function() {
 				text :'<i class="fa fa-file-excel-o"> Exportar Excel </i>',
 	            title:'Alumnos Mas Frecuentes',
 	            autoFilter: true,
+			},{
+				extend: 'pdfHtml5',
+				text :'<i class="fa fa-file-pdf-o"> Exportar Pdf</i>',
+	            title:'Alumnos Mas Frecuentes',
+	            orientation : 'portrait'
 			}]
 		},
 		"aoColumnDefs" : [ {
@@ -4385,7 +4512,6 @@ $(document).ready(function() {
 		"language" : {
 			"emptyTable" : "No hay registros encontrados."
 		},
-		"pageLength": 10,
 		"initComplete" : function() {
 			$local.$tablaResultadosMasFrecuentesFacultad.wrap("<div class='table-responsive'></div>");
 		},
@@ -4423,6 +4549,11 @@ $(document).ready(function() {
 					text :'<i class="fa fa-file-excel-o"> Exportar Excel </i>',
 		            title:'Facultades Mas Frecuentes',
 		            autoFilter: true,
+				},{
+					extend: 'pdfHtml5',
+					text :'<i class="fa fa-file-pdf-o"> Exportar Pdf</i>',
+		            title:'Facultades Mas Frecuentes',
+		            orientation : 'portrait'
 				}]
 			}
 		
@@ -4432,7 +4563,6 @@ $(document).ready(function() {
 		"language" : {
 			"emptyTable" : "No hay registros encontrados."
 		},
-		"pageLength": 10,
 		"initComplete" : function() {
 			$local.$tablaResultadosMasFrecuentesEscuela.wrap("<div class='table-responsive'></div>");
 		},
@@ -4470,6 +4600,11 @@ $(document).ready(function() {
 					text :'<i class="fa fa-file-excel-o"> Exportar Excel </i>',
 		            title:'Escuelas Mas Frecuentes',
 		            autoFilter: true,
+				},{
+					extend: 'pdfHtml5',
+					text :'<i class="fa fa-file-pdf-o"> Exportar Pdf</i>',
+		            title:'Escuelas Mas Frecuentes',
+		            orientation : 'portrait'
 				}]
 			}
 		
