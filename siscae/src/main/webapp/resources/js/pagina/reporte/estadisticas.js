@@ -701,7 +701,7 @@ $(document).ready(function() {
 								return;
 							}
 							//Dibujando tabla
-							console.log(response);
+							//console.log(response);
 							var data =[];
 							for(i=0;i<response.length;i++){
 								if(response[i].segmento != null){
@@ -760,12 +760,12 @@ $(document).ready(function() {
 									"buttons": [{
 										extend: 'excelHtml5',
 										text :'<i class="fa fa-file-excel-o"> Exportar Excel </i>',
-							            title:'Historial de Infracciones',
+							            title:'Prestamos',
 							            autoFilter: true,
 									},{
 										extend: 'pdfHtml5',
 										text :'<i class="fa fa-file-pdf-o"> Exportar Pdf</i>',
-							            title:'Historial de Infracciones',
+							            title:'Prestamos',
 							            orientation : 'portrait'
 									}]
 								};
@@ -785,7 +785,7 @@ $(document).ready(function() {
 			if(tipoGrafico == "BARRAS"){
 				if(ejeX=="PERIODO"){
 					if(segmentacionY=="NINGUNA"){
-						console.log("caso1,r");
+						console.log("caso1");
 						$.ajax({
 							type : "GET",
 							url : $variableUtil.root + "reporteEstadisticaPrestamos?accion=buscarPorPeriodoSinSegmentar"+criterio,
@@ -804,7 +804,7 @@ $(document).ready(function() {
 									return;
 								}
 								//Dibujando tabla
-								console.log(response);
+								//console.log(response);
 								var data =[];
 								for(i=0;i<response.length;i++){
 									var e = new Object();
@@ -814,7 +814,7 @@ $(document).ready(function() {
 									e['estadiaPromedio']=response[i].estadiaPromedio;
 									data.push(e);
 								}
-								console.log(data);
+								//console.log(data);
 								if($local.tablaResultadosPrestamo) { 
 									$local.tablaResultadosPrestamo.destroy(); 
 									$local.$tablaResultadosPrestamo.empty(); 
@@ -862,12 +862,12 @@ $(document).ready(function() {
 										"buttons": [{
 											extend: 'excelHtml5',
 											text :'<i class="fa fa-file-excel-o"> Exportar Excel </i>',
-								            title:'Historial de Infracciones',
+								            title:'Prestamos',
 								            autoFilter: true,
 										},{
 											extend: 'pdfHtml5',
 											text :'<i class="fa fa-file-pdf-o"> Exportar Pdf</i>',
-								            title:'Historial de Infracciones',
+								            title:'Prestamos',
 								            orientation : 'portrait'
 										}]
 									};
@@ -901,7 +901,7 @@ $(document).ready(function() {
 									$funcionUtil.notificarException($variableUtil.busquedaSinResultados, "fa-exclamation-circle", "Información", "info");
 									return;
 								}
-								console.log(response);
+								//console.log(response);
 								//Dando formato a respuesta del servidor
 								var data = [];
 								var aux;
@@ -918,7 +918,7 @@ $(document).ready(function() {
 								switch($local.$selectSegmY.val()){
 								case "ESCUELA":{		
 									arr = $local.$selectEscuela.val();
-									console.log(arr);
+									//console.log(arr);
 									$.ajax({
 										type : "GET",
 										url : $variableUtil.root + "escuela?accion=buscarTodos",
@@ -930,18 +930,18 @@ $(document).ready(function() {
 										},
 										
 										success : function(tr) {
-											console.log(tr);
+											//console.log(tr);
 
 											//Generando Leyenda
 											var resultGraph = [];
 											if(arr == "" ){
-											    console.log("funciono");
+											   // console.log("funciono");
 												var arrayJSONX = response[0].detalle;
 												arr = arrayJSONX;
 												
 											}else{
 												//eliminarVacios(data);
-												console.log($local.$selectEscuela.val());
+												//console.log($local.$selectEscuela.val());
 												var datos=[];
 												var j =0;
 												
@@ -958,10 +958,10 @@ $(document).ready(function() {
 													}
 													
 												}
-												console.log(datos);
+												//console.log(datos);
 												var arrayJSONX = [];
 												//var n = response[0].detalle;
-												console.log(response.length);
+												//console.log(response.length);
 												var datanuevo = [];
 												for (l=0;l<response.length;l++){
 													var n = response[l].detalle;
@@ -985,7 +985,7 @@ $(document).ready(function() {
 												}
 											}	
 												
-											console.log(datanuevo);
+											//console.log(datanuevo);
 
 											arrayJSONX.sort();								
 											for(i=0;i<arr.length;i++){
@@ -1009,10 +1009,10 @@ $(document).ready(function() {
 												presentacion='none';
 											}
 											//console.log(data);
-											console.log(arrayJSONX);	
-											console.log(data);
-											console.log(resultGraph);
-											console.log(Object.keys(data[0]));
+											//console.log(arrayJSONX);	
+											//console.log(data);
+											//console.log(resultGraph);
+											//console.log(Object.keys(data[0]));
 											if(arr==arrayJSONX){
 												var d = data;
 											}else{
@@ -1068,18 +1068,18 @@ $(document).ready(function() {
 													"buttons": [{
 														extend: 'excelHtml5',
 														text :'<i class="fa fa-file-excel-o"> Exportar Excel </i>',
-											            title:'Historial de Infracciones',
+											            title:'Prestamos',
 											            autoFilter: true,
 													},{
 														extend: 'pdfHtml5',
 														text :'<i class="fa fa-file-pdf-o"> Exportar Pdf</i>',
-											            title:'Historial de Infracciones',
+											            title:'Prestamos',
 											            orientation : 'portrait'
 													}]
 												};
 											dataObject.push(ayuda);
-											console.log(ayuda);
-											console.log(dataObject);
+											//console.log(ayuda);
+											//console.log(dataObject);
 
 											if($local.tablaResultadosPrestamo) { 
 												$local.tablaResultadosPrestamo.destroy(); 
@@ -1102,7 +1102,7 @@ $(document).ready(function() {
 								}
 								case "AREA_ESTUDIO":{
 									arr = $local.$selectAreaEstudio.val();
-									console.log(arr);
+									//console.log(arr);
 									$.ajax({
 										type : "GET",
 										url : $variableUtil.root + "areaEstudio?accion=buscarTodos",
@@ -1114,12 +1114,12 @@ $(document).ready(function() {
 										},
 										
 										success : function(tr) {
-											console.log(tr);
+											//console.log(tr);
 
 											//Generando Leyenda
 											var resultGraph = [];
 											if(arr == "" ){
-											    console.log("funciono");
+											    //console.log("funciono");
 												var arrayJSONX = response[0].detalle;
 												arr = arrayJSONX;
 												
@@ -1140,7 +1140,7 @@ $(document).ready(function() {
 													}
 													
 												}
-												console.log(datos);
+												//console.log(datos);
 												var arrayJSONX = [];
 												//var n = response[0].detalle;
 												console.log(response.length);
@@ -1167,7 +1167,7 @@ $(document).ready(function() {
 												}
 											}	
 												
-											console.log(datanuevo);
+											//console.log(datanuevo);
 
 											arrayJSONX.sort();								
 											for(i=0;i<arr.length;i++){
@@ -1191,11 +1191,11 @@ $(document).ready(function() {
 												presentacion='none';
 											}
 											//console.log(data);
-											console.log(arrayJSONX);
+											//console.log(arrayJSONX);
 											
-											console.log(data);
-											console.log(resultGraph);
-											console.log(Object.keys(data[0]));
+											//console.log(data);
+											//console.log(resultGraph);
+											//console.log(Object.keys(data[0]));
 											if(arr==arrayJSONX){
 													var d = data;
 											}else{
@@ -1247,18 +1247,18 @@ $(document).ready(function() {
 													"buttons": [{
 														extend: 'excelHtml5',
 														text :'<i class="fa fa-file-excel-o"> Exportar Excel </i>',
-											            title:'Historial de Infracciones',
+											            title:'Prestamos',
 											            autoFilter: true,
 													},{
 														extend: 'pdfHtml5',
 														text :'<i class="fa fa-file-pdf-o"> Exportar Pdf</i>',
-											            title:'Historial de Infracciones',
+											            title:'Prestamos',
 											            orientation : 'portrait'
 													}]
 												};
 											dataObject.push(ayuda);
-											console.log(ayuda);
-											console.log(dataObject);
+											//console.log(ayuda);
+											//console.log(dataObject);
 											if($local.tablaResultadosPrestamo) { 
 												$local.tablaResultadosPrestamo.destroy(); 
 												$local.$tablaResultadosPrestamo.empty(); 
@@ -1280,7 +1280,7 @@ $(document).ready(function() {
 								}
 								case "TIPO_SOLICITANTE":{
 									arr = $local.$selectSolicitante.val();
-									console.log(arr);
+									//console.log(arr);
 									//Generando Leyenda
 									var resultGraph = [];
 									if(arr==""){
@@ -1290,7 +1290,7 @@ $(document).ready(function() {
 										
 										var datos = [];
 										var j =0;
-										console.log(data[0][arr[0]]);
+										//console.log(data[0][arr[0]]);
 										
 										var arrayJSONX = [];
 										var datanuevo = [];
@@ -1319,7 +1319,7 @@ $(document).ready(function() {
 									}	
 									
 									
-									console.log(datanuevo);
+ 									//console.log(datanuevo);
 
 									arrayJSONX.sort();	
 									
@@ -1345,11 +1345,11 @@ $(document).ready(function() {
 											presentacion='none';
 										}
 										//console.log(data);
-										console.log(arrayJSONX);
+										//console.log(arrayJSONX);
 										
-										console.log(data);
-										console.log(resultGraph);
-										console.log(Object.keys(data[0]));
+										//console.log(data);
+										//console.log(resultGraph);
+										//console.log(Object.keys(data[0]));
 										if(arr==arrayJSONX){
 												var d = data;
 										}else{
@@ -1401,18 +1401,18 @@ $(document).ready(function() {
 												"buttons": [{
 													extend: 'excelHtml5',
 													text :'<i class="fa fa-file-excel-o"> Exportar Excel </i>',
-										            title:'Historial de Infracciones',
+										            title:'Prestamos',
 										            autoFilter: true,
 												},{
 													extend: 'pdfHtml5',
 													text :'<i class="fa fa-file-pdf-o"> Exportar Pdf</i>',
-										            title:'Historial de Infracciones',
+										            title:'Prestamos',
 										            orientation : 'portrait'
 												}]
 											};
 										dataObject.push(ayuda);
-										console.log(ayuda);
-										console.log(dataObject);
+										//console.log(ayuda);
+										//console.log(dataObject);
 										if($local.tablaResultadosPrestamo) { 
 											$local.tablaResultadosPrestamo.destroy(); 
 											$local.$tablaResultadosPrestamo.empty(); 
@@ -1433,7 +1433,7 @@ $(document).ready(function() {
 								}
 								case "RECURSO":{
 									arr = $local.$selectRecurso.val();
-									console.log(arr);
+									//console.log(arr);
 									$.ajax({
 										type : "GET",
 										url : $variableUtil.root + "tipoRecurso?accion=buscarTodos",
@@ -1445,12 +1445,12 @@ $(document).ready(function() {
 										},
 										
 										success : function(tr) {
-											console.log(tr);
+											//console.log(tr);
 
 											//Generando Leyenda
 											var resultGraph = [];
 											if(arr == "" ){
-											    console.log("funciono");
+											   // console.log("funciono");
 												var arrayJSONX = response[0].detalle;
 												arr = arrayJSONX;
 												
@@ -1471,10 +1471,10 @@ $(document).ready(function() {
 													}
 													
 												}
-												console.log(datos);
+												//console.log(datos);
 												var arrayJSONX = [];
 												//var n = response[0].detalle;
-												console.log(response.length);
+												//console.log(response.length);
 												var datanuevo = [];
 												for (l=0;l<response.length;l++){
 													var n = response[l].detalle;
@@ -1498,7 +1498,7 @@ $(document).ready(function() {
 												}
 											}	
 												
-											console.log(datanuevo);
+											//console.log(datanuevo);
 
 											arrayJSONX.sort();								
 											for(i=0;i<arr.length;i++){
@@ -1522,11 +1522,11 @@ $(document).ready(function() {
 												presentacion='none';
 											}
 											//console.log(data);
-											console.log(arrayJSONX);
+											//console.log(arrayJSONX);
 											
-											console.log(data);
-											console.log(resultGraph);
-											console.log(Object.keys(data[0]));
+											//console.log(data);
+											//console.log(resultGraph);
+											//console.log(Object.keys(data[0]));
 											if(arr==arrayJSONX){
 													var d = data;
 											}else{
@@ -1578,18 +1578,18 @@ $(document).ready(function() {
 													"buttons": [{
 														extend: 'excelHtml5',
 														text :'<i class="fa fa-file-excel-o"> Exportar Excel </i>',
-											            title:'Historial de Infracciones',
+											            title:'Prestamos',
 											            autoFilter: true,
 													},{
 														extend: 'pdfHtml5',
 														text :'<i class="fa fa-file-pdf-o"> Exportar Pdf</i>',
-											            title:'Historial de Infracciones',
+											            title:'Prestamos',
 											            orientation : 'portrait'
 													}]
 												};
 											dataObject.push(ayuda);
-											console.log(ayuda);
-											console.log(dataObject);
+											//console.log(ayuda);
+											//console.log(dataObject);
 											if($local.tablaResultadosPrestamo) { 
 												$local.tablaResultadosPrestamo.destroy(); 
 												$local.$tablaResultadosPrestamo.empty(); 
@@ -1626,7 +1626,7 @@ $(document).ready(function() {
 					}
 				}else{
 					if(segmentacionY=="NINGUNA"){
-						console.log("caso3,quitar lo q tiene cero?");
+						console.log("caso3");
 						$.ajax({
 							type : "GET",
 							url : $variableUtil.root + "reporteEstadisticaPrestamos?accion=buscarPorEjeXSinSegmentar"+criterio,
@@ -1644,7 +1644,7 @@ $(document).ready(function() {
 									$funcionUtil.notificarException($variableUtil.busquedaSinResultados, "fa-exclamation-circle", "Información", "info");
 									return;
 								}
-								console.log(response);
+								//console.log(response);
 								if($local.tablaResultadosPrestamo) { 
 									$local.tablaResultadosPrestamo.destroy(); 
 									$local.$tablaResultadosPrestamo.empty(); 
@@ -1711,7 +1711,7 @@ $(document).ready(function() {
 						});
 					}else{
 						
-						console.log("caso4,revisar");
+						console.log("caso4");
 						$.ajax({
 							type : "GET",
 							url : $variableUtil.root + "reporteEstadisticaPrestamos?accion=buscarPorEjeXSegmentado"+criterio,
@@ -1729,7 +1729,7 @@ $(document).ready(function() {
 									$funcionUtil.notificarException($variableUtil.busquedaSinResultados, "fa-exclamation-circle", "Información", "info");
 									return;
 								}
-								console.log(response);
+								//console.log(response);
 								//Dando formato a respuesta del servidor
 								var data = [];
 								var aux;
@@ -1746,7 +1746,7 @@ $(document).ready(function() {
 								switch($local.$selectSegmY.val()){
 								case "ESCUELA":{		
 									arr = $local.$selectEscuela.val();
-									console.log(arr);
+									//console.log(arr);
 									$.ajax({
 										type : "GET",
 										url : $variableUtil.root + "escuela?accion=buscarTodos",
@@ -1758,18 +1758,18 @@ $(document).ready(function() {
 										},
 										
 										success : function(tr) {
-											console.log(tr);
+											//console.log(tr);
 
 											//Generando Leyenda
 											var resultGraph = [];
 											if(arr == "" ){
-											    console.log("funciono");
+											    //console.log("funciono");
 												var arrayJSONX = response[0].detalle;
 												arr = arrayJSONX;
 												
 											}else{
 												//eliminarVacios(data);
-												console.log($local.$selectEscuela.val());
+												//console.log($local.$selectEscuela.val());
 												var datos=[];
 												var j =0;
 												
@@ -1786,7 +1786,7 @@ $(document).ready(function() {
 													}
 													
 												}
-												console.log(datos);
+												//console.log(datos);
 												var arrayJSONX = [];
 												//var n = response[0].detalle;
 												console.log(response.length);
@@ -1813,7 +1813,7 @@ $(document).ready(function() {
 												}
 											}	
 												
-											console.log(datanuevo);
+											//console.log(datanuevo);
 
 											arrayJSONX.sort();								
 											for(i=0;i<arr.length;i++){
@@ -1837,11 +1837,11 @@ $(document).ready(function() {
 												presentacion='none';
 											}
 											//console.log(data);
-											console.log(arrayJSONX);
+											//console.log(arrayJSONX);
 											
-											console.log(data);
-											console.log(resultGraph);
-											console.log(Object.keys(data[0]));
+											//console.log(data);
+											//console.log(resultGraph);
+											//console.log(Object.keys(data[0]));
 											if(arr==arrayJSONX){
 													var d = data;
 											}else{
@@ -1893,18 +1893,18 @@ $(document).ready(function() {
 													"buttons": [{
 														extend: 'excelHtml5',
 														text :'<i class="fa fa-file-excel-o"> Exportar Excel </i>',
-											            title:'Historial de Infracciones',
+											            title:'Prestamos',
 											            autoFilter: true,
 													},{
 														extend: 'pdfHtml5',
 														text :'<i class="fa fa-file-pdf-o"> Exportar Pdf</i>',
-											            title:'Historial de Infracciones',
+											            title:'Prestamos',
 											            orientation : 'portrait'
 													}]
 												};
 											dataObject.push(ayuda);
-											console.log(ayuda);
-											console.log(dataObject);
+											//console.log(ayuda);
+											//console.log(dataObject);
 											if($local.tablaResultadosPrestamo) { 
 												$local.tablaResultadosPrestamo.destroy(); 
 												$local.$tablaResultadosPrestamo.empty(); 
@@ -1926,7 +1926,7 @@ $(document).ready(function() {
 								}
 								case "AREA_ESTUDIO":{
 									arr = $local.$selectAreaEstudio.val();
-									console.log(arr);
+									//console.log(arr);
 									$.ajax({
 										type : "GET",
 										url : $variableUtil.root + "areaEstudio?accion=buscarTodos",
@@ -1938,7 +1938,7 @@ $(document).ready(function() {
 										},
 										
 										success : function(tr) {
-											console.log(tr);
+											//console.log(tr);
 
 											//Generando Leyenda
 											var resultGraph = [];
@@ -1964,10 +1964,10 @@ $(document).ready(function() {
 													}
 													
 												}
-												console.log(datos);
+												//console.log(datos);
 												var arrayJSONX = [];
 												//var n = response[0].detalle;
-												console.log(response.length);
+												//console.log(response.length);
 												var datanuevo = [];
 												for (l=0;l<response.length;l++){
 													var n = response[l].detalle;
@@ -1991,7 +1991,7 @@ $(document).ready(function() {
 												}
 											}	
 												
-											console.log(datanuevo);
+											//console.log(datanuevo);
 
 											arrayJSONX.sort();								
 											for(i=0;i<arr.length;i++){
@@ -2015,11 +2015,11 @@ $(document).ready(function() {
 												presentacion='none';
 											}
 											//console.log(data);
-											console.log(arrayJSONX);
+											//console.log(arrayJSONX);
 											
-											console.log(data);
-											console.log(resultGraph);
-											console.log(Object.keys(data[0]));
+											//console.log(data);
+											//console.log(resultGraph);
+											//console.log(Object.keys(data[0]));
 											if(arr==arrayJSONX){
 													var d = data;
 											}else{
@@ -2071,18 +2071,18 @@ $(document).ready(function() {
 													"buttons": [{
 														extend: 'excelHtml5',
 														text :'<i class="fa fa-file-excel-o"> Exportar Excel </i>',
-											            title:'Historial de Infracciones',
+											            title:'Prestamos',
 											            autoFilter: true,
 													},{
 														extend: 'pdfHtml5',
 														text :'<i class="fa fa-file-pdf-o"> Exportar Pdf</i>',
-											            title:'Historial de Infracciones',
+											            title:'Prestamos',
 											            orientation : 'portrait'
 													}]
 												};
 											dataObject.push(ayuda);
-											console.log(ayuda);
-											console.log(dataObject);
+											//console.log(ayuda);
+											//console.log(dataObject);
 											if($local.tablaResultadosPrestamo) { 
 												$local.tablaResultadosPrestamo.destroy(); 
 												$local.$tablaResultadosPrestamo.empty(); 
@@ -2104,7 +2104,7 @@ $(document).ready(function() {
 								}
 								case "TIPO_SOLICITANTE":{
 									arr = $local.$selectSolicitante.val();
-									console.log(arr);
+									//console.log(arr);
 									//Generando Leyenda
 									var resultGraph = [];
 									if(arr==""){
@@ -2142,7 +2142,7 @@ $(document).ready(function() {
 									}	
 									
 									
-									console.log(datanuevo);
+									//console.log(datanuevo);
 
 									arrayJSONX.sort();	
 									
@@ -2168,11 +2168,11 @@ $(document).ready(function() {
 											presentacion='none';
 										}
 										//console.log(data);
-										console.log(arrayJSONX);
+										//console.log(arrayJSONX);
 										
-										console.log(data);
-										console.log(resultGraph);
-										console.log(Object.keys(data[0]));
+										//console.log(data);
+										//console.log(resultGraph);
+										//console.log(Object.keys(data[0]));
 										if(arr==arrayJSONX){
 												var d = data;
 										}else{
@@ -2224,18 +2224,18 @@ $(document).ready(function() {
 												"buttons": [{
 													extend: 'excelHtml5',
 													text :'<i class="fa fa-file-excel-o"> Exportar Excel </i>',
-										            title:'Historial de Infracciones',
+										            title:'Prestamos',
 										            autoFilter: true,
 												},{
 													extend: 'pdfHtml5',
 													text :'<i class="fa fa-file-pdf-o"> Exportar Pdf</i>',
-										            title:'Historial de Infracciones',
+										            title:'Prestamos',
 										            orientation : 'portrait'
 												}]
 											};
 										dataObject.push(ayuda);
-										console.log(ayuda);
-										console.log(dataObject);
+										//console.log(ayuda);
+										//console.log(dataObject);
 										if($local.tablaResultadosPrestamo) { 
 											$local.tablaResultadosPrestamo.destroy(); 
 											$local.$tablaResultadosPrestamo.empty(); 
@@ -2256,7 +2256,7 @@ $(document).ready(function() {
 								}
 								case "RECURSO" :{
 									arr = $local.$selectRecurso.val();
-									console.log(arr);
+									//console.log(arr);
 									$.ajax({
 										type : "GET",
 										url : $variableUtil.root + "tipoRecurso?accion=buscarTodos",
@@ -2268,17 +2268,17 @@ $(document).ready(function() {
 										},
 										
 										success : function(tr) {
-											console.log(tr);
+											//console.log(tr);
 
 											//Generando Leyenda
 											var resultGraph = [];
 											if(arr == "" ){
-											    console.log("funciono");
+											   // console.log("funciono");
 												var arrayJSONX = response[0].detalle;
 												arr = arrayJSONX;
 												
 											}else{
-												//eliminarVacios(data);
+												
 												var datos=[];
 												var j =0;
 												
@@ -2295,7 +2295,7 @@ $(document).ready(function() {
 													}
 													
 												}
-												console.log(datos);
+												//console.log(datos);
 												var arrayJSONX = [];
 												//var n = response[0].detalle;
 												console.log(response.length);
@@ -2322,7 +2322,7 @@ $(document).ready(function() {
 												}
 											}	
 												
-											console.log(datanuevo);
+											//console.log(datanuevo);
 
 											arrayJSONX.sort();								
 											for(i=0;i<arr.length;i++){
@@ -2346,11 +2346,11 @@ $(document).ready(function() {
 												presentacion='none';
 											}
 											//console.log(data);
-											console.log(arrayJSONX);
+											//console.log(arrayJSONX);
 											
-											console.log(data);
-											console.log(resultGraph);
-											console.log(Object.keys(data[0]));
+											//console.log(data);
+											//console.log(resultGraph);
+											//console.log(Object.keys(data[0]));
 											if(arr==arrayJSONX){
 													var d = data;
 											}else{
@@ -2382,7 +2382,7 @@ $(document).ready(function() {
 												c.push(ej);
 											};
 											
-											//console.log(c); eval('[{"columns":' +c+ ',"data":' +data+0 '}]')
+											
 											var dataObject = [];
 											var ayuda = new Object();
 											ayuda['initComplete'] = function(){
@@ -2402,18 +2402,18 @@ $(document).ready(function() {
 													"buttons": [{
 														extend: 'excelHtml5',
 														text :'<i class="fa fa-file-excel-o"> Exportar Excel </i>',
-											            title:'Historial de Infracciones',
+											            title:'Prestamos',
 											            autoFilter: true,
 													},{
 														extend: 'pdfHtml5',
 														text :'<i class="fa fa-file-pdf-o"> Exportar Pdf</i>',
-											            title:'Historial de Infracciones',
+											            title:'Prestamos',
 											            orientation : 'portrait'
 													}]
 												};
 											dataObject.push(ayuda);
-											console.log(ayuda);
-											console.log(dataObject);
+											//console.log(ayuda);
+											//console.log(dataObject);
 											if($local.tablaResultadosPrestamo) { 
 												$local.tablaResultadosPrestamo.destroy(); 
 												$local.$tablaResultadosPrestamo.empty(); 
@@ -2452,7 +2452,7 @@ $(document).ready(function() {
 				}
 				
 			}if(tipoGrafico == "LINEAL"){
-				console.log(criterioBusqueda);
+				//console.log(criterioBusqueda);
 				console.log("caso5");
 				$.ajax({
 					type : "GET",
@@ -2616,12 +2616,12 @@ $(document).ready(function() {
 								"buttons": [{
 									extend: 'excelHtml5',
 									text :'<i class="fa fa-file-excel-o"> Exportar Excel </i>',
-						            title:'Historial de Infracciones',
+						            title:'Infracciones',
 						            autoFilter: true,
 								},{
 									extend: 'pdfHtml5',
 									text :'<i class="fa fa-file-pdf-o"> Exportar Pdf</i>',
-						            title:'Historial de Infracciones',
+						            title:'Infracciones',
 						            orientation : 'portrait'
 								}]
 							};
@@ -2746,7 +2746,7 @@ $(document).ready(function() {
 								$funcionUtil.notificarException($variableUtil.busquedaSinResultados, "fa-exclamation-circle", "Información", "info");
 								return;
 							}
-							console.log(response);
+							//console.log(response);
 							//Dando formato a respuesta del servidor
 							var data = [];
 							var aux;
@@ -2758,7 +2758,7 @@ $(document).ready(function() {
 								}
 								data.push(aux);
 							}
-							console.log(data);
+							//console.log(data);
 							
 							var arr;
 							var cant;
@@ -2777,7 +2777,7 @@ $(document).ready(function() {
 									},
 									
 									success : function(tr) {
-										console.log(tr);
+										//console.log(tr);
 
 										//Generando Leyenda
 										var resultGraph = [];
@@ -2805,7 +2805,7 @@ $(document).ready(function() {
 												}
 												
 											}
-											console.log(datos);
+											//console.log(datos);
 											var arrayJSONX = [];
 											//var n = response[0].detalle;
 											console.log(response.length);
@@ -2832,7 +2832,7 @@ $(document).ready(function() {
 											}
 										}	
 											
-										console.log(datanuevo);
+										//console.log(datanuevo);
 
 										arrayJSONX.sort();								
 										for(i=0;i<arr.length;i++){
@@ -2856,11 +2856,11 @@ $(document).ready(function() {
 											presentacion='none';
 										}
 										//console.log(data);
-										console.log(arrayJSONX);
+										//console.log(arrayJSONX);
 										
-										console.log(data);
-										console.log(resultGraph);
-										console.log(Object.keys(data[0]));
+										//console.log(data);
+										//console.log(resultGraph);
+										//console.log(Object.keys(data[0]));
 										if(arr==arrayJSONX){
 												var d = data;
 										}else{
@@ -2922,8 +2922,8 @@ $(document).ready(function() {
 												}]
 											};
 										dataObject.push(ayuda);
-										console.log(ayuda);
-										console.log(dataObject);
+										//console.log(ayuda);
+										//console.log(dataObject);
 										if($local.tablaResultadosInfraccion) { 
 											$local.tablaResultadosInfraccion.destroy(); 
 											$local.$tablaResultadosInfraccion.empty(); 
@@ -2945,7 +2945,7 @@ $(document).ready(function() {
 							}
 							case "AREA_ESTUDIO":{
 								arr = $local.$selectAreaEstudio.val();
-								console.log(arr);
+								//console.log(arr);
 								$.ajax({
 									type : "GET",
 									url : $variableUtil.root + "areaEstudio?accion=buscarTodos",
@@ -2957,7 +2957,7 @@ $(document).ready(function() {
 									},
 									
 									success : function(tr) {
-										console.log(tr);
+										//console.log(tr);
 
 										//Generando Leyenda
 										var resultGraph = [];
@@ -2983,7 +2983,7 @@ $(document).ready(function() {
 												}
 												
 											}
-											console.log(datos);
+											//console.log(datos);
 											var arrayJSONX = [];
 											//var n = response[0].detalle;
 											console.log(response.length);
@@ -3010,7 +3010,7 @@ $(document).ready(function() {
 											}
 										}	
 											
-										console.log(datanuevo);
+										//console.log(datanuevo);
 
 										arrayJSONX.sort();								
 										for(i=0;i<arr.length;i++){
@@ -3034,11 +3034,11 @@ $(document).ready(function() {
 											presentacion='none';
 										}
 										//console.log(data);
-										console.log(arrayJSONX);
+										//console.log(arrayJSONX);
 										
-										console.log(data);
-										console.log(resultGraph);
-										console.log(Object.keys(data[0]));
+										//console.log(data);
+										//console.log(resultGraph);
+										//console.log(Object.keys(data[0]));
 										if(arr==arrayJSONX){
 												var d = data;
 										}else{
@@ -3100,8 +3100,8 @@ $(document).ready(function() {
 												}]
 											};
 										dataObject.push(ayuda);
-										console.log(ayuda);
-										console.log(dataObject);
+										//console.log(ayuda);
+										//console.log(dataObject);
 										if($local.tablaResultadosInfraccion) { 
 											$local.tablaResultadosInfraccion.destroy(); 
 											$local.$tablaResultadosInfraccion.empty(); 
@@ -3123,7 +3123,7 @@ $(document).ready(function() {
 							}
 							case "TIPO_SOLICITANTE":{
 								arr = $local.$selectSolicitante.val();
-								console.log(arr);
+								//console.log(arr);
 								//Generando Leyenda
 								var resultGraph = [];
 								if(arr==""){
@@ -3165,7 +3165,7 @@ $(document).ready(function() {
 								}	
 								
 								
-								console.log(datanuevo);
+								//console.log(datanuevo);
 
 								arrayJSONX.sort();	
 								
@@ -3191,11 +3191,11 @@ $(document).ready(function() {
 										presentacion='none';
 									}
 									//console.log(data);
-									console.log(arrayJSONX);
+									//console.log(arrayJSONX);
 									
-									console.log(data);
-									console.log(resultGraph);
-									console.log(Object.keys(data[0]));
+									//console.log(data);
+									//console.log(resultGraph);
+									//console.log(Object.keys(data[0]));
 									if(arr==arrayJSONX){
 											var d = data;
 									}else{
@@ -3257,8 +3257,8 @@ $(document).ready(function() {
 											}]
 										};
 									dataObject.push(ayuda);
-									console.log(ayuda);
-									console.log(dataObject);
+									//console.log(ayuda);
+									//console.log(dataObject);
 									if($local.tablaResultadosInfraccion) { 
 										$local.tablaResultadosInfraccion.destroy(); 
 										$local.$tablaResultadosInfraccion.empty(); 
@@ -3290,7 +3290,7 @@ $(document).ready(function() {
 									},
 									
 									success : function(tr) {
-										console.log(tr);
+										//console.log(tr);
 
 										//Generando Leyenda
 										var resultGraph = [];
@@ -3316,7 +3316,7 @@ $(document).ready(function() {
 												}
 												
 											}
-											console.log(datos);
+											//console.log(datos);
 											var arrayJSONX = [];
 											//var n = response[0].detalle;
 											console.log(response.length);
@@ -3343,7 +3343,7 @@ $(document).ready(function() {
 											}
 										}	
 											
-										console.log(datanuevo);
+										//console.log(datanuevo);
 
 										arrayJSONX.sort();								
 										for(i=0;i<arr.length;i++){
@@ -3367,11 +3367,11 @@ $(document).ready(function() {
 											presentacion='none';
 										}
 										//console.log(data);
-										console.log(arrayJSONX);
+										//console.log(arrayJSONX);
 										
-										console.log(data);
-										console.log(resultGraph);
-										console.log(Object.keys(data[0]));
+										//console.log(data);
+										//console.log(resultGraph);
+										//console.log(Object.keys(data[0]));
 										if(arr==arrayJSONX){
 												var d = data;
 										}else{
@@ -3433,8 +3433,8 @@ $(document).ready(function() {
 												}]
 											};
 										dataObject.push(ayuda);
-										console.log(ayuda);
-										console.log(dataObject);
+										//console.log(ayuda);
+										//console.log(dataObject);
 										if($local.tablaResultadosInfraccion) { 
 											$local.tablaResultadosInfraccion.destroy(); 
 											$local.$tablaResultadosInfraccion.empty(); 
@@ -3569,7 +3569,7 @@ $(document).ready(function() {
 						}
 					});
 				}else{
-					console.log("caso10,revisar");
+					console.log("caso10");
 					$.ajax({
 						type : "GET",
 						url : $variableUtil.root + "reporteEstadisticaInfracciones?accion=buscarPorEjeXSegmentado"+criterio,
@@ -3587,7 +3587,7 @@ $(document).ready(function() {
 								$funcionUtil.notificarException($variableUtil.busquedaSinResultados, "fa-exclamation-circle", "Información", "info");
 								return;
 							}
-							console.log(response);
+							//console.log(response);
 							//Dando formato a respuesta del servidor
 							var data = [];
 							var aux;
@@ -3617,7 +3617,7 @@ $(document).ready(function() {
 									},
 									
 									success : function(tr) {
-										console.log(tr);
+										//console.log(tr);
 
 										//Generando Leyenda
 										var resultGraph = [];
@@ -3645,7 +3645,7 @@ $(document).ready(function() {
 												}
 												
 											}
-											console.log(datos);
+											//console.log(datos);
 											var arrayJSONX = [];
 											//var n = response[0].detalle;
 											console.log(response.length);
@@ -3672,7 +3672,7 @@ $(document).ready(function() {
 											}
 										}	
 											
-										console.log(datanuevo);
+										//console.log(datanuevo);
 
 										arrayJSONX.sort();								
 										for(i=0;i<arr.length;i++){
@@ -3696,11 +3696,11 @@ $(document).ready(function() {
 											presentacion='none';
 										}
 										//console.log(data);
-										console.log(arrayJSONX);
+										//console.log(arrayJSONX);
 										
-										console.log(data);
-										console.log(resultGraph);
-										console.log(Object.keys(data[0]));
+										//console.log(data);
+										//console.log(resultGraph);
+										//console.log(Object.keys(data[0]));
 										if(arr==arrayJSONX){
 												var d = data;
 										}else{
@@ -3762,8 +3762,8 @@ $(document).ready(function() {
 												}]
 											};
 										dataObject.push(ayuda);
-										console.log(ayuda);
-										console.log(dataObject);
+										//console.log(ayuda);
+										//console.log(dataObject);
 										if($local.tablaResultadosInfraccion) { 
 											$local.tablaResultadosInfraccion.destroy(); 
 											$local.$tablaResultadosInfraccion.empty(); 
@@ -3785,7 +3785,7 @@ $(document).ready(function() {
 							}
 							case "AREA_ESTUDIO":{
 								arr = $local.$selectAreaEstudio.val();
-								console.log(arr);
+								//console.log(arr);
 								$.ajax({
 									type : "GET",
 									url : $variableUtil.root + "areaEstudio?accion=buscarTodos",
@@ -3797,7 +3797,7 @@ $(document).ready(function() {
 									},
 									
 									success : function(tr) {
-										console.log(tr);
+										//console.log(tr);
 
 										//Generando Leyenda
 										var resultGraph = [];
@@ -3823,10 +3823,10 @@ $(document).ready(function() {
 												}
 												
 											}
-											console.log(datos);
+											//console.log(datos);
 											var arrayJSONX = [];
 											//var n = response[0].detalle;
-											console.log(response.length);
+											//console.log(response.length);
 											var datanuevo = [];
 											for (l=0;l<response.length;l++){
 												var n = response[l].detalle;
@@ -3850,7 +3850,7 @@ $(document).ready(function() {
 											}
 										}	
 											
-										console.log(datanuevo);
+										//console.log(datanuevo);
 
 										arrayJSONX.sort();								
 										for(i=0;i<arr.length;i++){
@@ -3874,11 +3874,11 @@ $(document).ready(function() {
 											presentacion='none';
 										}
 										//console.log(data);
-										console.log(arrayJSONX);
+										//console.log(arrayJSONX);
 										
-										console.log(data);
-										console.log(resultGraph);
-										console.log(Object.keys(data[0]));
+										//console.log(data);
+										//console.log(resultGraph);
+										//console.log(Object.keys(data[0]));
 										if(arr==arrayJSONX){
 												var d = data;
 										}else{
@@ -3940,8 +3940,8 @@ $(document).ready(function() {
 												}]
 											};
 										dataObject.push(ayuda);
-										console.log(ayuda);
-										console.log(dataObject);
+										//console.log(ayuda);
+										//console.log(dataObject);
 										if($local.tablaResultadosInfraccion) { 
 											$local.tablaResultadosInfraccion.destroy(); 
 											$local.$tablaResultadosInfraccion.empty(); 
@@ -3963,7 +3963,7 @@ $(document).ready(function() {
 							}
 							case "TIPO_SOLICITANTE":{
 								arr = $local.$selectSolicitante.val();
-								console.log(arr);
+								//console.log(arr);
 								//Generando Leyenda
 								var resultGraph = [];
 								if(arr==""){
@@ -4001,7 +4001,7 @@ $(document).ready(function() {
 								}	
 								
 								
-								console.log(datanuevo);
+								//console.log(datanuevo);
 
 								arrayJSONX.sort();	
 								
@@ -4027,11 +4027,11 @@ $(document).ready(function() {
 										presentacion='none';
 									}
 									//console.log(data);
-									console.log(arrayJSONX);
+									//console.log(arrayJSONX);
 									
-									console.log(data);
-									console.log(resultGraph);
-									console.log(Object.keys(data[0]));
+									//console.log(data);
+									//console.log(resultGraph);
+									//console.log(Object.keys(data[0]));
 									if(arr==arrayJSONX){
 											var d = data;
 									}else{
@@ -4093,8 +4093,8 @@ $(document).ready(function() {
 											}]
 										};
 									dataObject.push(ayuda);
-									console.log(ayuda);
-									console.log(dataObject);
+									//console.log(ayuda);
+									//console.log(dataObject);
 									if($local.tablaResultadosInfraccion) { 
 										$local.tablaResultadosInfraccion.destroy(); 
 										$local.$tablaResultadosInfraccion.empty(); 
@@ -4115,7 +4115,7 @@ $(document).ready(function() {
 							}
 							case "TIPO_INFRACCION":{
 								arr = $local.$selecttipoInfraccion.val();
-								console.log(arr);
+								//console.log(arr);
 								$.ajax({
 									type : "GET",
 									url : $variableUtil.root + "multiTabDet/multiTabCab/"+2,
@@ -4151,10 +4151,10 @@ $(document).ready(function() {
 												}
 												
 											}
-											console.log(datos);
+											//console.log(datos);
 											var arrayJSONX = [];
 											//var n = response[0].detalle;
-											console.log(response.length);
+											//console.log(response.length);
 											var datanuevo = [];
 											for (l=0;l<response.length;l++){
 												var n = response[l].detalle;
@@ -4178,7 +4178,7 @@ $(document).ready(function() {
 											}
 										}	
 											
-										console.log(datanuevo);
+										//console.log(datanuevo);
 
 										arrayJSONX.sort();								
 										for(i=0;i<arr.length;i++){
@@ -4202,11 +4202,11 @@ $(document).ready(function() {
 											presentacion='none';
 										}
 										//console.log(data);
-										console.log(arrayJSONX);
+										//console.log(arrayJSONX);
 										
-										console.log(data);
-										console.log(resultGraph);
-										console.log(Object.keys(data[0]));
+										//console.log(data);
+										//console.log(resultGraph);
+										//console.log(Object.keys(data[0]));
 										if(arr==arrayJSONX){
 												var d = data;
 										}else{
@@ -4268,8 +4268,8 @@ $(document).ready(function() {
 												}]
 											};
 										dataObject.push(ayuda);
-										console.log(ayuda);
-										console.log(dataObject);
+										//console.log(ayuda);
+										//console.log(dataObject);
 										if($local.tablaResultadosInfraccion) { 
 											$local.tablaResultadosInfraccion.destroy(); 
 											$local.$tablaResultadosInfraccion.empty(); 
