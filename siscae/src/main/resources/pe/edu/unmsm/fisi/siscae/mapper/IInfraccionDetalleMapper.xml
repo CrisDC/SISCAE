@@ -37,10 +37,10 @@
 				mi.n_id_tipo_infraccion			AS		id_tipo_infraccion,
 				mi.n_id_persona					AS		id_persona,
 				mi.v_descripcion				AS		descripcion,
-				mp.v_num_documento				AS		num_documento,
+				so.codigo						AS		num_documento,
 			    mp.v_app_paterno				AS		app_paterno,
 			    mp.v_app_materno				AS		app_materno,
-			    mp.v_nombre						AS		nombre,
+			    CONCAT(mp.v_app_paterno," ",mp.v_app_materno," ",mp.v_nombre)	AS		nombre,
 			    mmd.v_descripcion_Corta			AS		infraccion,
 			    met.v_descripcion				AS		estado,
 			    CAST(mi.d_fecha AS DATE)		AS		fecha,
@@ -49,6 +49,7 @@
 			    
 			FROM mov_infraccion mi
 			LEFT JOIN mae_persona mp			ON mi.n_id_persona = mp.n_id_persona
+			LEFT JOIN vw_solicitantes so		ON mi.n_id_persona = so.id_persona
 	        LEFT JOIN mae_estado_tabla 	met		ON mi.n_id_estado_tabla=met.n_id_estado_tabla
 	        LEFT JOIN mae_multi_tab_det mmd		ON mi.n_id_tipo_infraccion=mmd.n_id_item
             
