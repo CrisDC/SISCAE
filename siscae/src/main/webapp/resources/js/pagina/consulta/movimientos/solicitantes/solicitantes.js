@@ -117,6 +117,7 @@ $(document).ready(function() {
 			numDocumento : {
 				required : true,
 				notOnlySpace : true,
+				soloalfanumericos : true,
 				rangelength : [ 7, 15 ]
 			},
 			appPaterno : {
@@ -168,6 +169,7 @@ $(document).ready(function() {
 			},
 			numDocumento : {
 				required : "Ingrese un Número de documento  ",
+				soloalfanumericos : "El número de documento debe contener solo car&aacute;cteres alfanumericos.",
 				rangelength : "El número de documento debe contener entre 7 y 15 car&aacute;cteres."
 			},
 			nombre : {
