@@ -27,7 +27,7 @@ public class Externo {
 	
 	private Integer idExterno;
 	private String descripcionCorta;
-	private Integer numDocumento;
+	private String numDocumento;
 	private String nombre;
 	private String appPaterno;
 	private String appMaterno;
