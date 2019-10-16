@@ -80,6 +80,7 @@ $(document).ready(function() {
 	$local.$tablaMantenimiento.find("thead").on('keyup', 'input', function() {
 		$local.tablaMantenimiento.column($(this).parent().index() + ':visible').search(this.value).draw();
 	});
+	
 
 	$local.$tablaMantenimiento.find("thead").on('change', 'select', function() {
 		var val = $.fn.dataTable.util.escapeRegex($(this).val());
@@ -99,6 +100,13 @@ $(document).ready(function() {
 		$local.$actualizarMantenimiento.addClass("hidden");
 		$local.$registrarMantenimiento.removeClass("hidden");
 		//$local.$modalMantenimiento.PopupWindow("open");
+	});
+	
+	 $("input").on("keypress", function () {
+		  $input=$(this);
+		  setTimeout(function () {
+		   $input.val($input.val().toUpperCase());
+		  },50);
 	});
 
 	$local.$modalMantenimiento.on("open.popupwindow", function() {
