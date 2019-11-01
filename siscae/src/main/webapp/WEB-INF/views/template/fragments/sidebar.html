@@ -13,33 +13,33 @@
                 <nav class="sidebar-nav">
                     <ul id="sidebarnav">
                         <li class="nav-label"><a id="idNombreAreaEstudio" th:text="${#httpSession.getAttribute('areaEstudioAdministrativo')}"></a></li>
-                        <li>
+                        <li sec:authorize="hasPermission('CON_ESTADO_AREA','ANY')">
                             <a th:href="@{/movimiento/estadoArea}" aria-expanded="false">
                                 <i class="fa fa-th-large"></i>
                                 <span class="hide-menu">Estado del area</span>
                             </a>
 
                         </li>
-                        <li>
+                        <li sec:authorize="hasPermission('MANT_SOLICITANTE','ANY')" >
                             <a th:href="@{/movimiento/solicitantes}" aria-expanded="false">
                                 <i class="fa fa-user"></i>
                                 <span class="hide-menu">Solicitantes</span>
                             </a>
                         </li>
 						
-                        <li >
+                        <li sec:authorize="hasPermission('PRO_INFRACCIONES','ANY')">
                             <a th:href="@{/movimiento/infracciones}" aria-expanded="false">
                                 <i class="fa fa-book"></i>
                                 <span class="hide-menu">Infracciones</span>
                             </a>
                         </li>
-                        <li >
+                        <li sec:authorize="hasPermission('[CON_HISTORIAL_PRESTAMOS],[CON_HISTORIAL_INFRACCIONES]','PARENT_MENU')">
                             <a th:href="@{/reporte/historial}" aria-expanded="false">
                                 <i class="fa fa-list-alt"></i>
                                 <span class="hide-menu">Historial</span>
                             </a>
                         </li>
-                        <li>               
+                        <li sec:authorize="hasPermission('[RPT_SOLICITANTES_FRECUENTES],[RPT_PRESTAMOS],[RPT_INFRACCIONES]','PARENT_MENU')">               
                             <a th:href="@{/reporte/estadisticas}" aria-expanded="false">
 							<i class="fa fa-bar-chart"></i>
 							<span class="hide-menu">Reportes</span>
@@ -76,28 +76,70 @@
 <!--                         <li> -->
                     
                         
-                        <li>
+                        <li sec:authorize="hasPermission('[MANT_ADMINISTRATIVO],
+                                                          [MANT_ALUMNO],[MANT_]',
+                                                          [MANT_AREA_ESTUDIO],
+                                                          [MANT_AREA_ADMINISTRATIVO]',
+                                                          [MANT_DOCENTE],
+                                                          [MANT_ESCUELA],
+                                                          [MANT_EXTERNO],
+                                                          [MANT_FACULTAD],
+                                                          [MANT_PERSONA],
+                                                          [MANT_RECURSOS],
+                                                          [MANT_ROL],
+                                                          [MANT_USUARIO],
+                                                          [MANT_TABLA_TABLAS],
+                                                          [MANT_TIPO_RECURSOS],
+                                                          PARENT_MENU')">
 							<a href="#" aria-expanded="false" class="has-arrow">
 							<i class="fa fa-wrench"></i>
 							<span class="hide-menu">Mantenimientos</span>
 							</a>
 							
 							<ul aria-expanded="false" class="collapse">
-								<li ><a th:href="@{/administrativo}"> Administrativo</a></li>
-								<li ><a th:href="@{/alumno}"> Alumno</a></li>
-								<li ><a th:href="@{/areaEstudio}"> Area de Estudio</a></li>
-								<li ><a th:href="@{/areaAdministrativo}"> Area Administrativo</a></li>
-								<li ><a th:href="@{/docente}"> Docente</a></li>
-								<li ><a th:href="@{/escuela}"> Escuela</a></li>
-								<li ><a th:href="@{/externo}"> Externo</a></li>
-								<li ><a th:href="@{/facultad}"> Facultad</a></li>
+								<li sec:authorize="hasPermission('MANT_ADMINISTRATIVO','ANY')" >
+								    <a th:href="@{/administrativo}"> Administrativo</a>
+								</li>
+								<li sec:authorize="hasPermission('MANT_ALUMNO','ANY')">
+								    <a th:href="@{/alumno}"> Alumno</a>
+								</li>
+								<li sec:authorize="hasPermission('MANT_AREA_ESTUDIO','ANY')">
+								    <a th:href="@{/areaEstudio}"> Area de Estudio</a>
+								</li>
+								<li sec:authorize="hasPermission('MANT_AREA_ADMINISTRATIVO','ANY')">
+								    <a th:href="@{/areaAdministrativo}"> Area Administrativo</a>
+								</li>
+								<li sec:authorize="hasPermission('MANT_DOCENTE','ANY')">
+								    <a th:href="@{/docente}"> Docente</a>
+								</li>
+								<li sec:authorize="hasPermission('MANT_ESCUELA','ANY')">
+								    <a th:href="@{/escuela}"> Escuela</a>
+								</li>
+								<li sec:authorize="hasPermission('MANT_EXTERNO','ANY')">
+								    <a th:href="@{/externo}"> Externo</a>
+								</li>
+								<li sec:authorize="hasPermission('MANT_FACULTAD','ANY')">
+								    <a th:href="@{/facultad}"> Facultad</a>
+								</li>
 								<!-- <li ><a th:href="@{/horario}"> Horario</a></li> -->
-								<li ><a th:href="@{/persona}"> Persona</a></li>
-								<li ><a th:href="@{/recurso}"> Recursos</a></li>
-								<li ><a th:href="@{/rol}"> Rol</a></li>
-								<li ><a th:href="@{/usuario}"> Usuario</a></li>
-								<li ><a th:href="@{/multiTabCab}"> Tabla de tablas</a></li>
-								<li ><a th:href="@{/tipoRecurso}"> Tipo Recursos</a></li>
+								<li sec:authorize="hasPermission('MANT_PERSONA','ANY')">
+								   <a th:href="@{/persona}"> Persona</a>
+								</li>
+								<li sec:authorize="hasPermission('MANT_RECURSOS','ANY')">
+								   <a th:href="@{/recurso}"> Recursos</a>
+								</li>
+								<li sec:authorize="hasPermission('MANT_ROL','ANY')">
+								   <a th:href="@{/rol}"> Rol</a>
+								</li>
+								<li sec:authorize="hasPermission('MANT_USUARIO','ANY')">
+								   <a th:href="@{/usuario}"> Usuario</a>
+								</li>
+								<li sec:authorize="hasPermission('MANT_TABLA_TABLAS','ANY')">
+								   <a th:href="@{/multiTabCab}"> Tabla de tablas</a>
+								</li>
+								<li sec:authorize="hasPermission('MANT_TIPO_RECURSOS','ANY')">
+								   <a th:href="@{/tipoRecurso}"> Tipo Recursos</a>
+								</li>
 							</ul>
 						</li>
                         
