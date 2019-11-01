@@ -1,13 +1,13 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org"
 	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
-	xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4" layout:decorator="layout_user">
+	xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4" 
+	layout:decorator="layout_user"
+	lang="es">
 <head>
 <title th:text="|#{__${mantenimiento}__}|"></title>
 </head>
 <th:block layout:fragment="style">
-<!-- 	<link th:href="@{/resources/css/dataTables.bootstrap.min.css}" rel="stylesheet" /> -->
-<!-- 	<link th:href="@{/resources/css/responsive.bootstrap.min.css}" rel="stylesheet" /> -->
 	<link th:href="@{/resources/css/popupwindow.css}" rel="stylesheet" />
 	<link th:href="@{/resources/css/jquery-confirm.min.css}" rel="stylesheet" />
 	<link th:href="@{/resources/css/select2.min.css}" rel="stylesheet" />

@@ -5,45 +5,62 @@ import org.springframework.security.core.SpringSecurityCoreVersion;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.util.Assert;
 
+
+/**
+ * La clase {@code CustomGrantedAuthority} representa una <b>autorización</b> en
+ * el sistema.
+ * <p>
+ * Cada usuario del sistema tiene asignado una lista de autorizaciones, cada
+ * autorización esta conformado por un <b>recurso</b> y un <b>conjunto de
+ * acciones</b> aplicables a dicho recurso.
+ * 
+ * @see pe.edu.unmsm.fisi.siscae.configuracion.security.BasePermissionEvaluator
+ */
 public class CustomGrantedAuthority implements GrantedAuthority
 {
     private static final long serialVersionUID = SpringSecurityCoreVersion.SERIAL_VERSION_UID;
 
-    private final String role;
+    private final String idRecurso;
+    private final String accionRecurso;
 
-    public CustomGrantedAuthority(String role)
+    /**
+     * Crea una autorización
+     * 
+     * @param idRecurso
+     *            el identificador o código único del recurso.
+     * @param accionRecurso
+     *            el conjunto de acciones aplicadas al recurso
+     */
+    public CustomGrantedAuthority(String idRecurso, String accionRecurso)
     {
-        Assert.hasText(role, "A granted authority textual representation is required");
-        this.role = role;
+        this.idRecurso = idRecurso;
+        this.accionRecurso = accionRecurso;
     }
 
+    /**
+     * @return el identificador del recurso <b>idRecurso</b>
+     */
+    @Override
     public String getAuthority()
     {
-        return role;
+        return this.idRecurso;
     }
 
-    public boolean equals(Object obj)
+    /**
+     * Si existen dos o más acciones aplicadas al recurso, estas serán divididas
+     * a través de comas (,) e.g. '1,2,3,4'.
+     * 
+     * @return el conjunto de acciones aplicados al recurso
+     */
+    public String getAccionRecurso()
     {
-        if (this == obj)
-        {
-            return true;
-        }
-
-        if (obj instanceof SimpleGrantedAuthority)
-        {
-            return role.equals(((CustomGrantedAuthority) obj).role);
-        }
-
-        return false;
+        return this.accionRecurso;
     }
 
-    public int hashCode()
-    {
-        return this.role.hashCode();
-    }
-
+    @Override
     public String toString()
     {
-        return this.role;
+        return "CustomGrantedAuthority [idRecurso=" + idRecurso + ", accionRecurso=" + accionRecurso
+                + "]";
     }
 }

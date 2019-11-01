@@ -11,7 +11,7 @@ import pe.edu.unmsm.fisi.siscae.model.criterio.NumeroDocumentoIdentidadCriterioB
 @AllArgsConstructor
 @NoArgsConstructor
 
-public class numeroCriterioDetalle {
+public class NumeroCriterioDetalle {
 
 	private String idDetalle;
 	

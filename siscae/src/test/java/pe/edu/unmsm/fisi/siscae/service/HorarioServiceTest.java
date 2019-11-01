@@ -28,7 +28,7 @@ public class HorarioServiceTest {
 		horarioTest.setIdHorario(1);
 		horarioTest.setHoraInicio(LocalTime.now());
 		horarioTest.setHoraFin(LocalTime.now());
-		horarioTest.setTiempoMax(2.00);
+		//horarioTest.setTiempoMax(2.00);
 		horarioTest.setDescripcion("descripcion");
 		horarioTest.setIdEstadoTabla(1);
 		horarioTest.setIdTurno(1);
@@ -69,14 +69,14 @@ public class HorarioServiceTest {
 		horarioTest.setHoraInicio(LocalTime.now());
 		horarioTest.setHoraFin(LocalTime.now());
 		horarioTest.setIdEstadoTabla(1);
-		horarioTest.setTiempoMax(2.00);
+		//horarioTest.setTiempoMax(2.00);
 		horarioTest.setIdTurno(5);
 		horarioTest.setIdDia(1);
 		horarioTest.setIdTipoHorario(1);
 		horarioTest.setIdAreaEstudio(1);
 		horarioService.registrarHorario(horarioTest);
 
-		horarioTest.setTiempoMax(3.00);
+		//horarioTest.setTiempoMax(3.00);
 		horarioService.actualizarHorario(horarioTest);
 	}
 
@@ -87,7 +87,7 @@ public class HorarioServiceTest {
 		horarioTest.setHoraInicio(LocalTime.now());
 		horarioTest.setHoraFin(LocalTime.now());
 		horarioTest.setIdEstadoTabla(1);
-		horarioTest.setTiempoMax(2.00);
+		//horarioTest.setTiempoMax(2.00);
 		horarioTest.setIdTurno(8);
 		horarioTest.setIdDia(1);
 		horarioTest.setIdTipoHorario(1);

@@ -38,6 +38,7 @@ public class CustomAuthenticationProvider implements AuthenticationProvider {
 		try {
 			usuario = (CustomUser) userDetailsService.loadUserByUsername(idUsuario);
 		} catch (CannotCreateTransactionException cannotCreateTransactionException) {
+			cannotCreateTransactionException.printStackTrace();
 			throw new LoginException(ConstantesExcepciones.ERROR_CONEXION_BASE_DATOS);
 		}
 		if (usuario == null) {

@@ -6,13 +6,8 @@ import java.util.Map;
 
 public class ConstantesExcepciones
 {
-    /* Mensajes de Error de Mantenimiento de Contabilidad */
-    public static final String ESCENARIO_YA_EXISTE = "El Escenario asociado a la Cuenta Contable, ya existe.";
-    public static final String ESCENARIO_NO_ENCONTRADO = "El Escenario asociado a la Cuenta Contable, no fue encontrado.";
-    public static final String ESCENARIO_CON_COMISIONES_DUPLICADAS = "El Escenario tiene asociado Conceptos de Comisión Duplicados.";
-    public static final String ESCENARIO_SIN_COMPENSACIONES = "El Escenario tiene asociado un Código de Transacción que no acepta compensaciones.";
-    public static final String ESCENARIO_SIN_FONDO = "El Escenario debe tener asociado una Cuenta Fondo.";
-    public static final String ESCENARIO_SIN_COMISION = "El Escenario debe tener asociado al menos una Cuenta Comisión.";
+	/* Mensajes de Error en evalución de permisos */
+	public static final String PERMISOS_NO_NULO = "Los permisos a evaluar no deben ser nulos.";
 
 
     /* Mensajes de Error de Mantenimiento de Parametro Generales */

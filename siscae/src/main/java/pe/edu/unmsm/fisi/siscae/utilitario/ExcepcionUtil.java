@@ -3,7 +3,7 @@ package pe.edu.unmsm.fisi.siscae.utilitario;
 public class ExcepcionUtil
 {
     public static String traducirMensajeDesdeMensajeErrorLdap(String mensajeErrorLdap,
-            String idUsuario)
+            String idUsuario) 
     {
         String mensajeError = ConstantesExcepciones.ERROR_DESCONOCIDO;
         if (mensajeErrorLdap.contains(ConstantesExcepciones.CODIGO_AD_CONTRASENIA_INCORRECTA))

@@ -23,10 +23,11 @@
 				<li><a th:href="@{/inicio}"> <span class="fa fa-home"></span>Inicio </a></li>
 				
 				<!--  MANTENIMIENTOS -->
-				<li class="xn-openable">
+				<li sec:authorize="hasPermission('[MANT_ADMINISTRATIVO],[MANT_ALUMNO]','PARENT_MENU')" class="xn-openable">
 					<a><span class="fa fa-file"></span><span class="xn-text">Mantenimientos</span></a>
 					<ul>
-						<li ><a th:href="@{/administrativo}"> <span class="fa fa-file"></span>Administrativo</a></li>
+
+						<li ><a sec:authorize="hasPermission('MANT_ADMINISTRATIVO','ANY')" th:href="@{/administrativo}"> <span class="fa fa-file"></span>Administrativo</a></li>
 						<li ><a th:href="@{/alumno}"> <span class="fa fa-file"></span>Alumno</a></li>
 						<li ><a th:href="@{/areaEstudio}"> <span class="fa fa-file"></span>Area de Estudio</a></li>
 						<li ><a th:href="@{/areaAdministrativo}"> <span class="fa fa-file"></span>Area Administrativo</a></li>

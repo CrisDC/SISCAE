@@ -20,10 +20,7 @@ import com.fasterxml.jackson.annotation.JsonFormat;
 @AllArgsConstructor
 
 public class Rol {
-	
-	
 	private Integer idRol;
-	
 	
     @Length(min =1, max = 45, message = "{Length.CodigoProcesoSwitch.nombre}")
 	private String nombre;

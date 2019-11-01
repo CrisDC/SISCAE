@@ -29,7 +29,7 @@ public class HorarioMapperTest {
 		horarioTest.setIdHorario(1);
 		horarioTest.setHoraInicio(LocalTime.now());
 		horarioTest.setHoraFin(LocalTime.now());
-		horarioTest.setTiempoMax(2.00);
+		//horarioTest.setTiempoMax(2.00);
 		horarioTest.setDescripcion("descripcion");
 		horarioTest.setIdEstadoTabla(1);
 		horarioTest.setIdTurno(1);
