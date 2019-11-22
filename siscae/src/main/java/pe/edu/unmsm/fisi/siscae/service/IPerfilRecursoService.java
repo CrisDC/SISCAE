@@ -6,6 +6,7 @@ import pe.edu.unmsm.fisi.siscae.model.seguridad.PerfilRecurso;
 
 public interface IPerfilRecursoService {
    
+	
 	public List<PerfilRecurso> buscarTodos();
 
     public PerfilRecurso buscarPorId(Integer idEscuela);
