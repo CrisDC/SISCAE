@@ -6,6 +6,7 @@ import javax.validation.groups.Default;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.validation.Errors;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -34,6 +35,7 @@ public @RestController class AdministrativoController {
 
 	private @Autowired IAdministrativoService administrativoService;
 	@Audit(accion = Accion.CONSULTA, comentario = Comentario.ConsultaTodos)
+	@PreAuthorize("hasPermission('MANT_CITAS', '[2],[3],[4]')")
 	@GetMapping(params = "accion=buscarTodos")
 	public List<Administrativo> buscarTodos(){
 		
@@ -41,6 +43,7 @@ public @RestController class AdministrativoController {
 		
 	}
 	@Audit(accion = Accion.REGISTRO, comentario = Comentario.Registro)
+	@PreAuthorize("hasPermission('MANT_ADMINISTRATIVO', '1')")
 	@PostMapping
 	public ResponseEntity<?> registrarAdministrativo(
 		@Validated({ Default.class, IRegistro.class }) @RequestBody Administrativo administrativo,
