@@ -39,6 +39,7 @@ import pe.edu.unmsm.fisi.siscae.validacion.grupo.accion.IRegistro;
 public @RestController class AlumnoController {
 	private @Autowired IAlumnoService alumnoService;
 
+	
     @Audit(accion = Accion.CONSULTA, comentario = Comentario.ConsultaTodos)
     @GetMapping(params = "accion=buscarTodos")
     public List<Alumno> buscarTodos()
