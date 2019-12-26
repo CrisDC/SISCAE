@@ -3,6 +3,7 @@ package pe.edu.unmsm.fisi.siscae.service.impl.seguridad;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -13,7 +14,7 @@ import pe.edu.unmsm.fisi.siscae.model.seguridad.RecursoSeguridad;
 import pe.edu.unmsm.fisi.siscae.service.IRecursoSeguridadService;
 import pe.edu.unmsm.fisi.siscae.service.impl.MantenibleService;
 import pe.edu.unmsm.fisi.siscae.utilitario.Operacion;
-
+@Service
 public class RecursosSeguridadService extends MantenibleService<RecursoSeguridad> implements IRecursoSeguridadService{
 
 	
