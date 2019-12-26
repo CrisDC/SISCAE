@@ -39,7 +39,10 @@
                                 <span class="hide-menu">Historial</span>
                             </a>
                         </li>
-                        <li sec:authorize="hasPermission('[RPT_SOLICITANTES_FRECUENTES],[RPT_PRESTAMOS],[RPT_INFRACCIONES]','PARENT_MENU')">               
+                        <li sec:authorize="hasPermission('[RPT_SOLICITANTES_FRECUENTES],
+                        								  [RPT_PRESTAMOS],
+                        								  [RPT_INFRACCIONES]',
+                        								  'PARENT_MENU')">               
                             <a th:href="@{/reporte/estadisticas}" aria-expanded="false">
 							<i class="fa fa-bar-chart"></i>
 							<span class="hide-menu">Reportes</span>
