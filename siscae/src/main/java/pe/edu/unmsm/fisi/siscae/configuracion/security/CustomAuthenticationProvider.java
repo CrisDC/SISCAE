@@ -42,32 +42,16 @@ public class CustomAuthenticationProvider implements AuthenticationProvider {
 			throw new LoginException(ConstantesExcepciones.ERROR_CONEXION_BASE_DATOS);
 		}
 		if (usuario == null) {
-			/*
-			 * auditoriaService.registrarAuditoria(Tipo.Login,
-			 * Comentario.UsuarioNoEncontrado, Accion.Acceso, 0, idUsuario, direccionIp);
-			 */
 			throw new LoginException(String.format(ConstantesExcepciones.USUARIO_NO_ENCONTRADO, idUsuario));
 		}
 
 		if (!usuario.isEnabled()) {
-			/*
-			 * auditoriaService.registrarAuditoria(Tipo.Login, Comentario.NoActivo,
-			 * Accion.Acceso, 0, idUsuario, direccionIp);
-			 */
 			throw new LoginException(String.format(ConstantesExcepciones.USUARIO_NO_ACTIVO, idUsuario));
 		}
 		if (!passwordEnconder.matches(password, usuario.getPassword())) {
-			/*
-			 * auditoriaService.registrarAuditoria(Tipo.Login,
-			 * Comentario.CredencialIncorrecta, Accion.Acceso, 0, idUsuario, direccionIp);
-			 */
 			throw new LoginException(ConstantesExcepciones.CONTRASENIA_INCORRECTA);
 		}
 
-		/*
-		 * auditoriaService.registrarAuditoria(Tipo.Login,
-		 * Comentario.CredencialCorrecta, Accion.Acceso, 1, idUsuario, direccionIp);
-		 */
 		return new UsernamePasswordAuthenticationToken(usuario, password, usuario.getAuthorities());
 	}
 
