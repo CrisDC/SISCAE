@@ -15,12 +15,12 @@ import pe.edu.unmsm.fisi.siscae.service.IRecursoSeguridadService;
 import pe.edu.unmsm.fisi.siscae.service.impl.MantenibleService;
 import pe.edu.unmsm.fisi.siscae.utilitario.Operacion;
 @Service
-public class RecursosSeguridadService extends MantenibleService<RecursoSeguridad> implements IRecursoSeguridadService{
+public class RecursoSeguridadService extends MantenibleService<RecursoSeguridad> implements IRecursoSeguridadService{
 
 	
 	private IRecursoSeguridadMapper recursoSeguridadMapper;
 	
-	public RecursosSeguridadService(@Qualifier("IRecursoSeguridadMapper") IMantenibleMapper<RecursoSeguridad> mapper) {
+	public RecursoSeguridadService(@Qualifier("IRecursoSeguridadMapper") IMantenibleMapper<RecursoSeguridad> mapper) {
 		super(mapper);
 		this.recursoSeguridadMapper = (IRecursoSeguridadMapper) mapper;
 	}

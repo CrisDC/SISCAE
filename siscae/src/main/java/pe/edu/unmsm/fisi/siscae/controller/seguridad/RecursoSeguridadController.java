@@ -28,8 +28,8 @@ import pe.edu.unmsm.fisi.siscae.utilitario.ValidatorUtil;
 import pe.edu.unmsm.fisi.siscae.validacion.grupo.accion.IActualizacion;
 import pe.edu.unmsm.fisi.siscae.validacion.grupo.accion.IRegistro;
 
-@RequestMapping("/recursosSeguridad")
-public @RestController class RecursosSeguridadController {
+@RequestMapping("/recursoSeguridad")
+public @RestController class RecursoSeguridadController {
 
 	private @Autowired IRecursoSeguridadService recursoSeguridadService;
 	
