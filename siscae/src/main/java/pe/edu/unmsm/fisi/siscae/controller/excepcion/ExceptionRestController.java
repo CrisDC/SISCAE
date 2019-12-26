@@ -91,10 +91,8 @@ public class ExceptionRestController
     public MensajeError capturarDataIntegrityViolation(DataIntegrityViolationException ex)
     {
         logger.error(ex.getClass().getName(), ex);
-        String codigoErrorSqlServer = ex.getMessage();
-        int hola = Integer.parseInt(codigoErrorSqlServer);
-        ConstantesExcepciones.EXCEPCION_SQL_SERVER.get(hola);
-        return new MensajeError(hola, codigoErrorSqlServer);
+        String errorIntegridad = ex.getMessage();
+        return new MensajeError(-3000, errorIntegridad);
         
     }
     

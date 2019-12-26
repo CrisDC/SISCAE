@@ -18,8 +18,8 @@ public interface IPerfilRecursoSeguridadMapper extends  IMantenibleMapper<Perfil
             + "#{operacionParam, jdbcType = VARCHAR, mode = IN},"
             + "#{objeto.idPerfil, jdbcType = INTEGER, mode = IN},"
             + "#{objeto.idRecurso, jdbcType = INTEGER, mode = IN},"
-            + "#{objeto.acciones, jdbcType = VARCHAR, mode = IN}"})
-            //+ "#{userAudit, jdbcType = VARCHAR, mode = IN})}" })
+            + "#{objeto.acciones, jdbcType = VARCHAR, mode = IN},"
+            + "#{objeto.nombreUsuario, jdbcType = VARCHAR, mode = IN})}" })
     @Options(statementType = StatementType.CALLABLE)
     public List<PerfilRecursoSeguridad> mantener(Parametro parametro);
 }

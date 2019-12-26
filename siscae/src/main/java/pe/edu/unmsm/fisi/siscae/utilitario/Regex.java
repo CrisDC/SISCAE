@@ -17,6 +17,5 @@ public class Regex
     public static final String VACIO_O_NO_SOLO_ESPACIOS_EN_BLANCO = "^$|^(?=.*\\s).+$";
     public static final String NO_ESPACIOS_EN_BLANCO = "^\\S+$";
     public static final String ESPACIOS_EN_BLANCO = "\\s+";
-    public static final String TIPO_COMPENSACION = ConstantesGenerales.COMPENSACION_FONDO + "|"
-            + ConstantesGenerales.COMPENSACION_COMISION;
+
 }

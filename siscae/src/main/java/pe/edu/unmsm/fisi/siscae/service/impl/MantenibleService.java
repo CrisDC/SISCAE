@@ -65,6 +65,13 @@ public class MantenibleService<T> implements IMantenibleService<T> {
 
 	@Override
 	@Transactional(propagation = Propagation.MANDATORY)
+	public List<T> buscar(T dto) {
+		Parametro<T> parametro = new Parametro<T>(Operacion.SELECT, dto);
+		return mantenimientoMapper.mantener(parametro);
+	}
+	
+	@Override
+	@Transactional(propagation = Propagation.MANDATORY)
 	public List<T> buscar(T dto, Operacion operacion) {
 		Parametro<T> parametro = new Parametro<T>(operacion, dto);
 		return mantenimientoMapper.mantener(parametro);
@@ -75,12 +82,7 @@ public class MantenibleService<T> implements IMantenibleService<T> {
 	public List<T> buscar(T dto, OperacionParam operacionParam) {
 		Parametro<T> parametro = new Parametro<T>(Operacion.SELECT, operacionParam, dto,
 				SecurityContextFacade.obtenerNombreUsuario());
-		// System.out.println(operacion + "sera null??" + operacionParam + "--"
-		// + dto);
-		// System.out.println("pARAMETRIZLO" +parametro);
 		return mantenimientoMapper.mantener(parametro);
-		// System.out.println(parametro + "sera null??");
-		// return parametro.getResultados();
 	}
 
 	@Override

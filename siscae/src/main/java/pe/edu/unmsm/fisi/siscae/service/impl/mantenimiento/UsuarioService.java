@@ -34,7 +34,7 @@ public class UsuarioService extends MantenibleService<Usuario> implements IUsuar
 
 	@Override
 	@Transactional(propagation = Propagation.REQUIRED)
-	public Usuario buscarPorId(String nombre) {
+	public Usuario buscarPorNombre(String nombre) {
 		Usuario usuario = Usuario.builder().nombre(nombre).build();
 		return super.buscarPorId(usuario);
 	}

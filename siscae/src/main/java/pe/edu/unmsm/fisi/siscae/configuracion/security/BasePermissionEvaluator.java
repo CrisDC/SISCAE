@@ -36,14 +36,14 @@ public class BasePermissionEvaluator implements PermissionEvaluator
      * <ul>
      * <li>La expresión hasPermission('MANT_ABC','1') indica que se desea
      * evaluar si el usuario tiene permiso de realizar la acción de registro (1)
-     * sobre el recurso de Mantenimiento de Canal.
+     * sobre el recurso de Mantenimiento de ABC.
      * <li>La expresión hasPermission('MANT_ABC','ANY') indica que se desea
      * evaluar si el usuario tiene el permiso de realizar cualquier acción sobre
-     * el recurso de Mantenimiento de Canal.
+     * el recurso de Mantenimiento de ABC.
      * <li>La expresión hasPermission('[MANT_ABC],[MANT_XYZ]','PARENT_MENU')
      * indica que se desea evaluar si el usuario tiene el permiso de realizar
-     * cualquier acción sobre el recurso de Mantenimiento de Canal o
-     * Mantenimiento BIN.
+     * cualquier acción sobre el recurso de Mantenimiento de XYZ o
+     * Mantenimiento ABC.
      * </ul>
      * <p>
      * Cuando este método retorna {@code false} se lanza automáticamente la
@@ -51,7 +51,7 @@ public class BasePermissionEvaluator implements PermissionEvaluator
      * {@link org.springframework.security.access.AccessDeniedException}
      * 
      * @param targetDomainObject
-     *            el recurso en tipo {@link String} e.g. MANT_BIN, MANT_CANAL.
+     *            el recurso en tipo {@link String} e.g. MANT_ABC, MANT_XYZ.
      * @param permission
      *            la acción que el usuario desea realizar sobre el recurso.
      * @return {@code true} si el usuario tiene los permisos autorizados, en
@@ -66,6 +66,7 @@ public class BasePermissionEvaluator implements PermissionEvaluator
         boolean autorizado = false;
         List<CustomGrantedAuthority> autorizaciones = (List<CustomGrantedAuthority>) (Object) authentication
                 .getAuthorities();
+        System.out.println(autorizaciones);
         if (permission.equals("PARENT_MENU"))
         {
             autorizado = this.verificarPermisoPorIdRecurso(autorizaciones, targetDomainObject);

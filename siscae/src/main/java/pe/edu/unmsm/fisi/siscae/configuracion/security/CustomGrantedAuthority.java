@@ -2,8 +2,6 @@ package pe.edu.unmsm.fisi.siscae.configuracion.security;
 
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.SpringSecurityCoreVersion;
-import org.springframework.security.core.authority.SimpleGrantedAuthority;
-import org.springframework.util.Assert;
 
 
 /**
@@ -20,30 +18,30 @@ public class CustomGrantedAuthority implements GrantedAuthority
 {
     private static final long serialVersionUID = SpringSecurityCoreVersion.SERIAL_VERSION_UID;
 
-    private final String idRecurso;
+    private final String nombreRecurso;
     private final String accionRecurso;
 
     /**
      * Crea una autorización
      * 
-     * @param idRecurso
-     *            el identificador o código único del recurso.
+     * @param nombreRecurso
+     *            el nombre único del recurso.
      * @param accionRecurso
      *            el conjunto de acciones aplicadas al recurso
      */
-    public CustomGrantedAuthority(String idRecurso, String accionRecurso)
+    public CustomGrantedAuthority(String nombreRecurso, String accionRecurso)
     {
-        this.idRecurso = idRecurso;
+        this.nombreRecurso = nombreRecurso;
         this.accionRecurso = accionRecurso;
     }
 
     /**
-     * @return el identificador del recurso <b>idRecurso</b>
+     * @return el identificador del recurso <b>nombreRecurso</b>
      */
     @Override
     public String getAuthority()
     {
-        return this.idRecurso;
+        return this.nombreRecurso;
     }
 
     /**
@@ -60,7 +58,7 @@ public class CustomGrantedAuthority implements GrantedAuthority
     @Override
     public String toString()
     {
-        return "CustomGrantedAuthority [idRecurso=" + idRecurso + ", accionRecurso=" + accionRecurso
+        return "CustomGrantedAuthority [Recurso=" + nombreRecurso + ", accionRecurso=" + accionRecurso
                 + "]";
     }
 }

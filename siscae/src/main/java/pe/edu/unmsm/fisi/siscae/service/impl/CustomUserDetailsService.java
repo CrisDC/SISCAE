@@ -5,53 +5,64 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.GrantedAuthority;
-import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
-import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
+import pe.edu.unmsm.fisi.siscae.configuracion.security.CustomGrantedAuthority;
 import pe.edu.unmsm.fisi.siscae.configuracion.security.CustomUser;
-import pe.edu.unmsm.fisi.siscae.mapper.IRecursoMapper;
-import pe.edu.unmsm.fisi.siscae.model.RecursoSistema;
 import pe.edu.unmsm.fisi.siscae.model.mantenimiento.Usuario;
+import pe.edu.unmsm.fisi.siscae.model.seguridad.PerfilRecursoSeguridad;
+import pe.edu.unmsm.fisi.siscae.service.IPerfilRecursoSeguridadService;
 import pe.edu.unmsm.fisi.siscae.service.IUsuarioService;
-
+/**
+ * Ejecuta la lógica de negocio para la obtención de la información de algún
+ * usuario, principalmente usado en el proceso de identificación y/o
+ * autenticación.
+ * <p>
+ * Esta clase implementa el método {@code loadUserByUsername} de la interface
+ * {@link UserDetailsService}.
+ * 
+ */
 @Service
 public class CustomUserDetailsService implements UserDetailsService
 {
     private @Autowired IUsuarioService usuarioService;
-    private @Autowired IRecursoMapper recursoMapper;
+    private @Autowired IPerfilRecursoSeguridadService perfilRecursoService;
 
     @Override
     @Transactional(propagation = Propagation.REQUIRES_NEW)
-    public UserDetails loadUserByUsername(String login) throws UsernameNotFoundException
+    public UserDetails loadUserByUsername(String login)
     {
-        Usuario usuario = usuarioService.buscarPorId(login);
+        Usuario usuario = usuarioService.buscarPorNombre(login);
+        CustomUser user = null;
         if (usuario != null)
-        {
-            List<GrantedAuthority> authorities = new ArrayList<GrantedAuthority>();
-            authorities.add(new SimpleGrantedAuthority("ROLE_A"));
-         
-            System.out.println("Politica" + usuario); //no esta activo el usuario usuario.esActivo()
-            return new CustomUser(usuario.getIdUsuario(),usuario.getNombre(), usuario.getPass(), true, true, true,
-                    true, authorities);
-        //getGrantedAuthorities(
-          //                  recursoMapper.obtenerRecursosPermitidosPorIdUsuario(login) ));
-        } else
-        {
-            return null;
+        {            
+            user = new CustomUser(usuario.getNombre(), usuario.getPass(),
+                    usuario.isActivo(), true, true, true,
+                    asignarPermisos(perfilRecursoService.buscarPorNombreUsuario(login))
+                    );
         }
+        return user;
     }
 
-    private List<GrantedAuthority> getGrantedAuthorities(List<RecursoSistema> recursosPermitidos)
+    /**
+     * Convierte la clase {@link SecRecurso} y sus acciones autorizada en la
+     * clase {@link GrantedAuthority}.
+     * 
+     * @param recursosAsigandos
+     *            lista de {@link SecRecurso} a convertir
+     * @return la lista de {@link GrantedAuthority}
+     */
+    private List<GrantedAuthority> asignarPermisos(List<PerfilRecursoSeguridad> recursosAsigandos)
     {
-        List<GrantedAuthority> authorities = new ArrayList<GrantedAuthority>();
-        for (RecursoSistema recurso : recursosPermitidos)
+        List<GrantedAuthority> authorities = new ArrayList<>();
+        for (PerfilRecursoSeguridad recurso : recursosAsigandos)
         {
-            authorities.add(new SimpleGrantedAuthority("ROLE_"+recurso.getIdRecurso()));
+            authorities.add(
+                    new CustomGrantedAuthority(recurso.getNombreRecurso(), recurso.getAcciones()));
         }
         return authorities;
     }

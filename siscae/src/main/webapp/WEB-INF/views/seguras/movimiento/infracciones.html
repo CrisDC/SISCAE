@@ -142,7 +142,7 @@
 															<p 	th:if = "(${prestamo.estado} == 'OCUPADO') or (${prestamo.estado} == 'LIBERABLE') or (${prestamo.estado} == 'DISPONIBLE')"
 																th:text="${prestamo.tipoRecurso}+' '+${prestamo.numero}"></p>
 															<p 	th:if = "(${prestamo.estado} == 'OCUPADO') or (${prestamo.estado} == 'LIBERABLE') or (${prestamo.estado} == 'DISPONIBLE')"
-																th:text="${prestamo.codigoAlumno}!='NO TIENE' ? ${prestamo.codigoAlumno} : ${prestamo.num_documento}" th:class="${prestamo.estado} == 'OCUPADO'? ocupado : disponible"></p>
+																th:text="${prestamo.codigoAlumno}!='NO TIENE' ? ${prestamo.codigoAlumno} : ${prestamo.numDocumento}" th:class="${prestamo.estado} == 'OCUPADO'? ocupado : disponible"></p>
 													
 															<p th:if="${prestamo.estado} == 'LIBERABLE'"
 																th:text="LIBERABLE" class="liberable">

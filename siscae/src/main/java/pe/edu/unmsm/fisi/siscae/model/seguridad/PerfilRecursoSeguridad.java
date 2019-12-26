@@ -4,7 +4,6 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import pe.edu.unmsm.fisi.siscae.model.seguridad.PerfilRecurso.PerfilRecursoBuilder;
 
 @Data
 @Builder
@@ -14,5 +13,8 @@ public class PerfilRecursoSeguridad {
 
 	private int idPerfil;
 	private int idRecurso;
+	private String nombreRecurso;
 	private String acciones;
+	
+	private String nombreUsuario;
 }

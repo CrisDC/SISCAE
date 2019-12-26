@@ -5,6 +5,6 @@ import lombok.Value;
 @Value
 public class MensajeError
 {
-    private int codigo_error;
+    private int codigoError;
     private String motivo;
 }

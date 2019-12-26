@@ -12,7 +12,7 @@ import pe.edu.unmsm.fisi.siscae.model.parametro.Parametro;
 
 public interface IUsuarioMapper extends IMantenibleMapper<Usuario>
 {   
-   	@Select( value = {"{call SP_MANT_USUARIO("
+   	@Select( value = {"{call SP_MANT_SEG_USUARIO("
 			+ "#{operacion, jdbcType = VARCHAR, mode = IN},"
 			+ "#{operacionParam, jdbcType = VARCHAR, mode = IN},"
 			+ "#{objeto.idUsuario, jdbcType = INTEGER, mode = IN},"

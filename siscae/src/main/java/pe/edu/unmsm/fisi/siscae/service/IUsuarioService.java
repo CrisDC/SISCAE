@@ -7,7 +7,7 @@ import pe.edu.unmsm.fisi.siscae.model.mantenimiento.Usuario;
 public interface IUsuarioService extends IMantenibleService<Usuario> {
 	public List<Usuario> buscarTodos();
 
-	public Usuario buscarPorId(String idUsuario);
+	public Usuario buscarPorNombre(String nombreUsuario);
 
 	public boolean existe(Integer idUsuario);
 

@@ -19,6 +19,8 @@ public interface IMantenibleService<T>
     
     public void eliminar(T dto, OperacionParam operacionParam);
 
+    public List<T> buscar(T dto);
+    
     public List<T> buscar(T dto, Operacion operacion);
     
     public List<T> buscar(T dto, OperacionParam operacionParam);
